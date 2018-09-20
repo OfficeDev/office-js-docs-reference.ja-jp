@@ -1,0 +1,158 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: fb94d89259eb26ac706cca99c80ca4ac00c5342f
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048357"
+items:
+- uid: Outlook_1_1.Office.CustomProperties
+  summary: >-
+    CustomProperties オブジェクトは、特定のアイテムに固有の、かつ Outlook のメール アドインに固有のカスタム プロパティを表します。たとえば、メール アドインで、そのアドインをアクティブ化した現在の電子メール メッセージ内の固有のデータを保存する必要があるという状況が考えられます。この場合、後からユーザーが同じメッセージに再びアクセスし、メール アドインを再びアクティブ化すると、このアドインはカスタム プロパティとして保存されたデータを取得できます。
+
+
+    For Mac Outlook は、ユーザーのネットワークがダウンした場合のカスタム プロパティをキャッシュしない、ためメールのアドインは、カスタム プロパティにアクセスできません。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: Office.CustomProperties
+  fullName: Outlook_1_1.Office.CustomProperties
+  langs:
+  - typeScript
+  type: interface
+  package: Outlook_1_1
+  children:
+  - Outlook_1_1.Office.CustomProperties.get
+  - Outlook_1_1.Office.CustomProperties.remove
+  - Outlook_1_1.Office.CustomProperties.saveAsync
+  - Outlook_1_1.Office.CustomProperties.set
+- uid: Outlook_1_1.Office.CustomProperties.get
+  summary: 指定したカスタム プロパティの値を返します。
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: get(name)
+  fullName: Outlook_1_1.Office.CustomProperties.get
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'get(name: string): any;'
+    return:
+      type:
+      - any
+      description: >-
+        指定したカスタム プロパティの値。
+
+
+        \[Api セット: メールボックス 1.0\]
+    parameters:
+    - id: name
+      description: 取得するカスタム プロパティの名前。
+      type:
+      - string
+- uid: Outlook_1_1.Office.CustomProperties.remove
+  summary: >-
+    カスタム プロパティ コレクションから指定のプロパティを削除します。
+
+
+    プロパティを完全に削除するには、CustomProperties オブジェクトの saveAsync メソッドを呼び出す必要があります。
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: remove(name)
+  fullName: Outlook_1_1.Office.CustomProperties.remove
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'remove(name: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: name
+      description: '削除するプロパティの名前。 \[Api セット: メールボックス 1.0\]'
+      type:
+      - string
+- uid: Outlook_1_1.Office.CustomProperties.saveAsync
+  summary: >-
+    アイテム固有のカスタム プロパティをサーバーに保存します。
+
+
+    saveAsync メソッドを使用し、CustomProperties オブジェクトの set メソッドまたは remove メソッドで行ったすべての変更を保持する必要があります。保存操作は非同期です。
+
+
+    コールバック機能を確認し、saveAsync からエラーを処理するようにすることをお勧めします。 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 アドインが切断された状態のときに saveAsync を呼び出すと、saveAsync はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: saveAsync(callback, asyncContext)
+  fullName: Outlook_1_1.Office.CustomProperties.saveAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(callback?: (result: AsyncResult) => void, asyncContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
+      type:
+      - '(result: AsyncResult) => void'
+    - id: asyncContext
+      description: '省略可能。 コールバック メソッドに渡される状態データです。 \[Api セット: メールボックス 1.0\]'
+      type:
+      - any
+- uid: Outlook_1_1.Office.CustomProperties.set
+  summary: >-
+    指定のプロパティを指定の値に設定します。
+
+
+    set メソッドは、指定のプロパティを指定の値に設定します。プロパティをサーバーに保存するには、saveAsync メソッドを使用する必要があります。
+
+
+    指定のプロパティが存在しない場合、set メソッドによって新しいプロパティが作成されます。存在する場合は、既存の値が新しい値に置き換えられます。value パラメーターには任意の型を使用できます。ただし、サーバーには常に文字列として渡されます。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: set(name, value)
+  fullName: Outlook_1_1.Office.CustomProperties.set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(name: string, value: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: name
+      description: 設定するプロパティの名前。
+      type:
+      - string
+    - id: value
+      description: 設定するプロパティの値。
+      type:
+      - string

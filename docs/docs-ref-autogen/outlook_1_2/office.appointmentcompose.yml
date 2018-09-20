@@ -1,0 +1,580 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 27fc8980e53b6c28f0aa17f31febb61ca3431c9f
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24049194"
+items:
+- uid: Outlook_1_2.Office.AppointmentCompose
+  summary: >-
+    予定の開催者の荷[Office.context.mailbox.item](xref:Outlook_1_2.Office.Item)<!-- -->。
+
+
+    重要: これは、内部の Outlook オブジェクトを直接ではなく、既存のインターフェイスを通じて公開します。 モードとして処理する必要があります`Office.context.mailbox.item`。 オブジェクト モデルの詳細についてはページを参照してください。
+  name: Office.AppointmentCompose
+  fullName: Outlook_1_2.Office.AppointmentCompose
+  langs:
+  - typeScript
+  type: interface
+  extends:
+  - Appointment
+  package: Outlook_1_2
+  children:
+  - Outlook_1_2.Office.AppointmentCompose.addFileAttachmentAsync
+  - Outlook_1_2.Office.AppointmentCompose.addItemAttachmentAsync
+  - Outlook_1_2.Office.AppointmentCompose.body
+  - Outlook_1_2.Office.AppointmentCompose.dateTimeCreated
+  - Outlook_1_2.Office.AppointmentCompose.dateTimeModifed
+  - Outlook_1_2.Office.AppointmentCompose.end
+  - Outlook_1_2.Office.AppointmentCompose.getSelectedDataAsync
+  - Outlook_1_2.Office.AppointmentCompose.itemType
+  - Outlook_1_2.Office.AppointmentCompose.loadCustomPropertiesAsync
+  - Outlook_1_2.Office.AppointmentCompose.location
+  - Outlook_1_2.Office.AppointmentCompose.optionalAttendees
+  - Outlook_1_2.Office.AppointmentCompose.removeAttachmentAsync
+  - Outlook_1_2.Office.AppointmentCompose.requiredAttendees
+  - Outlook_1_2.Office.AppointmentCompose.setSelectedDataAsync
+  - Outlook_1_2.Office.AppointmentCompose.start
+  - Outlook_1_2.Office.AppointmentCompose.subject
+- uid: Outlook_1_2.Office.AppointmentCompose.addFileAttachmentAsync
+  summary: >-
+    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+
+
+    addFileAttachmentAsync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+
+
+    その後、removeAttachmentAsync メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+
+
+    \[[API セット: メールボックス 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr>
+
+
+    <tr><td>エラー</td><td>AttachmentSizeExceeded の添付ファイルは、許可を超えています。</td></tr><tr><td></td><td>FileTypeNotSupported の添付ファイルは、許可されていない拡張子を持ちます。</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
+
+
+    だけでなく、この署名メソッドは次の署名もあります。
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string): void;`
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string, options: Office.AsyncContextOptions): void;`
+
+
+    `addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult) => void): void;`
+  name: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  fullName: Outlook_1_2.Office.AppointmentCompose.addFileAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: uri
+      description: メッセージまたは予定に添付するファイルの場所を示す URI。最大長は 2048 文字です。
+      type:
+      - string
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。最大長は 255 文字です。
+      type:
+      - string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。 isInline: true の場合、添付ファイルがインライン メッセージの本文に表示され、添付ファイルの一覧に表示しないことを示します。'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: メソッドが完了すると、コールバック パラメーターで渡された関数は型 asyncResult の 1 つのパラメーターと呼ばれます。 成功した場合、asyncResult.value プロパティで、添付ファイルの識別子が提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトにはエラーについて説明する Error オブジェクトが入ります。
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_2.Office.AppointmentCompose.addItemAttachmentAsync
+  summary: >-
+    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
+
+
+    addItemAttachmentAsync メソッドは、指定した Exchange 識別子を含むアイテムを、作成フォーム内のアイテムに添付します。コールバック メソッドを指定した場合、メソッドは添付ファイルの識別子、またはアイテムの添付中に発生したすべてのエラーを含む asyncResult という 1 つのパラメーターで呼び出されます。options パラメーターを使用して、必要に応じてコールバック メソッドに状態情報を渡すことができます。
+
+
+    その後、removeAttachmentAsync メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+
+
+    AddItemAttachmentAsync メソッドが項目を編集している以外のアイテムにアイテムを添付できます、Office アドインを実行している場合の Outlook Web App で、ただし、これはサポートされていません、お勧めできません。
+
+
+    \[[API セット: メールボックス 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr>
+
+
+    <tr><td>エラー</td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
+
+
+    このメソッドはメインの署名だけでなく、これらの署名もあります。
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string): void;`
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string, options: Office.AsyncContextOptions): void;`
+
+
+    `addItemAttachmentAsync(itemId: any, attachmentName: string, callback: (result: AsyncResult) => void): void;`
+  name: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  fullName: Outlook_1_2.Office.AppointmentCompose.addItemAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: 添付するアイテムの Exchange 識別子。最大長は 100 文字です。
+      type:
+      - any
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。最大長は 255 文字です。
+      type:
+      - string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 成功した場合、asyncResult.value プロパティで、添付ファイルの識別子が提供されます。 添付ファイルの追加に失敗した場合は、asyncResult オブジェクトには、エラーの説明を提供するエラー オブジェクトが含まれます。
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_2.Office.AppointmentCompose.body
+  summary: >-
+    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
+
+
+    \[[API セット: メールボックス 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: body
+  fullName: Outlook_1_2.Office.AppointmentCompose.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Office.Body;'
+    return:
+      type:
+      - outlook.Office.Body
+- uid: Outlook_1_2.Office.AppointmentCompose.dateTimeCreated
+  summary: >-
+    アイテムが作成された日時を取得します。閲覧モードのみ。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: dateTimeCreated
+  fullName: Outlook_1_2.Office.AppointmentCompose.dateTimeCreated
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeCreated: Date;'
+    return:
+      type:
+      - Date
+- uid: Outlook_1_2.Office.AppointmentCompose.dateTimeModifed
+  summary: >-
+    アイテムが最後に変更された日時を取得します。閲覧モードのみ。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+
+
+    注:このメンバーは、Outlook for iOS または Outlook for Android ではサポートされていません。
+  name: dateTimeModifed
+  fullName: Outlook_1_2.Office.AppointmentCompose.dateTimeModifed
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeModifed: Date;'
+    return:
+      type:
+      - Date
+- uid: Outlook_1_2.Office.AppointmentCompose.end
+  summary: >-
+    予定が終了する日時を取得または設定します。
+
+
+    End プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される[Office.Time](xref:Outlook_1_2.Office.Time)オブジェクトです。 End プロパティの値をクライアントのローカルな日付と時刻に変換するのには、convertToLocalClientTime メソッドを使用することができます。
+
+
+    Time.setAsync メソッドを使用して終了時刻を設定する場合、convertToUtcClientTime メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: end
+  fullName: Outlook_1_2.Office.AppointmentCompose.end
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'end: Time;'
+    return:
+      type:
+      - Time
+- uid: Outlook_1_2.Office.AppointmentCompose.getSelectedDataAsync
+  summary: >-
+    メッセージの件名または本文から非同期的に選択したデータを返します。
+
+
+    本文または件名で選択範囲がカーソルのみの場合、メソッドは選択されたデータに対して null を返します。本文または件名以外のフィールドを選択した場合、メソッドは InvalidSelection エラーを返します。
+
+
+    コールバック メソッドから選択されたデータにアクセスするには、asyncResult.value.data を呼び出します。選択が行われたソース プロパティにアクセスするには、asyncResult.value.sourceProperty を呼び出します。この場合、body、または subject のいずれかになります。
+
+
+    \[[API セット: メールボックス 1.2](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: getSelectedDataAsync(coerciontype, options, callback)
+  fullName: Outlook_1_2.Office.AppointmentCompose.getSelectedDataAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getSelectedDataAsync(coerciontype: Office.CoercionType, options: Office.AsyncContextOptions, callback: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: 選択されたデータ (coercionType で決定された形式の文字列として)。
+    parameters:
+    - id: coerciontype
+      description: ''
+      type:
+      - office.Office.CoercionType
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_2.Office.AppointmentCompose.itemType
+  summary: >-
+    インスタンスが表しているアイテムの種類を取得します。
+
+
+    itemType プロパティは、ItemType 列挙値の 1 つを返します。これは item オブジェクト インスタンスがメッセージと予定のどちらであるかを示すものです。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: itemType
+  fullName: Outlook_1_2.Office.AppointmentCompose.itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: Office.MailboxEnums.ItemType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.ItemType
+- uid: Outlook_1_2.Office.AppointmentCompose.loadCustomPropertiesAsync
+  summary: >-
+    選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
+
+
+    カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
+
+
+    カスタム プロパティは asyncResult.value プロパティの CustomProperties オブジェクトとして指定されます。このオブジェクトは、アイテムからカスタム プロパティを取得、設定、および削除し、カスタム プロパティに対する変更をサーバーに設定し直すために使用できます。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: Outlook_1_2.Office.AppointmentCompose.loadCustomPropertiesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
+      type:
+      - '(result: AsyncResult) => void'
+    - id: userContext
+      description: 省略可能。 開発者は、コールバック関数にアクセスする任意のオブジェクトを提供できます。 このオブジェクトは、コールバック関数の asyncResult.asyncContext プロパティによってアクセスできます。
+      type:
+      - any
+- uid: Outlook_1_2.Office.AppointmentCompose.location
+  summary: >-
+    取得または予定の[Office.Location](xref:Outlook_1_2.Office.Location)を設定します。 location プロパティは予定の場所を取得または設定するために使用するメソッドを提供する Location オブジェクトを返します。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: location
+  fullName: Outlook_1_2.Office.AppointmentCompose.location
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'location: Location;'
+    return:
+      type:
+      - Location
+- uid: Outlook_1_2.Office.AppointmentCompose.optionalAttendees
+  summary: >-
+    イベントの任意の出席者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在の項目のモードによって異なります。 OptionalAttendees プロパティは、取得、または省略可能な会議の出席者を更新するメソッドを提供する[Office.Recipients](xref:Outlook_1_2.Office.Recipients)オブジェクトを返します。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: optionalAttendees
+  fullName: Outlook_1_2.Office.AppointmentCompose.optionalAttendees
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'optionalAttendees: Recipients;'
+    return:
+      type:
+      - Recipients
+- uid: Outlook_1_2.Office.AppointmentCompose.removeAttachmentAsync
+  summary: >-
+    メッセージまたは予定から添付ファイルを削除します。
+
+
+    removeAttachmentAsync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。ベスト プラクティスとして、添付ファイルの識別子を使用した添付ファイルの削除は、同一のメール アプリによって同一セッションでその添付ファイルが追加された場合にのみ行ってください。Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同一セッション内でのみ有効です。セッションは、アプリを閉じたとき、またはインライン フォームで作成を開始した後、インライン フォームをポップアウトして別のウィンドウで継続した場合に終了します。
+
+
+    \[[API セット: メールボックス 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr>
+
+
+    <tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
+
+
+    だけでなく、この署名メソッドは次の署名もあります。
+
+
+    `removeAttachmentAsync(attachmentIndex: string): void;`
+
+
+    `removeAttachmentAsync(attachmentIndex: string, options: Office.AsyncContextOptions): void;`
+
+
+    `removeAttachmentAsync(attachmentIndex: string, callback: (result: AsyncResult) => void): void;`
+  name: removeAttachmentAsync(attachmentIndex, options, callback)
+  fullName: Outlook_1_2.Office.AppointmentCompose.removeAttachmentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeAttachmentAsync(attachmentIndex: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: attachmentIndex
+      description: 削除する添付ファイルの識別子。文字列の最大長は 100 文字です。
+      type:
+      - string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 添付ファイルの削除に失敗した場合は、asyncResult.error プロパティは、エラーの原因とエラー コードに含まれます。
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_2.Office.AppointmentCompose.requiredAttendees
+  summary: >-
+    イベントの出席者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在の項目のモードによって異なります。 RequiredAttendees プロパティは、取得、または会議の出席者を更新するメソッドを提供する[Office.Recipients](xref:Outlook_1_2.Office.Recipients)オブジェクトを返します。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: requiredAttendees
+  fullName: Outlook_1_2.Office.AppointmentCompose.requiredAttendees
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'requiredAttendees: Recipients;'
+    return:
+      type:
+      - Recipients
+- uid: Outlook_1_2.Office.AppointmentCompose.setSelectedDataAsync
+  summary: >-
+    メッセージの本文または件名に非同期的にデータを挿入します。
+
+
+    SetSelectedDataAsync メソッドは、[件名] または [アイテムの本文内のカーソル位置に指定した文字列を挿入します。 または、エディターでテキストを選択すると、選択したテキストに置き換えられます。 本文または件名フィールド内にカーソルがない場合は、エラーが返されます。 、挿入後、カーソルが挿入された内容の末尾にします。
+
+
+    \[[API セット: メールボックス 1.2](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr>
+
+
+    <tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
+
+
+    だけでなく、この署名メソッドは次の署名もあります。
+
+
+    `setSelectedDataAsync(data: string): void;`
+
+
+    `setSelectedDataAsync(data: string, options: Office.AsyncContextOptions &amp; CoercionTypeOptions): void;`
+
+
+    `setSelectedDataAsync(data: string, callback: (result: AsyncResult) => void): void;`
+  name: setSelectedDataAsync(data, options, callback)
+  fullName: Outlook_1_2.Office.AppointmentCompose.setSelectedDataAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (result: AsyncResult) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: 挿入するデータ。データは 1,000,000 文字を超えてはいけません。1,000,000 文字を超える文字が渡されると、ArgumentOutOfRange の例外がスローされます。
+      type:
+      - string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。 coercionType: Outlook Web App および Outlook でテキスト、現在のスタイルが適用されている場合。 フィールドが HTML エディターの場合、データが HTML の場合でも、テキスト データのみが挿入されます。 Html とフィールド (件名のない) HTML をサポートする場合 Outlook Web App に現在のスタイルが適用され、Outlook の既定のスタイルを適用します。 フィールドがテキスト型フィールドの場合は、InvalidDataFormat エラーが返されます。 coercionType が設定されていない場合、結果はフィールドに依存します。フィールドが HTML フィールドであれば HTML が使用され、フィールドがテキスト フィールドであればプレーン テキストが使用されます。'
+      type:
+      - Office.AsyncContextOptions & CoercionTypeOptions
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 添付ファイルの削除に失敗した場合は、asyncResult.error プロパティは、エラーの原因とエラー コードに含まれます。
+      type:
+      - '(result: AsyncResult) => void'
+- uid: Outlook_1_2.Office.AppointmentCompose.start
+  summary: >-
+    予定を開始する日時を取得または設定します。
+
+
+    Start プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される[Office.Time](xref:Outlook_1_2.Office.Time)オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、クライアントのローカルな日付と時刻値に変換します。
+
+
+    Time.setAsync メソッドを使用して開始時刻を設定する場合、convertToUtcClientTime メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: start
+  fullName: Outlook_1_2.Office.AppointmentCompose.start
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'start: Time;'
+    return:
+      type:
+      - Time
+- uid: Outlook_1_2.Office.AppointmentCompose.subject
+  summary: >-
+    アイテムの件名フィールドに示される説明を取得または設定します。
+
+
+    subject プロパティは、電子メール サーバーによって送信されたアイテムの件名全体を取得または設定します。
+
+
+    subject プロパティは件名を取得および設定するためのメソッドを提供する Subject オブジェクトを返します。
+
+
+    \[[API セット: メールボックス 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr></table>
+  name: subject
+  fullName: Outlook_1_2.Office.AppointmentCompose.subject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'subject: Subject;'
+    return:
+      type:
+      - Subject
