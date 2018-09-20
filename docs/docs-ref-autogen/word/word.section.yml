@@ -1,0 +1,190 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: a0a12f858aba11b5e22568397e0f2fe8c2f01332
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24049535"
+items:
+- uid: word.Word.Section
+  summary: >-
+    Word 文書内のセクションを表します。
+
+
+    \[[API セット: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: Word.Section
+  fullName: word.Word.Section
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: word
+  children:
+  - word.Word.Section.body
+  - word.Word.Section.getFooter
+  - word.Word.Section.getHeader
+  - word.Word.Section.getNext
+  - word.Word.Section.getNextOrNullObject
+  - word.Word.Section.load
+  - word.Word.Section.toJSON
+  - word.Word.Section.track
+  - word.Word.Section.untrack
+- uid: word.Word.Section.body
+  summary: >-
+    セクションの本文のオブジェクトを取得します。 これには、ヘッダーとフッターとその他のセクションのメタデータは含まれません。 読み取り専用。
+
+
+    \[[API セット: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: body
+  fullName: word.Word.Section.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly body: Word.Body;'
+    return:
+      type:
+      - Word.Body
+- uid: word.Word.Section.getFooter
+  summary: >-
+    セクションのフッターの 1 つを取得します。
+
+
+    \[[API セット: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getFooter(type)
+  fullName: word.Word.Section.getFooter
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getFooter(type: Word.HeaderFooterType): Word.Body;'
+    return:
+      type:
+      - Word.Body
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a commmand to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary footer of the first section. \n        // Note that the footer is a body object.\n        var myFooter = mySections.items[0].getFooter(\"primary\");\n        \n        // Queue a command to insert text at the end of the footer.\n        myFooter.insertText(\"This is a footer.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myFooter.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a footer to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Word.run(async (context) => {\n    context.document.sections.getFirst()\n        .getFooter(\"Primary\").insertParagraph(\"Confidential\", \"End\");\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: type
+      description: "必須。 フッターを返すの型。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
+      type:
+      - word.Word.HeaderFooterType
+- uid: word.Word.Section.getHeader
+  summary: >-
+    セクションのヘッダーの 1 つを取得します。
+
+
+    \[[API セット: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getHeader(type)
+  fullName: word.Word.Section.getHeader
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getHeader(type: Word.HeaderFooterType): Word.Body;'
+    return:
+      type:
+      - Word.Body
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a commmand to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary header of the first section. \n        // Note that the header is a body object.\n        var myHeader = mySections.items[0].getHeader(\"primary\");\n        \n        // Queue a command to insert text at the end of the header.\n        myHeader.insertText(\"This is a header.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myHeader.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a header to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Word.run(async (context) => {\n    context.document.sections.getFirst()\n        .getHeader(\"Primary\").insertText(\"This is a header\", \"Start\");\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: type
+      description: "必須。 返されるヘッダーの種類。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
+      type:
+      - word.Word.HeaderFooterType
+- uid: word.Word.Section.getNext
+  summary: >-
+    次のセクションを取得します。このセクションが最後の 1 つの場合にスローします。
+
+
+    \[[API セット: WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getNext()
+  fullName: word.Word.Section.getNext
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNext(): Word.Section;'
+    return:
+      type:
+      - Word.Section
+      description: ''
+- uid: word.Word.Section.getNextOrNullObject
+  summary: >-
+    次のセクションを取得します。このセクションが最後の 1 つの場合は null オブジェクトを返します。
+
+
+    \[[API セット: WordApi 1.3](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: getNextOrNullObject()
+  fullName: word.Word.Section.getNextOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNextOrNullObject(): Word.Section;'
+    return:
+      type:
+      - Word.Section
+      description: ''
+- uid: word.Word.Section.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: { select?: string; expand?: string; }): Word.Section`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Section`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+  name: load(option)
+  fullName: word.Word.Section.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Word.Section;'
+    return:
+      type:
+      - Word.Section
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
+- uid: word.Word.Section.toJSON
+  name: toJSON()
+  fullName: word.Word.Section.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Word.Interfaces.SectionData;'
+    return:
+      type:
+      - Word.Interfaces.SectionData
+      description: ''
+- uid: word.Word.Section.track
+  summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
+  name: track()
+  fullName: word.Word.Section.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): Word.Section;'
+    return:
+      type:
+      - Word.Section
+      description: ''
+- uid: word.Word.Section.untrack
+  summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
+  name: untrack()
+  fullName: word.Word.Section.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): Word.Section;'
+    return:
+      type:
+      - Word.Section
+      description: ''

@@ -1,0 +1,284 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 326e16111259318ceed75d89bf7968c74fe4d95d
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048052"
+items:
+- uid: onenote.OneNote.SectionGroup
+  summary: >-
+    OneNote セクション グループを表します。セクション グループに含めることができるのは、セクションとその他のセクション グループです。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.SectionGroup
+  fullName: onenote.OneNote.SectionGroup
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.SectionGroup.addSection
+  - onenote.OneNote.SectionGroup.addSectionGroup
+  - onenote.OneNote.SectionGroup.clientUrl
+  - onenote.OneNote.SectionGroup.getRestApiId
+  - onenote.OneNote.SectionGroup.id
+  - onenote.OneNote.SectionGroup.load
+  - onenote.OneNote.SectionGroup.name
+  - onenote.OneNote.SectionGroup.notebook
+  - onenote.OneNote.SectionGroup.parentSectionGroup
+  - onenote.OneNote.SectionGroup.parentSectionGroupOrNull
+  - onenote.OneNote.SectionGroup.sectionGroups
+  - onenote.OneNote.SectionGroup.sections
+  - onenote.OneNote.SectionGroup.toJSON
+  - onenote.OneNote.SectionGroup.track
+  - onenote.OneNote.SectionGroup.untrack
+- uid: onenote.OneNote.SectionGroup.addSection
+  summary: >-
+    セクション グループの末尾に新しいセクションを追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: addSection(title)
+  fullName: onenote.OneNote.SectionGroup.addSection
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addSection(title: string): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n    \n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sectionGroups.load(\"id\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Add a section to each section group.\n            $.each(sectionGroups.items, function(index, sectionGroup) {\n                sectionGroup.addSection(\"Agenda\");\n            });\n            \n            // Run the queued commands.\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: title
+      description: 新しいセクションの名前を指定します。
+      type:
+      - string
+- uid: onenote.OneNote.SectionGroup.addSectionGroup
+  summary: >-
+    この sectionGroup の末尾に新しいセクション グループを追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: addSectionGroup(name)
+  fullName: onenote.OneNote.SectionGroup.addSectionGroup
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addSectionGroup(name: string): OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n    var sectionGroup;\n    var nestedSectionGroup;\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n\n    // Queue a command to add a new section group.\n    var sectionGroups = notebook.sectionGroups;\n\n    // Queue a command to load the new section group.\n    sectionGroups.load();\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function(){\n            sectionGroup = sectionGroups.items[0];\n            sectionGroup.load();\n            return context.sync();\n        })\n        .then(function(){\n            nestedSectionGroup = sectionGroup.addSectionGroup(\"Sample nested section group\");\n            nestedSectionGroup.load();\n            return context.sync();\n        })\n        .then(function() {\n            console.log(\"New nested section group name is \" + nestedSectionGroup.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: name
+      description: 新しいセクションの名前を指定します。
+      type:
+      - string
+- uid: onenote.OneNote.SectionGroup.clientUrl
+  summary: >-
+    セクション グループのクライアント url です。 読み取り専用
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: clientUrl
+  fullName: onenote.OneNote.SectionGroup.clientUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly clientUrl: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.SectionGroup.getRestApiId
+  summary: >-
+    REST API の ID を取得します
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getRestApiId()
+  fullName: onenote.OneNote.SectionGroup.getRestApiId
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+- uid: onenote.OneNote.SectionGroup.id
+  summary: >-
+    セクション グループの ID を取得します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.SectionGroup.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.SectionGroup.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): OneNote.SectionGroup`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroup`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group. \n    // For best performance, request specific properties.           \n    sectionGroup.load(\"id,name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Section group ID: \" + sectionGroup.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group with the specified properties.           \n    sectionGroup.load(\"name,notebook/name\"); \n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Parent notebook name: \" + sectionGroup.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sectionGroups.load(\"name\");\n    \n    // Get the child section groups of the first section group in the notebook.\n    var nestedSectionGroups = sectionGroups._GetItem(0).sectionGroups;\n    \n    // Queue a command to load the ID and name properties of the child section groups.\n    nestedSectionGroups.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each child section group.\n            $.each(nestedSectionGroups.items, function(index, sectionGroup) {\n                console.log(\"Section group name: \" + sectionGroup.name);  \n                console.log(\"Section group ID: \" + sectionGroup.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections that are siblings of the current section.\n    var sections = context.application.getActiveSection().parentSectionGroup.sections;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sections.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each section.\n            $.each(sections.items, function(index, section) {\n                console.log(\"Section name: \" + section.name);  \n                console.log(\"Section ID: \" + section.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.SectionGroup.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
+- uid: onenote.OneNote.SectionGroup.name
+  summary: >-
+    セクション グループの名前を取得します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: name
+  fullName: onenote.OneNote.SectionGroup.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.SectionGroup.notebook
+  summary: >-
+    セクション グループを含むノートブックを取得します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: notebook
+  fullName: onenote.OneNote.SectionGroup.notebook
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly notebook: OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+- uid: onenote.OneNote.SectionGroup.parentSectionGroup
+  summary: >-
+    セクション グループを含むセクション グループを取得します。セクション グループがノートブックの直接の子である場合は ItemNotFound をスローします。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentSectionGroup
+  fullName: onenote.OneNote.SectionGroup.parentSectionGroup
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentSectionGroup: OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+- uid: onenote.OneNote.SectionGroup.parentSectionGroupOrNull
+  summary: >-
+    セクション グループを含むセクション グループを取得します。セクション グループがノートブックの直接の子である場合は null を返します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentSectionGroupOrNull
+  fullName: onenote.OneNote.SectionGroup.parentSectionGroupOrNull
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentSectionGroupOrNull: OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+- uid: onenote.OneNote.SectionGroup.sectionGroups
+  summary: >-
+    セクション グループ内のセクション グループのコレクションです。 読み取り専用
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: sectionGroups
+  fullName: onenote.OneNote.SectionGroup.sectionGroups
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly sectionGroups: OneNote.SectionGroupCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroupCollection
+- uid: onenote.OneNote.SectionGroup.sections
+  summary: >-
+    セクション グループ内のセクションのコレクションです。 読み取り専用
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: sections
+  fullName: onenote.OneNote.SectionGroup.sections
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly sections: OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+- uid: onenote.OneNote.SectionGroup.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.SectionGroup.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.SectionGroupData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.SectionGroupData
+      description: ''
+- uid: onenote.OneNote.SectionGroup.track
+  summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
+  name: track()
+  fullName: onenote.OneNote.SectionGroup.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+      description: ''
+- uid: onenote.OneNote.SectionGroup.untrack
+  summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
+  name: untrack()
+  fullName: onenote.OneNote.SectionGroup.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.SectionGroup;'
+    return:
+      type:
+      - onenote.OneNote.SectionGroup
+      description: ''
