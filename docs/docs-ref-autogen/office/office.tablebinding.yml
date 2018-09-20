@@ -1,0 +1,439 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 8c4565f3b5279046978ebf8c6ff31c6b8c1c8884
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048470"
+items:
+- uid: office.Office.TableBinding
+  summary: <span data-ttu-id="47047-101">バインドを行と列の 2 次元で、必要に応じてヘッダーと共に表します。</span><span class="sxs-lookup"><span data-stu-id="47047-101">Represents a binding in two dimensions of rows and columns, optionally with headers.</span></span>
+  remarks: >-
+    <table><tr><td><span data-ttu-id="47047-102">要件の設定</span><span class="sxs-lookup"><span data-stu-id="47047-102">Requirement Sets</span></span></td><td><span data-ttu-id="47047-103">TableBindings</span><span class="sxs-lookup"><span data-stu-id="47047-103">TableBindings</span></span></td></tr></table>
+
+
+    <span data-ttu-id="47047-104">結合テーブル結合オブジェクトは、継承、`id`プロパティ、`type`プロパティ、`getDataAsync`メソッド、および`setDataAsync` [Office.Binding](xref:office.Office.Binding)オブジェクトのメソッド。</span><span class="sxs-lookup"><span data-stu-id="47047-104">The TableBinding object inherits the `id` property, `type` property, `getDataAsync` method, and `setDataAsync` method from the [Office.Binding](xref:office.Office.Binding) object.</span></span>
+
+
+    <span data-ttu-id="47047-105">Excel のテーブルのバインドを確立すると、各新しい行をテーブルにユーザーを追加自動的に含まれているバインディングと、行カウントの増加に注意してください。</span><span class="sxs-lookup"><span data-stu-id="47047-105">For Excel, note that after you establish a table binding, each new row a user adds to the table is automatically included in the binding and rowCount increases.</span></span>
+  name: Office.TableBinding
+  fullName: office.Office.TableBinding
+  langs:
+  - typeScript
+  type: interface
+  extends:
+  - Binding
+  package: office
+  children:
+  - office.Office.TableBinding.addColumnsAsync
+  - office.Office.TableBinding.addRowsAsync
+  - office.Office.TableBinding.clearFormatsAsync
+  - office.Office.TableBinding.columnCount
+  - office.Office.TableBinding.deleteAllDataValuesAsync
+  - office.Office.TableBinding.getFormatsAsync
+  - office.Office.TableBinding.hasHeaders
+  - office.Office.TableBinding.rowCount
+  - office.Office.TableBinding.setFormatsAsync
+  - office.Office.TableBinding.setTableOptionsAsync
+- uid: office.Office.TableBinding.addColumnsAsync
+  summary: <span data-ttu-id="47047-106">追加の列として指定されたデータをテーブルに追加します。</span><span class="sxs-lookup"><span data-stu-id="47047-106">Adds the specified data to the table as additional columns.</span></span>
+  remarks: >-
+    <span data-ttu-id="47047-107">データおよびヘッダーの値を指定する 1 つまたは複数の列を追加するに TableData オブジェクトを data パラメーターとして渡します。</span><span class="sxs-lookup"><span data-stu-id="47047-107">To add one or more columns specifying the values of the data and headers, pass a TableData object as the data parameter.</span></span> <span data-ttu-id="47047-108">データのみを指定する 1 つまたは複数の列を追加するには、data パラメーターとして配列の配列 (「マトリックス」) を渡します。</span><span class="sxs-lookup"><span data-stu-id="47047-108">To add one or more columns specifying only the data, pass an array of arrays ("matrix") as the data parameter.</span></span>
+
+
+    <span data-ttu-id="47047-109">AddColumnsAsync 操作の成否は、分割不可能なのです。</span><span class="sxs-lookup"><span data-stu-id="47047-109">The success or failure of an addColumnsAsync operation is atomic.</span></span> <span data-ttu-id="47047-110">全体での列の追加は、操作が成功する必要があります、または、完全にロールバックされます (および失敗をレポートするが、AsyncResult.status プロパティは、コールバックが返されます)。</span><span class="sxs-lookup"><span data-stu-id="47047-110">That is, the entire add columns operation must succeed, or it will be completely rolled back (and the AsyncResult.status property returned to the callback will report failure):</span></span>
+
+
+    - <span data-ttu-id="47047-111">データ引数として渡す配列内の各行には、更新されるテーブルとして同じ行の数が必要です。</span><span class="sxs-lookup"><span data-stu-id="47047-111">Each row in the array you pass as the data argument must have the same number of rows as the table being updated.</span></span> <span data-ttu-id="47047-112">それ以外の場合は、操作全体が失敗します。</span><span class="sxs-lookup"><span data-stu-id="47047-112">If not, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="47047-p104">配列内の各行とセルは、その行またはセルをテーブル内の新しく追加される列に正常に追加する必要があります。何らかの理由によって、行またはセルを設定できなかった場合は、操作全体が失敗します。</span><span class="sxs-lookup"><span data-stu-id="47047-p104">Each row and cell in the array must successfully add that row or cell to the table in the newly added column(s). If any row or cell fails to be set for any reason, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="47047-115">TableData オブジェクトを data 引数として渡すとすると更新されるテーブルのヘッダー行の数が一致しなければなりません。</span><span class="sxs-lookup"><span data-stu-id="47047-115">If you pass a TableData object as the data argument, the number of header rows must match that of the table being updated.</span></span>
+
+
+    <span data-ttu-id="47047-116">オンラインの Excel の他のコメント: データ パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドを 1 回の呼び出しで 20,000 を超えることはできません。</span><span class="sxs-lookup"><span data-stu-id="47047-116">Additional remark for Excel Online: The total number of cells in the TableData object passed to the data parameter can't exceed 20,000 in a single call to this method.</span></span>
+
+
+    <span data-ttu-id="47047-117">**サポートの詳細**</span><span class="sxs-lookup"><span data-stu-id="47047-117">**Support details**</span></span>
+
+
+    <span data-ttu-id="47047-p105">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class="sxs-lookup"><span data-stu-id="47047-p105">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="47047-120">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-120">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="47047-121">*サポートされるホスト (プラットフォーム別)*</span><span class="sxs-lookup"><span data-stu-id="47047-121">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="47047-122">Windows デスクトップ版 Office</span><span class="sxs-lookup"><span data-stu-id="47047-122">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="47047-123">Office Online (ブラウザー)</span><span class="sxs-lookup"><span data-stu-id="47047-123">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="47047-124">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="47047-124">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="47047-125"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="47047-125"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="47047-126">Y</span><span class="sxs-lookup"><span data-stu-id="47047-126">Y</span></span> </td><td> <span data-ttu-id="47047-127">Y</span><span class="sxs-lookup"><span data-stu-id="47047-127">Y</span></span> </td><td> <span data-ttu-id="47047-128">Y</span><span class="sxs-lookup"><span data-stu-id="47047-128">Y</span></span> </td></tr> <tr><td><span data-ttu-id="47047-129"><strong>単語</strong></span><span class="sxs-lookup"><span data-stu-id="47047-129"><strong> Word </strong></span></span></td><td> <span data-ttu-id="47047-130">Y</span><span class="sxs-lookup"><span data-stu-id="47047-130">Y</span></span> </td><td> <span data-ttu-id="47047-131">Y</span><span class="sxs-lookup"><span data-stu-id="47047-131">Y</span></span> </td><td> <span data-ttu-id="47047-132">Y</span><span class="sxs-lookup"><span data-stu-id="47047-132">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="47047-133">例</span><span class="sxs-lookup"><span data-stu-id="47047-133">Examples</span></span>
+
+
+    ```javascript
+
+    // The following example adds a single column with three rows to a bound table with the id "myTable"
+
+    // by passing a TableData object as the data argument of the addColumnsAsync method. To succeed,
+
+    // the table being updated must have three rows.
+
+
+    // Add a column to a binding of type table by passing a TableData object.
+
+    function addColumns() {
+        var myTable = new Office.TableData();
+        myTable.headers = [["Cities"]];
+        myTable.rows = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+        Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+            result.value.addColumnsAsync(myTable);
+        });
+    }
+
+
+    // The following example adds a single column with three rows to a bound table with the id myTable
+
+    // by passing an array of arrays ("matrix") as the data argument of the addColumnsAsync method.
+
+    // To succeed, the table being updated must have three rows.
+
+
+    // Add a column to a binding of type table by passing an array of arrays.
+
+    function addColumns() {
+        var myTable = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+        Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+            result.value.addColumnsAsync(myTable);
+        });
+    }
+
+    ```
+  name: addColumnsAsync(tableData, options, callback)
+  fullName: office.Office.TableBinding.addColumnsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addColumnsAsync(tableData: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: tableData
+      description: <span data-ttu-id="47047-134">配列の配列 (「マトリックス」) または、TableData オブジェクトをテーブルに追加するデータの 1 つまたは複数列が含まれています。</span><span class="sxs-lookup"><span data-stu-id="47047-134">An array of arrays ("matrix") or a TableData object that contains one or more columns of data to add to the table.</span></span> <span data-ttu-id="47047-135">必須。</span><span class="sxs-lookup"><span data-stu-id="47047-135">Required.</span></span>
+      type:
+      - TableData | any[][]
+    - id: options
+      description: <span data-ttu-id="47047-136">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-136">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-137">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-137">Optional.</span></span> <span data-ttu-id="47047-138">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-138">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.addRowsAsync
+  summary: <span data-ttu-id="47047-139">テーブルに新しい行として指定されたデータを追加します。</span><span class="sxs-lookup"><span data-stu-id="47047-139">Adds the specified data to the table as additional rows.</span></span>
+  remarks: >-
+    <span data-ttu-id="47047-140">AddRowsAsync 操作の成否は、分割不可能なのです。</span><span class="sxs-lookup"><span data-stu-id="47047-140">The success or failure of an addRowsAsync operation is atomic.</span></span> <span data-ttu-id="47047-141">全体での列の追加は、操作が成功する必要があります、または、完全にロールバックされます (および失敗をレポートするが、AsyncResult.status プロパティは、コールバックが返されます)。</span><span class="sxs-lookup"><span data-stu-id="47047-141">That is, the entire add columns operation must succeed, or it will be completely rolled back (and the AsyncResult.status property returned to the callback will report failure):</span></span>
+
+
+    - <span data-ttu-id="47047-142">データ引数として渡す配列内の各行には、更新されるテーブルと同じ列数が必要です。</span><span class="sxs-lookup"><span data-stu-id="47047-142">Each row in the array you pass as the data argument must have the same number of columns as the table being updated.</span></span> <span data-ttu-id="47047-143">それ以外の場合は、操作全体が失敗します。</span><span class="sxs-lookup"><span data-stu-id="47047-143">If not, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="47047-144">各列と、配列内のセルする必要があります正常にテーブルに追加する列またはセルで、新しく追加された行 (s)。</span><span class="sxs-lookup"><span data-stu-id="47047-144">Each column and cell in the array must successfully add that column or cell to the table in the newly added rows(s).</span></span> <span data-ttu-id="47047-145">任意の列またはセルが何らかの理由で設定する失敗した場合、操作全体が失敗します。</span><span class="sxs-lookup"><span data-stu-id="47047-145">If any column or cell fails to be set for any reason, the entire operation will fail.</span></span>
+
+
+    - <span data-ttu-id="47047-146">TableData オブジェクトを data 引数として渡すとすると更新されるテーブルのヘッダー行の数が一致しなければなりません。</span><span class="sxs-lookup"><span data-stu-id="47047-146">If you pass a TableData object as the data argument, the number of header rows must match that of the table being updated.</span></span>
+
+
+    <span data-ttu-id="47047-147">オンラインの Excel の他のコメント: データ パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドを 1 回の呼び出しで 20,000 を超えることはできません。</span><span class="sxs-lookup"><span data-stu-id="47047-147">Additional remark for Excel Online: The total number of cells in the TableData object passed to the data parameter can't exceed 20,000 in a single call to this method.</span></span>
+
+
+    <span data-ttu-id="47047-148">**サポートの詳細**</span><span class="sxs-lookup"><span data-stu-id="47047-148">**Support details**</span></span>
+
+
+    <span data-ttu-id="47047-p111">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class="sxs-lookup"><span data-stu-id="47047-p111">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="47047-151">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-151">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="47047-152">*サポートされるホスト (プラットフォーム別)*</span><span class="sxs-lookup"><span data-stu-id="47047-152">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="47047-153">Windows デスクトップ版 Office</span><span class="sxs-lookup"><span data-stu-id="47047-153">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="47047-154">Office Online (ブラウザー)</span><span class="sxs-lookup"><span data-stu-id="47047-154">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="47047-155">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="47047-155">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="47047-156"><strong>アクセス</strong></span><span class="sxs-lookup"><span data-stu-id="47047-156"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="47047-157">Y</span><span class="sxs-lookup"><span data-stu-id="47047-157">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id="47047-158"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="47047-158"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="47047-159">Y</span><span class="sxs-lookup"><span data-stu-id="47047-159">Y</span></span> </td><td> <span data-ttu-id="47047-160">Y</span><span class="sxs-lookup"><span data-stu-id="47047-160">Y</span></span> </td><td> <span data-ttu-id="47047-161">Y</span><span class="sxs-lookup"><span data-stu-id="47047-161">Y</span></span> </td></tr> <tr><td><span data-ttu-id="47047-162"><strong>単語</strong></span><span class="sxs-lookup"><span data-stu-id="47047-162"><strong> Word </strong></span></span></td><td> <span data-ttu-id="47047-163">Y</span><span class="sxs-lookup"><span data-stu-id="47047-163">Y</span></span> </td><td> <span data-ttu-id="47047-164">Y</span><span class="sxs-lookup"><span data-stu-id="47047-164">Y</span></span> </td><td> <span data-ttu-id="47047-165">Y</span><span class="sxs-lookup"><span data-stu-id="47047-165">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="47047-166">例</span><span class="sxs-lookup"><span data-stu-id="47047-166">Examples</span></span>
+
+
+    ```javascript
+
+    function addRowsToTable() {
+        Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+            var binding = asyncResult.value;
+            binding.addRowsAsync([["6", "k"], ["7", "j"]]);
+        });
+    }
+
+    ```
+  name: addRowsAsync(rows, options, callback)
+  fullName: office.Office.TableBinding.addRowsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addRowsAsync(rows: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: rows
+      description: <span data-ttu-id="47047-167">配列の配列 (「マトリックス」) または、TableData オブジェクトをテーブルに追加するデータの 1 つまたは複数行が含まれています。</span><span class="sxs-lookup"><span data-stu-id="47047-167">An array of arrays ("matrix") or a TableData object that contains one or more rows of data to add to the table.</span></span> <span data-ttu-id="47047-168">必須。</span><span class="sxs-lookup"><span data-stu-id="47047-168">Required.</span></span>
+      type:
+      - TableData | any[][]
+    - id: options
+      description: <span data-ttu-id="47047-169">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-169">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-170">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-170">Optional.</span></span> <span data-ttu-id="47047-171">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-171">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.clearFormatsAsync
+  summary: <span data-ttu-id="47047-172">バインド テーブルの書式設定をクリアします。</span><span class="sxs-lookup"><span data-stu-id="47047-172">Clears formatting on the bound table.</span></span>
+  remarks: >-
+    <span data-ttu-id="47047-173">詳細については、 [Excel 用のアドインの形式のテーブル](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="47047-173">See [Format tables in add-ins for Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) for more information.</span></span>
+
+
+    <span data-ttu-id="47047-174">**サポートの詳細**</span><span class="sxs-lookup"><span data-stu-id="47047-174">**Support details**</span></span>
+
+
+    <span data-ttu-id="47047-p114">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class="sxs-lookup"><span data-stu-id="47047-p114">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="47047-177">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-177">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="47047-178">*サポートされるホスト (プラットフォーム別)*</span><span class="sxs-lookup"><span data-stu-id="47047-178">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="47047-179">Windows デスクトップ版 Office</span><span class="sxs-lookup"><span data-stu-id="47047-179">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="47047-180">Office Online (ブラウザー)</span><span class="sxs-lookup"><span data-stu-id="47047-180">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="47047-181">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="47047-181">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="47047-182"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="47047-182"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="47047-183">Y</span><span class="sxs-lookup"><span data-stu-id="47047-183">Y</span></span> </td><td> <span data-ttu-id="47047-184">Y</span><span class="sxs-lookup"><span data-stu-id="47047-184">Y</span></span> </td><td> <span data-ttu-id="47047-185">Y</span><span class="sxs-lookup"><span data-stu-id="47047-185">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="47047-186">例</span><span class="sxs-lookup"><span data-stu-id="47047-186">Examples</span></span>
+
+
+    ```javascript
+
+    // The following example shows how to clear the formatting of the bound table with an ID of "myBinding":
+
+    Office.select("bindings#myBinding").clearFormatsAsync();
+
+    ```
+  name: clearFormatsAsync(options, callback)
+  fullName: office.Office.TableBinding.clearFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clearFormatsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: <span data-ttu-id="47047-187">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-187">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-188">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-188">Optional.</span></span> <span data-ttu-id="47047-189">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-189">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.columnCount
+  summary: <span data-ttu-id="47047-190">整数値としてでは、結合テーブルの結合、列の数を取得します。</span><span class="sxs-lookup"><span data-stu-id="47047-190">Gets the number of columns in the TableBinding, as an integer value.</span></span>
+  remarks: "<span data-ttu-id=\"47047-191\">**サポートの詳細**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-191\">**Support details**</span></span>\n\n<span data-ttu-id=\"47047-p116\">次の表で、大文字 Y は、このプロパティは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのプロパティをサポートしないことを示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-p116\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"47047-194\">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-194\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-195\">*サポートされるホスト (プラットフォーム別)*</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-195\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"47047-196\">Windows デスクトップ版 Office</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-196\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"47047-197\">Office Online (ブラウザー)</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-197\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"47047-198\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-198\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"47047-199\"><strong>アクセス</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-199\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"47047-200\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-200\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"47047-201\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-201\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"47047-202\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-202\">Y</span></span> </td><td> <span data-ttu-id=\"47047-203\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-203\">Y</span></span> </td><td> <span data-ttu-id=\"47047-204\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-204\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"47047-205\"><strong>単語</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-205\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"47047-206\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-206\">Y</span></span> </td><td> <span data-ttu-id=\"47047-207\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-207\">Y</span></span> </td><td> <span data-ttu-id=\"47047-208\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-208\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"47047-209\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-209\">Examples</span></span>\n\n```javascript\nfunction showBindingColumnCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Column: \" + asyncResult.value.columnCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: columnCount
+  fullName: office.Office.TableBinding.columnCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'columnCount: number;'
+    return:
+      type:
+      - number
+- uid: office.Office.TableBinding.deleteAllDataValuesAsync
+  summary: <span data-ttu-id="47047-210">テーブル内のヘッダー行以外の行と値をすべて削除し、ホスト アプリケーションに応じて適切にシフトします。</span><span class="sxs-lookup"><span data-stu-id="47047-210">Deletes all non-header rows and their values in the table, shifting appropriately for the host application.</span></span>
+  remarks: >-
+    <span data-ttu-id="47047-211">Excel では、テーブルにヘッダー行が含まれていない場合、このメソッドはテーブルそのものを削除します。</span><span class="sxs-lookup"><span data-stu-id="47047-211">In Excel, if the table has no header row, this method will delete the table itself.</span></span>
+
+
+    <span data-ttu-id="47047-212">**サポートの詳細**</span><span class="sxs-lookup"><span data-stu-id="47047-212">**Support details**</span></span>
+
+
+    <span data-ttu-id="47047-p117">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class="sxs-lookup"><span data-stu-id="47047-p117">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+
+
+    <span data-ttu-id="47047-215">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-215">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="47047-216">*サポートされるホスト (プラットフォーム別)*</span><span class="sxs-lookup"><span data-stu-id="47047-216">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="47047-217">Windows デスクトップ版 Office</span><span class="sxs-lookup"><span data-stu-id="47047-217">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="47047-218">Office Online (ブラウザー)</span><span class="sxs-lookup"><span data-stu-id="47047-218">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="47047-219">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="47047-219">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="47047-220"><strong>アクセス</strong></span><span class="sxs-lookup"><span data-stu-id="47047-220"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="47047-221">Y</span><span class="sxs-lookup"><span data-stu-id="47047-221">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id="47047-222"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="47047-222"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="47047-223">Y</span><span class="sxs-lookup"><span data-stu-id="47047-223">Y</span></span> </td><td> <span data-ttu-id="47047-224">Y</span><span class="sxs-lookup"><span data-stu-id="47047-224">Y</span></span> </td><td> <span data-ttu-id="47047-225">Y</span><span class="sxs-lookup"><span data-stu-id="47047-225">Y</span></span> </td></tr> <tr><td><span data-ttu-id="47047-226"><strong>単語</strong></span><span class="sxs-lookup"><span data-stu-id="47047-226"><strong> Word </strong></span></span></td><td> <span data-ttu-id="47047-227">Y</span><span class="sxs-lookup"><span data-stu-id="47047-227">Y</span></span> </td><td> <span data-ttu-id="47047-228">Y</span><span class="sxs-lookup"><span data-stu-id="47047-228">Y</span></span> </td><td> <span data-ttu-id="47047-229">Y</span><span class="sxs-lookup"><span data-stu-id="47047-229">Y</span></span> </td></tr> </table>
+
+    #### <a name="examples"></a><span data-ttu-id="47047-230">例</span><span class="sxs-lookup"><span data-stu-id="47047-230">Examples</span></span>
+
+
+    ```javascript
+
+    function deleteAllRowsFromTable() {
+        Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+            var binding = asyncResult.value;
+            binding.deleteAllDataValuesAsync();
+        });
+    }
+
+    ```
+  name: deleteAllDataValuesAsync(options, callback)
+  fullName: office.Office.TableBinding.deleteAllDataValuesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'deleteAllDataValuesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: <span data-ttu-id="47047-231">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-231">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-232">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-232">Optional.</span></span> <span data-ttu-id="47047-233">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-233">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.getFormatsAsync
+  summary: <span data-ttu-id="47047-234">テーブル内の指定されたアイテムに書式設定を取得します。</span><span class="sxs-lookup"><span data-stu-id="47047-234">Gets the formatting on specified items in the table.</span></span>
+  remarks: >-
+    <span data-ttu-id="47047-235">**形式の構造体が返されます**</span><span class="sxs-lookup"><span data-stu-id="47047-235">**Returned format structure**</span></span>
+
+
+    <span data-ttu-id="47047-236">戻り値の配列内の各の JavaScript オブジェクトには、このフォームがあります。`{cells:{ cell_range }, format:{ format_definition }}`</span><span class="sxs-lookup"><span data-stu-id="47047-236">Each JavaScript object in the return value array has this form: `{cells:{ cell_range }, format:{ format_definition }}`</span></span>
+
+
+    <span data-ttu-id="47047-237">`cells:`プロパティは、形式は次の値のいずれかを使用し範囲を指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-237">The `cells:` property specifies the range you want format using one of the following values:</span></span>
+
+
+    <span data-ttu-id="47047-238">**cells プロパティでサポートされている範囲**</span><span class="sxs-lookup"><span data-stu-id="47047-238">**Supported ranges in cells property**</span></span>
+
+
+    <table> <tr> <th><span data-ttu-id="47047-239">cells の範囲の設定</span><span class="sxs-lookup"><span data-stu-id="47047-239">cells range settings</span></span></th> <th><span data-ttu-id="47047-240">説明</span><span class="sxs-lookup"><span data-stu-id="47047-240">Description</span></span></th> </tr> <tr> <td><span data-ttu-id="47047-241">{0} 行: n}</span><span class="sxs-lookup"><span data-stu-id="47047-241">{row: n}</span></span></td> <td><span data-ttu-id="47047-242">テーブル内のデータの 0 から始まる n 番目の行の範囲を指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-242">Specifies the range that is the zero-based nth row of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="47047-243">{列: n}</span><span class="sxs-lookup"><span data-stu-id="47047-243">{column: n}</span></span></td> <td><span data-ttu-id="47047-244">テーブル内のデータの 0 から始まる n 番目の列の範囲を指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-244">Specifies the range that is the zero-based nth column of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="47047-245">{0} 行: i、列: j}</span><span class="sxs-lookup"><span data-stu-id="47047-245">{row: i, column: j}</span></span></td> <td><span data-ttu-id="47047-246">表の i 番目の行と jth 列は、1 つのセルを指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-246">Specifies the single cell that is the ith row and jth column of the table.</span></span></td> </tr> <tr> <td><span data-ttu-id="47047-247">Office.Table.All</span><span class="sxs-lookup"><span data-stu-id="47047-247">Office.Table.All</span></span></td> <td><span data-ttu-id="47047-248">見出し行のみを指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-248">Specifies the entire table, including column headers, data, and totals (if any).</span></span></td> </tr> <tr> <td><span data-ttu-id="47047-249">Office.Table.Data</span><span class="sxs-lookup"><span data-stu-id="47047-249">Office.Table.Data</span></span></td> <td><span data-ttu-id="47047-250">テーブル内のデータのみ (見出しと集計を含まない) を指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-250">Specifies only the data in the table (no headers and totals).</span></span></td> </tr> <tr> <td><span data-ttu-id="47047-251">Office.Table.Headers</span><span class="sxs-lookup"><span data-stu-id="47047-251">Office.Table.Headers</span></span></td> <td><span data-ttu-id="47047-252">見出し行のみを指定します。</span><span class="sxs-lookup"><span data-stu-id="47047-252">Specifies only the header row.</span></span></td> </tr> </table>
+
+
+    <span data-ttu-id="47047-253">`format:`プロパティは、Excel でのボックスの [セルの書式設定] ダイアログ ボックスの設定の一部に対応する値を指定 (右&gt;セルの書式設定またはホーム&gt;形式&gt;セルの書式設定)。</span><span class="sxs-lookup"><span data-stu-id="47047-253">The `format:` property specifies values that correspond to a subset of the settings available in the Format Cells dialog box in Excel (Right-click &gt; Format Cells or Home &gt; Format &gt; Format Cells).</span></span>
+  name: getFormatsAsync(cellReference, formats, options, callback)
+  fullName: office.Office.TableBinding.getFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getFormatsAsync(cellReference?: any, formats?: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cellReference
+      description: <span data-ttu-id="47047-254">リテラルの書式設定を取得するセルの範囲を指定する名前と値のペアを含むオブジェクトです。</span><span class="sxs-lookup"><span data-stu-id="47047-254">An object literal containing name-value pairs that specify the range of cells to get formatting from.</span></span>
+      type:
+      - any
+    - id: formats
+      description: <span data-ttu-id="47047-255">形式を取得するプロパティを指定する配列。</span><span class="sxs-lookup"><span data-stu-id="47047-255">An array specifying the format properties to get.</span></span>
+      type:
+      - any[]
+    - id: options
+      description: <span data-ttu-id="47047-256">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-256">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-257">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-257">Optional.</span></span> <span data-ttu-id="47047-258">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-258">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="47047-259">`value`の結果のプロパティの対応するセルの書式を指定する 1 つまたは複数の JavaScript オブジェクトを含む配列です。</span><span class="sxs-lookup"><span data-stu-id="47047-259">The `value` property of the result is an array containing one or more JavaScript objects specifying the formatting of their corresponding cells.</span></span>
+      type:
+      - '(result: AsyncResult< ({ cells: any, format: any})[]>) => void'
+- uid: office.Office.TableBinding.hasHeaders
+  summary: <span data-ttu-id="47047-260">テーブル ヘッダーにある場合は true。それ以外の場合は、false。</span><span class="sxs-lookup"><span data-stu-id="47047-260">True, if the table has headers; otherwise false.</span></span>
+  remarks: "<span data-ttu-id=\"47047-261\">**サポートの詳細**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-261\">**Support details**</span></span>\n\n<span data-ttu-id=\"47047-p120\">次の表で、大文字 Y は、このプロパティは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのプロパティをサポートしないことを示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-p120\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"47047-264\">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-264\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-265\">*サポートされるホスト (プラットフォーム別)*</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-265\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"47047-266\">Windows デスクトップ版 Office</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-266\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"47047-267\">Office Online (ブラウザー)</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-267\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"47047-268\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-268\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"47047-269\"><strong>アクセス</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-269\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"47047-270\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-270\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"47047-271\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-271\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"47047-272\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-272\">Y</span></span> </td><td> <span data-ttu-id=\"47047-273\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-273\">Y</span></span> </td><td> <span data-ttu-id=\"47047-274\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-274\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"47047-275\"><strong>単語</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-275\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"47047-276\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-276\">Y</span></span> </td><td> <span data-ttu-id=\"47047-277\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-277\">Y</span></span> </td><td> <span data-ttu-id=\"47047-278\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-278\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"47047-279\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-279\">Examples</span></span>\n\n```javascript\nfunction showBindingHasHeaders() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Binding has headers: \" + asyncResult.value.hasHeaders);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: hasHeaders
+  fullName: office.Office.TableBinding.hasHeaders
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'hasHeaders: boolean;'
+    return:
+      type:
+      - boolean
+- uid: office.Office.TableBinding.rowCount
+  summary: <span data-ttu-id="47047-280">整数値としてでは、結合テーブルの結合、行の数を取得します。</span><span class="sxs-lookup"><span data-stu-id="47047-280">Gets the number of rows in the TableBinding, as an integer value.</span></span>
+  remarks: "<span data-ttu-id=\"47047-281\">Excel 2013 と Excel のオンラインで 1 つの行を選択して空のテーブルを挿入するときに Office ホスト アプリケーションの両方は 1 つの空白行の後にヘッダーの 1 つの行を作成 ([挿入] タブでテーブルを使用します)。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-281\">When you insert an empty table by selecting a single row in Excel 2013 and Excel Online (using Table on the Insert tab), both Office host applications create a single row of headers followed by a single blank row.</span></span> <span data-ttu-id=\"47047-282\">ただし、アドインでのスクリプトのバインディングを作成する場合は、この新しく挿入されたテーブル (たとえば、 [Office.Bindings](xref:office.Office.Bindings)を使用して<!-- -->.addFromSelectionAsync メソッド)、値を確認し、rowCount プロパティの戻り値が異なる場合がスプレッドシートは、Excel 2013 またはオンラインの Excel で開いているかどうかを依存しています。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-282\">However, if your add-in's script creates a binding for this newly inserted table (for example, by using the [Office.Bindings](xref:office.Office.Bindings)<!-- -->.addFromSelectionAsync method), and then checks the value of the rowCount property, the value returned will differ depending whether the spreadsheet is open in Excel 2013 or Excel Online.</span></span>\n\n- <span data-ttu-id=\"47047-283\">デスクトップ上の excel では、行カウントが (空白の行が次のヘッダーは含まれません) 0 を返します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-283\">In Excel on the desktop, rowCount will return 0 (the blank row following the headers is not counted).</span></span>\n\n- <span data-ttu-id=\"47047-284\">オンラインの Excel では、行カウントが (ヘッダーを次の空白行をカウントします) 1 を返します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-284\">In Excel Online, rowCount will return 1 (the blank row following the headers is counted).</span></span>\n\n<span data-ttu-id=\"47047-285\">このスクリプトの違いを回避するには、場合を確認することで行カウント = 1、およびすべての空の文字列が行に含まれているかどうかはチェックし、場合は、します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-285\">You can work around this difference in your script by checking if rowCount == 1, and if so, then checking if the row contains all empty strings.</span></span>\n\n<span data-ttu-id=\"47047-286\">コンテンツ アドインにアクセスするため、パフォーマンス上の理由から行カウントは常に-1 を返します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-286\">In content add-ins for Access, for performance reasons the rowCount property always returns -1.</span></span>\n\n<span data-ttu-id=\"47047-287\">**サポートの詳細**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-287\">**Support details**</span></span>\n\n<span data-ttu-id=\"47047-p122\">次の表で、大文字 Y は、このプロパティは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのプロパティをサポートしないことを示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-p122\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>\n\n<span data-ttu-id=\"47047-290\">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-290\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-291\">*サポートされるホスト (プラットフォーム別)*</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-291\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"47047-292\">Windows デスクトップ版 Office</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-292\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"47047-293\">Office Online (ブラウザー)</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-293\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"47047-294\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-294\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"47047-295\"><strong>アクセス</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-295\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"47047-296\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-296\">Y</span></span> </td><td> </td></tr> <tr><td><span data-ttu-id=\"47047-297\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-297\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"47047-298\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-298\">Y</span></span> </td><td> <span data-ttu-id=\"47047-299\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-299\">Y</span></span> </td><td> <span data-ttu-id=\"47047-300\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-300\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"47047-301\"><strong>単語</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-301\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"47047-302\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-302\">Y</span></span> </td><td> <span data-ttu-id=\"47047-303\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-303\">Y</span></span> </td><td> <span data-ttu-id=\"47047-304\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-304\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"47047-305\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-305\">Examples</span></span>\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: rowCount
+  fullName: office.Office.TableBinding.rowCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'rowCount: number;'
+    return:
+      type:
+      - number
+- uid: office.Office.TableBinding.setFormatsAsync
+  summary: <span data-ttu-id="47047-306">指定した項目と、テーブル内のデータに書式を設定します。</span><span class="sxs-lookup"><span data-stu-id="47047-306">Sets formatting on specified items and data in the table.</span></span>
+  remarks: "<span data-ttu-id=\"47047-307\">**cellFormat パラメーターを指定する**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-307\">**Specifying the cellFormat parameter**</span></span>\n\n<span data-ttu-id=\"47047-308\">CellFormat パラメーターを使用して、設定または変更するセルの値、幅、高さ、フォント、背景、配置、およびように書式を設定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-308\">Use the cellFormat parameter to set or change cell formatting values, such as width, height, font, background, alignment, and so on.</span></span> <span data-ttu-id=\"47047-309\">CellFormat パラメーターは、1 つのリストを含む配列、または複数の JavaScript オブジェクトをターゲットにするセルを指定するには、渡す値 (`cells:`) と形式 (`format:`) に適用します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-309\">The value you pass as the cellFormat parameter is an array that contains a list of one or more JavaScript objects that specify which cells to target (`cells:`) and the formats (`format:`) to apply to them.</span></span>\n\n<span data-ttu-id=\"47047-310\">CellFormat 配列内の各の JavaScript オブジェクトには、このフォームがあります。`{cells:{ cell_range }, format:{ format_definition }}`</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-310\">Each JavaScript object in the cellFormat array has this form: `{cells:{ cell_range }, format:{ format_definition }}`</span></span>\n\n<span data-ttu-id=\"47047-311\">`cells:`プロパティは、形式は次の値のいずれかを使用し範囲を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-311\">The `cells:` property specifies the range you want format using one of the following values:</span></span>\n\n<span data-ttu-id=\"47047-312\">**cells プロパティでサポートされている範囲**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-312\">**Supported ranges in cells property**</span></span>\n\n<table> <tr> <th><span data-ttu-id=\"47047-313\">cells の範囲の設定</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-313\">cells range settings</span></span></th> <th><span data-ttu-id=\"47047-314\">説明</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-314\">Description</span></span></th> </tr> <tr> <td><span data-ttu-id=\"47047-315\">{0} 行: n}</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-315\">{row: n}</span></span></td> <td><span data-ttu-id=\"47047-316\">テーブル内のデータの 0 から始まる n 番目の行の範囲を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-316\">Specifies the range that is the zero-based nth row of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-317\">{列: n}</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-317\">{column: n}</span></span></td> <td><span data-ttu-id=\"47047-318\">テーブル内のデータの 0 から始まる n 番目の列の範囲を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-318\">Specifies the range that is the zero-based nth column of data in the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-319\">{0} 行: i、列: j}</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-319\">{row: i, column: j}</span></span></td> <td><span data-ttu-id=\"47047-320\">表の i 番目の行と jth 列は、1 つのセルを指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-320\">Specifies the single cell that is the ith row and jth column of the table.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-321\">Office.Table.All</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-321\">Office.Table.All</span></span></td> <td><span data-ttu-id=\"47047-322\">見出し行のみを指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-322\">Specifies the entire table, including column headers, data, and totals (if any).</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-323\">Office.Table.Data</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-323\">Office.Table.Data</span></span></td> <td><span data-ttu-id=\"47047-324\">テーブル内のデータのみ (見出しと集計を含まない) を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-324\">Specifies only the data in the table (no headers and totals).</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-325\">Office.Table.Headers</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-325\">Office.Table.Headers</span></span></td> <td><span data-ttu-id=\"47047-326\">見出し行のみを指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-326\">Specifies only the header row.</span></span></td> </tr> </table>\n\n<span data-ttu-id=\"47047-327\">`format:`プロパティは、Excel でのボックスの [セルの書式設定] ダイアログ ボックスの設定の一部に対応する値を指定 (右&gt;セルの書式設定またはホーム&gt;形式&gt;セルの書式設定)。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-327\">The `format:` property specifies values that correspond to a subset of the settings available in the Format Cells dialog box in Excel (Right-click &gt; Format Cells or Home &gt; Format &gt; Format Cells).</span></span>\n\n<span data-ttu-id=\"47047-328\">値を指定する、 `format:` 1 つまたは複数プロパティの名前の JavaScript のオブジェクト リテラルの値のペアのリストとしてのプロパティです。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-328\">You specify the value of the `format:` property as a list of one or more property name - value pairs in a JavaScript object literal.</span></span> <span data-ttu-id=\"47047-329\">property name では設定する書式設定プロパティの名前を指定し、value ではプロパティの値を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-329\">The property name specifies the name of the formatting property to set, and value specifies the property value.</span></span> <span data-ttu-id=\"47047-330\">フォントの色とサイズの両方など、特定の書式の複数の値を指定できます。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-330\">You can specify multiple values for a given format, such as both a font's color and size.</span></span>\n\n<span data-ttu-id=\"47047-331\">3 つの `format:` プロパティ値を指定する例を次に示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-331\">Here's three `format:` property value examples:</span></span>\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\n<span data-ttu-id=\"47047-332\">数値の書式を指定するには「コード」の文字列を書式設定の数を指定することにより、`numberFormat:`プロパティ。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-332\">You can specify number formats by specifying the number formatting \"code\" string in the `numberFormat:` property.</span></span> <span data-ttu-id=\"47047-333\">タブの [セルの書式設定] ダイアログ ボックスのカスタム カテゴリを使用して Excel で設定できるように、数値書式指定文字列を指定することができますが対応しています。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-333\">The number format strings you can specify correspond to those you can set in Excel using the Custom category on the Number tab of the Format Cells dialog box.</span></span> <span data-ttu-id=\"47047-334\">次の使用例は、小数点以下 2 桁の割合で数値の書式を設定する方法を示しています。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-334\">This example shows how to format a number as a percentage with two decimal places:</span></span>\n\n`format: {numberFormat:\"0.00%\"}`\n\n<span data-ttu-id=\"47047-335\">詳細についてを参照してください[カスタム数値形式を作成](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)する方法<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-335\">For more detail, see how to [Create a custom number format](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-336\">書式を設定するテーブルにデータを書き込むときの tableOptions、cellFormat の省略可能なパラメーターを使用して、`Document.setSelectedDataAsync`または`TableBinding.setDataAsync`方法です。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-336\">To set formatting on tables when writing data, use the tableOptions and cellFormat optional parameters of the `Document.setSelectedDataAsync` or `TableBinding.setDataAsync` methods.</span></span>\n\n<span data-ttu-id=\"47047-337\">省略可能なパラメーターを使用して書式を設定する、`Document.setSelectedDataAsync`と`TableBinding.setDataAsync`メソッドは、データの最初の時刻を書き込むときに書式を設定するのにはのみ動作します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-337\">Setting formatting with the optional parameters of the `Document.setSelectedDataAsync` and `TableBinding.setDataAsync` methods only works to set formatting when writing data the first time.</span></span> <span data-ttu-id=\"47047-338\">データを作成した後は書式設定の変更を行うには、以下の方法を使用します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-338\">To make formatting changes after writing data, use the following methods:</span></span>\n\n- <span data-ttu-id=\"47047-339\">フォントの色やスタイルなど、セルの書式設定を更新するには、`TableBinding.setFormatsAsync`メソッド (この)。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-339\">To update cell formatting, such as font color and style, use the `TableBinding.setFormatsAsync` method (this method).</span></span>\n\n- <span data-ttu-id=\"47047-340\">バンド設定された行など、テーブルのオプションを更新し、フィルター ボタンを使用します`TableBinding.setTableOptions`メソッドです。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-340\">To update table options, such as banded rows and filter buttons, use the `TableBinding.setTableOptions` method.</span></span>\n\n- <span data-ttu-id=\"47047-341\">クリアするには書式設定を使用して、`TableBinding.clearFormats`メソッドです。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-341\">To clear formatting, use the `TableBinding.clearFormats` method.</span></span>\n\n<span data-ttu-id=\"47047-342\">詳細詳細と例については、 [Excel 用のアドイン内のテーブルの書式を設定する方法](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-342\">For more details and examples, see [How to format tables in add-ins for Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-343\">**サポートの詳細**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-343\">**Support details**</span></span>\n\n<span data-ttu-id=\"47047-p127\">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-p127\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"47047-346\">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-346\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-347\">*サポートされるホスト (プラットフォーム別)*</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-347\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"47047-348\">Windows デスクトップ版 Office</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-348\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"47047-349\">Office Online (ブラウザー)</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-349\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"47047-350\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-350\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"47047-351\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-351\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"47047-352\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-352\">Y</span></span> </td><td> <span data-ttu-id=\"47047-353\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-353\">Y</span></span> </td><td> <span data-ttu-id=\"47047-354\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-354\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"47047-355\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-355\">Examples</span></span>\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
+  name: setFormatsAsync(cellFormat, options, callback)
+  fullName: office.Office.TableBinding.setFormatsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setFormatsAsync(cellFormat: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cellFormat
+      description: <span data-ttu-id="47047-356">ターゲットおよびそれらに適用する書式設定するセルを指定する 1 つまたは複数の JavaScript オブジェクトを含む配列です。</span><span class="sxs-lookup"><span data-stu-id="47047-356">An array that contains one or more JavaScript objects that specify which cells to target and the formatting to apply to them.</span></span>
+      type:
+      - any[]
+    - id: options
+      description: <span data-ttu-id="47047-357">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-357">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-358">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-358">Optional.</span></span> <span data-ttu-id="47047-359">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-359">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.TableBinding.setTableOptionsAsync
+  summary: <span data-ttu-id="47047-360">バインド テーブルにおけるテーブル書式設定オプションを更新します。</span><span class="sxs-lookup"><span data-stu-id="47047-360">Updates table formatting options on the bound table.</span></span>
+  remarks: "<table><tr><td><span data-ttu-id=\"47047-361\">Hosts</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-361\">Hosts</span></span></td><td><span data-ttu-id=\"47047-362\">Excel</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-362\">Excel</span></span></td></tr>\n\n<tr><td><span data-ttu-id=\"47047-363\">要件の設定</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-363\">Requirement Sets</span></span></td><td><span data-ttu-id=\"47047-364\">セットには指定できない</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-364\">Not in a set</span></span></td></tr></table>\n\n<span data-ttu-id=\"47047-365\">GoToByIdAsync メソッドに渡されるコールバック関数では、次の情報を返す AsyncResult オブジェクトのプロパティを使用できます。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-365\">In the callback function passed to the goToByIdAsync method, you can use the properties of the AsyncResult object to return the following information.</span></span>\n\n<table> <tr> <th><span data-ttu-id=\"47047-366\">プロパティ</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-366\">Property</span></span></th> <th><span data-ttu-id=\"47047-367\">使用目的</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-367\">Use to...</span></span></th> </tr> <tr> <td><span data-ttu-id=\"47047-368\">AsyncResult.value</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-368\">AsyncResult.value</span></span></td> <td><span data-ttu-id=\"47047-369\">データまたは書式を設定するときに取得するオブジェクトがないためには、undefined を返します常にします。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-369\">Always returns undefined because there is no data or object to retrieve when setting formats.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-370\">AsyncResult.status</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-370\">AsyncResult.status</span></span></td> <td><span data-ttu-id=\"47047-371\">操作の成功または失敗を判断します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-371\">Determine the success or failure of the operation.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-372\">AsyncResult.error</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-372\">AsyncResult.error</span></span></td> <td><span data-ttu-id=\"47047-373\">操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-373\">Access an Error object that provides error information if the operation failed.</span></span></td> </tr> <tr> <td><span data-ttu-id=\"47047-374\">AsyncResult.asyncContext</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-374\">AsyncResult.asyncContext</span></span></td> <td><span data-ttu-id=\"47047-375\">変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-375\">A user-defined item of any type that is returned in the AsyncResult object without being altered.</span></span></td> </tr> </table>\n\n<span data-ttu-id=\"47047-376\">**サポートの詳細**</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-376\">**Support details**</span></span>\n\n<span data-ttu-id=\"47047-p129\">次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-p129\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"47047-379\">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-379\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"47047-380\">*サポートされるホスト (プラットフォーム別)*</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-380\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"47047-381\">Windows デスクトップ版 Office</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-381\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"47047-382\">Office Online (ブラウザー)</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-382\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"47047-383\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-383\">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id=\"47047-384\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-384\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"47047-385\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-385\">Y</span></span> </td><td> <span data-ttu-id=\"47047-386\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-386\">Y</span></span> </td><td> <span data-ttu-id=\"47047-387\">Y</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-387\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"47047-388\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"47047-388\">Examples</span></span>\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
+  name: setTableOptionsAsync(tableOptions, options, callback)
+  fullName: office.Office.TableBinding.setTableOptionsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setTableOptionsAsync(tableOptions: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: tableOptions
+      description: <span data-ttu-id="47047-389">適用するテーブルのオプションを定義するプロパティの名前と値のペアのリストを含むオブジェクトのリテラルです。</span><span class="sxs-lookup"><span data-stu-id="47047-389">An object literal containing a list of property name-value pairs that define the table options to apply.</span></span>
+      type:
+      - any
+    - id: options
+      description: <span data-ttu-id="47047-390">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="47047-390">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="47047-391">省略可能。</span><span class="sxs-lookup"><span data-stu-id="47047-391">Optional.</span></span> <span data-ttu-id="47047-392">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="47047-392">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'

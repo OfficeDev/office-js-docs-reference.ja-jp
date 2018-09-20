@@ -1,0 +1,279 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: ba7e8d8b1e7b4afc784463798ff695d4fabab33c
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24049501"
+items:
+- uid: office.Office.CustomXmlPart
+  summary: <span data-ttu-id="3026a-101">[Office.CustomXmlParts](xref:office.Office.CustomXmlParts)コレクション内の 1 つの CustomXMLPart を表します。</span><span class="sxs-lookup"><span data-stu-id="3026a-101">Represents a single CustomXMLPart in an [Office.CustomXmlParts](xref:office.Office.CustomXmlParts) collection.</span></span>
+  remarks: >-
+    <table><tr><td><span data-ttu-id="3026a-102">要件の設定</span><span class="sxs-lookup"><span data-stu-id="3026a-102">Requirement Sets</span></span></td><td><span data-ttu-id="3026a-103">CustomXmlParts</span><span class="sxs-lookup"><span data-stu-id="3026a-103">CustomXmlParts</span></span></td></tr></table>
+
+
+    <span data-ttu-id="3026a-104">**サポートの詳細**</span><span class="sxs-lookup"><span data-stu-id="3026a-104">**Support details**</span></span>
+
+
+    <span data-ttu-id="3026a-105">大文字 Y の次のマトリックスでは、対応する Office ホスト アプリケーションでこのインターフェイスがサポートされていることを示します。</span><span class="sxs-lookup"><span data-stu-id="3026a-105">A capital Y in the following matrix indicates that this interface is supported in the corresponding Office host application.</span></span> <span data-ttu-id="3026a-106">空のセルでは、Office ホスト アプリケーションでこのインターフェイスをサポートしないことを示します。</span><span class="sxs-lookup"><span data-stu-id="3026a-106">An empty cell indicates that the Office host application doesn't support this interface.</span></span>
+
+
+    <span data-ttu-id="3026a-107">Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-107">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="3026a-108">*サポートされるホスト (プラットフォーム別)*</span><span class="sxs-lookup"><span data-stu-id="3026a-108">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="3026a-109">Windows デスクトップ版 Office</span><span class="sxs-lookup"><span data-stu-id="3026a-109">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="3026a-110">Office Online (ブラウザー)</span><span class="sxs-lookup"><span data-stu-id="3026a-110">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="3026a-111">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="3026a-111">Office for iPad</span></span> </th></tr> <tr><td><span data-ttu-id="3026a-112"><strong>単語</strong></span><span class="sxs-lookup"><span data-stu-id="3026a-112"><strong> Word </strong></span></span></td><td> <span data-ttu-id="3026a-113">Y</span><span class="sxs-lookup"><span data-stu-id="3026a-113">Y</span></span> </td><td> <span data-ttu-id="3026a-114">Y</span><span class="sxs-lookup"><span data-stu-id="3026a-114">Y</span></span> </td><td> <span data-ttu-id="3026a-115">Y</span><span class="sxs-lookup"><span data-stu-id="3026a-115">Y</span></span> </td></tr> </table>
+  name: Office.CustomXmlPart
+  fullName: office.Office.CustomXmlPart
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.CustomXmlPart.addHandlerAsync
+  - office.Office.CustomXmlPart.builtIn
+  - office.Office.CustomXmlPart.deleteAsync
+  - office.Office.CustomXmlPart.getNodesAsync
+  - office.Office.CustomXmlPart.getXmlAsync
+  - office.Office.CustomXmlPart.id
+  - office.Office.CustomXmlPart.namespaceManager
+  - office.Office.CustomXmlPart.removeHandlerAsync
+- uid: office.Office.CustomXmlPart.addHandlerAsync
+  summary: <span data-ttu-id="3026a-116">指定されたイベントの種類を使用してオブジェクトにイベント ハンドラーを追加します。</span><span class="sxs-lookup"><span data-stu-id="3026a-116">Adds an event handler to the object using the specified event type.</span></span>
+  remarks: >-
+    <span data-ttu-id="3026a-117">各イベント ハンドラー関数の名前が重複しない限り、指定されたイベントの種類の複数のイベント ハンドラーを追加できます。</span><span class="sxs-lookup"><span data-stu-id="3026a-117">You can add multiple event handlers for the specified eventType as long as the name of each event handler function is unique.</span></span>
+
+    #### <a name="examples"></a><span data-ttu-id="3026a-118">例</span><span class="sxs-lookup"><span data-stu-id="3026a-118">Examples</span></span>
+
+
+    ```javascript
+
+    // To add an event handler for the NodeDeleted event, use the addHandlerAsync method of the CustomXmlPart object.
+
+    function addNodeDeletedEvent() {
+        Office.context.document.customXmlParts.getByIdAsync(
+            "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+            var xmlPart = result.value;
+            xmlPart.addHandlerAsync(Office.EventType.NodeDeleted, function (eventArgs) {
+                write("A node has been deleted.");
+            });
+        });
+    }
+
+    // Function that writes to a div with id='message' on the page.
+
+    function write(message){
+        document.getElementById('message').innerText += message;
+    }
+
+    ```
+
+    ```javascript
+
+    // To add an event handler for the NodeInserted event, use the addHandlerAsync method of the CustomXmlPart object.
+
+    function addNodeInsertedEvent() {
+        Office.context.document.customXmlParts.getByIdAsync(
+            "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+            var xmlPart = result.value;
+            xmlPart.addHandlerAsync(Office.EventType.NodeInserted, function (eventArgs) {
+                write("A node has been inserted.");
+            });
+        });
+    }
+
+    // Function that writes to a div with id='message' on the page.
+
+    function write(message){
+        document.getElementById('message').innerText += message;
+    }
+
+    ```
+
+    ```javascript
+
+    // To add an event handler for the NodeReplaced event, use the addHandlerAsync method of the CustomXmlPart object.
+
+    function addNodeReplacedEvent() {
+        Office.context.document.customXmlParts.getByIdAsync(
+            "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+            var xmlPart = result.value;
+            xmlPart.addHandlerAsync(Office.EventType.NodeReplaced, function (eventArgs) {
+                write("A node has been replaced.");
+            });
+        });
+    }
+
+    // Function that writes to a div with id='message' on the page.
+
+    function write(message){
+        document.getElementById('message').innerText += message;
+    }
+
+    ```
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: office.Office.CustomXmlPart.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: any) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: <span data-ttu-id="3026a-119">追加するイベントの種類を指定します。</span><span class="sxs-lookup"><span data-stu-id="3026a-119">Specifies the type of event to add.</span></span> <span data-ttu-id="3026a-120">として CustomXmlPart オブジェクトでは、イベントの種類のパラメーターを指定できます`Office.EventType.NodeDeleted`、`Office.EventType.NodeInserted`と`Office.EventType.NodeReplaced`。</span><span class="sxs-lookup"><span data-stu-id="3026a-120">For a CustomXmlPart object, the eventType parameter can be specified as `Office.EventType.NodeDeleted`, `Office.EventType.NodeInserted`, and `Office.EventType.NodeReplaced`.</span></span>
+      type:
+      - Office.EventType
+    - id: handler
+      description: <span data-ttu-id="3026a-121">型[Office.NodeDeletedEventArgs](xref:office.Office.NodeDeletedEventArgs)が唯一のパラメーターは、イベント ハンドラー関数を追加するに<!-- -->、 [Office.NodeInsertedEventArgs](xref:office.Office.NodeInsertedEventArgs)<!-- -->、または[Office.NodeReplacedEventArgs](xref:office.Office.NodeReplacedEventArgs)</span><span class="sxs-lookup"><span data-stu-id="3026a-121">The event handler function to add, whose only parameter is of type[Office.NodeDeletedEventArgs](xref:office.Office.NodeDeletedEventArgs)<!-- -->, [Office.NodeInsertedEventArgs](xref:office.Office.NodeInsertedEventArgs)<!-- -->, or [Office.NodeReplacedEventArgs](xref:office.Office.NodeReplacedEventArgs)</span></span>
+      type:
+      - '(result: any) => void'
+    - id: options
+      description: <span data-ttu-id="3026a-122">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="3026a-122">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="3026a-123">省略可能。</span><span class="sxs-lookup"><span data-stu-id="3026a-123">Optional.</span></span> <span data-ttu-id="3026a-124">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-124">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.CustomXmlPart.builtIn
+  summary: <span data-ttu-id="3026a-125">。 カスタム XML 部分が組み込まれている場合は true。それ以外の場合は、false。</span><span class="sxs-lookup"><span data-stu-id="3026a-125">True, if the custom XML part is built in; otherwise false.</span></span>
+  name: builtIn
+  fullName: office.Office.CustomXmlPart.builtIn
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'builtIn: boolean;'
+    return:
+      type:
+      - boolean
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-126\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-126\">Examples</span></span>\n\n```javascript\nfunction showXMLPartBuiltIn() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        write(xmlPart.builtIn);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- uid: office.Office.CustomXmlPart.deleteAsync
+  summary: <span data-ttu-id="3026a-127">カスタム XML パーツを削除します。</span><span class="sxs-lookup"><span data-stu-id="3026a-127">Deletes the Custom XML Part.</span></span>
+  name: deleteAsync(options, callback)
+  fullName: office.Office.CustomXmlPart.deleteAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'deleteAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-128\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-128\">Examples</span></span>\n\n```javascript\nfunction deleteXMLPart() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.deleteAsync(function (eventArgs) {\n            write(\"The XML Part has been deleted.\");\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    parameters:
+    - id: options
+      description: <span data-ttu-id="3026a-129">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="3026a-129">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="3026a-130">省略可能。</span><span class="sxs-lookup"><span data-stu-id="3026a-130">Optional.</span></span> <span data-ttu-id="3026a-131">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-131">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.CustomXmlPart.getNodesAsync
+  summary: <span data-ttu-id="3026a-132">指定された XPath に一致するこのカスタム XML パーツ内の CustomXmlNodes を非同期に取得します。</span><span class="sxs-lookup"><span data-stu-id="3026a-132">Asynchronously gets any CustomXmlNodes in this custom XML part which match the specified XPath.</span></span>
+  name: getNodesAsync(xPath, options, callback)
+  fullName: office.Office.CustomXmlPart.getNodesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNodesAsync(xPath: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlNode[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-133\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-133\">Examples</span></span>\n\n```javascript\nfunction showXmlNodeType() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getNodesAsync('*/*', function (nodeResults) {\n            for (i = 0; i < nodeResults.value.length; i++) {\n                var node = nodeResults.value[i];\n                write(node.nodeType);\n            }\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    parameters:
+    - id: xPath
+      description: <span data-ttu-id="3026a-p105">取得するノードを指定する XPath 式。必須。</span><span class="sxs-lookup"><span data-stu-id="3026a-p105">An XPath expression that specifies the nodes you want returned. Required.</span></span>
+      type:
+      - string
+    - id: options
+      description: <span data-ttu-id="3026a-136">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="3026a-136">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="3026a-137">省略可能。</span><span class="sxs-lookup"><span data-stu-id="3026a-137">Optional.</span></span> <span data-ttu-id="3026a-138">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-138">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="3026a-139">`value` 、結果のプロパティは、xPath パラメーターに渡される XPath 式で指定されたノードを表す CustomXmlNode オブジェクトの配列。</span><span class="sxs-lookup"><span data-stu-id="3026a-139">The `value` property of the result is an array of CustomXmlNode objects that represent the nodes specified by the XPath expression passed to the xPath parameter.</span></span>
+      type:
+      - '(result: AsyncResult<CustomXmlNode[]>) => void'
+- uid: office.Office.CustomXmlPart.getXmlAsync
+  summary: <span data-ttu-id="3026a-140">このカスタム XML パーツ内の XML を非同期的に取得します。</span><span class="sxs-lookup"><span data-stu-id="3026a-140">Asynchronously gets the XML inside this custom XML part.</span></span>
+  name: getXmlAsync(options, callback)
+  fullName: office.Office.CustomXmlPart.getXmlAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getXmlAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-141\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-141\">Examples</span></span>\n\n```javascript\nfunction showXMLPartInnerXML() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getXmlAsync({}, function (eventArgs) {\n            write(eventArgs.value);\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    parameters:
+    - id: options
+      description: <span data-ttu-id="3026a-142">任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="3026a-142">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="3026a-143">省略可能。</span><span class="sxs-lookup"><span data-stu-id="3026a-143">Optional.</span></span> <span data-ttu-id="3026a-144">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-144">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="3026a-145">`value` 、結果のプロパティは、CustomXmlPart オブジェクトを参照先の XML を含む文字列です。</span><span class="sxs-lookup"><span data-stu-id="3026a-145">The `value` property of the result is a string that contains the XML of the referenced CustomXmlPart object.</span></span>
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: office.Office.CustomXmlPart.id
+  summary: <span data-ttu-id="3026a-146">CustomXMLPart の GUID を取得します。</span><span class="sxs-lookup"><span data-stu-id="3026a-146">Gets the GUID of the CustomXMLPart.</span></span>
+  name: id
+  fullName: office.Office.CustomXmlPart.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'id: string;'
+    return:
+      type:
+      - string
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-147\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-147\">Examples</span></span>\n\n```javascript\nfunction showXMLPartBuiltId() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        write(xmlPart.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- uid: office.Office.CustomXmlPart.namespaceManager
+  summary: <span data-ttu-id="3026a-148">一連の名前空間のプレフィックス マッピングを取得 ([Office.CustomXmlPrefixMappings](xref:office.Office.CustomXmlPrefixMappings)<!-- -->) 現在の CustomXmlPart に対して使用します。</span><span class="sxs-lookup"><span data-stu-id="3026a-148">Gets the set of namespace prefix mappings ([Office.CustomXmlPrefixMappings](xref:office.Office.CustomXmlPrefixMappings)<!-- -->) used against the current CustomXmlPart.</span></span>
+  name: namespaceManager
+  fullName: office.Office.CustomXmlPart.namespaceManager
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'namespaceManager: CustomXmlPrefixMappings;'
+    return:
+      type:
+      - office.Office.CustomXmlPrefixMappings
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-149\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-149\">Examples</span></span>\n\n```javascript\nfunction setXMLPartNamespaceManagerNamespace() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.namespaceManager.addNamespaceAsync(\"myPrefix\", \"myNamespace\");\n    });\n}\n```"
+- uid: office.Office.CustomXmlPart.removeHandlerAsync
+  summary: <span data-ttu-id="3026a-150">指定されたイベントの種類のイベント ハンドラーを削除します。</span><span class="sxs-lookup"><span data-stu-id="3026a-150">Removes an event handler for the specified event type.</span></span>
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: office.Office.CustomXmlPart.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, handler?: (result: any) => void, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"3026a-151\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"3026a-151\">Examples</span></span>\n\n```javascript\nfunction removeNodeInsertedEventHandler() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\",\n        function (result) {\n            var xmlPart = result.value;\n            xmlPart.removeHandlerAsync(Office.EventType.DataNodeInserted, {handler:myHandler});\n    });\n}\n```"
+    parameters:
+    - id: eventType
+      description: <span data-ttu-id="3026a-152">削除するイベントの種類を指定します。</span><span class="sxs-lookup"><span data-stu-id="3026a-152">Specifies the type of event to remove.</span></span> <span data-ttu-id="3026a-153">として CustomXmlPart オブジェクトでは、イベントの種類のパラメーターを指定できます`Office.EventType.NodeDeleted`、`Office.EventType.NodeInserted`と`Office.EventType.NodeReplaced`。</span><span class="sxs-lookup"><span data-stu-id="3026a-153">For a CustomXmlPart object, the eventType parameter can be specified as `Office.EventType.NodeDeleted`, `Office.EventType.NodeInserted`, and `Office.EventType.NodeReplaced`.</span></span>
+      type:
+      - Office.EventType
+    - id: handler
+      description: <span data-ttu-id="3026a-154">削除するハンドラーの名前。</span><span class="sxs-lookup"><span data-stu-id="3026a-154">The name of the handler to remove.</span></span>
+      type:
+      - '(result: any) => void'
+    - id: options
+      description: <span data-ttu-id="3026a-155">どのイベント ハンドラーまたはハンドラーを削除するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="3026a-155">Provides options to determine which event handler or handlers are removed.</span></span>
+      type:
+      - office.Office.RemoveHandlerOptions
+    - id: callback
+      description: <span data-ttu-id="3026a-156">省略可能。</span><span class="sxs-lookup"><span data-stu-id="3026a-156">Optional.</span></span> <span data-ttu-id="3026a-157">関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。</span><span class="sxs-lookup"><span data-stu-id="3026a-157">A function that is invoked when the callback returns, whose only parameter is of type[Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
