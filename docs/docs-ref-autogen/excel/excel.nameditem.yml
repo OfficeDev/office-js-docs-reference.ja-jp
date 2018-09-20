@@ -1,0 +1,281 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: e47efcf12653c512d436e01dbb745a779aaf8a24
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048426"
+items:
+- uid: excel.Excel.NamedItem
+  summary: >-
+    <span data-ttu-id="4ef8e-101">セルまたは値の範囲の定義済みの名前を表します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-101">Represents a defined name for a range of cells or value.</span></span> <span data-ttu-id="4ef8e-102">名プリミティブ (に示すように以下の種類) の名前付きオブジェクト、オブジェクト、または範囲への参照の範囲します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-102">Names can be primitive named objects (as seen in the type below), range object, or a reference to a range.</span></span> <span data-ttu-id="4ef8e-103">名に関連付けられている range オブジェクトを取得するのには、このオブジェクトを使用できます。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-103">This object can be used to obtain range object associated with names.</span></span>
+
+
+    <span data-ttu-id="4ef8e-104">\[[API セット: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-104">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: Excel.NamedItem
+  fullName: excel.Excel.NamedItem
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.NamedItem.arrayValues
+  - excel.Excel.NamedItem.comment
+  - excel.Excel.NamedItem.delete
+  - excel.Excel.NamedItem.formula
+  - excel.Excel.NamedItem.getRange
+  - excel.Excel.NamedItem.getRangeOrNullObject
+  - excel.Excel.NamedItem.load
+  - excel.Excel.NamedItem.name
+  - excel.Excel.NamedItem.scope
+  - excel.Excel.NamedItem.toJSON
+  - excel.Excel.NamedItem.type
+  - excel.Excel.NamedItem.value
+  - excel.Excel.NamedItem.visible
+  - excel.Excel.NamedItem.worksheet
+  - excel.Excel.NamedItem.worksheetOrNullObject
+- uid: excel.Excel.NamedItem.arrayValues
+  summary: >-
+    <span data-ttu-id="4ef8e-105">値および名前付きの項目の種類を格納するオブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-105">Returns an object containing values and types of the named item.</span></span> <span data-ttu-id="4ef8e-106">読み取り専用。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-106">Read-only.</span></span>
+
+
+    <span data-ttu-id="4ef8e-107">\[[API セット: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-107">\[ [API set: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: arrayValues
+  fullName: excel.Excel.NamedItem.arrayValues
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly arrayValues: Excel.NamedItemArrayValues;'
+    return:
+      type:
+      - excel.Excel.NamedItemArrayValues
+- uid: excel.Excel.NamedItem.comment
+  summary: >-
+    <span data-ttu-id="4ef8e-108">この名前に関連付けられているコメントを表します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-108">Represents the comment associated with this name.</span></span>
+
+
+    <span data-ttu-id="4ef8e-109">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-109">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: comment
+  fullName: excel.Excel.NamedItem.comment
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'comment: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.NamedItem.delete
+  summary: >-
+    <span data-ttu-id="4ef8e-110">指定された名前を削除します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-110">Deletes the given name.</span></span>
+
+
+    <span data-ttu-id="4ef8e-111">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-111">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: delete()
+  fullName: excel.Excel.NamedItem.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4ef8e-112\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-112\">Examples</span></span>\n\n```typescript\ntry {\n    await Excel.run(async (context) => {\n\n        const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n        sheet.names.getItem(\"TotalAmount\").delete();\n\n        // Replace the named item (TotalAmount) with the actual formula for TotalAmount to avoid displaying #NAME in the cell.\n        sheet.getRange(\"D11\").values = [[\"=SUM(ExpensesTable[AMOUNT])\"]];\n\n        await context.sync();\n\n    });\n}\ncatch (error) {\n    OfficeHelpers.UI.notify(error);\n    OfficeHelpers.Utilities.log(error);\n}\n```"
+- uid: excel.Excel.NamedItem.formula
+  summary: >-
+    <span data-ttu-id="4ef8e-113">取得または名前付きアイテムの数式を設定します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-113">Gets or sets the formula of the named item.</span></span> <span data-ttu-id="4ef8e-114">数式は、常に '=' 記号で始まります。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-114">Formula always starts with a '=' sign.</span></span>
+
+
+    <span data-ttu-id="4ef8e-115">\[[API セット: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-115">\[ [API set: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: formula
+  fullName: excel.Excel.NamedItem.formula
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'formula: any;'
+    return:
+      type:
+      - any
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4ef8e-116\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-116\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Get the named item\n    const myNamedItem = sheet.names.getItemOrNullObject(\"MyRange\");\n    myNamedItem.load(\"name, formula\");\n\n    await context.sync();\n\n    if (myNamedItem.isNullObject) {\n        OfficeHelpers.UI.notify(`There is no named item with the name \"MyRange\".`);\n    } else {\n        \n        // Update named item to point to the second range\n        myNamedItem.formula = \"=Sample!$B$10:$D$14\";\n\n        sheet.getRange(\"B10:D14\").select();\n\n        await context.sync();\n\n        OfficeHelpers.UI.notify(`Just updated the named item \"${myNamedItem.name}\" -- it's now located here: ${myNamedItem.formula}`);\n    }\n});\n```"
+- uid: excel.Excel.NamedItem.getRange
+  summary: >-
+    <span data-ttu-id="4ef8e-p104">名前に関連付けられている範囲オブジェクトを返します。名前付きアイテムの型が範囲でない場合、エラーをスローします。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-p104">Returns the range object that is associated with the name. Throws an error if the named item's type is not a range.</span></span>
+
+
+    <span data-ttu-id="4ef8e-119">\[[API セット: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-119">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: getRange()
+  fullName: excel.Excel.NamedItem.getRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4ef8e-120\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-120\">Examples</span></span>\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.NamedItem.getRangeOrNullObject
+  summary: >-
+    <span data-ttu-id="4ef8e-p105">名前に関連付けられている範囲オブジェクトを返します。名前付きアイテムの型が範囲でない場合は、null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-p105">Returns the range object that is associated with the name. Returns a null object if the named item's type is not a range.</span></span>
+
+
+    <span data-ttu-id="4ef8e-123">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-123">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: getRangeOrNullObject()
+  fullName: excel.Excel.NamedItem.getRangeOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRangeOrNullObject(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+- uid: excel.Excel.NamedItem.load
+  summary: <span data-ttu-id="4ef8e-124">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-124">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4ef8e-125">"Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-125">You must call "context.sync()" before reading the properties.</span></span>
+  remarks: "<span data-ttu-id=\"4ef8e-126\">だけでなく、この署名は、このメソッドは、次の署名をします。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-126\">In addition to this signature, this method has the following signatures:</span></span>\n\n<span data-ttu-id=\"4ef8e-127\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItem`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-127\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItem` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>\n\n<span data-ttu-id=\"4ef8e-128\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItem`でコレクション型のみ使用できます。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-128\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItem` - Only available on collection types.</span></span> <span data-ttu-id=\"4ef8e-129\">前の署名に似ていますが。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-129\">It is similar to the preceding signature.</span></span> <span data-ttu-id=\"4ef8e-130\">Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-130\">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id=\"4ef8e-131\">Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-131\">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id=\"4ef8e-132\">Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-132\">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>\n#### <a name=\"examples\"></a><span data-ttu-id=\"4ef8e-133\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4ef8e-133\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var namedItem = names.getItem('MyRange');\n    namedItem.load('type');\n    return ctx.sync().then(function() {\n            console.log(namedItem.type);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.NamedItem.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.NamedItem;'
+    return:
+      type:
+      - excel.Excel.NamedItem
+      description: ''
+    parameters:
+    - id: option
+      description: <span data-ttu-id="4ef8e-134">コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-134">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      type:
+      - string | string[]
+- uid: excel.Excel.NamedItem.name
+  summary: >-
+    <span data-ttu-id="4ef8e-p108">オブジェクトの名前。読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-p108">The name of the object. Read-only.</span></span>
+
+
+    <span data-ttu-id="4ef8e-137">\[[API セット: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-137">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: name
+  fullName: excel.Excel.NamedItem.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.NamedItem.scope
+  summary: >-
+    <span data-ttu-id="4ef8e-138">ブック全体または特定のワークシートを名前のスコープはあるかどうかを示します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-138">Indicates whether the name is scoped to the workbook or to a specific worksheet.</span></span> <span data-ttu-id="4ef8e-139">使用可能な値: ワークシート、ブックです。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-139">Possible values are: Worksheet, Workbook.</span></span> <span data-ttu-id="4ef8e-140">読み取り専用。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-140">Read-only.</span></span>
+
+
+    <span data-ttu-id="4ef8e-141">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-141">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: scope
+  fullName: excel.Excel.NamedItem.scope
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly scope: Excel.NamedItemScope | "Worksheet" | "Workbook";'
+    return:
+      type:
+      - Excel.NamedItemScope | "Worksheet" | "Workbook"
+- uid: excel.Excel.NamedItem.toJSON
+  name: toJSON()
+  fullName: excel.Excel.NamedItem.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.NamedItemData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.NamedItemData
+      description: ''
+- uid: excel.Excel.NamedItem.type
+  summary: >-
+    <span data-ttu-id="4ef8e-142">名前の数式によって返される値の型を示します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-142">Indicates the type of the value returned by the name's formula.</span></span> <span data-ttu-id="4ef8e-143">詳細については Excel.NamedItemType を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-143">See Excel.NamedItemType for details.</span></span> <span data-ttu-id="4ef8e-144">読み取り専用。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-144">Read-only.</span></span>
+
+
+    <span data-ttu-id="4ef8e-145">\[[API セット: 文字列、整数、ExcelApi 1.1 倍、ブール値、範囲、エラー; 配列の 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-145">\[ [API set: ExcelApi 1.1 for String,Integer,Double,Boolean,Range,Error; 1.7 for Array](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: type
+  fullName: excel.Excel.NamedItem.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly type: Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array";'
+    return:
+      type:
+      - Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array"
+- uid: excel.Excel.NamedItem.value
+  summary: >-
+    <span data-ttu-id="4ef8e-p111">名前の数式で計算された値を表します。名前付き範囲の場合は範囲のアドレスを返します。読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-p111">Represents the value computed by the name's formula. For a named range, will return the range address. Read-only.</span></span>
+
+
+    <span data-ttu-id="4ef8e-149">\[[API セット: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-149">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: value
+  fullName: excel.Excel.NamedItem.value
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly value: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.NamedItem.visible
+  summary: >-
+    <span data-ttu-id="4ef8e-150">オブジェクトを表示するかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-150">Specifies whether the object is visible or not.</span></span>
+
+
+    <span data-ttu-id="4ef8e-151">\[[API セット: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-151">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: visible
+  fullName: excel.Excel.NamedItem.visible
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'visible: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.NamedItem.worksheet
+  summary: >-
+    <span data-ttu-id="4ef8e-152">名前付きの項目のスコープになるワークシートを返します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-152">Returns the worksheet on which the named item is scoped to.</span></span> <span data-ttu-id="4ef8e-153">項目のスコープは、ブックを代わりにする場合は、エラーをスローします。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-153">Throws an error if the item is scoped to the workbook instead.</span></span>
+
+
+    <span data-ttu-id="4ef8e-154">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-154">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: worksheet
+  fullName: excel.Excel.NamedItem.worksheet
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly worksheet: Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+- uid: excel.Excel.NamedItem.worksheetOrNullObject
+  summary: >-
+    <span data-ttu-id="4ef8e-155">名前付きの項目のスコープになるワークシートを返します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-155">Returns the worksheet on which the named item is scoped to.</span></span> <span data-ttu-id="4ef8e-156">項目のスコープは、ブックを代わりにする場合は、null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="4ef8e-156">Returns a null object if the item is scoped to the workbook instead.</span></span>
+
+
+    <span data-ttu-id="4ef8e-157">\[[API セット: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4ef8e-157">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: worksheetOrNullObject
+  fullName: excel.Excel.NamedItem.worksheetOrNullObject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly worksheetOrNullObject: Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
