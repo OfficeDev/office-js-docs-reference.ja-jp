@@ -1,0 +1,110 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 12637044fa71605810bc715e16d3acdd6829aa60
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24047337"
+items:
+- uid: visio.Visio.HyperlinkCollection
+  summary: >-
+    ハイパーリンク コレクションを表します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: Visio.HyperlinkCollection
+  fullName: visio.Visio.HyperlinkCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: visio
+  children:
+  - visio.Visio.HyperlinkCollection.getCount
+  - visio.Visio.HyperlinkCollection.getItem
+  - visio.Visio.HyperlinkCollection.items
+  - visio.Visio.HyperlinkCollection.load
+  - visio.Visio.HyperlinkCollection.toJSON
+- uid: visio.Visio.HyperlinkCollection.getCount
+  summary: >-
+    ハイパーリンクの数を取得します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getCount()
+  fullName: visio.Visio.HyperlinkCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: visio.Visio.HyperlinkCollection.getItem
+  summary: >-
+    そのキー (名前または ID) を使用してハイパーリンクを取得します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getItem(Key)
+  fullName: visio.Visio.HyperlinkCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(Key: number | string): Visio.Hyperlink;'
+    return:
+      type:
+      - visio.Visio.Hyperlink
+      description: ''
+    parameters:
+    - id: Key
+      description: キーは、取得するハイパーリンクの名前またはインデックスです。
+      type:
+      - number | string
+- uid: visio.Visio.HyperlinkCollection.items
+  summary: このコレクションに読み込まれている子項目を取得します。
+  name: items
+  fullName: visio.Visio.HyperlinkCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Visio.Hyperlink[];'
+    return:
+      type:
+      - Visio.Hyperlink[]
+- uid: visio.Visio.HyperlinkCollection.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): Visio.HyperlinkCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.HyperlinkCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shapeName = \"Manager Belt\";\n    var shape = activePage.shapes.getItem(shapeName);\n    var hyperlinks = shape.hyperlinks;\n    shapeHyperlinks.load();\n        ctx.sync().then(function () {\n            for(var i=0; i<shapeHyperlinks.items.length;i++)\n            {\n                var hyperlink = shapeHyperlinks.items[i];\n                console.log(\n                    \"Description:\"+hyperlink.description +\"Address:\"+hyperlink.address +\"SubAddress:  \" + \n                    hyperlink.subAddress);\n            }\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: visio.Visio.HyperlinkCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Visio.HyperlinkCollection;'
+    return:
+      type:
+      - visio.Visio.HyperlinkCollection
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
+- uid: visio.Visio.HyperlinkCollection.toJSON
+  name: toJSON()
+  fullName: visio.Visio.HyperlinkCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.HyperlinkCollectionData;'
+    return:
+      type:
+      - visio.Visio.Interfaces.HyperlinkCollectionData
+      description: ''
