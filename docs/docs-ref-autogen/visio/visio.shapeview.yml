@@ -1,0 +1,197 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1c2b1141db1227e169d6a5d4c2f43352fc6f79dd
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048763"
+items:
+- uid: visio.Visio.ShapeView
+  summary: >-
+    ShapeView クラスを表します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: Visio.ShapeView
+  fullName: visio.Visio.ShapeView
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: visio
+  children:
+  - visio.Visio.ShapeView.addOverlay
+  - visio.Visio.ShapeView.highlight
+  - visio.Visio.ShapeView.load
+  - visio.Visio.ShapeView.removeOverlay
+  - visio.Visio.ShapeView.toJSON
+- uid: visio.Visio.ShapeView.addOverlay
+  summary: >-
+    図形の上にオーバーレイを追加します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: addOverlay(OverlayType, Content, OverlayHorizontalAlignment, OverlayVerticalAlignment, Width, Height)
+  fullName: visio.Visio.ShapeView.addOverlay
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addOverlay(OverlayType: Visio.OverlayType, Content: string, OverlayHorizontalAlignment: Visio.OverlayHorizontalAlignment, OverlayVerticalAlignment: Visio.OverlayVerticalAlignment, Width: number, Height: number): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+    parameters:
+    - id: OverlayType
+      description: オーバーレイ タイプの場合です。 'Text' または 'イメージ' をすることができます。
+      type:
+      - visio.Visio.OverlayType
+    - id: Content
+      description: オーバーレイのコンテンツ。
+      type:
+      - string
+    - id: OverlayHorizontalAlignment
+      description: オーバーレイの水平方向の配置です。 '左'、'中央'、または '右' にすることができます。
+      type:
+      - visio.Visio.OverlayHorizontalAlignment
+    - id: OverlayVerticalAlignment
+      description: オーバーレイの垂直方向の配置です。 '上'、'中'、'下' をすることができます。
+      type:
+      - visio.Visio.OverlayVerticalAlignment
+    - id: Width
+      description: オーバーレイの幅。
+      type:
+      - number
+    - id: Height
+      description: オーバーレイの高さ。
+      type:
+      - number
+- uid: visio.Visio.ShapeView.highlight
+  summary: >-
+    図形の周囲の強調表示を表します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: highlight
+  fullName: visio.Visio.ShapeView.highlight
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'highlight: Visio.Highlight;'
+    return:
+      type:
+      - visio.Visio.Highlight
+- uid: visio.Visio.ShapeView.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: { select?: string; expand?: string; }): Visio.ShapeView`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeView`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shape = activePage.shapes.getItem(0);
+        shape.view.highlight = { color: "#E7E7E7", width: 100 };
+        return ctx.sync();
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shape = activePage.shapes.getItem(0);
+        var overlayId=shape.view.addOverlay(1, "Visio Online", 2, 2, 50, 50);
+        return ctx.sync();
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shape = activePage.shapes.getItem(0);
+        shape.view.removeOverlay(1);
+        return ctx.sync();
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: visio.Visio.ShapeView.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Visio.ShapeView;'
+    return:
+      type:
+      - visio.Visio.ShapeView
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
+- uid: visio.Visio.ShapeView.removeOverlay
+  summary: >-
+    特定のオーバーレイまたは図形上のすべてのオーバーレイを削除します。
+
+
+    \[[API セット: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: removeOverlay(OverlayId)
+  fullName: visio.Visio.ShapeView.removeOverlay
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeOverlay(OverlayId: number): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: OverlayId
+      description: オーバーレイの ID。図形から特定のオーバーレイの ID を削除します。
+      type:
+      - number
+- uid: visio.Visio.ShapeView.toJSON
+  name: toJSON()
+  fullName: visio.Visio.ShapeView.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.ShapeViewData;'
+    return:
+      type:
+      - visio.Visio.Interfaces.ShapeViewData
+      description: ''

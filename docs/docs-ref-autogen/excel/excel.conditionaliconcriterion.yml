@@ -1,0 +1,92 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 2fc34b16018ba2881028ae44efd36db9212203ac
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048553"
+items:
+- uid: excel.Excel.ConditionalIconCriterion
+  summary: >-
+    iconset を使用していない場合の種類、値、演算子、およびオプションのカスタム アイコンを含むアイコンの条件を表します。
+
+
+    \[[API セット: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.ConditionalIconCriterion
+  fullName: excel.Excel.ConditionalIconCriterion
+  langs:
+  - typeScript
+  type: interface
+  package: excel
+  children:
+  - excel.Excel.ConditionalIconCriterion.customIcon
+  - excel.Excel.ConditionalIconCriterion.formula
+  - excel.Excel.ConditionalIconCriterion.operator
+  - excel.Excel.ConditionalIconCriterion.type
+- uid: excel.Excel.ConditionalIconCriterion.customIcon
+  summary: >-
+    既定の IconSet と異なる場合は現在の条件のカスタム アイコン、そうでない場合は null が返されます。
+
+
+    \[[API セット: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: customIcon
+  fullName: excel.Excel.ConditionalIconCriterion.customIcon
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'customIcon?: Excel.Icon;'
+    return:
+      type:
+      - excel.Excel.Icon
+- uid: excel.Excel.ConditionalIconCriterion.formula
+  summary: >-
+    種類によっては数値または数式。
+
+
+    \[[API セット: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: formula
+  fullName: excel.Excel.ConditionalIconCriterion.formula
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'formula: string;'
+    return:
+      type:
+      - string
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.ConditionalIconCriterion.operator
+  summary: >-
+    公差またはアイコンの条件付き書式ルールの種類ごとに GreaterThanOrEqual。
+
+
+    \[[API セット: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: operator
+  fullName: excel.Excel.ConditionalIconCriterion.operator
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'operator: Excel.ConditionalIconCriterionOperator | "Invalid" | "GreaterThan" | "GreaterThanOrEqual";'
+    return:
+      type:
+      - Excel.ConditionalIconCriterionOperator | "Invalid" | "GreaterThan" | "GreaterThanOrEqual"
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B16:D18\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.containsText);\n    conditionalFormat.textComparison.format.font.color = \"red\";\n    conditionalFormat.textComparison.rule = { operator: Excel.ConditionalTextOperator.contains, text: \"Delayed\" };\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.ConditionalIconCriterion.type
+  summary: >-
+    アイコンの条件式は次のものに基づいています。
+
+
+    \[[API セット: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: type
+  fullName: excel.Excel.ConditionalIconCriterion.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'type: Excel.ConditionalFormatIconRuleType | "Invalid" | "Number" | "Percent" | "Formula" | "Percentile";'
+    return:
+      type:
+      - Excel.ConditionalFormatIconRuleType | "Invalid" | "Number" | "Percent" | "Formula" | "Percentile"
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```"

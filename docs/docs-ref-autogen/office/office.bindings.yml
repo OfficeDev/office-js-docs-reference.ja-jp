@@ -1,0 +1,209 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1591c27f02ae5d0c52698ec0d22dcaf974cde419
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24049034"
+items:
+- uid: office.Office.Bindings
+  summary: アドインがドキュメント内に持つバインドを表します。
+  name: Office.Bindings
+  fullName: office.Office.Bindings
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.Bindings.addFromNamedItemAsync
+  - office.Office.Bindings.addFromPromptAsync
+  - office.Office.Bindings.addFromSelectionAsync
+  - office.Office.Bindings.document
+  - office.Office.Bindings.getAllAsync
+  - office.Office.Bindings.getByIdAsync
+  - office.Office.Bindings.releaseByIdAsync
+- uid: office.Office.Bindings.addFromNamedItemAsync
+  summary: ドキュメントで、名前付きオブジェクトに対してバインディングを作成します。
+  remarks: "<table><tr><td>要件の設定</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\nExcel では、アイテム名のパラメーターは、名前付き範囲またはテーブルを参照してください。\n\n既定では、Excel のテーブルを追加すると、最初に追加したテーブルには \"Table1\"、次に追加したテーブルには \"Table2\" という名前が割り当てられます。 Excel UI のテーブルにわかりやすい名前を割り当てるには、テーブル ツールの [テーブル名プロパティを使用します。 \\| 、リボンの [デザイン] タブ。\n\n注: Excel では、名前付きアイテムとしてテーブルを指定する場合、する必要があります名を完全修飾をこの形式でワークシート名、テーブル名が含まれます:\"Sheet1!Table1」\n\nWord は、アイテム名のパラメーターは、リッチ テキスト コンテンツ コントロールの Title プロパティを参照します。 (バインドできませんリッチ テキスト コンテンツ コントロールのコンテンツ コントロールに)。\n\n既定では、コンテンツ コントロールのタイトルの値が割り当てられているがありません。 Word UI で意味のあるテーブル名を割り当てるには、リボンの [開発] タブの [コントロール] グループから [リッチ テキスト] コンテンツ コントロールを挿入した後、[コントロール] グループの [プロパティ] コマンドを使用して [コンテンツ コントロールのプロパティ] ダイアログ ボックスを表示します。 次に、コンテンツ コントロールの [タイトル] プロパティに、コードから参照する名前を設定します。\n\nメモ: Word では、同じタイトル プロパティの値 (名前) を持つ複数のリッチ テキスト コンテンツ コントロールがある場合にバインドしようとするこれらのコンテンツを制御するこのメソッドを使用して (名前を指定して、アイテム名のパラメーターとして)、操作は失敗します。\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: addFromNamedItemAsync(itemName, bindingType, options, callback)
+  fullName: office.Office.Bindings.addFromNamedItemAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, options?: AddBindingFromNamedItemOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemName
+      description: ドキュメントのバインド可能なオブジェクトの名前です。 たとえば 'MyExpenses' テーブルを Excel にします」。
+      type:
+      - string
+    - id: bindingType
+      description: データの[Office.BindingType](xref:office.Office.BindingType)です。 メソッド選択したオブジェクトは、指定した型に強制的に変換できない場合は null を返します。
+      type:
+      - BindingType
+    - id: options
+      description: 作成されるバインディングを構成するためのオプションを提供します。
+      type:
+      - office.Office.AddBindingFromNamedItemOptions
+    - id: callback
+      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、指定された名前付き項目を表すバインディング オブジェクト。
+      type:
+      - '(result: AsyncResult<Binding>) => void'
+- uid: office.Office.Bindings.addFromPromptAsync
+  summary: バインディングを作成するには、ドキュメントを選択するプロンプトを表示します。
+  remarks: "<table><tr><td>要件の設定</td><td>セットには指定できない</td></tr></table>\n\n指定された型のバインド オブジェクトを Bindings コレクションに追加します。このバインド オブジェクトは、提供される id で識別できるようになります。指定された選択範囲をバインドできない場合、メソッドは失敗します。\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromPrompt() {\n    Office.context.document.bindings.addFromPromptAsync(\n        Office.BindingType.Text, \n        { id: 'MyBinding', promptText: 'Select text to bind to.' },\n        function (asyncResult) {\n            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: addFromPromptAsync(bindingType, options, callback)
+  fullName: office.Office.Bindings.addFromPromptAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromPromptAsync(bindingType: BindingType, options?: AddBindingFromPromptOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: bindingType
+      description: バインディングを作成するオブジェクトの種類を指定します。 必須。 選択したオブジェクトを指定された型に強制的に変換できない場合は、null を返します。
+      type:
+      - BindingType
+    - id: options
+      description: プロンプトの構成方法と、作成されるバインディングを識別するためのオプションを提供します。
+      type:
+      - office.Office.AddBindingFromPromptOptions
+    - id: callback
+      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、ユーザーによって指定された選択範囲を表すバインディング オブジェクト。
+      type:
+      - '(result: AsyncResult<Binding>) => void'
+- uid: office.Office.Bindings.addFromSelectionAsync
+  summary: ユーザーの現在の選択範囲に基づいて結合を作成します。
+  remarks: "<table><tr><td>要件の設定</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\n指定された id で識別するバインディングのコレクションにバインディング オブジェクトの指定した型を追加します。\n\nメモ Excel では、既存のバインディングの Binding.id で、addFromSelectionAsync メソッドを呼び出した場合、そのバインドの Binding.type を使用すると、bindingType パラメーターに異なる値を指定することでその型を変更できません。 既存の id を使用して bindingType を変更する必要がある場合は、最初に Bindings.releaseByIdAsync メソッドを呼び出してバインドを解放し、次に addFromSelectionAsync メソッドを呼び出してバインドを新しい種類で再確立します。\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromSelection() {\n    Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, \n        function (asyncResult) {\n        write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n        }\n    );\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: addFromSelectionAsync(bindingType, options, callback)
+  fullName: office.Office.Bindings.addFromSelectionAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromSelectionAsync(bindingType: BindingType, options?: AddBindingFromSelectionOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: bindingType
+      description: バインディングを作成するオブジェクトの種類を指定します。 必須。 選択したオブジェクトを指定された型に強制的に変換できない場合は、null を返します。
+      type:
+      - BindingType
+    - id: options
+      description: プロンプトの構成方法と、作成されるバインディングを識別するためのオプションを提供します。
+      type:
+      - office.Office.AddBindingFromSelectionOptions
+    - id: callback
+      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、ユーザーによって指定された選択範囲を表すバインディング オブジェクト。
+      type:
+      - '(result: AsyncResult<Binding>) => void'
+- uid: office.Office.Bindings.document
+  summary: この一連のバインディングに関連付けられているドキュメントを表す[Office.Document](xref:office.Office.Document)オブジェクトを取得します。
+  remarks: >-
+    **サポートの詳細**
+
+
+    次の表で、大文字 Y は、このプロパティは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのプロパティをサポートしないことを示します。
+
+
+    Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
+
+
+    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>
+  name: document
+  fullName: office.Office.Bindings.document
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'document: Document;'
+    return:
+      type:
+      - Document
+- uid: office.Office.Bindings.getAllAsync
+  summary: 以前に作成されたバインドをすべて取得します。
+  remarks: "<table><tr><td>要件の設定</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction displayAllBindingNames() {\n    Office.context.document.bindings.getAllAsync(function (asyncResult) {\n        var bindingString = '';\n        for (var i in asyncResult.value) {\n            bindingString += asyncResult.value[i].id + '\\n';\n        }\n        write('Existing bindings: ' + bindingString);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: getAllAsync(options, callback)
+  fullName: office.Office.Bindings.getAllAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAllAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、各バインディングの作成のバインドの参照先のオブジェクトを含む配列。
+      type:
+      - '(result: AsyncResult<Binding[]>) => void'
+- uid: office.Office.Bindings.getByIdAsync
+  summary: 名に基づいてバインディングを取得します。
+  remarks: "<table><tr><td>要件の設定</td><td>CustomXmlParts, MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\n指定された id が存在しない場合は失敗します。\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction displayBindingType() {\n    Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {\n        write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: getByIdAsync(id, options, callback)
+  fullName: office.Office.Bindings.getByIdAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: id
+      description: バインディング オブジェクトの一意の名前を指定します。 必須。
+      type:
+      - string
+    - id: options
+      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、呼び出しの id で指定されたバインディング オブジェクト。
+      type:
+      - '(result: AsyncResult<Binding>) => void'
+- uid: office.Office.Bindings.releaseByIdAsync
+  summary: バインディングをドキュメントから削除します。
+  remarks: "<table><tr><td>要件の設定</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\n指定された id が存在しない場合は失敗します。\n\n**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.releaseByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(\"Released MyBinding!\"); \n}); \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
+  name: releaseByIdAsync(id, options, callback)
+  fullName: office.Office.Bindings.releaseByIdAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'releaseByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: id
+      description: バインド オブジェクトの一意の識別名を指定します。必須です。
+      type:
+      - string
+    - id: options
+      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。
+      type:
+      - '(result: AsyncResult<void>) => void'

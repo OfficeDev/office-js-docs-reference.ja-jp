@@ -1,0 +1,183 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 10737336d011fe6c5a29f0e1e139c8ba5061732e
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24048468"
+items:
+- uid: onenote.OneNote.NotebookCollection
+  summary: >-
+    ノートブックのコレクションを表します。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.NotebookCollection
+  fullName: onenote.OneNote.NotebookCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.NotebookCollection.count
+  - onenote.OneNote.NotebookCollection.getByName
+  - onenote.OneNote.NotebookCollection.getItem
+  - onenote.OneNote.NotebookCollection.getItemAt
+  - onenote.OneNote.NotebookCollection.items
+  - onenote.OneNote.NotebookCollection.load
+  - onenote.OneNote.NotebookCollection.toJSON
+  - onenote.OneNote.NotebookCollection.track
+  - onenote.OneNote.NotebookCollection.untrack
+- uid: onenote.OneNote.NotebookCollection.count
+  summary: >-
+    コレクション内のノートブックの数を取得します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: count
+  fullName: onenote.OneNote.NotebookCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.NotebookCollection.getByName
+  summary: >-
+    アプリケーション インスタンスで開いている、指定された名前のノートブックのコレクションを取得します。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getByName(name)
+  fullName: onenote.OneNote.NotebookCollection.getByName
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByName(name: string): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id,name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index,\n            // for example: notebooks.items[0]\n            if (notebooks.items.length > 0) {\n                console.log(\"Notebook name: \" + notebooks.items[0].name);\n                console.log(\"Notebook ID: \" + notebooks.items[0].id);\n            }\n                \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: name
+      description: ノートブックの名前。
+      type:
+      - string
+- uid: onenote.OneNote.NotebookCollection.getItem
+  summary: >-
+    ID やコレクション内のインデックスで、ノートブックを取得します。読み取り専用です。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItem(index)
+  fullName: onenote.OneNote.NotebookCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(index: number | string): OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+      description: ''
+    parameters:
+    - id: index
+      description: ノートブックの ID、またはコレクション内のノートブックのインデックスの場所です。
+      type:
+      - number | string
+- uid: onenote.OneNote.NotebookCollection.getItemAt
+  summary: >-
+    コレクション内での位置を基にノートブックを取得します。
+
+
+    \[[API セット: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: onenote.OneNote.NotebookCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+      description: ''
+    parameters:
+    - id: index
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
+      type:
+      - number
+- uid: onenote.OneNote.NotebookCollection.items
+  summary: このコレクションに読み込まれている子項目を取得します。
+  name: items
+  fullName: onenote.OneNote.NotebookCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: OneNote.Notebook[];'
+    return:
+      type:
+      - OneNote.Notebook[]
+- uid: onenote.OneNote.NotebookCollection.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): OneNote.NotebookCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.NotebookCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index, \n            // for example: notebooks.items[0]\n            $.each(notebooks.items, function(index, notebook) {\n                notebook.addSection(\"Biology\");\n                notebook.addSection(\"Spanish\");\n                notebook.addSection(\"Computer Science\");\n            });\n            \n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.NotebookCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
+- uid: onenote.OneNote.NotebookCollection.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.NotebookCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.NotebookCollectionData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.NotebookCollectionData
+      description: ''
+- uid: onenote.OneNote.NotebookCollection.track
+  summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
+  name: track()
+  fullName: onenote.OneNote.NotebookCollection.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
+- uid: onenote.OneNote.NotebookCollection.untrack
+  summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
+  name: untrack()
+  fullName: onenote.OneNote.NotebookCollection.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
