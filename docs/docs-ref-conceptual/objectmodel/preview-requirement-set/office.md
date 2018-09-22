@@ -88,11 +88,11 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 
 | 名前 | 種類 | 説明 | 最小要件セット |
 |---|---|---|---|
-|`AppointmentTimeChanged`| String | 選択した系列の日付や時刻の予定が変更されました。 | Preview |
+|`AppointmentTimeChanged`| String | 日付または時刻を選択した予定の系列が変更されました。 | 1.7 |
 |`ItemChanged`| String | 選択したアイテムが変更されました。 | 1.5 |
 |`OfficeThemeChanged`| String | 選択したアイテムが変更されました。 | Preview |
-|`RecipientsChanged`| String | 選択したアイテムの受信者の一覧が変更されました。 | Preview |
-|`RecurrencePatternChanged`| String | 選択した一連の定期的なパターンが変更されています。 | Preview |
+|`RecipientsChanged`| String | 選択したアイテムまたは予定の場所の受信者の一覧が変更されました。 | 1.7 |
+|`RecurrenceChanged`| String | 選択した一連の定期的なパターンが変更されています。 | 1.7 |
 
 ##### <a name="requirements"></a>要件
 

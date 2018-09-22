@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-12"></a>Outlook アドイン API 要件セット 1.2
 
-JavaScript API for Office の Outlook アドイン API サブセットには、Outlook アドインで利用できるオブジェクト、メソッド、プロパティ、イベントが含まれます。
+Outlook アドイン API のサブセット Office 用の JavaScript API にはには、オブジェクト、メソッド、プロパティが含まれています、イベントが、Outlook で使用することができることを追加で。
 
 > [!NOTE]
 > このドキュメントではの[要件は、設定](/javascript/office/requirement-sets/outlook-api-requirement-sets)以外の最新の要件のセットです。 

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f8952632c109ec2390031257a6629053baa92243
-ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.openlocfilehash: 48b76901845a44f011b3cfd561493727f89daf27
+ms.sourcegitcommit: e9cb2f2717e1cf062a2f6ffe6a382d7b9b934ba0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/20/2018
-ms.locfileid: "24049072"
+ms.lasthandoff: 09/21/2018
+ms.locfileid: "24063151"
 items:
 - uid: visio
   name: visio
@@ -76,7 +76,7 @@ items:
   - visio.Visio.ShapeView
   - visio.Visio.ToolBarType
 - uid: visio.Visio.run
-  summary: 以前に作成された API のオブジェクトの要求コンテキストを使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。
+  summary: 以前に作成されたオブジェクトの RequestContext を使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
   remarks: >-
     だけでなく、この署名メソッドは次の署名もあります。
 
@@ -88,24 +88,24 @@ items:
 
 
     `run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;`
-  name: run(objects, batch)
+  name: run(contextObject, batch)
   fullName: visio.Visio.run
   langs:
   - typeScript
   type: function
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
+    content: 'export function run<T>(contextObject: OfficeExtension.ClientRequestContext, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     return:
       type:
       - Promise<T>
       description: ''
     parameters:
-    - id: objects
-      description: 以前に作成された API のオブジェクトの配列。 配列は、同じコンテキストを共有するすべてのオブジェクトかどうかを確認する検証されます。 バッチには、"context.sync()"でこれらのオブジェクトに適用される変更を集荷することは、この共有の要求コンテキストを使用します。
+    - id: contextObject
+      description: 以前に作成された Visio.RequestContext では。 バッチ関数ではなく、新しいコンテキストを作成すること) によってこのコンテキストが再使用されます。 これは、バッチがこれらのオブジェクトは、この同じコンテキストから取得した場合、既存の API のオブジェクトに加えた変更を選択できることを意味します。
       type:
-      - OfficeExtension.ClientObject[]
+      - office.OfficeExtension.ClientRequestContext
     - id: batch
-      description: Visio.RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
+      description: RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 コンテキスト パラメーターには、Visio アプリケーションへの要求が容易になります。 Office アドイン、Visio アプリケーションが 2 つの異なるプロセスで実行してからの RequestContext は、アドインから Visio のオブジェクト モデルにアクセスするために必要です。
       type:
       - '(context: Visio.RequestContext) => Promise<T>'
 references:

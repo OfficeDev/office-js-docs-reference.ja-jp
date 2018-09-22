@@ -2,7 +2,7 @@
 
 Visio JavaScript API を使うと、SharePoint Online で Visio の図を埋め込むことができます。 埋め込んだ Visio の図は、SharePoint ドキュメント ライブラリに保存され、SharePoint ページに表示されます。 Html に表示する Visio 図面を埋め込むには、`<iframe>`要素です。 そうすると、Visio JavaScript API を使用して、プログラムで埋め込み済みの図を使った作業ができるようになります。
 
-![SharePoint ページの iframe 上にある Visio の図とスクリプト エディター Web パーツ](../images/visio-api-block-diagram.png)
+![SharePoint ページの iframe 上にある Visio の図とスクリプト エディター Web パーツ](/javascript/api/docs-ref-conceptual/images/visio-api-block-diagram.png)
 
 
 Visio JavaScript API を使用して、次のことを行えます。
@@ -20,33 +20,32 @@ EmbeddedSession オブジェクトは、開発者のフレームと Visio Online
 
 ```js
 var session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
-session.init().then(function () {    
+session.init().then(function () {
     window.console.log("Session successfully initialized");
 });
 ```
 
 ## <a name="visiorunsession-functioncontext--batch-"></a>Visio.run (セッション、function(context) {バッチ})
 
-**Visio.run()** は、Visio オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 このバッチ コマンドには、JavaScript のローカル プロキシ オブジェクトの定義と、ローカル オブジェクトと Visio オブジェクトの間で状態を同期し、解決される約束を返す **sync()** メソッドが含まれます。 **Visio.run()** で要求をバッチ処理する利点は、約束が解決されるときに、実行中に割り当てられたすべての追跡ページ オブジェクトが自動的に解放されることです。 
+**Visio.run()** は、Visio オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 このバッチ コマンドには、JavaScript のローカル プロキシ オブジェクトの定義と、ローカル オブジェクトと Visio オブジェクトの間で状態を同期し、解決される約束を返す **sync()** メソッドが含まれます。 **Visio.run()** で要求をバッチ処理する利点は、約束が解決されるときに、実行中に割り当てられたすべての追跡ページ オブジェクトが自動的に解放されることです。
 
-メソッドの実行を選択し、セッションと RequestContext オブジェクトでは、約束を返します (通常は、ジャスト**context.sync()** の結果)。 バッチ操作は **Visio.run()** の外部で実行することができます。 ただし、このようなシナリオでは、ページ オブジェクトの参照は、手動で追跡および管理する必要があります。 
+メソッドの実行を選択し、セッションと RequestContext オブジェクトでは、約束を返します (通常は、ジャスト**context.sync()** の結果)。 バッチ操作は **Visio.run()** の外部で実行することができます。 ただし、このようなシナリオでは、ページ オブジェクトの参照は、手動で追跡および管理する必要があります。
 
 ## <a name="requestcontext"></a>RequestContext
 
-RequestContext オブジェクトには、Visio アプリケーションへの要求が容易になります。 現像フレームと Visio のオンライン アプリケーションは、異なる 2 つの iframe で実行するため、開発者のフレームから Visio とページや図形などの関連するオブジェクトへのアクセスを取得する RequestContext オブジェクト (以下の例のコンテキスト) が必要です。 
+RequestContext オブジェクトには、Visio アプリケーションへの要求が容易になります。 現像フレームと Visio のオンライン アプリケーションは、異なる 2 つの iframe で実行するため、開発者のフレームから Visio とページや図形などの関連するオブジェクトへのアクセスを取得する RequestContext オブジェクト (次の例の内容を含む) が必要です。
 
 ```js
 function hideToolbars() {
     Visio.run(session, function(context){
         var app = context.document.application;
-        app.showToolbars = false;            
-        return context.sync().then(function ()
-        {
+        app.showToolbars = false;
+        return context.sync().then(function () {
             window.console.log("Toolbars Hidden");
-        });      
-        }).catch(function(error)
+        });
+    }).catch(function(error)
     {
-        window.console.log("Error: " + error);            
+        window.console.log("Error: " + error);
     });
 };
 ```
@@ -81,27 +80,27 @@ object.load(string: properties); //or object.load(array: properties); //or objec
 
 ## <a name="example-printing-all-shapes-text-in-active-page"></a>例:アクティブ ページですべての図形テキストを印刷する
 
-次の例では、図形の配列オブジェクトから図形テキストの値を印刷する方法を示します。 **Visio.run()** メソッドには、命令のバッチが含まれています。 このバッチの一部として、作業中のドキュメントの図形を参照するプロキシ オブジェクトが作成されます。
+次の例では、図形の配列オブジェクトから図形テキストの値を印刷する方法を示します。
+**Visio.run()** メソッドには、命令のバッチが含まれています。 このバッチの一部として、作業中のドキュメントの図形を参照するプロキシ オブジェクトが作成されます。
 
 これらすべてのコマンドはキューに登録し、 **context.sync()** が呼び出されたときに実行します。 **sync()** メソッドが返す約束は、このメソッドを他の操作とチェーンにするために使用できます。
 
 ```js
 Visio.run(session, function (context) {
-   var page = context.document.getActivePage();
-   var shapes = page.shapes;
-   shapes.load();
-   return context.sync().then(function () {
-        for(var i=0; i<shapes.items.length;i++)
- {
+    var page = context.document.getActivePage();
+    var shapes = page.shapes;
+    shapes.load();
+    return context.sync().then(function () {
+        for(var i=0; i<shapes.items.length;i++) {
             var shape = shapes.items[i];
-     window.console.log("Shape Text: " + shape.text );
- }
-});
+            window.console.log("Shape Text: " + shape.text );
+        }
+    });
 }).catch(function(error) {
-  window.console.log("Error: " + error);
-  if (error instanceof OfficeExtension.Error) {
-       window.console.log ("Debug info: " + JSON.stringify(error.debugInfo));
-  }
+    window.console.log("Error: " + error);
+    if (error instanceof OfficeExtension.Error) {
+        window.console.log ("Debug info: " + JSON.stringify(error.debugInfo));
+    }
 });
 ```
 
@@ -136,45 +135,43 @@ document.write("<div id='iframeHost' />");
 
 let session; // Global variable to store the session and pass it afterwards in Visio.run()
 var textArea;
-// Loads the Visio application and Initializes communication between devloper frame and Visio online frame
+// Loads the Visio application and Initializes communication between developer frame and Visio online frame
 function initEmbeddedFrame() {
-        textArea = document.getElementById('ResultOutput');
+    textArea = document.getElementById('ResultOutput');
     var url = document.getElementById('fileUrl').value;
     if (!url) {
         window.alert("File URL should not be empty");
     }
-    // APIs are enabled for EmbedView action only.   
+    // APIs are enabled for EmbedView action only.
     url = url.replace("action=view","action=embedview");
     url = url.replace("action=interactivepreview","action=embedview");
     url = url.replace("action=default","action=embedview");
     url = url.replace("action=edit","action=embedview");
   
-       session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
-       return session.init().then(function () {
-        // Initilization is successful 
-        textArea.value  = "Initilization is successful";
+    session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
+    return session.init().then(function () {
+        // Initialization is successful
+        textArea.value  = "Initialization is successful";
     });
-     }
+}
 
 // Code for getting selected Shape Text using the shapes collection object
 function getSelectedShapeText() {
-    Visio.run(session, function (context) {     
-       var page = context.document.getActivePage();
-       var shapes = page.shapes;
-       shapes.load();
-           return context.sync().then(function () {
-               textArea.value = "Please select a Shape in the Diagram";
-               for(var i=0; i<shapes.items.length;i++)
-            {
-              var shape = shapes.items[i];
-                  if ( shape.select == true)
-               {
-                textArea.value = shape.text;
+    Visio.run(session, function (context) {
+        var page = context.document.getActivePage();
+        var shapes = page.shapes;
+        shapes.load();
+        return context.sync().then(function () {
+            textArea.value = "Please select a Shape in the Diagram";
+            for(var i=0; i<shapes.items.length;i++) {
+                var shape = shapes.items[i];
+                if ( shape.select == true) {
+                    textArea.value = shape.text;
                     return;
-                   }
+                }
             }
-      });
-     }).catch(function(error) {
+        });
+    }).catch(function(error) {
         textArea.value = "Error: ";
         if (error instanceof OfficeExtension.Error) {
             textArea.value += "Debug info: " + JSON.stringify(error.debugInfo);
@@ -186,13 +183,13 @@ function getSelectedShapeText() {
 
 その後、必要なものは使用する Visio の図の URL です。 だけで Visio 図面を SharePoint Online にアップロードし、オンラインの Visio で開くことです。 埋め込みダイアログ ボックスを開くし、埋め込みの URL を使用して、上の例で。
 
-![埋め込むダイアログから Visio ファイルの URL をコピーします。](../images/Visio-embed-url.png)
+![埋め込むダイアログから Visio ファイルの URL をコピーします。](/javascript/api/docs-ref-conceptual/images/Visio-embed-url.png)
 
-を使用している Visio のオンライン編集モードの場合は、埋め込むダイアログを開く**ファイル**を選択することによって > **共有** > **埋め込む**。 を使用している Visio のオンライン表示モードの場合は、']' と、**埋め込み**を選択することで埋め込み] ダイアログを開きます。 
+を使用している Visio のオンライン編集モードの場合は、埋め込むダイアログを開く**ファイル**を選択することによって > **共有** > **埋め込む**。 を使用している Visio のオンライン表示モードの場合は、']' と、**埋め込み**を選択することで埋め込み] ダイアログを開きます。
 
 ## <a name="open-api-specifications"></a>Open API の仕様
 
-新しい API の設計と開発にあたり、[Open API の仕様](../openspec.md)ページでこれらに対するフィードバックの提供が可能になります。パイプラインの新機能をご確認いただき、設計の仕様に関する情報をお寄せください。 
+新しい API の設計と開発にあたり、[Open API の仕様](../openspec.md)ページでこれらに対するフィードバックの提供が可能になります。パイプラインの新機能をご確認いただき、設計の仕様に関する情報をお寄せください。
 
 ## <a name="visio-javascript-api-reference"></a>Visio の JavaScript API リファレンス
 

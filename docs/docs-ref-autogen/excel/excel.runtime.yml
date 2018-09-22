@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d0c809c95c1a86bb8c3dc35df52a4282d7ef4600
-ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.openlocfilehash: 03e423369c3c502dcc4debceb603889b2e823660
+ms.sourcegitcommit: e9cb2f2717e1cf062a2f6ffe6a382d7b9b934ba0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/20/2018
-ms.locfileid: "24047292"
+ms.lasthandoff: 09/21/2018
+ms.locfileid: "24062808"
 items:
 - uid: excel.Excel.Runtime
   summary: >-
@@ -21,7 +21,51 @@ items:
   - OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.Runtime.enableEvents
+  - excel.Excel.Runtime.load
   - excel.Excel.Runtime.toJSON
+- uid: excel.Excel.Runtime.enableEvents
+  summary: >-
+    現在の作業ウィンドウまたはコンテンツの追加の JavaScript イベントのオン/オフにします。
+
+
+    \[[API セット: ExcelApi 1.8](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: enableEvents
+  fullName: excel.Excel.Runtime.enableEvents
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'enableEvents: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.Runtime.load
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Runtime`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Runtime`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+  name: load(option)
+  fullName: excel.Excel.Runtime.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Runtime;'
+    return:
+      type:
+      - excel.Excel.Runtime
+      description: ''
+    parameters:
+    - id: option
+      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      type:
+      - string | string[]
 - uid: excel.Excel.Runtime.toJSON
   name: toJSON()
   fullName: excel.Excel.Runtime.toJSON
@@ -29,11 +73,8 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'toJSON:'
+    content: 'toJSON(): Excel.Interfaces.RuntimeData;'
     return:
       type:
-      - >-
-        {
-                    [key: string]: string;
-                }
+      - excel.Excel.Interfaces.RuntimeData
       description: ''

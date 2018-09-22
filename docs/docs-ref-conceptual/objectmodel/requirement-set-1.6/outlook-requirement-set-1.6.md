@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-16"></a>Outlook アドイン API 要件は、1.6 を設定します。
 
-JavaScript API for Office の Outlook アドイン API サブセットには、Outlook アドインで利用できるオブジェクト、メソッド、プロパティ、イベントが含まれます。
+Outlook アドイン API のサブセット Office 用の JavaScript API にはには、オブジェクト、メソッド、プロパティが含まれています、イベントが、Outlook で使用することができることを追加で。
 
 ## <a name="whats-new-in-16"></a>1.6 の新機能は何ですか。
 
