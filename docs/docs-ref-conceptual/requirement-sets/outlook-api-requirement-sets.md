@@ -40,6 +40,8 @@ if (item.somePropertyOrFunction !== undefined) {
 
 | クライアント | サポートされる API の要件セット |
 | --- | --- |
+| Windows 用の outlook 2019 | 1.1、1.2、1.3、1.4、1.5、1.6 |
+| For Mac outlook 2019 | 1.1、1.2、1.3、1.4、1.5、1.6 |
 | Windows 版 Outlook 2016 (クイック実行) | 1.1、1.2、1.3、1.4、1.5、1.6、1.7 |
 | Windows 版 Outlook 2016 (MSI) | 1.1、1.2、1.3、1.4 |
 | Outlook 2016 for Mac | 1.1、1.2、1.3、1.4、1.5、1.6 |
