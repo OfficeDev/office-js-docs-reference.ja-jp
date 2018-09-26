@@ -79,7 +79,7 @@ Microsoft Outlook と web 上の Microsoft Outlook には、Outlook アドイン
 新規作成モードでは、[`saveAsync`](Office.context.mailbox.item.md#saveasyncoptions-callback) メソッドを呼び出してから、`restUrl` メンバーを使用する必要があります。アプリには、`saveAsync` メソッドを呼び出す **ReadWriteItem** アクセス許可が必要です。
 
 > [!NOTE]
-> Outlook クライアントが構成されているカスタムの残りの部分 URL を使用して Exchange の 2016 年の設置型インストールに接続されているは無効な値を返す`restUrl`。
+> Outlook クライアントが Exchange の 2016 年の設置型インストールに接続されているか、構成されている他のカスタム URL を後でもうは無効な値を返す`restUrl`。
 
 ##### <a name="type"></a>型:
 

@@ -2,7 +2,7 @@
 
 要件セットは、API メンバーの名前付きグループです。 Office アドインでは、マニフェストで指定されている要件のセットを使用して、またはランタイム チェックを使用して、Office ホストがアドインを必要とする Api をサポートしているかどうかを決定します。 詳細については、 [Office のバージョンおよび要件の設定](https://docs.microsoft.com/office/dev/add-ins/develop/office-versions-and-requirement-sets)を参照してください。
 
-Excel のアドインは、Windows、iPad の Office、Office for Mac、および Office オンライン Office 2016 を含め、Office の複数のバージョン間で実行します。 Excel の要件の設定、要件セットごとに、およびビルドのバージョンをサポートしたり、それらのアプリケーションの Office ホスト アプリケーションを次の表に一覧します。
+、および Office オンラインの複数のバージョンの Office 2016 を含め、Office や Windows、iPad の Office、Office for Mac の後で Excel のアドインを実行します。 Excel の要件の設定、要件セットごとに、およびビルドのバージョンをサポートしたり、それらのアプリケーションの Office ホスト アプリケーションを次の表に一覧します。
 
 > [!NOTE]
 > **ベータ版**としてマークされているすべての API は、エンド ・ ユーザーの生産の準備が完了ではありません。 ここで使用できるように開発者は、テストおよび開発環境で試してみるのです。 運用とビジネスの重要なドキュメントに対して使用するのにはないです。

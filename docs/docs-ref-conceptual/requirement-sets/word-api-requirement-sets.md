@@ -2,7 +2,7 @@
 
 要件セットは、API メンバーの名前付きグループです。 Office アドインでは、マニフェストで指定されている要件のセットを使用して、またはランタイム チェックを使用して、Office ホストがアドインを必要とする Api をサポートしているかどうかを決定します。 詳細については、 [Office のバージョンおよび要件の設定](https://docs.microsoft.com/office/dev/add-ins/develop/office-versions-and-requirement-sets)を参照してください。
 
-Word のアドインは、Windows、iPad の Office、Office for Mac、および Office オンライン Office 2016 を含め、Office の複数のバージョン間で実行します。 Word の要件のセット、それらのアプリケーションの要件のセット、およびビルドまたはバージョン番号をサポートする Office ホスト アプリケーションを次の表に一覧します。
+、および Office オンラインの複数のバージョンの Office 2016 を含め、Office や Windows、iPad の Office、Office for Mac の後で Word のアドインを実行します。 Word の要件のセット、それらのアプリケーションの要件のセット、およびビルドまたはバージョン番号をサポートする Office ホスト アプリケーションを次の表に一覧します。
 
 > [!NOTE]
 > ベータ版としてマークされている要件のセットを指定された (またはそれ以降) バージョンの Office ソフトウェアを使用して、CDN のベータ版のライブラリを使用して: https://appsforoffice.microsoft.com/lib/beta/hosted/office.js。

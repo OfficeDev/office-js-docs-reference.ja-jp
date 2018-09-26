@@ -1453,7 +1453,7 @@ Office.initialize = function () {
 アドインが[操作可能メッセージによってアクティブ化](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)されるときに渡される初期化データを取得します。
 
 > [!NOTE]
-> このメソッドのみでサポートされて Outlook 2016 (クイック実行バージョンが 16.0.8413.1000 より大きい値) を Windows および web 上で Outlook を Office 365 の。
+> このメソッドは Outlook 2016 または Windows (クイック実行バージョン 16.0.8413.1000 以降) と、web 上で Outlook を後で Office 365 のです。
 
 ##### <a name="parameters"></a>パラメーター:
 |名前|型|属性|説明|

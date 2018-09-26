@@ -49,8 +49,8 @@ if (item.somePropertyOrFunction !== undefined) {
 | Outlook for iPhone | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook for Android | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook on the web (Office 365 および Outlook.com) | 1.1、1.2、1.3、1.4、1.5、1.6 |
-| Outlook Web App (Exchange 2013 On-Premise) | 1.1 |
-| Outlook Web App (Exchange 2016 On-Premise) | 1.1, 1.2. 1.3 |
+| Outlook Web App (Exchange 2013 の設置型) | 1.1 |
+| Outlook Web App (Exchange 2016 設置型) | 1.1, 1.2. 1.3 |
 
 > [!NOTE]
 > Outlook 2013 で 1.3 のサポートは、 [2015年 12 月 8日、Outlook 2013 (KB3114349) の更新](https://support.microsoft.com/kb/3114349)の一部として追加されました。 [2016年 9 月 13日、Outlook 2013 (KB3118280) の更新](https://support.microsoft.com/help/3118280)の一部として、Outlook 2013 で 1.4 のサポートが追加されました。

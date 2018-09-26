@@ -26,7 +26,7 @@ TypeScript を使用していて npm がある場合、コマンド ライン �
 
 アドインを実行するには、Office.initialize イベント ハンドラーを使用します。アドインの初期化の詳細については、「[API について](https://docs.microsoft.com/office/dev/add-ins/develop/understanding-the-javascript-api-for-office)」を参照してください。
 
-Word 2016 を対象とするアドインは、**Word.run()** メソッドに関数を渡すことで実行されます。**run** メソッドに渡される関数には、context 引数が必要です。この[コンテキスト オブジェクト](/javascript/api/word/word.requestcontext)は、Office オブジェクトから取得するコンテキスト オブジェクトとは異なりますが、どちらも Word ランタイム環境と対話するために使用されます。コンテキスト オブジェクトを使用して、Word JavaScript API オブジェクト モデルにアクセスできます。以下の例では、**Word.run()** メソッドを使用して Word アドインを初期化して実行する方法を示しています。
+アドインに Word 2016 のターゲットまたは後で、 **Word.run()** メソッドに関数を渡すことにより実行します。 **Run**メソッドに渡される関数は、コンテキストの引数が必要です。 この[コンテキスト オブジェクト](/javascript/api/word/word.requestcontext)は、Office のオブジェクトから取得するコンテキスト オブジェクトとは異なるが、Word の実行時環境との対話にも使用します。 コンテキスト オブジェクトでは、JavaScript API の Word オブジェクト モデルへのアクセスを提供します。 次の例では、 **Word.run()** メソッドを使用して、アドインを初期化し、Word を実行する方法を示します。
 
 ```js
 (function () {
