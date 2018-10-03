@@ -24,7 +24,7 @@ Office アドインは、Office の複数のバージョン間で実行します
 
 ## <a name="identityapi-11"></a>IdentityAPI 1.1 
 
-シングル サインオン IdentityAPI 1.1 は API の最初のバージョンです。 API に関する詳細についてを参照してください、 `getAccessTokenAsync` [Office.Auth](/javascript/api/office/office.auth)のリファレンス トピックの方法です。
+シングル サインオン IdentityAPI 1.1 は API の最初のバージョンです。 この API についての詳細は、[アドインで SSO を有効にする](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins)の[SSO API リファレンス](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins#sso-api-reference)を参照してください。
 
 ## <a name="see-also"></a>関連項目
 
