@@ -11,5 +11,5 @@ Office 用の JavaScript API を使用すると、Office ホスト アプリケ�
 
 ## <a name="see-also"></a>関連項目
 
-- [JavaScript API for Office](https://docs.microsoft.com/javascript/office/javascript-api-for-office?view=office-js)
+- [JavaScript API for Office](https://docs.microsoft.com/office/dev/add-ins/reference/javascript-api-for-office?view=office-js)
 - [クイック スタート、チュートリアル、および Office アドイン用の高度なプログラミング ガイド](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins?view=office-js)
