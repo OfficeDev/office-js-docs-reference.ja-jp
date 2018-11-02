@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7d538aaaf2b31d96af424f92d5628877c0d8f7da
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 9c4796da102c44d50159545a2a297c4a785e3add
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25585955"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25914294"
 items:
 - uid: outlook.Office.Item
   summary: >-
@@ -28,6 +28,7 @@ items:
   - outlook.Office.Item.body
   - outlook.Office.Item.dateTimeCreated
   - outlook.Office.Item.dateTimeModifed
+  - outlook.Office.Item.getAttachmentContentAsync
   - outlook.Office.Item.getInitializationContextAsync
   - outlook.Office.Item.getSharedPropertiesAsync
   - outlook.Office.Item.itemType
@@ -41,21 +42,11 @@ items:
     サポートされているイベントのイベント ハンドラーを追加します。
 
 
-    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。 プレビューでは、`Office.EventType.AttachmentsChanged`もサポートします。
 
 
     \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可のレベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-
-
-    だけでなくこの署名では、メソッドは次のシグネチャもあります。
-
-
-    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  remarks: "<table><tr><td>[最小限のアクセス許可のレベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>\n\nだけでなくこの署名では、メソッドは次のシグネチャもあります。\n\n`addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction myHandlerFunction(eventarg) { \n    if (eventarg.attachmentStatus == Office.MailboxEnums.AttachmentStatus.Added) { \n        var _att = eventarg.attachmentDetails; \n        showMessage(\"Event Fired and Attachment Added!\"); \n        getAttachmentContentAsync(_att.id, options, callback); \n    } \n} \nOffice.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);\n```"
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: outlook.Office.Item.addHandlerAsync
   langs:
@@ -150,6 +141,41 @@ items:
     return:
       type:
       - Date
+- uid: outlook.Office.Item.getAttachmentContentAsync
+  summary: >-
+    メッセージまたは予定の添付ファイルを取得し、としてそれを返す、`Office.AttachmentContent`オブジェクトです。
+
+
+    `getAttachmentContentAsync`メソッドは、アイテムから指定された識別子を持つ添付ファイルを取得します。 最善の方法として、attachmentIds で取得されたのと同じセッションで添付ファイルを取得するために識別子を使用する必要があります、`getAttachmentsAsync`または`item.attachments`を呼び出します。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 セッションは、ユーザーがアプリケーションを閉じたとき、またはユーザーは、インライン フォームの作成を開始し、フォームの別のウィンドウで続行するのには後で表示する場合に。
+
+
+    \[[API セット: メールボックス プレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[最小限のアクセス許可のレベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr>\n\n<tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>\n####例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);  \n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    //parse string to be a url, an .eml file, or a base64 encoded string\n    if (result.format == Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        //handle file attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        //handle item attachment\n    }\n    else {\n        //handle cloud attachment  \n    }\n}\n```"
+  isPreview: true
+  name: getAttachmentContentAsync(attachmentId, options, callback)
+  fullName: outlook.Office.Item.getAttachmentContentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.AttachmentContent>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: attachmentId
+      description: 取得する添付ファイルの識別子です。 文字列の最大の長さは 100 文字です。
+      type:
+      - string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。 呼び出しが失敗した場合、asyncResult.error プロパティに格納され、エラー コードでは、失敗の理由です。
+      type:
+      - '(result: AsyncResult<Office.AttachmentContent>) => void'
 - uid: outlook.Office.Item.getInitializationContextAsync
   summary: >-
     アドインでは[、実践的なメッセージによってアクティブ化される](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)ときに渡される初期化データを取得する<!-- -->。
@@ -444,7 +470,7 @@ items:
     サポートされているイベントのイベント ハンドラーを削除します。
 
 
-    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。 プレビューでは、`Office.EventType.AttachmentsChanged`もサポートします。
 
 
     \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -472,7 +498,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: ハンドラーを呼び出す必要のあるイベント。
+      description: このイベントは、ハンドラーを取り消す必要があります。
       type:
       - Office.EventType
     - id: handler
