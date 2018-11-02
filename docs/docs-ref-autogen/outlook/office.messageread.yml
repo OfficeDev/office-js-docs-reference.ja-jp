@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 97c669e9f4fab0a2875518d5bde7bba9ea2126aa
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 7da2872b7646eb50e46b53a63dae749b1087ef8a
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25590855"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25912572"
 items:
 - uid: outlook.Office.MessageRead
   summary: >-
@@ -39,6 +39,7 @@ items:
   - outlook.Office.MessageRead.getRegExMatchesByName
   - outlook.Office.MessageRead.getSelectedEntities
   - outlook.Office.MessageRead.getSelectedRegExMatches
+  - outlook.Office.MessageRead.internetHeaders
   - outlook.Office.MessageRead.internetMessageId
   - outlook.Office.MessageRead.itemClass
   - outlook.Office.MessageRead.itemId
@@ -57,7 +58,7 @@ items:
     サポートされているイベントのイベント ハンドラーを追加します。
 
 
-    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。 プレビューでは、`Office.EventType.AttachmentsChanged`もサポートします。
 
 
     \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -102,7 +103,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.MessageRead.attachments
   summary: >-
-    アイテムの添付ファイルの配列を取得します。
+    アイテムの添付ファイルを配列として取得します。
 
 
     \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -918,6 +919,31 @@ items:
       type:
       - any
       description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。各配列の名前は、一致する ItemHasRegularExpressionMatch ルールの RegExName 属性、または一致する ItemHasKnownEntity ルールの FilterName 属性の対応する値と等しくなります。
+- uid: outlook.Office.MessageRead.internetHeaders
+  summary: >-
+    メッセージのインターネット ヘッダーを取得します。
+
+
+    InternetHeaders プロパティは、メッセージのインターネット ヘッダーを管理するメソッドを提供する InternetHeaders オブジェクトを返します。
+
+
+    \[[API セット: メールボックス プレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可のレベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの閲覧</td></tr></table>
+  isPreview: true
+  name: internetHeaders
+  fullName: outlook.Office.MessageRead.internetHeaders
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'internetHeaders: Office.InternetHeaders;'
+    return:
+      type:
+      - outlook.Office.InternetHeaders
 - uid: outlook.Office.MessageRead.internetMessageId
   summary: >-
     電子メール メッセージのインターネット メッセージ ID を取得します。
@@ -958,7 +984,7 @@ items:
     itemClass プロパティは、選択されたアイテムのメッセージ クラスを指定します。メッセージ アイテムまたは予定アイテムの既定のメッセージ クラスは次のとおりです。
 
 
-    <table> <tr> <th>種類</th> <th>説明</th> <th>アイテム クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらはアイテム クラス IPM.Appointment または IPM.Appointment.Occurence の予定表アイテムです。</td> <td>IPM.IPM の予定です。Appointment.Occurence</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これらには、既定のメッセージ クラス IPM.Note を持つ電子メール メッセージ、および基本メッセージ クラスとして IPM.Schedule.Meeting を使用する会議出席依頼、返信、または取り消しが含まれます。</td> <td>IPM.IPM 注意してください。Schedule.Meeting.Request,IPM。Schedule.Meeting.Neg,IPM。Schedule.Meeting.Pos,IPM。Schedule.Meeting.Tent,IPM。Schedule.Meeting.Canceled</td> </tr> </table>
+    <table> <tr> <th>型</th> <th>説明</th> <th>アイテム クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらはアイテム クラス IPM.Appointment または IPM.Appointment.Occurence の予定表アイテムです。</td> <td>IPM.IPM の予定です。Appointment.Occurence</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これらには、既定のメッセージ クラス IPM.Note を持つ電子メール メッセージ、および基本メッセージ クラスとして IPM.Schedule.Meeting を使用する会議出席依頼、返信、または取り消しが含まれます。</td> <td>IPM.IPM 注意してください。Schedule.Meeting.Request,IPM。Schedule.Meeting.Neg,IPM。Schedule.Meeting.Pos,IPM。Schedule.Meeting.Tent,IPM。Schedule.Meeting.Canceled</td> </tr> </table>
   name: itemClass
   fullName: outlook.Office.MessageRead.itemClass
   langs:
@@ -1160,7 +1186,7 @@ items:
     サポートされているイベントのイベント ハンドラーを削除します。
 
 
-    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。 プレビューでは、`Office.EventType.AttachmentsChanged`もサポートします。
 
 
     \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1188,7 +1214,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: ハンドラーを呼び出す必要のあるイベント。
+      description: このイベントは、ハンドラーを取り消す必要があります。
       type:
       - EventType
     - id: handler
