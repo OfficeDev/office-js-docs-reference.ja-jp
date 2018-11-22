@@ -1,14 +1,14 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8651db1ad807e40e9af4c926b9699eb5adb47607
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: 5fe31f8406e5ea7b628c70602fe4942239a904d4
+ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26297967"
+ms.lasthandoff: 11/22/2018
+ms.locfileid: "26647155"
 items:
 - uid: office.Office.AsyncResult
   summary: 要求が失敗した場合の状態やエラー情報など、非同期要求の結果をカプセル化するオブジェクト。
-  remarks: "<table><tr><td>Hosts</td><td>Access、Excel、Outlook、PowerPoint、Project、Word</td></tr></table>\n\n関数をやり取りするときに、 `callback` \"Async\"メソッドのパラメーターを実行、AsyncResult オブジェクトからアクセスすることを受け取る、`callback`関数の唯一のパラメーターです。\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === \"success\") {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
+  remarks: "<table><tr><td>ホスト</td><td>Access、Excel、Outlook、PowerPoint、Project、Word</td></tr></table>\n\n関数をやり取りするときに、 `callback` \"Async\"メソッドのパラメーターを実行、AsyncResult オブジェクトからアクセスすることを受け取る、`callback`関数の唯一のパラメーターです。\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === \"success\") {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
   name: Office.AsyncResult
   fullName: Office.AsyncResult
   langs:
@@ -17,6 +17,7 @@ items:
   package: office
   children:
   - office.Office.AsyncResult.asyncContext
+  - office.Office.AsyncResult.diagnostics
   - office.Office.AsyncResult.error
   - office.Office.AsyncResult.status
   - office.Office.AsyncResult.value
@@ -30,6 +31,38 @@ items:
   type: property
   syntax:
     content: 'asyncContext: any;'
+    return:
+      type:
+      - any
+- uid: office.Office.AsyncResult.diagnostics
+  summary: エラーが発生した場合は追加情報を提供するオブジェクトを取得します。
+  remarks: >-
+    **サポートの詳細**
+
+
+    大文字 Y の次のマトリックスでは、対応する Office ホスト アプリケーションでこのプロパティがサポートされていることを示します。 空のセルでは、Office ホスト アプリケーションがこの列挙型をサポートしないことを示します。
+
+
+    Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
+
+
+    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> デバイス用 OWA </th><th> Office for Mac </th></tr> <tr><td><strong>Outlook</strong></td><td> Y (メールボックス プレビュー) </td><td> </td><td> </td><td> </td><td> </td></tr> </table>
+
+
+    *サポートされている Api*
+
+
+    `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
+
+
+    *サポートされているエラー* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>返されるオブジェクトの診断の説明 </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>要求が失敗しました。 診断オブジェクトを表示する HTTP エラー コードを参照してください。 </td><td>JSON 内の HTTP エラー コードが、オブジェクトします。`{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Exchange サーバーには、エラーが返されます。 診断オブジェクトの詳細について参照してください。</td><td>JSON 内の Exchange サーバーからのエラー メッセージのオブジェクトなど、`{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
+  name: diagnostics
+  fullName: diagnostics
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'diagnostics: any;'
     return:
       type:
       - any

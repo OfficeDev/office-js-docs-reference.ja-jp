@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 20bc98c2a19e73ae2ddbcbacff8904d349292e04
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: db98f3f5b4e39d5b5662233c54ff302901f90fcb
+ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26298079"
+ms.lasthandoff: 11/22/2018
+ms.locfileid: "26647197"
 items:
 - uid: office.Office.CustomXmlNode
   summary: ドキュメント内のツリーの XML ノードを表します。
@@ -21,7 +21,7 @@ items:
     Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
 
 
-    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> </table>
+    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> Office for Mac? </th></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td><td> Y </td></tr> </table>
   name: Office.CustomXmlNode
   fullName: Office.CustomXmlNode
   langs:
@@ -203,7 +203,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: office.Office.CustomXmlNode.setTextAsync
   summary: カスタム XML パーツ内の XML ノードのテキストを非同期的に設定します。
-  remarks: "<table><tr><td>Hosts</td><td>Word</td></tr>\n\n<tr><td>要件の設定</td><td>CustomXmlParts</td></tr></table>\n#### 例\n\n```javascript\n// Learn how to set the text value of a node in a custom XML part from the following example.\n\n// Get the built-in core properties XML part by using its ID. This results in a call to Word.\nOffice.context.document.customXmlParts.getByIdAsync(\n    \"{6C3C8BC8-F283-45AE-878A-BAB7291924A1}\",\n    function (getByIdAsyncResult) {\n    \n    // Access the XML part.\n    var xmlPart = getByIdAsyncResult.value;\n    \n    // Add namespaces to the namespace manager. These two calls result in two calls to Word.\n    xmlPart.namespaceManager.addNamespaceAsync(\n        'cp', \n        'http://schemas.openxmlformats.org/package/2006/metadata/core-properties', \n        function () {\n        xmlPart.namespaceManager.addNamespaceAsync(\n            'dc', \n            'http://purl.org/dc/elements/1.1/', \n            function () {\n\n            // Get XML nodes by using an Xpath expression. This results in a call to the host.\n            xmlPart.getNodesAsync(\"/cp:coreProperties/dc:subject\", function (getNodesAsyncResult) {\n                \n                // Get the first node returned by using the Xpath expression.\n                // This will be the subject element in this example.\n                var subjectNode = getNodesAsyncResult.value[0];\n                \n                // Set the text value of the subject node and use the asyncContext. \n                // This results in a call to the host.  The results are logged to the browser console.\n                subjectNode.setTextAsync(\n                    \"newSubject\", \n                    {asyncContext: \"StateNormal\"}, \n                    function (setTextAsyncResult) {\n                        console.log(\"The status of the call: \" + setTextAsyncResult.status);\n                        console.log(\"The asyncContext value = \" + setTextAsyncResult.asyncContext);\n                });\n            });\n        });\n    });\n});\n```"
+  remarks: "<table><tr><td>ホスト</td><td>Word</td></tr>\n\n<tr><td>要件の設定</td><td>CustomXmlParts</td></tr></table>\n#### 例\n\n```javascript\n// Learn how to set the text value of a node in a custom XML part from the following example.\n\n// Get the built-in core properties XML part by using its ID. This results in a call to Word.\nOffice.context.document.customXmlParts.getByIdAsync(\n    \"{6C3C8BC8-F283-45AE-878A-BAB7291924A1}\",\n    function (getByIdAsyncResult) {\n    \n    // Access the XML part.\n    var xmlPart = getByIdAsyncResult.value;\n    \n    // Add namespaces to the namespace manager. These two calls result in two calls to Word.\n    xmlPart.namespaceManager.addNamespaceAsync(\n        'cp', \n        'http://schemas.openxmlformats.org/package/2006/metadata/core-properties', \n        function () {\n        xmlPart.namespaceManager.addNamespaceAsync(\n            'dc', \n            'http://purl.org/dc/elements/1.1/', \n            function () {\n\n            // Get XML nodes by using an Xpath expression. This results in a call to the host.\n            xmlPart.getNodesAsync(\"/cp:coreProperties/dc:subject\", function (getNodesAsyncResult) {\n                \n                // Get the first node returned by using the Xpath expression.\n                // This will be the subject element in this example.\n                var subjectNode = getNodesAsyncResult.value[0];\n                \n                // Set the text value of the subject node and use the asyncContext. \n                // This results in a call to the host.  The results are logged to the browser console.\n                subjectNode.setTextAsync(\n                    \"newSubject\", \n                    {asyncContext: \"StateNormal\"}, \n                    function (setTextAsyncResult) {\n                        console.log(\"The status of the call: \" + setTextAsyncResult.status);\n                        console.log(\"The asyncContext value = \" + setTextAsyncResult.asyncContext);\n                });\n            });\n        });\n    });\n});\n```"
   name: setTextAsync(text, options, callback)
   fullName: setTextAsync
   langs:
