@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4db913a5fe659f11b1dfd9bfb2fa661ae035430b
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 804047e8fc6065ca3a1844741e3de20da14377fe
+ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995487"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "27243458"
 items:
 - uid: word.Word.Range
   summary: >-
@@ -342,7 +342,7 @@ items:
     return:
       type:
       - word.Word.RangeCollection
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Word.run(async (context) => {\n    // Gets the complete sentence (as range) associated with the insertion point.\n    let sentences = context.document.getSelection().getTextRanges(\n        [\".\"] /* Using the \".\" as delimiter */,\n        false /*means without trimming spaces*/);\n    sentences.load(\"$none\");\n    await context.sync();\n\n    // Expands the range to the end of the paragraph to get all the complete sentences.\n    let sentencesToTheEndOfParagraph = sentences.items[0].getRange().expandTo(\n        context.document.getSelection().paragraphs.getFirst().getRange(\"End\")).getTextRanges(\n            [\".\"],\n             false /* Don't trim spaces*/);\n    sentencesToTheEndOfParagraph.load(\"text\");\n    await context.sync();\n    \n    for (let i = 0; i < sentencesToTheEndOfParagraph.items.length; i++) {\n        console.log(sentencesToTheEndOfParagraph.items[i].text);\n    }\n});\n```"
     parameters:
     - id: endingMarks
       description: 必須。文字列配列としての句読点と他の終了記号、またはそのいずれか。
@@ -403,7 +403,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue a command to get the current selection and then\n    // create a proxy range object with the results.\n    var range = context.document.getSelection();\n\n    // Queue a commmand to insert a page break after the selected text.\n    range.insertBreak('page', 'After');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Inserted a page break after the selected text.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: breakType
-      description: 必須。 追加するのには区切りの種類です。
+      description: 必須です。 追加するのには区切りの種類です。
       type:
       - word.Word.BreakType
     - id: insertLocation
@@ -450,7 +450,7 @@ items:
       type:
       - string
     - id: insertLocation
-      description: 必須。 値できます '置換'、'開始'、'終了'、'' か ''。
+      description: 必須です。 値できます '置換'、'開始'、'終了'、'' か ''。
       type:
       - Word.InsertLocation
 - uid: word.Word.Range.insertHtml
@@ -476,7 +476,7 @@ items:
       type:
       - string
     - id: insertLocation
-      description: 必須。 値できます '置換'、'開始'、'終了'、'' か ''。
+      description: 必須です。 値できます '置換'、'開始'、'終了'、'' か ''。
       type:
       - Word.InsertLocation
 - uid: word.Word.Range.insertInlinePictureFromBase64
@@ -502,7 +502,7 @@ items:
       type:
       - string
     - id: insertLocation
-      description: 必須。 値できます '置換'、'開始'、'終了'、'' か ''。
+      description: 必須です。 値できます '置換'、'開始'、'終了'、'' か ''。
       type:
       - Word.InsertLocation
 - uid: word.Word.Range.insertOoxml
@@ -528,7 +528,7 @@ items:
       type:
       - string
     - id: insertLocation
-      description: 必須。 値できます '置換'、'開始'、'終了'、'' か ''。
+      description: 必須です。 値できます '置換'、'開始'、'終了'、'' か ''。
       type:
       - Word.InsertLocation
 - uid: word.Word.Range.insertParagraph
@@ -614,7 +614,7 @@ items:
       type:
       - string
     - id: insertLocation
-      description: 必須。 値できます '置換'、'開始'、'終了'、'' か ''。
+      description: 必須です。 値できます '置換'、'開始'、'終了'、'' か ''。
       type:
       - Word.InsertLocation
 - uid: word.Word.Range.intersectWith
