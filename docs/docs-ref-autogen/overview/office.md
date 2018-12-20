@@ -7,7 +7,7 @@ Office 用の JavaScript API を使用すると、Office ホスト アプリケ�
 - [Outlook](https://docs.microsoft.com/javascript/api/outlook?view=office-js)
 - [Visio](https://docs.microsoft.com/javascript/api/visio?view=office-js)
 - [Word](https://docs.microsoft.com/javascript/api/word?view=office-js)
-- [共有 API](https://docs.microsoft.com/javascript/api/office?view=office-js)
+- [共通の API](https://docs.microsoft.com/javascript/api/office?view=office-js)
 
 ## <a name="see-also"></a>関連項目
 
