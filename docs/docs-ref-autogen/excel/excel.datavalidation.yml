@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 38f301ce9182fbc761b3e867b6d3988a48db3210
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: c1e79f8060a2a13892185357fe51cd29e3a2a692
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994892"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724746"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
@@ -22,6 +22,7 @@ items:
   package: excel
   children:
   - excel.Excel.DataValidation.clear
+  - excel.Excel.DataValidation.context
   - excel.Excel.DataValidation.errorAlert
   - excel.Excel.DataValidation.ignoreBlanks
   - excel.Excel.DataValidation.load
@@ -32,7 +33,7 @@ items:
   - excel.Excel.DataValidation.valid
 - uid: excel.Excel.DataValidation.clear
   summary: >-
-    現在の範囲からのデータの入力規則を削除します。
+    現在の範囲からデータの入力規則をクリアします。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -47,9 +48,21 @@ items:
       type:
       - void
       description: ''
+- uid: excel.Excel.DataValidation.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.DataValidation.errorAlert
   summary: >-
-    無効なデータが入力されたときに警告をエラーします。
+    無効なデータが入力された場合のエラー警告。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -66,7 +79,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.DataValidation.ignoreBlanks
   summary: >-
-    空白を無視する: 空白のセルにデータ検証は実行されません、既定で true に設定します。
+    空白を無視します。つまり、空白のセルではデータの入力規則が検証されません。既定では true に設定されます。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -139,6 +152,7 @@ items:
       type:
       - excel.Excel.DataValidationRule
 - uid: excel.Excel.DataValidation.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.DataValidation オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.DataValidationData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -152,7 +166,7 @@ items:
       description: ''
 - uid: excel.Excel.DataValidation.type
   summary: >-
-    データの入力規則の種類、詳細については Excel.DataValidationType を参照してください。
+    データの入力規則の種類。詳細については、Excel.DataValidationType を参照してください。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -168,7 +182,7 @@ items:
       - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
 - uid: excel.Excel.DataValidation.valid
   summary: >-
-    すべてのセル値は、データの入力規則に従った有効な場合を表します。 すべてのセルの値が無効な場合すべてのセルの値が無効な場合、または false の場合は、true を返します。 両方の有効および無効なセル値の範囲内である場合は null を返します。
+    すべてのセルの値がデータの入力規則に従っているかどうかを表します。 すべてのセルの値が無効な場合すべてのセルの値が無効な場合、または false の場合は、true を返します。 両方の有効および無効なセル値の範囲内である場合は null を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

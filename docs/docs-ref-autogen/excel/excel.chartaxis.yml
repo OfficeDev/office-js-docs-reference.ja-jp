@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0ea0be2646f6a2627e007914c4ebbca8ad2339f7
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 91ed56ea49b9da4d6557712d82f5887b9b87f941
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996129"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725495"
 items:
 - uid: excel.Excel.ChartAxis
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.ChartAxis.axisGroup
   - excel.Excel.ChartAxis.baseTimeUnit
   - excel.Excel.ChartAxis.categoryType
+  - excel.Excel.ChartAxis.context
   - excel.Excel.ChartAxis.customDisplayUnit
   - excel.Excel.ChartAxis.displayUnit
   - excel.Excel.ChartAxis.format
@@ -82,7 +83,7 @@ items:
       - Excel.ChartTickLabelAlignment | "Center" | "Left" | "Right"
 - uid: excel.Excel.ChartAxis.axisGroup
   summary: >-
-    指定された軸のグループを表します。 詳細については Excel.ChartAxisGroup を参照してください。 読み取り専用。
+    指定した軸に対応するグループを表します。 詳細については Excel.ChartAxisGroup を参照してください。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -98,7 +99,7 @@ items:
       - Excel.ChartAxisGroup | "Primary" | "Secondary"
 - uid: excel.Excel.ChartAxis.baseTimeUnit
   summary: >-
-    指定された項目軸の基本単位を設定または返します。
+    指定された項目軸の基本単位を返すか設定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -114,7 +115,7 @@ items:
       - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
 - uid: excel.Excel.ChartAxis.categoryType
   summary: >-
-    項目軸の種類を設定または返します。
+    項目軸の種類を返すか設定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -128,9 +129,21 @@ items:
     return:
       type:
       - Excel.ChartAxisCategoryType | "Automatic" | "TextAxis" | "DateAxis"
+- uid: excel.Excel.ChartAxis.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.ChartAxis.customDisplayUnit
   summary: >-
-    カスタムの軸の表示単位の値を表します。 読み取り専用。 このプロパティを設定するには、SetCustomDisplayUnit(double) メソッドを使用してください。
+    カスタム軸の表示単位の値を表します。 読み取り専用です。 このプロパティを設定するには、SetCustomDisplayUnit(double) メソッドを使用してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -179,7 +192,7 @@ items:
       - excel.Excel.ChartAxisFormat
 - uid: excel.Excel.ChartAxis.height
   summary: >-
-    ポイント、グラフの軸の単位の高さを表します。 軸が表示されていない場合は null です。 読み取り専用。
+    グラフ軸の高さ (ポイント数) を表します。 軸が表示されていない場合は null です。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -195,7 +208,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.isBetweenCategories
   summary: >-
-    数値軸の項目間の項目軸を交差するかどうかを表します。
+    項目の境界で数値軸が項目軸と交差するかどうかを表します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -211,7 +224,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartAxis.left
   summary: >-
-    グラフ エリアの左側に軸の左端からの距離をポイント単位でを表します。 軸が表示されていない場合は null です。 読み取り専用。
+    軸の左端からグラフ エリアの左端までの距離 (ポイント数) を表します。 軸が表示されていない場合は null です。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -246,7 +259,7 @@ items:
       - string | string[]
 - uid: excel.Excel.ChartAxis.logBase
   summary: >-
-    対数目盛を使用する場合は、対数の底を表します。
+    対数目盛りを使用する場合の対数の底を表します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -294,7 +307,7 @@ items:
       - Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside"
 - uid: excel.Excel.ChartAxis.majorTimeUnitScale
   summary: >-
-    取得またはタイム スケール領域に [社員コード] プロパティが設定されている場合、項目軸の目盛間隔のスケールの値を設定します。
+    CategoryType プロパティが lTimeScale に設定されている場合、項目軸の目盛のスケール値を返すか設定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -310,7 +323,7 @@ items:
       - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
 - uid: excel.Excel.ChartAxis.majorUnit
   summary: >-
-    2 つの目盛の間隔を表します。 数値の値または空の文字列に設定できます。 返された値は、常に番号です。
+    2 つの目盛の間隔を表します。 数値の値または空の文字列に設定できます。 戻り値は常に数値です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -326,7 +339,7 @@ items:
       - any
 - uid: excel.Excel.ChartAxis.maximum
   summary: >-
-    数値軸の最大値を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 返された値は、常に番号です。
+    数値軸の最大値を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 戻り値は常に数値です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -342,7 +355,7 @@ items:
       - any
 - uid: excel.Excel.ChartAxis.minimum
   summary: >-
-    数値軸の最小値を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 返された値は、常に番号です。
+    数値軸の最小値を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 戻り値は常に数値です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -374,7 +387,7 @@ items:
       - excel.Excel.ChartGridlines
 - uid: excel.Excel.ChartAxis.minorTickMark
   summary: >-
-    指定された軸の補助目盛の種類を表します。 詳細については Excel.ChartAxisTickMark を参照してください。
+    指定した軸の補助目盛の種類を表します。 詳細については Excel.ChartAxisTickMark を参照してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -390,7 +403,7 @@ items:
       - Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside"
 - uid: excel.Excel.ChartAxis.minorTimeUnitScale
   summary: >-
-    取得またはタイム スケール領域に [社員コード] プロパティが設定されている場合、項目軸の補助目盛間隔のスケールの値を設定します。
+    CategoryType プロパティが lTimeScale に設定されている場合、項目軸の補助目盛のスケール値を返すか設定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -406,7 +419,7 @@ items:
       - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
 - uid: excel.Excel.ChartAxis.minorUnit
   summary: >-
-    2 つの補助目盛の間隔を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 返された値は、常に番号です。
+    2 つの補助目盛の間隔を表します。 数値で指定するか (自動の軸の値) に空の文字列に設定できます。 戻り値は常に数値です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -438,7 +451,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartAxis.numberFormat
   summary: >-
-    軸の目盛ラベルの表示形式のコードを表します。
+    軸の目盛ラベルの書式コードを表します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -454,7 +467,7 @@ items:
       - string
 - uid: excel.Excel.ChartAxis.offset
   summary: >-
-    ラベルのレベル、および先頭レベルと軸線間の距離の間の距離を表します。 値は、0 ~ 1000 の整数にする必要があります。
+    ラベルのレベル間の距離、および先頭レベルと軸線との距離を表します。 値は 0 から 1000 の範囲内でなければなりません。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -470,7 +483,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.position
   summary: >-
-    指定した軸の位置を他の軸と交差する位置を表します。 詳細については Excel.ChartAxisPosition を参照してください。
+    指定した軸と他の軸との交差位置を表します。 詳細については Excel.ChartAxisPosition を参照してください。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -486,7 +499,7 @@ items:
       - Excel.ChartAxisPosition | "Automatic" | "Maximum" | "Minimum" | "Custom"
 - uid: excel.Excel.ChartAxis.positionAt
   summary: >-
-    他の軸と交差する、指定した軸の位置を表します。 このプロパティを設定するのには、SetPositionAt(double) メソッドを使用する必要があります。
+    指定した軸と他の軸との交差位置を表します。 このプロパティを設定するには、SetPositionAt(double) メソッドを使用する必要があります。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -502,7 +515,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.reversePlotOrder
   summary: >-
-    Microsoft Excel に最初から最後のデータ ポイントをプロットするかどうかを表します。
+    Microsoft Excel でデータ ポイントを最後から最初への順でプロットするかどうかを表します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -518,7 +531,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartAxis.scaleType
   summary: >-
-    数値軸の目盛の種類を表します。 詳細については Excel.ChartAxisScaleType を参照してください。
+    数値軸のスケールの種類を表します。 詳細については Excel.ChartAxisScaleType を参照してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -556,7 +569,7 @@ items:
       - Range
 - uid: excel.Excel.ChartAxis.setCustomDisplayUnit
   summary: >-
-    カスタムの値軸表示単位を設定します。
+    軸の表示単位をカスタム値に設定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -578,7 +591,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.setPositionAt
   summary: >-
-    他の軸と交差する位置指定した軸の位置を設定します。
+    指定した軸と他の軸との交差位置を設定します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -600,7 +613,7 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.showDisplayUnitLabel
   summary: >-
-    軸の表示単位ラベルが表示されるかどうかを表します。
+    軸の表示単位のラベルを表示するかどうかを表します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -617,7 +630,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    let chart = sheet.charts.getItemAt(0);\n    let axis = chart.axes.valueAxis;\n\n    // Remove display unit.\n    axis.showDisplayUnitLabel = false;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ChartAxis.textOrientation
   summary: >-
-    軸の目盛ラベルのテキストの向きを表します。 値は整数である必要があります 90、またはテキストの垂直方向に 180 を-90 度からです。
+    軸の目盛ラベルのテキストの向きを表します。 値は -90 から 90 の範囲内の整数か、縦書きテキストの場合は 180 でなければなりません。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -633,7 +646,7 @@ items:
       - any
 - uid: excel.Excel.ChartAxis.tickLabelPosition
   summary: >-
-    指定した軸の目盛ラベルの位置を表します。 詳細については Excel.ChartAxisTickLabelPosition を参照してください。
+    指定した軸での目盛ラベルの位置を示します。 詳細については Excel.ChartAxisTickLabelPosition を参照してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -649,7 +662,7 @@ items:
       - Excel.ChartAxisTickLabelPosition | "NextToAxis" | "High" | "Low" | "None"
 - uid: excel.Excel.ChartAxis.tickLabelSpacing
   summary: >-
-    項目または目盛ラベル間でデータ系列の数を表します。 1 から 31999 または自動設定に空の文字列から値を指定できます。 返された値は、常に番号です。
+    目盛ラベル間の項目または系列の数を表します。 1 から 31999 の範囲内で値を設定できます。自動的に設定する場合は、空の文字列にします。 戻り値は常に数値です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -665,7 +678,7 @@ items:
       - any
 - uid: excel.Excel.ChartAxis.tickMarkSpacing
   summary: >-
-    項目または系列の目盛りの間の数を表します。
+    目盛間の項目または系列の数を表します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -696,6 +709,7 @@ items:
       type:
       - excel.Excel.ChartAxisTitle
 - uid: excel.Excel.ChartAxis.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.ChartAxis オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartAxisData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -709,7 +723,7 @@ items:
       description: ''
 - uid: excel.Excel.ChartAxis.top
   summary: >-
-    グラフ エリアの最上部に軸の上端からの距離をポイント単位でを表します。 軸が表示されていない場合は null です。 読み取り専用。
+    軸の上端からグラフ エリアの上端までの距離 (ポイント数) を表します。 軸が表示されていない場合は null です。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -741,7 +755,7 @@ items:
       - Excel.ChartAxisType | "Invalid" | "Category" | "Value" | "Series"
 - uid: excel.Excel.ChartAxis.visible
   summary: >-
-    ブール値は、軸の表示/非表示を表します。
+    軸を表示するかどうかを表すブール値。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -757,7 +771,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartAxis.width
   summary: >-
-    ポイント、グラフの軸の幅を表します。 軸が表示されていない場合は null です。 読み取り専用。
+    グラフ軸の幅 (ポイント数) を表します。 軸が表示されていない場合は null です。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

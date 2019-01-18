@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 2ab6816398b76df763a4803a12b6aa2417894b4d
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: cc4fcfd114add0f06f08cd80d8ba4ca8bcfc7152
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995494"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725005"
 items:
 - uid: excel.Excel.Worksheet
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.Worksheet.activate
   - excel.Excel.Worksheet.calculate
   - excel.Excel.Worksheet.charts
+  - excel.Excel.Worksheet.context
   - excel.Excel.Worksheet.copy
   - excel.Excel.Worksheet.delete
   - excel.Excel.Worksheet.freezePanes
@@ -112,9 +113,21 @@ items:
     return:
       type:
       - excel.Excel.ChartCollection
+- uid: excel.Excel.Worksheet.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Worksheet.copy
   summary: >-
-    ワークシートをコピーして、指定した位置に配置します。 コピーするワークシートを返します。
+    ワークシートをコピーして、指定した位置に配置します。 コピーしたワークシートを返します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -157,7 +170,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Worksheet.freezePanes
   summary: >-
-    ワークシート上の固定されたウィンドウ枠を操作するために使用するオブジェクトを取得します。 読み取り専用。
+    ワークシート上の固定されたウィンドウ枠を操作するために使用するオブジェクトを取得します。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -199,7 +212,7 @@ items:
       - number
 - uid: excel.Excel.Worksheet.getNext
   summary: >-
-    これに続くワークシートを取得します。これに続くワークシートがない場合、このメソッドによってエラーがスローされます。
+    このワークシートの後に続くワークシートを取得します。後続のワークシートがない場合、このメソッドによってエラーがスローされます。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -221,7 +234,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getNextOrNullObject
   summary: >-
-    これに続くワークシートを取得します。これに続くワークシートがない場合、このメソッドによって null オブジェクトが返されます。
+    このワークシートの後に続くワークシートを取得します。後続のワークシートがない場合、このメソッドによって null オブジェクトがスローされます。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -243,7 +256,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getPrevious
   summary: >-
-    この前に来るワークシートを取得します。この前のワークシートがない場合、このメソッドによってエラーがスローされます。
+    このワークシートに先行するワークシートを取得します。先行するワークシートがない場合、このメソッドによってエラーがスローされます。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -265,7 +278,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getPreviousOrNullObject
   summary: >-
-    この前に来るワークシートを取得します。この前のワークシートがない場合、このメソッドによって null オブジェクトが返されます。
+    このワークシートに先行するワークシートを取得します。先行するワークシートがない場合、このメソッドによって null オブジェクトがスローされます。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -308,7 +321,11 @@ items:
       type:
       - string
 - uid: excel.Excel.Worksheet.getRangeByIndexes
-  summary: " は、特定の行インデックスと列インデックスから開始し、一定数の行と列にわたる、range オブジェクトを取得します。\n\n\\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+  summary: >-
+    特定の行インデックスと列インデックスから開始し、一定数の行と列にわたる、Range オブジェクトを取得します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
   fullName: getRangeByIndexes
   langs:
@@ -579,7 +596,7 @@ items:
       - excel.Excel.WorksheetProtection
 - uid: excel.Excel.Worksheet.showGridlines
   summary: >-
-    取得または、ワークシートの枠線] のフラグを設定します。 このフラグは、グリッド線は、ユーザーに表示されるかどうかを決定します。
+    ワークシートの gridlines フラグを取得または設定します。 このフラグは、グリッド線は、ユーザーに表示されるかどうかを決定します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -596,7 +613,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.showGridlines = true;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Worksheet.showHeadings
   summary: >-
-    取得または、ワークシートの見出しのフラグを設定します。 このフラグは、見出しは、ユーザーに表示するかどうかを決定します。
+    ワークシートの headings フラグを取得または設定します。 このフラグは、見出しは、ユーザーに表示するかどうかを決定します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -612,7 +629,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.standardHeight
   summary: >-
-    ポイント単位で、ワークシート内のすべての行の標準 (既定) の高さを返します。 読み取り専用。
+    ワークシート内のすべての行の標準 (既定) の高さ (ポイント数) を返します。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -628,7 +645,7 @@ items:
       - number
 - uid: excel.Excel.Worksheet.standardWidth
   summary: >-
-    取得またはワークシート内のすべての列の標準 (既定) の幅を設定します。 列幅の 1 単位は標準スタイルの 1 文字分の幅に相当します。 プロポーショナル フォントでは、0 (ゼロ) の文字の幅が使用されます。
+    ワークシートのすべての列の標準 (既定) の幅を返すか設定します。 1 単位の列幅は、標準スタイルの 1 文字の幅に等しくなります。 プロポーショナル フォントでは、文字幅 0 (ゼロ) が使用されます。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -644,7 +661,7 @@ items:
       - number
 - uid: excel.Excel.Worksheet.tabColor
   summary: >-
-    取得または、ワークシートのタブの色を設定します。 ワークシートが表示されていない場合は、タブの色を検索する場合、値は null になります。 ワークシートが表示されている場合は自動的にタブの色を設定すると、空の文字列が返されます。 色、フォームにプロパティを設定する場合は、"\#123456" の色を設定する場合それ以外の場合、「自動」の色、または実際の色を設定するのには空文字列を使用します。
+    ワークシートのタブの色を取得または設定します。 ワークシートが表示されていない場合は、タブの色を検索する場合、値は null になります。 ワークシートが表示されている場合は自動的にタブの色を設定すると、空の文字列が返されます。 色、フォームにプロパティを設定する場合は、"\#123456" の色を設定する場合それ以外の場合、「自動」の色、または実際の色を設定するのには空文字列を使用します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -676,6 +693,7 @@ items:
       type:
       - excel.Excel.TableCollection
 - uid: excel.Excel.Worksheet.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。Excel.Worksheet の元のオブジェクトは、API のオブジェクトは、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorksheetData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:

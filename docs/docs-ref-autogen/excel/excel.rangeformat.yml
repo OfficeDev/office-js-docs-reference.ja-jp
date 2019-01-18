@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 88b480928cb80e07541362126634363124f819fe
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 92d8c7c86435564093bdf0c639aeead2e374089e
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994578"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725362"
 items:
 - uid: excel.Excel.RangeFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.RangeFormat.autofitRows
   - excel.Excel.RangeFormat.borders
   - excel.Excel.RangeFormat.columnWidth
+  - excel.Excel.RangeFormat.context
   - excel.Excel.RangeFormat.fill
   - excel.Excel.RangeFormat.font
   - excel.Excel.RangeFormat.horizontalAlignment
@@ -56,7 +57,7 @@ items:
       description: ''
 - uid: excel.Excel.RangeFormat.autofitRows
   summary: >-
-    現在の列のデータに基づいて、現在の範囲の行の高さを最適な高さに変更します。
+    現在の行のデータに基づいて、現在の範囲の行の高さを最適な高さに変更します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -103,6 +104,18 @@ items:
     return:
       type:
       - number
+- uid: excel.Excel.RangeFormat.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.RangeFormat.fill
   summary: >-
     範囲全体に定義された塗りつぶしオブジェクトを返します。読み取り専用です。
@@ -204,7 +217,7 @@ items:
       - number
 - uid: excel.Excel.RangeFormat.textOrientation
   summary: >-
-    取得または範囲内のすべてのセルのテキストの向きを設定します。 テキストの向きは整数である必要があります 90、またはテキストの垂直方向に 180 を-90 度からです。 範囲内で印刷の向きが一様でない場合は、null が返されます。
+    該当する範囲内のすべてのセルのテキストの向きを設定します。 テキストの向きは整数である必要があります 90、またはテキストの垂直方向に 180 を-90 度からです。 範囲内で印刷の向きが一様でない場合は、null が返されます。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -220,6 +233,7 @@ items:
       - number
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:E2\");\n\n    // Set textOrientation to either an integer between -90 and 90\n    // or to 180 for vertically-oriented text.\n    range.format.textOrientation = 90;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.RangeFormat.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.RangeFormat オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.RangeFormatData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -233,7 +247,7 @@ items:
       description: ''
 - uid: excel.Excel.RangeFormat.useStandardHeight
   summary: >-
-    Range オブジェクトの行の高さがシートの標準の高さに等しいかどうかを決定します。 Range オブジェクトの行の高さがシートの標準の高さに等しい場合に True を返します。 範囲に含まれる複数の行と、行すべての高さが同じでない場合は、Null を返します。 それ以外の場合は False を返します。
+    Range オブジェクトの行の高さを、シートの標準の高さと等しくするかどうかを指定します。 Range オブジェクトの行の高さがシートの標準の高さに等しい場合に True を返します。 範囲に含まれる複数の行と、行すべての高さが同じでない場合は、Null を返します。 それ以外の場合は False を返します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

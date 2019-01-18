@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 9ab0bdc1c89055d686c563df42d99b7a5bf33549
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 0ba9b9efdfcbcd0573ab1eda7c0a4734a0de14a9
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994815"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724613"
 items:
 - uid: excel.Excel.CustomXmlPartScopedCollection
   summary: >-
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.CustomXmlPartScopedCollection.context
   - excel.Excel.CustomXmlPartScopedCollection.getCount
   - excel.Excel.CustomXmlPartScopedCollection.getItem
   - excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
@@ -29,9 +30,21 @@ items:
   - excel.Excel.CustomXmlPartScopedCollection.items
   - excel.Excel.CustomXmlPartScopedCollection.load
   - excel.Excel.CustomXmlPartScopedCollection.toJSON
+- uid: excel.Excel.CustomXmlPartScopedCollection.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.CustomXmlPartScopedCollection.getCount
   summary: >-
-    コレクション内にある CustomXML パーツの数を取得します。
+    コレクションに含まれる CustomXML パーツの数を取得します。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -92,7 +105,7 @@ items:
       - string
 - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
   summary: >-
-    コレクションに含まれる項目が 1 つだけの場合、このメソッドはこれを返します。 それ以外の場合、このメソッドは、エラーを生成します。
+    コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドは、エラーを生成します。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -109,7 +122,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
   summary: >-
-    コレクションに含まれる項目が 1 つだけの場合、このメソッドはこれを返します。 それ以外の場合、このメソッドは Null を返します。
+    コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドは Null を返します。
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -163,6 +176,7 @@ items:
       type:
       - string | string[]
 - uid: excel.Excel.CustomXmlPartScopedCollection.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.CustomXmlPartScopedCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.CustomXmlPartScopedCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
   name: toJSON()
   fullName: toJSON
   langs:

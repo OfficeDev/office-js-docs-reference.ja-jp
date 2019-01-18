@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 63ade8d57975212d17ca67f235aab81206856a71
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: e9d7dac89d11878fa613877f7f5816787dfdd5d2
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995641"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725425"
 items:
 - uid: excel.Excel.PivotLayout
   summary: >-
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.PivotLayout.context
   - excel.Excel.PivotLayout.getColumnLabelRange
   - excel.Excel.PivotLayout.getDataBodyRange
   - excel.Excel.PivotLayout.getFilterAxisRange
@@ -32,9 +33,21 @@ items:
   - excel.Excel.PivotLayout.showRowGrandTotals
   - excel.Excel.PivotLayout.subtotalLocation
   - excel.Excel.PivotLayout.toJSON
+- uid: excel.Excel.PivotLayout.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.PivotLayout.getColumnLabelRange
   summary: >-
-    ピボット テーブルの列のラベルが存在する範囲を返します。
+    ピボットテーブルの列ラベルが存在する範囲を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -51,7 +64,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getDataBodyRange
   summary: >-
-    ピボット テーブルのデータ値が存在する範囲を返します。
+    ピボットテーブルのデータ値が存在する範囲を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -68,7 +81,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotLayout.getFilterAxisRange
   summary: >-
-    ピボット テーブルのフィルター領域の範囲を返します。
+    ピボットテーブルのフィルター エリアの範囲を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -85,7 +98,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getRange
   summary: >-
-    除外フィルター エリアに、ピボット テーブルが存在する範囲を返します。
+    フィルター エリアを除く、ピボットテーブルが存在する範囲を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -102,7 +115,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.getRowLabelRange
   summary: >-
-    ピボット テーブルの行のラベルが存在する範囲を返します。
+    ピボットテーブルの行ラベルが存在する範囲を返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -119,7 +132,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotLayout.layoutType
   summary: >-
-    このプロパティは、ピボット テーブルのすべてのフィールドの PivotLayoutType を示します。 フィールドには、さまざまな状態がある、これは null になります。
+    このプロパティは、ピボットテーブルのすべてのフィールドの PivotLayoutType を示します。 フィールドによって状態が異なる場合は null 値になります。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -161,7 +174,7 @@ items:
       - string | string[]
 - uid: excel.Excel.PivotLayout.showColumnGrandTotals
   summary: >-
-    True を設定すると列の合計をピボット テーブル レポートに総計が表示されます。
+    true の場合、ピボットテーブル レポートに列の総計が表示されます。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -177,7 +190,7 @@ items:
       - boolean
 - uid: excel.Excel.PivotLayout.showRowGrandTotals
   summary: >-
-    True を設定すると行の合計をピボット テーブル レポートに総計が表示されます。
+    true の場合、ピボットテーブル レポートに行の総計が表示されます。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -193,7 +206,7 @@ items:
       - boolean
 - uid: excel.Excel.PivotLayout.subtotalLocation
   summary: >-
-    このプロパティは、ピボット テーブルのすべてのフィールドの SubtotalLocationType を示します。 フィールドには、さまざまな状態がある、これは null になります。
+    このプロパティは、ピボットテーブルのすべてのフィールドの SubtotalLocationType を示します。 フィールドによって状態が異なる場合は null 値になります。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -208,6 +221,7 @@ items:
       type:
       - Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"
 - uid: excel.Excel.PivotLayout.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.PivotLayout オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.PivotLayoutData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:

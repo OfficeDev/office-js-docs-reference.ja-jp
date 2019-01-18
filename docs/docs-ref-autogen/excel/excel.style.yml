@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b343e503a3fa62d30beef4789b3ad81a209df463
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 6ba3e82f178c68789eb1283a7a0b28a8ae4c3704
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996166"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725439"
 items:
 - uid: excel.Excel.Style
   summary: >-
@@ -24,6 +24,7 @@ items:
   - excel.Excel.Style.autoIndent
   - excel.Excel.Style.borders
   - excel.Excel.Style.builtIn
+  - excel.Excel.Style.context
   - excel.Excel.Style.delete
   - excel.Excel.Style.fill
   - excel.Excel.Style.font
@@ -49,7 +50,7 @@ items:
   - excel.Excel.Style.wrapText
 - uid: excel.Excel.Style.autoIndent
   summary: >-
-    セル内のテキストの配置が均等に設定されている場合かどうかはテキストを自動的にインデントを示します。
+    セル内のテキスト配置が均等割り付けに設定されている場合、テキストを自動的にインデントするかどうかを指定します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -65,7 +66,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.borders
   summary: >-
-    4 つの枠線のスタイルを表す 4 つの Border オブジェクトの枠線のコレクションです。
+    4 つの辺の罫線のスタイルを表す、4 つの Border オブジェクトのコレクション。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -81,7 +82,7 @@ items:
       - excel.Excel.RangeBorderCollection
 - uid: excel.Excel.Style.builtIn
   summary: >-
-    スタイルが組み込みのスタイルを示します。
+    スタイルが組み込みのスタイルであるかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -95,6 +96,18 @@ items:
     return:
       type:
       - boolean
+- uid: excel.Excel.Style.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Style.delete
   summary: >-
     このスタイルを削除します。
@@ -130,7 +143,7 @@ items:
       - excel.Excel.RangeFill
 - uid: excel.Excel.Style.font
   summary: >-
-    スタイルのフォントを表す Font オブジェクトを返します。
+    スタイルのフォントを表す Font オブジェクト。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -163,7 +176,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.horizontalAlignment
   summary: >-
-    スタイルの水平方向の配置を表します。 詳細については Excel.HorizontalAlignment を参照してください。
+    スタイルでの水平方向の配置を表します。 詳細については Excel.HorizontalAlignment を参照してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -180,7 +193,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Style.includeAlignment
   summary: >-
-    スタイルに、自動インデント、HorizontalAlignment、VerticalAlignment、WrapText、IndentLevel、TextOrientation プロパティが含まれるかどうかを示します。
+    スタイルに配置のプロパティ (AddIndent、HorizontalAlignment、VerticalAlignment、WrapText、IndentLevel、および TextOrientation) が含まれるかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -196,7 +209,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeBorder
   summary: >-
-    スタイルに、カラー、ColorIndex、LineStyle、および太さの罫線のプロパティが含まれるかどうかを示します。
+    スタイルに罫線のプロパティ (Color、ColorIndex、LineStyle、Weight) が含まれているかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -212,7 +225,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeFont
   summary: >-
-    スタイルに背景、太字、色、ColorIndex、FontStyle、斜体、名前、サイズ、取り消し線、下付き文字、上付き文字、および下線のフォントのプロパティが含まれるかどうかを示します。
+    スタイルにフォントのプロパティ (Background、Bold、Color、ColorIndex、FontStyle、Italic、Name、Size、Strikethrough、Subscript、Superscript、Underline) が含まれているかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -228,7 +241,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeNumber
   summary: >-
-    スタイルに数字が含まれるかどうかを示します。
+    スタイルに NumberFormat プロパティが含まれているかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -244,7 +257,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includePatterns
   summary: >-
-    スタイル、色、ColorIndex、InvertIfNegative、パターン、PatternColor、PatternColorIndex 内部プロパティが含まれるかどうかを示します。
+    スタイルに塗りつぶしのプロパティ (Color、ColorIndex、InvertIfNegative、Pattern、PatternColor、PatternColorIndex) が含まれているかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -260,7 +273,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeProtection
   summary: >-
-    スタイルになるとき、および [ロックの保護プロパティが含まれるかどうかを示します。
+    スタイルに保護のプロパティ (FormulaHidden および Locked) が含まれているかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -276,7 +289,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.indentLevel
   summary: >-
-    スタイルのインデントのレベルを示す 0 から 250 の整数です。
+    スタイルのインデント レベルを示す 0 から 250 の範囲内の整数。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -311,7 +324,7 @@ items:
       - string | string[]
 - uid: excel.Excel.Style.locked
   summary: >-
-    オブジェクトがロックされているワークシートが保護されていることを示します。
+    ワークシートが保護されている場合、オブジェクトがロックされるかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -327,7 +340,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.name
   summary: >-
-    スタイルの名前です。
+    スタイルの名前。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -343,7 +356,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormat
   summary: >-
-    スタイルの表示形式の書式コードです。
+    スタイルで適用される数値形式の表示形式コード。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -359,7 +372,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormatLocal
   summary: >-
-    スタイルの表示形式のローカライズされた書式コードです。
+    スタイルで適用される数値形式のローカライズされた表示形式コード。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -375,7 +388,7 @@ items:
       - string
 - uid: excel.Excel.Style.readingOrder
   summary: >-
-    スタイルの読み取り順序です。
+    スタイルで適用される読み上げ順序。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -391,7 +404,7 @@ items:
       - Excel.ReadingOrder | "Context" | "LeftToRight" | "RightToLeft"
 - uid: excel.Excel.Style.shrinkToFit
   summary: >-
-    テキストが使用可能な列幅に収まるように自動的に縮小するかどうかを示します。
+    使用可能な列幅に収まるように自動的に文字列が縮小されるかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -407,7 +420,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.textOrientation
   summary: >-
-    スタイルのテキストの向きです。
+    スタイルで適用されるテキストの向き。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -422,6 +435,7 @@ items:
       type:
       - number
 - uid: excel.Excel.Style.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.Style オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.StyleData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -435,7 +449,7 @@ items:
       description: ''
 - uid: excel.Excel.Style.verticalAlignment
   summary: >-
-    スタイルの垂直方向の配置を表します。 詳細については Excel.VerticalAlignment を参照してください。
+    スタイルで適用される垂直方向の配置を表します。 詳細については Excel.VerticalAlignment を参照してください。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -451,7 +465,7 @@ items:
       - Excel.VerticalAlignment | "Top" | "Center" | "Bottom" | "Justify" | "Distributed"
 - uid: excel.Excel.Style.wrapText
   summary: >-
-    オブジェクト内のテキストを折り返すかを示します。
+    Microsoft Excel でオブジェクト内のテキストをラップするかどうかを示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

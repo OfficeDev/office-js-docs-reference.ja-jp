@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 08991fad028da6e48ea68476acc166458996d612
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 59c880ad2b9363bbe91a2388f7570f4b73182ffe
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996829"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725334"
 items:
 - uid: excel.Excel.WorksheetFreezePanes
   summary: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]'
@@ -17,6 +17,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.WorksheetFreezePanes.context
   - excel.Excel.WorksheetFreezePanes.freezeAt
   - excel.Excel.WorksheetFreezePanes.freezeColumns
   - excel.Excel.WorksheetFreezePanes.freezeRows
@@ -24,9 +25,21 @@ items:
   - excel.Excel.WorksheetFreezePanes.getLocationOrNullObject
   - excel.Excel.WorksheetFreezePanes.toJSON
   - excel.Excel.WorksheetFreezePanes.unfreeze
+- uid: excel.Excel.WorksheetFreezePanes.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.WorksheetFreezePanes.freezeAt
   summary: >-
-    作業中のワークシート ビューで保持されているセルを設定します。 最上部と左側のペインで凍結されることにあるセル範囲を指定したが対応しています。
+    アクティブなワークシート ビューに固定セルを設定します。 最上部と左側のペインで凍結されることにあるセル範囲を指定したが対応しています。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -48,7 +61,7 @@ items:
       - Range | string
 - uid: excel.Excel.WorksheetFreezePanes.freezeColumns
   summary: >-
-    埋め込みのワークシートの最初の列を固定します。
+    ワークシートの最初の列 (複数可) を所定の場所に固定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -70,7 +83,7 @@ items:
       - number
 - uid: excel.Excel.WorksheetFreezePanes.freezeRows
   summary: >-
-    上でワークシートの行を固定します。
+    ワークシートの最初の行 (複数可) を所定の場所に固定します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -92,7 +105,7 @@ items:
       - number
 - uid: excel.Excel.WorksheetFreezePanes.getLocation
   summary: >-
-    作業中のワークシート ビューで固定されたセルを表す範囲を取得します。 固定範囲は、最上部と左側のウィンドウで保持されているセルに対応します。
+    アクティブなワークシート ビュー内の固定セルを記述する範囲を取得します。 固定範囲は、最上部と左側のウィンドウで保持されているセルに対応します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -109,7 +122,7 @@ items:
       description: ''
 - uid: excel.Excel.WorksheetFreezePanes.getLocationOrNullObject
   summary: >-
-    作業中のワークシート ビューで固定されたセルを表す範囲を取得します。 固定範囲は、最上部と左側のウィンドウで保持されているセルに対応します。 固定されたウィンドウ枠がない場合は、null オブジェクトを返します。
+    アクティブなワークシート ビュー内の固定セルを記述する範囲を取得します。 固定範囲は、最上部と左側のウィンドウで保持されているセルに対応します。 固定されたウィンドウ枠がない場合は、null オブジェクトを返します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -125,6 +138,7 @@ items:
       - excel.Excel.Range
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const frozenRange = sheet.freezePanes.getLocationOrNullObject();\n    frozenRange.load(\"address\");\n\n    await context.sync();\n\n    if (frozenRange.isNullObject) {\n        OfficeHelpers.UI.notify(`The worksheet does not contain a frozen pane.`);\n    } else {\n        console.log(`The address of the frozen range (cells that are frozen in the top-and-left-most pane) is \"${frozenRange.address}\"`);\n    }\n});\n```"
 - uid: excel.Excel.WorksheetFreezePanes.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.WorksheetFreezePanes オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorksheetFreezePanesData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -141,7 +155,7 @@ items:
       description: ''
 - uid: excel.Excel.WorksheetFreezePanes.unfreeze
   summary: >-
-    ワークシート内のすべての固定されたウィンドウ枠を削除します。
+    ワークシートからすべての固定ウィンドウを削除します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

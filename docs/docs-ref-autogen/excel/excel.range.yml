@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0113e19fe75f6a676740174afd9f8d42681f847a
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: 8538878d7c5ae5deb7dd090b3760f6eaf146efed
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243465"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724963"
 items:
 - uid: excel.Excel.Range
   summary: >-
@@ -31,6 +31,7 @@ items:
   - excel.Excel.Range.columnHidden
   - excel.Excel.Range.columnIndex
   - excel.Excel.Range.conditionalFormats
+  - excel.Excel.Range.context
   - excel.Excel.Range.dataValidation
   - excel.Excel.Range.delete
   - excel.Excel.Range.format
@@ -86,7 +87,7 @@ items:
   - excel.Excel.Range.worksheet
 - uid: excel.Excel.Range.address
   summary: >-
-    A1 スタイルの範囲参照を表します。 アドレスの値には、シートの参照 (例:"Sheet1!A1: B4」)。 読み取りのみ可能です。
+    A1 スタイルの範囲参照を表します。 アドレスの値には、シートの参照 (例:"Sheet1!A1: B4」)。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -221,7 +222,7 @@ items:
       - number
 - uid: excel.Excel.Range.conditionalFormats
   summary: >-
-    範囲を交差する ConditionalFormats のコレクション。読み取り専用です。
+    範囲を交差する ConditionalFormats のコレクション。読み取り専用。
 
 
     \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -235,9 +236,21 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormatCollection
+- uid: excel.Excel.Range.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Range.dataValidation
   summary: >-
-    データ検証オブジェクトを返します。
+    dataValidation オブジェクトを返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -339,7 +352,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.getAbsoluteResizedRange
   summary: >-
-    行と列の指定した数値が、現在の範囲のオブジェクトと同じ左上のセルでは、Range オブジェクトを取得します。
+    現在の Range オブジェクトと左上のセルが同じで、指定した数の行と列を含む Range オブジェクトを取得します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -743,7 +756,7 @@ items:
       - number
 - uid: excel.Excel.Range.getSurroundingRegion
   summary: >-
-    この範囲の左上のセルの周囲の領域を表す Range オブジェクトを返します。 周囲の領域は、空白行と、この範囲を基準にして空白の列の任意の組み合わせで囲まれた範囲です。
+    指定された範囲の左上のセルを囲む領域を表す Range オブジェクトを返します。 周囲の領域は、この範囲に相対の空白の行と空白の列の任意の組み合わせで囲まれた範囲です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -876,7 +889,7 @@ items:
       - excel.Excel.InsertShiftDirection
 - uid: excel.Excel.Range.isEntireColumn
   summary: >-
-    現在の範囲が、全体の列である場合を表します。 読み取りのみ可能です。
+    現在の範囲が列全体であるかどうかを表します。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -892,7 +905,7 @@ items:
       - boolean
 - uid: excel.Excel.Range.isEntireRow
   summary: >-
-    現在の範囲が行全体である場合を表します。 読み取りのみ可能です。
+    現在の範囲が行全体であるかどうかを表します。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -927,7 +940,7 @@ items:
       - string | string[]
 - uid: excel.Excel.Range.merge
   summary: >-
-    範囲内のセルをワークシートの 1 つの領域にマージします。
+    範囲内のセルをワークシートの 1 つの領域に結合します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -965,7 +978,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.numberFormatLocal
   summary: >-
-    ユーザーの言語で文字列として Excel の特定の範囲の数値形式のコードを表します。 範囲に、ローカルの表示形式を設定する場合、値の引数は、1 つの値 (文字列) または 2 次元の配列のいずれかに使用できます。 引数が 1 つの値の場合は、範囲内のすべてのセルに適用されます。
+    ユーザーの言語で文字列として指定された範囲に対応する、Excel の数値形式コードを表します。 範囲に、ローカルの表示形式を設定する場合、値の引数は、1 つの値 (文字列) または 2 次元の配列のいずれかに使用できます。 引数が 1 つの値の場合は、範囲内のすべてのセルに適用されます。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1046,7 +1059,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Range.showCard
   summary: >-
-    値の豊富なコンテンツがある場合は、カードが、アクティブ セルを表示します。
+    アクティブ セルに多数の値が含まれる場合、そのセルのカードを表示します。
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1096,7 +1109,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Range.text
   summary: >-
-    指定された範囲のテキスト値。 テキスト値は、セルの幅に依存されます。 \#記号を Excel の UI で発生するための代替には、API によって返されるテキストの値は変わりません。 読み取りのみ可能です。
+    指定された範囲のテキスト値。 テキスト値は、セルの幅に依存されます。 \#記号を Excel の UI で発生するための代替には、API によって返されるテキストの値は変わりません。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1111,6 +1124,7 @@ items:
       type:
       - string[][]
 - uid: excel.Excel.Range.toJSON
+  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元 Excel.Range オブジェクトは、API のオブジェクトは、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.RangeData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
   fullName: toJSON
   langs:
@@ -1183,7 +1197,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.valueTypes
   summary: >-
-    各セルのデータの種類を表します。 読み取りのみ可能です。
+    各セルのデータの種類を表します。 読み取り専用です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
