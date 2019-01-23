@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0fa4fe0a847e831c0031308bfc2c10b4fbeff85d
-ms.sourcegitcommit: 4e15262bb3005b2f4ebb2756484e6a1b4e2379bd
+ms.openlocfilehash: 43c102c59b4cd29bf8ea0396d2e2b4ac6c1883ea
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "27770519"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29385526"
 items:
 - uid: outlook.Office.MessageCompose
   summary: >-
@@ -60,7 +60,7 @@ items:
 
 
     \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>\n\n<tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>\n\n<tr><td>Errors</td><td>AttachmentSizeExceeded の添付ファイルは、許可を超えています。</td></tr><tr><td></td><td>FileTypeNotSupported の添付ファイルは、許可されていない拡張子を持ちます。</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>\n\nだけでなく、この署名メソッドは次の署名もあります。\n\n`addFileAttachmentAsync(uri: string, attachmentName: string): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, options: AsyncContextOptions): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        showMessage(result.error);\n    } else {\n        showMessage(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```\n```javascript\n// The following example adds an image file as an inline attachment and\n// references the attachment in the message body.\nOffice.context.mailbox.item.addFileAttachmentAsync\n(\n    \"http://i.imgur.com/WJXklif.png\",\n    \"cute_bird.png\",\n    {\n        isInline: true\n    },\n    function (asyncResult) {\n        Office.context.mailbox.item.body.setAsync(\n            \"<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>\",\n            {\n                \"coercionType\": \"html\"\n            },\n            function (asyncResult) {\n                \n            });\n    });\n```"
+  remarks: "<table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>\n\n<tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>\n\n<tr><td>エラー</td><td>AttachmentSizeExceeded の添付ファイルは、許可を超えています。</td></tr><tr><td></td><td>FileTypeNotSupported の添付ファイルは、許可されていない拡張子を持ちます。</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>\n\nだけでなく、この署名メソッドは次の署名もあります。\n\n`addFileAttachmentAsync(uri: string, attachmentName: string): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, options: AsyncContextOptions): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        showMessage(result.error);\n    } else {\n        showMessage(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```\n```javascript\n// The following example adds an image file as an inline attachment and\n// references the attachment in the message body.\nOffice.context.mailbox.item.addFileAttachmentAsync\n(\n    \"http://i.imgur.com/WJXklif.png\",\n    \"cute_bird.png\",\n    {\n        isInline: true\n    },\n    function (asyncResult) {\n        Office.context.mailbox.item.body.setAsync(\n            \"<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>\",\n            {\n                \"coercionType\": \"html\"\n            },\n            function (asyncResult) {\n                \n            });\n    });\n```"
   name: addFileAttachmentAsync(uri, attachmentName, options, callback)
   fullName: addFileAttachmentAsync
   langs:
@@ -108,7 +108,7 @@ items:
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>予定の開催者</td></tr>
 
 
-    <tr><td>Errors</td><td>AttachmentSizeExceeded の添付ファイルは、許可を超えています。</td></tr><tr><td></td><td>FileTypeNotSupported の添付ファイルは、許可されていない拡張子を持ちます。</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
+    <tr><td>エラー</td><td>AttachmentSizeExceeded の添付ファイルは、許可を超えています。</td></tr><tr><td></td><td>FileTypeNotSupported の添付ファイルは、許可されていない拡張子を持ちます。</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
 
     ####例
 
@@ -230,7 +230,7 @@ items:
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>
 
 
-    <tr><td>Errors</td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
+    <tr><td>エラー</td><td>NumberOfAttachmentsExceeded ・ メッセージまたは予定には添付ファイルが多すぎます。</td></tr></table>
 
 
     だけでなくこの署名では、このメソッドは次の署名もあります。
@@ -830,7 +830,7 @@ items:
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
+    <tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
 
 
     だけでなく、この署名メソッドは次の署名もあります。
@@ -887,7 +887,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.MessageCompose.removeHandlerAsync
   summary: >-
-    サポートされているイベントのイベント ハンドラーを削除します。
+    サポートされているイベントの種類のイベント ハンドラーを削除します。
 
 
     現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。 プレビューでは、`Office.EventType.AttachmentsChanged`もサポートします。
@@ -904,14 +904,14 @@ items:
     だけでなくこの署名では、メソッドは次のシグネチャもあります。
 
 
-    `removeHandlerAsync(eventType:EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
-  name: removeHandlerAsync(eventType, handler, options, callback)
+    `removeHandlerAsync(eventType:EventType, callback?: (result: AsyncResult<void>) => void): void;`
+  name: removeHandlerAsync(eventType, options, callback)
   fullName: removeHandlerAsync
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'removeHandlerAsync(eventType:EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType:EventType, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -921,10 +921,6 @@ items:
       description: ハンドラーを取り消すイベント。
       type:
       - EventType
-    - id: handler
-      description: イベントを処理する関数。 関数は、オブジェクト リテラルは、1 つのパラメーターを受け入れる必要があります。 パラメーターの [種類] プロパティには、removeHandlerAsync に渡されるイベントの種類のパラメーターが一致します。
-      type:
-      - any
     - id: options
       description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
       type:
@@ -964,7 +960,7 @@ items:
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
+    <tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
 
 
     だけでなく、この署名メソッドは次の署名もあります。
@@ -1070,7 +1066,7 @@ items:
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
+    <tr><td>エラー</td><td>InvalidAttachmentId - 添付ファイルの識別子は存在しません。</td></tr></table>
 
 
     だけでなく、この署名メソッドは次の署名もあります。

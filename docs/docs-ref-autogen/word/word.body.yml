@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0c7c0ba26034c7ca935a47ace83ad05366419cd7
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 9a863fd73f7a3a8af89c759bfa08fb85bf339025
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995404"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29385386"
 items:
 - uid: word.Word.Body
   summary: >-
@@ -23,6 +23,7 @@ items:
   children:
   - word.Word.Body.clear
   - word.Word.Body.contentControls
+  - word.Word.Body.context
   - word.Word.Body.font
   - word.Word.Body.getHtml
   - word.Word.Body.getOoxml
@@ -89,6 +90,18 @@ items:
     return:
       type:
       - word.Word.ContentControlCollection
+- uid: word.Word.Body.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: word.Word.Body.font
   summary: >-
     本文のテキスト形式を取得します。これを使用して、フォント名、サイズ、色、およびその他のプロパティを取得および設定します。読み取り専用。
@@ -107,7 +120,7 @@ items:
       - word.Word.Font
 - uid: word.Word.Body.getHtml
   summary: >-
-    本文のオブジェクトの HTML 表記を取得します。
+    ボディ オブジェクトの HTML 表記を取得します。 Web ページまたは HTML ビューアーで表示されると、書式設定されますの文書の書式設定の閉じるが、正確ではなく一致。 このメソッドは、別のプラットフォーム (Windows、Mac、Word のオンラインなど) で、同じドキュメントの正確な同じ HTML を返しません。 使用する必要があります正確な再現性、またはコンシステンシ ・ プラットフォーム間で、`Body.getOoxml()`と、返された XML を HTML に変換します。
 
 
     \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -163,7 +176,7 @@ items:
       - word.Word.RangeLocation
 - uid: word.Word.Body.inlinePictures
   summary: >-
-    本文内には、InlinePicture オブジェクトのコレクションを取得します。 コレクションでは、フリーのイメージは含まれません。 読み取り専用。
+    本文内には、InlinePicture オブジェクトのコレクションを取得します。 コレクションでは、フリーのイメージは含まれません。 読み取り専用です。
 
 
     \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -662,7 +675,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a commmand to search the document.\n    var searchResults = context.document.body.search('video', {matchCase: false});\n\n    // Queue a commmand to load the results.\n    context.load(searchResults, 'text, font');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        var results = 'Found count: ' + searchResults.items.length +\n                      '; we highlighted the results.';\n\n        // Queue a command to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n          searchResults.items[i].font.color = '#FF0000'    // Change color to Red\n          searchResults.items[i].font.highlightColor = '#FFFF00';\n          searchResults.items[i].font.bold = true;\n        }\n\n        // Synchronize the document state by executing the queued commands,\n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(results);\n        });\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Word-Add-in-DocumentAssembly sample provides another example of how to search a document.\n// https://github.com/OfficeDev/Word-Add-in-DocumentAssembly\n```\n```typescript\nawait Word.run(async (context) => {\n    let results = context.document.body.search(\"Online\");\n    results.load(\"font/highlightColor\");\n\n    await context.sync();\n\n    // Let's traverse the search results... and highlight...\n    for (let i = 0; i < results.items.length; i++) {\n        results.items[i].font.highlightColor = \"yellow\";\n    }\n\n    await context.sync();\n});\n```\n```typescript\nawait Word.run(async (context) => {\n    // Check out how wildcard expression are built, also use the second parameter of the search method to include search modes (i.e. we are using wildcards).\n    let results = context.document.body.search(\"$*.[0-9][0-9]\", { matchWildcards: true });\n    results.load(\"font/highlightColor, font/color\");\n\n    await context.sync();\n\n    // Let's traverse the search results... and highlight...\n    for (let i = 0; i < results.items.length; i++) {\n        results.items[i].font.highlightColor = \"red\";\n        results.items[i].font.color = \"white\";\n    }\n\n    await context.sync();\n});\n```"
     parameters:
     - id: searchText
-      description: 必須。 検索するテキスト。 最大 255 文字まで使用できます。
+      description: 必須です。 検索するテキスト。 最大 255 文字まで使用できます。
       type:
       - string
     - id: searchOptions

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 533959bd84b874bdcb9ec273179250f75bfd91ca
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 009ce2031f68d04dfc98399f52828ee8944e2f3f
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26221263"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29384560"
 items:
 - uid: word
   name: word
@@ -32,6 +32,7 @@ items:
   - word.Word.DocumentProperties
   - word.Word.DocumentPropertyType
   - word.Word.ErrorCodes
+  - word.Word.EventType
   - word.Word.FileContentFormat
   - word.Word.Font
   - word.Word.HeaderFooterType
@@ -124,23 +125,27 @@ items:
   - word.Word.UnderlineType
   - word.Word.VerticalAlignment
 - uid: word.Word.run
-  summary: 以前に作成された API のオブジェクトの RequestContext を使用して、Word のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。
-  name: run(objects, batch)
+  summary: 新しい RequestContext を使用して、Word のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
+  remarks: >-
+    だけでなく、この署名メソッドは次のシグネチャでは、以前に作成したオブジェクトの要求コンテキストの使用を再開することもあります。
+
+
+    実行<T>(オブジェクト: OfficeExtension.ClientObject、バッチ: (コンテキスト: Word.RequestContext) =&gt;約束<T>): 約束<T>です。
+
+
+    実行<T>(オブジェクト: OfficeExtension.ClientObject\[\]、バッチ: (コンテキスト: Word.RequestContext) =&gt;約束<T>): 約束<T>です。
+  name: run(batch)
   fullName: Word.run
   langs:
   - typeScript
   type: function
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
+    content: 'export function run<T>(batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
     return:
       type:
       - Promise<T>
       description: ''
     parameters:
-    - id: objects
-      description: 以前に作成された API のオブジェクトの配列。 配列は、同じコンテキストを共有するすべてのオブジェクトかどうかを確認する検証されます。 バッチには、この共有 RequestContext、"context.sync()"でこれらのオブジェクトに適用される変更を集荷することを意味を使用します。
-      type:
-      - OfficeExtension.ClientObject[]
     - id: batch
       description: RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 コンテキスト パラメーターには、Word アプリケーションへの要求が容易になります。 Office アドインで、Word アプリケーションが 2 つの異なるプロセスで実行してからの RequestContext は、アドインから、Word オブジェクト モデルにアクセスするために必要です。
       type:
@@ -184,6 +189,8 @@ references:
   name: Word.DocumentPropertyType
 - uid: word.Word.ErrorCodes
   name: Word.ErrorCodes
+- uid: word.Word.EventType
+  name: Word.EventType
 - uid: word.Word.FileContentFormat
   name: Word.FileContentFormat
 - uid: word.Word.Font

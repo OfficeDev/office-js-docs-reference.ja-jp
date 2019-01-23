@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f189c9030bc535ddbde604cbb63514df3381b33c
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: bd19a46b78fece884d6372cbc3192f3767fc231f
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996607"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29384784"
 items:
 - uid: word.Word.Section
   summary: >-
@@ -22,6 +22,7 @@ items:
   package: word
   children:
   - word.Word.Section.body
+  - word.Word.Section.context
   - word.Word.Section.getFooter
   - word.Word.Section.getHeader
   - word.Word.Section.getNext
@@ -32,7 +33,7 @@ items:
   - word.Word.Section.untrack
 - uid: word.Word.Section.body
   summary: >-
-    セクションの本文のオブジェクトを取得します。 これには、ヘッダーとフッターとその他のセクションのメタデータは含まれません。 読み取り専用。
+    セクションの本文のオブジェクトを取得します。 これには、ヘッダーとフッターとその他のセクションのメタデータは含まれません。 読み取り専用です。
 
 
     \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -46,6 +47,18 @@ items:
     return:
       type:
       - Word.Body
+- uid: word.Word.Section.context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: word.Word.Section.getFooter
   summary: >-
     セクションのフッターの 1 つを取得します。
@@ -65,7 +78,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a commmand to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary footer of the first section. \n        // Note that the footer is a body object.\n        var myFooter = mySections.items[0].getFooter(\"primary\");\n        \n        // Queue a command to insert text at the end of the footer.\n        myFooter.insertText(\"This is a footer.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myFooter.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a footer to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getFooter(\"Primary\")\n    .insertParagraph(\"This is a footer\", \"End\");\n\n  await context.sync();\n});\n```"
     parameters:
     - id: type
-      description: "必須。 フッターを返すの型。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
+      description: "必須です。 フッターを返すの型。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
       type:
       - word.Word.HeaderFooterType
 - uid: word.Word.Section.getHeader
@@ -87,7 +100,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a commmand to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary header of the first section. \n        // Note that the header is a body object.\n        var myHeader = mySections.items[0].getHeader(\"primary\");\n        \n        // Queue a command to insert text at the end of the header.\n        myHeader.insertText(\"This is a header.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myHeader.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a header to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getHeader(\"Primary\")\n    .insertParagraph(\"This is a header\", \"End\");\n\n  await context.sync();\n});\n```"
     parameters:
     - id: type
-      description: "必須。 返されるヘッダーの種類。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
+      description: "必須です。 返されるヘッダーの種類。 値を指定できます: '主'、'FirstPage'、または 'EvenPages' です。"
       type:
       - word.Word.HeaderFooterType
 - uid: word.Word.Section.getNext
