@@ -1,13 +1,13 @@
-# <a name="office-javascript-api-reference"></a>Office の JavaScript API のリファレンス
+# <a name="office-javascript-api-reference"></a>Office JavaScript API リファレンス
 
-Office 用の JavaScript API を使用すると、Office ホスト アプリケーションのオブジェクト モデルと対話する web アプリケーションを作成できます。 詳細については、クラス、メソッド、およびその他の種類の Office アドインを作成するために利用可能なこのセクションを使用します。
+JavaScript API for Office を使用すると、Office ホスト アプリケーションのオブジェクト モデルと対話する Web アプリケーションを作成できます。 詳細については、クラス、メソッド、およびその他の種類の Office アドインを作成するために利用可能なこのセクションを使用します。
 
 - [Excel](https://docs.microsoft.com/javascript/api/excel?view=office-js)
 - [OneNote](https://docs.microsoft.com/javascript/api/onenote?view=office-js)
 - [Outlook](https://docs.microsoft.com/javascript/api/outlook?view=office-js)
 - [Visio](https://docs.microsoft.com/javascript/api/visio?view=office-js)
 - [Word](https://docs.microsoft.com/javascript/api/word?view=office-js)
-- [共通の API](https://docs.microsoft.com/javascript/api/office?view=office-js)
+- [共通 API](https://docs.microsoft.com/javascript/api/office?view=office-js)
 
 ## <a name="see-also"></a>関連項目
 
