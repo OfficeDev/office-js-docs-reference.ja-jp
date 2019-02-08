@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b25f9a9508a221fb18c36da566c0523ce1271a82
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: a6fd797ad1fa718951fbca172f25efde753c2a5e
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724508"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769758"
 items:
 - uid: excel.Excel.PresetCriteriaConditionalFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.PresetCriteriaConditionalFormat.format
   - excel.Excel.PresetCriteriaConditionalFormat.load
   - excel.Excel.PresetCriteriaConditionalFormat.rule
+  - excel.Excel.PresetCriteriaConditionalFormat.set
   - excel.Excel.PresetCriteriaConditionalFormat.toJSON
 - uid: excel.Excel.PresetCriteriaConditionalFormat.context
   summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
@@ -97,6 +98,33 @@ items:
       type:
       - excel.Excel.ConditionalPresetCriteriaRule
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.presetCriteria);\n    conditionalFormat.preset.format.font.color = \"white\";\n    conditionalFormat.preset.rule = { criterion: Excel.ConditionalFormatPresetCriterion.oneStdDevAboveAverage };\n\n    await context.sync();\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT(\"RC[-1]\",0),TRUE)';\n    conditionalFormat.custom.format.font.color = \"green\";\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PresetCriteriaConditionalFormat.set
+  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Excel.PresetCriteriaConditionalFormat): void`
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.PresetCriteriaConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
+      type:
+      - Interfaces.PresetCriteriaConditionalFormatUpdateData
+    - id: options
+      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.PresetCriteriaConditionalFormat.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.PresetCriteriaConditionalFormat オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.PresetCriteriaConditionalFormatData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()

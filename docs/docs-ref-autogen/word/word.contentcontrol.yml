@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4ec604434ffbae02c99cb4a027cdec774427dfc8
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 304334e90c787f73e8e1b37719ab4fca33a25ac5
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385393"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769723"
 items:
 - uid: word.Word.ContentControl
   summary: >-
@@ -58,6 +58,7 @@ items:
   - word.Word.ContentControl.removeWhenEdited
   - word.Word.ContentControl.search
   - word.Word.ContentControl.select
+  - word.Word.ContentControl.set
   - word.Word.ContentControl.split
   - word.Word.ContentControl.style
   - word.Word.ContentControl.styleBuiltIn
@@ -808,6 +809,74 @@ items:
       description: 省略可能。 選択モードは、'Select'、'Start'、'End' のいずれかになります。'Select' が既定値です。
       type:
       - Word.SelectionMode
+- uid: word.Word.ContentControl.set
+  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Word.ContentControl): void`
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Adds title and colors to odd and even content controls and changes their appearance.
+
+    await Word.run(async (context) => {
+        // Gets the complete sentence  (as range) associated with the insertion point.
+        let evenContentControls = context.document.contentControls.getByTag("even");
+        let oddContentControls = context.document.contentControls.getByTag("odd");
+        evenContentControls.load("color,title,appearance");
+        oddContentControls.load("color,title,appearance");
+
+        await context.sync();
+
+        for (let i = 0; i < evenContentControls.items.length; i++) {
+            // Change a few properties and append a paragraph
+            evenContentControls.items[i].set({
+                color: 'red',
+                title: 'Odd ContentControl #' + (i + 1),
+                appearance: 'Tags'
+            });
+            evenContentControls.items[i].insertParagraph("This is an odd content control", "End");
+        }
+
+        for (let j = 0; j < oddContentControls.items.length; j++) {
+            // Change a few properties and append a paragraph
+            oddContentControls.items[j].set({
+                color: 'green',
+                title: 'Even ContentControl #' + (j + 1),
+                appearance: 'Tags'
+            });
+            oddContentControls.items[j].insertHtml("This is an <b>even</b> content control", "End");
+        }
+
+        await context.sync();
+    });
+
+    ```
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.ContentControlUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
+      type:
+      - Interfaces.ContentControlUpdateData
+    - id: options
+      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: word.Word.ContentControl.split
   summary: >-
     区切り記号を使用して、コンテンツ コントロールを子の範囲に分割します。

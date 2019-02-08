@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b263f2178c3a2b053f11b16b93eb694a2ff48b09
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: d9b768001e0e026c4a8ea3b0fad6f075042235ed
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385232"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769800"
 items:
 - uid: word.Word.Paragraph
   summary: >-
@@ -70,6 +70,7 @@ items:
   - word.Word.Paragraph.rightIndent
   - word.Word.Paragraph.search
   - word.Word.Paragraph.select
+  - word.Word.Paragraph.set
   - word.Word.Paragraph.spaceAfter
   - word.Word.Paragraph.spaceBefore
   - word.Word.Paragraph.split
@@ -1032,6 +1033,69 @@ items:
       description: 省略可能。 選択モードは、'Select'、'Start'、'End' のいずれかになります。'Select' が既定値です。
       type:
       - Word.SelectionMode
+- uid: word.Word.Paragraph.set
+  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Word.Paragraph): void`
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await Word.run(async (context) => {
+      const paragraph = context.document.body.paragraphs.getFirst();
+      paragraph.set({
+        leftIndent: 30,
+        font: {
+          bold: true,
+          color: "red"
+        }
+      });
+
+      await context.sync();
+    });
+
+    ```
+
+    ```typescript
+
+    await Word.run(async (context) => {
+      const firstParagraph = context.document.body.paragraphs.getFirst();
+      const secondParagraph = firstParagraph.getNext();
+      firstParagraph.load("text, font/color, font/bold, leftIndent");
+
+      await context.sync();
+
+      secondParagraph.set(firstParagraph);
+
+      await context.sync();
+    });
+
+    ```
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.ParagraphUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
+      type:
+      - Interfaces.ParagraphUpdateData
+    - id: options
+      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: word.Word.Paragraph.spaceAfter
   summary: >-
     段落後の間隔をポイント数単位で取得または設定します。
