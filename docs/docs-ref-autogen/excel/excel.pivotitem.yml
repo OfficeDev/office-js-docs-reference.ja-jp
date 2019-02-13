@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0659b8f3d10250c765d2ce623c11dc8af055aa58
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 800a8fda4c5ea5e2efa609fc764d386516c06c63
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769408"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980500"
 items:
 - uid: excel.Excel.PivotItem
   summary: >-
@@ -25,8 +25,11 @@ items:
   - excel.Excel.PivotItem.id
   - excel.Excel.PivotItem.isExpanded
   - excel.Excel.PivotItem.load
+  - excel.Excel.PivotItem.load_1
+  - excel.Excel.PivotItem.load_2
   - excel.Excel.PivotItem.name
   - excel.Excel.PivotItem.set
+  - excel.Excel.PivotItem.set_1
   - excel.Excel.PivotItem.toJSON
   - excel.Excel.PivotItem.visible
 - uid: excel.Excel.PivotItem.context
@@ -79,26 +82,65 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.PivotItem`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.PivotItem`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotItem`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.PivotItem;'
+    content: 'load(option?: Excel.Interfaces.PivotItemLoadOptions): Excel.PivotItem;'
     return:
       type:
       - excel.Excel.PivotItem
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.PivotItemLoadOptions
+- uid: excel.Excel.PivotItem.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotItem;'
+    return:
+      type:
+      - excel.Excel.PivotItem
+      description: ''
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.PivotItem.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.PivotItem;'
+    return:
+      type:
+      - excel.Excel.PivotItem
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.PivotItem.name
   summary: >-
     PivotItem の名前。
@@ -123,7 +165,7 @@ items:
 
     `set(properties: Excel.PivotItem): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -142,10 +184,28 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.PivotItem.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.PivotItem): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.PivotItem
 - uid: excel.Excel.PivotItem.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.PivotItem オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.PivotItemData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

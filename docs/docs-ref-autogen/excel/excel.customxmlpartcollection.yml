@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 98a010a342e422aa0938312a116338b0e402361a
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: ddb5e3ab5990ec33d169d01228b3b915d3438c3b
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724319"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981165"
 items:
 - uid: excel.Excel.CustomXmlPartCollection
   summary: >-
@@ -29,6 +29,8 @@ items:
   - excel.Excel.CustomXmlPartCollection.getItemOrNullObject
   - excel.Excel.CustomXmlPartCollection.items
   - excel.Excel.CustomXmlPartCollection.load
+  - excel.Excel.CustomXmlPartCollection.load_1
+  - excel.Excel.CustomXmlPartCollection.load_2
   - excel.Excel.CustomXmlPartCollection.toJSON
 - uid: excel.Excel.CustomXmlPartCollection.add
   summary: >-
@@ -37,7 +39,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(xml)
-  fullName: add
+  fullName: add(xml)
   langs:
   - typeScript
   type: method
@@ -71,7 +73,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getByNamespace(namespaceUri)
-  fullName: getByNamespace
+  fullName: getByNamespace(namespaceUri)
   langs:
   - typeScript
   type: method
@@ -93,7 +95,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -110,7 +112,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(id)
-  fullName: getItem
+  fullName: getItem(id)
   langs:
   - typeScript
   type: method
@@ -132,7 +134,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(id)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(id)
   langs:
   - typeScript
   type: method
@@ -165,30 +167,68 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.CustomXmlPartCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPartCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPartCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.CustomXmlPartCollection;'
+    content: 'load(option?: Excel.Interfaces.CustomXmlPartCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomXmlPartCollection;'
     return:
       type:
       - excel.Excel.CustomXmlPartCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.CustomXmlPartCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.CustomXmlPartCollection.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.CustomXmlPartCollection;'
+    return:
+      type:
+      - excel.Excel.CustomXmlPartCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.CustomXmlPartCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.CustomXmlPartCollection;'
+    return:
+      type:
+      - excel.Excel.CustomXmlPartCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.CustomXmlPartCollection.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.CustomXmlPartCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.CustomXmlPartCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 82334b5a01b7b254342381e4f5e3f8b8c90554e5
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 09ae4be877fcadf8d226394758f6569dff40a618
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724914"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980290"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
@@ -31,6 +31,8 @@ items:
   - excel.Excel.WorksheetCollection.getLast
   - excel.Excel.WorksheetCollection.items
   - excel.Excel.WorksheetCollection.load
+  - excel.Excel.WorksheetCollection.load_1
+  - excel.Excel.WorksheetCollection.load_2
   - excel.Excel.WorksheetCollection.onActivated
   - excel.Excel.WorksheetCollection.onAdded
   - excel.Excel.WorksheetCollection.onCalculated
@@ -44,7 +46,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(name)
-  fullName: add
+  fullName: add(name)
   langs:
   - typeScript
   type: method
@@ -78,7 +80,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveWorksheet()
-  fullName: getActiveWorksheet
+  fullName: getActiveWorksheet()
   langs:
   - typeScript
   type: method
@@ -95,7 +97,7 @@ items:
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount(visibleOnly)
-  fullName: getCount
+  fullName: getCount(visibleOnly)
   langs:
   - typeScript
   type: method
@@ -117,7 +119,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getFirst(visibleOnly)
-  fullName: getFirst
+  fullName: getFirst(visibleOnly)
   langs:
   - typeScript
   type: method
@@ -139,7 +141,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
-  fullName: getItem
+  fullName: getItem(key)
   langs:
   - typeScript
   type: method
@@ -161,7 +163,7 @@ items:
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(key)
   langs:
   - typeScript
   type: method
@@ -183,7 +185,7 @@ items:
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getLast(visibleOnly)
-  fullName: getLast
+  fullName: getLast(visibleOnly)
   langs:
   - typeScript
   type: method
@@ -212,23 +214,68 @@ items:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): Excel.WorksheetCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.WorksheetCollection;'
+    content: 'load(option?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
     return:
       type:
       - excel.Excel.WorksheetCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.WorksheetCollection.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
+    return:
+      type:
+      - excel.Excel.WorksheetCollection
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.WorksheetCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
+    return:
+      type:
+      - excel.Excel.WorksheetCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.WorksheetCollection.onActivated
   summary: >-
     ブック内の任意のワークシートがアクティブになったときに発生します。
@@ -315,7 +362,7 @@ items:
 - uid: excel.Excel.WorksheetCollection.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.WorksheetCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorksheetCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
