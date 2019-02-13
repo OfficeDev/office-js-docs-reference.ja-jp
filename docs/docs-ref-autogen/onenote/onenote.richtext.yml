@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bcd243c523da2752210925c2d288c65af609543b
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 2aa063637350bf669966d58aeee1253bce7edd21
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385491"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975614"
 items:
 - uid: onenote.OneNote.RichText
   summary: >-
@@ -26,6 +26,8 @@ items:
   - onenote.OneNote.RichText.id
   - onenote.OneNote.RichText.languageId
   - onenote.OneNote.RichText.load
+  - onenote.OneNote.RichText.load_1
+  - onenote.OneNote.RichText.load_2
   - onenote.OneNote.RichText.paragraph
   - onenote.OneNote.RichText.text
   - onenote.OneNote.RichText.toJSON
@@ -50,7 +52,7 @@ items:
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getHtml()
-  fullName: getHtml
+  fullName: getHtml()
   langs:
   - typeScript
   type: method
@@ -94,23 +96,69 @@ items:
       - string
 - uid: onenote.OneNote.RichText.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): OneNote.RichText`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n});\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): OneNote.RichText`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.RichText`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.RichText;'
+    content: 'load(option?: OneNote.Interfaces.RichTextLoadOptions): OneNote.RichText;'
     return:
       type:
       - onenote.OneNote.RichText
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.RichTextLoadOptions
+- uid: onenote.OneNote.RichText.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.RichText;'
+    return:
+      type:
+      - onenote.OneNote.RichText
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n});\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: onenote.OneNote.RichText.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.RichText;'
+    return:
+      type:
+      - onenote.OneNote.RichText
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.RichText.paragraph
   summary: >-
     RichText オブジェクトを含む Paragraph オブジェクトを取得します。読み取り専用です。
@@ -146,7 +194,7 @@ items:
 - uid: onenote.OneNote.RichText.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の OneNote.RichText オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`OneNote.Interfaces.RichTextData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -159,7 +207,7 @@ items:
 - uid: onenote.OneNote.RichText.track
   summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -172,7 +220,7 @@ items:
 - uid: onenote.OneNote.RichText.untrack
   summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

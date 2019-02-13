@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4e64a71585b6ef6d6a6386accce768af54c06221
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: ccbdcb17c336de846eb03a2ca9cf7d9211b63039
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769716"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974949"
 items:
 - uid: excel.Excel.ChartAxis
   summary: >-
@@ -33,6 +33,8 @@ items:
   - excel.Excel.ChartAxis.isBetweenCategories
   - excel.Excel.ChartAxis.left
   - excel.Excel.ChartAxis.load
+  - excel.Excel.ChartAxis.load_1
+  - excel.Excel.ChartAxis.load_2
   - excel.Excel.ChartAxis.logBase
   - excel.Excel.ChartAxis.majorGridlines
   - excel.Excel.ChartAxis.majorTickMark
@@ -52,6 +54,7 @@ items:
   - excel.Excel.ChartAxis.reversePlotOrder
   - excel.Excel.ChartAxis.scaleType
   - excel.Excel.ChartAxis.set
+  - excel.Excel.ChartAxis.set_1
   - excel.Excel.ChartAxis.setCategoryNames
   - excel.Excel.ChartAxis.setCustomDisplayUnit
   - excel.Excel.ChartAxis.setPositionAt
@@ -241,23 +244,69 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): Excel.ChartAxis`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartAxis;'
+    content: 'load(option?: Excel.Interfaces.ChartAxisLoadOptions): Excel.ChartAxis;'
     return:
       type:
       - excel.Excel.ChartAxis
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartAxisLoadOptions
+- uid: excel.Excel.ChartAxis.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.ChartAxis.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartAxis.logBase
   summary: >-
     対数目盛りを使用する場合の対数の底を表します。
@@ -554,7 +603,7 @@ items:
 
     `set(properties: Excel.ChartAxis): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -573,6 +622,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartAxis.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartAxis): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartAxis
 - uid: excel.Excel.ChartAxis.setCategoryNames
   summary: >-
     指定した軸のすべてのカテゴリ名を設定します。
@@ -580,7 +647,7 @@ items:
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setCategoryNames(sourceData)
-  fullName: setCategoryNames
+  fullName: setCategoryNames(sourceData)
   langs:
   - typeScript
   type: method
@@ -602,7 +669,7 @@ items:
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setCustomDisplayUnit(value)
-  fullName: setCustomDisplayUnit
+  fullName: setCustomDisplayUnit(value)
   langs:
   - typeScript
   type: method
@@ -624,7 +691,7 @@ items:
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setPositionAt(value)
-  fullName: setPositionAt
+  fullName: setPositionAt(value)
   langs:
   - typeScript
   type: method
@@ -739,7 +806,7 @@ items:
 - uid: excel.Excel.ChartAxis.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.ChartAxis オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartAxisData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee32694f520b1c3c78b0946823331d65deca536
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 4eaf88574524ad44b5432f746afe09404b9019a7
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769674"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973297"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -30,6 +30,8 @@ items:
   - excel.Excel.Workbook.getActiveCell
   - excel.Excel.Workbook.getSelectedRange
   - excel.Excel.Workbook.load
+  - excel.Excel.Workbook.load_1
+  - excel.Excel.Workbook.load_2
   - excel.Excel.Workbook.name
   - excel.Excel.Workbook.names
   - excel.Excel.Workbook.onSelectionChanged
@@ -38,6 +40,7 @@ items:
   - excel.Excel.Workbook.protection
   - excel.Excel.Workbook.readOnly
   - excel.Excel.Workbook.set
+  - excel.Excel.Workbook.set_1
   - excel.Excel.Workbook.settings
   - excel.Excel.Workbook.styles
   - excel.Excel.Workbook.tables
@@ -142,7 +145,7 @@ items:
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveCell()
-  fullName: getActiveCell
+  fullName: getActiveCell()
   langs:
   - typeScript
   type: method
@@ -159,7 +162,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getSelectedRange()
-  fullName: getSelectedRange
+  fullName: getSelectedRange()
   langs:
   - typeScript
   type: method
@@ -175,26 +178,65 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.Workbook`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.Workbook`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Workbook;'
+    content: 'load(option?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
     return:
       type:
       - excel.Excel.Workbook
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.WorkbookLoadOptions
+- uid: excel.Excel.Workbook.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.Workbook.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Workbook.name
   summary: >-
     ブックの名前を取得します。 読み取り専用です。
@@ -316,7 +358,7 @@ items:
 
     `set(properties: Excel.Workbook): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -335,6 +377,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Workbook.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Workbook): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Workbook
 - uid: excel.Excel.Workbook.settings
   summary: >-
     ブックに関連付けられている Setting のコレクションを表します。読み取り専用。
@@ -386,7 +446,7 @@ items:
 - uid: excel.Excel.Workbook.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.Workbook オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorkbookData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

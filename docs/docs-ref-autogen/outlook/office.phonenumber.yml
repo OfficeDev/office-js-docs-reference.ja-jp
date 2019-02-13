@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 06847c231ec856348c9ea81fd3dbefc6fb05e05d
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: 1689170654c7ea0e388be103d2f9f8e5b9cca98f
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26298394"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975243"
 items:
 - uid: outlook.Office.PhoneNumber
   summary: >-
@@ -19,7 +19,28 @@ items:
     <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    var item = Office.context.mailbox.item;
+
+    // Get an array of strings that represent phone numbers in the current item's body.
+
+    var phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);
+
+    console.log("There are " + phoneNumbers.length + " phone numbers.")
+
+    phoneNumbers.forEach(function (phoneNumber) {
+        console.log("Phone number: " + JSON.stringify(phoneNumber.phoneString));
+        console.log("Type: " + JSON.stringify(phoneNumber.type));
+        console.log("Source text: " + JSON.stringify(phoneNumber.originalPhoneString));
+    });
+
+    ```
   name: Office.PhoneNumber
   fullName: Office.PhoneNumber
   langs:

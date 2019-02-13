@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5ab6b194cae39f41f54e507d96a28dcd906eeb9c
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 01fbaa2eea367ce7f41dfe8966d9f468a77f73b5
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26222943"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979800"
 items:
 - uid: visio
   name: visio
@@ -26,33 +26,49 @@ items:
   - visio.Visio.Hyperlink
   - visio.Visio.HyperlinkCollection
   - visio.Visio.Interfaces.ApplicationData
+  - visio.Visio.Interfaces.ApplicationLoadOptions
   - visio.Visio.Interfaces.ApplicationUpdateData
+  - visio.Visio.Interfaces.CollectionLoadOptions
   - visio.Visio.Interfaces.CommentCollectionData
+  - visio.Visio.Interfaces.CommentCollectionLoadOptions
   - visio.Visio.Interfaces.CommentCollectionUpdateData
   - visio.Visio.Interfaces.CommentData
+  - visio.Visio.Interfaces.CommentLoadOptions
   - visio.Visio.Interfaces.CommentUpdateData
   - visio.Visio.Interfaces.DocumentData
+  - visio.Visio.Interfaces.DocumentLoadOptions
   - visio.Visio.Interfaces.DocumentUpdateData
   - visio.Visio.Interfaces.DocumentViewData
+  - visio.Visio.Interfaces.DocumentViewLoadOptions
   - visio.Visio.Interfaces.DocumentViewUpdateData
   - visio.Visio.Interfaces.HyperlinkCollectionData
+  - visio.Visio.Interfaces.HyperlinkCollectionLoadOptions
   - visio.Visio.Interfaces.HyperlinkCollectionUpdateData
   - visio.Visio.Interfaces.HyperlinkData
+  - visio.Visio.Interfaces.HyperlinkLoadOptions
   - visio.Visio.Interfaces.PageCollectionData
+  - visio.Visio.Interfaces.PageCollectionLoadOptions
   - visio.Visio.Interfaces.PageCollectionUpdateData
   - visio.Visio.Interfaces.PageData
+  - visio.Visio.Interfaces.PageLoadOptions
   - visio.Visio.Interfaces.PageUpdateData
   - visio.Visio.Interfaces.PageViewData
+  - visio.Visio.Interfaces.PageViewLoadOptions
   - visio.Visio.Interfaces.PageViewUpdateData
   - visio.Visio.Interfaces.SelectionData
   - visio.Visio.Interfaces.ShapeCollectionData
+  - visio.Visio.Interfaces.ShapeCollectionLoadOptions
   - visio.Visio.Interfaces.ShapeCollectionUpdateData
   - visio.Visio.Interfaces.ShapeData
   - visio.Visio.Interfaces.ShapeDataItemCollectionData
+  - visio.Visio.Interfaces.ShapeDataItemCollectionLoadOptions
   - visio.Visio.Interfaces.ShapeDataItemCollectionUpdateData
   - visio.Visio.Interfaces.ShapeDataItemData
+  - visio.Visio.Interfaces.ShapeDataItemLoadOptions
+  - visio.Visio.Interfaces.ShapeLoadOptions
   - visio.Visio.Interfaces.ShapeUpdateData
   - visio.Visio.Interfaces.ShapeViewData
+  - visio.Visio.Interfaces.ShapeViewLoadOptions
   - visio.Visio.Interfaces.ShapeViewUpdateData
   - visio.Visio.OverlayHorizontalAlignment
   - visio.Visio.OverlayType
@@ -65,6 +81,9 @@ items:
   - visio.Visio.Position
   - visio.Visio.RequestContext
   - visio.Visio.run
+  - visio.Visio.run_1
+  - visio.Visio.run_2
+  - visio.Visio.run_3
   - visio.Visio.Selection
   - visio.Visio.SelectionChangedEventArgs
   - visio.Visio.Shape
@@ -76,6 +95,68 @@ items:
   - visio.Visio.ShapeView
   - visio.Visio.ToolBarType
 - uid: visio.Visio.run
+  summary: 新しい要求のコンテキストを使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
+  name: Visio.run
+  fullName: Visio.run
+  langs:
+  - typeScript
+  type: function
+  syntax:
+    content: 'export function run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
+    return:
+      type:
+      - Promise<T>
+      description: ''
+    parameters:
+    - id: batch
+      description: Visio.RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 コンテキスト パラメーターには、Visio アプリケーションへの要求が容易になります。 Office アドイン、Visio アプリケーションが 2 つの異なるプロセスで実行してからは、要求のコンテキストは、アドインから Visio のオブジェクト モデルにアクセスするために必要があります。
+      type:
+      - '(context: Visio.RequestContext) => Promise<T>'
+- uid: visio.Visio.run_1
+  summary: 要求オブジェクトのコンテキストを以前に作成された API を使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。
+  name: Visio.run_1
+  fullName: Visio.run_1
+  langs:
+  - typeScript
+  type: function
+  syntax:
+    content: 'export function run<T>(object: OfficeExtension.ClientObject | OfficeExtension.EmbeddedSession, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
+    return:
+      type:
+      - Promise<T>
+      description: ''
+    parameters:
+    - id: object
+      description: 以前に作成された API オブジェクトを使用しています。 バッチは、渡されたオブジェクトとして"context.sync()"で、オブジェクトに適用される変更を集荷することは、同じ要求のコンテキストを使用します。
+      type:
+      - OfficeExtension.ClientObject | OfficeExtension.EmbeddedSession
+    - id: batch
+      description: Visio.RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
+      type:
+      - '(context: Visio.RequestContext) => Promise<T>'
+- uid: visio.Visio.run_2
+  summary: 以前に作成された API のオブジェクトの要求コンテキストを使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。
+  name: Visio.run_2
+  fullName: Visio.run_2
+  langs:
+  - typeScript
+  type: function
+  syntax:
+    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
+    return:
+      type:
+      - Promise<T>
+      description: ''
+    parameters:
+    - id: objects
+      description: 以前に作成された API のオブジェクトの配列。 配列は、同じコンテキストを共有するすべてのオブジェクトかどうかを確認する検証されます。 バッチには、"context.sync()"でこれらのオブジェクトに適用される変更を集荷することは、この共有の要求コンテキストを使用します。
+      type:
+      - OfficeExtension.ClientObject[]
+    - id: batch
+      description: Visio.RequestContext で取得し、約束を返す関数 (通常、ジャストの「context.sync()")。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
+      type:
+      - '(context: Visio.RequestContext) => Promise<T>'
+- uid: visio.Visio.run_3
   summary: 以前に作成されたオブジェクトの RequestContext を使用して、Visio のオブジェクト モデルの操作を実行するバッチ スクリプトを実行します。 約束が解決されると、実行時に自動的に割り当てられた追跡対象のオブジェクトが解放されます。
   remarks: >-
     だけでなく、この署名メソッドは次の署名もあります。
@@ -88,8 +169,8 @@ items:
 
 
     `run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;`
-  name: run(contextObject, batch)
-  fullName: Visio.run
+  name: Visio.run_3
+  fullName: Visio.run_3
   langs:
   - typeScript
   type: function
@@ -135,60 +216,92 @@ references:
   name: Visio.HyperlinkCollection
 - uid: visio.Visio.Interfaces.ApplicationData
   name: Visio.Interfaces.ApplicationData
+- uid: visio.Visio.Interfaces.ApplicationLoadOptions
+  name: Visio.Interfaces.ApplicationLoadOptions
 - uid: visio.Visio.Interfaces.ApplicationUpdateData
   name: Visio.Interfaces.ApplicationUpdateData
+- uid: visio.Visio.Interfaces.CollectionLoadOptions
+  name: Visio.Interfaces.CollectionLoadOptions
 - uid: visio.Visio.Interfaces.CommentCollectionData
   name: Visio.Interfaces.CommentCollectionData
+- uid: visio.Visio.Interfaces.CommentCollectionLoadOptions
+  name: Visio.Interfaces.CommentCollectionLoadOptions
 - uid: visio.Visio.Interfaces.CommentCollectionUpdateData
   name: Visio.Interfaces.CommentCollectionUpdateData
 - uid: visio.Visio.Interfaces.CommentData
   name: Visio.Interfaces.CommentData
+- uid: visio.Visio.Interfaces.CommentLoadOptions
+  name: Visio.Interfaces.CommentLoadOptions
 - uid: visio.Visio.Interfaces.CommentUpdateData
   name: Visio.Interfaces.CommentUpdateData
 - uid: visio.Visio.Interfaces.DocumentData
   name: Visio.Interfaces.DocumentData
+- uid: visio.Visio.Interfaces.DocumentLoadOptions
+  name: Visio.Interfaces.DocumentLoadOptions
 - uid: visio.Visio.Interfaces.DocumentUpdateData
   name: Visio.Interfaces.DocumentUpdateData
 - uid: visio.Visio.Interfaces.DocumentViewData
   name: Visio.Interfaces.DocumentViewData
+- uid: visio.Visio.Interfaces.DocumentViewLoadOptions
+  name: Visio.Interfaces.DocumentViewLoadOptions
 - uid: visio.Visio.Interfaces.DocumentViewUpdateData
   name: Visio.Interfaces.DocumentViewUpdateData
 - uid: visio.Visio.Interfaces.HyperlinkCollectionData
   name: Visio.Interfaces.HyperlinkCollectionData
+- uid: visio.Visio.Interfaces.HyperlinkCollectionLoadOptions
+  name: Visio.Interfaces.HyperlinkCollectionLoadOptions
 - uid: visio.Visio.Interfaces.HyperlinkCollectionUpdateData
   name: Visio.Interfaces.HyperlinkCollectionUpdateData
 - uid: visio.Visio.Interfaces.HyperlinkData
   name: Visio.Interfaces.HyperlinkData
+- uid: visio.Visio.Interfaces.HyperlinkLoadOptions
+  name: Visio.Interfaces.HyperlinkLoadOptions
 - uid: visio.Visio.Interfaces.PageCollectionData
   name: Visio.Interfaces.PageCollectionData
+- uid: visio.Visio.Interfaces.PageCollectionLoadOptions
+  name: Visio.Interfaces.PageCollectionLoadOptions
 - uid: visio.Visio.Interfaces.PageCollectionUpdateData
   name: Visio.Interfaces.PageCollectionUpdateData
 - uid: visio.Visio.Interfaces.PageData
   name: Visio.Interfaces.PageData
+- uid: visio.Visio.Interfaces.PageLoadOptions
+  name: Visio.Interfaces.PageLoadOptions
 - uid: visio.Visio.Interfaces.PageUpdateData
   name: Visio.Interfaces.PageUpdateData
 - uid: visio.Visio.Interfaces.PageViewData
   name: Visio.Interfaces.PageViewData
+- uid: visio.Visio.Interfaces.PageViewLoadOptions
+  name: Visio.Interfaces.PageViewLoadOptions
 - uid: visio.Visio.Interfaces.PageViewUpdateData
   name: Visio.Interfaces.PageViewUpdateData
 - uid: visio.Visio.Interfaces.SelectionData
   name: Visio.Interfaces.SelectionData
 - uid: visio.Visio.Interfaces.ShapeCollectionData
   name: Visio.Interfaces.ShapeCollectionData
+- uid: visio.Visio.Interfaces.ShapeCollectionLoadOptions
+  name: Visio.Interfaces.ShapeCollectionLoadOptions
 - uid: visio.Visio.Interfaces.ShapeCollectionUpdateData
   name: Visio.Interfaces.ShapeCollectionUpdateData
 - uid: visio.Visio.Interfaces.ShapeData
   name: Visio.Interfaces.ShapeData
 - uid: visio.Visio.Interfaces.ShapeDataItemCollectionData
   name: Visio.Interfaces.ShapeDataItemCollectionData
+- uid: visio.Visio.Interfaces.ShapeDataItemCollectionLoadOptions
+  name: Visio.Interfaces.ShapeDataItemCollectionLoadOptions
 - uid: visio.Visio.Interfaces.ShapeDataItemCollectionUpdateData
   name: Visio.Interfaces.ShapeDataItemCollectionUpdateData
 - uid: visio.Visio.Interfaces.ShapeDataItemData
   name: Visio.Interfaces.ShapeDataItemData
+- uid: visio.Visio.Interfaces.ShapeDataItemLoadOptions
+  name: Visio.Interfaces.ShapeDataItemLoadOptions
+- uid: visio.Visio.Interfaces.ShapeLoadOptions
+  name: Visio.Interfaces.ShapeLoadOptions
 - uid: visio.Visio.Interfaces.ShapeUpdateData
   name: Visio.Interfaces.ShapeUpdateData
 - uid: visio.Visio.Interfaces.ShapeViewData
   name: Visio.Interfaces.ShapeViewData
+- uid: visio.Visio.Interfaces.ShapeViewLoadOptions
+  name: Visio.Interfaces.ShapeViewLoadOptions
 - uid: visio.Visio.Interfaces.ShapeViewUpdateData
   name: Visio.Interfaces.ShapeViewUpdateData
 - uid: visio.Visio.OverlayHorizontalAlignment

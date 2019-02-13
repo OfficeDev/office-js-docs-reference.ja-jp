@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d2c6b2fe6326e88a662da28dc65222cee0fe0caf
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: a65880612d7566db70a0e06a77dfd72488fc8e31
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769380"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977231"
 items:
 - uid: excel.Excel.Application
   summary: >-
@@ -22,10 +22,14 @@ items:
   package: excel
   children:
   - excel.Excel.Application.calculate
+  - excel.Excel.Application.calculate_1
   - excel.Excel.Application.calculationMode
   - excel.Excel.Application.context
   - excel.Excel.Application.load
+  - excel.Excel.Application.load_1
+  - excel.Excel.Application.load_2
   - excel.Excel.Application.set
+  - excel.Excel.Application.set_1
   - excel.Excel.Application.suspendApiCalculationUntilNextSync
   - excel.Excel.Application.toJSON
 - uid: excel.Excel.Application.calculate
@@ -35,7 +39,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: calculate(calculationType)
-  fullName: calculate
+  fullName: calculate(calculationType)
   langs:
   - typeScript
   type: method
@@ -44,12 +48,34 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
     parameters:
     - id: calculationType
       description: 使用する計算の種類を指定します。 詳細については Excel.CalculationType を参照してください。
       type:
       - excel.Excel.CalculationType
+- uid: excel.Excel.Application.calculate_1
+  summary: >-
+    Excel で現在開いているすべてのブックを再計算します。
+
+
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: calculate(calculationTypeString)
+  fullName: calculate(calculationTypeString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: calculationTypeString
+      description: 使用する計算の種類を指定します。 詳細については Excel.CalculationType を参照してください。
+      type:
+      - "\"Recalculate\" | \"Full\" | \"FullRebuild\""
 - uid: excel.Excel.Application.calculationMode
   summary: >-
     Excel.CalculationMode の定数で定義されているブックで使用される計算モードを返します。 使用可能な値: `Automatic`<!-- -->という、Excel コントロールの再計算します。`AutomaticExceptTables` <!-- -->Excel が再計算を制御するが、テーブル内の変更は無視されますが、`Manual`<!-- -->ユーザーが要求したときに計算を実行する場所です。
@@ -84,46 +110,65 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.Application`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.Application`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-
-    #### <a name="examples"></a>例
-
-
-    ```javascript
-
-    Excel.run(function (ctx) {
-        var application = ctx.workbook.application;
-        application.load('calculationMode');
-        return ctx.sync().then(function() {
-            console.log(application.calculationMode);
-        });
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Application;'
+    content: 'load(option?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
     return:
       type:
       - excel.Excel.Application
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ApplicationLoadOptions
+- uid: excel.Excel.Application.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Application;'
+    return:
+      type:
+      - excel.Excel.Application
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.Application.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Application;'
+    return:
+      type:
+      - excel.Excel.Application
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Application.set
   summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
   remarks: >-
@@ -132,7 +177,7 @@ items:
 
     `set(properties: Excel.Application): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -151,6 +196,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Application.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Application): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Application
 - uid: excel.Excel.Application.suspendApiCalculationUntilNextSync
   summary: >-
     次の "context.sync()" が呼び出されるまで、計算を中断します。設定されると、依存関係が確実に伝達されるようにブックを再計算するのは開発者の責任です。
@@ -158,7 +221,7 @@ items:
 
     \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: suspendApiCalculationUntilNextSync()
-  fullName: suspendApiCalculationUntilNextSync
+  fullName: suspendApiCalculationUntilNextSync()
   langs:
   - typeScript
   type: method
@@ -171,7 +234,7 @@ items:
 - uid: excel.Excel.Application.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。始めますの元のオブジェクトは、API のオブジェクトは、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ApplicationData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

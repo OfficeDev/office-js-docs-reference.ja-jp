@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 124023953de7147e48d616ad493f4a497d5c5a2b
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 27fbf15be2fa0b8da0e050411f174bfa984ff414
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29768905"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977651"
 items:
 - uid: excel.Excel.ChartAxes
   summary: >-
@@ -24,9 +24,13 @@ items:
   - excel.Excel.ChartAxes.categoryAxis
   - excel.Excel.ChartAxes.context
   - excel.Excel.ChartAxes.getItem
+  - excel.Excel.ChartAxes.getItem_1
   - excel.Excel.ChartAxes.load
+  - excel.Excel.ChartAxes.load_1
+  - excel.Excel.ChartAxes.load_2
   - excel.Excel.ChartAxes.seriesAxis
   - excel.Excel.ChartAxes.set
+  - excel.Excel.ChartAxes.set_1
   - excel.Excel.ChartAxes.toJSON
   - excel.Excel.ChartAxes.valueAxis
 - uid: excel.Excel.ChartAxes.categoryAxis
@@ -64,7 +68,7 @@ items:
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(type, group)
-  fullName: getItem
+  fullName: getItem(type, group)
   langs:
   - typeScript
   type: method
@@ -83,10 +87,39 @@ items:
       description: 省略可能。 軸のグループを指定します。 詳細については Excel.ChartAxisGroup を参照してください。
       type:
       - excel.Excel.ChartAxisGroup
+- uid: excel.Excel.ChartAxes.getItem_1
+  summary: >-
+    種類とグループで識別された特定の軸を返します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getItem(typeString, group)
+  fullName: getItem(typeString, group)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(typeString: "Invalid" | "Category" | "Value" | "Series", group?: "Primary" | "Secondary"): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: ''
+    parameters:
+    - id: typeString
+      description: 軸の種類を指定します。 詳細については Excel.ChartAxisType を参照してください。
+      type:
+      - "\"Invalid\" | \"Category\" | \"Value\" | \"Series\""
+    - id: group
+      description: 省略可能。 軸のグループを指定します。 詳細については Excel.ChartAxisGroup を参照してください。
+      type:
+      - "\"Primary\" | \"Secondary\""
 - uid: excel.Excel.ChartAxes.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
   remarks: >-
     だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): Excel.ChartAxes`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
 
 
     `load(option?: { select?: string; expand?: string; }): Excel.ChartAxes`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
@@ -94,21 +127,57 @@ items:
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxes`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartAxes;'
+    content: 'load(option?: Excel.Interfaces.ChartAxesLoadOptions): Excel.ChartAxes;'
     return:
       type:
       - excel.Excel.ChartAxes
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartAxesLoadOptions
+- uid: excel.Excel.ChartAxes.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartAxes;'
+    return:
+      type:
+      - excel.Excel.ChartAxes
+      description: ''
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.ChartAxes.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartAxes;'
+    return:
+      type:
+      - excel.Excel.ChartAxes
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartAxes.seriesAxis
   summary: >-
     3 次元グラフの系列軸を表します。値の取得のみ可能です。
@@ -133,7 +202,7 @@ items:
 
     `set(properties: Excel.ChartAxes): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -152,10 +221,28 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartAxes.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartAxes): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartAxes
 - uid: excel.Excel.ChartAxes.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.ChartAxes オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartAxesData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
