@@ -1,22 +1,62 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 169ac713dde13ef0ccae5fe2f8561028c88f4eb5
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: 124e9061d9d12a0f0a93af7fbb34497bd40b948b
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29703373"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978127"
 items:
 - uid: outlook.Office.RecurrenceProperties
   summary: >-
-    <span data-ttu-id="3fa3b-101">定期的なアイテムのプロパティを表します。</span><span class="sxs-lookup"><span data-stu-id="3fa3b-101">Represents the properties of the recurrence.</span></span>
+    <span data-ttu-id="f30a0-101">定期的なアイテムのプロパティを表します。</span><span class="sxs-lookup"><span data-stu-id="f30a0-101">Represents the properties of the recurrence.</span></span>
 
 
-    <span data-ttu-id="3fa3b-102">\[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="3fa3b-102">\[ [API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="f30a0-102">\[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f30a0-102">\[ [API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
   remarks: >-
-    <table><tr><td>[<span data-ttu-id="3fa3b-103">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="3fa3b-103">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="3fa3b-104">ReadItem</span><span class="sxs-lookup"><span data-stu-id="3fa3b-104">ReadItem</span></span></td></tr>
+    <table><tr><td>[<span data-ttu-id="f30a0-103">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="f30a0-103">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="f30a0-104">ReadItem</span><span class="sxs-lookup"><span data-stu-id="f30a0-104">ReadItem</span></span></td></tr>
 
 
-    <tr><td>[<span data-ttu-id="3fa3b-105">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="3fa3b-105">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="3fa3b-106">作成または読み取り</span><span class="sxs-lookup"><span data-stu-id="3fa3b-106">Compose or read</span></span></td></tr></table>
+    <tr><td>[<span data-ttu-id="f30a0-105">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="f30a0-105">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="f30a0-106">作成または読み取り</span><span class="sxs-lookup"><span data-stu-id="f30a0-106">Compose or read</span></span></td></tr></table><span data-ttu-id="f30a0-107">
+
+    ####例</span><span class="sxs-lookup"><span data-stu-id="f30a0-107">
+
+    #### Examples</span></span>
+
+
+    ```javascript
+
+    // This example gets the Recurrence object of an appointment item.
+
+    Office.context.mailbox.item.recurrence.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var context = asyncResult.context;
+        var recurrence = asyncResult.value;
+        if (!recurrence) {
+            console.log("One-time appointment or meeting");
+        } else {
+            console.log(JSON.stringify(recurrence));
+        }
+    }
+
+
+    // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
+
+    // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
+
+    // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
+
+    // recurrence date and time properties.
+
+    Recurrence = {
+        "recurrenceType": "weekly",
+        "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
+        "seriesTime": {seriesTimeObject},
+        "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
+    }
+
+    ```
   name: Office.RecurrenceProperties
   fullName: Office.RecurrenceProperties
   langs:
@@ -32,7 +72,7 @@ items:
   - outlook.Office.RecurrenceProperties.month
   - outlook.Office.RecurrenceProperties.weekNumber
 - uid: outlook.Office.RecurrenceProperties.dayOfMonth
-  summary: <span data-ttu-id="3fa3b-107">月の日を表します。</span><span class="sxs-lookup"><span data-stu-id="3fa3b-107">Represents the day of the month.</span></span>
+  summary: <span data-ttu-id="f30a0-108">月の日を表します。</span><span class="sxs-lookup"><span data-stu-id="f30a0-108">Represents the day of the month.</span></span>
   name: dayOfMonth
   fullName: dayOfMonth
   langs:
@@ -44,7 +84,7 @@ items:
       type:
       - number
 - uid: outlook.Office.RecurrenceProperties.dayOfWeek
-  summary: <span data-ttu-id="3fa3b-108">週または日、週末の日と平日などの種類の 1 日を表します。</span><span class="sxs-lookup"><span data-stu-id="3fa3b-108">Represents the day of the week or type of day, for example, weekend day vs weekday.</span></span>
+  summary: <span data-ttu-id="f30a0-109">週または日、週末の日と平日などの種類の 1 日を表します。</span><span class="sxs-lookup"><span data-stu-id="f30a0-109">Represents the day of the week or type of day, for example, weekend day vs weekday.</span></span>
   name: dayOfWeek
   fullName: dayOfWeek
   langs:
@@ -56,7 +96,7 @@ items:
       type:
       - MailboxEnums.Days
 - uid: outlook.Office.RecurrenceProperties.days
-  summary: "<span data-ttu-id=\"3fa3b-109\">この定期的な予定の日のセットを表します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"3fa3b-109\">Represents the set of days for this recurrence.</span></span> <span data-ttu-id=\"3fa3b-110\">有効な値: '月'、'Tue'、'水'、'木'、'金'、'土曜日'、および '太陽'。</span><span class=\"sxs-lookup\"><span data-stu-id=\"3fa3b-110\">Valid values are: 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', and 'Sun'.</span></span>"
+  summary: "<span data-ttu-id=\"f30a0-110\">この定期的な予定の日のセットを表します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"f30a0-110\">Represents the set of days for this recurrence.</span></span> <span data-ttu-id=\"f30a0-111\">有効な値: '月'、'Tue'、'水'、'木'、'金'、'土曜日'、および '太陽'。</span><span class=\"sxs-lookup\"><span data-stu-id=\"f30a0-111\">Valid values are: 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', and 'Sun'.</span></span>"
   name: days
   fullName: days
   langs:
@@ -68,7 +108,7 @@ items:
       type:
       - MailboxEnums.Days[]
 - uid: outlook.Office.RecurrenceProperties.firstDayOfWeek
-  summary: "<span data-ttu-id=\"3fa3b-111\">選択した週の場合は、既定値は、現在のユーザーの設定での最初の日を表します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"3fa3b-111\">Represents your chosen first day of the week otherwise the default is the value in the current user's settings.</span></span> <span data-ttu-id=\"3fa3b-112\">有効な値: '月'、'Tue'、'水'、'木'、'金'、'土曜日'、および '太陽'。</span><span class=\"sxs-lookup\"><span data-stu-id=\"3fa3b-112\">Valid values are: 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', and 'Sun'.</span></span>"
+  summary: "<span data-ttu-id=\"f30a0-112\">選択した週の場合は、既定値は、現在のユーザーの設定での最初の日を表します。</span><span class=\"sxs-lookup\"><span data-stu-id=\"f30a0-112\">Represents your chosen first day of the week otherwise the default is the value in the current user's settings.</span></span> <span data-ttu-id=\"f30a0-113\">有効な値: '月'、'Tue'、'水'、'木'、'金'、'土曜日'、および '太陽'。</span><span class=\"sxs-lookup\"><span data-stu-id=\"f30a0-113\">Valid values are: 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', and 'Sun'.</span></span>"
   name: firstDayOfWeek
   fullName: firstDayOfWeek
   langs:
@@ -80,7 +120,7 @@ items:
       type:
       - MailboxEnums.Days
 - uid: outlook.Office.RecurrenceProperties.interval
-  summary: <span data-ttu-id="3fa3b-113">同じ定期的な系列のインスタンスの間の期間を表します。</span><span class="sxs-lookup"><span data-stu-id="3fa3b-113">Represents the period between instances of the same recurring series.</span></span>
+  summary: <span data-ttu-id="f30a0-114">同じ定期的な系列のインスタンスの間の期間を表します。</span><span class="sxs-lookup"><span data-stu-id="f30a0-114">Represents the period between instances of the same recurring series.</span></span>
   name: interval
   fullName: interval
   langs:
@@ -92,7 +132,7 @@ items:
       type:
       - number
 - uid: outlook.Office.RecurrenceProperties.month
-  summary: <span data-ttu-id="3fa3b-114">月を表します。</span><span class="sxs-lookup"><span data-stu-id="3fa3b-114">Represents the month.</span></span>
+  summary: <span data-ttu-id="f30a0-115">月を表します。</span><span class="sxs-lookup"><span data-stu-id="f30a0-115">Represents the month.</span></span>
   name: month
   fullName: month
   langs:
@@ -104,7 +144,7 @@ items:
       type:
       - MailboxEnums.Month
 - uid: outlook.Office.RecurrenceProperties.weekNumber
-  summary: "<span data-ttu-id=\"3fa3b-115\">数を表す選択した月の週例: '' の最初の週の最初の月。</span><span class=\"sxs-lookup\"><span data-stu-id=\"3fa3b-115\">Represents the number of the week in the selected month e.g. 'first' for first week of the month.</span></span>"
+  summary: "<span data-ttu-id=\"f30a0-116\">数を表す選択した月の週例: '' の最初の週の最初の月。</span><span class=\"sxs-lookup\"><span data-stu-id=\"f30a0-116\">Represents the number of the week in the selected month e.g. 'first' for first week of the month.</span></span>"
   name: weekNumber
   fullName: weekNumber
   langs:
