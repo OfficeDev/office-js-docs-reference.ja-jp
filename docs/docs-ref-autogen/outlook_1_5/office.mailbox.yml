@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4e6eef6725c37f75960e65be19f0ef13a1c190ef
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: e5d7afb8d75779307e4a3d9d9491e592dfcfd6b2
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29705732"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981459"
 items:
 - uid: Outlook_1_5.Office.Mailbox
   summary: >-
@@ -41,16 +41,18 @@ items:
   - Outlook_1_5.Office.Mailbox.convertToLocalClientTime
   - Outlook_1_5.Office.Mailbox.convertToRestId
   - Outlook_1_5.Office.Mailbox.convertToUtcClientTime
-  - Outlook_1_5.Office.Mailbox.diagnostics
   - Outlook_1_5.Office.Mailbox.displayAppointmentForm
   - Outlook_1_5.Office.Mailbox.displayMessageForm
   - Outlook_1_5.Office.Mailbox.displayNewAppointmentForm
-  - Outlook_1_5.Office.Mailbox.ewsUrl
   - Outlook_1_5.Office.Mailbox.getCallbackTokenAsync
+  - Outlook_1_5.Office.Mailbox.getCallbackTokenAsync_1
+  - Outlook_1_5.Office.Mailbox.getCallbackTokenAsync_2
   - Outlook_1_5.Office.Mailbox.getUserIdentityTokenAsync
-  - Outlook_1_5.Office.Mailbox.item
   - Outlook_1_5.Office.Mailbox.makeEwsRequestAsync
   - Outlook_1_5.Office.Mailbox.removeHandlerAsync
+  - Outlook_1_5.Office.Mailbox.diagnostics
+  - Outlook_1_5.Office.Mailbox.ewsUrl
+  - Outlook_1_5.Office.Mailbox.item
   - Outlook_1_5.Office.Mailbox.restUrl
   - Outlook_1_5.Office.Mailbox.userProfile
 - uid: Outlook_1_5.Office.Mailbox.addHandlerAsync
@@ -67,8 +69,31 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
   name: addHandlerAsync(eventType, handler, options, callback)
-  fullName: addHandlerAsync
+  fullName: addHandlerAsync(eventType, handler, options, callback)
   langs:
   - typeScript
   type: method
@@ -90,7 +115,7 @@ items:
     - id: options
       description: 省略可能。 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
     - id: callback
       description: 省略可能。 メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
       type:
@@ -103,7 +128,7 @@ items:
     REST API (Outlook Mail API や Microsoft Graph など) で取得されたアイテム ID は、Exchange Web サービス (EWS) に使用される形式とは異なる形式を使用します。 ConvertToEwsId メソッドでは、EWS の適切な形式に、残りの部分の書式設定された ID を変換します。
 
 
-    注:このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
+    **注**: iOS の Outlook またはアプリは、Outlook では、このメソッドはサポートされていません。
 
 
     \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -112,8 +137,24 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    // Get an item's ID from a REST API
+
+    var restId = 'AAMkAGVlOTZjNTM3LW...';
+
+
+    // Treat restId as coming from the v2.0 version of the Outlook Mail API
+
+    var ewsId = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
+
+    ```
   name: convertToEwsId(itemId, restVersion)
-  fullName: convertToEwsId
+  fullName: convertToEwsId(itemId, restVersion)
   langs:
   - typeScript
   type: method
@@ -150,7 +191,7 @@ items:
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
   name: convertToLocalClientTime(timeValue)
-  fullName: convertToLocalClientTime
+  fullName: convertToLocalClientTime(timeValue)
   langs:
   - typeScript
   type: method
@@ -170,7 +211,7 @@ items:
     EWS 形式のアイテム ID を REST 形式に変換します。
 
 
-    注:このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
+    **注**: iOS の Outlook またはアプリは、Outlook では、このメソッドはサポートされていません。
 
 
     \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -182,8 +223,24 @@ items:
 
 
     EWS 経由で、または itemId プロパティを通じて取得される Id が他の Api で使用される形式とは異なる形式を使用するアイテム ( [Outlook のメール API](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)など、 [Microsoft Graph](https://graph.microsoft.io/)<!-- -->。 ConvertToRestId メソッドでは、残りの部分の適切な形式に EWS でフォーマットされた ID を変換します。
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Get the currently selected item's ID
+
+    var ewsId = Office.context.mailbox.item.itemId;
+
+
+    // Convert to a REST ID for the v2.0 version of the Outlook Mail API
+
+    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
+
+    ```
   name: convertToRestId(itemId, restVersion)
-  fullName: convertToRestId
+  fullName: convertToRestId(itemId, restVersion)
   langs:
   - typeScript
   type: method
@@ -217,7 +274,7 @@ items:
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
   name: convertToUtcClientTime(input)
-  fullName: convertToUtcClientTime
+  fullName: convertToUtcClientTime(input)
   langs:
   - typeScript
   type: method
@@ -232,42 +289,6 @@ items:
       description: 変換するローカル時刻の値。
       type:
       - LocalClientTime
-- uid: Outlook_1_5.Office.Mailbox.diagnostics
-  summary: >-
-    Outlook アドインに診断情報を提供します。
-
-
-    次のメンバーが含まれています。
-
-
-    - ホスト名 (文字列): ホスト アプリケーションの名前を表す文字列です。 次の値のいずれかである: Outlook や Mac の Outlook、OutlookIOS、OutlookWebApp。
-
-
-    - hostVersion (文字列): ホスト アプリケーションまたは Exchange Server のいずれかのバージョンを表す文字列です。 メール アドインを実行している場合の Outlook デスクトップ クライアントまたは Outlook の iOS、hostVersion プロパティは、ホスト アプリケーションでは、Outlook のバージョンを返します。 Outlook Web App では、プロパティは、Exchange Server のバージョンを返します。 例は、文字列 15.0.468.0 です。
-
-
-    - OWAView MailboxEnums.OWAView (文字列): 列挙型 (または文字列リテラル) には、Outlook Web App の現在のビューを表します。 ホスト アプリケーションが Outlook Web App ではない場合、このプロパティにアクセスすると undefined が返されます。 Outlook Web App の 3 つのビュー (表示の画面が狭い場合に表示される、TwoColumns の画面のサイズを大きくする場合に表示されると ThreeColumns の場合、画面の幅が表示されます) には、画面とウィンドウ、および列の数の幅に対応します。表示できます。
-
-
-    [ [Office.Diagnostics](xref:Outlook_1_5.Office.Diagnostics)] の詳細については、<!-- -->。
-
-
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-  name: diagnostics
-  fullName: diagnostics
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'diagnostics: Diagnostics;'
-    return:
-      type:
-      - Diagnostics
 - uid: Outlook_1_5.Office.Mailbox.displayAppointmentForm
   summary: >-
     既存の予定を表示します。
@@ -285,7 +306,7 @@ items:
     指定のアイテム識別子が既存の予定を表していない場合は、クライアント コンピューターまたはデバイスで空のウィンドウが開き、エラー メッセージは返されません。
 
 
-    注:このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
+    **注**: iOS の Outlook またはアプリは、Outlook では、このメソッドはサポートされていません。
 
 
     \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -295,7 +316,7 @@ items:
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
   name: displayAppointmentForm(itemId)
-  fullName: displayAppointmentForm
+  fullName: displayAppointmentForm(itemId)
   langs:
   - typeScript
   type: method
@@ -327,7 +348,7 @@ items:
     displayMessageForm と予定を表す itemId を一緒に使わないでください。既存の予定を表示するには displayAppointmentForm メソッドを使い、新しい予定を作成するフォームを表示するには displayNewAppointmentForm を使います。
 
 
-    注:このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
+    **注**: iOS の Outlook またはアプリは、Outlook では、このメソッドはサポートされていません。
 
 
     \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -337,7 +358,7 @@ items:
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
   name: displayMessageForm(itemId)
-  fullName: displayMessageForm
+  fullName: displayMessageForm(itemId)
   langs:
   - typeScript
   type: method
@@ -369,7 +390,7 @@ items:
     パラメーターのいずれかが指定のサイズ制限を超える場合、または不明なパラメーター名が指定されている場合は、例外がスローされます。
 
 
-    注:このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
+    **注**: iOS の Outlook またはアプリは、Outlook では、このメソッドはサポートされていません。
 
 
     \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -378,8 +399,35 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    var start = new Date();
+
+    var end = new Date();
+
+    end.setHours(start.getHours() + 1);
+
+
+    Office.context.mailbox.displayNewAppointmentForm(
+
+    {
+        requiredAttendees: ['bob@contoso.com'],
+        optionalAttendees: ['sam@contoso.com'],
+        start: start,
+        end: end,
+        location: 'Home',
+        resources: ['projector@contoso.com'],
+        subject: 'meeting',
+        body: 'Hello World!'
+    });
+
+    ```
   name: displayNewAppointmentForm(parameters)
-  fullName: displayNewAppointmentForm
+  fullName: displayNewAppointmentForm(parameters)
   langs:
   - typeScript
   type: method
@@ -394,39 +442,6 @@ items:
       description: 新しい予定を記述する AppointmentForm です。 すべてのプロパティはオプションです。
       type:
       - AppointmentForm
-- uid: Outlook_1_5.Office.Mailbox.ewsUrl
-  summary: >-
-    このメール アカウントの Exchange Web サービス (EWS) エンドポイントの URL を取得します。読み取りモードのみです。
-
-
-    アプリ、ReadItem アクセス許可が必要、マニフェストで指定されている読み取りモードで ewsUrl のメンバーを呼び出すことです。
-
-
-    作成モードの ewsUrl メンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem アクセス許可が必要です。
-
-
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-
-
-    EwsUrl 値は、ユーザーのメールボックスに EWS 呼び出しを行うリモート サービスで使用できます。 [選択したアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモート サービスを作成するたとえば、<!-- -->。
-
-
-    注:このメンバーは、Outlook for iOS または Outlook for Android ではサポートされていません。
-  name: ewsUrl
-  fullName: ewsUrl
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'ewsUrl: string;'
-    return:
-      type:
-      - string
 - uid: Outlook_1_5.Office.Mailbox.getCallbackTokenAsync
   summary: >-
     REST API または Exchange Web サービスを呼び出すために使用するトークンを含む文字列を取得します。
@@ -453,7 +468,7 @@ items:
     アドインを使用してください ewsUrl は EWS 呼び出しを行うときに使用する正しい URL を確認します。
 
 
-    注:可能であれば、アドインでは Exchange Web サービスの代わりに REST API を使用することをお勧めします。
+    **注**: アドインが可能な場合に、Exchange Web サービスではなく REST Api を使用することをお勧めします。
 
 
     \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -471,8 +486,29 @@ items:
 
 
     `getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;`
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function getCallbackToken() {
+        var options = {
+            isRest: true,
+            asyncContext: { message: 'Hello World!' }
+        };
+
+        Office.context.mailbox.getCallbackTokenAsync(options, cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
   name: getCallbackTokenAsync(options, callback)
-  fullName: getCallbackTokenAsync
+  fullName: getCallbackTokenAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -491,6 +527,104 @@ items:
       description: メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、`asyncResult.error`と`asyncResult.diagnostics`のプロパティは、追加情報を提供可能性があります。
       type:
       - '(result: Office.AsyncResult<string>) => void'
+- uid: Outlook_1_5.Office.Mailbox.getCallbackTokenAsync_1
+  summary: >-
+    Exchange Server から添付ファイルやアイテムを取得するために使うトークンを含む文字列を取得します。
+
+
+    getCallbackTokenAsync メソッドは、ユーザーのメールボックスをホストする Exchange Server から不透明なトークンを取得する非同期の呼び出しを行います。コールバック トークンの有効期間は 5 分です。
+
+
+    トークンと予定の識別子またはアイテムの識別子をサードパーティ システムに渡すことができます。サードパーティ システムは、トークンをベアラー承認トークンとして使用し、Exchange Web サービス (EWS) GetAttachment または GetItem 操作を呼び出して、添付ファイルまたはアイテムを返します。たとえば、選択したアイテムから添付ファイルを取得するためにリモート サービスを作成できます。
+
+
+    アプリ権限が必要、ReadItem そのマニフェストで指定されている読み取りモードで getCallbackTokenAsync メソッドを呼び出すことです。
+
+
+    作成モードの getCallbackTokenAsync メソッドに渡される項目 id を取得する saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem アクセス許可が必要です。
+
+
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    function getCallbackToken() {
+        Office.context.mailbox.getCallbackTokenAsync(cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
+  name: getCallbackTokenAsync(callback)
+  fullName: getCallbackTokenAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、`asyncResult.error`と`asyncResult.diagnostics`のプロパティは、追加情報を提供可能性があります。
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+- uid: Outlook_1_5.Office.Mailbox.getCallbackTokenAsync_2
+  summary: >-
+    Exchange Server から添付ファイルやアイテムを取得するために使うトークンを含む文字列を取得します。
+
+
+    getCallbackTokenAsync メソッドは、ユーザーのメールボックスをホストする Exchange Server から不透明なトークンを取得する非同期の呼び出しを行います。コールバック トークンの有効期間は 5 分です。
+
+
+    トークンと予定の識別子またはアイテムの識別子をサードパーティ システムに渡すことができます。サードパーティ システムは、トークンをベアラー承認トークンとして使用し、Exchange Web サービス (EWS) GetAttachment または GetItem 操作を呼び出して、添付ファイルまたはアイテムを返します。たとえば、選択したアイテムから添付ファイルを取得するためにリモート サービスを作成できます。
+
+
+    アプリ権限が必要、ReadItem そのマニフェストで指定されている読み取りモードで getCallbackTokenAsync メソッドを呼び出すことです。
+
+
+    作成モードの getCallbackTokenAsync メソッドに渡される項目 id を取得する saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem アクセス許可が必要です。
+
+
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+  name: getCallbackTokenAsync(callback, userContext)
+  fullName: getCallbackTokenAsync(callback, userContext)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、`asyncResult.error`と`asyncResult.diagnostics`のプロパティは、追加情報を提供可能性があります。
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+    - id: userContext
+      description: 省略可能。 非同期メソッドに渡される状態データです。
+      type:
+      - any
 - uid: Outlook_1_5.Office.Mailbox.getUserIdentityTokenAsync
   summary: >-
     ユーザーと Office アドインを識別するトークンを取得します。
@@ -508,8 +642,24 @@ items:
 
 
     GetUserIdentityTokenAsync メソッドを識別するのに使用できるトークンおよび[アドインとサードパーティ製のシステムとユーザー認証](https://docs.microsoft.com/outlook/add-ins/authentication)を返します<!-- -->。
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function getIdentityToken() {
+        Office.context.mailbox.getUserIdentityTokenAsync(cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
   name: getUserIdentityTokenAsync(callback, userContext)
-  fullName: getUserIdentityTokenAsync
+  fullName: getUserIdentityTokenAsync(callback, userContext)
   langs:
   - typeScript
   type: method
@@ -528,18 +678,6 @@ items:
       description: 省略可能。 非同期メソッドに渡される状態データです。\|
       type:
       - any
-- uid: Outlook_1_5.Office.Mailbox.item
-  summary: 'メールボックスの項目。 コンテキストによっては、アドインが開かれている、任意の数種類の項目があります。 IntelliSense の特定の種類のみを参照してくださいする場合は、この項目を次のいずれかをキャストしてください: `ItemCompose` <!-- -->、 `ItemRead` <!-- -->、 `MessageCompose` <!-- -->、 `MessageRead` <!-- -->、 `AppointmentCompose` <!-- -->、`AppointmentRead`'
-  name: item
-  fullName: item
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'item: Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose;'
-    return:
-      type:
-      - Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose
 - uid: Outlook_1_5.Office.Mailbox.makeEwsRequestAsync
   summary: >-
     ユーザーのメールボックスをホストしている Exchange サーバー上の Exchange Web サービス (EWS) サービスに非同期要求を使用します。
@@ -554,7 +692,7 @@ items:
     makeEwsRequestAsync メソッドでは、フォルダー関連アイテムを要求できません。
 
 
-    XML 要求では UTF-8 エンコードを指定する必要があります。 &lt;?xml バージョン「1.0」のエンコーディングを = ="utf-8"でしょうか。&gt;
+    XML 要求では UTF-8 エンコードを指定する必要があります。 &lt;<!-- -->?xml バージョン「1.0」のエンコーディングを = ="utf-8"でしょうか。<!-- -->&gt;
 
 
     追加で makeEwsRequestAsync メソッドを使用して、ReadWriteMailbox のアクセス許可を必要があります。 [メール アドインにアクセスするため、ユーザーのメールボックスを指定するアクセス許可](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)を参照してください makeEwsRequestAsync メソッドを使用して、ReadWriteMailbox のアクセス許可と、呼び出すことができる EWS 操作の使用方法の詳細については、<!-- -->。
@@ -563,7 +701,7 @@ items:
     EWS 呼び出しの XML 結果は、asyncResult.value プロパティ内の文字列として提供されています。結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
 
 
-    注: このメソッドは、次のシナリオでサポートされていません。
+    **注**: 次のシナリオでは、このメソッドはサポートされていません。
 
 
     - IOS は、Outlook または Android の Outlook です。
@@ -572,7 +710,7 @@ items:
     - アドインの読み込み時 Gmail のメールボックスにします。
 
 
-    注: サーバーの管理者する必要があります OAuthAuthentication true に設定 EWS 要求を作成する makeEwsRequestAsync メソッドを有効にするクライアント アクセス サーバーの EWS のディレクトリにします。
+    **注**: サーバーの管理者は EWS 要求を作成する makeEwsRequestAsync メソッドを有効にするクライアント アクセス サーバーの EWS のディレクトリを true に設定する OAuthAuthentication を設定する必要があります。
 
 
     *バージョンの相違点*
@@ -593,8 +731,57 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    function getSubjectRequest(id) {
+        // Return a GetItem operation request for the subject of the specified item.
+        var request =
+            '<?xml version="1.0" encoding="utf-8"?>' +
+            '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+            '               xmlns:xsd="http://www.w3.org/2001/XMLSchema"' +
+            '               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"' +
+            '               xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">' +
+            '  <soap:Header>' +
+            '    <RequestServerVersion Version="Exchange2013" xmlns="http://schemas.microsoft.com/exchange/services/2006/types" soap:mustUnderstand="0" />' +
+            '  </soap:Header>' +
+            '  <soap:Body>' +
+            '    <GetItem xmlns="http://schemas.microsoft.com/exchange/services/2006/messages">' +
+            '      <ItemShape>' +
+            '        <t:BaseShape>IdOnly</t:BaseShape>' +
+            '        <t:AdditionalProperties>' +
+            '            <t:FieldURI FieldURI="item:Subject"/>' +
+            '        </t:AdditionalProperties>' +
+            '      </ItemShape>' +
+            '      <ItemIds><t:ItemId Id="' + id + '"/></ItemIds>' +
+            '    </GetItem>' +
+            '  </soap:Body>' +
+            '</soap:Envelope>';
+
+        return request;
+    }
+
+
+    function sendRequest() {
+        // Create a local variable that contains the mailbox.
+        Office.context.mailbox.makeEwsRequestAsync(
+            getSubjectRequest(mailbox.item.itemId), callback);
+    }
+
+
+    function callback(asyncResult)  {
+        var result = asyncResult.value;
+        var context = asyncResult.asyncContext;
+
+        // Process the returned response here.
+    }
+
+    ```
   name: makeEwsRequestAsync(data, callback, userContext)
-  fullName: makeEwsRequestAsync
+  fullName: makeEwsRequestAsync(data, callback, userContext)
   langs:
   - typeScript
   type: method
@@ -632,7 +819,7 @@ items:
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
   name: removeHandlerAsync(eventType, options, callback)
-  fullName: removeHandlerAsync
+  fullName: removeHandlerAsync(eventType, options, callback)
   langs:
   - typeScript
   type: method
@@ -650,11 +837,92 @@ items:
     - id: options
       description: 省略可能。 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
     - id: callback
       description: 省略可能。 メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
       type:
       - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_5.Office.Mailbox.diagnostics
+  summary: >-
+    Outlook アドインに診断情報を提供します。
+
+
+    次のメンバーが含まれています。
+
+
+    - ホスト名 (文字列): ホスト アプリケーションの名前を表す文字列です。 次の値のいずれかである: Outlook や Mac の Outlook、OutlookIOS、OutlookWebApp。
+
+
+    - hostVersion (文字列): ホスト アプリケーションまたは Exchange Server のいずれかのバージョンを表す文字列です。 メール アドインを実行している場合の Outlook デスクトップ クライアントまたは Outlook の iOS、hostVersion プロパティは、ホスト アプリケーションでは、Outlook のバージョンを返します。 Outlook Web App では、プロパティは、Exchange Server のバージョンを返します。 例は、文字列 15.0.468.0 です。
+
+
+    - OWAView MailboxEnums.OWAView (文字列): 列挙型 (または文字列リテラル) には、Outlook Web App の現在のビューを表します。 ホスト アプリケーションが Outlook Web App ではない場合、このプロパティにアクセスすると undefined が返されます。 Outlook Web App の 3 つのビュー (表示の画面が狭い場合に表示される、TwoColumns の画面のサイズを大きくする場合に表示されると ThreeColumns の場合、画面の幅が表示されます) には、画面とウィンドウ、および列の数の幅に対応します。表示できます。
+
+
+    [ [Office.Diagnostics](xref:Outlook_1_5.Office.Diagnostics)] の詳細については、<!-- -->。
+
+
+    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: diagnostics
+  fullName: diagnostics
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'diagnostics: Diagnostics;'
+    return:
+      type:
+      - Diagnostics
+- uid: Outlook_1_5.Office.Mailbox.ewsUrl
+  summary: >-
+    このメール アカウントの Exchange Web サービス (EWS) エンドポイントの URL を取得します。読み取りモードのみです。
+
+
+    アプリ、ReadItem アクセス許可が必要、マニフェストで指定されている読み取りモードで ewsUrl のメンバーを呼び出すことです。
+
+
+    作成モードの ewsUrl メンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem アクセス許可が必要です。
+
+
+    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+
+    EwsUrl 値は、ユーザーのメールボックスに EWS 呼び出しを行うリモート サービスで使用できます。 [選択したアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモート サービスを作成するたとえば、<!-- -->。
+
+
+    **メモ**: このメンバーは、iOS は、Outlook またはアプリは、Outlook でサポートされていません。
+  name: ewsUrl
+  fullName: ewsUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'ewsUrl: string;'
+    return:
+      type:
+      - string
+- uid: Outlook_1_5.Office.Mailbox.item
+  summary: 'メールボックスの項目。 コンテキストによっては、アドインが開かれている、任意の数種類の項目があります。 IntelliSense の特定の種類のみを参照してくださいする場合は、この項目を次のいずれかをキャストしてください: `ItemCompose` <!-- -->、 `ItemRead` <!-- -->、 `MessageCompose` <!-- -->、 `MessageRead` <!-- -->、 `AppointmentCompose` <!-- -->、`AppointmentRead`'
+  name: item
+  fullName: item
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'item: Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose;'
+    return:
+      type:
+      - Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose
 - uid: Outlook_1_5.Office.Mailbox.restUrl
   summary: >-
     この電子メール アカウントの REST エンドポイントの URL を取得します。
