@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0deb3498939c1fe8484d36cfc4ed64eeffee79ad
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 8bbd4592bbafb147c6938c71ac2a32bf2e5f1588
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28725320"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981095"
 items:
 - uid: excel.Excel.ConditionalFormatCollection
   summary: >-
-    <span data-ttu-id="d001e-101">範囲の重複している、すべての条件付き書式のコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="d001e-101">Represents a collection of all the conditional formats that are overlap the range.</span></span>
+    <span data-ttu-id="d1e66-101">範囲の重複している、すべての条件付き書式のコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-101">Represents a collection of all the conditional formats that are overlap the range.</span></span>
 
 
-    <span data-ttu-id="d001e-102">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-102">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-102">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-102">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.ConditionalFormatCollection
   fullName: Excel.ConditionalFormatCollection
   langs:
@@ -22,6 +22,7 @@ items:
   package: excel
   children:
   - excel.Excel.ConditionalFormatCollection.add
+  - excel.Excel.ConditionalFormatCollection.add_1
   - excel.Excel.ConditionalFormatCollection.clearAll
   - excel.Excel.ConditionalFormatCollection.context
   - excel.Excel.ConditionalFormatCollection.getCount
@@ -29,15 +30,17 @@ items:
   - excel.Excel.ConditionalFormatCollection.getItemAt
   - excel.Excel.ConditionalFormatCollection.items
   - excel.Excel.ConditionalFormatCollection.load
+  - excel.Excel.ConditionalFormatCollection.load_1
+  - excel.Excel.ConditionalFormatCollection.load_2
   - excel.Excel.ConditionalFormatCollection.toJSON
 - uid: excel.Excel.ConditionalFormatCollection.add
   summary: >-
-    <span data-ttu-id="d001e-103">コレクション内の最初と最上位の優先度にするには、新しい条件付き書式を追加します。</span><span class="sxs-lookup"><span data-stu-id="d001e-103">Adds a new conditional format to the collection at the first/top priority.</span></span>
+    <span data-ttu-id="d1e66-103">コレクション内の最初と最上位の優先度にするには、新しい条件付き書式を追加します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-103">Adds a new conditional format to the collection at the first/top priority.</span></span>
 
 
-    <span data-ttu-id="d001e-104">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-104">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-104">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-104">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: add(type)
-  fullName: add
+  fullName: add(type)
   langs:
   - typeScript
   type: method
@@ -46,20 +49,42 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormat
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d001e-105\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d001e-105\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = \"YellowThreeArrows\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new yellow three arrow icon set.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d1e66-105\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d1e66-105\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = \"YellowThreeArrows\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new yellow three arrow icon set.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
     parameters:
     - id: type
-      description: <span data-ttu-id="d001e-106">追加の条件付き書式の種類。</span><span class="sxs-lookup"><span data-stu-id="d001e-106">The type of conditional format being added.</span></span> <span data-ttu-id="d001e-107">詳細については Excel.ConditionalFormatType を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d001e-107">See Excel.ConditionalFormatType for details.</span></span>
+      description: <span data-ttu-id="d1e66-106">追加の条件付き書式の種類。</span><span class="sxs-lookup"><span data-stu-id="d1e66-106">The type of conditional format being added.</span></span> <span data-ttu-id="d1e66-107">詳細については Excel.ConditionalFormatType を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d1e66-107">See Excel.ConditionalFormatType for details.</span></span>
       type:
       - excel.Excel.ConditionalFormatType
+- uid: excel.Excel.ConditionalFormatCollection.add_1
+  summary: >-
+    <span data-ttu-id="d1e66-108">コレクション内の最初と最上位の優先度にするには、新しい条件付き書式を追加します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-108">Adds a new conditional format to the collection at the first/top priority.</span></span>
+
+
+    <span data-ttu-id="d1e66-109">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-109">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  name: add(typeString)
+  fullName: add(typeString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'add(typeString: "Custom" | "DataBar" | "ColorScale" | "IconSet" | "TopBottom" | "PresetCriteria" | "ContainsText" | "CellValue"): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: typeString
+      description: <span data-ttu-id="d1e66-110">追加の条件付き書式の種類。</span><span class="sxs-lookup"><span data-stu-id="d1e66-110">The type of conditional format being added.</span></span> <span data-ttu-id="d1e66-111">詳細については Excel.ConditionalFormatType を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d1e66-111">See Excel.ConditionalFormatType for details.</span></span>
+      type:
+      - "\"Custom\" | \"DataBar\" | \"ColorScale\" | \"IconSet\" | \"TopBottom\" | \"PresetCriteria\" | \"ContainsText\" | \"CellValue\""
 - uid: excel.Excel.ConditionalFormatCollection.clearAll
   summary: >-
-    <span data-ttu-id="d001e-108">現在指定している範囲でアクティブなすべての条件付き書式をクリアする。</span><span class="sxs-lookup"><span data-stu-id="d001e-108">Clears all conditional formats active on the current specified range.</span></span>
+    <span data-ttu-id="d1e66-112">現在指定している範囲でアクティブなすべての条件付き書式をクリアする。</span><span class="sxs-lookup"><span data-stu-id="d1e66-112">Clears all conditional formats active on the current specified range.</span></span>
 
 
-    <span data-ttu-id="d001e-109">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-109">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-113">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-113">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: clearAll()
-  fullName: clearAll
+  fullName: clearAll()
   langs:
   - typeScript
   type: method
@@ -68,9 +93,9 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d001e-110\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d001e-110\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.clearAll();\n    return ctx.sync().then(function () {\n        console.log(\"Cleared all conditional formats from this range.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange();\n    range.conditionalFormats.clearAll();\n\n    await context.sync();\n\n    $(\".conditional-formats\").hide();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d1e66-114\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d1e66-114\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.clearAll();\n    return ctx.sync().then(function () {\n        console.log(\"Cleared all conditional formats from this range.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange();\n    range.conditionalFormats.clearAll();\n\n    await context.sync();\n\n    $(\".conditional-formats\").hide();\n});\n```"
 - uid: excel.Excel.ConditionalFormatCollection.context
-  summary: <span data-ttu-id="d001e-111">オブジェクトに関連付けられた要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="d001e-111">The request context associated with the object.</span></span> <span data-ttu-id="d001e-112">これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。</span><span class="sxs-lookup"><span data-stu-id="d001e-112">This connects the add-in's process to the Office host application's process.</span></span>
+  summary: <span data-ttu-id="d1e66-115">オブジェクトに関連付けられた要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="d1e66-115">The request context associated with the object.</span></span> <span data-ttu-id="d1e66-116">これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-116">This connects the add-in's process to the Office host application's process.</span></span>
   name: context
   fullName: context
   langs:
@@ -83,12 +108,12 @@ items:
       - RequestContext
 - uid: excel.Excel.ConditionalFormatCollection.getCount
   summary: >-
-    <span data-ttu-id="d001e-p103">ブックに含まれる条件付き書式の数を返します。読み取り専用。</span><span class="sxs-lookup"><span data-stu-id="d001e-p103">Returns the number of conditional formats in the workbook. Read-only.</span></span>
+    <span data-ttu-id="d1e66-p104">ブックに含まれる条件付き書式の数を返します。読み取り専用。</span><span class="sxs-lookup"><span data-stu-id="d1e66-p104">Returns the number of conditional formats in the workbook. Read-only.</span></span>
 
 
-    <span data-ttu-id="d001e-115">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-115">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-119">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-119">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -97,15 +122,15 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<number>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d001e-116\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d001e-116\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = Excel.IconSet.fourTrafficLights;\n    var cfCount = range.conditionalFormats.getCount(); \n\n    return ctx.sync().then(function () {\n        console.log(\"Count: \" + cfCount.value);\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d1e66-120\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d1e66-120\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = Excel.IconSet.fourTrafficLights;\n    var cfCount = range.conditionalFormats.getCount(); \n\n    return ctx.sync().then(function () {\n        console.log(\"Count: \" + cfCount.value);\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.ConditionalFormatCollection.getItem
   summary: >-
-    <span data-ttu-id="d001e-117">指定された ID に対応する条件付き書式を返します。</span><span class="sxs-lookup"><span data-stu-id="d001e-117">Returns a conditional format for the given ID.</span></span>
+    <span data-ttu-id="d1e66-121">指定された ID に対応する条件付き書式を返します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-121">Returns a conditional format for the given ID.</span></span>
 
 
-    <span data-ttu-id="d001e-118">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-118">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-122">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-122">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItem(id)
-  fullName: getItem
+  fullName: getItem(id)
   langs:
   - typeScript
   type: method
@@ -115,9 +140,9 @@ items:
       type:
       - excel.Excel.ConditionalFormat
       description: >-
-        <span data-ttu-id="d001e-119">オブジェクトの条件付き書式設定します。</span><span class="sxs-lookup"><span data-stu-id="d001e-119">Conditional Format object.</span></span>
+        <span data-ttu-id="d1e66-123">オブジェクトの条件付き書式設定します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-123">Conditional Format object.</span></span>
 
-        #### <a name="examples"></a><span data-ttu-id="d001e-120">例</span><span class="sxs-lookup"><span data-stu-id="d001e-120">Examples</span></span>
+        #### <a name="examples"></a><span data-ttu-id="d1e66-124">例</span><span class="sxs-lookup"><span data-stu-id="d1e66-124">Examples</span></span>
 
 
         ```javascript
@@ -141,17 +166,17 @@ items:
         ```
     parameters:
     - id: id
-      description: <span data-ttu-id="d001e-121">条件付き書式の id です。</span><span class="sxs-lookup"><span data-stu-id="d001e-121">The id of the conditional format.</span></span>
+      description: <span data-ttu-id="d1e66-125">条件付き書式の id です。</span><span class="sxs-lookup"><span data-stu-id="d1e66-125">The id of the conditional format.</span></span>
       type:
       - string
 - uid: excel.Excel.ConditionalFormatCollection.getItemAt
   summary: >-
-    <span data-ttu-id="d001e-122">指定されたインデックスに条件付き書式を返します。</span><span class="sxs-lookup"><span data-stu-id="d001e-122">Returns a conditional format at the given index.</span></span>
+    <span data-ttu-id="d1e66-126">指定されたインデックスに条件付き書式を返します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-126">Returns a conditional format at the given index.</span></span>
 
 
-    <span data-ttu-id="d001e-123">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d001e-123">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="d1e66-127">\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d1e66-127">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -160,14 +185,14 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormat
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d001e-124\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d001e-124\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.getItemAt(3);\n    return ctx.sync().then(function () {\n        console.log(\"Conditional Format at Item 3 Loaded\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const worksheetRange = sheet.getRange();\n    worksheetRange.conditionalFormats.load(\"type\");\n\n    await context.sync();\n\n    let cfRangePairs: { cf: Excel.ConditionalFormat, range: Excel.Range }[] = [];\n    worksheetRange.conditionalFormats.items.forEach(item => {\n        cfRangePairs.push({\n            cf: item,\n            range: item.getRange().load(\"address\")\n        });\n    });\n\n    await context.sync();\n\n    if (cfRangePairs.length > 0) {\n        cfRangePairs.forEach(item => {\n            console.log(item.cf.type);\n        });\n    } else {\n        console.log(\"No conditional formats applied.\");\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"d1e66-128\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"d1e66-128\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.getItemAt(3);\n    return ctx.sync().then(function () {\n        console.log(\"Conditional Format at Item 3 Loaded\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const worksheetRange = sheet.getRange();\n    worksheetRange.conditionalFormats.load(\"type\");\n\n    await context.sync();\n\n    let cfRangePairs: { cf: Excel.ConditionalFormat, range: Excel.Range }[] = [];\n    worksheetRange.conditionalFormats.items.forEach(item => {\n        cfRangePairs.push({\n            cf: item,\n            range: item.getRange().load(\"address\")\n        });\n    });\n\n    await context.sync();\n\n    if (cfRangePairs.length > 0) {\n        cfRangePairs.forEach(item => {\n            console.log(item.cf.type);\n        });\n    } else {\n        console.log(\"No conditional formats applied.\");\n    }\n});\n```"
     parameters:
     - id: index
-      description: <span data-ttu-id="d001e-125">取得する条件付き書式のインデックス。</span><span class="sxs-lookup"><span data-stu-id="d001e-125">Index of the conditional formats to be retrieved.</span></span>
+      description: <span data-ttu-id="d1e66-129">取得する条件付き書式のインデックス。</span><span class="sxs-lookup"><span data-stu-id="d1e66-129">Index of the conditional formats to be retrieved.</span></span>
       type:
       - number
 - uid: excel.Excel.ConditionalFormatCollection.items
-  summary: <span data-ttu-id="d001e-126">このコレクションに読み込まれている子項目を取得します。</span><span class="sxs-lookup"><span data-stu-id="d001e-126">Gets the loaded child items in this collection.</span></span>
+  summary: <span data-ttu-id="d1e66-130">このコレクションに読み込まれている子項目を取得します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-130">Gets the loaded child items in this collection.</span></span>
   name: items
   fullName: items
   langs:
@@ -179,35 +204,73 @@ items:
       type:
       - Excel.ConditionalFormat[]
 - uid: excel.Excel.ConditionalFormatCollection.load
-  summary: <span data-ttu-id="d001e-127">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="d001e-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d001e-128">"Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d001e-128">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="d1e66-131">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="d1e66-131">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d1e66-132">"Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d1e66-132">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="d001e-129">だけでなく、この署名は、このメソッドは、次の署名をします。</span><span class="sxs-lookup"><span data-stu-id="d001e-129">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="d1e66-133">だけでなく、この署名は、このメソッドは、次の署名をします。</span><span class="sxs-lookup"><span data-stu-id="d1e66-133">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="d001e-130">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。</span><span class="sxs-lookup"><span data-stu-id="d001e-130">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="d1e66-134">`load(option?: string | string[]): Excel.ConditionalFormatCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="d1e66-134">`load(option?: string | string[]): Excel.ConditionalFormatCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
 
 
-    <span data-ttu-id="d001e-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection`でコレクション型のみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="d001e-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection` - Only available on collection types.</span></span> <span data-ttu-id="d001e-132">前の署名に似ていますが。</span><span class="sxs-lookup"><span data-stu-id="d001e-132">It is similar to the preceding signature.</span></span> <span data-ttu-id="d001e-133">Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d001e-133">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="d001e-134">Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d001e-134">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="d001e-135">Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。</span><span class="sxs-lookup"><span data-stu-id="d001e-135">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="d1e66-135">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。</span><span class="sxs-lookup"><span data-stu-id="d1e66-135">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+
+    <span data-ttu-id="d1e66-136">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection`でコレクション型のみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="d1e66-136">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection` - Only available on collection types.</span></span> <span data-ttu-id="d1e66-137">前の署名に似ていますが。</span><span class="sxs-lookup"><span data-stu-id="d1e66-137">It is similar to the preceding signature.</span></span> <span data-ttu-id="d1e66-138">Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-138">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="d1e66-139">Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d1e66-139">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="d1e66-140">Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。</span><span class="sxs-lookup"><span data-stu-id="d1e66-140">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ConditionalFormatCollection;'
+    content: 'load(option?: Excel.Interfaces.ConditionalFormatCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ConditionalFormatCollection;'
     return:
       type:
       - excel.Excel.ConditionalFormatCollection
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="d001e-136">コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="d001e-136">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: ''
+      type:
+      - Excel.Interfaces.ConditionalFormatCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.ConditionalFormatCollection.load_1
+  summary: <span data-ttu-id="d1e66-141">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="d1e66-141">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d1e66-142">呼び出す必要があります`context.sync()`プロパティを読み取る前にします。</span><span class="sxs-lookup"><span data-stu-id="d1e66-142">You must call `context.sync()` before reading the properties.</span></span>
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ConditionalFormatCollection;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormatCollection
+      description: ''
+    parameters:
+    - id: propertyNames
+      description: <span data-ttu-id="d1e66-143">コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="d1e66-143">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
+- uid: excel.Excel.ConditionalFormatCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.ConditionalFormatCollection;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormatCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.ConditionalFormatCollection.toJSON
-  summary: <span data-ttu-id="d001e-137">JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。</span><span class="sxs-lookup"><span data-stu-id="d001e-137">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="d001e-138">(`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.ConditionalFormatCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ConditionalFormatCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。</span><span class="sxs-lookup"><span data-stu-id="d001e-138">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.ConditionalFormatCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.ConditionalFormatCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
+  summary: <span data-ttu-id="d1e66-144">JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。</span><span class="sxs-lookup"><span data-stu-id="d1e66-144">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="d1e66-145">(`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.ConditionalFormatCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ConditionalFormatCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。</span><span class="sxs-lookup"><span data-stu-id="d1e66-145">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.ConditionalFormatCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.ConditionalFormatCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
