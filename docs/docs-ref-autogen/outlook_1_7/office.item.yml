@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7895a874d9ffd8708f13a3234eb36b6cb49e675e
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: 11ed1a8c73b51f1b3e1614723d2a8c76fdfef665
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29705074"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973927"
 items:
 - uid: Outlook_1_7.Office.Item
   summary: >-
@@ -25,14 +25,13 @@ items:
   package: Outlook_1_7
   children:
   - Outlook_1_7.Office.Item.addHandlerAsync
-  - Outlook_1_7.Office.Item.body
-  - Outlook_1_7.Office.Item.dateTimeCreated
-  - Outlook_1_7.Office.Item.dateTimeModified
-  - Outlook_1_7.Office.Item.itemType
+  - Outlook_1_7.Office.Item.addHandlerAsync_1
   - Outlook_1_7.Office.Item.loadCustomPropertiesAsync
-  - Outlook_1_7.Office.Item.notificationMessages
-  - Outlook_1_7.Office.Item.recurrence
   - Outlook_1_7.Office.Item.removeHandlerAsync
+  - Outlook_1_7.Office.Item.removeHandlerAsync_1
+  - Outlook_1_7.Office.Item.body
+  - Outlook_1_7.Office.Item.itemType
+  - Outlook_1_7.Office.Item.notificationMessages
   - Outlook_1_7.Office.Item.seriesId
 - uid: Outlook_1_7.Office.Item.addHandlerAsync
   summary: >-
@@ -55,7 +54,7 @@ items:
 
     `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: Office.AsyncResult<void>) => void): void;`
   name: addHandlerAsync(eventType, handler, options, callback)
-  fullName: addHandlerAsync
+  fullName: addHandlerAsync(eventType, handler, options, callback)
   langs:
   - typeScript
   type: method
@@ -82,96 +81,62 @@ items:
       description: 省略可能。 メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。
       type:
       - '(result: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_7.Office.Item.body
+- uid: Outlook_1_7.Office.Item.addHandlerAsync_1
   summary: >-
-    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
+    サポートされているイベントのイベント ハンドラーを追加します。
 
 
-    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+
+
+    \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-  name: body
-  fullName: body
+
+    ####例
+
+
+    ```javascript
+
+    function myHandlerFunction(eventarg) {
+        if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
+            var attachment = eventarg.attachmentDetails;
+            console.log("Event Fired and Attachment Added!");
+            getAttachmentContentAsync(attachment.id, options, callback);
+        }
+    }
+
+
+    Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
+
+    ```
+  name: addHandlerAsync(eventType, handler, callback)
+  fullName: addHandlerAsync(eventType, handler, callback)
   langs:
   - typeScript
-  type: property
+  type: method
   syntax:
-    content: 'body: Body;'
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: Office.AsyncResult<void>) => void): void;'
     return:
       type:
-      - Body
-- uid: Outlook_1_7.Office.Item.dateTimeCreated
-  summary: >-
-    アイテムが作成された日時を取得します。閲覧モードのみ。
-
-
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
-  name: dateTimeCreated
-  fullName: dateTimeCreated
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'dateTimeCreated: Date;'
-    return:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを呼び出す必要のあるイベント。
       type:
-      - Date
-- uid: Outlook_1_7.Office.Item.dateTimeModified
-  summary: >-
-    アイテムが最後に変更された日時を取得します。閲覧モードのみ。
-
-
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
-
-
-    注:このメンバーは、Outlook for iOS または Outlook for Android ではサポートされていません。
-  name: dateTimeModified
-  fullName: dateTimeModified
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'dateTimeModified: Date;'
-    return:
+      - Office.EventType
+    - id: handler
+      description: イベントを処理する関数。 関数は、オブジェクト リテラルは、1 つのパラメーターを受け入れる必要があります。 パラメーターの [種類] プロパティには、addHandlerAsync に渡されるイベントの種類のパラメーターが一致します。
       type:
-      - Date
-- uid: Outlook_1_7.Office.Item.itemType
-  summary: >-
-    インスタンスが表しているアイテムの種類を取得します。
-
-
-    itemType プロパティは、ItemType 列挙値の 1 つを返します。これは item オブジェクト インスタンスがメッセージと予定のどちらであるかを示すものです。
-
-
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-  name: itemType
-  fullName: itemType
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'itemType: MailboxEnums.ItemType;'
-    return:
+      - any
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。
       type:
-      - MailboxEnums.ItemType
+      - '(result: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_7.Office.Item.loadCustomPropertiesAsync
   summary: >-
     選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
@@ -189,8 +154,52 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    // The following example shows how to use the loadCustomPropertiesAsync method
+
+    // to asynchronously load custom properties that are specific to the current item.
+
+    // The example also shows how to use the saveAsync method to save these properties
+
+    // back to the server. After loading the custom properties, the example uses the
+
+    // get method to read the custom property myProp, the set method to write the
+
+    // custom property otherProp, and then finally calls the saveAsync method to save
+
+    // the custom properties.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, add-in-specific code can run.
+            var mailbox = Office.context.mailbox;
+            mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+        });
+    };
+
+
+    function customPropsCallback(asyncResult) {
+        var customProps = asyncResult.value;
+        var myProp = customProps.get("myProp");
+
+        customProps.set("otherProp", "value");
+        customProps.saveAsync(saveCallback);
+    }
+
+
+    function saveCallback(asyncResult) {
+
+    }
+
+    ```
   name: loadCustomPropertiesAsync(callback, userContext)
-  fullName: loadCustomPropertiesAsync
+  fullName: loadCustomPropertiesAsync(callback, userContext)
   langs:
   - typeScript
   type: method
@@ -209,57 +218,6 @@ items:
       description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトは、コールバック関数の asyncResult.asyncContext プロパティによってアクセスできます。
       type:
       - any
-- uid: Outlook_1_7.Office.Item.notificationMessages
-  summary: >-
-    アイテムの通知メッセージを取得します。
-
-
-    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-  name: notificationMessages
-  fullName: notificationMessages
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'notificationMessages: NotificationMessages;'
-    return:
-      type:
-      - NotificationMessages
-- uid: Outlook_1_7.Office.Item.recurrence
-  summary: >-
-    予定の定期的なパターンを取得または設定します。 会議出席依頼の定期的なパターンを取得します。 予定アイテムの閲覧モードと新規作成モード。 会議出席依頼アイテムの閲覧モード。
-
-
-    定期的なアイテムのプロパティは、アイテムが系列または系列のインスタンスの場合、定期的な予定または会議出席依頼に定期的なアイテム オブジェクトを返します。 `null` は、単発の予定および単発の予定の会議出席依頼に対して返されます。 `undefined` は、会議出席依頼ではないメッセージに対して返されます。
-
-
-    注: 会議出席依頼は、IPM の itemClass 値を持ちます。Schedule.Meeting.Request。
-
-
-    注: 定期的なアイテム オブジェクトが null の場合は、このことを示しますオブジェクト 1 つの予定または会議出席依頼の 1 つの予定と、シリーズの一部ではないです。
-
-
-    \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-  name: recurrence
-  fullName: recurrence
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'recurrence: Recurrence;'
-    return:
-      type:
-      - Recurrence
 - uid: Outlook_1_7.Office.Item.removeHandlerAsync
   summary: >-
     サポートされているイベントの種類のイベント ハンドラーを削除します。
@@ -281,7 +239,7 @@ items:
 
     `removeHandlerAsync(eventType: Office.EventType, callback?: (result: Office.AsyncResult<void>) => void): void;`
   name: removeHandlerAsync(eventType, options, callback)
-  fullName: removeHandlerAsync
+  fullName: removeHandlerAsync(eventType, options, callback)
   langs:
   - typeScript
   type: method
@@ -304,6 +262,158 @@ items:
       description: 省略可能。 メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。
       type:
       - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Item.removeHandlerAsync_1
+  summary: >-
+    サポートされているイベントの種類のイベント ハンドラーを削除します。
+
+
+    現在サポートされているイベントの種類は、 `Office.EventType.AppointmentTimeChanged` <!-- -->、 `Office.EventType.RecipientsChanged` <!-- -->、および`Office.EventType.RecurrenceChanged` <!-- -->。
+
+
+    \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  name: removeHandlerAsync(eventType, callback)
+  fullName: removeHandlerAsync(eventType, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを取り消すイベント。
+      type:
+      - Office.EventType
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Item.body
+  summary: >-
+    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    // This example gets the body of the message in plain text.
+
+    Office.context.mailbox.item.body.getAsync(
+        "text",
+        { asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Do something with the result
+        });
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value": "TEXT of whole body (including threads below)",
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  name: body
+  fullName: body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Body;'
+    return:
+      type:
+      - Body
+- uid: Outlook_1_7.Office.Item.itemType
+  summary: >-
+    インスタンスが表しているアイテムの種類を取得します。
+
+
+    itemType プロパティは、ItemType 列挙値の 1 つを返します。これは item オブジェクト インスタンスがメッセージと予定のどちらであるかを示すものです。
+
+
+    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
+        // do something
+    } else {
+        // do something else
+    }
+
+    ```
+  name: itemType
+  fullName: itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: MailboxEnums.ItemType;'
+    return:
+      type:
+      - MailboxEnums.ItemType
+- uid: Outlook_1_7.Office.Item.notificationMessages
+  summary: >-
+    アイテムの通知メッセージを取得します。
+
+
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    // Get all notifications
+
+    Office.context.mailbox.item.notificationMessages.getAllAsync(
+        function (asyncResult) {
+            console.log(JSON.stringify(asyncResult));
+        }
+    );
+
+    ```
+  name: notificationMessages
+  fullName: notificationMessages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'notificationMessages: NotificationMessages;'
+    return:
+      type:
+      - NotificationMessages
 - uid: Outlook_1_7.Office.Item.seriesId
   summary: >-
     あるインスタンスが属するシリーズの ID を取得します。
@@ -312,7 +422,7 @@ items:
     OWA と Outlook では、seriesId は、この項目が属する親 (系列) の項目の Exchange Web サービス (EWS) ID を返します。 ただし、iOS および Android で、seriesId は親項目の残りの部分 ID を返します。
 
 
-    注: seriesId プロパティによって返される識別子は、Exchange Web サービスの項目の識別子と同じです。 SeriesId プロパティは、Outlook の他の API で使用される Outlook の Id と同じではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、 [Outlook のアドインから Outlook REST Api を使用して](https://docs.microsoft.com/outlook/add-ins/use-rest-api)参照してください<!-- -->。
+    **注**: seriesId プロパティによって返される識別子は、Exchange Web サービスの項目の識別子と同じです。 SeriesId プロパティは、Outlook の他の API で使用される Outlook の Id と同じではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、 [Outlook のアドインから Outlook REST Api を使用して](https://docs.microsoft.com/outlook/add-ins/use-rest-api)参照してください<!-- -->。
 
 
     SeriesId プロパティが関連アイテムを 1 つの予定などの親項目がない項目の null を返します。 または会議を要求し、会議出席依頼ではない他の項目は undefined を返します。
@@ -324,6 +434,28 @@ items:
 
 
     <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    var seriesId = Office.context.mailbox.item.seriesId;
+
+
+    // The seriesId property returns null for items that do
+
+    // not have parent items (such as single appointments,
+
+    // series items, or meeting requests) and returns
+
+    // undefined for messages that are not meeting requests.
+
+    var isSeriesInstance = (seriesId != null);
+
+    console.log("SeriesId is " + seriesId + " and isSeriesInstance is " + isSeriesInstance);
+
+    ```
   name: seriesId
   fullName: seriesId
   langs:

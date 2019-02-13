@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7b7205e1fd825971a66570b0916317cec4a663cd
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 7b6f2aa8821ff2e4bce9f7b87ae342363d62a680
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769954"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974417"
 items:
 - uid: excel.Excel.ChartLineFormat
   summary: >-
@@ -26,7 +26,10 @@ items:
   - excel.Excel.ChartLineFormat.context
   - excel.Excel.ChartLineFormat.lineStyle
   - excel.Excel.ChartLineFormat.load
+  - excel.Excel.ChartLineFormat.load_1
+  - excel.Excel.ChartLineFormat.load_2
   - excel.Excel.ChartLineFormat.set
+  - excel.Excel.ChartLineFormat.set_1
   - excel.Excel.ChartLineFormat.toJSON
   - excel.Excel.ChartLineFormat.weight
 - uid: excel.Excel.ChartLineFormat.clear
@@ -36,7 +39,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clear()
-  fullName: clear
+  fullName: clear()
   langs:
   - typeScript
   type: method
@@ -96,48 +99,65 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.ChartLineFormat`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ChartLineFormat`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartLineFormat`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-
-    #### <a name="examples"></a>例
-
-
-    ```javascript
-
-    // Set chart major gridlines on value axis to be red.
-
-    Excel.run(function (ctx) {
-        var gridlines = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1").axes.valueAxis.majorGridlines;
-        gridlines.format.line.color = "#FF0000";
-        return ctx.sync().then(function () {
-            console.log("Chart Gridlines Color Updated");
-        });
-    }).catch(function (error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartLineFormat;'
+    content: 'load(option?: Excel.Interfaces.ChartLineFormatLoadOptions): Excel.ChartLineFormat;'
     return:
       type:
       - excel.Excel.ChartLineFormat
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartLineFormatLoadOptions
+- uid: excel.Excel.ChartLineFormat.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartLineFormat;'
+    return:
+      type:
+      - excel.Excel.ChartLineFormat
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Set chart major gridlines on value axis to be red.\nExcel.run(function (ctx) {\n    var gridlines = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.color = \"#FF0000\";\n    return ctx.sync().then(function () {\n        console.log(\"Chart Gridlines Color Updated\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.ChartLineFormat.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartLineFormat;'
+    return:
+      type:
+      - excel.Excel.ChartLineFormat
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartLineFormat.set
   summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
   remarks: >-
@@ -146,7 +166,7 @@ items:
 
     `set(properties: Excel.ChartLineFormat): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -165,10 +185,28 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartLineFormat.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartLineFormat): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartLineFormat
 - uid: excel.Excel.ChartLineFormat.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.ChartLineFormat オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartLineFormatData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

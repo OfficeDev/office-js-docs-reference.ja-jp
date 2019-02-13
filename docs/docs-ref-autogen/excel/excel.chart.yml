@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: dcb1d7a8a8793c9d1e2c4fc6648309b0796660ae
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 4d30b17694b88916e7a36360f3e631d96242d255
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769870"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974599"
 items:
 - uid: excel.Excel.Chart
   summary: >-
@@ -30,11 +30,14 @@ items:
   - excel.Excel.Chart.displayBlanksAs
   - excel.Excel.Chart.format
   - excel.Excel.Chart.getImage
+  - excel.Excel.Chart.getImage_1
   - excel.Excel.Chart.height
   - excel.Excel.Chart.id
   - excel.Excel.Chart.left
   - excel.Excel.Chart.legend
   - excel.Excel.Chart.load
+  - excel.Excel.Chart.load_1
+  - excel.Excel.Chart.load_2
   - excel.Excel.Chart.name
   - excel.Excel.Chart.onActivated
   - excel.Excel.Chart.onDeactivated
@@ -44,7 +47,9 @@ items:
   - excel.Excel.Chart.series
   - excel.Excel.Chart.seriesNameLevel
   - excel.Excel.Chart.set
+  - excel.Excel.Chart.set_1
   - excel.Excel.Chart.setData
+  - excel.Excel.Chart.setData_1
   - excel.Excel.Chart.setPosition
   - excel.Excel.Chart.showAllFieldButtons
   - excel.Excel.Chart.showDataLabelsOverMaximum
@@ -137,7 +142,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -186,7 +191,7 @@ items:
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getImage(width, height, fittingMode)
-  fullName: getImage
+  fullName: getImage(width, height, fittingMode)
   langs:
   - typeScript
   type: method
@@ -209,6 +214,36 @@ items:
       description: (省略可能)(高さと幅の両方が設定されている) 場合は、指定した寸法を指定したグラフを拡大または縮小するために使用するメソッドです。
       type:
       - excel.Excel.ImageFittingMode
+- uid: excel.Excel.Chart.getImage_1
+  summary: >-
+    指定したサイズに合わせてグラフを拡大、縮小することで、グラフを Base64 でエンコードされた画像としてレンダリングします。 縦横比は、サイズ変更の一部として保持されます。
+
+
+    \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getImage(width, height, fittingModeString)
+  fullName: getImage(width, height, fittingModeString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getImage(width?: number, height?: number, fittingModeString?: "Fit" | "FitAndCenter" | "Fill"): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: width
+      description: (省略可能)結果のイメージの幅。
+      type:
+      - number
+    - id: height
+      description: (省略可能)結果のイメージの高さ。
+      type:
+      - number
+    - id: fittingModeString
+      description: (省略可能)(高さと幅の両方が設定されている) 場合は、指定した寸法を指定したグラフを拡大または縮小するために使用するメソッドです。
+      type:
+      - "\"Fit\" | \"FitAndCenter\" | \"Fill\""
 - uid: excel.Excel.Chart.height
   summary: >-
     グラフ オブジェクトの高さをポイント単位で表します。
@@ -275,23 +310,69 @@ items:
       - excel.Excel.ChartLegend
 - uid: excel.Excel.Chart.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): Excel.Chart`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Chart`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get a chart named \"Chart1\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.load('name');\n    return ctx.sync().then(function() {\n            console.log(chart.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): Excel.Chart`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Chart`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Chart`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Chart;'
+    content: 'load(option?: Excel.Interfaces.ChartLoadOptions): Excel.Chart;'
     return:
       type:
       - excel.Excel.Chart
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartLoadOptions
+- uid: excel.Excel.Chart.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Chart;'
+    return:
+      type:
+      - excel.Excel.Chart
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get a chart named \"Chart1\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.load('name');\n    return ctx.sync().then(function() {\n            console.log(chart.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.Chart.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Chart;'
+    return:
+      type:
+      - excel.Excel.Chart
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Chart.name
   summary: " グラフ オブジェクトの名前を表します。\n\n\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
   name: name
@@ -427,7 +508,7 @@ items:
 
     `set(properties: Excel.Chart): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -446,6 +527,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Chart.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Chart): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Chart
 - uid: excel.Excel.Chart.setData
   summary: >-
     グラフのソース データをリセットします。
@@ -453,7 +552,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setData(sourceData, seriesBy)
-  fullName: setData
+  fullName: setData(sourceData, seriesBy)
   langs:
   - typeScript
   type: method
@@ -462,7 +561,7 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Set the sourceData to be \"A1:B4\" and seriesBy to be \"Columns\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var sourceData = \"A1:B4\";\n    chart.setData(sourceData, \"Columns\");\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
     parameters:
     - id: sourceData
       description: データ ソースに対応する range オブジェクトです。
@@ -472,6 +571,32 @@ items:
       description: '方法の列または行がグラフのデータ系列として使用されるかを指定します。 次のいずれか: 自動 (既定)、行、および列です。 詳細については Excel.ChartSeriesBy を参照してください。'
       type:
       - excel.Excel.ChartSeriesBy
+- uid: excel.Excel.Chart.setData_1
+  summary: >-
+    グラフのソース データをリセットします。
+
+
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: setData(sourceData, seriesByString)
+  fullName: setData(sourceData, seriesByString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setData(sourceData: Range, seriesByString?: "Auto" | "Columns" | "Rows"): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Set the sourceData to be \"A1:B4\" and seriesBy to be \"Columns\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var sourceData = \"A1:B4\";\n    chart.setData(sourceData, \"Columns\");\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: sourceData
+      description: データ ソースに対応する range オブジェクトです。
+      type:
+      - Range
+    - id: seriesByString
+      description: '方法の列または行がグラフのデータ系列として使用されるかを指定します。 次のいずれか: 自動 (既定)、行、および列です。 詳細については Excel.ChartSeriesBy を参照してください。'
+      type:
+      - "\"Auto\" | \"Columns\" | \"Rows\""
 - uid: excel.Excel.Chart.setPosition
   summary: >-
     ワークシート上のセルを基準にしてグラフを配置します。
@@ -479,7 +604,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setPosition(startCell, endCell)
-  fullName: setPosition
+  fullName: setPosition(startCell, endCell)
   langs:
   - typeScript
   type: method
@@ -565,7 +690,7 @@ items:
 - uid: excel.Excel.Chart.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。Excel.Chart の元のオブジェクトは、API のオブジェクトは、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

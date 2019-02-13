@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5be3dae9e1d063aaf0ab87c8dae6ee2cf3eebcee
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 9e7758795081c8a15536292bd568fc244f3fb953
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769968"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979933"
 items:
 - uid: excel.Excel.ConditionalFormat
   summary: >-
@@ -37,10 +37,13 @@ items:
   - excel.Excel.ConditionalFormat.iconSetOrNullObject
   - excel.Excel.ConditionalFormat.id
   - excel.Excel.ConditionalFormat.load
+  - excel.Excel.ConditionalFormat.load_1
+  - excel.Excel.ConditionalFormat.load_2
   - excel.Excel.ConditionalFormat.preset
   - excel.Excel.ConditionalFormat.presetOrNullObject
   - excel.Excel.ConditionalFormat.priority
   - excel.Excel.ConditionalFormat.set
+  - excel.Excel.ConditionalFormat.set_1
   - excel.Excel.ConditionalFormat.stopIfTrue
   - excel.Excel.ConditionalFormat.textComparison
   - excel.Excel.ConditionalFormat.textComparisonOrNullObject
@@ -199,7 +202,7 @@ items:
 
     \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -216,7 +219,7 @@ items:
 
     \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -233,7 +236,7 @@ items:
 
     \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeOrNullObject()
-  fullName: getRangeOrNullObject
+  fullName: getRangeOrNullObject()
   langs:
   - typeScript
   type: method
@@ -298,26 +301,65 @@ items:
     だけでなく、この署名は、このメソッドは、次の署名をします。
 
 
+    `load(option?: string | string[]): Excel.ConditionalFormat`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormat`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormat`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ConditionalFormat;'
+    content: 'load(option?: Excel.Interfaces.ConditionalFormatLoadOptions): Excel.ConditionalFormat;'
     return:
       type:
       - excel.Excel.ConditionalFormat
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ConditionalFormatLoadOptions
+- uid: excel.Excel.ConditionalFormat.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.ConditionalFormat.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ConditionalFormat.preset
   summary: >-
     条件を事前に設定された条件付き書式を返します。 詳細については Excel.PresetCriteriaConditionalFormat を参照してください。
@@ -375,7 +417,7 @@ items:
 
     `set(properties: Excel.ConditionalFormat): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -394,6 +436,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ConditionalFormat.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ConditionalFormat): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ConditionalFormat
 - uid: excel.Excel.ConditionalFormat.stopIfTrue
   summary: >-
     この条件付き書式の条件が満たされた場合、優先順位の低い書式はそのセルに影響を及ぼしません。 これらの StopIfTrue の概念がないために、databars、アイコン セット、および colorscales に null します。
@@ -446,7 +506,7 @@ items:
 - uid: excel.Excel.ConditionalFormat.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.ConditionalFormat オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ConditionalFormatData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

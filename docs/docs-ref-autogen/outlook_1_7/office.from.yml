@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: df7f436e878f20213f5017210a23cf421172c8f7
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: fd28d2f87afa87c519ea0aab2c3394849149cdcd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29704129"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979414"
 items:
 - uid: Outlook_1_7.Office.From
   summary: >-
@@ -25,6 +25,7 @@ items:
   package: Outlook_1_7
   children:
   - Outlook_1_7.Office.From.getAsync
+  - Outlook_1_7.Office.From.getAsync_1
 - uid: Outlook_1_7.Office.From.getAsync
   summary: >-
     取得、メッセージの値からです。
@@ -49,7 +50,7 @@ items:
 
     `getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;`
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -63,7 +64,55 @@ items:
     - id: options
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバック メソッドにアクセスする任意のオブジェクトを提供できます。'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。 `value` 、結果のプロパティは、EmailAddressDetails オブジェクトとしての値からのメッセージです。
+      type:
+      - '(result: Office.AsyncResult<EmailAddressDetails>) => void'
+- uid: Outlook_1_7.Office.From.getAsync_1
+  summary: >-
+    取得、メッセージの値からです。
+
+
+    されますメソッドを取得する Exchange サーバーへの非同期呼び出しを開始する、メッセージの値からです。
+
+
+    項目の値から、asyncResult.value プロパティでは、 [Office.EmailAddressDetails](xref:Outlook_1_7.Office.EmailAddressDetails)として提供されています。
+
+
+    \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr></table>
+
+    ####例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.from.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var from = asyncResult.value;
+        console.log("From " + from);
+    }
+
+    ```
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: メソッドが完了すると、パラメーターを 1 つ、asyncResult で、Office.AsyncResult オブジェクトは、コールバック パラメーターで渡された関数が呼び出されます。 `value` 、結果のプロパティは、EmailAddressDetails オブジェクトとしての値からのメッセージです。
       type:

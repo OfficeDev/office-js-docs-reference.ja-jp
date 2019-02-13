@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a5fb3f4975900e0b332201d217c1fc1f28f3616c
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 5bd5b055e39908e3c3fdd513f2d48f9665544f8a
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769961"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978387"
 items:
 - uid: excel.Excel.Table
   summary: >-
@@ -35,12 +35,15 @@ items:
   - excel.Excel.Table.id
   - excel.Excel.Table.legacyId
   - excel.Excel.Table.load
+  - excel.Excel.Table.load_1
+  - excel.Excel.Table.load_2
   - excel.Excel.Table.name
   - excel.Excel.Table.onChanged
   - excel.Excel.Table.onSelectionChanged
   - excel.Excel.Table.reapplyFilters
   - excel.Excel.Table.rows
   - excel.Excel.Table.set
+  - excel.Excel.Table.set_1
   - excel.Excel.Table.showBandedColumns
   - excel.Excel.Table.showBandedRows
   - excel.Excel.Table.showFilterButton
@@ -57,7 +60,7 @@ items:
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clearFilters()
-  fullName: clearFilters
+  fullName: clearFilters()
   langs:
   - typeScript
   type: method
@@ -102,7 +105,7 @@ items:
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: convertToRange()
-  fullName: convertToRange
+  fullName: convertToRange()
   langs:
   - typeScript
   type: method
@@ -119,7 +122,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -136,7 +139,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getDataBodyRange()
-  fullName: getDataBodyRange
+  fullName: getDataBodyRange()
   langs:
   - typeScript
   type: method
@@ -153,7 +156,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getHeaderRowRange()
-  fullName: getHeaderRowRange
+  fullName: getHeaderRowRange()
   langs:
   - typeScript
   type: method
@@ -170,7 +173,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -187,7 +190,7 @@ items:
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getTotalRowRange()
-  fullName: getTotalRowRange
+  fullName: getTotalRowRange()
   langs:
   - typeScript
   type: method
@@ -263,23 +266,69 @@ items:
       - string
 - uid: excel.Excel.Table.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): Excel.Table`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): Excel.Table`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Table`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Table;'
+    content: 'load(option?: Excel.Interfaces.TableLoadOptions): Excel.Table;'
     return:
       type:
       - excel.Excel.Table
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.TableLoadOptions
+- uid: excel.Excel.Table.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: excel.Excel.Table.load_2
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Table.name
   summary: >-
     テーブルの名前。
@@ -337,7 +386,7 @@ items:
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: reapplyFilters()
-  fullName: reapplyFilters
+  fullName: reapplyFilters()
   langs:
   - typeScript
   type: method
@@ -371,7 +420,7 @@ items:
 
     `set(properties: Excel.Table): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -390,6 +439,24 @@ items:
       description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Table.set_1
+  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Table): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Table
 - uid: excel.Excel.Table.showBandedColumns
   summary: >-
     テーブルを見やすくするため、奇数列を偶数列とは異なる方法で強調表示する書式設定にして、列を縞模様で表示するかどうかを示します。
@@ -505,7 +572,7 @@ items:
 - uid: excel.Excel.Table.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.Table オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.TableData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

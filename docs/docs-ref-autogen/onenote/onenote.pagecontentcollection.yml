@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: c2e1992f93d5826cd5296902d4f40d3eb3e36517
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: de85c4939ea97a716609ef6a9359eed8da7bc60a
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385505"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973661"
 items:
 - uid: onenote.OneNote.PageContentCollection
   summary: >-
@@ -27,6 +27,8 @@ items:
   - onenote.OneNote.PageContentCollection.getItemAt
   - onenote.OneNote.PageContentCollection.items
   - onenote.OneNote.PageContentCollection.load
+  - onenote.OneNote.PageContentCollection.load_1
+  - onenote.OneNote.PageContentCollection.load_2
   - onenote.OneNote.PageContentCollection.toJSON
   - onenote.OneNote.PageContentCollection.track
   - onenote.OneNote.PageContentCollection.untrack
@@ -65,7 +67,7 @@ items:
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getItem(index)
-  fullName: getItem
+  fullName: getItem(index)
   langs:
   - typeScript
   type: method
@@ -87,7 +89,7 @@ items:
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -116,27 +118,72 @@ items:
       - OneNote.PageContent[]
 - uid: onenote.OneNote.PageContentCollection.load
   summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: "だけでなく、この署名は、このメソッドは、次の署名をします。\n\n`load(option?: { select?: string; expand?: string; }): OneNote.PageContentCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageContentCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Queue a command to load the type of each pageContent.\n    pageContents.load(\"type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            $.each(pageContents.items, function(index, pageContent) {\n                console.log(\"PageContent type: \" + pageContent.type);\n            });\n        });\n})                \n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n   var page = context.application.getActivePage();\n   var pageContents = page.contents;\n   pageContents.load('type');\n   var outlines = ;\n   return context.sync()\n       .then(function () {      \n              $.each(pageContents.items, function (index, pageContent) {\n                     console.log(pageContent.type);\n                     if (pageContent.type === 'Outline') {\n                           outlines.push(pageContent);\n                     }\n              });\n              $.each(outlines, function (index, outline) {\n                     outline.load(\"id,paragraphs,paragraphs/type\");\n              });\n              return context.sync();\n       })\n       .then(function () {\n              $.each(outlines, function (index, outline) {\n                     console.log(\"An outline was found with id : \" + outline.id);\n              });\n              return Promise.resolve(outlines);\n       });\n});\n```"
+  remarks: >-
+    だけでなく、この署名は、このメソッドは、次の署名をします。
+
+
+    `load(option?: string | string[]): OneNote.PageContentCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.PageContentCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageContentCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.PageContentCollection;'
+    content: 'load(option?: OneNote.Interfaces.PageContentCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.PageContentCollection;'
     return:
       type:
       - onenote.OneNote.PageContentCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - OneNote.Interfaces.PageContentCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
+- uid: onenote.OneNote.PageContentCollection.load_1
+  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.PageContentCollection;'
+    return:
+      type:
+      - onenote.OneNote.PageContentCollection
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Queue a command to load the type of each pageContent.\n    pageContents.load(\"type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            $.each(pageContents.items, function(index, pageContent) {\n                console.log(\"PageContent type: \" + pageContent.type);\n            });\n        });\n})                \n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n   var page = context.application.getActivePage();\n   var pageContents = page.contents;\n   pageContents.load('type');\n   var outlines = ;\n   return context.sync()\n       .then(function () {      \n              $.each(pageContents.items, function (index, pageContent) {\n                     console.log(pageContent.type);\n                     if (pageContent.type === 'Outline') {\n                           outlines.push(pageContent);\n                     }\n              });\n              $.each(outlines, function (index, outline) {\n                     outline.load(\"id,paragraphs,paragraphs/type\");\n              });\n              return context.sync();\n       })\n       .then(function () {\n              $.each(outlines, function (index, outline) {\n                     console.log(\"An outline was found with id : \" + outline.id);\n              });\n              return Promise.resolve(outlines);\n       });\n});\n```"
+    parameters:
+    - id: propertyNames
       description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
       type:
       - string | string[]
+- uid: onenote.OneNote.PageContentCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): OneNote.PageContentCollection;'
+    return:
+      type:
+      - onenote.OneNote.PageContentCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: onenote.OneNote.PageContentCollection.toJSON
   summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`OneNote.PageContentCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`OneNote.Interfaces.PageContentCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -149,7 +196,7 @@ items:
 - uid: onenote.OneNote.PageContentCollection.track
   summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -162,7 +209,7 @@ items:
 - uid: onenote.OneNote.PageContentCollection.untrack
   summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method
