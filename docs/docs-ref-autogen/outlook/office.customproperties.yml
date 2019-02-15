@@ -1,25 +1,21 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1c0864eb0d29c270076960998698da414dc8f165
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 1c7a82e7d218df5010d08d8a3f3782746e6c3319
+ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29976895"
+ms.lasthandoff: 02/15/2019
+ms.locfileid: "30054913"
 items:
 - uid: outlook.Office.CustomProperties
   summary: >-
     CustomProperties オブジェクトは、特定のアイテムに固有の、かつ Outlook のメール アドインに固有のカスタム プロパティを表します。たとえば、メール アドインで、そのアドインをアクティブ化した現在の電子メール メッセージ内の固有のデータを保存する必要があるという状況が考えられます。この場合、後からユーザーが同じメッセージに再びアクセスし、メール アドインを再びアクティブ化すると、このアドインはカスタム プロパティとして保存されたデータを取得できます。
 
 
-    For Mac Outlook は、ユーザーのネットワークがダウンした場合のカスタム プロパティをキャッシュしない、ためメールのアドインは、カスタム プロパティにアクセスできません。
+    Outlook for Mac はカスタムプロパティをキャッシュに入れるわけではないため、ユーザーのネットワークがダウンした場合、メールアドインはカスタムプロパティにアクセスできなくなります。
 
 
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
   name: Office.CustomProperties
   fullName: Office.CustomProperties
   langs:
@@ -30,14 +26,12 @@ items:
   - outlook.Office.CustomProperties.get
   - outlook.Office.CustomProperties.remove
   - outlook.Office.CustomProperties.saveAsync
+  - outlook.Office.CustomProperties.saveAsync_1
+  - outlook.Office.CustomProperties.saveAsync_2
   - outlook.Office.CustomProperties.set
 - uid: outlook.Office.CustomProperties.get
   summary: 指定したカスタム プロパティの値を返します。
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
   name: get(name)
   fullName: get(name)
   langs:
@@ -52,7 +46,7 @@ items:
         指定したカスタム プロパティの値。
 
 
-        \[Api セット: メールボックス 1.0\]
+        \[Api set: Mailbox 1.0\]
     parameters:
     - id: name
       description: 取得するカスタム プロパティの名前。
@@ -64,11 +58,7 @@ items:
 
 
     プロパティを完全に削除するには、CustomProperties オブジェクトの saveAsync メソッドを呼び出す必要があります。
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
   name: remove(name)
   fullName: remove(name)
   langs:
@@ -86,7 +76,7 @@ items:
         削除するプロパティの名前。
 
 
-        \[Api セット: メールボックス 1.0\]
+        \[Api set: Mailbox 1.0\]
       type:
       - string
 - uid: outlook.Office.CustomProperties.saveAsync
@@ -97,14 +87,11 @@ items:
     saveAsync メソッドを使用し、CustomProperties オブジェクトの set メソッドまたは remove メソッドで行ったすべての変更を保持する必要があります。保存操作は非同期です。
 
 
-    コールバック機能を確認し、saveAsync からエラーを処理するようにすることをお勧めします。 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 アドインが切断された状態のときに saveAsync を呼び出すと、saveAsync はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+    コールバック関数で saveAsync のエラーをチェックして処理することをお勧めします。 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態の間にアドインが saveAsync を呼び出すと、saveAsync はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
 
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-
-    ####例
+    ####例えば
 
 
     ```javascript
@@ -176,7 +163,7 @@ items:
       description: ''
     parameters:
     - id: callback
-      description: 省略可能。 メソッドが完了すると、Office.AsyncResult の種類の 1 つのパラメーターでコールバック パラメーターで渡された関数が呼び出されます。
+      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
       - '(result: Office.AsyncResult<void>) => void'
     - id: asyncContext
@@ -184,9 +171,63 @@ items:
         省略可能。 コールバック メソッドに渡される状態データです。
 
 
-        \[Api セット: メールボックス 1.0\]
+        \[Api set: Mailbox 1.0\]
       type:
       - any
+- uid: outlook.Office.CustomProperties.saveAsync_1
+  summary: >-
+    アイテム固有のカスタム プロパティをサーバーに保存します。
+
+
+    saveAsync メソッドを使用し、CustomProperties オブジェクトの set メソッドまたは remove メソッドで行ったすべての変更を保持する必要があります。保存操作は非同期です。
+
+
+    コールバック関数で saveAsync のエラーをチェックして処理することをお勧めします。 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態の間にアドインが saveAsync を呼び出すと、saveAsync はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
+  name: saveAsync(callback)
+  fullName: saveAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(callback?: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: >-
+        省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+
+
+        \[Api set: Mailbox 1.0\]
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: outlook.Office.CustomProperties.saveAsync_2
+  summary: >-
+    アイテム固有のカスタム プロパティをサーバーに保存します。
+
+
+    saveAsync メソッドを使用し、CustomProperties オブジェクトの set メソッドまたは remove メソッドで行ったすべての変更を保持する必要があります。保存操作は非同期です。
+
+
+    コールバック関数で saveAsync のエラーをチェックして処理することをお勧めします。 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態の間にアドインが saveAsync を呼び出すと、saveAsync はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+
+
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
+  name: saveAsync()
+  fullName: saveAsync()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(): void;'
+    return:
+      type:
+      - void
+      description: ''
 - uid: outlook.Office.CustomProperties.set
   summary: >-
     指定のプロパティを指定の値に設定します。
@@ -198,12 +239,8 @@ items:
     指定のプロパティが存在しない場合、set メソッドによって新しいプロパティが作成されます。存在する場合は、既存の値が新しい値に置き換えられます。value パラメーターには任意の型を使用できます。ただし、サーバーには常に文字列として渡されます。
 
 
-    \[[API セット: メールボックス 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
   name: set(name, value)
   fullName: set(name, value)
   langs:

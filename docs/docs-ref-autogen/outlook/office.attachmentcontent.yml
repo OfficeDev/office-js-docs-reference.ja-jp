@@ -1,22 +1,18 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 42fe97363078120d9715b3091764fcd5626d2c6e
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: b52c294c7c7b30390622fec52183f8d455e9060d
+ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980066"
+ms.lasthandoff: 02/15/2019
+ms.locfileid: "30054983"
 items:
 - uid: outlook.Office.AttachmentContent
   summary: >-
-    メッセージまたは予定アイテムに添付ファイルの内容を表します。
+    メッセージアイテムまたは予定アイテムの添付ファイルのコンテンツを表します。
 
 
-    \[[API セット: メールボックス プレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または読み取り</td></tr> </table>
   isPreview: true
   name: Office.AttachmentContent
   fullName: Office.AttachmentContent
@@ -28,7 +24,7 @@ items:
   - outlook.Office.AttachmentContent.content
   - outlook.Office.AttachmentContent.format
 - uid: outlook.Office.AttachmentContent.content
-  summary: 文字列として添付ファイルの内容。
+  summary: 文字列としての添付ファイルの内容。
   isPreview: true
   name: content
   fullName: content
@@ -42,19 +38,19 @@ items:
       - string
 - uid: outlook.Office.AttachmentContent.format
   summary: >-
-    添付ファイルのコンテンツに使用する文字列の形式です。
+    添付ファイルのコンテンツに使用する文字列形式。
 
 
-    ファイルの添付ファイルの base64 でエンコードされた文字列は、書式設定。
+    添付ファイルの場合、書式設定は base64 でエンコードされた文字列です。
 
 
-    項目の添付ファイルのメッセージを表す、書式設定は .eml 形式のファイルを表す文字列です。
+    メッセージを表すアイテムの添付ファイルの場合、書式設定は .eml 形式のファイルを表す文字列です。
 
 
-    項目の添付ファイルの予定表アイテムを表す、書式設定は、.icalendar ファイルを表す文字列。
+    アイテムの添付ファイルが予定表アイテムを表す場合、書式設定は icalendar ファイルを表す文字列になります。
 
 
-    クラウドの添付ファイルの書式設定、URL 文字列です。
+    クラウド添付ファイルの場合、書式設定は URL 文字列です。
   isPreview: true
   name: format
   fullName: format
@@ -66,4 +62,4 @@ items:
     return:
       type:
       - MailboxEnums.AttachmentContentFormat
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\n\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);\n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file\n    if (result.format === Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        // handle file attachment\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        // handle email item attachment\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.ICalendar) {\n        // handle .icalender attachment\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Url) {\n        // handle cloud attachment\n    } else {\n        // handle attachment formats that are not supported\n    }\n}\n```"
+      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\n\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);\n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.\n    if (result.format === Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        // Handle file attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        // Handle email item attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.ICalendar) {\n        // Handle .icalender attachment.\n    } else if (result.format === Office.MailboxEnums.AttachmentContentFormat.Url) {\n        // Handle cloud attachment.\n    } else {\n        // Handle attachment formats that are not supported.\n    }\n}\n```"
