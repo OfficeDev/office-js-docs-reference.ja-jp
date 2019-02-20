@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 09ae4be877fcadf8d226394758f6569dff40a618
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 0cc0db56f3778fc9cef827cc4541bed17a5f34c2
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980290"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30096116"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
-    <span data-ttu-id="4d54b-101">ブックの一部であるワークシート オブジェクトのコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-101">Represents a collection of worksheet objects that are part of the workbook.</span></span>
+    <span data-ttu-id="37aea-101">ブックの一部であるワークシート オブジェクトのコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="37aea-101">Represents a collection of worksheet objects that are part of the workbook.</span></span>
 
 
-    <span data-ttu-id="4d54b-102">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-102">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.WorksheetCollection
   fullName: Excel.WorksheetCollection
   langs:
@@ -22,6 +22,8 @@ items:
   package: excel
   children:
   - excel.Excel.WorksheetCollection.add
+  - excel.Excel.WorksheetCollection.addFromBase64
+  - excel.Excel.WorksheetCollection.addFromBase64_1
   - excel.Excel.WorksheetCollection.context
   - excel.Excel.WorksheetCollection.getActiveWorksheet
   - excel.Excel.WorksheetCollection.getCount
@@ -36,15 +38,19 @@ items:
   - excel.Excel.WorksheetCollection.onActivated
   - excel.Excel.WorksheetCollection.onAdded
   - excel.Excel.WorksheetCollection.onCalculated
+  - excel.Excel.WorksheetCollection.onChanged
   - excel.Excel.WorksheetCollection.onDeactivated
   - excel.Excel.WorksheetCollection.onDeleted
+  - excel.Excel.WorksheetCollection.onFiltered
+  - excel.Excel.WorksheetCollection.onFormatChanged
+  - excel.Excel.WorksheetCollection.onSelectionChanged
   - excel.Excel.WorksheetCollection.toJSON
 - uid: excel.Excel.WorksheetCollection.add
   summary: >-
-    <span data-ttu-id="4d54b-p101">新しいワークシートをブックに追加します。ワークシートは、既存のワークシートの末尾に追加されます。新しく追加したワークシートをアクティブにする場合は、そのワークシートに対して ".activate() を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p101">Adds a new worksheet to the workbook. The worksheet will be added at the end of existing worksheets. If you wish to activate the newly added worksheet, call ".activate() on it.</span></span>
+    <span data-ttu-id="37aea-p101">新しいワークシートをブックに追加します。ワークシートは、既存のワークシートの末尾に追加されます。新しく追加したワークシートをアクティブにする場合は、そのワークシートに対して ".activate() を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p101">Adds a new worksheet to the workbook. The worksheet will be added at the end of existing worksheets. If you wish to activate the newly added worksheet, call ".activate() on it.</span></span>
 
 
-    <span data-ttu-id="4d54b-106">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-106">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-106">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-106">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: add(name)
   fullName: add(name)
   langs:
@@ -55,14 +61,84 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-107\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-107\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-107\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-107\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: name
-      description: <span data-ttu-id="4d54b-p102">省略可能。追加するワークシートの名前。指定する場合、名前は一意である必要があります。指定されていない場合は、Excel が新しいワークシートの名前を決定します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p102">Optional. The name of the worksheet to be added. If specified, name should be unqiue. If not specified, Excel determines the name of the new worksheet.</span></span>
+      description: <span data-ttu-id="37aea-p102">省略可能。追加するワークシートの名前。指定する場合、名前は一意である必要があります。指定されていない場合は、Excel が新しいワークシートの名前を決定します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p102">Optional. The name of the worksheet to be added. If specified, name should be unqiue. If not specified, Excel determines the name of the new worksheet.</span></span>
       type:
       - string
+- uid: excel.Excel.WorksheetCollection.addFromBase64
+  summary: >-
+    <span data-ttu-id="37aea-112">ブックの指定されたワークシートを現在のブックに挿入します。</span><span class="sxs-lookup"><span data-stu-id="37aea-112">Inserts the specified worksheets of a workbook into the current workbook.</span></span>
+
+
+    <span data-ttu-id="37aea-113">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-113">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: <span data-ttu-id="37aea-114">各アイテムが新しい挿入ワークシートの Id を表す配列。</span><span class="sxs-lookup"><span data-stu-id="37aea-114">An array where each item represents the Id of the new inserted worksheet.</span></span>
+    parameters:
+    - id: base64File
+      description: <span data-ttu-id="37aea-115">必須です。</span><span class="sxs-lookup"><span data-stu-id="37aea-115">Required.</span></span> <span data-ttu-id="37aea-116">元のブックを表す Base64 文字列。</span><span class="sxs-lookup"><span data-stu-id="37aea-116">Base64 string representing the source workbook.</span></span>
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: <span data-ttu-id="37aea-117">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-117">Optional.</span></span> <span data-ttu-id="37aea-118">挿入する speified されたワークシート名。</span><span class="sxs-lookup"><span data-stu-id="37aea-118">The speified worksheet names to insert.</span></span> <span data-ttu-id="37aea-119">既定では、元のブックのすべてのワークシートが挿入されます。</span><span class="sxs-lookup"><span data-stu-id="37aea-119">By default it will insert all worksheets from the source workbook.</span></span>
+      type:
+      - string[]
+    - id: positionType
+      description: <span data-ttu-id="37aea-120">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-120">Optional.</span></span> <span data-ttu-id="37aea-121">位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="37aea-121">Insert position type, see Excel.WorksheetPositionType for details.</span></span> <span data-ttu-id="37aea-122">既定値は "Start" です。</span><span class="sxs-lookup"><span data-stu-id="37aea-122">Default is "Start".</span></span>
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: <span data-ttu-id="37aea-123">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-123">Optional.</span></span> <span data-ttu-id="37aea-124">現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。</span><span class="sxs-lookup"><span data-stu-id="37aea-124">The referencing worksheet object or worksheet name/id in the current workbook.</span></span> <span data-ttu-id="37aea-125">既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。</span><span class="sxs-lookup"><span data-stu-id="37aea-125">Default is null and based on the postionType parameter it will insert worksheets at the start or end of the current workbook.</span></span>
+      type:
+      - Worksheet | string
+- uid: excel.Excel.WorksheetCollection.addFromBase64_1
+  summary: >-
+    <span data-ttu-id="37aea-126">ブックの指定されたワークシートを現在のブックに挿入します。</span><span class="sxs-lookup"><span data-stu-id="37aea-126">Inserts the specified worksheets of a workbook into the current workbook.</span></span>
+
+
+    <span data-ttu-id="37aea-127">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-127">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: <span data-ttu-id="37aea-128">各アイテムが新しい挿入ワークシートの Id を表す配列。</span><span class="sxs-lookup"><span data-stu-id="37aea-128">An array where each item represents the Id of the new inserted worksheet.</span></span>
+    parameters:
+    - id: base64File
+      description: <span data-ttu-id="37aea-129">必須です。</span><span class="sxs-lookup"><span data-stu-id="37aea-129">Required.</span></span> <span data-ttu-id="37aea-130">元のブックを表す Base64 文字列。</span><span class="sxs-lookup"><span data-stu-id="37aea-130">Base64 string representing the source workbook.</span></span>
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: <span data-ttu-id="37aea-131">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-131">Optional.</span></span> <span data-ttu-id="37aea-132">挿入する speified されたワークシート名。</span><span class="sxs-lookup"><span data-stu-id="37aea-132">The speified worksheet names to insert.</span></span> <span data-ttu-id="37aea-133">既定では、元のブックのすべてのワークシートが挿入されます。</span><span class="sxs-lookup"><span data-stu-id="37aea-133">By default it will insert all worksheets from the source workbook.</span></span>
+      type:
+      - string[]
+    - id: positionTypeString
+      description: <span data-ttu-id="37aea-134">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-134">Optional.</span></span> <span data-ttu-id="37aea-135">位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="37aea-135">Insert position type, see Excel.WorksheetPositionType for details.</span></span> <span data-ttu-id="37aea-136">既定値は "Start" です。</span><span class="sxs-lookup"><span data-stu-id="37aea-136">Default is "Start".</span></span>
+      type:
+      - "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
+    - id: relativeTo
+      description: <span data-ttu-id="37aea-137">省略可能。</span><span class="sxs-lookup"><span data-stu-id="37aea-137">Optional.</span></span> <span data-ttu-id="37aea-138">現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。</span><span class="sxs-lookup"><span data-stu-id="37aea-138">The referencing worksheet object or worksheet name/id in the current workbook.</span></span> <span data-ttu-id="37aea-139">既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。</span><span class="sxs-lookup"><span data-stu-id="37aea-139">Default is null and based on the postionType parameter it will insert worksheets at the start or end of the current workbook.</span></span>
+      type:
+      - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.context
-  summary: <span data-ttu-id="4d54b-112">オブジェクトに関連付けられた要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="4d54b-112">The request context associated with the object.</span></span> <span data-ttu-id="4d54b-113">これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-113">This connects the add-in's process to the Office host application's process.</span></span>
+  summary: <span data-ttu-id="37aea-140">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="37aea-140">The request context associated with the object.</span></span> <span data-ttu-id="37aea-141">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="37aea-141">This connects the add-in's process to the Office host application's process.</span></span>
   name: context
   fullName: context
   langs:
@@ -75,10 +151,10 @@ items:
       - RequestContext
 - uid: excel.Excel.WorksheetCollection.getActiveWorksheet
   summary: >-
-    <span data-ttu-id="4d54b-114">ブックの、現在作業中のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-114">Gets the currently active worksheet in the workbook.</span></span>
+    <span data-ttu-id="37aea-142">ブックの、現在作業中のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-142">Gets the currently active worksheet in the workbook.</span></span>
 
 
-    <span data-ttu-id="4d54b-115">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-115">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-143">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-143">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getActiveWorksheet()
   fullName: getActiveWorksheet()
   langs:
@@ -89,13 +165,13 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-116\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-116\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-144\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-144\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.WorksheetCollection.getCount
   summary: >-
-    <span data-ttu-id="4d54b-117">コレクションに含まれるワークシートの数を取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-117">Gets the number of worksheets in the collection.</span></span>
+    <span data-ttu-id="37aea-145">コレクションに含まれるワークシートの数を取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-145">Gets the number of worksheets in the collection.</span></span>
 
 
-    <span data-ttu-id="4d54b-118">\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-118">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-146">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-146">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getCount(visibleOnly)
   fullName: getCount(visibleOnly)
   langs:
@@ -109,15 +185,15 @@ items:
       description: ''
     parameters:
     - id: visibleOnly
-      description: <span data-ttu-id="4d54b-p104">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p104">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
+      description: <span data-ttu-id="37aea-p112">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p112">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.getFirst
   summary: >-
-    <span data-ttu-id="4d54b-121">コレクション内の最初のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-121">Gets the first worksheet in the collection.</span></span>
+    <span data-ttu-id="37aea-149">コレクション内の最初のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-149">Gets the first worksheet in the collection.</span></span>
 
 
-    <span data-ttu-id="4d54b-122">\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-122">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-150">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-150">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getFirst(visibleOnly)
   fullName: getFirst(visibleOnly)
   langs:
@@ -128,18 +204,18 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-123\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-123\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-151\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-151\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
-      description: <span data-ttu-id="4d54b-p105">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p105">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
+      description: <span data-ttu-id="37aea-p113">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p113">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.getItem
   summary: >-
-    <span data-ttu-id="4d54b-126">名前または ID を使用して、ワークシート オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-126">Gets a worksheet object using its Name or ID.</span></span>
+    <span data-ttu-id="37aea-154">名前または ID を使用して、ワークシート オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-154">Gets a worksheet object using its Name or ID.</span></span>
 
 
-    <span data-ttu-id="4d54b-127">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-127">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-155">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-155">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItem(key)
   fullName: getItem(key)
   langs:
@@ -153,15 +229,15 @@ items:
       description: ''
     parameters:
     - id: key
-      description: <span data-ttu-id="4d54b-128">ワークシートの名前または ID。</span><span class="sxs-lookup"><span data-stu-id="4d54b-128">The Name or ID of the worksheet.</span></span>
+      description: <span data-ttu-id="37aea-156">ワークシートの名前または ID。</span><span class="sxs-lookup"><span data-stu-id="37aea-156">The Name or ID of the worksheet.</span></span>
       type:
       - string
 - uid: excel.Excel.WorksheetCollection.getItemOrNullObject
   summary: >-
-    <span data-ttu-id="4d54b-p106">名前または ID に基づいて worksheet オブジェクトを取得します。ワークシートが存在しない場合は null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p106">Gets a worksheet object using its Name or ID. If the worksheet does not exist, will return a null object.</span></span>
+    <span data-ttu-id="37aea-p114">名前または ID に基づいて worksheet オブジェクトを取得します。ワークシートが存在しない場合は null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p114">Gets a worksheet object using its Name or ID. If the worksheet does not exist, will return a null object.</span></span>
 
 
-    <span data-ttu-id="4d54b-131">\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-131">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-159">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-159">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItemOrNullObject(key)
   fullName: getItemOrNullObject(key)
   langs:
@@ -175,15 +251,15 @@ items:
       description: ''
     parameters:
     - id: key
-      description: <span data-ttu-id="4d54b-132">ワークシートの名前または ID。</span><span class="sxs-lookup"><span data-stu-id="4d54b-132">The Name or ID of the worksheet.</span></span>
+      description: <span data-ttu-id="37aea-160">ワークシートの名前または ID。</span><span class="sxs-lookup"><span data-stu-id="37aea-160">The Name or ID of the worksheet.</span></span>
       type:
       - string
 - uid: excel.Excel.WorksheetCollection.getLast
   summary: >-
-    <span data-ttu-id="4d54b-133">コレクション内の最後のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-133">Gets the last worksheet in the collection.</span></span>
+    <span data-ttu-id="37aea-161">コレクション内の最後のワークシートを取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-161">Gets the last worksheet in the collection.</span></span>
 
 
-    <span data-ttu-id="4d54b-134">\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-134">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-162">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-162">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getLast(visibleOnly)
   fullName: getLast(visibleOnly)
   langs:
@@ -194,14 +270,14 @@ items:
     return:
       type:
       - excel.Excel.Worksheet
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-135\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-135\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-163\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-163\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
-      description: <span data-ttu-id="4d54b-p107">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-p107">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
+      description: <span data-ttu-id="37aea-p115">省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。</span><span class="sxs-lookup"><span data-stu-id="37aea-p115">Optional. If true, considers only visible worksheets, skipping over any hidden ones.</span></span>
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.items
-  summary: <span data-ttu-id="4d54b-138">このコレクションに読み込まれている子項目を取得します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-138">Gets the loaded child items in this collection.</span></span>
+  summary: <span data-ttu-id="37aea-166">このコレクション内の読み込まれた子アイテムを取得します。</span><span class="sxs-lookup"><span data-stu-id="37aea-166">Gets the loaded child items in this collection.</span></span>
   name: items
   fullName: items
   langs:
@@ -213,18 +289,18 @@ items:
       type:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
-  summary: <span data-ttu-id="4d54b-139">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="4d54b-139">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4d54b-140">"Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="4d54b-140">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="37aea-167">オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。</span><span class="sxs-lookup"><span data-stu-id="37aea-167">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="37aea-168">プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="37aea-168">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="4d54b-141">だけでなく、この署名は、このメソッドは、次の署名をします。</span><span class="sxs-lookup"><span data-stu-id="4d54b-141">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="37aea-169">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="37aea-169">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="4d54b-142">`load(option?: string | string[]): Excel.WorksheetCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="4d54b-142">`load(option?: string | string[]): Excel.WorksheetCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+    <span data-ttu-id="37aea-170">`load(option?: string | string[]): Excel.WorksheetCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="37aea-170">`load(option?: string | string[]): Excel.WorksheetCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
 
 
-    <span data-ttu-id="4d54b-143">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。</span><span class="sxs-lookup"><span data-stu-id="4d54b-143">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="37aea-171">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="37aea-171">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
 
-    <span data-ttu-id="4d54b-144">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`でコレクション型のみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="4d54b-144">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection` - Only available on collection types.</span></span> <span data-ttu-id="4d54b-145">前の署名に似ていますが。</span><span class="sxs-lookup"><span data-stu-id="4d54b-145">It is similar to the preceding signature.</span></span> <span data-ttu-id="4d54b-146">Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-146">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="4d54b-147">Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-147">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="4d54b-148">Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。</span><span class="sxs-lookup"><span data-stu-id="4d54b-148">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="37aea-172">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="37aea-172">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection` - Only available on collection types.</span></span> <span data-ttu-id="37aea-173">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="37aea-173">It is similar to the preceding signature.</span></span> <span data-ttu-id="37aea-174">top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="37aea-174">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="37aea-175">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="37aea-175">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="37aea-176">option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="37aea-176">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
   fullName: load(option)
   langs:
@@ -242,7 +318,7 @@ items:
       type:
       - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.WorksheetCollection.load_1
-  summary: <span data-ttu-id="4d54b-149">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="4d54b-149">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4d54b-150">呼び出す必要があります`context.sync()`プロパティを読み取る前にします。</span><span class="sxs-lookup"><span data-stu-id="4d54b-150">You must call `context.sync()` before reading the properties.</span></span>
+  summary: <span data-ttu-id="37aea-177">オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。</span><span class="sxs-lookup"><span data-stu-id="37aea-177">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="37aea-178">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="37aea-178">You must call `context.sync()` before reading the properties.</span></span>
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -253,10 +329,10 @@ items:
     return:
       type:
       - excel.Excel.WorksheetCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-151\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-151\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-179\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-179\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: <span data-ttu-id="4d54b-152">コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="4d54b-152">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="37aea-180">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="37aea-180">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.WorksheetCollection.load_2
@@ -278,10 +354,10 @@ items:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.WorksheetCollection.onActivated
   summary: >-
-    <span data-ttu-id="4d54b-153">ブック内の任意のワークシートがアクティブになったときに発生します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-153">Occurs when any worksheet in the workbook is activated.</span></span>
+    <span data-ttu-id="37aea-181">ブック内のすべてのワークシートがアクティブになったときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-181">Occurs when any worksheet in the workbook is activated.</span></span>
 
 
-    <span data-ttu-id="4d54b-154">\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-154">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-182">\[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-182">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: onActivated
   fullName: onActivated
   langs:
@@ -292,13 +368,13 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-155\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-155\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-183\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-183\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onAdded
   summary: >-
-    <span data-ttu-id="4d54b-156">新しいワークシートがブックに追加するときに発生します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-156">Occurs when a new worksheet is added to the workbook.</span></span>
+    <span data-ttu-id="37aea-184">新しいワークシートがブックに追加されるときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-184">Occurs when a new worksheet is added to the workbook.</span></span>
 
 
-    <span data-ttu-id="4d54b-157">\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-157">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-185">\[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-185">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: onAdded
   fullName: onAdded
   langs:
@@ -309,13 +385,13 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetAddedEventArgs>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-158\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-158\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-186\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-186\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onCalculated
   summary: >-
-    <span data-ttu-id="4d54b-159">ブック内の任意のワークシートを計算するときに発生します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-159">Occurs when any worksheet in the workbook is calculated.</span></span>
+    <span data-ttu-id="37aea-187">ブック内の任意のワークシートが計算されるときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-187">Occurs when any worksheet in the workbook is calculated.</span></span>
 
 
-    <span data-ttu-id="4d54b-160">\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-160">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-188">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-188">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: onCalculated
   fullName: onCalculated
   langs:
@@ -326,12 +402,29 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onChanged
+  summary: >-
+    <span data-ttu-id="37aea-189">ブック内の任意のワークシートが変更されたときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-189">Occurs when any worksheet in the workbook is changed.</span></span>
+
+
+    <span data-ttu-id="37aea-190">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-190">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: onChanged
+  fullName: onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onDeactivated
   summary: >-
-    <span data-ttu-id="4d54b-161">ブック内の任意のワークシートがアクティブでなくなったときに発生します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-161">Occurs when any worksheet in the workbook is deactivated.</span></span>
+    <span data-ttu-id="37aea-191">ブック内のすべてのワークシートが非アクティブ化されたときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-191">Occurs when any worksheet in the workbook is deactivated.</span></span>
 
 
-    <span data-ttu-id="4d54b-162">\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-162">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-192">\[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-192">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: onDeactivated
   fullName: onDeactivated
   langs:
@@ -342,13 +435,13 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4d54b-163\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4d54b-163\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"37aea-193\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"37aea-193\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onDeleted
   summary: >-
-    <span data-ttu-id="4d54b-164">ブックからワークシートを削除するときに発生します。</span><span class="sxs-lookup"><span data-stu-id="4d54b-164">Occurs when a worksheet is deleted from the workbook.</span></span>
+    <span data-ttu-id="37aea-194">ブックからワークシートが削除されるときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-194">Occurs when a worksheet is deleted from the workbook.</span></span>
 
 
-    <span data-ttu-id="4d54b-165">\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4d54b-165">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="37aea-195">\[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-195">\[ [API set: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: onDeleted
   fullName: onDeleted
   langs:
@@ -359,8 +452,59 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFiltered
+  summary: >-
+    <span data-ttu-id="37aea-196">ワークシートのフィルターがブック内で適用されるときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-196">Occurs when any worksheet's filter is applied in the workbook.</span></span>
+
+
+    <span data-ttu-id="37aea-197">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-197">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFormatChanged
+  summary: >-
+    <span data-ttu-id="37aea-198">ブック内のすべてのワークシートの書式が変更されたときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-198">Occurs when any worksheet in the workbook has format changed.</span></span>
+
+
+    <span data-ttu-id="37aea-199">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-199">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: onFormatChanged
+  fullName: onFormatChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onSelectionChanged
+  summary: >-
+    <span data-ttu-id="37aea-200">ワークシートで選択範囲が変更されたときに発生します。</span><span class="sxs-lookup"><span data-stu-id="37aea-200">Occurs when the selection changes on any worksheet.</span></span>
+
+
+    <span data-ttu-id="37aea-201">\[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37aea-201">\[ [API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+  isPreview: true
+  name: onSelectionChanged
+  fullName: onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.toJSON
-  summary: <span data-ttu-id="4d54b-166">JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。</span><span class="sxs-lookup"><span data-stu-id="4d54b-166">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="4d54b-167">(`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.WorksheetCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorksheetCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。</span><span class="sxs-lookup"><span data-stu-id="4d54b-167">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.WorksheetCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.WorksheetCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
+  summary: <span data-ttu-id="37aea-202">API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="37aea-202">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="37aea-203">(`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。`Excel.WorksheetCollection`元のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドは、コレクションのアイテムから`Excel.Interfaces.WorksheetCollectionData` <!-- -->読み込まれたプロパティの浅いコピーを持つ "items" 配列を含む、プレーンな JavaScript オブジェクト (として型指定) を返します。</span><span class="sxs-lookup"><span data-stu-id="37aea-203">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.WorksheetCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.WorksheetCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
   name: toJSON()
   fullName: toJSON()
   langs:
