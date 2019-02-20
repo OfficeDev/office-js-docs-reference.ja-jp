@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f61e680ba63f386c9e1fd081621a3ebf00f2524a
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
+ms.openlocfilehash: 22640344b302990a1db33da6443ce80f67dd239a
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30054423"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095948"
 items:
 - uid: outlook.Office.Location
   summary: >-
@@ -191,7 +191,24 @@ items:
 
 
     setAsync メソッドは、予定の場所を設定する Exchange サーバーへの非同期呼び出しを開始します。予定の場所を設定すると、現在の場所が上書きされます。
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>
+  remarks: >-
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>
+
+    ####例えば
+
+
+    ```javascript
+
+    Office.context.mailbox.item.location.setAsync(
+        "Room 1",
+        function (asyncResult) {
+            if (asyncResult.status === "failed") {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+        }
+    );
+
+    ```
   name: setAsync(location, callback)
   fullName: setAsync(location, callback)
   langs:

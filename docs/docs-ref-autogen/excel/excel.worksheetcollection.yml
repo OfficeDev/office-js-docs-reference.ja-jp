@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 09ae4be877fcadf8d226394758f6569dff40a618
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 0cc0db56f3778fc9cef827cc4541bed17a5f34c2
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980290"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30096116"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
     ブックの一部であるワークシート オブジェクトのコレクションを表します。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.WorksheetCollection
   fullName: Excel.WorksheetCollection
   langs:
@@ -22,6 +22,8 @@ items:
   package: excel
   children:
   - excel.Excel.WorksheetCollection.add
+  - excel.Excel.WorksheetCollection.addFromBase64
+  - excel.Excel.WorksheetCollection.addFromBase64_1
   - excel.Excel.WorksheetCollection.context
   - excel.Excel.WorksheetCollection.getActiveWorksheet
   - excel.Excel.WorksheetCollection.getCount
@@ -36,15 +38,19 @@ items:
   - excel.Excel.WorksheetCollection.onActivated
   - excel.Excel.WorksheetCollection.onAdded
   - excel.Excel.WorksheetCollection.onCalculated
+  - excel.Excel.WorksheetCollection.onChanged
   - excel.Excel.WorksheetCollection.onDeactivated
   - excel.Excel.WorksheetCollection.onDeleted
+  - excel.Excel.WorksheetCollection.onFiltered
+  - excel.Excel.WorksheetCollection.onFormatChanged
+  - excel.Excel.WorksheetCollection.onSelectionChanged
   - excel.Excel.WorksheetCollection.toJSON
 - uid: excel.Excel.WorksheetCollection.add
   summary: >-
     新しいワークシートをブックに追加します。ワークシートは、既存のワークシートの末尾に追加されます。新しく追加したワークシートをアクティブにする場合は、そのワークシートに対して ".activate() を呼び出します。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(name)
   fullName: add(name)
   langs:
@@ -61,8 +67,78 @@ items:
       description: 省略可能。追加するワークシートの名前。指定する場合、名前は一意である必要があります。指定されていない場合は、Excel が新しいワークシートの名前を決定します。
       type:
       - string
+- uid: excel.Excel.WorksheetCollection.addFromBase64
+  summary: >-
+    ブックの指定されたワークシートを現在のブックに挿入します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: 各アイテムが新しい挿入ワークシートの Id を表す配列。
+    parameters:
+    - id: base64File
+      description: 必須です。 元のブックを表す Base64 文字列。
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: 省略可能。 挿入する speified されたワークシート名。 既定では、元のブックのすべてのワークシートが挿入されます。
+      type:
+      - string[]
+    - id: positionType
+      description: 省略可能。 位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: 省略可能。 現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。 既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。
+      type:
+      - Worksheet | string
+- uid: excel.Excel.WorksheetCollection.addFromBase64_1
+  summary: >-
+    ブックの指定されたワークシートを現在のブックに挿入します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: 各アイテムが新しい挿入ワークシートの Id を表す配列。
+    parameters:
+    - id: base64File
+      description: 必須です。 元のブックを表す Base64 文字列。
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: 省略可能。 挿入する speified されたワークシート名。 既定では、元のブックのすべてのワークシートが挿入されます。
+      type:
+      - string[]
+    - id: positionTypeString
+      description: 省略可能。 位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
+      type:
+      - "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
+    - id: relativeTo
+      description: 省略可能。 現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。 既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。
+      type:
+      - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
   name: context
   fullName: context
   langs:
@@ -78,7 +154,7 @@ items:
     ブックの、現在作業中のワークシートを取得します。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveWorksheet()
   fullName: getActiveWorksheet()
   langs:
@@ -95,7 +171,7 @@ items:
     コレクションに含まれるワークシートの数を取得します。
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount(visibleOnly)
   fullName: getCount(visibleOnly)
   langs:
@@ -117,7 +193,7 @@ items:
     コレクション内の最初のワークシートを取得します。
 
 
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getFirst(visibleOnly)
   fullName: getFirst(visibleOnly)
   langs:
@@ -139,7 +215,7 @@ items:
     名前または ID を使用して、ワークシート オブジェクトを取得します。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
   fullName: getItem(key)
   langs:
@@ -161,7 +237,7 @@ items:
     名前または ID に基づいて worksheet オブジェクトを取得します。ワークシートが存在しない場合は null オブジェクトを返します。
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(key)
   fullName: getItemOrNullObject(key)
   langs:
@@ -183,7 +259,7 @@ items:
     コレクション内の最後のワークシートを取得します。
 
 
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getLast(visibleOnly)
   fullName: getLast(visibleOnly)
   langs:
@@ -201,7 +277,7 @@ items:
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.items
-  summary: このコレクションに読み込まれている子項目を取得します。
+  summary: このコレクション内の読み込まれた子アイテムを取得します。
   name: items
   fullName: items
   langs:
@@ -213,18 +289,18 @@ items:
       type:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
   remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
 
-    `load(option?: string | string[]): Excel.WorksheetCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+    `load(option?: string | string[]): Excel.WorksheetCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
   name: load(option)
   fullName: load(option)
   langs:
@@ -242,7 +318,7 @@ items:
       type:
       - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.WorksheetCollection.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -256,7 +332,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
       type:
       - string | string[]
 - uid: excel.Excel.WorksheetCollection.load_2
@@ -278,10 +354,10 @@ items:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.WorksheetCollection.onActivated
   summary: >-
-    ブック内の任意のワークシートがアクティブになったときに発生します。
+    ブック内のすべてのワークシートがアクティブになったときに発生します。
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onActivated
   fullName: onActivated
   langs:
@@ -295,10 +371,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onAdded
   summary: >-
-    新しいワークシートがブックに追加するときに発生します。
+    新しいワークシートがブックに追加されるときに発生します。
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onAdded
   fullName: onAdded
   langs:
@@ -312,10 +388,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onCalculated
   summary: >-
-    ブック内の任意のワークシートを計算するときに発生します。
+    ブック内の任意のワークシートが計算されるときに発生します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onCalculated
   fullName: onCalculated
   langs:
@@ -326,12 +402,29 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onChanged
+  summary: >-
+    ブック内の任意のワークシートが変更されたときに発生します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onChanged
+  fullName: onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onDeactivated
   summary: >-
-    ブック内の任意のワークシートがアクティブでなくなったときに発生します。
+    ブック内のすべてのワークシートが非アクティブ化されたときに発生します。
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeactivated
   fullName: onDeactivated
   langs:
@@ -345,10 +438,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onDeleted
   summary: >-
-    ブックからワークシートを削除するときに発生します。
+    ブックからワークシートが削除されるときに発生します。
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeleted
   fullName: onDeleted
   langs:
@@ -359,8 +452,59 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFiltered
+  summary: >-
+    ワークシートのフィルターがブック内で適用されるときに発生します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFormatChanged
+  summary: >-
+    ブック内のすべてのワークシートの書式が変更されたときに発生します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFormatChanged
+  fullName: onFormatChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onSelectionChanged
+  summary: >-
+    ワークシートで選択範囲が変更されたときに発生します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onSelectionChanged
+  fullName: onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.WorksheetCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.WorksheetCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
+  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。`Excel.WorksheetCollection`元のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドは、コレクションのアイテムから`Excel.Interfaces.WorksheetCollectionData` <!-- -->読み込まれたプロパティの浅いコピーを持つ "items" 配列を含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
   name: toJSON()
   fullName: toJSON()
   langs:

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 29df3b46a83161a03519e4c55994ccc0e2ff6e7a
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
+ms.openlocfilehash: 13dd2745a2529f50bd41111a641ca5702b55293a
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30055046"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095164"
 items:
 - uid: Outlook_1_3.Office.Item
   summary: >-
@@ -12,11 +12,7 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: Office.Item
   fullName: Office.Item
   langs:
@@ -25,6 +21,7 @@ items:
   package: Outlook_1_3
   children:
   - Outlook_1_3.Office.Item.loadCustomPropertiesAsync
+  - Outlook_1_3.Office.Item.loadCustomPropertiesAsync_1
   - Outlook_1_3.Office.Item.body
   - Outlook_1_3.Office.Item.itemType
   - Outlook_1_3.Office.Item.notificationMessages
@@ -40,11 +37,41 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: loadCustomPropertiesAsync(callback, userContext)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      type:
+      - '(result: Office.AsyncResult<CustomProperties>) => void'
+    - id: userContext
+      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
+      type:
+      - any
+- uid: Outlook_1_3.Office.Item.loadCustomPropertiesAsync_1
+  summary: >-
+    選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
+
+
+    カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
+
+
+    カスタム プロパティは asyncResult.value プロパティの CustomProperties オブジェクトとして指定されます。このオブジェクトは、アイテムからカスタム プロパティを取得、設定、および削除し、カスタム プロパティに対する変更をサーバーに設定し直すために使用できます。
+
+
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -89,13 +116,13 @@ items:
     }
 
     ```
-  name: loadCustomPropertiesAsync(callback, userContext)
-  fullName: loadCustomPropertiesAsync(callback, userContext)
+  name: loadCustomPropertiesAsync(callback)
+  fullName: loadCustomPropertiesAsync(callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void): void;'
     return:
       type:
       - void
@@ -105,10 +132,6 @@ items:
       description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
       - '(result: Office.AsyncResult<CustomProperties>) => void'
-    - id: userContext
-      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
-      type:
-      - any
 - uid: Outlook_1_3.Office.Item.body
   summary: >-
     アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
@@ -116,10 +139,7 @@ items:
 
     \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -164,10 +184,7 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -198,10 +215,7 @@ items:
 
     \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 

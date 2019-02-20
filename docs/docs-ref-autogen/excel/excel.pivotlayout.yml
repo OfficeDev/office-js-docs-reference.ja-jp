@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: c62a352c3a8f6c5f0da6526defd0bf4137251184
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: f75ef1f55d423ee130694bf500e9b6c2127b6b44
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29981774"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095731"
 items:
 - uid: excel.Excel.PivotLayout
   summary: >-
-    ピボット テーブルのレイアウトを表します。
+    ピボットテーブルの視覚的なレイアウトを表します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.PivotLayout
   fullName: Excel.PivotLayout
   langs:
@@ -21,24 +21,50 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.PivotLayout.autoFormat
   - excel.Excel.PivotLayout.context
+  - excel.Excel.PivotLayout.enableFieldList
+  - excel.Excel.PivotLayout.getCell
   - excel.Excel.PivotLayout.getColumnLabelRange
   - excel.Excel.PivotLayout.getDataBodyRange
+  - excel.Excel.PivotLayout.getDataHierarchy
   - excel.Excel.PivotLayout.getFilterAxisRange
+  - excel.Excel.PivotLayout.getPivotItems
+  - excel.Excel.PivotLayout.getPivotItems_1
   - excel.Excel.PivotLayout.getRange
   - excel.Excel.PivotLayout.getRowLabelRange
   - excel.Excel.PivotLayout.layoutType
   - excel.Excel.PivotLayout.load
   - excel.Excel.PivotLayout.load_1
   - excel.Excel.PivotLayout.load_2
+  - excel.Excel.PivotLayout.preserveFormatting
   - excel.Excel.PivotLayout.set
   - excel.Excel.PivotLayout.set_1
+  - excel.Excel.PivotLayout.setAutosortOnCell
+  - excel.Excel.PivotLayout.setAutosortOnCell_1
   - excel.Excel.PivotLayout.showColumnGrandTotals
   - excel.Excel.PivotLayout.showRowGrandTotals
   - excel.Excel.PivotLayout.subtotalLocation
   - excel.Excel.PivotLayout.toJSON
+- uid: excel.Excel.PivotLayout.autoFormat
+  summary: >-
+    True の場合は、書式設定が更新されたとき、またはフィールドが移動されたときに自動的に書式設定されます。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: autoFormat
+  fullName: autoFormat
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'autoFormat: boolean;'
+    return:
+      type:
+      - boolean
 - uid: excel.Excel.PivotLayout.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
   name: context
   fullName: context
   langs:
@@ -49,12 +75,60 @@ items:
     return:
       type:
       - RequestContext
+- uid: excel.Excel.PivotLayout.enableFieldList
+  summary: >-
+    True の場合は、フィールドリストを UI に表示するか非表示にするかを指定します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: enableFieldList
+  fullName: enableFieldList
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'enableFieldList: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.PivotLayout.getCell
+  summary: >-
+    指定したデータ階層、rowitems、および columnitems の共通部分の値を含むピボットテーブルのデータ本文内のセルを取得します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getCell(dataHierarchy, rowItems, columnItems)
+  fullName: getCell(dataHierarchy, rowItems, columnItems)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCell(dataHierarchy: DataPivotHierarchy | string, rowItems: Array<PivotItem | string>, columnItems: Array<PivotItem | string>): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: 指定された値を含む単一のセルを指定する範囲。
+    parameters:
+    - id: dataHierarchy
+      description: 検索するデータ項目を提供する datahierarchy。
+      type:
+      - DataPivotHierarchy | string
+    - id: rowItems
+      description: 検索する値を構成する行軸からの PivotItems。
+      type:
+      - Array<PivotItem | string>
+    - id: columnItems
+      description: 検索する値を設定する列軸からの PivotItems。
+      type:
+      - Array<PivotItem | string>
 - uid: excel.Excel.PivotLayout.getColumnLabelRange
   summary: >-
     ピボットテーブルの列ラベルが存在する範囲を返します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getColumnLabelRange()
   fullName: getColumnLabelRange()
   langs:
@@ -71,7 +145,7 @@ items:
     ピボットテーブルのデータ値が存在する範囲を返します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getDataBodyRange()
   fullName: getDataBodyRange()
   langs:
@@ -83,12 +157,35 @@ items:
       type:
       - excel.Excel.Range
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PivotLayout.getDataHierarchy
+  summary: >-
+    ピボットテーブル内の指定された範囲内の値を計算するために使用される datahierarchy を取得します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getDataHierarchy(cell)
+  fullName: getDataHierarchy(cell)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getDataHierarchy(cell: Range | string): Excel.DataPivotHierarchy;'
+    return:
+      type:
+      - excel.Excel.DataPivotHierarchy
+      description: 指定したセルの値を計算するために使用される DataPivotHierarchy オブジェクト。
+    parameters:
+    - id: cell
+      description: hieararchy データを取得するための、ピボットテーブルデータ本文内の1つのセル。
+      type:
+      - Range | string
 - uid: excel.Excel.PivotLayout.getFilterAxisRange
   summary: >-
     ピボットテーブルのフィルター エリアの範囲を返します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getFilterAxisRange()
   fullName: getFilterAxisRange()
   langs:
@@ -100,12 +197,66 @@ items:
       type:
       - excel.Excel.Range
       description: ''
+- uid: excel.Excel.PivotLayout.getPivotItems
+  summary: >-
+    ピボットテーブル内の指定された範囲内の値を構成する軸から PivotItems を取得します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getPivotItems(axis, cell)
+  fullName: getPivotItems(axis, cell)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<Excel.PivotItem[]>
+      description: 指定された行の値を計算するために使用される PivotItems のコレクション。
+    parameters:
+    - id: axis
+      description: PivotItems の取得元の軸。 "row" または "column" である必要があります。
+      type:
+      - excel.Excel.PivotAxis
+    - id: cell
+      description: PivotItems を取得するための、ピボットテーブルのデータ本文内の1つのセル。
+      type:
+      - Range | string
+- uid: excel.Excel.PivotLayout.getPivotItems_1
+  summary: >-
+    ピボットテーブル内の指定された範囲内の値を構成する軸から PivotItems を取得します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getPivotItems(axisString, cell)
+  fullName: getPivotItems(axisString, cell)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<Excel.PivotItem[]>
+      description: 指定された行の値を計算するために使用される PivotItems のコレクション。
+    parameters:
+    - id: axisString
+      description: PivotItems の取得元の軸。 "row" または "column" である必要があります。
+      type:
+      - "\"Unknown\" | \"Row\" | \"Column\" | \"Data\" | \"Filter\""
+    - id: cell
+      description: PivotItems を取得するための、ピボットテーブルのデータ本文内の1つのセル。
+      type:
+      - Range | string
 - uid: excel.Excel.PivotLayout.getRange
   summary: >-
     フィルター エリアを除く、ピボットテーブルが存在する範囲を返します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
   fullName: getRange()
   langs:
@@ -122,7 +273,7 @@ items:
     ピボットテーブルの行ラベルが存在する範囲を返します。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRowLabelRange()
   fullName: getRowLabelRange()
   langs:
@@ -139,7 +290,7 @@ items:
     このプロパティは、ピボットテーブルのすべてのフィールドの PivotLayoutType を示します。 フィールドによって状態が異なる場合は null 値になります。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: layoutType
   fullName: layoutType
   langs:
@@ -151,18 +302,18 @@ items:
       type:
       - Excel.PivotLayoutType | "Compact" | "Tabular" | "Outline"
 - uid: excel.Excel.PivotLayout.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
   remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
 
-    `load(option?: string | string[]): Excel.PivotLayout`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+    `load(option?: string | string[]): Excel.PivotLayout`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.PivotLayout`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+    `load(option?: { select?: string; expand?: string; }): Excel.PivotLayout`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotLayout`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotLayout`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
   name: load(option)
   fullName: load(option)
   langs:
@@ -180,7 +331,7 @@ items:
       type:
       - excel.Excel.Interfaces.PivotLayoutLoadOptions
 - uid: excel.Excel.PivotLayout.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -194,11 +345,11 @@ items:
       description: ''
     parameters:
     - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
       type:
       - string | string[]
 - uid: excel.Excel.PivotLayout.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -212,13 +363,30 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
       type:
       - '{ select?: string; expand?: string; }'
+- uid: excel.Excel.PivotLayout.preserveFormatting
+  summary: >-
+    True の場合、ピボット、並べ替え、ページフィールドアイテムの変更などの操作によって、レポートが更新または再計算されるときに書式設定が保持されます。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: preserveFormatting
+  fullName: preserveFormatting
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'preserveFormatting: boolean;'
+    return:
+      type:
+      - boolean
 - uid: excel.Excel.PivotLayout.set
-  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
   remarks: >-
-    このメソッドには、次の追加の署名があります。
+    このメソッドには、次の追加のシグネチャがあります。
 
 
     `set(properties: Excel.PivotLayout): void`
@@ -235,15 +403,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
       type:
       - Interfaces.PivotLayoutUpdateData
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.PivotLayout.set_1
-  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -260,12 +428,66 @@ items:
       description: ''
       type:
       - excel.Excel.PivotLayout
+- uid: excel.Excel.PivotLayout.setAutosortOnCell
+  summary: >-
+    指定したセルを使用して自動並べ替えを設定し、並べ替えのすべての条件とコンテキストを自動的に選択します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: setAutosortOnCell(cell, sortby)
+  fullName: setAutosortOnCell(cell, sortby)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAutosortOnCell(cell: Range | string, sortby: Excel.SortBy): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cell
+      description: 1つのセルを使用して、自動並べ替えを適用する抽出条件を取得します。
+      type:
+      - Range | string
+    - id: sortby
+      description: 並べ替えの方向を示します。
+      type:
+      - excel.Excel.SortBy
+- uid: excel.Excel.PivotLayout.setAutosortOnCell_1
+  summary: >-
+    指定したセルを使用して自動並べ替えを設定し、並べ替えのすべての条件とコンテキストを自動的に選択します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: setAutosortOnCell(cell, sortbyString)
+  fullName: setAutosortOnCell(cell, sortbyString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAutosortOnCell(cell: Range | string, sortbyString: "Ascending" | "Descending"): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: cell
+      description: 1つのセルを使用して、自動並べ替えを適用する抽出条件を取得します。
+      type:
+      - Range | string
+    - id: sortbyString
+      description: 並べ替えの方向を示します。
+      type:
+      - "\"Ascending\" | \"Descending\""
 - uid: excel.Excel.PivotLayout.showColumnGrandTotals
   summary: >-
     true の場合、ピボットテーブル レポートに列の総計が表示されます。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showColumnGrandTotals
   fullName: showColumnGrandTotals
   langs:
@@ -281,7 +503,7 @@ items:
     true の場合、ピボットテーブル レポートに行の総計が表示されます。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showRowGrandTotals
   fullName: showRowGrandTotals
   langs:
@@ -297,7 +519,7 @@ items:
     このプロパティは、ピボットテーブルのすべてのフィールドの SubtotalLocationType を示します。 フィールドによって状態が異なる場合は null 値になります。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: subtotalLocation
   fullName: subtotalLocation
   langs:
@@ -309,7 +531,7 @@ items:
       type:
       - Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"
 - uid: excel.Excel.PivotLayout.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.PivotLayout オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.PivotLayoutData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
+  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の PivotLayout オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドは、元のオブジェクトから読み込まれ`Excel.Interfaces.PivotLayoutData` <!-- -->た子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
   name: toJSON()
   fullName: toJSON()
   langs:

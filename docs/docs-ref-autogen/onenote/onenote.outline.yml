@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f34b697a24062068b10fa266d99ceaa356934e85
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 8c912f3eff9b3dd7b813e3af01365f14f7df8905
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29979905"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30093904"
 items:
 - uid: onenote.OneNote.Outline
   summary: >-
@@ -55,7 +55,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Get pageContents of the activePage. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            if (pageContents.items.length != 0 && pageContents.items[0].type == \"Outline\")\n            {\n                // First item is an outline.\n                outline = pageContents.items[0].outline;\n\n                // Queue a command to append a paragraph to the outline.\n                outline.appendHtml(\"<p>new paragraph</p>\");\n\n                // Run the queued commands.\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: html
-      description: 追加する HTML 文字列です。 OneNote アドインの JavaScript API には、[サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html)を参照してください。
+      description: 追加する HTML 文字列です。 OneNote アドインの JavaScript API については、「[サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。
       type:
       - string
 - uid: onenote.OneNote.Outline.appendImage
@@ -73,7 +73,7 @@ items:
     content: 'appendImage(base64EncodedImage: string, width: number, height: number): OneNote.Image;'
     return:
       type:
-      - onenote.OneNote.Image
+      - OneNote.Image
       description: ''
     parameters:
     - id: base64EncodedImage
@@ -141,7 +141,7 @@ items:
       type:
       - string[][]
 - uid: onenote.OneNote.Outline.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
   name: context
   fullName: context
   langs:
@@ -170,7 +170,7 @@ items:
       - string
 - uid: onenote.OneNote.Outline.isTitle
   summary: >-
-    タイトルのアウトラインは、アウトラインを確認してください。
+    アウトラインがタイトルのアウトラインであるかどうかを確認します。
 
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
@@ -186,18 +186,18 @@ items:
       - OfficeExtension.ClientResult<boolean>
       description: ''
 - uid: onenote.OneNote.Outline.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
   remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
 
-    `load(option?: string | string[]): OneNote.Outline`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+    `load(option?: string | string[]): OneNote.Outline`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
 
-    `load(option?: { select?: string; expand?: string; }): OneNote.Outline`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+    `load(option?: { select?: string; expand?: string; }): OneNote.Outline`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Outline`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Outline`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
   name: load(option)
   fullName: load(option)
   langs:
@@ -215,7 +215,7 @@ items:
       type:
       - onenote.OneNote.Interfaces.OutlineLoadOptions
 - uid: onenote.OneNote.Outline.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -229,11 +229,11 @@ items:
       description: ''
     parameters:
     - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
       type:
       - string | string[]
 - uid: onenote.OneNote.Outline.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -247,7 +247,7 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
       type:
       - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.Outline.pageContent
@@ -283,7 +283,7 @@ items:
       type:
       - onenote.OneNote.ParagraphCollection
 - uid: onenote.OneNote.Outline.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の OneNote.Outline オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`OneNote.Interfaces.OutlineData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
+  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の OneNote のアウトラインオブジェクトは API オブジェクトですが、メソッド`toJSON`は、元のオブジェクトから読み込まれた`OneNote.Interfaces.OutlineData` <!-- -->子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -296,7 +296,7 @@ items:
       - onenote.OneNote.Interfaces.OutlineData
       description: ''
 - uid: onenote.OneNote.Outline.track
-  summary: 周囲の文書内の変更に基づいて自動的に調整するオブジェクトを追跡します。 この呼び出しは、context.trackedObjects.add(thisObject) の短縮です。 プロパティを設定するときは、このオブジェクト".sync"の呼び出しで、".run"のバッチ、および get"InvalidObjectPath"エラーの連続実行範囲の外側を使用しているまたは追跡対象のオブジェクトにオブジェクトを追加するのには必要なオブジェクトのメソッドを呼び出して、コレクションのオブジェクトが最初に作成したときです。
+  summary: ドキュメント内の周囲の変更に基づいて自動調整するオブジェクトを追跡します。 この呼び出しは、コンテキストの省略形です。追加 (thisObject)。 このオブジェクトを "sync" という呼び出しの間で使用していて、プロパティを設定するとき、またはオブジェクトでメソッドを呼び出したときに "InvalidObjectPath" エラーが発生する場合は、オブジェクトを追跡対象オブジェクトに追加する必要があります。オブジェクトが最初に作成されたときのコレクションです。
   name: track()
   fullName: track()
   langs:
@@ -309,7 +309,7 @@ items:
       - onenote.OneNote.Outline
       description: ''
 - uid: onenote.OneNote.Outline.untrack
-  summary: リリース履歴管理されていた場合に、このオブジェクトに関連付けられているメモリです。 この呼び出しは、context.trackedObjects.remove(thisObject) の省略形です。 追跡の多くのオブジェクトを持つ速度が遅くなりますホスト アプリケーションでは、そのためできたら、追加するすべてのオブジェクトを解放するために注意してくださいそれらを使用します。 メモリの解放を有効にするには、"context.sync()"を呼び出す必要があります。
+  summary: このオブジェクトが以前に追跡されている場合は、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、コンテキストの短縮形です。 remove (thisObject)。 追跡対象のオブジェクトの数が多いとホストアプリケーションの処理速度が低下するので、追加したオブジェクトはすべて使用した後で解放してください。 メモリリリースを有効にするには、「context. sync ()」を呼び出す必要があります。
   name: untrack()
   fullName: untrack()
   langs:

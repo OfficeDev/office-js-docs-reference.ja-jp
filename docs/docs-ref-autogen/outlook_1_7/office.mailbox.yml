@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 959261dc144c0c903378b3fabbaaf9e40be6b821
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
+ms.openlocfilehash: bfc5a0f42e2481e9b224e2b12b9265c9d2d55893
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30055599"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30098440"
 items:
 - uid: Outlook_1_7.Office.Mailbox
   summary: >-
@@ -24,11 +24,7 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: Office.Mailbox
   fullName: Office.Mailbox
   langs:
@@ -37,6 +33,8 @@ items:
   package: Outlook_1_7
   children:
   - Outlook_1_7.Office.Mailbox.addHandlerAsync
+  - Outlook_1_7.Office.Mailbox.addHandlerAsync_1
+  - Outlook_1_7.Office.Mailbox.addHandlerAsync_2
   - Outlook_1_7.Office.Mailbox.convertToEwsId
   - Outlook_1_7.Office.Mailbox.convertToLocalClientTime
   - Outlook_1_7.Office.Mailbox.convertToRestId
@@ -49,8 +47,12 @@ items:
   - Outlook_1_7.Office.Mailbox.getCallbackTokenAsync_1
   - Outlook_1_7.Office.Mailbox.getCallbackTokenAsync_2
   - Outlook_1_7.Office.Mailbox.getUserIdentityTokenAsync
+  - Outlook_1_7.Office.Mailbox.getUserIdentityTokenAsync_1
   - Outlook_1_7.Office.Mailbox.makeEwsRequestAsync
+  - Outlook_1_7.Office.Mailbox.makeEwsRequestAsync_1
   - Outlook_1_7.Office.Mailbox.removeHandlerAsync
+  - Outlook_1_7.Office.Mailbox.removeHandlerAsync_1
+  - Outlook_1_7.Office.Mailbox.removeHandlerAsync_2
   - Outlook_1_7.Office.Mailbox.diagnostics
   - Outlook_1_7.Office.Mailbox.ewsUrl
   - Outlook_1_7.Office.Mailbox.item
@@ -61,38 +63,11 @@ items:
     サポートされているイベントのイベント ハンドラーを追加します。
 
 
-    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。 プレビューでは`Office.EventType.OfficeThemeChanged` 、もサポートされています。
 
 
     \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.initialize = function (reason) {
-        $(document).ready(function () {
-            Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
-            if (result.status === Office.AsyncResultStatus.Failed) {
-                    // Handle error.
-                }
-            });
-        });
-    };
-
-
-    function loadNewItem(eventArgs) {
-        // Load the properties of the newly selected item.
-        loadProps(Office.context.mailbox.item);
-    }
-
-    ```
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: addHandlerAsync(eventType, handler, options, callback)
   langs:
@@ -121,6 +96,94 @@ items:
       description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
       - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Mailbox.addHandlerAsync_1
+  summary: >-
+    サポートされているイベントのイベント ハンドラーを追加します。
+
+
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+
+
+    \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+
+    ####例えば
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error.
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item.
+        loadProps(Office.context.mailbox.item);
+    }
+
+    ```
+  name: addHandlerAsync(eventType, handler, callback)
+  fullName: addHandlerAsync(eventType, handler, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (type: Office.EventType) => void, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを呼び出す必要のあるイベント。
+      type:
+      - Office.EventType
+    - id: handler
+      description: イベントを処理する関数。 この関数は、1つのパラメーター (オブジェクトリテラル) を受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+      type:
+      - '(type: Office.EventType) => void'
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Mailbox.addHandlerAsync_2
+  summary: >-
+    サポートされているイベントのイベント ハンドラーを追加します。
+
+
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+
+
+    \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+  name: addHandlerAsync(eventType, handler)
+  fullName: addHandlerAsync(eventType, handler)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (type: Office.EventType) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを呼び出す必要のあるイベント。
+      type:
+      - Office.EventType
+    - id: handler
+      description: イベントを処理する関数。 この関数は、1つのパラメーター (オブジェクトリテラル) を受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+      type:
+      - '(type: Office.EventType) => void'
 - uid: Outlook_1_7.Office.Mailbox.convertToEwsId
   summary: >-
     REST 形式のアイテム ID を EWS 形式に変換します。
@@ -134,10 +197,7 @@ items:
 
     \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -186,11 +246,7 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: convertToLocalClientTime(timeValue)
   fullName: convertToLocalClientTime(timeValue)
   langs:
@@ -217,10 +273,7 @@ items:
 
     \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
 
     EWS 経由で取得したアイテム id、または itemId プロパティを使用して取得したアイテム id は、REST api で使用される形式 ( [Outlook メール API](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)や[Microsoft Graph](https://graph.microsoft.io/)<!-- -->など) とは異なる形式を使用します。 converttorestid メソッドは、EWS 形式の id を REST 用の適切な形式に変換します。
@@ -269,11 +322,7 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: convertToUtcClientTime(input)
   fullName: convertToUtcClientTime(input)
   langs:
@@ -312,10 +361,7 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -363,10 +409,7 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -414,10 +457,7 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr> </table>
 
     ####例えば
 
@@ -474,10 +514,7 @@ items:
 
     \[[API set: Mailbox 1.6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>読み取り</td></tr> </table>
 
     ####例えば
 
@@ -584,21 +621,9 @@ items:
 
     \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
-
-
-    このシグネチャに加えて、メソッドのシグネチャは次のとおりです。
-
-
-    `getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void): void;`
-
-
-    `getCallbackTokenAsync(callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;`
-
-    #### <a name="examples"></a>例
+    ####例えば
 
 
     ```javascript
@@ -657,10 +682,7 @@ items:
 
     \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -711,11 +733,7 @@ items:
 
 
     \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: getCallbackTokenAsync(callback, userContext)
   fullName: getCallbackTokenAsync(callback, userContext)
   langs:
@@ -746,29 +764,10 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
 
     getuseridentity tokenasync メソッドは、[アドインとユーザーをサードパーティのシステム](https://docs.microsoft.com/outlook/add-ins/authentication)<!-- -->で識別して認証するために使用できるトークンを返します。
-
-    #### <a name="examples"></a>例
-
-
-    ```javascript
-
-    function getIdentityToken() {
-        Office.context.mailbox.getUserIdentityTokenAsync(cb);
-    }
-
-
-    function cb(asyncResult) {
-        var token = asyncResult.value;
-    }
-
-    ```
   name: getUserIdentityTokenAsync(callback, userContext)
   fullName: getUserIdentityTokenAsync(callback, userContext)
   langs:
@@ -789,6 +788,52 @@ items:
       description: 省略可能。 非同期メソッドに渡される状態データです。\|
       type:
       - any
+- uid: Outlook_1_7.Office.Mailbox.getUserIdentityTokenAsync_1
+  summary: >-
+    ユーザーと Office アドインを識別するトークンを取得します。
+
+
+    トークンは、asyncResult.value プロパティで文字列として提供されます。
+
+
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+
+
+    getuseridentity tokenasync メソッドは、[アドインとユーザーをサードパーティのシステム](https://docs.microsoft.com/outlook/add-ins/authentication)<!-- -->で識別して認証するために使用できるトークンを返します。
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function getIdentityToken() {
+        Office.context.mailbox.getUserIdentityTokenAsync(cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
+  name: getUserIdentityTokenAsync(callback)
+  fullName: getUserIdentityTokenAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUserIdentityTokenAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、プロパティ`asyncResult.error`と`asyncResult.diagnostics`プロパティによって追加情報が提供されることがあります。
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_7.Office.Mailbox.makeEwsRequestAsync
   summary: >-
     ユーザーのメールボックスをホストしている exchange サーバー上の exchange Web サービス (EWS) サービスに対して非同期の要求を行います。
@@ -837,11 +882,81 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+  name: makeEwsRequestAsync(data, callback, userContext)
+  fullName: makeEwsRequestAsync(data, callback, userContext)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'makeEwsRequestAsync(data: any, callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: EWS 要求です。
+      type:
+      - any
+    - id: callback
+      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 結果`value`のプロパティは、文字列として提供された EWS 要求の XML です。 結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+    - id: userContext
+      description: 省略可能。 非同期メソッドに渡される状態データです。
+      type:
+      - any
+- uid: Outlook_1_7.Office.Mailbox.makeEwsRequestAsync_1
+  summary: >-
+    ユーザーのメールボックスをホストしている exchange サーバー上の exchange Web サービス (EWS) サービスに対して非同期の要求を行います。
+
+
+    このような場合は、アドインでは REST API を使用して、代わりにユーザーのメールボックスにアクセスする必要があります。
+
+
+    makeEwsRequestAsync メソッドは、アドインの代わりに Exchange に EWS 要求を送信します。
+
+
+    makeEwsRequestAsync メソッドでは、フォルダー関連アイテムを要求できません。
+
+
+    XML 要求では UTF-8 エンコードを指定する必要があります。 &lt;<!-- -->?xml version = "1.0" encoding = "utf-8"?<!-- -->&gt;
+
+
+    アドインには、makeEwsRequestAsync メソッドを使用するための ReadWriteMailbox アクセス許可が必要です。 makeEwsRequestAsync メソッドで呼び出すことができる ReadWriteMailbox アクセス許可と EWS 操作の使用方法については、「<!-- -->[ユーザーのメールボックスへのメールアドインアクセスのアクセス許可を指定](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)する」を参照してください。
+
+
+    EWS 呼び出しの XML 結果は、asyncResult.value プロパティ内の文字列として提供されています。結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
+
+
+    **注**: このメソッドは、次のシナリオではサポートされていません。
+
+
+    - outlook for iOS または outlook for Android。
+
+
+    - アドインが Gmail メールボックスに読み込まれている場合。
+
+
+    **注**: サーバー管理者は、クライアントアクセスサーバーの ews ディレクトリで oauthauthentication を true に設定して、makeEwsRequestAsync メソッドで EWS 要求を行うことができるようにする必要があります。
+
+
+    *バージョンの相違点*
+
+
+    バージョン 15.0.4535.1004 より前のバージョンの Outlook で実行しているメール アプリで makeEwsRequestAsync メソッドを使う場合は、エンコード値を ISO-8859-1 に設定する必要があります。
+
+
+    `<?xml version="1.0" encoding="iso-8859-1"?>`
+
+
+    Outlook on the web でメール アプリを実行している場合は、エンコード値を設定する必要はありません。mailbox.diagnostics.hostName プロパティを使って、メール アプリを Outlook で実行しているのか、Outlook on the web で実行しているのかを確認できます。mailbox.diagnostics.hostVersion プロパティを使って、どのバージョンの Outlook を使って実行しているかを確認できます。
+
+
+    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成と閲覧</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
     ####例えば
 
@@ -891,13 +1006,13 @@ items:
     }
 
     ```
-  name: makeEwsRequestAsync(data, callback, userContext)
-  fullName: makeEwsRequestAsync(data, callback, userContext)
+  name: makeEwsRequestAsync(data, callback)
+  fullName: makeEwsRequestAsync(data, callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'makeEwsRequestAsync(data: any, callback: (result: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    content: 'makeEwsRequestAsync(data: any, callback: (result: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -911,24 +1026,16 @@ items:
       description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 結果`value`のプロパティは、文字列として提供された EWS 要求の XML です。 結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
       type:
       - '(result: Office.AsyncResult<string>) => void'
-    - id: userContext
-      description: 省略可能。 非同期メソッドに渡される状態データです。
-      type:
-      - any
 - uid: Outlook_1_7.Office.Mailbox.removeHandlerAsync
   summary: >-
     サポートされているイベントの種類のイベント ハンドラーを削除します。
 
 
-    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。 プレビューでは`Office.EventType.OfficeThemeChanged` 、もサポートされています。
 
 
     \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: removeHandlerAsync(eventType, options, callback)
   fullName: removeHandlerAsync(eventType, options, callback)
   langs:
@@ -953,6 +1060,62 @@ items:
       description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
       - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Mailbox.removeHandlerAsync_1
+  summary: >-
+    サポートされているイベントの種類のイベント ハンドラーを削除します。
+
+
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+
+
+    \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+  name: removeHandlerAsync(eventType, callback)
+  fullName: removeHandlerAsync(eventType, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを取り消すイベント。
+      type:
+      - Office.EventType
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_7.Office.Mailbox.removeHandlerAsync_2
+  summary: >-
+    サポートされているイベントの種類のイベント ハンドラーを削除します。
+
+
+    現在、サポートされているイベント`Office.EventType.ItemChanged` <!-- -->の種類はのみです。
+
+
+    \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+  name: removeHandlerAsync(eventType)
+  fullName: removeHandlerAsync(eventType)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: ハンドラーを取り消すイベント。
+      type:
+      - Office.EventType
 - uid: Outlook_1_7.Office.Mailbox.diagnostics
   summary: >-
     Outlook アドインに診断情報を提供します。
@@ -974,11 +1137,7 @@ items:
 
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
   name: diagnostics
   fullName: diagnostics
   langs:
@@ -1002,10 +1161,7 @@ items:
 
     \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
 
     ewsurl の値は、リモートサービスでユーザーのメールボックスへの EWS 呼び出しを行うために使用できます。 たとえば、選択した<!-- -->[アイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモートサービスを作成できます。
@@ -1047,10 +1203,7 @@ items:
 
     \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成または読み取り</td></tr></table>
+    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
 
     office.context.mailbox.resturl が値を使用して、ユーザーのメールボックスへの[REST API](https://docs.microsoft.com/outlook/rest/)呼び出しを行うことができます。

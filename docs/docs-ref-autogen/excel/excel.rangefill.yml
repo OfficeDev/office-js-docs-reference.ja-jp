@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7cf795e16d8b1c4d1b7f31f4c07a8002519356e0
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: aba0c589d55832df817ae004459f6ec4cbe57be9
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980479"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30094016"
 items:
 - uid: excel.Excel.RangeFill
   summary: >-
     Range オブジェクトの背景を表します。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.RangeFill
   fullName: Excel.RangeFill
   langs:
@@ -27,15 +27,19 @@ items:
   - excel.Excel.RangeFill.load
   - excel.Excel.RangeFill.load_1
   - excel.Excel.RangeFill.load_2
+  - excel.Excel.RangeFill.pattern
+  - excel.Excel.RangeFill.patternColor
+  - excel.Excel.RangeFill.patternTintAndShade
   - excel.Excel.RangeFill.set
   - excel.Excel.RangeFill.set_1
+  - excel.Excel.RangeFill.tintAndShade
   - excel.Excel.RangeFill.toJSON
 - uid: excel.Excel.RangeFill.clear
   summary: >-
     範囲の背景をリセットします。
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clear()
   fullName: clear()
   langs:
@@ -49,10 +53,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var rangeFill = range.format.fill;\n    rangeFill.clear();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.RangeFill.color
   summary: >-
-    HTML コードは、フォームの背景の色を表す\#RRGGBB (例:"FFA500")、または名前付きの HTML 色 (例:「オレンジ」)
+    フォーム\#RRGGBB (例: "FFA500") の境界線の色を表す html カラーコード、または名前付きの html 色 (例: "オレンジ")
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: color
   fullName: color
   langs:
@@ -64,7 +68,7 @@ items:
       type:
       - string
 - uid: excel.Excel.RangeFill.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
   name: context
   fullName: context
   langs:
@@ -76,18 +80,18 @@ items:
       type:
       - RequestContext
 - uid: excel.Excel.RangeFill.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
   remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
 
-    `load(option?: string | string[]): Excel.RangeFill`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+    `load(option?: string | string[]): Excel.RangeFill`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.RangeFill`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+    `load(option?: { select?: string; expand?: string; }): Excel.RangeFill`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFill`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFill`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
   name: load(option)
   fullName: load(option)
   langs:
@@ -105,7 +109,7 @@ items:
       type:
       - excel.Excel.Interfaces.RangeFillLoadOptions
 - uid: excel.Excel.RangeFill.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -119,11 +123,11 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var rangeFill = range.format.fill;\n    rangeFill.load('color');\n    return ctx.sync().then(function() {\n        console.log(rangeFill.color);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// The example below sets fill color. \nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.format.fill.color = '0000FF';\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
       type:
       - string | string[]
 - uid: excel.Excel.RangeFill.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -137,13 +141,64 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
       type:
       - '{ select?: string; expand?: string; }'
+- uid: excel.Excel.RangeFill.pattern
+  summary: >-
+    指定範囲のパターンを取得または設定します。 詳細については、「Excel の fillpattern」を参照してください。 LinearGradient および RectangularGradient はサポートされていません。 null 値は、範囲全体に均一なパターンが設定されていないことを示します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: pattern
+  fullName: pattern
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'pattern: Excel.FillPattern | "None" | "Solid" | "Gray50" | "Gray75" | "Gray25" | "Horizontal" | "Vertical" | "Down" | "Up" | "Checker" | "SemiGray75" | "LightHorizontal" | "LightVertical" | "LightDown" | "LightUp" | "Grid" | "CrissCross" | "Gray16" | "Gray8" | "LinearGradient" | "RectangularGradient";'
+    return:
+      type:
+      - Excel.FillPattern | "None" | "Solid" | "Gray50" | "Gray75" | "Gray25" | "Horizontal" | "Vertical" | "Down" | "Up" | "Checker" | "SemiGray75" | "LightHorizontal" | "LightVertical" | "LightDown" | "LightUp" | "Grid" | "CrissCross" | "Gray16" | "Gray8" | "LinearGradient" | "RectangularGradient"
+- uid: excel.Excel.RangeFill.patternColor
+  summary: >-
+    範囲パターンの色を表す html カラーコードを設定します。これ\#は、フォームの RRGGBB (例: "FFA500") または名前付きの html 色 (例: "オレンジ") です。 \#RRGGBB (例: "FFA500") の範囲パターンの色を表す HTML カラーコードを取得します。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: patternColor
+  fullName: patternColor
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'patternColor: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.RangeFill.patternTintAndShade
+  summary: >-
+    指定範囲の塗りつぶしのパターンの色を明るくまたは暗くする倍精度浮動小数点型 (double) の値を設定します。値は、-1 (最も暗い) から 1 (最も明るい) までで、元の色は0です。 パターン tintandshades が一様でない場合は、null が返されます。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: patternTintAndShade
+  fullName: patternTintAndShade
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'patternTintAndShade: number;'
+    return:
+      type:
+      - number
 - uid: excel.Excel.RangeFill.set
-  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
   remarks: >-
-    このメソッドには、次の追加の署名があります。
+    このメソッドには、次の追加のシグネチャがあります。
 
 
     `set(properties: Excel.RangeFill): void`
@@ -160,15 +215,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
       type:
       - Interfaces.RangeFillUpdateData
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.RangeFill.set_1
-  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -185,8 +240,25 @@ items:
       description: ''
       type:
       - excel.Excel.RangeFill
+- uid: excel.Excel.RangeFill.tintAndShade
+  summary: >-
+    指定範囲の塗りつぶしの色を明るくまたは暗くする倍精度浮動小数点型 (double) の値を設定します。値は、-1 (最も暗い) から 1 (最も明るい) までで、元の色は0です。 tintandshades が一様でない場合は、null が返されます。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: tintAndShade
+  fullName: tintAndShade
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tintAndShade: number;'
+    return:
+      type:
+      - number
 - uid: excel.Excel.RangeFill.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.RangeFill オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.RangeFillData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
+  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の rangefill オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドは、元のオブジェクトから読み込まれ`Excel.Interfaces.RangeFillData` <!-- -->た子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
   name: toJSON()
   fullName: toJSON()
   langs:
