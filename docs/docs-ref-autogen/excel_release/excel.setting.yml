@@ -1,0 +1,217 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 80408fb196e30bbfa3f98f7fc7afc5d935721a01
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30111762"
+items:
+- uid: excel_release.Excel.Setting
+  summary: >-
+    setting は、ドキュメントに保持される設定のキーと値のペアを表します (アドインごとのファイルごと)。 これらのカスタムキーと値のペアを使用して、コンテンツアドインまたは作業ウィンドウアドインに必要な状態またはライフサイクル情報を格納できます。 設定はドキュメント内で保持されるため、ユーザー情報やパスワードなどの機密情報や保護された情報を格納する場所ではないことに注意してください。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.Setting
+  fullName: Excel.Setting
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - office.OfficeExtension.ClientObject
+  package: excel_release
+  children:
+  - excel_release.Excel.Setting.context
+  - excel_release.Excel.Setting.delete
+  - excel_release.Excel.Setting.key
+  - excel_release.Excel.Setting.load
+  - excel_release.Excel.Setting.load_1
+  - excel_release.Excel.Setting.load_2
+  - excel_release.Excel.Setting.set
+  - excel_release.Excel.Setting.set_1
+  - excel_release.Excel.Setting.toJSON
+  - excel_release.Excel.Setting.value
+- uid: excel_release.Excel.Setting.context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
+- uid: excel_release.Excel.Setting.delete
+  summary: >-
+    設定を削除します。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: delete()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
+- uid: excel_release.Excel.Setting.key
+  summary: >-
+    Setting の ID を表すキーを返します。読み取り専用。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: key
+  fullName: key
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly key: string;'
+    return:
+      type:
+      - string
+- uid: excel_release.Excel.Setting.load
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): Excel.Setting`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Setting`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.SettingLoadOptions
+- uid: excel_release.Excel.Setting.load_1
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type:
+      - string | string[]
+- uid: excel_release.Excel.Setting.load_2
+  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      type:
+      - '{ select?: string; expand?: string; }'
+- uid: excel_release.Excel.Setting.set
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加のシグネチャがあります。
+
+
+    `set(properties: Excel.Setting): void`
+  name: set(properties, options)
+  fullName: set(properties, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+      type:
+      - Interfaces.SettingUpdateData
+    - id: options
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+      type:
+      - office.OfficeExtension.UpdateOptions
+- uid: excel_release.Excel.Setting.set_1
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Setting): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Setting
+- uid: excel_release.Excel.Setting.toJSON
+  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の Excel 設定オブジェクトは API オブジェクトであるのに対し`toJSON` 、メソッドは、元のオブジェクトから読み込ま`Excel.Interfaces.SettingData` <!-- -->れた子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
+  name: toJSON()
+  fullName: toJSON()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.SettingData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.SettingData
+      description: ''
+- uid: excel_release.Excel.Setting.value
+  summary: >-
+    この設定に格納されている値を表します。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: value
+  fullName: value
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'value: any;'
+    return:
+      type:
+      - any
