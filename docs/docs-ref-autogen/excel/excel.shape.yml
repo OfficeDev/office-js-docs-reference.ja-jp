@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee2491ed2571cd9e34670b0778164ba9452c9bf
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 92c35f5db99c5a152a3b1a23d7f0c058df15bbe1
+ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30108108"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "30303040"
 items:
 - uid: excel.Excel.Shape
   summary: >-
@@ -24,6 +24,7 @@ items:
   children:
   - excel.Excel.Shape.altTextDescription
   - excel.Excel.Shape.altTextTitle
+  - excel.Excel.Shape.connectionSiteCount
   - excel.Excel.Shape.context
   - excel.Excel.Shape.delete
   - excel.Excel.Shape.fill
@@ -101,6 +102,23 @@ items:
     return:
       type:
       - string
+- uid: excel.Excel.Shape.connectionSiteCount
+  summary: >-
+    指定した図形の結合点の数を取得します。値の取得のみ可能です。
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: connectionSiteCount
+  fullName: connectionSiteCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly connectionSiteCount: number;'
+    return:
+      type:
+      - number
 - uid: excel.Excel.Shape.context
   summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
   isPreview: true
@@ -131,7 +149,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shapes = sheet.shapes;\n\n    // load all the shapes in the collection without loading their properties\n    shapes.load(\"items/$none\");\n    await context.sync();\n\n    shapes.items.forEach((shape) => shape.delete());\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.fill
   summary: >-
     shape オブジェクトの塗りつぶしの書式を取得します。 読み取り専用です。
@@ -149,6 +167,7 @@ items:
     return:
       type:
       - excel.Excel.ShapeFill
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foreColor = \"yellow\"\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.geometricShape
   summary: >-
     shape オブジェクトの幾何学的な図形を取得します。 shape オブジェクトが、geometricshape ではなく、他の種類の図形 (画像、SmartArt など) である場合は、エラーがスローされます。
@@ -268,7 +287,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Square\")\n    shape.incrementLeft(-25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: 図形を水平方向にどのくらい移動するかをポイントで指定します。 正の値を指定すると図形は右に移動し、負の値を指定すると左に移動します。 シートが RTL の場合、正の値が指定された IncrementLeft は、図形を右ではなく左に移動します。
@@ -291,7 +310,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    shape.incrementRotation(180);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: 図形を水平方向に回転させる角度を指定します。正の値を指定すると図形は時計回りに回転し、負の値を指定すると反時計回りに回転します。
@@ -314,7 +333,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Pentagon\")\n    shape.incrementTop(25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: 図形を垂直にどのくらい移動するかをポイント単位で指定します。正の値を指定すると図形は下に移動し、負の値を指定すると上に移動します。
@@ -575,6 +594,7 @@ items:
     return:
       type:
       - number
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.triangle);\n    shape.left = 100;\n    shape.top = 300;\n    shape.height = 150;\n    shape.width = 200;\n    shape.rotation = 45;\n    shape.fill.clear();\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.saveAsPicture
   summary: >-
     図形を図として保存し、DPI セットを96に使用して、base64 でエンコードされた文字列の形式で画像を返します。 サポートされるのは、excel 形式の .bmp、excel 形式の .png、excel 形式の .gif、および excel 形式の .gif です。
@@ -638,7 +658,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: 変更後の図形の幅と現在の幅の比率、または変更後の図形の幅と元の幅との比率を指定します。
@@ -649,7 +669,7 @@ items:
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: オプション。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleHeight_1
@@ -680,7 +700,7 @@ items:
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: オプション。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.scaleWidth
@@ -700,7 +720,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: 変更後の図形の幅と現在の幅の比率、または変更後の図形の幅と元の幅との比率を指定します。
@@ -711,7 +731,7 @@ items:
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: オプション。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleWidth_1
@@ -742,7 +762,7 @@ items:
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: オプション。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.set
@@ -809,7 +829,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.setZOrder(Excel.ShapeZOrder.sendBackward);\n    await context.sync();\n});\n```"
     parameters:
     - id: value
       description: 他の図形を基準にして、指定した図形を移動する位置を指定します。 詳細については、「Excel のスナップショット注文」を参照してください。

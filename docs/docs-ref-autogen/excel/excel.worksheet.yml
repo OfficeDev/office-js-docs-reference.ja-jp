@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a3efae33e400954ea270e85c640f6f139cda2004
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 8e825405e1f328ca931354e2d4138476887d2e8d
+ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30095738"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "30303243"
 items:
 - uid: excel.Excel.Worksheet
   summary: >-
@@ -307,7 +307,31 @@ items:
     return:
       type:
       - excel.Excel.RangeAreas
-      description: 検索条件に一致する1つまたは複数の四角形の範囲で構成される rangearea オブジェクト。 一致しない場合、この関数は null オブジェクトを返します。
+      description: >-
+        検索条件に一致する1つまたは複数の四角形の範囲で構成される rangearea オブジェクト。 一致しない場合、この関数は null オブジェクトを返します。
+
+        #### <a name="examples"></a>例
+
+
+        ```typescript
+
+        await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+            const foundRanges = sheet.findAllOrNullObject("Complete", {
+                completeMatch: true,
+                matchCase: false
+            });
+
+            await context.sync();
+
+            if (foundRanges.isNullObject) {
+                console.log("No complete projects");
+            } else {
+                foundRanges.format.fill.color = "green"
+            }
+        });
+
+        ```
     parameters:
     - id: text
       description: 検索する文字列を指定します。
@@ -466,7 +490,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Below example uses range address to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Below example uses a named-range to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeName = 'MyRange';\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: address
-      description: '省略可能。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1: B2" となります。 指定しない場合は、ワークシートの範囲全体が返されます。'
+      description: 'オプション。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1: B2" となります。 指定しない場合は、ワークシートの範囲全体が返されます。'
       type:
       - string
 - uid: excel.Excel.Worksheet.getRangeByIndexes
@@ -520,10 +544,10 @@ items:
     return:
       type:
       - excel.Excel.RangeAreas
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const specifiedRanges = sheet.getRanges(\"D3:D5, G3:G5\");\n    specifiedRanges.format.fill.color = \"pink\";\n\n    await context.sync();\n})\n```"
     parameters:
     - id: address
-      description: '省略可能。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、"A1: B2, A5: B5" とします。 指定しない場合、ワークシート全体の rangearea オブジェクトが返されます。'
+      description: 'オプション。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、"A1: B2, A5: B5" とします。 指定しない場合、ワークシート全体の rangearea オブジェクトが返されます。'
       type:
       - string
 - uid: excel.Excel.Worksheet.getUsedRange
@@ -545,7 +569,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    var usedRange = worksheet.getUsedRange();\n    usedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(usedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: valuesOnly
-      description: '省略可能。 true の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。 \[Api セット: excelapi 1.2\]'
+      description: 'オプション。 true の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。 \[Api セット: excelapi 1.2\]'
       type:
       - boolean
 - uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
