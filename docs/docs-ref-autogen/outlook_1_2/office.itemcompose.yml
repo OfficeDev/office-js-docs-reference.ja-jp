@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6bdd800424d3f4641c93d844c24b4ece418c40ca
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: cb762d427a5a2c48416b6449226ac7c7a161f7e6
+ms.sourcegitcommit: 5c1011d5e46e007fd1f7f620d4dff74356dcd029
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30096053"
+ms.lasthandoff: 03/01/2019
+ms.locfileid: "30358842"
 items:
 - uid: Outlook_1_2.Office.ItemCompose
   summary: >-
@@ -23,19 +23,14 @@ items:
   children:
   - Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync
   - Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync_1
-  - Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync_2
   - Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync
   - Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync_1
-  - Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync_2
   - Outlook_1_2.Office.ItemCompose.getSelectedDataAsync
   - Outlook_1_2.Office.ItemCompose.getSelectedDataAsync_1
   - Outlook_1_2.Office.ItemCompose.removeAttachmentAsync
   - Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_1
-  - Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_2
-  - Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_3
   - Outlook_1_2.Office.ItemCompose.setSelectedDataAsync
   - Outlook_1_2.Office.ItemCompose.setSelectedDataAsync_1
-  - Outlook_1_2.Office.ItemCompose.setSelectedDataAsync_2
   - Outlook_1_2.Office.ItemCompose.subject
 - uid: Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync
   summary: >-
@@ -56,7 +51,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -71,47 +66,14 @@ items:
       type:
       - string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 isinline: true の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
+      description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 isinline: true の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
       type:
-      - Office.AsyncContextOptions
+      - 'Office.AsyncContextOptions & { isInline: boolean }'
     - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトにはエラーについて説明する Error オブジェクトが入ります。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトにはエラーについて説明する Error オブジェクトが入ります。
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync_1
-  summary: >-
-    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
-
-
-    addFileAttachmentAsync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
-
-
-    その後、removeAttachmentAsync メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>attachmentsizeexceeded-添付ファイルが許可されているサイズを超えています。</td></tr> <tr><td></td><td>filetypenotsupported-添付ファイルに許可されていない拡張子が付いています。</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-  name: addFileAttachmentAsync(uri, attachmentName)
-  fullName: addFileAttachmentAsync(uri, attachmentName)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: uri
-      description: メッセージまたは予定に添付するファイルの場所を示す URI。最大長は 2048 文字です。
-      type:
-      - string
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。最大長は 255 文字です。
-      type:
-      - string
-- uid: Outlook_1_2.Office.ItemCompose.addFileAttachmentAsync_2
   summary: >-
     ファイルを添付ファイルとしてメッセージまたは予定に追加します。
 
@@ -130,7 +92,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -145,9 +107,9 @@ items:
       type:
       - string
     - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトにはエラーについて説明する Error オブジェクトが入ります。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトにはエラーについて説明する Error オブジェクトが入ります。
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync
   summary: >-
     メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
@@ -170,7 +132,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -185,50 +147,14 @@ items:
       type:
       - string
     - id: options
-      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
       type:
       - Office.AsyncContextOptions
     - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync_1
-  summary: >-
-    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
-
-
-    addItemAttachmentAsync メソッドは、指定した Exchange 識別子を含むアイテムを、作成フォーム内のアイテムに添付します。コールバック メソッドを指定した場合、メソッドは添付ファイルの識別子、またはアイテムの添付中に発生したすべてのエラーを含む asyncResult という 1 つのパラメーターで呼び出されます。options パラメーターを使用して、必要に応じてコールバック メソッドに状態情報を渡すことができます。
-
-
-    その後、removeAttachmentAsync メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
-
-
-    Office アドインを Outlook Web App で実行している場合、addItemAttachmentAsync メソッドはアイテムを、編集中のアイテム以外のアイテムに添付できますが、これはサポートされておらず、推奨されていません。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-  name: addItemAttachmentAsync(itemId, attachmentName)
-  fullName: addItemAttachmentAsync(itemId, attachmentName)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemId
-      description: 添付するアイテムの Exchange 識別子。最大長は 100 文字です。
-      type:
-      - any
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。最大長は 255 文字です。
-      type:
-      - string
-- uid: Outlook_1_2.Office.ItemCompose.addItemAttachmentAsync_2
   summary: >-
     メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
 
@@ -250,7 +176,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback: (result: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -265,9 +191,9 @@ items:
       type:
       - string
     - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
       type:
-      - '(result: Office.AsyncResult<string>) => void'
+      - '(asyncResult: Office.AsyncResult<string>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.getSelectedDataAsync
   summary: >-
     メッセージの件名または本文から非同期的に選択したデータを返します。
@@ -287,7 +213,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, options: Office.AsyncContextOptions, callback: (result: Office.AsyncResult<any>) => void): void;'
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
     return:
       type:
       - void
@@ -304,7 +230,7 @@ items:
     - id: callback
       description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
-      - '(result: Office.AsyncResult<any>) => void'
+      - '(asyncResult: Office.AsyncResult<any>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.getSelectedDataAsync_1
   summary: >-
     メッセージの件名または本文から非同期的に選択したデータを返します。
@@ -324,7 +250,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, callback: (result: Office.AsyncResult<any>) => void): void;'
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
     return:
       type:
       - void
@@ -337,7 +263,7 @@ items:
     - id: callback
       description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
-      - '(result: Office.AsyncResult<any>) => void'
+      - '(asyncResult: Office.AsyncResult<any>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.removeAttachmentAsync
   summary: >-
     メッセージまたは予定から添付ファイルを削除します。
@@ -354,7 +280,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -365,70 +291,14 @@ items:
       type:
       - string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
       type:
       - Office.AsyncContextOptions
     - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_1
-  summary: >-
-    メッセージまたは予定から添付ファイルを削除します。
-
-
-    removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じるか、ユーザーがインライン フォームで新規作成を開始し、フォームが表示され、別ウィンドウで操作を継続すると、セッションは終了します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-  name: removeAttachmentAsync(attachmentId)
-  fullName: removeAttachmentAsync(attachmentId)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: 削除する添付ファイルの識別子。
-      type:
-      - string
-- uid: Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_2
-  summary: >-
-    メッセージまたは予定から添付ファイルを削除します。
-
-
-    removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じるか、ユーザーがインライン フォームで新規作成を開始し、フォームが表示され、別ウィンドウで操作を継続すると、セッションは終了します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-  name: removeAttachmentAsync(attachmentId, options)
-  fullName: removeAttachmentAsync(attachmentId, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: 削除する添付ファイルの識別子。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-- uid: Outlook_1_2.Office.ItemCompose.removeAttachmentAsync_3
   summary: >-
     メッセージまたは予定から添付ファイルを削除します。
 
@@ -444,7 +314,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -455,9 +325,9 @@ items:
       type:
       - string
     - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.setSelectedDataAsync
   summary: >-
     メッセージの本文または件名に非同期的にデータを挿入します。
@@ -474,7 +344,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -485,40 +355,14 @@ items:
       type:
       - string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: テキストの場合、現在のスタイルが outlook Web App および outlook で適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でも、テキスト データのみが挿入されます。 html とフィールドが html をサポートしている場合 (件名は含まれません)、現在のスタイルが outlook Web App で適用され、既定のスタイルが outlook で適用されます。 フィールドがテキストフィールドの場合は、InvalidDataFormat エラーが返されます。 coercionType が設定されていない場合、結果はフィールドに依存します。フィールドが HTML フィールドであれば HTML が使用され、フィールドがテキスト フィールドであればプレーン テキストが使用されます。'
+      description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: テキストの場合、現在のスタイルが outlook Web App および outlook で適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でも、テキスト データのみが挿入されます。 html とフィールドが html をサポートしている場合 (件名は含まれません)、現在のスタイルが outlook Web App で適用され、既定のスタイルが outlook で適用されます。 フィールドがテキストフィールドの場合は、InvalidDataFormat エラーが返されます。 coercionType が設定されていない場合、結果はフィールドに依存します。フィールドが HTML フィールドであれば HTML が使用され、フィールドがテキスト フィールドであればプレーン テキストが使用されます。'
       type:
       - Office.AsyncContextOptions & CoercionTypeOptions
     - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.setSelectedDataAsync_1
-  summary: >-
-    メッセージの本文または件名に非同期的にデータを挿入します。
-
-
-    setselecteddataasync メソッドは、指定された文字列を、アイテムの件名または本文にあるカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルが本文または件名フィールドにない場合は、エラーが返されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
-
-
-    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-  name: setSelectedDataAsync(data)
-  fullName: setSelectedDataAsync(data)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setSelectedDataAsync(data: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: 挿入するデータ。データは 1,000,000 文字を超えてはいけません。1,000,000 文字を超える文字が渡されると、ArgumentOutOfRange の例外がスローされます。
-      type:
-      - string
-- uid: Outlook_1_2.Office.ItemCompose.setSelectedDataAsync_2
   summary: >-
     メッセージの本文または件名に非同期的にデータを挿入します。
 
@@ -534,7 +378,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'setSelectedDataAsync(data: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -545,9 +389,9 @@ items:
       type:
       - string
     - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
       type:
-      - '(result: Office.AsyncResult<void>) => void'
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_2.Office.ItemCompose.subject
   summary: >-
     アイテムの件名フィールドに示される説明を取得または設定します。
