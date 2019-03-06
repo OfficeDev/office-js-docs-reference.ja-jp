@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: cf53d2f1b4be020686b4df6de8468a6c9bda276a
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 5f9aebbab6f3c0ec1756cf2a6c5419d6db6ca08a
+ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30107681"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "30413848"
 items:
 - uid: excel.Excel.RemoveDuplicatesResult
   summary: >-
@@ -43,7 +43,7 @@ items:
       type:
       - RequestContext
 - uid: excel.Excel.RemoveDuplicatesResult.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
   remarks: >-
     このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
@@ -73,7 +73,7 @@ items:
       type:
       - excel.Excel.Interfaces.RemoveDuplicatesResultLoadOptions
 - uid: excel.Excel.RemoveDuplicatesResult.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   isPreview: true
   name: load(propertyNames)
   fullName: load(propertyNames)
@@ -92,7 +92,7 @@ items:
       type:
       - string | string[]
 - uid: excel.Excel.RemoveDuplicatesResult.load_2
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   isPreview: true
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
@@ -112,7 +112,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.RemoveDuplicatesResult.removed
   summary: >-
-    操作によって削除された重複した行の数。
+    操作によって削除された重複行の数。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -143,7 +143,7 @@ items:
       description: ''
 - uid: excel.Excel.RemoveDuplicatesResult.uniqueRemaining
   summary: >-
-    結果の範囲内に存在する残りの一意の行の数。
+    結果として生じた範囲に存在する残りの一意の行の数。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -158,3 +158,4 @@ items:
     return:
       type:
       - number
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:D11\");\n\n    const deleteResult = range.removeDuplicates([0],true);    \n    deleteResult.load();    \n    await context.sync();\n\n    console.log(deleteResult.removed + \" entries with duplicate names removed.\");\n    console.log(deleteResult.uniqueRemaining + \" entries with unique names remain in the range.\");\n});\n```"
