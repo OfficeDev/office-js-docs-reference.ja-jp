@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: c827b346f429c90b6637cbaefe26dfa1c8677bb0
-ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
+ms.openlocfilehash: e6a2dd64fbef5ae636f64d3e17a129fb476fdd71
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "30303117"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575677"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
@@ -69,7 +69,7 @@ items:
       - string
 - uid: excel.Excel.WorksheetCollection.addFromBase64
   summary: >-
-    ブックの指定されたワークシートを現在のブックに挿入します。
+    あるブックの指定されたワークシートを現在のブックに挿入します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -84,27 +84,27 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<string[]>
-      description: "各アイテムが新しい挿入ワークシートの Id を表す配列。\n#### <a name=\"examples\"></a>例\n\n```javascript\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = (<string>(<FileReader>event.target).result).indexOf(\"base64,\");\n        const workbookContents = (<string>(<FileReader>event.target).result).substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
+      description: "新しく挿入された各ワークシートに対応する id の配列を格納します。\n#### <a name=\"examples\"></a>例\n\n```javascript\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = (<string>(<FileReader>event.target).result).indexOf(\"base64,\");\n        const workbookContents = (<string>(<FileReader>event.target).result).substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
     parameters:
     - id: base64File
-      description: 必須です。 元のブックを表す Base64 文字列。
+      description: 必須。 元のブックファイルを表す base64 でエンコードされた文字列。
       type:
       - string
     - id: sheetNamesToInsert
-      description: オプション。 挿入する speified されたワークシート名。 既定では、元のブックのすべてのワークシートが挿入されます。
+      description: 省略可能。 挿入する個々のワークシートの名前を入力します。 既定では、元のブックのすべてのワークシートが挿入されます。
       type:
       - string[]
     - id: positionType
-      description: オプション。 位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
+      description: 省略可能。 現在のブックでは、新しいワークシートが挿入されます。 詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
       type:
       - excel.Excel.WorksheetPositionType
     - id: relativeTo
-      description: オプション。 現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。 既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。
+      description: 省略可能。 positiontype パラメーターに対して参照されている現在のブックのワークシート。 既定値は null で、positiontype に基づいて、現在のブックの先頭または末尾にワークシートを挿入します。
       type:
       - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.addFromBase64_1
   summary: >-
-    ブックの指定されたワークシートを現在のブックに挿入します。
+    あるブックの指定されたワークシートを現在のブックに挿入します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -119,22 +119,22 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<string[]>
-      description: 各アイテムが新しい挿入ワークシートの Id を表す配列。
+      description: 新しく挿入された各ワークシートに対応する id の配列を格納します。
     parameters:
     - id: base64File
-      description: 必須です。 元のブックを表す Base64 文字列。
+      description: 必須。 元のブックファイルを表す base64 でエンコードされた文字列。
       type:
       - string
     - id: sheetNamesToInsert
-      description: オプション。 挿入する speified されたワークシート名。 既定では、元のブックのすべてのワークシートが挿入されます。
+      description: 省略可能。 挿入する個々のワークシートの名前を入力します。 既定では、元のブックのすべてのワークシートが挿入されます。
       type:
       - string[]
     - id: positionTypeString
-      description: オプション。 位置の種類を挿入します。詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
+      description: 省略可能。 現在のブックでは、新しいワークシートが挿入されます。 詳細については、「Excel. ワークシートの種類」を参照してください。 既定値は "Start" です。
       type:
       - "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: オプション。 現在のブックの参照元の worksheet オブジェクトまたはワークシートの名前または id。 既定値は null で、現在のブックの先頭または末尾にワークシートを挿入します。
+      description: 省略可能。 positiontype パラメーターに対して参照されている現在のブックのワークシート。 既定値は null で、positiontype に基づいて、現在のブックの先頭または末尾にワークシートを挿入します。
       type:
       - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.context
@@ -185,7 +185,7 @@ items:
       description: ''
     parameters:
     - id: visibleOnly
-      description: 省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.getFirst
@@ -207,7 +207,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
-      description: 省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.getItem
@@ -234,7 +234,7 @@ items:
       - string
 - uid: excel.Excel.WorksheetCollection.getItemOrNullObject
   summary: >-
-    名前または ID に基づいて worksheet オブジェクトを取得します。ワークシートが存在しない場合は null オブジェクトを返します。
+    名前または ID を使用して、ワークシート オブジェクトを取得します。 ワークシートが存在しない場合は null オブジェクトを返します。
 
 
     \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -273,11 +273,11 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
     parameters:
     - id: visibleOnly
-      description: 省略可能。true の場合、非表示のワークシートをスキップし、表示可能なワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.items
-  summary: このコレクション内の読み込まれた子アイテムを取得します。
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
   name: items
   fullName: items
   langs:
@@ -289,7 +289,7 @@ items:
       type:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
   remarks: >-
     このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
@@ -318,7 +318,7 @@ items:
       type:
       - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.WorksheetCollection.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -404,7 +404,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onChanged
   summary: >-
-    ブック内の任意のワークシートが変更されたときに発生します。
+    ブックのワークシートが変更されたときに発生します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -454,7 +454,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onFiltered
   summary: >-
-    ワークシートのフィルターがブック内で適用されるときに発生します。
+    ブック内でワークシートのフィルターが適用されたときに発生します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -471,7 +471,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
 - uid: excel.Excel.WorksheetCollection.onFormatChanged
   summary: >-
-    ブック内のすべてのワークシートの書式が変更されたときに発生します。
+    ブック内のワークシートの書式が変更されたときに発生します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -488,7 +488,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onSelectionChanged
   summary: >-
-    ワークシートで選択範囲が変更されたときに発生します。
+    ワークシートで選択範囲を変更したときに発生します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -504,7 +504,7 @@ items:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.toJSON
-  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。`Excel.WorksheetCollection`元のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドは、コレクションのアイテムから`Excel.Interfaces.WorksheetCollectionData` <!-- -->読み込まれたプロパティの浅いコピーを持つ "items" 配列を含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
+  summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.WorksheetCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.WorksheetCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
   name: toJSON()
   fullName: toJSON()
   langs:

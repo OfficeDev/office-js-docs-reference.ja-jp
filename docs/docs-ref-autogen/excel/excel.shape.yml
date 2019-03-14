@@ -1,14 +1,14 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4438c2b727e8957db232766dbffb6b4f9e5670d1
-ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
+ms.openlocfilehash: 67621ae13426a756364e0cd8e317a2635a1bc17e
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "30413862"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575685"
 items:
 - uid: excel.Excel.Shape
   summary: >-
-    ワークシートの標準図形オブジェクトを表します。
+    ワークシートの標準図形オブジェクトを表します。 図形とは、幾何学的な図形、線、図形のグループなどのことです。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -30,6 +30,8 @@ items:
   - excel.Excel.Shape.fill
   - excel.Excel.Shape.geometricShape
   - excel.Excel.Shape.geometricShapeType
+  - excel.Excel.Shape.getAsImage
+  - excel.Excel.Shape.getAsImage_1
   - excel.Excel.Shape.group
   - excel.Excel.Shape.height
   - excel.Excel.Shape.id
@@ -51,8 +53,6 @@ items:
   - excel.Excel.Shape.parentGroup
   - excel.Excel.Shape.placement
   - excel.Excel.Shape.rotation
-  - excel.Excel.Shape.saveAsPicture
-  - excel.Excel.Shape.saveAsPicture_1
   - excel.Excel.Shape.scaleHeight
   - excel.Excel.Shape.scaleHeight_1
   - excel.Excel.Shape.scaleWidth
@@ -70,7 +70,7 @@ items:
   - excel.Excel.Shape.zorderPosition
 - uid: excel.Excel.Shape.altTextDescription
   summary: >-
-    Shape オブジェクトを Web ページに保存するときに、そのオブジェクトの代替説明テキスト文字列を設定または返します。
+    Shape オブジェクトの代替説明テキストを設定または返します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -87,7 +87,7 @@ items:
       - string
 - uid: excel.Excel.Shape.altTextTitle
   summary: >-
-    Shape オブジェクトを Web ページに保存するときに、そのオブジェクトの代替タイトル テキスト文字列を設定または返します。
+    Shape オブジェクトの代替タイトルテキストを設定または返します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -104,7 +104,7 @@ items:
       - string
 - uid: excel.Excel.Shape.connectionSiteCount
   summary: >-
-    指定した図形の結合点の数を取得します。 値の取得のみ可能です。
+    この図形にある接続サイトの数を返します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -134,7 +134,7 @@ items:
       - RequestContext
 - uid: excel.Excel.Shape.delete
   summary: >-
-    図形を削除します。
+    ワークシートから図形を削除します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -152,7 +152,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shapes = sheet.shapes;\n\n    // load all the shapes in the collection without loading their properties\n    shapes.load(\"items/$none\");\n    await context.sync();\n\n    shapes.items.forEach((shape) => shape.delete());\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.fill
   summary: >-
-    図形オブジェクトの塗りつぶし設定を返します。 値の取得のみ可能です。
+    この図形の塗りつぶしの書式設定を返します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -167,10 +167,10 @@ items:
     return:
       type:
       - excel.Excel.ShapeFill
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foreColor = \"yellow\"\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foregroundColor = \"yellow\"\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.geometricShape
   summary: >-
-    図形オブジェクトの幾何学的図形を返します。 図形オブジェクトが GeometricShape 以外の図形の場合 (Like、Image、SmartArt など)、エラーがスローされます。
+    図形に関連付けられているジオメトリック図形を取得します。 図形の種類が "geometricshape" ではない場合は、エラーがスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -187,7 +187,7 @@ items:
       - excel.Excel.GeometricShape
 - uid: excel.Excel.Shape.geometricShapeType
   summary: >-
-    指定された図形の幾何学的図形の種類を表します。 詳細については、Excel.GeometricShapeType をご覧ください。 図形が幾何学的ではない場合、null を返します。たとえば、線またはグラフの GeometricShapeType は null を返します。
+    この幾何学図形の幾何学的な図形の種類を表します。 詳細については、「GeometricShapeType」を参照してください。 図形の種類が "geometricshape" ではない場合は、null を返します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -202,9 +202,55 @@ items:
     return:
       type:
       - Excel.GeometricShapeType | "LineInverse" | "Triangle" | "RightTriangle" | "Rectangle" | "Diamond" | "Parallelogram" | "Trapezoid" | "NonIsoscelesTrapezoid" | "Pentagon" | "Hexagon" | "Heptagon" | "Octagon" | "Decagon" | "Dodecagon" | "Star4" | "Star5" | "Star6" | "Star7" | "Star8" | "Star10" | "Star12" | "Star16" | "Star24" | "Star32" | "RoundRectangle" | "Round1Rectangle" | "Round2SameRectangle" | "Round2DiagonalRectangle" | "SnipRoundRectangle" | "Snip1Rectangle" | "Snip2SameRectangle" | "Snip2DiagonalRectangle" | "Plaque" | "Ellipse" | "Teardrop" | "HomePlate" | "Chevron" | "PieWedge" | "Pie" | "BlockArc" | "Donut" | "NoSmoking" | "RightArrow" | "LeftArrow" | "UpArrow" | "DownArrow" | "StripedRightArrow" | "NotchedRightArrow" | "BentUpArrow" | "LeftRightArrow" | "UpDownArrow" | "LeftUpArrow" | "LeftRightUpArrow" | "QuadArrow" | "LeftArrowCallout" | "RightArrowCallout" | "UpArrowCallout" | "DownArrowCallout" | "LeftRightArrowCallout" | "UpDownArrowCallout" | "QuadArrowCallout" | "BentArrow" | "UturnArrow" | "CircularArrow" | "LeftCircularArrow" | "LeftRightCircularArrow" | "CurvedRightArrow" | "CurvedLeftArrow" | "CurvedUpArrow" | "CurvedDownArrow" | "SwooshArrow" | "Cube" | "Can" | "LightningBolt" | "Heart" | "Sun" | "Moon" | "SmileyFace" | "IrregularSeal1" | "IrregularSeal2" | "FoldedCorner" | "Bevel" | "Frame" | "HalfFrame" | "Corner" | "DiagonalStripe" | "Chord" | "Arc" | "LeftBracket" | "RightBracket" | "LeftBrace" | "RightBrace" | "BracketPair" | "BracePair" | "Callout1" | "Callout2" | "Callout3" | "AccentCallout1" | "AccentCallout2" | "AccentCallout3" | "BorderCallout1" | "BorderCallout2" | "BorderCallout3" | "AccentBorderCallout1" | "AccentBorderCallout2" | "AccentBorderCallout3" | "WedgeRectCallout" | "WedgeRRectCallout" | "WedgeEllipseCallout" | "CloudCallout" | "Cloud" | "Ribbon" | "Ribbon2" | "EllipseRibbon" | "EllipseRibbon2" | "LeftRightRibbon" | "VerticalScroll" | "HorizontalScroll" | "Wave" | "DoubleWave" | "Plus" | "FlowChartProcess" | "FlowChartDecision" | "FlowChartInputOutput" | "FlowChartPredefinedProcess" | "FlowChartInternalStorage" | "FlowChartDocument" | "FlowChartMultidocument" | "FlowChartTerminator" | "FlowChartPreparation" | "FlowChartManualInput" | "FlowChartManualOperation" | "FlowChartConnector" | "FlowChartPunchedCard" | "FlowChartPunchedTape" | "FlowChartSummingJunction" | "FlowChartOr" | "FlowChartCollate" | "FlowChartSort" | "FlowChartExtract" | "FlowChartMerge" | "FlowChartOfflineStorage" | "FlowChartOnlineStorage" | "FlowChartMagneticTape" | "FlowChartMagneticDisk" | "FlowChartMagneticDrum" | "FlowChartDisplay" | "FlowChartDelay" | "FlowChartAlternateProcess" | "FlowChartOffpageConnector" | "ActionButtonBlank" | "ActionButtonHome" | "ActionButtonHelp" | "ActionButtonInformation" | "ActionButtonForwardNext" | "ActionButtonBackPrevious" | "ActionButtonEnd" | "ActionButtonBeginning" | "ActionButtonReturn" | "ActionButtonDocument" | "ActionButtonSound" | "ActionButtonMovie" | "Gear6" | "Gear9" | "Funnel" | "MathPlus" | "MathMinus" | "MathMultiply" | "MathDivide" | "MathEqual" | "MathNotEqual" | "CornerTabs" | "SquareTabs" | "PlaqueTabs" | "ChartX" | "ChartStar" | "ChartPlus"
+- uid: excel.Excel.Shape.getAsImage
+  summary: >-
+    図形を画像に変換し、そのイメージを base64 でエンコードされた文字列として返します。 DPI は96です。 サポートされている形式は、`Excel.PictureFormat.BMP`<!-- -->, `Excel.PictureFormat.PNG`<!-- -->, `Excel.PictureFormat.JPEG`<!-- -->そして`Excel.PictureFormat.GIF`<!-- -->.
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getAsImage(format)
+  fullName: getAsImage(format)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsImage(format: Excel.PictureFormat): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: format
+      description: 画像の形式を指定します。
+      type:
+      - excel.Excel.PictureFormat
+- uid: excel.Excel.Shape.getAsImage_1
+  summary: >-
+    図形を画像に変換し、そのイメージを base64 でエンコードされた文字列として返します。 DPI は96です。 サポートされている形式は、`Excel.PictureFormat.BMP`<!-- -->, `Excel.PictureFormat.PNG`<!-- -->, `Excel.PictureFormat.JPEG`<!-- -->そして`Excel.PictureFormat.GIF`<!-- -->.
+
+
+    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getAsImage(formatString)
+  fullName: getAsImage(formatString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsImage(formatString: "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: formatString
+      description: 画像の形式を指定します。
+      type:
+      - "\"UNKNOWN\" | \"BMP\" | \"JPEG\" | \"GIF\" | \"PNG\" | \"SVG\""
 - uid: excel.Excel.Shape.group
   summary: >-
-    図形オブジェクトの図形グループを返します。 図形オブジェクトが GroupShape 以外の図形の場合 (Like、Image、SmartArt など)、エラーがスローされます。
+    図形に関連付けられた図形グループを取得します。 図形の種類が "グループグループ" ではない場合は、エラーがスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -219,9 +265,10 @@ items:
     return:
       type:
       - excel.Excel.ShapeGroup
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n\n    const shapeGroup = sheet.shapes.getItem(\"Group\").group;\n    shapeGroup.ungroup();\n    console.log(\"Shapes ungrouped\");\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.height
   summary: >-
-    図形の高さをポイント数で表します。 負の値で設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
+    図形の高さをポイント数で表します。 負の値を設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -238,7 +285,7 @@ items:
       - number
 - uid: excel.Excel.Shape.id
   summary: >-
-    図形 ID を表します。 値の取得のみ可能です。
+    図形 ID を表します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -255,7 +302,7 @@ items:
       - string
 - uid: excel.Excel.Shape.image
   summary: >-
-    図形オブジェクトの画像を返します。 図形オブジェクトが Image 以外の図形の場合 (Like、GeometricShape、SmartArt など)、エラーがスローされます。
+    図形に関連付けられているイメージを返します。 図形の種類が "イメージ" ではない場合は、エラーがスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -290,12 +337,12 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Square\")\n    shape.incrementLeft(-25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: 図形の水平方向の移動量をポイント単位で指定します。 正の値を指定すると図形は右方向に移動し、負の値を指定すると左方向に移動します。 シートが RTL の場合、正の値が指定された IncrementLeft は、図形を右ではなく左に移動します。
+      description: 図形を水平方向に移動するには、ポイント単位で指定します。 正の値を指定すると図形は右に移動し、負の値を指定すると左に移動します。 シートの方向が右から左の場合、正の値を指定すると、図形は左に移動し、負の値を指定すると右に移動します。
       type:
       - number
 - uid: excel.Excel.Shape.incrementRotation
   summary: >-
-    図形の z 軸を中心とした回転角度を、指定した度数だけ変更します。 図形の絶対回転角度を設定するには、Rotation プロパティを使用します。
+    z 軸を中心として、指定した角度だけ図形を時計回りに回転します。 図形の`rotation`絶対回転角度を設定するには、プロパティを使用します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -313,7 +360,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    shape.incrementRotation(180);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: 図形の水平方向の回転角度をどれくらい変更するかを度単位で指定します。正の値を指定すると図形は時計回りに回転し、負の値を指定すると反時計回りに回転します。
+      description: 図形を回転する角度を指定します。 正の値を指定すると図形は時計回りに回転し、負の値を指定すると反時計回りに回転します。
       type:
       - number
 - uid: excel.Excel.Shape.incrementTop
@@ -336,12 +383,12 @@ items:
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Pentagon\")\n    shape.incrementTop(25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: 図形を垂直にどのくらい移動するかをポイント単位で指定します。正の値を指定すると図形は下に移動し、負の値を指定すると上に移動します。
+      description: 図形を垂直方向に移動するには、ポイント単位で指定します。 をポイント単位で指定します。 正の値を指定すると図形は下に移動し、負の値を指定すると上に移動します。
       type:
       - number
 - uid: excel.Excel.Shape.left
   summary: >-
-    図形の左側からワークシートの左までの距離 (ポイント数)。 入力に負の値を設定すると、無効な引数の例外がスローされます。
+    図形の左端からワークシートの左端までの距離をポイント単位で指定します。 入力として負の値を設定すると、無効な引数の例外がスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -358,7 +405,7 @@ items:
       - number
 - uid: excel.Excel.Shape.level
   summary: >-
-    指定された図形のレベルを表します。 レベル 0 は図形がグループに属していないことを意味します。レベル 1 は最上位のグループに属し、後続のレベルはそれより下位のグループに属することを意味します。
+    指定された図形のレベルを表します。 たとえば、レベルが0の場合は、図形がグループの一部ではないことを意味し、レベル1は図形が最上位グループの一部であり、レベル2は図形が最上位レベルのサブグループの一部であることを意味します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -375,7 +422,7 @@ items:
       - number
 - uid: excel.Excel.Shape.line
   summary: >-
-    図形オブジェクトの線オブジェクトを返します。 図形オブジェクトが Image 以外の図形の場合 (Like、GeometricShape、SmartArt など)、エラーがスローされます。
+    図形に関連付けられている線を返します。 図形の種類が "行" ではない場合は、エラーがスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -390,10 +437,10 @@ items:
     return:
       type:
       - excel.Excel.Line
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const line = shapes.getItem(\"StraightLine\").line;\n    line.beginArrowHeadLength = Excel.ArrowHeadLength.long;\n    line.beginArrowHeadWidth = Excel.ArrowHeadWidth.wide;\n    line.beginArrowHeadStyle = Excel.ArrowHeadStyle.oval;\n\n    line.endArrowHeadLength = Excel.ArrowHeadLength.long;\n    line.endArrowHeadWidth = Excel.ArrowHeadWidth.wide;\n    line.endArrowHeadStyle = Excel.ArrowHeadStyle.triangle;\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const line = shapes.getItem(\"StraightLine\").line;\n    line.beginArrowheadLength = Excel.ArrowheadLength.long;\n    line.beginArrowheadWidth = Excel.ArrowheadWidth.wide;\n    line.beginArrowheadStyle = Excel.ArrowheadStyle.oval;\n\n    line.endArrowheadLength = Excel.ArrowheadLength.long;\n    line.endArrowheadWidth = Excel.ArrowheadWidth.wide;\n    line.endArrowheadStyle = Excel.ArrowheadStyle.triangle;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.lineFormat
   summary: >-
-    図形オブジェクトの線の書式設定を返します。 読み取り専用です。
+    この図形の線の書式設定を返します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -478,7 +525,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Shape.lockAspectRatio
   summary: >-
-    図形の縦横比が固定されているかどうかをブール値で表します。
+    この図形の縦横比がロックされているかどうかを指定します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -529,7 +576,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.ShapeActivatedEventArgs>
 - uid: excel.Excel.Shape.onDeactivated
   summary: >-
-    図形がアクティブになったときに発生します。
+    図形が非アクティブになるときに発生します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -546,7 +593,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.ShapeDeactivatedEventArgs>
 - uid: excel.Excel.Shape.parentGroup
   summary: >-
-    指定された図形の親グループを表します。
+    この図形の親グループを表します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -563,7 +610,7 @@ items:
       - excel.Excel.Shape
 - uid: excel.Excel.Shape.placement
   summary: >-
-    オブジェクトとその下にあるセルとの位置関係を表す placement 値を表します。
+    オブジェクトがその下のセルにどのように接続されるかを表します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -596,55 +643,9 @@ items:
       type:
       - number
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.triangle);\n    shape.left = 100;\n    shape.top = 300;\n    shape.height = 150;\n    shape.width = 200;\n    shape.rotation = 45;\n    shape.fill.clear();\n    await context.sync();\n});\n```"
-- uid: excel.Excel.Shape.saveAsPicture
-  summary: >-
-    図形を図として保存し、その図を base64 でエンコードされた文字列形式で返します。DPI は 96 に設定されます。 保存形式としては、Excel.PictureFormat.BMP、Excel.PictureFormat.PNG、Excel.PictureFormat.JPEG、Excel.PictureFormat.GIF のみがサポートされています。
-
-
-    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: saveAsPicture(format)
-  fullName: saveAsPicture(format)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsPicture(format: Excel.PictureFormat): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    const result = shape.saveAsPicture(Excel.PictureFormat.png);\n    await context.sync();\n\n    const imageString = result.value;\n    // Your add-in would save this string as a .png file.\n    console.log(\"The image's base64-encoded string: \" + imageString);\n});\n```"
-    parameters:
-    - id: format
-      description: ''
-      type:
-      - excel.Excel.PictureFormat
-- uid: excel.Excel.Shape.saveAsPicture_1
-  summary: >-
-    図形を図として保存し、その図を base64 でエンコードされた文字列形式で返します。DPI は 96 に設定されます。 保存形式としては、Excel.PictureFormat.BMP、Excel.PictureFormat.PNG、Excel.PictureFormat.JPEG、Excel.PictureFormat.GIF のみがサポートされています。
-
-
-    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: saveAsPicture(formatString)
-  fullName: saveAsPicture(formatString)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsPicture(formatString: "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: ''
-    parameters:
-    - id: formatString
-      description: ''
-      type:
-      - "\"UNKNOWN\" | \"BMP\" | \"JPEG\" | \"GIF\" | \"PNG\" | \"SVG\""
 - uid: excel.Excel.Shape.scaleHeight
   summary: >-
-    指定した係数分だけ図形の高さを変更します。 図の場合は、図形を元のサイズに対して拡大または縮小するのか、現在のサイズに対して拡大または縮小するのかを指定できます。 図以外の図形の場合は、常に現在の高さに対して拡大または縮小されます。
+    指定した係数分だけ図形の高さを変更します。 画像の場合は、元のサイズまたは現在のサイズに対して図形を拡大または縮小するかどうかを指定できます。 図以外の図形の場合は、常に現在の高さに対して拡大または縮小されます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -666,16 +667,16 @@ items:
       type:
       - number
     - id: scaleType
-      description: 元のサイズに対して図形を拡大または縮小する originalsize。 currentsize を現在のサイズに対して拡大または縮小します。 指定した図形が図の場合にのみ、この引数に originalsize を指定できます。
+      description: 図形を元のサイズに対して拡大または縮小するかを指定します。 元のサイズスケーリングオプションは、イメージに対してのみ機能します。
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: 省略可能。 図形を拡大縮小する場合、図形の位置を保持する部分を指定します。 省略すると、図形の左上隅の位置を保持します。
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleHeight_1
   summary: >-
-    指定した係数分だけ図形の高さを変更します。 図の場合は、図形を元のサイズに対して拡大または縮小するのか、現在のサイズに対して拡大または縮小するのかを指定できます。 図以外の図形の場合は、常に現在の高さに対して拡大または縮小されます。
+    指定した係数分だけ図形の高さを変更します。 画像の場合は、元のサイズまたは現在のサイズに対して図形を拡大または縮小するかどうかを指定できます。 図以外の図形の場合は、常に現在の高さに対して拡大または縮小されます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -697,16 +698,16 @@ items:
       type:
       - number
     - id: scaleTypeString
-      description: 元のサイズに対して図形を拡大または縮小する originalsize。 currentsize を現在のサイズに対して拡大または縮小します。 指定した図形が図の場合にのみ、この引数に originalsize を指定できます。
+      description: 図形を元のサイズに対して拡大または縮小するかを指定します。 元のサイズスケーリングオプションは、イメージに対してのみ機能します。
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: 省略可能。 図形を拡大縮小する場合、図形の位置を保持する部分を指定します。 省略すると、図形の左上隅の位置を保持します。
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.scaleWidth
   summary: >-
-    指定した係数分だけ図形の幅を変更します。 図の場合は、図形を元のサイズに対して拡大または縮小するのか、現在のサイズに対して拡大または縮小するのかを指定できます。 図以外の図形の場合は、常に現在の幅に対して拡大または縮小されます。
+    指定した係数分だけ図形の幅を変更します。 画像の場合は、元のサイズまたは現在のサイズに対して図形を拡大または縮小するかどうかを指定できます。 図以外の図形の場合は、常に現在の幅に対して拡大または縮小されます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -728,16 +729,16 @@ items:
       type:
       - number
     - id: scaleType
-      description: 元のサイズに対して図形を拡大または縮小する originalsize。 currentsize を現在のサイズに対して拡大または縮小します。 指定した図形が図の場合にのみ、この引数に originalsize を指定できます。
+      description: 図形を元のサイズに対して拡大または縮小するかを指定します。 元のサイズスケーリングオプションは、イメージに対してのみ機能します。
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: 省略可能。 図形を拡大縮小する場合、図形の位置を保持する部分を指定します。 省略すると、図形の左上隅の位置を保持します。
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleWidth_1
   summary: >-
-    指定した係数分だけ図形の幅を変更します。 図の場合は、図形を元のサイズに対して拡大または縮小するのか、現在のサイズに対して拡大または縮小するのかを指定できます。 図以外の図形の場合は、常に現在の幅に対して拡大または縮小されます。
+    指定した係数分だけ図形の幅を変更します。 画像の場合は、元のサイズまたは現在のサイズに対して図形を拡大または縮小するかどうかを指定できます。 図以外の図形の場合は、常に現在の幅に対して拡大または縮小されます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -759,11 +760,11 @@ items:
       type:
       - number
     - id: scaleTypeString
-      description: 元のサイズに対して図形を拡大または縮小する originalsize。 currentsize を現在のサイズに対して拡大または縮小します。 指定した図形が図の場合にのみ、この引数に originalsize を指定できます。
+      description: 図形を元のサイズに対して拡大または縮小するかを指定します。 元のサイズスケーリングオプションは、イメージに対してのみ機能します。
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: 省略可能。 図形を拡大または縮小するときに、図形の位置を保持する部分を指定する ShapeScaleFrom の定数の1つ。 省略すると、図形の左上隅の位置を保持します。
+      description: 省略可能。 図形を拡大縮小する場合、図形の位置を保持する部分を指定します。 省略すると、図形の左上隅の位置を保持します。
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.set
@@ -815,53 +816,53 @@ items:
       - excel.Excel.Shape
 - uid: excel.Excel.Shape.setZOrder
   summary: >-
-    コレクションの他の図形の前面または背後に指定の図形を移動させます (つまり、図形の位置を z オーダーで変更します)。
+    指定した図形を、コレクションの z オーダーで上下に移動し、他の図形の前面または背面に移動します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: setZOrder(value)
-  fullName: setZOrder(value)
+  name: setZOrder(position)
+  fullName: setZOrder(position)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'setZOrder(value: Excel.ShapeZOrder): void;'
+    content: 'setZOrder(position: Excel.ShapeZOrder): void;'
     return:
       type:
       - void
       description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.setZOrder(Excel.ShapeZOrder.sendBackward);\n    await context.sync();\n});\n```"
     parameters:
-    - id: value
-      description: 他の図形を基準にして、指定した図形を移動する位置を指定します。 詳細については、「Excel のスナップショット注文」を参照してください。
+    - id: position
+      description: 他の図形を基準にして z オーダーのスタック内の図形を移動する位置を指定します。 詳細については、「Excel のスナップショット注文」を参照してください。
       type:
       - excel.Excel.ShapeZOrder
 - uid: excel.Excel.Shape.setZOrder_1
   summary: >-
-    コレクションの他の図形の前面または背後に指定の図形を移動させます (つまり、図形の位置を z オーダーで変更します)。
+    指定した図形を、コレクションの z オーダーで上下に移動し、他の図形の前面または背面に移動します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: setZOrder(valueString)
-  fullName: setZOrder(valueString)
+  name: setZOrder(positionString)
+  fullName: setZOrder(positionString)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'setZOrder(valueString: "BringToFront" | "BringForward" | "SendToBack" | "SendBackward"): void;'
+    content: 'setZOrder(positionString: "BringToFront" | "BringForward" | "SendToBack" | "SendBackward"): void;'
     return:
       type:
       - void
       description: ''
     parameters:
-    - id: valueString
-      description: 他の図形を基準にして、指定した図形を移動する位置を指定します。 詳細については、「Excel のスナップショット注文」を参照してください。
+    - id: positionString
+      description: 他の図形を基準にして z オーダーのスタック内の図形を移動する位置を指定します。 詳細については、「Excel のスナップショット注文」を参照してください。
       type:
       - "\"BringToFront\" | \"BringForward\" | \"SendToBack\" | \"SendBackward\""
 - uid: excel.Excel.Shape.textFrame
   summary: >-
-    図形の textFrame オブジェクトを返します。 読み取り専用です。
+    この図形のテキスト frame オブジェクトを返します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -877,7 +878,7 @@ items:
       type:
       - excel.Excel.TextFrame
 - uid: excel.Excel.Shape.toJSON
-  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の Shape オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドは、元のオブジェクトから読み込まれ`Excel.Interfaces.ShapeData` <!-- -->た子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
+  summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Shape オブジェクトは API オブジェクトであるのに対して`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.ShapeData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
   isPreview: true
   name: toJSON()
   fullName: toJSON()
@@ -892,7 +893,7 @@ items:
       description: ''
 - uid: excel.Excel.Shape.top
   summary: >-
-    図形の上端からワークシートの上までのポイント単位の距離です。 入力に負の値を設定すると、無効な引数の例外がスローされます。
+    図形の上端からワークシートの上端までの距離をポイント単位で指定します。 入力として負の値を設定すると、無効な引数の例外がスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -909,7 +910,7 @@ items:
       - number
 - uid: excel.Excel.Shape.type
   summary: >-
-    指定された図形の型を返します。 読み取り専用です。 詳細については、Excel.ShapeType をご覧ください。
+    この図形の種類を返します。 詳細については、「ShapeType」を参照してください。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -920,13 +921,13 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'readonly type: Excel.ShapeType | "Unknown" | "Image" | "GeometricShape" | "Group" | "Line";'
+    content: 'readonly type: Excel.ShapeType | "Unsupported" | "Image" | "GeometricShape" | "Group" | "Line";'
     return:
       type:
-      - Excel.ShapeType | "Unknown" | "Image" | "GeometricShape" | "Group" | "Line"
+      - Excel.ShapeType | "Unsupported" | "Image" | "GeometricShape" | "Group" | "Line"
 - uid: excel.Excel.Shape.visible
   summary: >-
-    指定された図形の表示/非表示をブール値で表します。
+    この図形の可視性を表します。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -943,7 +944,7 @@ items:
       - boolean
 - uid: excel.Excel.Shape.width
   summary: >-
-    図形の幅 (ポイント数) を表します。 負の値で設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
+    図形の幅 (ポイント数) を表します。 負の値を設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -960,7 +961,7 @@ items:
       - number
 - uid: excel.Excel.Shape.zorderPosition
   summary: >-
-    指定された図形の位置を z オーダーで返します。一番下の図形の z オーダー値は 0 です。 読み取り専用です。
+    指定した図形の z オーダーの位置を返します。0は、順序スタックの最下部を表します。 読み取り専用です。
 
 
     \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
