@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 166355af8df97c6673b2ac19a6e25bf242dac126
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 672d94d6b1b14e2143cc82f5d3e149f572475e85
+ms.sourcegitcommit: a422a2c3b9ada79477a9f873276b3c00765f7072
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29982546"
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "30900399"
 items:
 - uid: office
   name: office
@@ -22,6 +22,8 @@ items:
   - office.Office.AsyncContextOptions
   - office.Office.AsyncResult
   - office.Office.AsyncResultStatus
+  - office.Office.Auth
+  - office.Office.AuthOptions
   - office.Office.Binding
   - office.Office.BindingDataChangedEventArgs
   - office.Office.Bindings
@@ -108,17 +110,17 @@ items:
     ランタイム環境が読み込まれ、アプリケーションやホストされたドキュメントを対話操作するアドインの準備ができたときに発生します。
 
 
-    "理由"パラメーターの初期化イベントのリスナー関数を返します、`InitializationReason`の初期化が発生したかを指定する列挙値。 作業ウィンドウまたはコンテンツを追加では、2 つの方法で初期化できます。
+    initialize イベントリスナー関数の reason パラメーターは、初期化が`InitializationReason`行われた方法を指定する列挙値を返します。 作業ウィンドウ アドインまたはコンテンツ アドインは、次の 2 つの場合に初期化できます。
 
 
-    - ユーザーが挿入して、アドインをドロップダウン リストでは、Office ホスト アプリケーションでは、リボンの [挿入] タブでのアドインの最近使用したセクションからまたは挿入の追加] ダイアログ ボックスから。
+    - ユーザーは、Office ホストアプリケーションのリボンの [挿入] タブにあるアドインのドロップダウンリストの [最近使用したアドイン] セクションから、または [アドインの挿入] ダイアログボックスからアドインを挿入しただけです。
 
 
     - 既にアドインが含まれているドキュメントをユーザーが開いた場合。
 
 
-    *注*: 初期化イベント リスナーの"理由"パラメーターの機能のみを返します、`InitializationReason`作業ウィンドウおよびコンテンツのアドインの列挙値。Outlook アドインの場合、値は返されません。
-  remarks: "**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> デバイス用 OWA </th><th> Office for Mac </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>Outlook</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\n// You can use the value of the InitializationEnumeration to implement different logic for\n// when the add-in is first inserted versus when it is already part of the document.\n// The following example shows some simple logic that uses the value of the reason parameter\n// to display how the task pane or content add-in was initialized.\nOffice.initialize = function (reason) {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Display initialization reason.\n    if (reason == \"inserted\")\n    write(\"The add-in was just inserted.\");\n\n    if (reason == \"documentOpened\")\n    write(\"The add-in is already part of the document.\");\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    *注*: initialize イベントリスナー関数の reason パラメーターは、作業ウィンドウアドイン`InitializationReason`とコンテンツアドインの列挙値のみを返します。Outlook アドインの値を返すことはありません。
+  remarks: "**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\noffice ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> OWA for Devices </th><th> Office for Mac </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>出席</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>しまう</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\n// You can use the value of the InitializationEnumeration to implement different logic for\n// when the add-in is first inserted versus when it is already part of the document.\n// The following example shows some simple logic that uses the value of the reason parameter\n// to display how the task pane or content add-in was initialized.\nOffice.initialize = function (reason) {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Display initialization reason.\n    if (reason == \"inserted\")\n    write(\"The add-in was just inserted.\");\n\n    if (reason == \"documentOpened\")\n    write(\"The add-in is already part of the document.\");\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: Office.initialize
   fullName: Office.initialize
   langs:
@@ -132,11 +134,11 @@ items:
       description: ''
     parameters:
     - id: reason
-      description: アプリケーションを初期化した方法を示します。
+      description: アプリが初期化された方法を示します。
       type:
       - office.Office.InitializationReason
 - uid: office.Office.onReady
-  summary: Office の JavaScript Api がアドインによって呼び出されることができていることを保証します。 フレームワークは、まだ初期化されていない、コールバックや約束であって待機 Office ホストでは、API の呼び出しを受け入れる準備が完了するまでします。 この API は、Office アドイン内で使用する、それも使用できます、アドインの外部に注意してください。 場合、Office.js は、Office ホスト アプリケーションの外部で実行していることを判断した後、コールバックを呼び出す、ホストとプラットフォームの両方に"null"との約束を解決するにはされます。
+  summary: Office JavaScript api がアドインによって呼び出される準備が整っていることを確認します。 フレームワークがまだ初期化されていない場合、コールバックまたは promise は Office ホストが API 呼び出しを受け入れる準備ができるまで待機します。 この API は Office アドイン内で使用することを目的としていますが、アドインの外部でも使用できます。 その場合は、office ホストアプリケーションの外部で実行されていると判断された後、そのコールバックを呼び出し、ホストとプラットフォームの両方に対して "null" を使用して promise を解決します。
   name: Office.onReady
   fullName: Office.onReady
   langs:
@@ -147,14 +149,14 @@ items:
     return:
       type:
       - 'Promise<{ host: HostType, platform: PlatformType }>'
-      description: 初期化が完了したら、ホスト、およびプラットフォームの情報が含まれている約束です。
+      description: 初期化が完了すると、ホストとプラットフォームの情報を含む約束ができます。
     parameters:
     - id: callback
-      description: ホストおよびプラットフォームの情報を受け取る省略可能なコールバック メソッド。 代わりに、コールバックを使用するのではなく追加で単純に待機することが解決するのには、関数によって返される約束の。
+      description: ホストおよびプラットフォームの情報を受け取るオプションのコールバックメソッド。 または、コールバックを使用するのではなく、関数によって返された Promise を解決するだけでアドインが待機することもあります。
       type:
       - '(info: { host: HostType, platform: PlatformType }) => any'
 - uid: office.Office.select
-  summary: 約束の式で説明されているオブジェクトを返します。 メソッドが失敗した場合にのみ、コールバックが呼び出されます。
+  summary: 式で記述されたオブジェクトの promise を返します。 コールバックは、メソッドが失敗した場合にのみ呼び出されます。
   remarks: >-
     **サポートの詳細**
 
@@ -162,10 +164,10 @@ items:
     次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。
 
 
-    Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
+    office ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
 
 
-    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> </td><td> Y </td></tr> </table>
+    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> </td><td> Y </td></tr> </table>
 
     #### <a name="examples"></a>例
 
@@ -199,16 +201,16 @@ items:
       description: ''
     parameters:
     - id: expression
-      description: 取得するオブジェクトです。 例"バインド\#BindingName"、'BindingName' という名前のバインディングのバインディングの約束を取得します。
+      description: 取得するオブジェクトを指定します。 "bindings\#bindingname" の例は、' bindingname ' という名前のバインドのためのバインド保証を取得します。
       type:
       - string
     - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.
       type:
       - '(result: AsyncResult<any>) => void'
 - uid: office.Office.useShortNamespace
-  summary: オンとオフの切り替え、`Office`の完全なエイリアス`Microsoft.Office.WebExtension`名前空間です。
-  remarks: "**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\nOffice ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> デバイス用 OWA </th><th> Office for Mac </th></tr> <tr><td><strong>アクセス</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>Outlook</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction startUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(true);\n    }\n    else {\n        Office.useShortNamespace(true);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\nfunction stopUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(false);\n    }\n    else {\n        Office.useShortNamespace(false);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: 完全な`Microsoft.Office.WebExtension`名前空間の`Office`エイリアスをオンまたはオフにします。
+  remarks: "**サポートの詳細**\n\n次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。\n\noffice ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.\n\n*サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> OWA for Devices </th><th> Office for Mac </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>出席</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>しまう</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction startUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(true);\n    }\n    else {\n        Office.useShortNamespace(true);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\nfunction stopUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(false);\n    }\n    else {\n        Office.useShortNamespace(false);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: Office.useShortNamespace
   fullName: Office.useShortNamespace
   langs:
@@ -222,7 +224,7 @@ items:
       description: ''
     parameters:
     - id: useShortNamespace
-      description: ショートカット、エイリアスを使用する場合は true。それを無効にする場合は false です。 既定値は true です。
+      description: ショートカットエイリアスを使用する場合は True、それ以外の場合は false を無効にします。 既定値は true です。
       type:
       - boolean
 references:
@@ -244,6 +246,10 @@ references:
   name: Office.AsyncResult
 - uid: office.Office.AsyncResultStatus
   name: Office.AsyncResultStatus
+- uid: office.Office.Auth
+  name: Office.Auth
+- uid: office.Office.AuthOptions
+  name: Office.AuthOptions
 - uid: office.Office.Binding
   name: Office.Binding
 - uid: office.Office.BindingDataChangedEventArgs
