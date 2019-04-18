@@ -1,844 +1,728 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f9863954baea800eb006d6e8eee95e07f7ae4ced
-ms.sourcegitcommit: 2ef4b6e6f2f27ecb9abf01fefa4cffd9498ad5dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 03/16/2019
-ms.locfileid: "30656599"
 items:
-- uid: Outlook_1_2.Office.MessageCompose
-  summary: >-
-    メッセージ作成モードの[Office. mailbox。](xref:Outlook_1_2.Office.Item)<!-- -->.
-
-
-    **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、Office の1つのモードとして扱う必要があります。 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.2/office.context.mailbox.item)」ページを参照してください。
-  name: Office.MessageCompose
-  fullName: Office.MessageCompose
-  langs:
-  - typeScript
-  type: interface
-  extends:
-  - Message
-  - 'ItemCompose '
-  package: Outlook_1_2
-  children:
-  - Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync
-  - Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync_1
-  - Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync
-  - Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync_1
-  - Outlook_1_2.Office.MessageCompose.getSelectedDataAsync
-  - Outlook_1_2.Office.MessageCompose.getSelectedDataAsync_1
-  - Outlook_1_2.Office.MessageCompose.loadCustomPropertiesAsync
-  - Outlook_1_2.Office.MessageCompose.removeAttachmentAsync
-  - Outlook_1_2.Office.MessageCompose.removeAttachmentAsync_1
-  - Outlook_1_2.Office.MessageCompose.setSelectedDataAsync
-  - Outlook_1_2.Office.MessageCompose.setSelectedDataAsync_1
-  - Outlook_1_2.Office.MessageCompose.bcc
-  - Outlook_1_2.Office.MessageCompose.body
-  - Outlook_1_2.Office.MessageCompose.cc
-  - Outlook_1_2.Office.MessageCompose.conversationId
-  - Outlook_1_2.Office.MessageCompose.itemType
-  - Outlook_1_2.Office.MessageCompose.subject
-  - Outlook_1_2.Office.MessageCompose.to
-- uid: Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync
-  summary: >-
-    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
-
-
-    addfileattachmentasync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
-
-
-    その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>attachmentsizeexceeded-添付ファイルが許可されているサイズを超えています。</td></tr> <tr><td></td><td>filetypenotsupported-添付ファイルに許可されていない拡張子が付いています。</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    function callback(result) {
-        if (result.error) {
-            console.log(result.error);
-        } else {
-            console.log("Attachment added");
-        }
-    }
-
-
-    function addAttachment() {
-        // The values in asyncContext can be accessed in the callback.
-        var options = { 'asyncContext': { var1: 1, var2: 2 } };
-
-        var attachmentURL = "https://contoso.com/rtm/icon.png";
-        Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
-    }
-
-    ```
-
-    ```javascript
-
-    // The following example adds an image file as an inline attachment and
-
-    // references the attachment in the message body.
-
-    Office.context.mailbox.item.addFileAttachmentAsync(
-        "http://i.imgur.com/WJXklif.png",
-        "cute_bird.png",
-        {
-            isInline: true
-        },
-        function (asyncResult) {
-            Office.context.mailbox.item.body.setAsync(
-                "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
-                {
-                    "coercionType": "html"
-                },
-                function (asyncResult) {
-                    // Do something here.
-                });
-        });
-    ```
-  name: addFileAttachmentAsync(uri, attachmentName, options, callback)
-  fullName: addFileAttachmentAsync(uri, attachmentName, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: uri
-      description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
-      type:
-      - string
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 isinline: true の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
-      type:
-      - 'Office.AsyncContextOptions & { isInline: boolean }'
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync_1
-  summary: >-
-    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
-
-
-    addfileattachmentasync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
-
-
-    その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>attachmentsizeexceeded-添付ファイルが許可されているサイズを超えています。</td></tr> <tr><td></td><td>filetypenotsupported-添付ファイルに許可されていない拡張子が付いています。</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-  name: addFileAttachmentAsync(uri, attachmentName, callback)
-  fullName: addFileAttachmentAsync(uri, attachmentName, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: uri
-      description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
-      type:
-      - string
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync
-  summary: >-
-    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
-
-
-    additemattachmentasync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
-
-
-    その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
-
-
-    Office アドインが Outlook Web App で実行されている場合、additemattachmentasync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // The following example adds an existing Outlook item as an attachment
-
-    // with the name `My Attachment`.
-
-    function callback(result) {
-        if (result.error) {
-            console.log(result.error);
-        } else {
-            console.log("Attachment added");
-        }
-    }
-
-
-    function addAttachment() {
-        // EWS ID of item to attach (shortened for readability).
-        var itemId = "AAMkADI1...AAA=";
-
-        // The values in asyncContext can be accessed in the callback.
-        var options = { 'asyncContext': { var1: 1, var2: 2 } };
-
-        Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
-    }
-
-    ```
-  name: addItemAttachmentAsync(itemId, attachmentName, options, callback)
-  fullName: addItemAttachmentAsync(itemId, attachmentName, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemId
-      description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
-      type:
-      - any
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync_1
-  summary: >-
-    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
-
-
-    additemattachmentasync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
-
-
-    その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
-
-
-    Office アドインが Outlook Web App で実行されている場合、additemattachmentasync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
-  name: addItemAttachmentAsync(itemId, attachmentName, callback)
-  fullName: addItemAttachmentAsync(itemId, attachmentName, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemId
-      description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
-      type:
-      - any
-    - id: attachmentName
-      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.getSelectedDataAsync
-  summary: >-
-    メッセージの件名または本文から非同期的に選択したデータを返します。
-
-
-    選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは invalidselection エラーを返します。
-
-
-    コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
-
-
-    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // Get selected data.
-
-    Office.initialize = function () {
-        Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
-    };
-
-
-    function getCallback(asyncResult) {
-        var text = asyncResult.value.data;
-        var prop = asyncResult.value.sourceProperty;
-
-        Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
-    }
-
-
-    function setCallback(asyncResult) {
-        // Check for errors.
-    }
-
-    ```
-  name: getSelectedDataAsync(coercionType, options, callback)
-  fullName: getSelectedDataAsync(coercionType, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
-    return:
-      type:
-      - void
-      description: coercionType によって決定された形式の文字列として選択されたデータ。
-    parameters:
-    - id: coercionType
-      description: データの形式を要求します。 text の場合、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 HTMLの場合、メソッドは、プレーンテキストまたは HTML のいずれの場合も選択されたテキストを返します。
-      type:
-      - Office.CoercionType
-    - id: options
-      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<any>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.getSelectedDataAsync_1
-  summary: >-
-    メッセージの件名または本文から非同期的に選択したデータを返します。
-
-
-    選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは invalidselection エラーを返します。
-
-
-    コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
-
-
-    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-  name: getSelectedDataAsync(coercionType, callback)
-  fullName: getSelectedDataAsync(coercionType, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
-    return:
-      type:
-      - void
-      description: coercionType によって決定された形式の文字列として選択されたデータ。
-    parameters:
-    - id: coercionType
-      description: データの形式を要求します。 text の場合、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 HTMLの場合、メソッドは、プレーンテキストまたは HTML のいずれの場合も選択されたテキストを返します。
-      type:
-      - Office.CoercionType
-    - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<any>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.loadCustomPropertiesAsync
-  summary: >-
-    選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
-
-
-    カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
-
-
-    カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-  name: loadCustomPropertiesAsync(callback, userContext)
-  fullName: loadCustomPropertiesAsync(callback, userContext)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
-    - id: userContext
-      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
-      type:
-      - any
-- uid: Outlook_1_2.Office.MessageCompose.removeAttachmentAsync
-  summary: >-
-    メッセージまたは予定から添付ファイルを削除します。
-
-
-    removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // The following code removes an attachment with an identifier of '0'.
-
-    Office.context.mailbox.item.removeAttachmentAsync(
-        '0',
-        { asyncContext : null },
-        function (asyncResult)
-        {
-            console.log(asyncResult.status);
-        }
-    );
-
-    ```
-  name: removeAttachmentAsync(attachmentId, options, callback)
-  fullName: removeAttachmentAsync(attachmentId, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: 削除する添付ファイルの識別子。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.removeAttachmentAsync_1
-  summary: >-
-    メッセージまたは予定から添付ファイルを削除します。
-
-
-    removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-  name: removeAttachmentAsync(attachmentId, callback)
-  fullName: removeAttachmentAsync(attachmentId, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: attachmentId
-      description: 削除する添付ファイルの識別子。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.setSelectedDataAsync
-  summary: >-
-    メッセージの本文または件名に非同期的にデータを挿入します。
-
-
-    setselecteddataasync メソッドは、指定された文字列を、アイテムの件名または本文にあるカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルが本文または件名フィールドにない場合は、エラーが返されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
-
-
-    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
-
-    ```
-  name: setSelectedDataAsync(data, options, callback)
-  fullName: setSelectedDataAsync(data, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: 挿入されるデータ。 データの最大の長さは 1,000,000 文字です。 100万文字を超える文字が渡されると、ArgumentOutOfRange 例外がスローされます。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: テキストの場合、現在のスタイルが outlook Web App および outlook で適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でも、テキスト データのみが挿入されます。 html とフィールドが html をサポートしている場合 (件名は含まれません)、現在のスタイルが outlook Web App で適用され、既定のスタイルが outlook で適用されます。 フィールドがテキストフィールドの場合は、InvalidDataFormat エラーが返されます。 coercionType が設定されていない場合、結果はフィールドによって異なります。フィールドが html の場合は、html が使用されます。フィールドがテキストの場合は、プレーンテキストが使用されます。'
-      type:
-      - Office.AsyncContextOptions & CoercionTypeOptions
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.setSelectedDataAsync_1
-  summary: >-
-    メッセージの本文または件名に非同期的にデータを挿入します。
-
-
-    setselecteddataasync メソッドは、指定された文字列を、アイテムの件名または本文にあるカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルが本文または件名フィールドにない場合は、エラーが返されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
-
-
-    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
-
-    ```
-  name: setSelectedDataAsync(data, callback)
-  fullName: setSelectedDataAsync(data, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: 挿入されるデータ。 データの最大の長さは 1,000,000 文字です。 100万文字を超える文字が渡されると、ArgumentOutOfRange 例外がスローされます。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_2.Office.MessageCompose.bcc
-  summary: >-
-    メッセージの BCC (ブラインド カーボン コピー) 行の受信者を取得または更新するメソッドを提供するオブジェクトを取得します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-
-    Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
-
-    Office.context.mailbox.item.bcc.getAsync(callback);
-
-
-    function callback(asyncResult) {
-        var arrayOfBccRecipients = asyncResult.value;
-    }
-
-    ```
-  name: bcc
-  fullName: bcc
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'bcc: Recipients;'
-    return:
-      type:
-      - Recipients
-- uid: Outlook_1_2.Office.MessageCompose.body
-  summary: >-
-    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // This example gets the body of the item as plain text.
-
-    Office.context.mailbox.item.body.getAsync(
-        "text",
-        { asyncContext: "This is passed to the callback" },
-        function callback(result) {
-            // Do something with the result.
-        });
-
-    // The following is an example of the result parameter passed to the callback function.
-
-    {
-        "value": "TEXT of whole body (including threads below)",
-        "status": "succeeded",
-        "asyncContext": "This is passed to the callback"
-    }
-
-    ```
-  name: body
-  fullName: body
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'body: Body;'
-    return:
-      type:
-      - Body
-- uid: Outlook_1_2.Office.MessageCompose.cc
-  summary: >-
-    メッセージの CC (カーボン コピー) の受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
-
-
-    cc プロパティは、メッセージの cc 行にある受信者を取得または更新するためのメソッドを提供する、 [Office の recipients](xref:Outlook_1_2.Office.Recipients)オブジェクトを返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-
-    Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
-
-    Office.context.mailbox.item.cc.getAsync(callback);
-
-
-    function callback(asyncResult) {
-        var arrayOfCcRecipients = asyncResult.value;
-    }
-
-    ```
-  name: cc
-  fullName: cc
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'cc: Recipients;'
-    return:
-      type:
-      - Recipients
-- uid: Outlook_1_2.Office.MessageCompose.conversationId
-  summary: >-
-    特定のメッセージが含まれている電子メールの会話の識別子を取得します。
-
-
-    メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
-
-
-    新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。 ユーザーが件名を設定し、アイテムを保存した場合、conversationId プロパティは値を返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    var conversationId = Office.context.mailbox.item.conversationId;
-
-    console.log("conversationId: " + conversationId);
-
-    ```
-  name: conversationId
-  fullName: conversationId
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'conversationId: string;'
-    return:
-      type:
-      - string
-- uid: Outlook_1_2.Office.MessageCompose.itemType
-  summary: >-
-    インスタンスが表しているアイテムの種類を取得します。
-
-
-    itemtype プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、itemtype 列挙値の1つを返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
-        // Do something.
-    } else {
-        // Do something else.
-    }
-
-    ```
-  name: itemType
-  fullName: itemType
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'itemType: MailboxEnums.ItemType;'
-    return:
-      type:
-      - MailboxEnums.ItemType
-- uid: Outlook_1_2.Office.MessageCompose.subject
-  summary: >-
-    アイテムの件名フィールドに示される説明を取得または設定します。
-
-
-    subject プロパティは、電子メールサーバーによって送信されたアイテムの件名全体を取得または設定します。
-
-
-    subject プロパティは、件名を取得および設定するためのメソッドを提供する subject オブジェクトを返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.subject.getAsync(callback);
-
-
-    function callback(asyncResult) {
-        var subject = asyncResult.value;
-    }
-
-    ```
-  name: subject
-  fullName: subject
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'subject: Subject;'
-    return:
-      type:
-      - Subject
-- uid: Outlook_1_2.Office.MessageCompose.to
-  summary: >-
-    メッセージの To 行にある受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
-
-
-    to プロパティは、メッセージの to 行の受信者を取得または更新するメソッドを提供する recipients オブジェクトを返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-
-    Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
-
-    Office.context.mailbox.item.to.getAsync(callback);
-
-
-    function callback(asyncResult) {
-        var arrayOfToRecipients = asyncResult.value;
-    }
-
-    ```
-  name: to
-  fullName: to
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'to: Recipients;'
-    return:
-      type:
-      - Recipients
+  - uid: Outlook_1_2.Office.MessageCompose
+    summary: |-
+      メッセージ作成モードの[Office. mailbox。](xref:Outlook_1_2.Office.Item)<!-- -->.
+
+      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、Office の1つのモードとして扱う必要があります。 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.2/office.context.mailbox.item)」ページを参照してください。
+    name: Office.MessageCompose
+    fullName: Office.MessageCompose
+    langs:
+      - typeScript
+    type: interface
+    extends:
+      - Message
+      - 'ItemCompose '
+    package: Outlook_1_2
+    children:
+      - Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync
+      - Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync_1
+      - Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync
+      - Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync_1
+      - Outlook_1_2.Office.MessageCompose.getSelectedDataAsync
+      - Outlook_1_2.Office.MessageCompose.getSelectedDataAsync_1
+      - Outlook_1_2.Office.MessageCompose.loadCustomPropertiesAsync
+      - Outlook_1_2.Office.MessageCompose.removeAttachmentAsync
+      - Outlook_1_2.Office.MessageCompose.removeAttachmentAsync_1
+      - Outlook_1_2.Office.MessageCompose.setSelectedDataAsync
+      - Outlook_1_2.Office.MessageCompose.setSelectedDataAsync_1
+      - Outlook_1_2.Office.MessageCompose.bcc
+      - Outlook_1_2.Office.MessageCompose.body
+      - Outlook_1_2.Office.MessageCompose.cc
+      - Outlook_1_2.Office.MessageCompose.conversationId
+      - Outlook_1_2.Office.MessageCompose.itemType
+      - Outlook_1_2.Office.MessageCompose.subject
+      - Outlook_1_2.Office.MessageCompose.to
+  - uid: Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync
+    summary: |-
+      ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+
+      addfileattachmentasync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+
+      その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>attachmentsizeexceeded-添付ファイルが許可されているサイズを超えています。</td></tr> <tr><td></td><td>filetypenotsupported-添付ファイルに許可されていない拡張子が付いています。</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function callback(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Attachment added");
+          }
+      }
+
+      function addAttachment() {
+          // The values in asyncContext can be accessed in the callback.
+          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+          var attachmentURL = "https://contoso.com/rtm/icon.png";
+          Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
+      }
+      ```
+      ```javascript
+      // The following example adds an image file as an inline attachment and
+      // references the attachment in the message body.
+      Office.context.mailbox.item.addFileAttachmentAsync(
+          "http://i.imgur.com/WJXklif.png",
+          "cute_bird.png",
+          {
+              isInline: true
+          },
+          function (asyncResult) {
+              Office.context.mailbox.item.body.setAsync(
+                  "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
+                  {
+                      "coercionType": "html"
+                  },
+                  function (asyncResult) {
+                      // Do something here.
+                  });
+          });
+      ```
+    name: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
+    fullName: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: uri
+          description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
+          type:
+            - string
+        - id: attachmentName
+          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+          type:
+            - string
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 isinline: true の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
+          type:
+            - 'Office.AsyncContextOptions & { isInline: boolean }'
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.addFileAttachmentAsync_1
+    summary: |-
+      ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+
+      addfileattachmentasync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+
+      その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>attachmentsizeexceeded-添付ファイルが許可されているサイズを超えています。</td></tr> <tr><td></td><td>filetypenotsupported-添付ファイルに許可されていない拡張子が付いています。</td></tr> <tr><td></td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>'
+    name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
+    fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: uri
+          description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
+          type:
+            - string
+        - id: attachmentName
+          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+          type:
+            - string
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync
+    summary: |-
+      メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
+
+      additemattachmentasync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
+
+      その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+
+      Office アドインが Outlook Web App で実行されている場合、additemattachmentasync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // The following example adds an existing Outlook item as an attachment
+      // with the name `My Attachment`.
+      function callback(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Attachment added");
+          }
+      }
+
+      function addAttachment() {
+          // EWS ID of item to attach (shortened for readability).
+          var itemId = "AAMkADI1...AAA=";
+
+          // The values in asyncContext can be accessed in the callback.
+          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+          Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
+      }
+      ```
+    name: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
+    fullName: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
+          type:
+            - any
+        - id: attachmentName
+          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+          type:
+            - string
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.addItemAttachmentAsync_1
+    summary: |-
+      メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
+
+      additemattachmentasync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
+
+      その後、removeattachmentasync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+
+      Office アドインが Outlook Web App で実行されている場合、additemattachmentasync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>NumberOfAttachmentsExceeded-メッセージまたは予定に含まれている添付ファイルが多すぎます。</td></tr> </table>'
+    name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
+    fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
+          type:
+            - any
+        - id: attachmentName
+          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+          type:
+            - string
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する error オブジェクトが格納されます。
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.getSelectedDataAsync
+    summary: |-
+      メッセージの件名または本文から非同期的に選択したデータを返します。
+
+      選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは invalidselection エラーを返します。
+
+      コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
+
+      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // Get selected data.
+      Office.initialize = function () {
+          Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
+      };
+
+      function getCallback(asyncResult) {
+          var text = asyncResult.value.data;
+          var prop = asyncResult.value.sourceProperty;
+
+          Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
+      }
+
+      function setCallback(asyncResult) {
+          // Check for errors.
+      }
+      ```
+    name: 'getSelectedDataAsync(coercionType, options, callback)'
+    fullName: 'getSelectedDataAsync(coercionType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedDataAsync(coercionType: Office.CoercionType, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+      return:
+        type:
+          - void
+        description: coercionType によって決定された形式の文字列として選択されたデータ。
+      parameters:
+        - id: coercionType
+          description: データの形式を要求します。 text の場合、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 HTMLの場合、メソッドは、プレーンテキストまたは HTML のいずれの場合も選択されたテキストを返します。
+          type:
+            - Office.CoercionType
+        - id: options
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<any>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.getSelectedDataAsync_1
+    summary: |-
+      メッセージの件名または本文から非同期的に選択したデータを返します。
+
+      選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは invalidselection エラーを返します。
+
+      コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
+
+      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>'
+    name: 'getSelectedDataAsync(coercionType, callback)'
+    fullName: 'getSelectedDataAsync(coercionType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedDataAsync(coercionType: Office.CoercionType, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+      return:
+        type:
+          - void
+        description: coercionType によって決定された形式の文字列として選択されたデータ。
+      parameters:
+        - id: coercionType
+          description: データの形式を要求します。 text の場合、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 HTMLの場合、メソッドは、プレーンテキストまたは HTML のいずれの場合も選択されたテキストを返します。
+          type:
+            - Office.CoercionType
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<any>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.loadCustomPropertiesAsync
+    summary: |-
+      選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
+
+      カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
+
+      カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>'
+    name: 'loadCustomPropertiesAsync(callback, userContext)'
+    fullName: 'loadCustomPropertiesAsync(callback, userContext)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
+        - id: userContext
+          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
+          type:
+            - any
+  - uid: Outlook_1_2.Office.MessageCompose.removeAttachmentAsync
+    summary: |-
+      メッセージまたは予定から添付ファイルを削除します。
+
+      removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // The following code removes an attachment with an identifier of '0'.
+      Office.context.mailbox.item.removeAttachmentAsync(
+          '0',
+          { asyncContext : null },
+          function (asyncResult)
+          {
+              console.log(asyncResult.status);
+          }
+      );
+      ```
+    name: 'removeAttachmentAsync(attachmentId, options, callback)'
+    fullName: 'removeAttachmentAsync(attachmentId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: 削除する添付ファイルの識別子。
+          type:
+            - string
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.removeAttachmentAsync_1
+    summary: |-
+      メッセージまたは予定から添付ファイルを削除します。
+
+      removeattachmentasync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>'
+    name: 'removeAttachmentAsync(attachmentId, callback)'
+    fullName: 'removeAttachmentAsync(attachmentId, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: 削除する添付ファイルの識別子。
+          type:
+            - string
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.setSelectedDataAsync
+    summary: |-
+      メッセージの本文または件名に非同期的にデータを挿入します。
+
+      setselecteddataasync メソッドは、指定された文字列を、アイテムの件名または本文にあるカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルが本文または件名フィールドにない場合は、エラーが返されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
+
+      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
+      ```
+    name: 'setSelectedDataAsync(data, options, callback)'
+    fullName: 'setSelectedDataAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '挿入されるデータ。 データの最大の長さは 1,000,000 文字です。 100万文字を超える文字が渡されると、ArgumentOutOfRange 例外がスローされます。'
+          type:
+            - string
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: テキストの場合、現在のスタイルが outlook Web App および outlook で適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でも、テキスト データのみが挿入されます。 html とフィールドが html をサポートしている場合 (件名は含まれません)、現在のスタイルが outlook Web App で適用され、既定のスタイルが outlook で適用されます。 フィールドがテキストフィールドの場合は、InvalidDataFormat エラーが返されます。 coercionType が設定されていない場合、結果はフィールドによって異なります。フィールドが html の場合は、html が使用されます。フィールドがテキストの場合は、プレーンテキストが使用されます。'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.setSelectedDataAsync_1
+    summary: |-
+      メッセージの本文または件名に非同期的にデータを挿入します。
+
+      setselecteddataasync メソッドは、指定された文字列を、アイテムの件名または本文にあるカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルが本文または件名フィールドにない場合は、エラーが返されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
+
+      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> <tr><td>エラー</td><td>InvalidAttachmentId-添付ファイル識別子が存在しません。</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
+      ```
+    name: 'setSelectedDataAsync(data, callback)'
+    fullName: 'setSelectedDataAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '挿入されるデータ。 データの最大の長さは 1,000,000 文字です。 100万文字を超える文字が渡されると、ArgumentOutOfRange 例外がスローされます。'
+          type:
+            - string
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_2.Office.MessageCompose.bcc
+    summary: |-
+      メッセージの BCC (ブラインド カーボン コピー) 行の受信者を取得または更新するメソッドを提供するオブジェクトを取得します。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.bcc.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfBccRecipients = asyncResult.value;
+      }
+      ```
+    name: bcc
+    fullName: bcc
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'bcc: Recipients;'
+      return:
+        type:
+          - Recipients
+  - uid: Outlook_1_2.Office.MessageCompose.body
+    summary: |-
+      アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
+
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // This example gets the body of the item as plain text.
+      Office.context.mailbox.item.body.getAsync(
+          "text",
+          { asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Do something with the result.
+          });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value": "TEXT of whole body (including threads below)",
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: body
+    fullName: body
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'body: Body;'
+      return:
+        type:
+          - Body
+  - uid: Outlook_1_2.Office.MessageCompose.cc
+    summary: |-
+      メッセージの CC (カーボン コピー) の受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+
+      cc プロパティは、メッセージの cc 行にある受信者を取得または更新するためのメソッドを提供する、 [Office の recipients](xref:Outlook_1_2.Office.Recipients)オブジェクトを返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.cc.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfCcRecipients = asyncResult.value;
+      }
+      ```
+    name: cc
+    fullName: cc
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'cc: Recipients;'
+      return:
+        type:
+          - Recipients
+  - uid: Outlook_1_2.Office.MessageCompose.conversationId
+    summary: |-
+      特定のメッセージが含まれている電子メールの会話の識別子を取得します。
+
+      メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
+
+      新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。 ユーザーが件名を設定し、アイテムを保存した場合、conversationId プロパティは値を返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      var conversationId = Office.context.mailbox.item.conversationId;
+      console.log("conversationId: " + conversationId);
+      ```
+    name: conversationId
+    fullName: conversationId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'conversationId: string;'
+      return:
+        type:
+          - string
+  - uid: Outlook_1_2.Office.MessageCompose.itemType
+    summary: |-
+      インスタンスが表しているアイテムの種類を取得します。
+
+      itemtype プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、itemtype 列挙値の1つを返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
+          // Do something.
+      } else {
+          // Do something else.
+      }
+      ```
+    name: itemType
+    fullName: itemType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemType: MailboxEnums.ItemType;'
+      return:
+        type:
+          - MailboxEnums.ItemType
+  - uid: Outlook_1_2.Office.MessageCompose.subject
+    summary: |-
+      アイテムの件名フィールドに示される説明を取得または設定します。
+
+      subject プロパティは、電子メールサーバーによって送信されたアイテムの件名全体を取得または設定します。
+
+      subject プロパティは、件名を取得および設定するためのメソッドを提供する subject オブジェクトを返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.subject.getAsync(callback);
+
+      function callback(asyncResult) {
+          var subject = asyncResult.value;
+      }
+      ```
+    name: subject
+    fullName: subject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'subject: Subject;'
+      return:
+        type:
+          - Subject
+  - uid: Outlook_1_2.Office.MessageCompose.to
+    summary: |-
+      メッセージの To 行にある受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+
+      to プロパティは、メッセージの to 行の受信者を取得または更新するメソッドを提供する recipients オブジェクトを返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>メッセージの作成</td></tr> </table>
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.to.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfToRecipients = asyncResult.value;
+      }
+      ```
+    name: to
+    fullName: to
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'to: Recipients;'
+      return:
+        type:
+          - Recipients

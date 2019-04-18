@@ -1,219 +1,257 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 646ac2590bc8a12f11afd6ae43bfc0c579c44aec
-ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "30302991"
 items:
-- uid: excel.Excel.StyleCollection
-  summary: >-
-    すべてのスタイルのコレクションを表します。
+  - uid: excel.Excel.StyleCollection
+    summary: |-
+      すべてのスタイルのコレクションを表します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.StyleCollection
+    fullName: Excel.StyleCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.StyleCollection.add
+      - excel.Excel.StyleCollection.context
+      - excel.Excel.StyleCollection.getCount
+      - excel.Excel.StyleCollection.getItem
+      - excel.Excel.StyleCollection.getItemAt
+      - excel.Excel.StyleCollection.items
+      - excel.Excel.StyleCollection.load
+      - excel.Excel.StyleCollection.load_1
+      - excel.Excel.StyleCollection.load_2
+      - excel.Excel.StyleCollection.toJSON
+  - uid: excel.Excel.StyleCollection.add
+    summary: |-
+      コレクションに新しいスタイルを追加します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: add(name)
+    fullName: add(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(name: string): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.StyleCollection
-  fullName: Excel.StyleCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.StyleCollection.add
-  - excel.Excel.StyleCollection.context
-  - excel.Excel.StyleCollection.getCount
-  - excel.Excel.StyleCollection.getItem
-  - excel.Excel.StyleCollection.getItemAt
-  - excel.Excel.StyleCollection.items
-  - excel.Excel.StyleCollection.load
-  - excel.Excel.StyleCollection.load_1
-  - excel.Excel.StyleCollection.load_2
-  - excel.Excel.StyleCollection.toJSON
-- uid: excel.Excel.StyleCollection.add
-  summary: >-
-    コレクションに新しいスタイルを追加します。
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let styles = context.workbook.styles;
+
+              // Add a new style to the style collection.
+              // Styles is in the Home tab ribbon.
+              styles.add("Diagonal Orientation Style");
+                    
+              let newStyle = styles.getItem("Diagonal Orientation Style");
+              
+              // The "Diagonal Orientation Style" properties.
+              newStyle.textOrientation = 38;
+              newStyle.autoIndent = true;
+              newStyle.includeProtection = true;
+              newStyle.shrinkToFit = true;
+              newStyle.locked = false;
+              
+              await context.sync();
+
+              console.log("Successfully added a new style with diagonal orientation to the Home tab ribbon.");
+          });
+          ```
+      parameters:
+        - id: name
+          description: 追加するスタイルの名前を指定します。
+          type:
+            - string
+  - uid: excel.Excel.StyleCollection.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.StyleCollection.getCount
+    summary: |-
+      コレクション内のスタイルの数を取得します。
+
+      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.StyleCollection.getItem
+    summary: |-
+      名前に基づいてスタイルを取得します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(name)
+    fullName: getItem(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(name: string): Excel.Style;'
+      return:
+        type:
+          - excel.Excel.Style
+        description: |-
 
 
-    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: add(name)
-  fullName: add(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(name: string): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let styles = context.workbook.styles;\n\n    // Add a new style to the style collection.\n    // Styles is in the Home tab ribbon.\n    styles.add(\"Diagonal Orientation Style\");\n          \n    let newStyle = styles.getItem(\"Diagonal Orientation Style\");\n    \n    // The \"Diagonal Orientation Style\" properties.\n    newStyle.textOrientation = 38;\n    newStyle.autoIndent = true;\n    newStyle.includeProtection = true;\n    newStyle.shrinkToFit = true;\n    newStyle.locked = false;\n    \n    await context.sync();\n\n    console.log(\"Successfully added a new style with diagonal orientation to the Home tab ribbon.\");\n});\n```"
-    parameters:
-    - id: name
-      description: 追加するスタイルの名前を指定します。
-      type:
-      - string
-- uid: excel.Excel.StyleCollection.context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.StyleCollection.getCount
-  summary: >-
-    コレクション内のスタイルの数を取得します。
+          #### <a name="examples"></a>例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              let styles = context.workbook.styles;
 
-    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.StyleCollection.getItem
-  summary: >-
-    名前に基づいてスタイルを取得します。
+              // Add a new style to the style collection.
+              // Styles is in the Home tab ribbon.
+              styles.add("Diagonal Orientation Style");
+                    
+              let newStyle = styles.getItem("Diagonal Orientation Style");
+              
+              // The "Diagonal Orientation Style" properties.
+              newStyle.textOrientation = 38;
+              newStyle.autoIndent = true;
+              newStyle.includeProtection = true;
+              newStyle.shrinkToFit = true;
+              newStyle.locked = false;
+              
+              await context.sync();
 
+              console.log("Successfully added a new style with diagonal orientation to the Home tab ribbon.");
+          });
+          ```
+      parameters:
+        - id: name
+          description: 取得するスタイルの名前を指定します。
+          type:
+            - string
+  - uid: excel.Excel.StyleCollection.getItemAt
+    summary: |-
+      コレクション内の位置に基づいてスタイルを取得します。
 
-    \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItem(name)
-  fullName: getItem(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(name: string): Excel.Style;'
-    return:
-      type:
-      - excel.Excel.Style
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    let styles = context.workbook.styles;\n\n    // Add a new style to the style collection.\n    // Styles is in the Home tab ribbon.\n    styles.add(\"Diagonal Orientation Style\");\n          \n    let newStyle = styles.getItem(\"Diagonal Orientation Style\");\n    \n    // The \"Diagonal Orientation Style\" properties.\n    newStyle.textOrientation = 38;\n    newStyle.autoIndent = true;\n    newStyle.includeProtection = true;\n    newStyle.shrinkToFit = true;\n    newStyle.locked = false;\n    \n    await context.sync();\n\n    console.log(\"Successfully added a new style with diagonal orientation to the Home tab ribbon.\");\n});\n```"
-    parameters:
-    - id: name
-      description: 取得するスタイルの名前を指定します。
-      type:
-      - string
-- uid: excel.Excel.StyleCollection.getItemAt
-  summary: >-
-    コレクション内の位置に基づいてスタイルを取得します。
+      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Style;'
+      return:
+        type:
+          - excel.Excel.Style
+        description: ''
+      parameters:
+        - id: index
+          description: 取得する style オブジェクトのインデックス値を指定します。 0 を起点とする番号になります。
+          type:
+            - number
+  - uid: excel.Excel.StyleCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Style[];'
+      return:
+        type:
+          - 'Excel.Style[]'
+  - uid: excel.Excel.StyleCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
+      `load(option?: string | string[]): Excel.StyleCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
-    \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.Style;'
-    return:
-      type:
-      - excel.Excel.Style
-      description: ''
-    parameters:
-    - id: index
-      description: 取得する style オブジェクトのインデックス値を指定します。 0から始まるインデックス。
-      type:
-      - number
-- uid: excel.Excel.StyleCollection.items
-  summary: このコレクション内の読み込まれた子アイテムを取得します。
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.Style[];'
-    return:
-      type:
-      - Excel.Style[]
-- uid: excel.Excel.StyleCollection.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
-  remarks: >-
-    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+      `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-
-    `load(option?: string | string[]): Excel.StyleCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.StyleCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.StyleCollection;'
-    return:
-      type:
-      - excel.Excel.StyleCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.StyleCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.StyleCollection.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.StyleCollection;'
-    return:
-      type:
-      - excel.Excel.StyleCollection
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.StyleCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.StyleCollection;'
-    return:
-      type:
-      - excel.Excel.StyleCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.StyleCollection.toJSON
-  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。`Excel.StyleCollection`元のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドは、コレクションのアイテムから`Excel.Interfaces.StyleCollectionData` <!-- -->読み込まれたプロパティの浅いコピーを持つ "items" 配列を含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.StyleCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.StyleCollectionData
-      description: ''
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.StyleCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.StyleCollection;'
+      return:
+        type:
+          - excel.Excel.StyleCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.StyleCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.StyleCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.StyleCollection;'
+      return:
+        type:
+          - excel.Excel.StyleCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.StyleCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.StyleCollection;'
+      return:
+        type:
+          - excel.Excel.StyleCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.StyleCollection.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.StyleCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.StyleCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.StyleCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.StyleCollectionData
+        description: ''

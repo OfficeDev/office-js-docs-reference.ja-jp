@@ -1,238 +1,296 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: cb686f345e7a7dfa727fb9993e62d73d4e1f6137
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29976237"
 items:
-- uid: excel.Excel.TableRow
-  summary: >-
-    テーブル内の行を表します。
+  - uid: excel.Excel.TableRow
+    summary: |-
+      テーブル内の行を表します。
+
+      範囲または列の違いで、新しい行/列が追加されている場合は調整されますが、TableRow オブジェクトは、テーブルの行の物理的な位置を表しますが、データは表示しません。 つまり、データが並べ替えられている場合、または新しい行が追加された場合、テーブル行は、作成されたインデックスを引き続きポイントします。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableRow
+    fullName: Excel.TableRow
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.TableRow.context
+      - excel.Excel.TableRow.delete
+      - excel.Excel.TableRow.getRange
+      - excel.Excel.TableRow.index
+      - excel.Excel.TableRow.load
+      - excel.Excel.TableRow.load_1
+      - excel.Excel.TableRow.load_2
+      - excel.Excel.TableRow.set
+      - excel.Excel.TableRow.set_1
+      - excel.Excel.TableRow.toJSON
+      - excel.Excel.TableRow.values
+  - uid: excel.Excel.TableRow.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.TableRow.delete
+    summary: |-
+      テーブルから行を削除します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    範囲や、その前に新しい行や列を追加する場合の調整は、列とは異なり、TableRow オブジェクトを表すテーブルの行がデータではなく物理的な場所をメモします。 データが並べ替えられている場合、または新しい行を追加する場合は、テーブルの行は引き続き作成されたインデックス位置にします。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);
+              row.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.TableRow.getRange
+    summary: |-
+      行全体に関連付けられた範囲オブジェクトを返します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.TableRow
-  fullName: Excel.TableRow
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.TableRow.context
-  - excel.Excel.TableRow.delete
-  - excel.Excel.TableRow.getRange
-  - excel.Excel.TableRow.index
-  - excel.Excel.TableRow.load
-  - excel.Excel.TableRow.load_1
-  - excel.Excel.TableRow.load_2
-  - excel.Excel.TableRow.set
-  - excel.Excel.TableRow.set_1
-  - excel.Excel.TableRow.toJSON
-  - excel.Excel.TableRow.values
-- uid: excel.Excel.TableRow.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.TableRow.delete
-  summary: >-
-    テーブルから行を削除します。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);
+              var rowRange = row.getRange();
+              rowRange.load('address');
+              return ctx.sync().then(function() {
+                  console.log(rowRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.TableRow.index
+    summary: |-
+      テーブルの行コレクション内の行のインデックス番号を返します。 0 を起点とする番号になります。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: index
+    fullName: index
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly index: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableRow.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.TableRow`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.TableRow`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.TableRowLoadOptions
+  - uid: excel.Excel.TableRow.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.TableRow.getRange
-  summary: >-
-    行全体に関連付けられた範囲オブジェクトを返します。
+          #### <a name="examples"></a>例
 
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);
+              row.load('index');
+              return ctx.sync().then(function() {
+                  console.log(row.index);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var newValues = [["New", "Values", "For", "New", "Row"]];
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);
+              row.values = newValues;
+              row.load('values');
+              return ctx.sync().then(function() {
+                  console.log(row.values);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableRow.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.TableRow.set
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getRange()
-  fullName: getRange()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRange(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);\n    var rowRange = row.getRange();\n    rowRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(rowRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.TableRow.index
-  summary: >-
-    テーブルの行コレクション内の行のインデックス番号を返します。0 を起点とする番号になります。読み取り専用。
+      `set(properties: Excel.TableRow): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - Interfaces.TableRowUpdateData
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.TableRow.set_1
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.TableRow): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.TableRow
+  - uid: excel.Excel.TableRow.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の TableRow オブジェクトは API オブジェクトであるのに対して`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableRowData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableRowData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableRowData
+        description: ''
+  - uid: excel.Excel.TableRow.values
+    summary: |-
+      指定した範囲の Raw 値を表します。 返されるデータの型は、文字列、数値、ブール値のいずれかになります。 エラーが含まれているセルは、エラー文字列を返します。
 
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: index
-  fullName: index
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly index: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.TableRow.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
-
-
-    `load(option?: string | string[]): Excel.TableRow`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.TableRow`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.TableRowLoadOptions
-- uid: excel.Excel.TableRow.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var newValues = [[\"New\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.values = newValues;\n    row.load('values');\n    return ctx.sync().then(function() {\n        console.log(row.values);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.TableRow.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.TableRow.set
-  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.TableRow): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
-      type:
-      - Interfaces.TableRowUpdateData
-    - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.TableRow.set_1
-  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.TableRow): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.TableRow
-- uid: excel.Excel.TableRow.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.TableRow オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.TableRowData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableRowData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableRowData
-      description: ''
-- uid: excel.Excel.TableRow.values
-  summary: >-
-    指定された範囲の生の値を表します。 返されたデータは、文字列型、数値、またはブール値の可能性があります。 エラーを含むセルでは、エラー文字列を返します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: values
-  fullName: values
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'values: any[][];'
-    return:
-      type:
-      - any[][]
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: values
+    fullName: values
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'values: any[][];'
+      return:
+        type:
+          - 'any[][]'

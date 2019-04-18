@@ -1,157 +1,163 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 46f2ca6ab12fbe4cad956c40b3df252d187e7532
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30096900"
 items:
-- uid: visio.Visio.ShapeCollection
-  summary: >-
-    図形コレクションを表します。
+  - uid: visio.Visio.ShapeCollection
+    summary: |-
+      図形コレクションを表します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.ShapeCollection
+    fullName: Visio.ShapeCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: visio
+    children:
+      - visio.Visio.ShapeCollection.getCount
+      - visio.Visio.ShapeCollection.getItem
+      - visio.Visio.ShapeCollection.items
+      - visio.Visio.ShapeCollection.load
+      - visio.Visio.ShapeCollection.load_1
+      - visio.Visio.ShapeCollection.load_2
+      - visio.Visio.ShapeCollection.toJSON
+  - uid: visio.Visio.ShapeCollection.getCount
+    summary: |-
+      コレクション内の図形の数を取得します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: |-
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: Visio.ShapeCollection
-  fullName: Visio.ShapeCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: visio
-  children:
-  - visio.Visio.ShapeCollection.getCount
-  - visio.Visio.ShapeCollection.getItem
-  - visio.Visio.ShapeCollection.items
-  - visio.Visio.ShapeCollection.load
-  - visio.Visio.ShapeCollection.load_1
-  - visio.Visio.ShapeCollection.load_2
-  - visio.Visio.ShapeCollection.toJSON
-- uid: visio.Visio.ShapeCollection.getCount
-  summary: >-
-    コレクション内の図形の数を取得します。
+          #### <a name="examples"></a>例
 
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var numShapesActivePage = activePage.shapes.getCount();
+              return ctx.sync().then(function () {
+                  console.log("Shapes Count: " + numShapesActivePage.value);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.ShapeCollection.getItem
+    summary: |-
+      そのキー (名前または ID) を使用して図形を取得します。
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var numShapesActivePage = activePage.shapes.getCount();\n    return ctx.sync().then(function () {\n        console.log(\"Shapes Count: \" + numShapesActivePage.value);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.ShapeCollection.getItem
-  summary: >-
-    そのキー (名前または ID) を使用して図形を取得します。
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Visio.Shape;'
+      return:
+        type:
+          - Visio.Shape
+        description: ''
+      parameters:
+        - id: key
+          description: キーは、取得する図形の名前またはインデックスです。
+          type:
+            - number | string
+  - uid: visio.Visio.ShapeCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Visio.Shape[];'
+      return:
+        type:
+          - 'Visio.Shape[]'
+  - uid: visio.Visio.ShapeCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
+      `load(option?: string | string[]): Visio.ShapeCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: number | string): Visio.Shape;'
-    return:
-      type:
-      - Visio.Shape
-      description: ''
-    parameters:
-    - id: key
-      description: キーは、取得する図形の名前またはインデックスです。
-      type:
-      - number | string
-- uid: visio.Visio.ShapeCollection.items
-  summary: このコレクション内の読み込まれた子アイテムを取得します。
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Visio.Shape[];'
-    return:
-      type:
-      - Visio.Shape[]
-- uid: visio.Visio.ShapeCollection.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
-  remarks: >-
-    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+      `load(option?: { select?: string; expand?: string; }): Visio.ShapeCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-
-    `load(option?: string | string[]): Visio.ShapeCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): Visio.ShapeCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Visio.Interfaces.ShapeCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.ShapeCollection;'
-    return:
-      type:
-      - Visio.ShapeCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Visio.Interfaces.ShapeCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions
-- uid: visio.Visio.ShapeCollection.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Visio.ShapeCollection;'
-    return:
-      type:
-      - Visio.ShapeCollection
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-      type:
-      - string | string[]
-- uid: visio.Visio.ShapeCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Visio.ShapeCollection;'
-    return:
-      type:
-      - Visio.ShapeCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: visio.Visio.ShapeCollection.toJSON
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Visio.Interfaces.ShapeCollectionData;'
-    return:
-      type:
-      - Visio.Interfaces.ShapeCollectionData
-      description: ''
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Visio.Interfaces.ShapeCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.ShapeCollection;'
+      return:
+        type:
+          - Visio.ShapeCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Visio.Interfaces.ShapeCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions
+  - uid: visio.Visio.ShapeCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Visio.ShapeCollection;'
+      return:
+        type:
+          - Visio.ShapeCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: visio.Visio.ShapeCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Visio.ShapeCollection;'
+      return:
+        type:
+          - Visio.ShapeCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: visio.Visio.ShapeCollection.toJSON
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Visio.Interfaces.ShapeCollectionData;'
+      return:
+        type:
+          - Visio.Interfaces.ShapeCollectionData
+        description: ''

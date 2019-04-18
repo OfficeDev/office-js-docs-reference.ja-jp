@@ -1,215 +1,257 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 67e798487f7440346eec7200d1776e0963c03fd7
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29978750"
 items:
-- uid: excel.Excel.ChartSeriesCollection
-  summary: >-
-    グラフ系列のコレクションを表します。
+  - uid: excel.Excel.ChartSeriesCollection
+    summary: |-
+      グラフ系列のコレクションを表します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.ChartSeriesCollection
+    fullName: Excel.ChartSeriesCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.ChartSeriesCollection.add
+      - excel.Excel.ChartSeriesCollection.context
+      - excel.Excel.ChartSeriesCollection.count
+      - excel.Excel.ChartSeriesCollection.getCount
+      - excel.Excel.ChartSeriesCollection.getItemAt
+      - excel.Excel.ChartSeriesCollection.items
+      - excel.Excel.ChartSeriesCollection.load
+      - excel.Excel.ChartSeriesCollection.load_1
+      - excel.Excel.ChartSeriesCollection.load_2
+      - excel.Excel.ChartSeriesCollection.toJSON
+  - uid: excel.Excel.ChartSeriesCollection.add
+    summary: |-
+      コレクションに新しい系列を追加します。 新たに追加された系列は、値を設定するか x 軸の値/バブルサイズを (グラフの種類に応じて) 表示されるまで表示されません。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'add(name, index)'
+    fullName: 'add(name, index)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(name?: string, index?: number): Excel.ChartSeries;'
+      return:
+        type:
+          - excel.Excel.ChartSeries
+        description: ''
+      parameters:
+        - id: name
+          description: 省略可能です。 データ系列の名前を指定します。
+          type:
+            - string
+        - id: index
+          description: 省略可能です。 追加する系列のインデックス値を指定します。 0 を起点とする番号になります。
+          type:
+            - number
+  - uid: excel.Excel.ChartSeriesCollection.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.ChartSeriesCollection.count
+    summary: |-
+      コレクション内にあるデータ系列の数を取得します。 値の取得のみ可能です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.ChartSeriesCollection.getCount
+    summary: |-
+      コレクションに含まれるデータ系列の数を返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.ChartSeriesCollection.getItemAt
+    summary: |-
+      コレクション内の位置に基づいてデータ系列を取得します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.ChartSeries;'
+      return:
+        type:
+          - excel.Excel.ChartSeries
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.ChartSeriesCollection
-  fullName: Excel.ChartSeriesCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.ChartSeriesCollection.add
-  - excel.Excel.ChartSeriesCollection.context
-  - excel.Excel.ChartSeriesCollection.count
-  - excel.Excel.ChartSeriesCollection.getCount
-  - excel.Excel.ChartSeriesCollection.getItemAt
-  - excel.Excel.ChartSeriesCollection.items
-  - excel.Excel.ChartSeriesCollection.load
-  - excel.Excel.ChartSeriesCollection.load_1
-  - excel.Excel.ChartSeriesCollection.load_2
-  - excel.Excel.ChartSeriesCollection.toJSON
-- uid: excel.Excel.ChartSeriesCollection.add
-  summary: >-
-    コレクションに新しい系列を追加します。 新規追加したデータ系列は、値を設定するまで、または (グラフの種類) によって、軸の値とバブル サイズの x には表示されません。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Get the name of the first series in the series collection.
+          Excel.run(function (ctx) { 
+              var seriesCollection = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1").series;
+              seriesCollection.load('items');
+              return ctx.sync().then(function() {
+                  console.log(seriesCollection.items[0].name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+          type:
+            - number
+  - uid: excel.Excel.ChartSeriesCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.ChartSeries[];'
+      return:
+        type:
+          - 'Excel.ChartSeries[]'
+  - uid: excel.Excel.ChartSeriesCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.ChartSeriesCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.ChartSeriesCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeriesCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.ChartSeriesCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ChartSeriesCollection;'
+      return:
+        type:
+          - excel.Excel.ChartSeriesCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.ChartSeriesCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.ChartSeriesCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.ChartSeriesCollection;'
+      return:
+        type:
+          - excel.Excel.ChartSeriesCollection
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: add(name, index)
-  fullName: add(name, index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(name?: string, index?: number): Excel.ChartSeries;'
-    return:
-      type:
-      - excel.Excel.ChartSeries
-      description: ''
-    parameters:
-    - id: name
-      description: 省略可能。 系列の名前。
-      type:
-      - string
-    - id: index
-      description: 省略可能。 追加するデータ系列の値のインデックスを作成します。 0 のインデックスを作成します。
-      type:
-      - number
-- uid: excel.Excel.ChartSeriesCollection.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.ChartSeriesCollection.count
-  summary: >-
-    コレクション内にあるデータ系列の数を取得します。値の取得のみ可能です。
+          #### <a name="examples"></a>例
 
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.ChartSeriesCollection.getCount
-  summary: >-
-    コレクションに含まれるデータ系列の数を返します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.ChartSeriesCollection.getItemAt
-  summary: >-
-    コレクション内の位置に基づいてデータ系列を取得します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.ChartSeries;'
-    return:
-      type:
-      - excel.Excel.ChartSeries
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Get the name of the first series in the series collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('items');\n    return ctx.sync().then(function() {\n        console.log(seriesCollection.items[0].name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
-      type:
-      - number
-- uid: excel.Excel.ChartSeriesCollection.items
-  summary: このコレクションに読み込まれている子項目を取得します。
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.ChartSeries[];'
-    return:
-      type:
-      - Excel.ChartSeries[]
-- uid: excel.Excel.ChartSeriesCollection.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
-
-
-    `load(option?: string | string[]): Excel.ChartSeriesCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.ChartSeriesCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeriesCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.ChartSeriesCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ChartSeriesCollection;'
-    return:
-      type:
-      - excel.Excel.ChartSeriesCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.ChartSeriesCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.ChartSeriesCollection.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.ChartSeriesCollection;'
-    return:
-      type:
-      - excel.Excel.ChartSeriesCollection
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Getting the names of series in the series collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < seriesCollection.items.length; i++)\n        {\n            console.log(seriesCollection.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of chart series in collection.\nExcel.run(function (ctx) { \n    var seriesCollection = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series;\n    seriesCollection.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"series: Count= \" + seriesCollection.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.ChartSeriesCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.ChartSeriesCollection;'
-    return:
-      type:
-      - excel.Excel.ChartSeriesCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.ChartSeriesCollection.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.ChartSeriesCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.ChartSeriesCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.ChartSeriesCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.ChartSeriesCollectionData
-      description: ''
+          ```javascript
+          // Getting the names of series in the series collection.
+          Excel.run(function (ctx) { 
+              var seriesCollection = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1").series;
+              seriesCollection.load('items');
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < seriesCollection.items.length; i++)
+                  {
+                      console.log(seriesCollection.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Get the number of chart series in collection.
+          Excel.run(function (ctx) { 
+              var seriesCollection = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1").series;
+              seriesCollection.load('count');
+              return ctx.sync().then(function() {
+                  console.log("series: Count= " + seriesCollection.count);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.ChartSeriesCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.ChartSeriesCollection;'
+      return:
+        type:
+          - excel.Excel.ChartSeriesCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.ChartSeriesCollection.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.ChartSeriesCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.ChartSeriesCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ChartSeriesCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.ChartSeriesCollectionData
+        description: ''

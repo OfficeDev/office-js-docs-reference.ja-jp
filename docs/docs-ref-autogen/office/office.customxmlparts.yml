@@ -1,181 +1,231 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 97693514969a93ac094cb1917e2a95e048161f36
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29979303"
 items:
-- uid: office.Office.CustomXmlParts
-  summary: CustomXmlPart オブジェクトのコレクションを表します。
-  remarks: >-
-    <table><tr><td>要件の設定</td><td>CustomXmlParts</td></tr></table>
+  - uid: office.Office.CustomXmlParts
+    summary: CustomXmlPart オブジェクトのコレクションを表します。
+    remarks: '**ホスト**: Word'
+    name: Office.CustomXmlParts
+    fullName: Office.CustomXmlParts
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.CustomXmlParts.addAsync
+      - office.Office.CustomXmlParts.addAsync_1
+      - office.Office.CustomXmlParts.getByIdAsync
+      - office.Office.CustomXmlParts.getByIdAsync_1
+      - office.Office.CustomXmlParts.getByNamespaceAsync
+      - office.Office.CustomXmlParts.getByNamespaceAsync_1
+  - uid: office.Office.CustomXmlParts.addAsync
+    summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'addAsync(xml, options, callback)'
+    fullName: 'addAsync(xml, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(xml: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xml
+          description: 新しく作成するカスタム XML パーツに追加する XML。
+          type:
+            - string
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、新しく作成された CustomXmlPart オブジェクトです。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.addAsync_1
+    summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
 
+      #### <a name="examples"></a>例
 
-    **サポートの詳細**
+      ```javascript
+      function addXMLPart() {
+          Office.context.document.customXmlParts.addAsync(
+              '<root categoryId="1" xmlns="http://tempuri.org"><item name="Cheap Item" price="$193.95"/><item name="Expensive Item" price="$931.88"/></root>',
+              function (result) {});
+      }
 
+      function addXMLPartandHandler() {
+          Office.context.document.customXmlParts.addAsync(
+              "<testns:book xmlns:testns='http://testns.com'><testns:page number='1'>Hello</testns:page><testns:page number='2'>world!</testns:page></testns:book>",
+              function(r) { r.value.addHandlerAsync(Office.EventType.DataNodeDeleted,
+                  function(a) {write(a.type)
+                  },
+                      function(s) {write(s.status)
+                      });
+              });
+      }
 
-    大文字 Y の次のマトリックスでは、対応する Office ホスト アプリケーションでこのインターフェイスがサポートされていることを示します。 空のセルでは、Office ホスト アプリケーションでこのインターフェイスをサポートしないことを示します。
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message;
+      }
+      ```
+    name: 'addAsync(xml, callback)'
+    fullName: 'addAsync(xml, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(xml: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xml
+          description: 新しく作成するカスタム XML パーツに追加する XML。
+          type:
+            - string
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、新しく作成された CustomXmlPart オブジェクトです。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByIdAsync
+    summary: 指定されたカスタム XML パーツを id で非同期的に取得します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
 
+      #### <a name="examples"></a>例
 
-    Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
+      ```javascript
+      function showXMLPartInnerXML() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.getXmlAsync({}, function (eventArgs) {
+                  write(eventArgs.value);
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getByIdAsync(id, options, callback)'
+    fullName: 'getByIdAsync(id, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: カスタム XML パーツの GUID (左かっこと右かっこを含む)。
+          type:
+            - string
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、指定されたカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した id を持つカスタム XML パーツがない場合、このメソッドは null を返します。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByIdAsync_1
+    summary: 指定されたカスタム XML パーツを id で非同期的に取得します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getByIdAsync(id, callback)'
+    fullName: 'getByIdAsync(id, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: カスタム XML パーツの GUID (左かっこと右かっこを含む)。
+          type:
+            - string
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、指定されたカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した id を持つカスタム XML パーツがない場合、このメソッドは null を返します。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByNamespaceAsync
+    summary: 名前空間によって指定されたカスタム XML 部分を非同期的に取得します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getByNamespaceAsync(ns, options, callback)'
+    fullName: 'getByNamespaceAsync(ns, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByNamespaceAsync(ns: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: ns
+          description: 名前空間 URI。
+          type:
+            - string
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、指定された名前空間に一致する CustomXmlPart オブジェクトの配列です。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart[]>) => void'
+  - uid: office.Office.CustomXmlParts.getByNamespaceAsync_1
+    summary: 名前空間によって指定されたカスタム XML 部分を非同期的に取得します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
 
+      #### <a name="examples"></a>例
 
-    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> Office for Mac? </th></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> </table>
-  name: Office.CustomXmlParts
-  fullName: Office.CustomXmlParts
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.CustomXmlParts.addAsync
-  - office.Office.CustomXmlParts.addAsync_1
-  - office.Office.CustomXmlParts.getByIdAsync
-  - office.Office.CustomXmlParts.getByIdAsync_1
-  - office.Office.CustomXmlParts.getByNamespaceAsync
-  - office.Office.CustomXmlParts.getByNamespaceAsync_1
-- uid: office.Office.CustomXmlParts.addAsync
-  summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
-  name: addAsync(xml, options, callback)
-  fullName: addAsync(xml, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addAsync(xml: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: xml
-      description: 新しく作成したカスタム XML 部分に追加する XML です。
-      type:
-      - string
-    - id: options
-      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、CustomXmlPart オブジェクトを新しく作成します。
-      type:
-      - '(result: AsyncResult<CustomXmlPart>) => void'
-- uid: office.Office.CustomXmlParts.addAsync_1
-  summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
-  name: addAsync(xml, callback)
-  fullName: addAsync(xml, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addAsync(xml: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addXMLPart() {\n    Office.context.document.customXmlParts.addAsync(\n        '<root categoryId=\"1\" xmlns=\"http://tempuri.org\"><item name=\"Cheap Item\" price=\"$193.95\"/><item name=\"Expensive Item\" price=\"$931.88\"/></root>',\n        function (result) {});\n}\n\nfunction addXMLPartandHandler() {\n    Office.context.document.customXmlParts.addAsync(\n        \"<testns:book xmlns:testns='http://testns.com'><testns:page number='1'>Hello</testns:page><testns:page number='2'>world!</testns:page></testns:book>\",\n        function(r) { r.value.addHandlerAsync(Office.EventType.DataNodeDeleted,\n            function(a) {write(a.type)\n            },\n                function(s) {write(s.status)\n                });\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message;\n}\n```"
-    parameters:
-    - id: xml
-      description: 新しく作成したカスタム XML 部分に追加する XML です。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、CustomXmlPart オブジェクトを新しく作成します。
-      type:
-      - '(result: AsyncResult<CustomXmlPart>) => void'
-- uid: office.Office.CustomXmlParts.getByIdAsync
-  summary: 非同期的にその id で指定したカスタム XML 部分を取得します。
-  name: getByIdAsync(id, options, callback)
-  fullName: getByIdAsync(id, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartInnerXML() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getXmlAsync({}, function (eventArgs) {\n            write(eventArgs.value);\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-    parameters:
-    - id: id
-      description: 開始と終了の中かっこを含む、カスタム XML 部分の GUID を指定します。
-      type:
-      - string
-    - id: options
-      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、指定したカスタム XML 部分を表す CustomXmlPart オブジェクトです。 カスタム XML 部分に指定された id がない場合、メソッドは null を返します。
-      type:
-      - '(result: AsyncResult<CustomXmlPart>) => void'
-- uid: office.Office.CustomXmlParts.getByIdAsync_1
-  summary: 非同期的にその id で指定したカスタム XML 部分を取得します。
-  name: getByIdAsync(id, callback)
-  fullName: getByIdAsync(id, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: id
-      description: 開始と終了の中かっこを含む、カスタム XML 部分の GUID を指定します。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、指定したカスタム XML 部分を表す CustomXmlPart オブジェクトです。 カスタム XML 部分に指定された id がない場合、メソッドは null を返します。
-      type:
-      - '(result: AsyncResult<CustomXmlPart>) => void'
-- uid: office.Office.CustomXmlParts.getByNamespaceAsync
-  summary: 名前空間で指定したカスタム XML パーツを非同期的に取得します。
-  name: getByNamespaceAsync(ns, options, callback)
-  fullName: getByNamespaceAsync(ns, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByNamespaceAsync(ns: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: ns
-      description: 名前空間は URI であります。
-      type:
-      - string
-    - id: options
-      description: 任意の型を変更せずに、コールバックで使用するためのコンテキスト データを保持するためのオプションを提供します。
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、指定した名前空間に一致する CustomXmlPart オブジェクトの配列。
-      type:
-      - '(result: AsyncResult<CustomXmlPart[]>) => void'
-- uid: office.Office.CustomXmlParts.getByNamespaceAsync_1
-  summary: 名前空間で指定したカスタム XML パーツを非同期的に取得します。
-  name: getByNamespaceAsync(ns, callback)
-  fullName: getByNamespaceAsync(ns, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByNamespaceAsync(ns: string, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartsInNamespace() {\n    Office.context.document.customXmlParts.getByNamespaceAsync(\n        \"http://tempuri.org\", \n        function (eventArgs) {\n            write(\"Found \" + eventArgs.value.length + \" parts with this namespace\");\n    }); \n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-    parameters:
-    - id: ns
-      description: 名前空間は URI であります。
-      type:
-      - string
-    - id: callback
-      description: 省略可能。 関数コールバックが返されるときに呼び出されます[Office.AsyncResult](xref:office.Office.AsyncResult)の種類が唯一のパラメーターは、<!-- -->。 `value` 、結果のプロパティは、指定した名前空間に一致する CustomXmlPart オブジェクトの配列。
-      type:
-      - '(result: AsyncResult<CustomXmlPart[]>) => void'
+      ```javascript
+      function showXMLPartsInNamespace() {
+          Office.context.document.customXmlParts.getByNamespaceAsync(
+              "http://tempuri.org", 
+              function (eventArgs) {
+                  write("Found " + eventArgs.value.length + " parts with this namespace");
+          }); 
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getByNamespaceAsync(ns, callback)'
+    fullName: 'getByNamespaceAsync(ns, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByNamespaceAsync(ns: string, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: ns
+          description: 名前空間 URI。
+          type:
+            - string
+        - id: callback
+          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. 結果`value`のプロパティは、指定された名前空間に一致する CustomXmlPart オブジェクトの配列です。'
+          type:
+            - '(result: AsyncResult<CustomXmlPart[]>) => void'

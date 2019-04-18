@@ -1,239 +1,272 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1a8f80148f46248cd4fc130a989910cc008dac44
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29981074"
 items:
-- uid: excel.Excel.SettingCollection
-  summary: >-
-    ブックの一部であるオブジェクトを設定するキーと値ペアのコレクションを表します。 スコープでは、ファイルおよびアドインの作業ウィンドウ (コンテンツ) の組み合わせごとに制限されます。
+  - uid: excel.Excel.SettingCollection
+    summary: |-
+      ブックの一部であるキーと値のペア設定オブジェクトのコレクションを表します。 範囲は、ファイルとアドイン (タスクペインまたはコンテンツ) の組み合わせに制限されます。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.SettingCollection
+    fullName: Excel.SettingCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.SettingCollection.add
+      - excel.Excel.SettingCollection.context
+      - excel.Excel.SettingCollection.getCount
+      - excel.Excel.SettingCollection.getItem
+      - excel.Excel.SettingCollection.getItemOrNullObject
+      - excel.Excel.SettingCollection.items
+      - excel.Excel.SettingCollection.load
+      - excel.Excel.SettingCollection.load_1
+      - excel.Excel.SettingCollection.load_2
+      - excel.Excel.SettingCollection.onSettingsChanged
+      - excel.Excel.SettingCollection.toJSON
+  - uid: excel.Excel.SettingCollection.add
+    summary: |-
+      指定した設定をブックに設定または追加します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'add(key, value)'
+    fullName: 'add(key, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(key: string, value: string | number | boolean | Date | Array<any> | any): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.SettingCollection
-  fullName: Excel.SettingCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.SettingCollection.add
-  - excel.Excel.SettingCollection.context
-  - excel.Excel.SettingCollection.getCount
-  - excel.Excel.SettingCollection.getItem
-  - excel.Excel.SettingCollection.getItemOrNullObject
-  - excel.Excel.SettingCollection.items
-  - excel.Excel.SettingCollection.load
-  - excel.Excel.SettingCollection.load_1
-  - excel.Excel.SettingCollection.load_2
-  - excel.Excel.SettingCollection.onSettingsChanged
-  - excel.Excel.SettingCollection.toJSON
-- uid: excel.Excel.SettingCollection.add
-  summary: >-
-    指定した設定をブックに設定または追加します。
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings; 
+              settings.onSettingsChanged.add(onChangedSetting);
+
+              await context.sync();
+              console.log("Settings changed handler registered.");
+          });
+          ```
+      parameters:
+        - id: key
+          description: 新しい設定のキーです。
+          type:
+            - string
+        - id: value
+          description: 新しい設定の値です。
+          type:
+            - string | number | boolean | Date | Array<any> | any
+  - uid: excel.Excel.SettingCollection.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.SettingCollection.getCount
+    summary: |-
+      コレクションに含まれる設定の数を取得します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.SettingCollection.getItem
+    summary: |-
+      キーに基づいて設定エントリを取得します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: ''
+      parameters:
+        - id: key
+          description: 設定のキーです。
+          type:
+            - string
+  - uid: excel.Excel.SettingCollection.getItemOrNullObject
+    summary: |-
+      キーから Setting エントリを取得します。 Setting が存在しない場合は null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Excel.Setting;'
+      return:
+        type:
+          - excel.Excel.Setting
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: add(key, value)
-  fullName: add(key, value)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(key: string, value: string | number | boolean | Date | Array<any> | any): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n\n    await context.sync();\n    console.log(\"Settings changed handler registered.\");\n});\n```"
-    parameters:
-    - id: key
-      description: 新しい設定のキーです。
-      type:
-      - string
-    - id: value
-      description: 新しい設定の値です。
-      type:
-      - string | number | boolean | Date | Array<any> | any
-- uid: excel.Excel.SettingCollection.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.SettingCollection.getCount
-  summary: >-
-    コレクションに含まれる設定の数を取得します。
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings;
+              let needsReview = settings.getItem("NeedsReview");
+              needsReview.delete();
+              needsReview = settings.getItemOrNullObject("NeedsReview");
+
+              await context.sync();
+
+              if (needsReview.isNullObject) {
+                  console.log("The setting has been deleted");
+              } else {
+                  console.log("The setting was not deleted");
+              }
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: key
+          description: 設定のキーです。
+          type:
+            - string
+  - uid: excel.Excel.SettingCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Setting[];'
+      return:
+        type:
+          - 'Excel.Setting[]'
+  - uid: excel.Excel.SettingCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.SettingCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.SettingCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SettingCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SettingCollection;'
+      return:
+        type:
+          - excel.Excel.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.SettingCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.SettingCollection;'
+      return:
+        type:
+          - excel.Excel.SettingCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.SettingCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.SettingCollection;'
+      return:
+        type:
+          - excel.Excel.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.SettingCollection.onSettingsChanged
+    summary: |-
+      ドキュメント内の設定が変更されるときに発生します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSettingsChanged
+    fullName: onSettingsChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSettingsChanged: OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.SettingCollection.getItem
-  summary: >-
-    キーに基づいて設定エントリを取得します。
+          #### <a name="examples"></a>例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings; 
+              settings.onSettingsChanged.add(onChangedSetting);
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: string): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: ''
-    parameters:
-    - id: key
-      description: 設定のキーです。
-      type:
-      - string
-- uid: excel.Excel.SettingCollection.getItemOrNullObject
-  summary: >-
-    キーに基づいて設定エントリを取得します。設定が存在しない場合は null オブジェクトを返します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemOrNullObject(key: string): Excel.Setting;'
-    return:
-      type:
-      - excel.Excel.Setting
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
-    parameters:
-    - id: key
-      description: 設定のキーです。
-      type:
-      - string
-- uid: excel.Excel.SettingCollection.items
-  summary: このコレクションに読み込まれている子項目を取得します。
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.Setting[];'
-    return:
-      type:
-      - Excel.Setting[]
-- uid: excel.Excel.SettingCollection.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
-
-
-    `load(option?: string | string[]): Excel.SettingCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.SettingCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SettingCollection`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SettingCollection;'
-    return:
-      type:
-      - excel.Excel.SettingCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.SettingCollection.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.SettingCollection;'
-    return:
-      type:
-      - excel.Excel.SettingCollection
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.SettingCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.SettingCollection;'
-    return:
-      type:
-      - excel.Excel.SettingCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.SettingCollection.onSettingsChanged
-  summary: >-
-    ドキュメント内の設定が変更されるときに発生します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: onSettingsChanged
-  fullName: onSettingsChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onSettingsChanged: OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n\n    await context.sync();\n    console.log(\"Settings changed handler registered.\");\n});\n```"
-- uid: excel.Excel.SettingCollection.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.SettingCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.SettingCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.SettingCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.SettingCollectionData
-      description: ''
+              await context.sync();
+              console.log("Settings changed handler registered.");
+          });
+          ```
+  - uid: excel.Excel.SettingCollection.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.SettingCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.SettingCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.SettingCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.SettingCollectionData
+        description: ''

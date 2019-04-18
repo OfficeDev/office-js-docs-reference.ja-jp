@@ -1,213 +1,174 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 311a302472a7e4b0ee101c395ce17f74675853b7
-ms.sourcegitcommit: 2ef4b6e6f2f27ecb9abf01fefa4cffd9498ad5dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 03/16/2019
-ms.locfileid: "30656613"
 items:
-- uid: Outlook_1_6.Office.Item
-  summary: >-
-    item 名前空間は、現在選択されているメッセージ、会議出席依頼、または予定にアクセスするために使用されます。 `itemType`プロパティを使用して、アイテムの種類を調べることができます。
+  - uid: Outlook_1_6.Office.Item
+    summary: |-
+      item 名前空間は、現在選択されているメッセージ、会議出席依頼、または予定にアクセスするために使用されます。 `itemType`プロパティを使用して、アイテムの種類を調べることができます。
 
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>'
+    name: Office.Item
+    fullName: Office.Item
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_6
+    children:
+      - Outlook_1_6.Office.Item.loadCustomPropertiesAsync
+      - Outlook_1_6.Office.Item.body
+      - Outlook_1_6.Office.Item.itemType
+      - Outlook_1_6.Office.Item.notificationMessages
+  - uid: Outlook_1_6.Office.Item.loadCustomPropertiesAsync
+    summary: |-
+      選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
 
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-  name: Office.Item
-  fullName: Office.Item
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_6
-  children:
-  - Outlook_1_6.Office.Item.loadCustomPropertiesAsync
-  - Outlook_1_6.Office.Item.body
-  - Outlook_1_6.Office.Item.itemType
-  - Outlook_1_6.Office.Item.notificationMessages
-- uid: Outlook_1_6.Office.Item.loadCustomPropertiesAsync
-  summary: >-
-    選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
+      カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
 
+      カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
 
-    カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
+      #### <a name="examples"></a>例
 
-    カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
+      ```javascript
+      // The following example shows how to use the loadCustomPropertiesAsync method
+      // to asynchronously load custom properties that are specific to the current item.
+      // The example also shows how to use the saveAsync method to save these properties
+      // back to the server. After loading the custom properties, the example uses the
+      // get method to read the custom property myProp, the set method to write the
+      // custom property otherProp, and then finally calls the saveAsync method to save
+      // the custom properties.
+      Office.initialize = function () {
+          // Checks for the DOM to load using the jQuery ready function.
+          $(document).ready(function () {
+              // After the DOM is loaded, add-in-specific code can run.
+              var mailbox = Office.context.mailbox;
+              mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+          });
+      };
 
+      function customPropsCallback(asyncResult) {
+          var customProps = asyncResult.value;
+          var myProp = customProps.get("myProp");
 
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+          customProps.set("otherProp", "value");
+          customProps.saveAsync(saveCallback);
+      }
 
-    ####例えば
+      function saveCallback(asyncResult) {
+      }
+      ```
+    name: 'loadCustomPropertiesAsync(callback, userContext)'
+    fullName: 'loadCustomPropertiesAsync(callback, userContext)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
+        - id: userContext
+          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
+          type:
+            - any
+  - uid: Outlook_1_6.Office.Item.body
+    summary: |-
+      アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
 
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
-    ```javascript
+      #### <a name="examples"></a>例
 
-    // The following example shows how to use the loadCustomPropertiesAsync method
+      ```javascript
+      // This example gets the body of the item as plain text.
+      Office.context.mailbox.item.body.getAsync(
+          "text",
+          { asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Do something with the result.
+          });
 
-    // to asynchronously load custom properties that are specific to the current item.
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value": "TEXT of whole body (including threads below)",
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: body
+    fullName: body
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'body: Body;'
+      return:
+        type:
+          - Body
+  - uid: Outlook_1_6.Office.Item.itemType
+    summary: |-
+      インスタンスが表しているアイテムの種類を取得します。
 
-    // The example also shows how to use the saveAsync method to save these properties
+      itemtype プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、itemtype 列挙値の1つを返します。
 
-    // back to the server. After loading the custom properties, the example uses the
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
-    // get method to read the custom property myProp, the set method to write the
+      #### <a name="examples"></a>例
 
-    // custom property otherProp, and then finally calls the saveAsync method to save
+      ```javascript
+      if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
+          // Do something.
+      } else {
+          // Do something else.
+      }
+      ```
+    name: itemType
+    fullName: itemType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemType: MailboxEnums.ItemType;'
+      return:
+        type:
+          - MailboxEnums.ItemType
+  - uid: Outlook_1_6.Office.Item.notificationMessages
+    summary: |-
+      アイテムの通知メッセージを取得します。
 
-    // the custom properties.
+      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
-    Office.initialize = function () {
-        // Checks for the DOM to load using the jQuery ready function.
-        $(document).ready(function () {
-            // After the DOM is loaded, add-in-specific code can run.
-            var mailbox = Office.context.mailbox;
-            mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
-        });
-    };
+      #### <a name="examples"></a>例
 
-
-    function customPropsCallback(asyncResult) {
-        var customProps = asyncResult.value;
-        var myProp = customProps.get("myProp");
-
-        customProps.set("otherProp", "value");
-        customProps.saveAsync(saveCallback);
-    }
-
-
-    function saveCallback(asyncResult) {
-
-    }
-
-    ```
-  name: loadCustomPropertiesAsync(callback, userContext)
-  fullName: loadCustomPropertiesAsync(callback, userContext)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
-    - id: userContext
-      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
-      type:
-      - any
-- uid: Outlook_1_6.Office.Item.body
-  summary: >-
-    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
-
-
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // This example gets the body of the item as plain text.
-
-    Office.context.mailbox.item.body.getAsync(
-        "text",
-        { asyncContext: "This is passed to the callback" },
-        function callback(result) {
-            // Do something with the result.
-        });
-
-    // The following is an example of the result parameter passed to the callback function.
-
-    {
-        "value": "TEXT of whole body (including threads below)",
-        "status": "succeeded",
-        "asyncContext": "This is passed to the callback"
-    }
-
-    ```
-  name: body
-  fullName: body
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'body: Body;'
-    return:
-      type:
-      - Body
-- uid: Outlook_1_6.Office.Item.itemType
-  summary: >-
-    インスタンスが表しているアイテムの種類を取得します。
-
-
-    itemtype プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、itemtype 列挙値の1つを返します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
-        // Do something.
-    } else {
-        // Do something else.
-    }
-
-    ```
-  name: itemType
-  fullName: itemType
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'itemType: MailboxEnums.ItemType;'
-    return:
-      type:
-      - MailboxEnums.ItemType
-- uid: Outlook_1_6.Office.Item.notificationMessages
-  summary: >-
-    アイテムの通知メッセージを取得します。
-
-
-    \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    // Get all notifications.
-
-    Office.context.mailbox.item.notificationMessages.getAllAsync(
-        function (asyncResult) {
-            console.log(JSON.stringify(asyncResult));
-        }
-    );
-
-    ```
-  name: notificationMessages
-  fullName: notificationMessages
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'notificationMessages: NotificationMessages;'
-    return:
-      type:
-      - NotificationMessages
+      ```javascript
+      // Get all notifications.
+      Office.context.mailbox.item.notificationMessages.getAllAsync(
+          function (asyncResult) {
+              console.log(JSON.stringify(asyncResult));
+          }
+      );
+      ```
+    name: notificationMessages
+    fullName: notificationMessages
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'notificationMessages: NotificationMessages;'
+      return:
+        type:
+          - NotificationMessages
