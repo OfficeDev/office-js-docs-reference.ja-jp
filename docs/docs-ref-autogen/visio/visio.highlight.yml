@@ -1,56 +1,65 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e30b43cbb58af9bcf990ca19190e4537935d03ed
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26222859"
 items:
-- uid: visio.Visio.Highlight
-  summary: >-
-    図形に追加された強調表示のデータを表します。
+  - uid: visio.Visio.Highlight
+    summary: |-
+      図形に追加された強調表示のデータを表します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.Highlight
+    fullName: Visio.Highlight
+    langs:
+      - typeScript
+    type: interface
+    package: visio
+    children:
+      - visio.Visio.Highlight.color
+      - visio.Visio.Highlight.width
+  - uid: visio.Visio.Highlight.color
+    summary: |-
+      強調表示の色を指定する文字列。 このプロパティには、"\#RRGGBB" という形式を指定する必要があります。各文字は0から F までの数字を表し、RR は 0 ~ 0xff (255) の範囲の赤の値、BB は 0 ~ 0xff (255) の青の値です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: color
+    fullName: color
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'color: string;'
+      return:
+        type:
+          - string
+        description: |-
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: Visio.Highlight
-  fullName: Visio.Highlight
-  langs:
-  - typeScript
-  type: interface
-  package: visio
-  children:
-  - visio.Visio.Highlight.color
-  - visio.Visio.Highlight.width
-- uid: visio.Visio.Highlight.color
-  summary: >-
-    ハイライトの色を指定する文字列です。 フォームをする必要があります"\#RRGGBB"、それぞれの文字が 16 進数 0 から F までを表すし、RR が 0 から 0 xff (255)、緑の値の 0 から 0 xff (255)、GG の赤の値であり、BB は青の値を 0 ~ 0 xff (255) の間をします。
+          #### <a name="examples"></a>例
 
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shape = activePage.shapes.getItem(0);
+              shape.view.highlight.color = "#E7E7E7";
+              shape.view.highlight.width = 100;
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.Highlight.width
+    summary: |-
+      強調表示のストロークの幅をピクセル単位で指定する正の整数です。
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: color
-  fullName: color
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'color: string;'
-    return:
-      type:
-      - string
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shape = activePage.shapes.getItem(0);\n    shape.view.highlight.color = \"#E7E7E7\";\n    shape.view.highlight.width = 100;\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.Highlight.width
-  summary: >-
-    強調表示のストロークの幅をピクセル単位で指定する正の整数です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: width
-  fullName: width
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'width: number;'
-    return:
-      type:
-      - number
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: width
+    fullName: width
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'width: number;'
+      return:
+        type:
+          - number

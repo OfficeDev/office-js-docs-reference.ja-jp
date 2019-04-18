@@ -1,364 +1,411 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b8cef1a9fb6b0a28a9c36743a8cc320cb0f260a6
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29973668"
 items:
-- uid: visio.Visio.Document
-  summary: >-
-    ドキュメント クラスを表します。
+  - uid: visio.Visio.Document
+    summary: |-
+      ドキュメント クラスを表します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.Document
+    fullName: Visio.Document
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: visio
+    children:
+      - visio.Visio.Document.application
+      - visio.Visio.Document.getActivePage
+      - visio.Visio.Document.load
+      - visio.Visio.Document.load_1
+      - visio.Visio.Document.load_2
+      - visio.Visio.Document.onDataRefreshComplete
+      - visio.Visio.Document.onDocumentLoadComplete
+      - visio.Visio.Document.onPageLoadComplete
+      - visio.Visio.Document.onSelectionChanged
+      - visio.Visio.Document.onShapeMouseEnter
+      - visio.Visio.Document.onShapeMouseLeave
+      - visio.Visio.Document.pages
+      - visio.Visio.Document.set
+      - visio.Visio.Document.set_1
+      - visio.Visio.Document.setActivePage
+      - visio.Visio.Document.startDataRefresh
+      - visio.Visio.Document.toJSON
+      - visio.Visio.Document.view
+  - uid: visio.Visio.Document.application
+    summary: |-
+      このドキュメントを含む Visio アプリケーションのインスタンスを表します。 読み取り専用です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: application
+    fullName: application
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly application: Visio.Application;'
+      return:
+        type:
+          - Visio.Application
+  - uid: visio.Visio.Document.getActivePage
+    summary: |-
+      ドキュメントのアクティブ ページを返します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getActivePage()
+    fullName: getActivePage()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActivePage(): Visio.Page;'
+      return:
+        type:
+          - Visio.Page
+        description: |-
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: Visio.Document
-  fullName: Visio.Document
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: visio
-  children:
-  - visio.Visio.Document.application
-  - visio.Visio.Document.getActivePage
-  - visio.Visio.Document.load
-  - visio.Visio.Document.load_1
-  - visio.Visio.Document.load_2
-  - visio.Visio.Document.onDataRefreshComplete
-  - visio.Visio.Document.onDocumentLoadComplete
-  - visio.Visio.Document.onPageLoadComplete
-  - visio.Visio.Document.onSelectionChanged
-  - visio.Visio.Document.onShapeMouseEnter
-  - visio.Visio.Document.onShapeMouseLeave
-  - visio.Visio.Document.pages
-  - visio.Visio.Document.set
-  - visio.Visio.Document.set_1
-  - visio.Visio.Document.setActivePage
-  - visio.Visio.Document.startDataRefresh
-  - visio.Visio.Document.toJSON
-  - visio.Visio.Document.view
-- uid: visio.Visio.Document.application
-  summary: >-
-    このドキュメントを含む Visio アプリケーションのインスタンスを表します。読み取り専用です。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var document = ctx.document;
+              var activePage = document.getActivePage();
+              activePage.load();
+              return ctx.sync().then(function () {
+                  console.log("pageName: " +activePage.name);
+              });   
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.Document.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Visio.Document`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Visio.Document`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Document`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Visio.Interfaces.DocumentLoadOptions): Visio.Document;'
+      return:
+        type:
+          - Visio.Document
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - visio.Visio.Interfaces.DocumentLoadOptions
+  - uid: visio.Visio.Document.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Visio.Document;'
+      return:
+        type:
+          - Visio.Document
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: visio.Visio.Document.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Document;'
+      return:
+        type:
+          - Visio.Document
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: visio.Visio.Document.onDataRefreshComplete
+    summary: |-
+      ダイアグラムでデータが更新されるときに発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onDataRefreshComplete
+    fullName: onDataRefreshComplete
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDataRefreshComplete: OfficeExtension.EventHandlers<Visio.DataRefreshCompleteEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.DataRefreshCompleteEventArgs>
+  - uid: visio.Visio.Document.onDocumentLoadComplete
+    summary: |-
+      ドキュメントが読み込まれるとき、更新されるとき、または変更されるときに発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onDocumentLoadComplete
+    fullName: onDocumentLoadComplete
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDocumentLoadComplete: OfficeExtension.EventHandlers<Visio.DocumentLoadCompleteEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.DocumentLoadCompleteEventArgs>
+  - uid: visio.Visio.Document.onPageLoadComplete
+    summary: |-
+      ページの読み込みが完了したときに発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onPageLoadComplete
+    fullName: onPageLoadComplete
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onPageLoadComplete: OfficeExtension.EventHandlers<Visio.PageLoadCompleteEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.PageLoadCompleteEventArgs>
+  - uid: visio.Visio.Document.onSelectionChanged
+    summary: |-
+      現在の選択されている図形が変更されると発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Visio.SelectionChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.SelectionChangedEventArgs>
+  - uid: visio.Visio.Document.onShapeMouseEnter
+    summary: |-
+      ユーザーがマウスポインターを図形の境界ボックスに移動したときに発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onShapeMouseEnter
+    fullName: onShapeMouseEnter
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onShapeMouseEnter: OfficeExtension.EventHandlers<Visio.ShapeMouseEnterEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.ShapeMouseEnterEventArgs>
+  - uid: visio.Visio.Document.onShapeMouseLeave
+    summary: |-
+      ユーザーがマウスを図形の境界ボックスの外に移動したときに発生します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: onShapeMouseLeave
+    fullName: onShapeMouseLeave
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onShapeMouseLeave: OfficeExtension.EventHandlers<Visio.ShapeMouseLeaveEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Visio.ShapeMouseLeaveEventArgs>
+  - uid: visio.Visio.Document.pages
+    summary: |-
+      ドキュメントに関連付けられているページのコレクションを表します。 読み取り専用です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: pages
+    fullName: pages
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pages: Visio.PageCollection;'
+      return:
+        type:
+          - Visio.PageCollection
+        description: |-
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: application
-  fullName: application
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly application: Visio.Application;'
-    return:
-      type:
-      - Visio.Application
-- uid: visio.Visio.Document.getActivePage
-  summary: >-
-    ドキュメントのアクティブ ページを返します。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var pages = ctx.document.pages;
+              var pageCount = pages.getCount();
+              return ctx.sync().then(function () {
+                  console.log("Pages Count: " +pageCount.value);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.Document.set
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Visio.Document): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.DocumentUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - Interfaces.DocumentUpdateData
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: visio.Visio.Document.set_1
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Visio.Document): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - Visio.Document
+  - uid: visio.Visio.Document.setActivePage
+    summary: |-
+      ドキュメントのアクティブ ページを設定します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: setActivePage(PageName)
+    fullName: setActivePage(PageName)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setActivePage(PageName: string): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: getActivePage()
-  fullName: getActivePage()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getActivePage(): Visio.Page;'
-    return:
-      type:
-      - Visio.Page
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var document = ctx.document;\n    var activePage = document.getActivePage();\n    activePage.load();\n    return ctx.sync().then(function () {\n        console.log(\"pageName: \" +activePage.name);\n    });   \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.Document.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var document = ctx.document;
+              var pageName = "Page-1";
+              document.setActivePage(pageName);
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: PageName
+          description: ページの名前
+          type:
+            - string
+  - uid: visio.Visio.Document.startDataRefresh
+    summary: |-
+      すべてのページについて、図内のデータの更新をトリガーします。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: startDataRefresh()
+    fullName: startDataRefresh()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'startDataRefresh(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    `load(option?: string | string[]): Visio.Document`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+          #### <a name="examples"></a>例
 
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var document = ctx.document;
+              document.startDataRefresh();
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.Document.toJSON
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Visio.Interfaces.DocumentData;'
+      return:
+        type:
+          - visio.Visio.Interfaces.DocumentData
+        description: ''
+  - uid: visio.Visio.Document.view
+    summary: |-
+      DocumentView オブジェクトを返します。 読み取り専用です。
 
-    `load(option?: { select?: string; expand?: string; }): Visio.Document`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Document`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Visio.Interfaces.DocumentLoadOptions): Visio.Document;'
-    return:
-      type:
-      - Visio.Document
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - visio.Visio.Interfaces.DocumentLoadOptions
-- uid: visio.Visio.Document.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Visio.Document;'
-    return:
-      type:
-      - Visio.Document
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
-      type:
-      - string | string[]
-- uid: visio.Visio.Document.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Document;'
-    return:
-      type:
-      - Visio.Document
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: visio.Visio.Document.onDataRefreshComplete
-  summary: >-
-    図のデータが更新されたときに発生します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onDataRefreshComplete
-  fullName: onDataRefreshComplete
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onDataRefreshComplete: OfficeExtension.EventHandlers<Visio.DataRefreshCompleteEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.DataRefreshCompleteEventArgs>
-- uid: visio.Visio.Document.onDocumentLoadComplete
-  summary: >-
-    ドキュメントが読み込まれて、更新、または変更するときに発生します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onDocumentLoadComplete
-  fullName: onDocumentLoadComplete
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onDocumentLoadComplete: OfficeExtension.EventHandlers<Visio.DocumentLoadCompleteEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.DocumentLoadCompleteEventArgs>
-- uid: visio.Visio.Document.onPageLoadComplete
-  summary: >-
-    ページを終了すると発生をロードします。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onPageLoadComplete
-  fullName: onPageLoadComplete
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onPageLoadComplete: OfficeExtension.EventHandlers<Visio.PageLoadCompleteEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.PageLoadCompleteEventArgs>
-- uid: visio.Visio.Document.onSelectionChanged
-  summary: >-
-    図形の現在の選択範囲が変更されたときに発生します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onSelectionChanged
-  fullName: onSelectionChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Visio.SelectionChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.SelectionChangedEventArgs>
-- uid: visio.Visio.Document.onShapeMouseEnter
-  summary: >-
-    ユーザーが図形の境界ボックスにマウス ポインターを移動するときに発生します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onShapeMouseEnter
-  fullName: onShapeMouseEnter
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onShapeMouseEnter: OfficeExtension.EventHandlers<Visio.ShapeMouseEnterEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.ShapeMouseEnterEventArgs>
-- uid: visio.Visio.Document.onShapeMouseLeave
-  summary: >-
-    ユーザーが図形の境界ボックスからマウスを動かすと発生します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: onShapeMouseLeave
-  fullName: onShapeMouseLeave
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onShapeMouseLeave: OfficeExtension.EventHandlers<Visio.ShapeMouseLeaveEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Visio.ShapeMouseLeaveEventArgs>
-- uid: visio.Visio.Document.pages
-  summary: >-
-    ドキュメントに関連付けられているページのコレクションを表します。読み取り専用です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: pages
-  fullName: pages
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly pages: Visio.PageCollection;'
-    return:
-      type:
-      - Visio.PageCollection
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var pages = ctx.document.pages;\n    var pageCount = pages.getCount();\n    return ctx.sync().then(function () {\n        console.log(\"Pages Count: \" +pageCount.value);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.Document.set
-  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Visio.Document): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.DocumentUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
-      type:
-      - Interfaces.DocumentUpdateData
-    - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: visio.Visio.Document.set_1
-  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Visio.Document): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - Visio.Document
-- uid: visio.Visio.Document.setActivePage
-  summary: >-
-    ドキュメントのアクティブ ページを設定します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: setActivePage(PageName)
-  fullName: setActivePage(PageName)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setActivePage(PageName: string): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var document = ctx.document;\n    var pageName = \"Page-1\";\n    document.setActivePage(pageName);\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: PageName
-      description: ページの名前
-      type:
-      - string
-- uid: visio.Visio.Document.startDataRefresh
-  summary: >-
-    すべてのページについて、図内のデータの更新をトリガーします。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: startDataRefresh()
-  fullName: startDataRefresh()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'startDataRefresh(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var document = ctx.document;\n    document.startDataRefresh();\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.Document.toJSON
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Visio.Interfaces.DocumentData;'
-    return:
-      type:
-      - visio.Visio.Interfaces.DocumentData
-      description: ''
-- uid: visio.Visio.Document.view
-  summary: >-
-    DocumentView オブジェクトを返します。読み取り専用です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: view
-  fullName: view
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly view: Visio.DocumentView;'
-    return:
-      type:
-      - visio.Visio.DocumentView
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: view
+    fullName: view
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly view: Visio.DocumentView;'
+      return:
+        type:
+          - visio.Visio.DocumentView

@@ -1,185 +1,162 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 88d750cf331655dbe70abe306bad821c973b9a53
-ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/22/2019
-ms.locfileid: "30198726"
 items:
-- uid: Outlook_1_7.Office.Location
-  summary: >-
-    Outlook アドインで会議の場所を取得し設定する方法を提供します。
+  - uid: Outlook_1_7.Office.Location
+    summary: |-
+      Outlook アドインで会議の場所を取得し設定する方法を提供します。
 
+      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>'
+    name: Office.Location
+    fullName: Office.Location
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_7
+    children:
+      - Outlook_1_7.Office.Location.getAsync
+      - Outlook_1_7.Office.Location.getAsync_1
+      - Outlook_1_7.Office.Location.setAsync
+      - Outlook_1_7.Office.Location.setAsync_1
+  - uid: Outlook_1_7.Office.Location.getAsync
+    summary: |-
+      予定の場所を取得します。
 
-    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>
-  name: Office.Location
-  fullName: Office.Location
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_7
-  children:
-  - Outlook_1_7.Office.Location.getAsync
-  - Outlook_1_7.Office.Location.getAsync_1
-  - Outlook_1_7.Office.Location.setAsync
-  - Outlook_1_7.Office.Location.setAsync_1
-- uid: Outlook_1_7.Office.Location.getAsync
-  summary: >-
-    予定の場所を取得します。
+      getAsync メソッドは、Exchange サーバーへの非同期呼び出しを開始して、予定の場所を取得します。 予定の場所は、asyncResult プロパティに文字列として提供されます。
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>
 
+      #### <a name="examples"></a>例
 
-    getAsync メソッドは、Exchange サーバーへの非同期呼び出しを開始し、予定の場所を取得します。 予定の場所は、asyncResult.value プロパティに文字列として指定されます。
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>
+      ```javascript
+      var userContext = { value : 1 };
+      Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
 
-    ####例えば
+      function callback(asyncResult) {
+          var context = asyncResult.context;
+          var location = asyncResult.value;
+      }
+      ```
+    name: 'getAsync(options, callback)'
+    fullName: 'getAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
 
+            \[Api set: Mailbox 1.1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_7.Office.Location.getAsync_1
+    summary: |-
+      予定の場所を取得します。
 
-    ```javascript
+      getAsync メソッドは、Exchange サーバーへの非同期呼び出しを開始して、予定の場所を取得します。 予定の場所は、asyncResult プロパティに文字列として提供されます。
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>'
+    name: getAsync(callback)
+    fullName: getAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
 
-    var userContext = { value : 1 };
+            \[Api set: Mailbox 1.1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_7.Office.Location.setAsync
+    summary: |-
+      予定の場所を設定します。
 
-    Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+      setasync メソッドは、Exchange サーバーへの非同期呼び出しを開始して、予定の場所を設定します。 予定の場所を設定すると、現在の場所が上書きされます。
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>'
+    name: 'setAsync(location, options, callback)'
+    fullName: 'setAsync(location, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: location
+          description: 予定の場所。 文字列の最大長は 255 文字です。
+          type:
+            - string
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 場所の設定に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
 
+            \[Api set: Mailbox 1.1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_7.Office.Location.setAsync_1
+    summary: |-
+      予定の場所を設定します。
 
-    function callback(asyncResult) {
-        var context = asyncResult.context;
-        var location = asyncResult.value;
-    }
+      setasync メソッドは、Exchange サーバーへの非同期呼び出しを開始して、予定の場所を設定します。 予定の場所を設定すると、現在の場所が上書きされます。
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>
 
-    ```
-  name: getAsync(options, callback)
-  fullName: getAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: >-
-        メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+      #### <a name="examples"></a>例
 
+      ```javascript
+      Office.context.mailbox.item.location.setAsync(
+          "Room 1",
+          function (asyncResult) {
+              if (asyncResult.status === "failed") {
+                  console.log("Action failed with error: " + asyncResult.error.message);
+              }
+          }
+      );
+      ```
+    name: 'setAsync(location, callback)'
+    fullName: 'setAsync(location, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(location: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: location
+          description: 予定の場所。 文字列の最大長は 255 文字です。
+          type:
+            - string
+        - id: callback
+          description: |-
+            省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 場所の設定に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
 
-        \[Api set: Mailbox 1.1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_7.Office.Location.getAsync_1
-  summary: >-
-    予定の場所を取得します。
-
-
-    getAsync メソッドは、Exchange サーバーへの非同期呼び出しを開始し、予定の場所を取得します。 予定の場所は、asyncResult.value プロパティに文字列として指定されます。
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> </table>
-  name: getAsync(callback)
-  fullName: getAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: >-
-        メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-
-
-        \[Api set: Mailbox 1.1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_7.Office.Location.setAsync
-  summary: >-
-    予定の場所を設定します。
-
-
-    setAsync メソッドは、予定の場所を設定する Exchange サーバーへの非同期呼び出しを開始します。予定の場所を設定すると、現在の場所が上書きされます。
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>
-  name: setAsync(location, options, callback)
-  fullName: setAsync(location, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: location
-      description: 予定の場所。文字列の最大長は 255 文字です。
-      type:
-      - string
-    - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: >-
-        省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 場所の設定に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
-
-
-        \[Api set: Mailbox 1.1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_7.Office.Location.setAsync_1
-  summary: >-
-    予定の場所を設定します。
-
-
-    setAsync メソッドは、予定の場所を設定する Exchange サーバーへの非同期呼び出しを開始します。予定の場所を設定すると、現在の場所が上書きされます。
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>作成</td></tr> <tr><td>エラー</td><td>DataExceedsMaximumSize-location パラメーターは、255文字を超えています。</td></tr> </table>
-
-    ####例えば
-
-
-    ```javascript
-
-    Office.context.mailbox.item.location.setAsync(
-        "Room 1",
-        function (asyncResult) {
-            if (asyncResult.status === "failed") {
-                console.log("Action failed with error: " + asyncResult.error.message);
-            }
-        }
-    );
-
-    ```
-  name: setAsync(location, callback)
-  fullName: setAsync(location, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(location: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: location
-      description: 予定の場所。文字列の最大長は 255 文字です。
-      type:
-      - string
-    - id: callback
-      description: >-
-        省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 場所の設定に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
-
-
-        \[Api set: Mailbox 1.1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
+            \[Api set: Mailbox 1.1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'

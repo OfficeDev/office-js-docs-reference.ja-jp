@@ -1,302 +1,298 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: eada72d6cc02c51824513b42b2000b28f6b2008c
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29976286"
 items:
-- uid: excel.Excel.DataBarConditionalFormat
-  summary: >-
-    Excel の条件付きのデータ バーの種類を表します。
+  - uid: excel.Excel.DataBarConditionalFormat
+    summary: |-
+      Excel の条件付きデータバーの種類を表します。
+
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.DataBarConditionalFormat
+    fullName: Excel.DataBarConditionalFormat
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.DataBarConditionalFormat.axisColor
+      - excel.Excel.DataBarConditionalFormat.axisFormat
+      - excel.Excel.DataBarConditionalFormat.barDirection
+      - excel.Excel.DataBarConditionalFormat.context
+      - excel.Excel.DataBarConditionalFormat.load
+      - excel.Excel.DataBarConditionalFormat.load_1
+      - excel.Excel.DataBarConditionalFormat.load_2
+      - excel.Excel.DataBarConditionalFormat.lowerBoundRule
+      - excel.Excel.DataBarConditionalFormat.negativeFormat
+      - excel.Excel.DataBarConditionalFormat.positiveFormat
+      - excel.Excel.DataBarConditionalFormat.set
+      - excel.Excel.DataBarConditionalFormat.set_1
+      - excel.Excel.DataBarConditionalFormat.showDataBarOnly
+      - excel.Excel.DataBarConditionalFormat.toJSON
+      - excel.Excel.DataBarConditionalFormat.upperBoundRule
+  - uid: excel.Excel.DataBarConditionalFormat.axisColor
+    summary: |-
+      フォーム\#RRGGBB (例: "FFA500") の軸線の色を表す html カラーコード、または名前付きの html 色 (例: "オレンジ")。 軸が存在しない場合または設定されていない場合は、"" (空の文字列)。
+
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: axisColor
+    fullName: axisColor
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'axisColor: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.DataBarConditionalFormat.axisFormat
+    summary: |-
+      Excel データバーの軸をどのように判別するかを表します。
+
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: axisFormat
+    fullName: axisFormat
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'axisFormat: Excel.ConditionalDataBarAxisFormat | "Automatic" | "None" | "CellMidPoint";'
+      return:
+        type:
+          - Excel.ConditionalDataBarAxisFormat | "Automatic" | "None" | "CellMidPoint"
+  - uid: excel.Excel.DataBarConditionalFormat.barDirection
+    summary: |-
+      データバーのグラフィックスの基準となる方向を表します。
+
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: barDirection
+    fullName: barDirection
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'barDirection: Excel.ConditionalDataBarDirection | "Context" | "LeftToRight" | "RightToLeft";'
+      return:
+        type:
+          - Excel.ConditionalDataBarDirection | "Context" | "LeftToRight" | "RightToLeft"
+        description: |-
 
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.DataBarConditionalFormat
-  fullName: Excel.DataBarConditionalFormat
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.DataBarConditionalFormat.axisColor
-  - excel.Excel.DataBarConditionalFormat.axisFormat
-  - excel.Excel.DataBarConditionalFormat.barDirection
-  - excel.Excel.DataBarConditionalFormat.context
-  - excel.Excel.DataBarConditionalFormat.load
-  - excel.Excel.DataBarConditionalFormat.load_1
-  - excel.Excel.DataBarConditionalFormat.load_2
-  - excel.Excel.DataBarConditionalFormat.lowerBoundRule
-  - excel.Excel.DataBarConditionalFormat.negativeFormat
-  - excel.Excel.DataBarConditionalFormat.positiveFormat
-  - excel.Excel.DataBarConditionalFormat.set
-  - excel.Excel.DataBarConditionalFormat.set_1
-  - excel.Excel.DataBarConditionalFormat.showDataBarOnly
-  - excel.Excel.DataBarConditionalFormat.toJSON
-  - excel.Excel.DataBarConditionalFormat.upperBoundRule
-- uid: excel.Excel.DataBarConditionalFormat.axisColor
-  summary: >-
-    HTML コードは、フォームの軸線の色を表す\#RRGGBB (例:"FFA500")、または名前付きの HTML 色 (例:「オレンジ」)。 ""(空の文字列) 軸がない場合にインストールまたは設定します。
+          #### <a name="examples"></a>例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B8:E13");
+              const conditionalFormat = range.conditionalFormats
+                  .add(Excel.ConditionalFormatType.dataBar);
+              conditionalFormat.dataBar.barDirection = Excel.ConditionalDataBarDirection.leftToRight;
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: axisColor
-  fullName: axisColor
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'axisColor: string;'
-    return:
-      type:
-      - string
-- uid: excel.Excel.DataBarConditionalFormat.axisFormat
-  summary: >-
-    Excel のデータ バーの軸を決定する方法を表したもの。
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.DataBarConditionalFormat.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.DataBarConditionalFormat.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
+      `load(option?: string | string[]): Excel.DataBarConditionalFormat`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: axisFormat
-  fullName: axisFormat
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'axisFormat: Excel.ConditionalDataBarAxisFormat | "Automatic" | "None" | "CellMidPoint";'
-    return:
-      type:
-      - Excel.ConditionalDataBarAxisFormat | "Automatic" | "None" | "CellMidPoint"
-- uid: excel.Excel.DataBarConditionalFormat.barDirection
-  summary: >-
-    データ バーの画像を基になる必要がある方向を表します。
+      `load(option?: { select?: string; expand?: string; }): Excel.DataBarConditionalFormat`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataBarConditionalFormat`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.DataBarConditionalFormatLoadOptions): Excel.DataBarConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.DataBarConditionalFormat
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.DataBarConditionalFormatLoadOptions
+  - uid: excel.Excel.DataBarConditionalFormat.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.DataBarConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.DataBarConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.DataBarConditionalFormat.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.DataBarConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.DataBarConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.DataBarConditionalFormat.lowerBoundRule
+    summary: |-
+      データ バーの下限値 (および該当する場合はその計算方法) を構成するルール。
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: barDirection
-  fullName: barDirection
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'barDirection: Excel.ConditionalDataBarDirection | "Context" | "LeftToRight" | "RightToLeft";'
-    return:
-      type:
-      - Excel.ConditionalDataBarDirection | "Context" | "LeftToRight" | "RightToLeft"
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.dataBar);\n    conditionalFormat.dataBar.barDirection = Excel.ConditionalDataBarDirection.leftToRight;\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.DataBarConditionalFormat.context
-  summary: オブジェクトに関連付けられた要求コンテキスト。 これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.DataBarConditionalFormat.load
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 "Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。
-  remarks: >-
-    だけでなく、この署名は、このメソッドは、次の署名をします。
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: lowerBoundRule
+    fullName: lowerBoundRule
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'lowerBoundRule: Excel.ConditionalDataBarRule;'
+      return:
+        type:
+          - excel.Excel.ConditionalDataBarRule
+  - uid: excel.Excel.DataBarConditionalFormat.negativeFormat
+    summary: |-
+      Excel データバーの軸の左側にあるすべての値の表現。 読み取り専用です。
 
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: negativeFormat
+    fullName: negativeFormat
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly negativeFormat: Excel.ConditionalDataBarNegativeFormat;'
+      return:
+        type:
+          - excel.Excel.ConditionalDataBarNegativeFormat
+  - uid: excel.Excel.DataBarConditionalFormat.positiveFormat
+    summary: |-
+      Excel データバーの軸の右側にあるすべての値の表現。 読み取り専用です。
 
-    `load(option?: string | string[]): Excel.DataBarConditionalFormat`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: positiveFormat
+    fullName: positiveFormat
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly positiveFormat: Excel.ConditionalDataBarPositiveFormat;'
+      return:
+        type:
+          - excel.Excel.ConditionalDataBarPositiveFormat
+  - uid: excel.Excel.DataBarConditionalFormat.set
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
 
+      `set(properties: Excel.DataBarConditionalFormat): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.DataBarConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - Interfaces.DataBarConditionalFormatUpdateData
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.DataBarConditionalFormat.set_1
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.DataBarConditionalFormat): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.DataBarConditionalFormat
+  - uid: excel.Excel.DataBarConditionalFormat.showDataBarOnly
+    summary: |-
+      true の場合、データ バーが適用されているセルの値を非表示にします。
 
-    `load(option?: { select?: string; expand?: string; }): Excel.DataBarConditionalFormat`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showDataBarOnly
+    fullName: showDataBarOnly
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showDataBarOnly: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.DataBarConditionalFormat.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel のエクセル arconditionalformat オブジェクトは API オブジェクトであるのに`toJSON`対して、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.DataBarConditionalFormatData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.DataBarConditionalFormatData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.DataBarConditionalFormatData
+        description: ''
+  - uid: excel.Excel.DataBarConditionalFormat.upperBoundRule
+    summary: |-
+      データ バーの上限値 (および該当する場合はその計算方法) を構成するルール。
 
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataBarConditionalFormat`でコレクション型のみ使用できます。 前の署名に似ていますが。 Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。 Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。 Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.DataBarConditionalFormatLoadOptions): Excel.DataBarConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.DataBarConditionalFormat
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.DataBarConditionalFormatLoadOptions
-- uid: excel.Excel.DataBarConditionalFormat.load_1
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.DataBarConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.DataBarConditionalFormat
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.DataBarConditionalFormat.load_2
-  summary: オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。 呼び出す必要があります`context.sync()`プロパティを読み取る前にします。
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.DataBarConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.DataBarConditionalFormat
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: 読み込むには、プロパティを指定するコンマ区切りの文字列は、propertyNamesAndPaths.select、propertyNamesAndPaths.expand は、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.DataBarConditionalFormat.lowerBoundRule
-  summary: >-
-    データ バーの下限値 (および該当する場合はその計算方法) を構成するルール。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: lowerBoundRule
-  fullName: lowerBoundRule
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'lowerBoundRule: Excel.ConditionalDataBarRule;'
-    return:
-      type:
-      - excel.Excel.ConditionalDataBarRule
-- uid: excel.Excel.DataBarConditionalFormat.negativeFormat
-  summary: >-
-    Excel データ バーの軸の左側のすべての値を表します。読み取り専用。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: negativeFormat
-  fullName: negativeFormat
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly negativeFormat: Excel.ConditionalDataBarNegativeFormat;'
-    return:
-      type:
-      - excel.Excel.ConditionalDataBarNegativeFormat
-- uid: excel.Excel.DataBarConditionalFormat.positiveFormat
-  summary: >-
-    Excel データ バーの軸の右側のすべての値を表します。読み取り専用。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: positiveFormat
-  fullName: positiveFormat
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly positiveFormat: Excel.ConditionalDataBarPositiveFormat;'
-    return:
-      type:
-      - excel.Excel.ConditionalDataBarPositiveFormat
-- uid: excel.Excel.DataBarConditionalFormat.set
-  summary: 同時に複数のオブジェクトのプロパティを設定します。 適切なプロパティで、普通のオブジェクトまたは同じ種類の別の API のオブジェクトのいずれかを渡すことができます。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.DataBarConditionalFormat): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.DataBarConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Isomorphically メソッドが呼び出されますオブジェクトのプロパティを構造化されているプロパティを使用して JavaScript オブジェクトです。
-      type:
-      - Interfaces.DataBarConditionalFormatUpdateData
-    - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを非表示にするオプションが用意されています。
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.DataBarConditionalFormat.set_1
-  summary: オブジェクトに読み込まれている既存のオブジェクトに基づいて、同時に複数のプロパティを設定します。
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.DataBarConditionalFormat): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.DataBarConditionalFormat
-- uid: excel.Excel.DataBarConditionalFormat.showDataBarOnly
-  summary: >-
-    true の場合、データ バーが適用されているセルの値を非表示にします。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: showDataBarOnly
-  fullName: showDataBarOnly
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'showDataBarOnly: boolean;'
-    return:
-      type:
-      - boolean
-- uid: excel.Excel.DataBarConditionalFormat.toJSON
-  summary: JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。 (`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。API のオブジェクトの元の Excel.DataBarConditionalFormat オブジェクトには、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.DataBarConditionalFormatData` <!-- -->) を元のオブジェクトから読み込まれた子プロパティのシャロー コピーが含まれています。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.DataBarConditionalFormatData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.DataBarConditionalFormatData
-      description: ''
-- uid: excel.Excel.DataBarConditionalFormat.upperBoundRule
-  summary: >-
-    データ バーの上限値 (および該当する場合はその計算方法) を構成するルール。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: upperBoundRule
-  fullName: upperBoundRule
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'upperBoundRule: Excel.ConditionalDataBarRule;'
-    return:
-      type:
-      - excel.Excel.ConditionalDataBarRule
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: upperBoundRule
+    fullName: upperBoundRule
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'upperBoundRule: Excel.ConditionalDataBarRule;'
+      return:
+        type:
+          - excel.Excel.ConditionalDataBarRule

@@ -1,230 +1,314 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: fb24dcba61cbd384f66ac9c24d671181a5f41fb5
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30095640"
 items:
-- uid: excel.Excel.CustomXmlPartScopedCollection
-  summary: >-
-    カスタム XML パーツのスコープ ベースのコレクション。 スコープ指定されたコレクションは、名前空間によるフィルターなど、いくつかの操作の結果です。 スコープ指定されたコレクションは、スコープを追加することはできません。
+  - uid: excel.Excel.CustomXmlPartScopedCollection
+    summary: |-
+      カスタム XML パーツのスコープ付きコレクション。 スコープ指定されたコレクションは、名前空間によるフィルターなど、いくつかの操作の結果です。 スコープ指定されたコレクションは、スコープを追加することはできません。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.CustomXmlPartScopedCollection
+    fullName: Excel.CustomXmlPartScopedCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.CustomXmlPartScopedCollection.context
+      - excel.Excel.CustomXmlPartScopedCollection.getCount
+      - excel.Excel.CustomXmlPartScopedCollection.getItem
+      - excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
+      - excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
+      - excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
+      - excel.Excel.CustomXmlPartScopedCollection.items
+      - excel.Excel.CustomXmlPartScopedCollection.load
+      - excel.Excel.CustomXmlPartScopedCollection.load_1
+      - excel.Excel.CustomXmlPartScopedCollection.load_2
+      - excel.Excel.CustomXmlPartScopedCollection.toJSON
+  - uid: excel.Excel.CustomXmlPartScopedCollection.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getCount
+    summary: |-
+      コレクションに含まれる CustomXML パーツの数を取得します。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: |-
 
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.CustomXmlPartScopedCollection
-  fullName: Excel.CustomXmlPartScopedCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.CustomXmlPartScopedCollection.context
-  - excel.Excel.CustomXmlPartScopedCollection.getCount
-  - excel.Excel.CustomXmlPartScopedCollection.getItem
-  - excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
-  - excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
-  - excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
-  - excel.Excel.CustomXmlPartScopedCollection.items
-  - excel.Excel.CustomXmlPartScopedCollection.load
-  - excel.Excel.CustomXmlPartScopedCollection.load_1
-  - excel.Excel.CustomXmlPartScopedCollection.load_2
-  - excel.Excel.CustomXmlPartScopedCollection.toJSON
-- uid: excel.Excel.CustomXmlPartScopedCollection.context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.CustomXmlPartScopedCollection.getCount
-  summary: >-
-    コレクションに含まれる CustomXML パーツの数を取得します。
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              $("#display-xml").text("");
+              const contosoNamespace = "http://schemas.contoso.com/review/1.0";
+              const customXmlParts = context.workbook.customXmlParts;
+              const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);
+              const numberOfPartsInNamespace = filteredXmlParts.getCount();
+
+              await context.sync();
+
+              if (numberOfPartsInNamespace.value == 1) {
+                  const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();
+                  const xmlBlob = onlyXmlPartInNamespace.getXml();
+
+                  await context.sync();
+
+                  // Make it a bit more readable.
+                  const readableXml = xmlBlob.value.replace(/></g, ">\n<");
+
+                  $("#display-xml").text(`The only XML part in the namespace ${contosoNamespace} is:
+                      ${readableXml}`);
+
+              } else {
+                  console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);
+              }        
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getItem
+    summary: |-
+      ID に基づいて、カスタム XML パーツを取得します。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(id)
+    fullName: getItem(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(id: string): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: ''
+      parameters:
+        - id: id
+          description: 取得するオブジェクトの ID を指定します。
+          type:
+            - string
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
+    summary: |-
+      ID に基づいて、カスタム XML パーツを取得します。 CustomXmlPart が存在しない場合、返されるオブジェクトの isNull プロパティは true になります。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemOrNullObject(id)
+    fullName: getItemOrNullObject(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(id: string): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: |-
 
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.CustomXmlPartScopedCollection.getItem
-  summary: >-
-    ID に基づいて、カスタム XML パーツを取得します。
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings;
+              const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
+              await context.sync();
+
+              if (xmlPartIDSetting.value) {   
+                  let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);
+                  const xmlBlob = customXmlPart.getXml();
+                  customXmlPart.delete();
+                  customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);
+
+                  await context.sync();
+
+                  if (customXmlPart.isNullObject) {
+                      $("#display-xml").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);
+
+                      // Delete the unneeded setting too.
+                      xmlPartIDSetting.delete();            
+                  } else {
+                      const readableXml = addLineBreaksToXML(xmlBlob.value);
+                      const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\n${readableXml}`
+                      $("#display-xml").text(strangeMessage);
+                  }
+
+                  await context.sync();
+              }
+          });
+          ```
+      parameters:
+        - id: id
+          description: 取得するオブジェクトの ID を指定します。
+          type:
+            - string
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
+    summary: |-
+      コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドはエラーを生成します。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getOnlyItem()
+    fullName: getOnlyItem()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOnlyItem(): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: |-
 
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItem(id)
-  fullName: getItem(id)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(id: string): Excel.CustomXmlPart;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPart
-      description: ''
-    parameters:
-    - id: id
-      description: 取得するオブジェクトの ID。
-      type:
-      - string
-- uid: excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
-  summary: >-
-    ID に基づいて、カスタム XML パーツを取得します。 CustomXmlPart が存在しない場合、返されるオブジェクトの isNull プロパティは true になります。
+          #### <a name="examples"></a>例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              $("#display-xml").text("");
+              const contosoNamespace = "http://schemas.contoso.com/review/1.0";
+              const customXmlParts = context.workbook.customXmlParts;
+              const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);
+              const numberOfPartsInNamespace = filteredXmlParts.getCount();
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemOrNullObject(id)
-  fullName: getItemOrNullObject(id)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemOrNullObject(id: string): Excel.CustomXmlPart;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPart
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n        const xmlBlob = customXmlPart.getXml();\n        customXmlPart.delete();\n        customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);\n\n        await context.sync();\n\n        if (customXmlPart.isNullObject) {\n            $(\"#display-xml\").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);\n\n            // Delete the unneeded setting too.\n            xmlPartIDSetting.delete();            \n        } else {\n            const readableXml = addLineBreaksToXML(xmlBlob.value);\n            const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\\n${readableXml}`\n            $(\"#display-xml\").text(strangeMessage);\n        }\n\n        await context.sync();\n    }\n});\n```"
-    parameters:
-    - id: id
-      description: 取得するオブジェクトの ID。
-      type:
-      - string
-- uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
-  summary: >-
-    コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドはエラーを生成します。
+              await context.sync();
 
+              if (numberOfPartsInNamespace.value == 1) {
+                  const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();
+                  const xmlBlob = onlyXmlPartInNamespace.getXml();
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getOnlyItem()
-  fullName: getOnlyItem()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getOnlyItem(): Excel.CustomXmlPart;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPart
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
-  summary: >-
-    コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドは Null を返します。
+                  await context.sync();
 
+                  // Make it a bit more readable.
+                  const readableXml = xmlBlob.value.replace(/></g, ">\n<");
 
-    \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getOnlyItemOrNullObject()
-  fullName: getOnlyItemOrNullObject()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getOnlyItemOrNullObject(): Excel.CustomXmlPart;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPart
-      description: ''
-- uid: excel.Excel.CustomXmlPartScopedCollection.items
-  summary: このコレクション内の読み込まれた子アイテムを取得します。
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.CustomXmlPart[];'
-    return:
-      type:
-      - Excel.CustomXmlPart[]
-- uid: excel.Excel.CustomXmlPartScopedCollection.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
-  remarks: >-
-    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+                  $("#display-xml").text(`The only XML part in the namespace ${contosoNamespace} is:
+                      ${readableXml}`);
 
+              } else {
+                  console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);
+              }        
 
-    `load(option?: string | string[]): Excel.CustomXmlPartScopedCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
+    summary: |-
+      コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。 それ以外の場合、このメソッドは Null を返します。
 
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getOnlyItemOrNullObject()
+    fullName: getOnlyItemOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOnlyItemOrNullObject(): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: ''
+  - uid: excel.Excel.CustomXmlPartScopedCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.CustomXmlPart[];'
+      return:
+        type:
+          - 'Excel.CustomXmlPart[]'
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
-    `load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPartScopedCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      `load(option?: string | string[]): Excel.CustomXmlPartScopedCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
 
+      `load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPartScopedCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPartScopedCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomXmlPartScopedCollection;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPartScopedCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.CustomXmlPartScopedCollection.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.CustomXmlPartScopedCollection;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPartScopedCollection
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-      type:
-      - string | string[]
-- uid: excel.Excel.CustomXmlPartScopedCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.CustomXmlPartScopedCollection;'
-    return:
-      type:
-      - excel.Excel.CustomXmlPartScopedCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.CustomXmlPartScopedCollection.toJSON
-  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。`Excel.CustomXmlPartScopedCollection`元のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドは、コレクションのアイテムから`Excel.Interfaces.CustomXmlPartScopedCollectionData` <!-- -->読み込まれたプロパティの浅いコピーを持つ "items" 配列を含む、プレーンな JavaScript オブジェクト (として型指定) を返します。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.CustomXmlPartScopedCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.CustomXmlPartScopedCollectionData
-      description: ''
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPartScopedCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.CustomXmlPartScopedCollection.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.CustomXmlPartScopedCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.CustomXmlPartScopedCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.CustomXmlPartScopedCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.CustomXmlPartScopedCollectionData
+        description: ''

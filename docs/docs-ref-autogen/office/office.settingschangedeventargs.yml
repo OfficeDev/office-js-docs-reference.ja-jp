@@ -1,69 +1,46 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 13242acd07836e0989463cf3c590f973a3236d45
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29977469"
 items:
-- uid: office.Office.SettingsChangedEventArgs
-  summary: settingsChanged イベントが発生した設定についての情報を提供します。
-  remarks: >-
-    <table><tr><td>要件の設定</td><td>設定</td></tr></table>
+  - uid: office.Office.SettingsChangedEventArgs
+    summary: |-
+      settingsChanged イベントが発生した設定についての情報を提供します。
 
+      settingschanged イベントのイベントハンドラーを追加するには、 [Office の Settings](xref:office.Office.Settings)オブジェクトの addhandler async メソッドを使用します。
 
-    SettingsChanged イベントのイベント ハンドラーを追加するには、 [Office.Settings](xref:office.Office.Settings)オブジェクトの addHandlerAsync メソッドを使用します。
+      settingschanged イベントは、アドインのスクリプトが saveAsync メソッドを呼び出して、設定のメモリ内コピーをドキュメントファイルに保持する場合にのみ発生します。 settingsChanged イベントは、Settings.set または Settings.remove メソッドが呼び出された場合にはトリガーされません。
 
+      settingschanged イベントは、アドインが共有 (共同編集) ドキュメントで使用されているときに、2人以上のユーザーが設定を保存しようとしたときに発生する可能性のある競合を処理できるように設計されています。
 
-    アドインのスクリプトは、ドキュメント ファイルに設定のメモリ内コピーを保持する Settings.saveAsync メソッドを呼び出すときにだけは、settingsChanged イベントが発生します。 Settings.set または Settings.remove メソッドが呼び出されたときに、settingsChanged イベントは発生しません。
-
-
-    SettingsChanged イベントは、2 つまたは複数のユーザーが設定を保存すると、追加のドキュメントで使用、共有 (共著) 同時にしようとしたときに潜在的な競合を処理するためにできるように設計されています。
-
-
-    **重要**: アドインのコードは、アドインは、Excel クライアントで実行しているが、のみ、アドインの読み込み時と、Excel のオンライン、および複数のユーザーで開かれているワークシートのイベントは発生するときは、settingsChanged イベントのハンドラーを登録できます(共同編集) のスプレッドシートを編集します。 したがって、効果的に settingsChanged イベントがサポートされている Excel オンラインで共同編集のシナリオでのみです。
-
-
-    **サポートの詳細**
-
-
-    大文字 Y の次のマトリックスでは、対応する Office ホスト アプリケーションでこのインターフェイスがサポートされていることを示します。 空のセルでは、Office ホスト アプリケーションでこのインターフェイスをサポートしないことを示します。
-
-
-    Office ホスト アプリケーションとサーバーの要件の詳細については、 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)を参照してください<!-- -->。
-
-
-    *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>Excel</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>単語</strong></td><td> Y </td><td> Y </td><td> </td></tr> </table>
-  name: Office.SettingsChangedEventArgs
-  fullName: Office.SettingsChangedEventArgs
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.SettingsChangedEventArgs.settings
-  - office.Office.SettingsChangedEventArgs.type
-- uid: office.Office.SettingsChangedEventArgs.settings
-  summary: SettingsChanged イベントを発生させた設定を表す[Office.Settings](xref:office.Office.Settings)オブジェクトを取得します。
-  name: settings
-  fullName: settings
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'settings: Settings;'
-    return:
-      type:
-      - office.Office.Settings
-- uid: office.Office.SettingsChangedEventArgs.type
-  summary: 発生したイベントの種類を識別する[Office.EventType](xref:office.Office.EventType)列挙値を取得します。
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'type: EventType;'
-    return:
-      type:
-      - EventType
+      **重要**: アドインが excel クライアントで実行されている場合は、アドインのコードで settingschanged イベントのハンドラーを登録できますが、このイベントは、アドインが excel Online に開かれたスプレッドシートを使用して読み込まれた場合にのみ発生します。また、複数のユーザースプレッドシートを編集しています (共同編集)。 Therefore, effectively the settingsChanged event is supported only in Excel Online in co-authoring scenarios.
+    name: Office.SettingsChangedEventArgs
+    fullName: Office.SettingsChangedEventArgs
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.SettingsChangedEventArgs.settings
+      - office.Office.SettingsChangedEventArgs.type
+  - uid: office.Office.SettingsChangedEventArgs.settings
+    summary: 'settingschanged イベントが発生した設定を表す、 [Office 設定](xref:office.Office.Settings)オブジェクトを取得します。'
+    name: settings
+    fullName: settings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'settings: Settings;'
+      return:
+        type:
+          - office.Office.Settings
+  - uid: office.Office.SettingsChangedEventArgs.type
+    summary: '発生したイベントの種類を識別する、 [Office の EventType](xref:office.Office.EventType)列挙値を取得します。'
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: EventType;'
+      return:
+        type:
+          - EventType

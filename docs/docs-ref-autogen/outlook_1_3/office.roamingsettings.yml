@@ -1,166 +1,139 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 58bf311507d7a8d59e6835c18f9a110eaf494505
-ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/22/2019
-ms.locfileid: "30198425"
 items:
-- uid: Outlook_1_3.Office.RoamingSettings
-  summary: >-
-    RoamingSettings オブジェクトのメソッドを使用して作成された設定は、アドインとユーザーごとに保存されます。 つまり、これらは、それらを作成したアドインのみが利用でき、ユーザーのメールボックスからのみ使用できます。
+  - uid: Outlook_1_3.Office.RoamingSettings
+    summary: |-
+      RoamingSettings オブジェクトのメソッドを使用して作成された設定は、アドインとユーザーごとに保存されます。 つまり、これらは、それらを作成したアドインのみが利用でき、ユーザーのメールボックスからのみ使用できます。
 
+      Outlook アドイン API では、それらの設定を作成したアドインのみが設定にアクセスできますが、これらの設定がセキュアなストレージであると見なすことはできません。これらの設定は、Exchange Web サービスや拡張 MAPI からアクセスできます。それらに、ユーザー資格情報やセキュリティ トークンなどの機密情報を格納しないでください。
 
-    Outlook アドイン API では、それらの設定を作成したアドインのみが設定にアクセスできますが、これらの設定がセキュアなストレージであると見なすことはできません。これらの設定は、Exchange Web サービスや拡張 MAPI からアクセスできます。それらに、ユーザー資格情報やセキュリティ トークンなどの機密情報を格納しないでください。
+      設定の名前は String ですが、値は String、Number、Boolean、null、Object、Array のいずれかになります。
 
+      RoamingSettings オブジェクトには、Office のコンテキスト名前空間の RoamingSettings プロパティを使用してアクセスできます。
 
-    設定の名前は String ですが、値は String、Number、Boolean、null、Object、Array のいずれかになります。
+      **重要**: RoamingSettings オブジェクトは、アドインが最初に読み込まれたときにのみ、永続化ストレージから初期化されます。 これは、作業ウィンドウでは、作業ウィンドウが最初に開いたときにのみ初期化されることを意味します。 作業ウィンドウが別のページに移動したり、現在のページを再読み込みしたりすると、アドインで変更が保持されている場合でも、メモリ内オブジェクトは初期値にリセットされます。 保存された変更は、作業ウィンドウが閉じて再度開かれるまで使用できません。
 
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
 
-    RoamingSettings オブジェクトには、Office のコンテキスト名前空間の RoamingSettings プロパティを使用してアクセスできます。
+      #### <a name="examples"></a>例
 
+      ```javascript
+      // Get the current value of the 'myKey' setting.
+      var value = Office.context.roamingSettings.get('myKey');
+      // Update the value of the 'myKey' setting.
+      Office.context.roamingSettings.set('myKey', 'Hello World!');
+      // Persist the change.
+      Office.context.roamingSettings.saveAsync();
+      ```
+    name: Office.RoamingSettings
+    fullName: Office.RoamingSettings
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_3
+    children:
+      - Outlook_1_3.Office.RoamingSettings.get
+      - Outlook_1_3.Office.RoamingSettings.remove
+      - Outlook_1_3.Office.RoamingSettings.saveAsync
+      - Outlook_1_3.Office.RoamingSettings.set
+  - uid: Outlook_1_3.Office.RoamingSettings.get
+    summary: |-
+      指定された設定を取得します。
 
-    **重要**: RoamingSettings オブジェクトは、アドインが最初に読み込まれたときにのみ、永続化ストレージから初期化されます。 これは、作業ウィンドウでは、作業ウィンドウが最初に開いたときにのみ初期化されることを意味します。 作業ウィンドウが別のページに移動したり、現在のページを再読み込みしたりすると、アドインで変更が保持されている場合でも、メモリ内オブジェクトは初期値にリセットされます。 保存された変更は、作業ウィンドウが閉じて再度開かれるまで使用できません。
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>'
+    name: get(name)
+    fullName: get(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'get(name: string): any;'
+      return:
+        type:
+          - any
+        description: '型: String \| Number \| Boolean \|オブジェクト\|配列'
+      parameters:
+        - id: name
+          description: The case-sensitive name of the setting to retrieve.
+          type:
+            - string
+  - uid: Outlook_1_3.Office.RoamingSettings.remove
+    summary: |-
+      指定された設定を削除します
 
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>'
+    name: remove(name)
+    fullName: remove(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'remove(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: The case-sensitive name of the setting to remove.
+          type:
+            - string
+  - uid: Outlook_1_3.Office.RoamingSettings.saveAsync
+    summary: |-
+      設定を保存します。
 
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
+      アドインによって以前に保存された設定は、初期化時に読み込まれるため、セッションの有効期間中は、設定プロパティバッグのメモリ内コピーを操作するために set メソッドと get メソッドを使用するだけでかまいません。 設定を保持して、次回アドインを使用するときに使用できるようにするには、saveAsync メソッドを使用します。
 
-    ####例えば
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>'
+    name: saveAsync(callback)
+    fullName: saveAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_3.Office.RoamingSettings.set
+    summary: |-
+      指定された設定を設定または作成します。
 
+      set メソッドは、指定された名前の新しい設定を作成するか (その設定が存在しない場合)、指定された名前の既存の設定を設定します。値は、そのデータ型のシリアル化された JSON 表現としてドキュメントに格納されます。
 
-    ```javascript
+      各アドインの設定では、最大32kb を使用できます。
 
-    // Get the current value of the 'myKey' setting.
+      set 関数を使用して設定に加えた変更は、saveAsync 関数が呼び出されるまでサーバーに保存されません。
 
-    var value = Office.context.roamingSettings.get('myKey');
-
-    // Update the value of the 'myKey' setting.
-
-    Office.context.roamingSettings.set('myKey', 'Hello World!');
-
-    // Persist the change.
-
-    Office.context.roamingSettings.saveAsync();
-
-    ```
-  name: Office.RoamingSettings
-  fullName: Office.RoamingSettings
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_3
-  children:
-  - Outlook_1_3.Office.RoamingSettings.get
-  - Outlook_1_3.Office.RoamingSettings.remove
-  - Outlook_1_3.Office.RoamingSettings.saveAsync
-  - Outlook_1_3.Office.RoamingSettings.set
-- uid: Outlook_1_3.Office.RoamingSettings.get
-  summary: >-
-    指定された設定を取得します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-  name: get(name)
-  fullName: get(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'get(name: string): any;'
-    return:
-      type:
-      - any
-      description: '型: String \| Number \| Boolean \|オブジェクト\|配列'
-    parameters:
-    - id: name
-      description: The case-sensitive name of the setting to retrieve.
-      type:
-      - string
-- uid: Outlook_1_3.Office.RoamingSettings.remove
-  summary: >-
-    指定された設定を削除します
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-  name: remove(name)
-  fullName: remove(name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'remove(name: string): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: name
-      description: The case-sensitive name of the setting to remove.
-      type:
-      - string
-- uid: Outlook_1_3.Office.RoamingSettings.saveAsync
-  summary: >-
-    設定を保存します。
-
-
-    アドインによって以前に保存された設定は、初期化時に読み込まれるため、セッションの有効期間中は、設定プロパティバッグのメモリ内コピーを操作するために set メソッドと get メソッドを使用するだけでかまいません。 設定を保持して、次回アドインを使用するときに使用できるようにするには、saveAsync メソッドを使用します。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-  name: saveAsync(callback)
-  fullName: saveAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_3.Office.RoamingSettings.set
-  summary: >-
-    指定された設定を設定または作成します。
-
-
-    set メソッドは、指定された名前の新しい設定を作成するか (その設定が存在しない場合)、指定された名前の既存の設定を設定します。値は、そのデータ型のシリアル化された JSON 表現としてドキュメントに格納されます。
-
-
-    各アドインの設定では、最大32kb を使用できます。
-
-
-    set 関数を使用して設定に加えた変更は、saveAsync 関数が呼び出されるまでサーバーに保存されません。
-
-
-    \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>
-  name: set(name, value)
-  fullName: set(name, value)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(name: string, value: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: name
-      description: The case-sensitive name of the setting to set or create.
-      type:
-      - string
-    - id: value
-      description: Specifies the value to be stored.
-      type:
-      - any
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[最小限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>制限あり</td></tr> <tr><td>[適用可能な Outlook のモード](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>新規作成または閲覧</td></tr> </table>'
+    name: 'set(name, value)'
+    fullName: 'set(name, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(name: string, value: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: The case-sensitive name of the setting to set or create.
+          type:
+            - string
+        - id: value
+          description: Specifies the value to be stored.
+          type:
+            - any
