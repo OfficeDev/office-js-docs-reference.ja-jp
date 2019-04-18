@@ -1,265 +1,326 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: fd1fe7101ecdabc10e4fc8e689d8559a47086e96
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29973409"
 items:
-- uid: excel.Excel.TableColumnCollection
-  summary: >-
-    <span data-ttu-id="4807b-101">表の一部であるすべての列のコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="4807b-101">Represents a collection of all the columns that are part of the table.</span></span>
+  - uid: excel.Excel.TableColumnCollection
+    summary: |-
+      <span data-ttu-id="591c2-101">表の一部であるすべての列のコレクションを表します。</span><span class="sxs-lookup"><span data-stu-id="591c2-101">Represents a collection of all the columns that are part of the table.</span></span>
+
+      <span data-ttu-id="591c2-102">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.TableColumnCollection
+    fullName: Excel.TableColumnCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.TableColumnCollection.add
+      - excel.Excel.TableColumnCollection.context
+      - excel.Excel.TableColumnCollection.count
+      - excel.Excel.TableColumnCollection.getCount
+      - excel.Excel.TableColumnCollection.getItem
+      - excel.Excel.TableColumnCollection.getItemAt
+      - excel.Excel.TableColumnCollection.getItemOrNullObject
+      - excel.Excel.TableColumnCollection.items
+      - excel.Excel.TableColumnCollection.load
+      - excel.Excel.TableColumnCollection.load_1
+      - excel.Excel.TableColumnCollection.load_2
+      - excel.Excel.TableColumnCollection.toJSON
+  - uid: excel.Excel.TableColumnCollection.add
+    summary: |-
+      <span data-ttu-id="591c2-103">テーブルに新しい列を追加します。</span><span class="sxs-lookup"><span data-stu-id="591c2-103">Adds a new column to the table.</span></span>
+
+      <span data-ttu-id="591c2-104">\[[API set: excelapi 1.1 には、合計列数より小さいインデックスが必要です。1.4 では、インデックスを省略可能 (null または-1) し、最後に列を追加することができます。1.4 では、作成時に name パラメーターを指定できます](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)。</span><span class="sxs-lookup"><span data-stu-id="591c2-104">\[ [API set: ExcelApi 1.1 requires an index smaller than the total column count; 1.4 allows index to be optional (null or -1) and will append a column at the end; 1.4 allows name parameter at creation time.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)</span></span> <span data-ttu-id="591c2-105">\]</span><span class="sxs-lookup"><span data-stu-id="591c2-105"></span></span>
+    name: 'add(index, values, name)'
+    fullName: 'add(index, values, name)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    <span data-ttu-id="4807b-102">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: Excel.TableColumnCollection
-  fullName: Excel.TableColumnCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.TableColumnCollection.add
-  - excel.Excel.TableColumnCollection.context
-  - excel.Excel.TableColumnCollection.count
-  - excel.Excel.TableColumnCollection.getCount
-  - excel.Excel.TableColumnCollection.getItem
-  - excel.Excel.TableColumnCollection.getItemAt
-  - excel.Excel.TableColumnCollection.getItemOrNullObject
-  - excel.Excel.TableColumnCollection.items
-  - excel.Excel.TableColumnCollection.load
-  - excel.Excel.TableColumnCollection.load_1
-  - excel.Excel.TableColumnCollection.load_2
-  - excel.Excel.TableColumnCollection.toJSON
-- uid: excel.Excel.TableColumnCollection.add
-  summary: >-
-    <span data-ttu-id="4807b-103">テーブルに新しい列を追加します。</span><span class="sxs-lookup"><span data-stu-id="4807b-103">Adds a new column to the table.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="591c2-106">例</span><span class="sxs-lookup"><span data-stu-id="591c2-106">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample"], ["Values"], ["For"], ["New"], ["Column"]];
+              var column = tables.getItem("Table1").columns.add(null, values);
+              column.load('name');
+              return ctx.sync().then(function() {
+                  console.log(column.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: '<span data-ttu-id="591c2-p102">省略可能。新しい列の相対位置を指定します。null または -1 の場合、最後に追加が行われます。上位のインデックスを持つ列は横にシフトされます。0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="591c2-p102">Optional. Specifies the relative position of the new column. If null or -1, the addition happens at the end. Columns with a higher index will be shifted to the side. Zero-indexed.</span></span>'
+          type:
+            - number
+        - id: values
+          description: <span data-ttu-id="591c2-112">省略可能。</span><span class="sxs-lookup"><span data-stu-id="591c2-112">Optional.</span></span> <span data-ttu-id="591c2-113">テーブルの列の、書式設定されていない値の 2 次元の配列。</span><span class="sxs-lookup"><span data-stu-id="591c2-113">A 2-dimensional array of unformatted values of the table column.</span></span>
+          type:
+            - Array<Array<boolean | string | number>> | boolean | string | number
+        - id: name
+          description: '<span data-ttu-id="591c2-114">省略可能。</span><span class="sxs-lookup"><span data-stu-id="591c2-114">Optional.</span></span> <span data-ttu-id="591c2-115">新しい列の名前を指定します。</span><span class="sxs-lookup"><span data-stu-id="591c2-115">Specifies the name of the new column.</span></span> <span data-ttu-id="591c2-116">null の場合は既定の名前が使用されます。</span><span class="sxs-lookup"><span data-stu-id="591c2-116">If null, the default name will be used.</span></span>'
+          type:
+            - string
+  - uid: excel.Excel.TableColumnCollection.context
+    summary: <span data-ttu-id="591c2-117">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="591c2-117">The request context associated with the object.</span></span> <span data-ttu-id="591c2-118">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="591c2-118">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.TableColumnCollection.count
+    summary: |-
+      <span data-ttu-id="591c2-119">テーブルの列数を返します。</span><span class="sxs-lookup"><span data-stu-id="591c2-119">Returns the number of columns in the table.</span></span> <span data-ttu-id="591c2-120">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="591c2-120">Read-only.</span></span>
+
+      <span data-ttu-id="591c2-121">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-121">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableColumnCollection.getCount
+    summary: |-
+      <span data-ttu-id="591c2-122">表の列数を取得します。</span><span class="sxs-lookup"><span data-stu-id="591c2-122">Gets the number of columns in the table.</span></span>
+
+      <span data-ttu-id="591c2-123">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-123">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableColumnCollection.getItem
+    summary: |-
+      <span data-ttu-id="591c2-124">名前または ID を使用して列オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="591c2-124">Gets a column object by Name or ID.</span></span>
+
+      <span data-ttu-id="591c2-125">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-125">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    <span data-ttu-id="4807b-104">\[[API セット: ExcelApi 1.1 には、列の合計数よりも小さいインデックスが必要です; 1.4 では、インデックスにある省略可能な (null または-1) と末尾の列が追加されます;、1.4 は、作成時に name パラメーターを使用します](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)。</span><span class="sxs-lookup"><span data-stu-id="4807b-104">\[ [API set: ExcelApi 1.1 requires an index smaller than the total column count; 1.4 allows index to be optional (null or -1) and will append a column at the end; 1.4 allows name parameter at creation time.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)</span></span> <span data-ttu-id="4807b-105">\]</span><span class="sxs-lookup"><span data-stu-id="4807b-105"></span></span>
-  name: add(index, values, name)
-  fullName: add(index, values, name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4807b-106\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4807b-106\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\"], [\"Values\"], [\"For\"], [\"New\"], [\"Column\"]];\n    var column = tables.getItem(\"Table1\").columns.add(null, values);\n    column.load('name');\n    return ctx.sync().then(function() {\n        console.log(column.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: <span data-ttu-id="4807b-p102">省略可能。新しい列の相対位置を指定します。null または -1 の場合、最後に追加が行われます。上位のインデックスを持つ列は横にシフトされます。0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="4807b-p102">Optional. Specifies the relative position of the new column. If null or -1, the addition happens at the end. Columns with a higher index will be shifted to the side. Zero-indexed.</span></span>
-      type:
-      - number
-    - id: values
-      description: <span data-ttu-id="4807b-p103">省略可能。テーブルの列の、書式設定されていない値の 2 次元の配列。</span><span class="sxs-lookup"><span data-stu-id="4807b-p103">Optional. A 2-dimensional array of unformatted values of the table column.</span></span>
-      type:
-      - Array<Array<boolean | string | number>> | boolean | string | number
-    - id: name
-      description: <span data-ttu-id="4807b-p104">省略可能。新しい列の名前を指定します。null の場合は既定の名前が使用されます。</span><span class="sxs-lookup"><span data-stu-id="4807b-p104">Optional. Specifies the name of the new column. If null, the default name will be used.</span></span>
-      type:
-      - string
-- uid: excel.Excel.TableColumnCollection.context
-  summary: <span data-ttu-id="4807b-117">オブジェクトに関連付けられた要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="4807b-117">The request context associated with the object.</span></span> <span data-ttu-id="4807b-118">これは、Office ホスト アプリケーションのプロセスに、アドインのプロセスを接続します。</span><span class="sxs-lookup"><span data-stu-id="4807b-118">This connects the add-in's process to the Office host application's process.</span></span>
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.TableColumnCollection.count
-  summary: >-
-    <span data-ttu-id="4807b-p106">テーブルの列数を返します。読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="4807b-p106">Returns the number of columns in the table. Read-only.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="591c2-126">例</span><span class="sxs-lookup"><span data-stu-id="591c2-126">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: <span data-ttu-id="591c2-127">列名または ID。</span><span class="sxs-lookup"><span data-stu-id="591c2-127">Column Name or ID.</span></span>
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.getItemAt
+    summary: |-
+      <span data-ttu-id="591c2-128">コレクション内の位置に基づいて列を取得します。</span><span class="sxs-lookup"><span data-stu-id="591c2-128">Gets a column based on its position in the collection.</span></span>
+
+      <span data-ttu-id="591c2-129">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-129">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    <span data-ttu-id="4807b-121">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-121">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.TableColumnCollection.getCount
-  summary: >-
-    <span data-ttu-id="4807b-122">表の列数を取得します。</span><span class="sxs-lookup"><span data-stu-id="4807b-122">Gets the number of columns in the table.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="591c2-130">例</span><span class="sxs-lookup"><span data-stu-id="591c2-130">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: <span data-ttu-id="591c2-131">取得するオブジェクトのインデックス値。</span><span class="sxs-lookup"><span data-stu-id="591c2-131">Index value of the object to be retrieved.</span></span> <span data-ttu-id="591c2-132">0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="591c2-132">Zero-indexed.</span></span>
+          type:
+            - number
+  - uid: excel.Excel.TableColumnCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="591c2-133">名前または ID によって、列オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="591c2-133">Gets a column object by Name or ID.</span></span> <span data-ttu-id="591c2-134">列が存在しない場合は null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="591c2-134">If the column does not exist, will return a null object.</span></span>
+
+      <span data-ttu-id="591c2-135">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="591c2-135">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: ''
+      parameters:
+        - id: key
+          description: <span data-ttu-id="591c2-136">列名または ID。</span><span class="sxs-lookup"><span data-stu-id="591c2-136">Column Name or ID.</span></span>
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.items
+    summary: <span data-ttu-id="591c2-137">このコレクション内に読み込まれた子アイテムを取得します。</span><span class="sxs-lookup"><span data-stu-id="591c2-137">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableColumn[];'
+      return:
+        type:
+          - 'Excel.TableColumn[]'
+  - uid: excel.Excel.TableColumnCollection.load
+    summary: <span data-ttu-id="591c2-138">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="591c2-138">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="591c2-139">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="591c2-139">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="591c2-140">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="591c2-140">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="591c2-141">`load(option?: string | string[]): Excel.TableColumnCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="591c2-141">`load(option?: string | string[]): Excel.TableColumnCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="591c2-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="591c2-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="591c2-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="591c2-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection` - Only available on collection types.</span></span> <span data-ttu-id="591c2-144">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="591c2-144">It is similar to the preceding signature.</span></span> <span data-ttu-id="591c2-145">top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="591c2-145">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="591c2-146">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="591c2-146">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="591c2-147">option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="591c2-147">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableColumnCollection.load_1
+    summary: <span data-ttu-id="591c2-148">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="591c2-148">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="591c2-149">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="591c2-149">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: |-
 
 
-    <span data-ttu-id="4807b-123">\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-123">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.TableColumnCollection.getItem
-  summary: >-
-    <span data-ttu-id="4807b-124">名前または ID を使用して列オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="4807b-124">Gets a column object by Name or ID.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="591c2-150">例</span><span class="sxs-lookup"><span data-stu-id="591c2-150">Examples</span></span>
 
-
-    <span data-ttu-id="4807b-125">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-125">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: number | string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4807b-126\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4807b-126\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);\n    tablecolumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablecolumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: key
-      description: <span data-ttu-id="4807b-127">列名または ID。</span><span class="sxs-lookup"><span data-stu-id="4807b-127">Column Name or ID.</span></span>
-      type:
-      - number | string
-- uid: excel.Excel.TableColumnCollection.getItemAt
-  summary: >-
-    <span data-ttu-id="4807b-128">コレクション内の位置に基づいて列を取得します。</span><span class="sxs-lookup"><span data-stu-id="4807b-128">Gets a column based on its position in the collection.</span></span>
-
-
-    <span data-ttu-id="4807b-129">\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-129">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4807b-130\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4807b-130\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);\n    tablecolumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablecolumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: <span data-ttu-id="4807b-p107">取得するオブジェクトのインデックス値。0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="4807b-p107">Index value of the object to be retrieved. Zero-indexed.</span></span>
-      type:
-      - number
-- uid: excel.Excel.TableColumnCollection.getItemOrNullObject
-  summary: >-
-    <span data-ttu-id="4807b-p108">名前または ID に基づいて column オブジェクトを取得します。列が存在しない場合は null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="4807b-p108">Gets a column object by Name or ID. If the column does not exist, will return a null object.</span></span>
-
-
-    <span data-ttu-id="4807b-135">\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="4807b-135">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: ''
-    parameters:
-    - id: key
-      description: <span data-ttu-id="4807b-136">列名または ID。</span><span class="sxs-lookup"><span data-stu-id="4807b-136">Column Name or ID.</span></span>
-      type:
-      - number | string
-- uid: excel.Excel.TableColumnCollection.items
-  summary: <span data-ttu-id="4807b-137">このコレクションに読み込まれている子項目を取得します。</span><span class="sxs-lookup"><span data-stu-id="4807b-137">Gets the loaded child items in this collection.</span></span>
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.TableColumn[];'
-    return:
-      type:
-      - Excel.TableColumn[]
-- uid: excel.Excel.TableColumnCollection.load
-  summary: <span data-ttu-id="4807b-138">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="4807b-138">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4807b-139">"Context.sync()"は、プロパティを読み取る前に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="4807b-139">You must call "context.sync()" before reading the properties.</span></span>
-  remarks: >-
-    <span data-ttu-id="4807b-140">だけでなく、この署名は、このメソッドは、次の署名をします。</span><span class="sxs-lookup"><span data-stu-id="4807b-140">In addition to this signature, this method has the following signatures:</span></span>
-
-
-    <span data-ttu-id="4807b-141">`load(option?: string | string[]): Excel.TableColumnCollection`-ここで、オプションは、コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="4807b-141">`load(option?: string | string[]): Excel.TableColumnCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
-
-
-    <span data-ttu-id="4807b-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection`-どこで読み込むには、プロパティを指定するコンマ区切りの文字列は、option.select、options.expand を読み込むナビゲーション プロパティを指定するコンマ区切りの文字列。</span><span class="sxs-lookup"><span data-stu-id="4807b-142">`load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-
-
-    <span data-ttu-id="4807b-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection`でコレクション型のみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="4807b-143">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection` - Only available on collection types.</span></span> <span data-ttu-id="4807b-144">前の署名に似ていますが。</span><span class="sxs-lookup"><span data-stu-id="4807b-144">It is similar to the preceding signature.</span></span> <span data-ttu-id="4807b-145">Option.top は、結果に含めることができるコレクション アイテムの最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="4807b-145">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="4807b-146">Option.skip はスキップされ、その結果に含まれていない項目の数を指定します。</span><span class="sxs-lookup"><span data-stu-id="4807b-146">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="4807b-147">Option.top が指定されている場合、結果セットが指定数のアイテムをスキップした後開始されます。</span><span class="sxs-lookup"><span data-stu-id="4807b-147">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.TableColumnCollection.load_1
-  summary: <span data-ttu-id="4807b-148">オブジェクトの指定したプロパティを読み込むためのコマンドをキューします。</span><span class="sxs-lookup"><span data-stu-id="4807b-148">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="4807b-149">呼び出す必要があります`context.sync()`プロパティを読み取る前にします。</span><span class="sxs-lookup"><span data-stu-id="4807b-149">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"4807b-150\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"4807b-150\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;\n    tablecolumns.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tablecolumns Count: \" + tablecolumns.count);\n        for (var i = 0; i < tablecolumns.items.length; i++) {\n            console.log(tablecolumns.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: <span data-ttu-id="4807b-151">コンマで区切られた文字列またはロードするにはプロパティを指定する文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="4807b-151">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
-      type:
-      - string | string[]
-- uid: excel.Excel.TableColumnCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.TableColumnCollection.toJSON
-  summary: <span data-ttu-id="4807b-152">JavaScript を上書き`toJSON()`API オブジェクトに渡すときより有用な出力を提供するためにメソッド`JSON.stringify()` <!-- -->。</span><span class="sxs-lookup"><span data-stu-id="4807b-152">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="4807b-153">(`JSON.stringify`<!-- -->で、さらに、`toJSON`に渡されるオブジェクトのメソッドです)。元の`Excel.TableColumnCollection`オブジェクトは、API のオブジェクト、`toJSON`メソッドは、プレーンな JavaScript オブジェクトを返します (として型指定された`Excel.Interfaces.TableColumnCollectionData` <!-- -->) コレクションのアイテムから読み込まれているプロパティのシャロー コピーを [アイテム] の配列が含まれています。</span><span class="sxs-lookup"><span data-stu-id="4807b-153">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.TableColumnCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableColumnCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableColumnCollectionData
-      description: ''
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;
+              tablecolumns.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablecolumns Count: " + tablecolumns.count);
+                  for (var i = 0; i < tablecolumns.items.length; i++) {
+                      console.log(tablecolumns.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="591c2-151">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="591c2-151">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableColumnCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.TableColumnCollection.toJSON
+    summary: '<span data-ttu-id="591c2-152">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="591c2-152">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="591c2-153">.</span><span class="sxs-lookup"><span data-stu-id="591c2-153"></span></span> <span data-ttu-id="591c2-154">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="591c2-154"></span></span><!-- --><span data-ttu-id="591c2-155">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.TableColumnCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableColumnCollectionData`</span><span class="sxs-lookup"><span data-stu-id="591c2-155">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.TableColumnCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableColumnCollectionData`</span></span><!-- --><span data-ttu-id="591c2-156">) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。</span><span class="sxs-lookup"><span data-stu-id="591c2-156">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableColumnCollectionData
+        description: ''

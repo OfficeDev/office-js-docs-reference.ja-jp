@@ -1,477 +1,471 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f24c1aeb90c3ecea67bb08954bde0e11c894cc5a
-ms.sourcegitcommit: 2ef4b6e6f2f27ecb9abf01fefa4cffd9498ad5dc
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 03/16/2019
-ms.locfileid: "30656760"
 items:
-- uid: outlook.Office.Body
-  summary: >-
-    <span data-ttu-id="14fd5-101">body オブジェクトには、メッセージまたは予定の内容を追加および更新するためのメソッドが用意されています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-101">The body object provides methods for adding and updating the content of the message or appointment.</span></span> <span data-ttu-id="14fd5-102">これは、選択されたアイテムの body プロパティで返されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-102">It is returned in the body property of the selected item.</span></span>
-
-
-    <span data-ttu-id="14fd5-103">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-103">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-104">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-104">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-105">ReadItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-105">ReadItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-106">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-106">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-107">新規作成または閲覧</span><span class="sxs-lookup"><span data-stu-id="14fd5-107">Compose or Read</span></span></td></tr> </table>
-  name: Office.Body
-  fullName: Office.Body
-  langs:
-  - typeScript
-  type: interface
-  package: outlook
-  children:
-  - outlook.Office.Body.getAsync
-  - outlook.Office.Body.getAsync_1
-  - outlook.Office.Body.getTypeAsync
-  - outlook.Office.Body.getTypeAsync_1
-  - outlook.Office.Body.prependAsync
-  - outlook.Office.Body.prependAsync_1
-  - outlook.Office.Body.setAsync
-  - outlook.Office.Body.setAsync_1
-  - outlook.Office.Body.setSelectedDataAsync
-  - outlook.Office.Body.setSelectedDataAsync_1
-- uid: outlook.Office.Body.getAsync
-  summary: >-
-    <span data-ttu-id="14fd5-108">現在の本文を指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-108">Returns the current body in a specified format.</span></span>
-
-
-    <span data-ttu-id="14fd5-109">このメソッドは、現在の本文全体を coercionType で指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-109">This method returns the entire current body in the format specified by coercionType.</span></span>
-
-
-    <span data-ttu-id="14fd5-110">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="14fd5-110">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="14fd5-111">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="14fd5-111">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="14fd5-112">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-112">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
-
-
-    <span data-ttu-id="14fd5-113">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-113">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: >-
-    <table> <tr><td>[<span data-ttu-id="14fd5-114">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-114">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-115">ReadItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-115">ReadItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-116">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-116">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-117">新規作成または閲覧</span><span class="sxs-lookup"><span data-stu-id="14fd5-117">Compose or Read</span></span></td></tr> </table><span data-ttu-id="14fd5-118">
-
-    ####例えば</span><span class="sxs-lookup"><span data-stu-id="14fd5-118">
-
-    #### Examples</span></span>
-
-
-    ```javascript
-
-    // This example gets the body of the item as plain text.
-
-    Office.context.mailbox.item.body.getAsync(
-        "text",
-        { asyncContext: "This is passed to the callback" },
-        function callback(result) {
-            // Do something with the result.
-        });
-
-    // The following is an example of the result parameter passed to the callback function.
-
-    {
-        "value": "TEXT of whole body (including threads below)",
-        "status": "succeeded",
-        "asyncContext": "This is passed to the callback"
-    }
-
-    ```
-  name: getAsync(coercionType, options, callback)
-  fullName: getAsync(coercionType, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(coercionType: Office.CoercionType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: coercionType
-      description: <span data-ttu-id="14fd5-119">返される本文の形式です。</span><span class="sxs-lookup"><span data-stu-id="14fd5-119">The format for the returned body.</span></span>
-      type:
-      - Office.CoercionType
-    - id: options
-      description: '<span data-ttu-id="14fd5-120">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-120">Optional.</span></span> <span data-ttu-id="14fd5-121">次のプロパティの1つ以上を含むオブジェクトリテラル。 asynccontext: 開発者は、コールバックメソッドで、アクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-121">An object literal that contains one or more of the following properties: asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: <span data-ttu-id="14fd5-122">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-122">Optional.</span></span> <span data-ttu-id="14fd5-123">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-123">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-124">本文は、asyncResult. value プロパティの要求された形式で提供されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-124">The body is provided in the requested format in the asyncResult.value property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: outlook.Office.Body.getAsync_1
-  summary: >-
-    <span data-ttu-id="14fd5-125">現在の本文を指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-125">Returns the current body in a specified format.</span></span>
-
-
-    <span data-ttu-id="14fd5-126">このメソッドは、現在の本文全体を coercionType で指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-126">This method returns the entire current body in the format specified by coercionType.</span></span>
-
-
-    <span data-ttu-id="14fd5-127">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="14fd5-127">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="14fd5-128">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="14fd5-128">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="14fd5-129">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-129">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
-
-
-    <span data-ttu-id="14fd5-130">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-130">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-131">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-131">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-132">ReadItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-132">ReadItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-133">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-133">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-134">新規作成または閲覧</span><span class="sxs-lookup"><span data-stu-id="14fd5-134">Compose or Read</span></span></td></tr> </table>
-  name: getAsync(coercionType, callback)
-  fullName: getAsync(coercionType, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(coercionType: Office.CoercionType, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: coercionType
-      description: <span data-ttu-id="14fd5-135">返される本文の形式です。</span><span class="sxs-lookup"><span data-stu-id="14fd5-135">The format for the returned body.</span></span>
-      type:
-      - Office.CoercionType
-    - id: callback
-      description: <span data-ttu-id="14fd5-136">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-136">Optional.</span></span> <span data-ttu-id="14fd5-137">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-137">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-138">本文は、asyncResult. value プロパティの要求された形式で提供されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-138">The body is provided in the requested format in the asyncResult.value property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: outlook.Office.Body.getTypeAsync
-  summary: >-
-    <span data-ttu-id="14fd5-139">コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-139">Gets a value that indicates whether the content is in HTML or text format.</span></span>
-
-
-    <span data-ttu-id="14fd5-140">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-140">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-141">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-141">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-142">ReadItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-142">ReadItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-143">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-143">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-144">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-144">Compose</span></span></td></tr> </table>
-  name: getTypeAsync(options, callback)
-  fullName: getTypeAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getTypeAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: '<span data-ttu-id="14fd5-145">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-145">Optional.</span></span> <span data-ttu-id="14fd5-146">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="14fd5-146">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="14fd5-147">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-147">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: <span data-ttu-id="14fd5-148">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-148">Optional.</span></span> <span data-ttu-id="14fd5-149">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-149">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-150">コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-150">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
-- uid: outlook.Office.Body.getTypeAsync_1
-  summary: >-
-    <span data-ttu-id="14fd5-151">コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-151">Gets a value that indicates whether the content is in HTML or text format.</span></span>
-
-
-    <span data-ttu-id="14fd5-152">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-152">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: >-
-    <table> <tr><td>[<span data-ttu-id="14fd5-153">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-153">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-154">ReadItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-154">ReadItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-155">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-155">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-156">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-156">Compose</span></span></td></tr> </table><span data-ttu-id="14fd5-157">
-
-    ####例えば</span><span class="sxs-lookup"><span data-stu-id="14fd5-157">
-
-    #### Examples</span></span>
-
-
-    ```javascript
-
-    Office.context.mailbox.item.body.getTypeAsync(function (asyncResult) {
-        if (asyncResult.status === "failed") {
-            console.log("Action failed with error: " + asyncResult.error.message);
-        } else {
-            console.log("Body type: " + asyncResult.value);
-        }
-    });
-
-    ```
-  name: getTypeAsync(callback)
-  fullName: getTypeAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: <span data-ttu-id="14fd5-158">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-158">Optional.</span></span> <span data-ttu-id="14fd5-159">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-159">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-160">コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-160">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
-- uid: outlook.Office.Body.prependAsync
-  summary: >-
-    <span data-ttu-id="14fd5-161">アイテム本文の先頭に指定の内容を追加します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-161">Adds the specified content to the beginning of the item body.</span></span>
-
-
-    <span data-ttu-id="14fd5-162">prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-162">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="14fd5-163">挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-163">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
-
-
-    <span data-ttu-id="14fd5-164">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-164">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-165">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-165">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-166">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-166">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-167">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-167">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: >-
-    <table> <tr><td>[<span data-ttu-id="14fd5-168">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-168">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-169">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-169">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-170">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-170">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-171">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-171">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-172">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-172">Errors</span></span></td><td><span data-ttu-id="14fd5-173">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-173">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> </table><span data-ttu-id="14fd5-174">
-
-    ####例えば</span><span class="sxs-lookup"><span data-stu-id="14fd5-174">
-
-    #### Examples</span></span>
-
-
-    ```javascript
-
-    // When including links in HTML markup, you can disable online link preview
-
-    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
-
-    Office.context.mailbox.item.body.prependAsync(
-        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
-        {coercionType: Office.CoercionType.Html},
-        callback);
-    ```
-  name: prependAsync(data, options, callback)
-  fullName: prependAsync(data, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'prependAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-175">本文の先頭に挿入する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-175">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="14fd5-176">文字列の最大長は 1,000,000 文字です。</span><span class="sxs-lookup"><span data-stu-id="14fd5-176">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: options
-      description: '<span data-ttu-id="14fd5-177">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-177">Optional.</span></span> <span data-ttu-id="14fd5-178">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="14fd5-178">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="14fd5-179">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-179">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="14fd5-180">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="14fd5-180">coercionType: The desired format for the body.</span></span> <span data-ttu-id="14fd5-181">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-181">The string in the data parameter will be converted to this format.</span></span>'
-      type:
-      - Office.AsyncContextOptions & CoercionTypeOptions
-    - id: callback
-      description: <span data-ttu-id="14fd5-182">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-182">Optional.</span></span> <span data-ttu-id="14fd5-183">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-183">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-184">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-184">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: outlook.Office.Body.prependAsync_1
-  summary: >-
-    <span data-ttu-id="14fd5-185">アイテム本文の先頭に指定の内容を追加します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-185">Adds the specified content to the beginning of the item body.</span></span>
-
-
-    <span data-ttu-id="14fd5-186">prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-186">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="14fd5-187">挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-187">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
-
-
-    <span data-ttu-id="14fd5-188">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-188">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-189">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-189">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-190">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-190">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-191">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-191">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-192">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-192">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-193">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-193">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-194">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-194">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-195">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-195">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-196">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-196">Errors</span></span></td><td><span data-ttu-id="14fd5-197">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-197">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> </table>
-  name: prependAsync(data, callback)
-  fullName: prependAsync(data, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-198">本文の先頭に挿入する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-198">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="14fd5-199">文字列の最大長は 1,000,000 文字です。</span><span class="sxs-lookup"><span data-stu-id="14fd5-199">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: callback
-      description: <span data-ttu-id="14fd5-200">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-200">Optional.</span></span> <span data-ttu-id="14fd5-201">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-201">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-202">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-202">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: outlook.Office.Body.setAsync
-  summary: >-
-    <span data-ttu-id="14fd5-203">本文全体を指定されたテキストに置換します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-203">Replaces the entire body with the specified text.</span></span>
-
-
-    <span data-ttu-id="14fd5-204">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="14fd5-204">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="14fd5-205">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="14fd5-205">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="14fd5-206">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-206">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
-
-
-    <span data-ttu-id="14fd5-207">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-207">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-208">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-208">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-209">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-209">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-210">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-210">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: >-
-    <table> <tr><td>[<span data-ttu-id="14fd5-211">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-211">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-212">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-212">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-213">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-213">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-214">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-214">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-215">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-215">Errors</span></span></td><td><span data-ttu-id="14fd5-216">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-216">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> <tr><td></td><td><span data-ttu-id="14fd5-217">invalidformaterror-coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-217">InvalidFormatError - The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span></td></tr> </table><span data-ttu-id="14fd5-218">
-
-    ####例えば</span><span class="sxs-lookup"><span data-stu-id="14fd5-218">
-
-    #### Examples</span></span>
-
-
-    ```javascript
-
-    // When including links in HTML markup, you can disable online link preview
-
-    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
-
-    Office.context.mailbox.item.body.setAsync(
-        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
-        {coercionType: Office.CoercionType.Html},
-        callback);
-    Office.context.mailbox.item.body.setAsync(
-        "<b>(replaces all body, including threads you are replying to that may be on the bottom)</b>",
-        { coercionType: "html", asyncContext: "This is passed to the callback" },
-        function callback(result) {
-            // Process the result.
-    });
-
-
-    // The following is an example of the result parameter passed to the callback function.
-
-    {
-        "value":null,
-        "status": "succeeded",
-        "asyncContext": "This is passed to the callback"
-    }
-
-    ```
-  name: setAsync(data, options, callback)
-  fullName: setAsync(data, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-219">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-219">The string that will replace the existing body.</span></span> <span data-ttu-id="14fd5-220">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-220">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: options
-      description: '<span data-ttu-id="14fd5-221">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-221">Optional.</span></span> <span data-ttu-id="14fd5-222">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="14fd5-222">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="14fd5-223">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-223">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="14fd5-224">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="14fd5-224">coercionType: The desired format for the body.</span></span> <span data-ttu-id="14fd5-225">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-225">The string in the data parameter will be converted to this format.</span></span>'
-      type:
-      - Office.AsyncContextOptions & CoercionTypeOptions
-    - id: callback
-      description: <span data-ttu-id="14fd5-226">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-226">Optional.</span></span> <span data-ttu-id="14fd5-227">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-227">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-228">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-228">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: outlook.Office.Body.setAsync_1
-  summary: >-
-    <span data-ttu-id="14fd5-229">本文全体を指定されたテキストに置換します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-229">Replaces the entire body with the specified text.</span></span>
-
-
-    <span data-ttu-id="14fd5-230">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="14fd5-230">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="14fd5-231">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="14fd5-231">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="14fd5-232">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-232">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
-
-
-    <span data-ttu-id="14fd5-233">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-233">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-234">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-234">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-235">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-235">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-236">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-236">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-237">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-237">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-238">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-238">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-239">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-239">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-240">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-240">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-241">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-241">Errors</span></span></td><td><span data-ttu-id="14fd5-242">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-242">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> <tr><td></td><td><span data-ttu-id="14fd5-243">invalidformaterror-coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-243">InvalidFormatError - The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span></td></tr> </table>
-  name: setAsync(data, callback)
-  fullName: setAsync(data, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-244">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-244">The string that will replace the existing body.</span></span> <span data-ttu-id="14fd5-245">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-245">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: callback
-      description: <span data-ttu-id="14fd5-246">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-246">Optional.</span></span> <span data-ttu-id="14fd5-247">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-247">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-248">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-248">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: outlook.Office.Body.setSelectedDataAsync
-  summary: >-
-    <span data-ttu-id="14fd5-249">本文の選択部分を、指定のテキストに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-249">Replaces the selection in the body with the specified text.</span></span>
-
-
-    <span data-ttu-id="14fd5-250">setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-250">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="14fd5-251">カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-251">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="14fd5-252">挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-252">After insertion, the cursor is placed at the end of the inserted content.</span></span>
-
-
-    <span data-ttu-id="14fd5-253">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-253">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-254">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-254">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-255">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-255">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-256">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-256">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: >-
-    <table> <tr><td>[<span data-ttu-id="14fd5-257">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-257">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-258">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-258">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-259">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-259">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-260">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-260">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-261">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-261">Errors</span></span></td><td><span data-ttu-id="14fd5-262">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-262">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> <tr><td></td><td><span data-ttu-id="14fd5-263">invalidformaterror-coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-263">InvalidFormatError - The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span></td></tr> </table><span data-ttu-id="14fd5-264">
-
-    ####例えば</span><span class="sxs-lookup"><span data-stu-id="14fd5-264">
-
-    #### Examples</span></span>
-
-
-    ```javascript
-
-    // When including links in HTML markup, you can disable online link preview
-
-    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
-
-    Office.context.mailbox.item.body.setSelectedDataAsync(
-        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
-        {coercionType: Office.CoercionType.Html},
-        callback);
-    ```
-  name: setSelectedDataAsync(data, options, callback)
-  fullName: setSelectedDataAsync(data, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-265">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-265">The string that will replace the existing body.</span></span> <span data-ttu-id="14fd5-266">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-266">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: options
-      description: '<span data-ttu-id="14fd5-267">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-267">Optional.</span></span> <span data-ttu-id="14fd5-268">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="14fd5-268">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="14fd5-269">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-269">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="14fd5-270">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="14fd5-270">coercionType: The desired format for the body.</span></span> <span data-ttu-id="14fd5-271">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-271">The string in the data parameter will be converted to this format.</span></span>'
-      type:
-      - Office.AsyncContextOptions & CoercionTypeOptions
-    - id: callback
-      description: <span data-ttu-id="14fd5-272">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-272">Optional.</span></span> <span data-ttu-id="14fd5-273">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-273">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-274">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-274">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: outlook.Office.Body.setSelectedDataAsync_1
-  summary: >-
-    <span data-ttu-id="14fd5-275">本文の選択部分を、指定のテキストに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-275">Replaces the selection in the body with the specified text.</span></span>
-
-
-    <span data-ttu-id="14fd5-276">setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。</span><span class="sxs-lookup"><span data-stu-id="14fd5-276">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="14fd5-277">カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-277">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="14fd5-278">挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-278">After insertion, the cursor is placed at the end of the inserted content.</span></span>
-
-
-    <span data-ttu-id="14fd5-279">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="14fd5-279">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="14fd5-280">a</span><span class="sxs-lookup"><span data-stu-id="14fd5-280">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="14fd5-281">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="14fd5-281">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
-
-
-    <span data-ttu-id="14fd5-282">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="14fd5-282">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
-  remarks: <table> <tr><td>[<span data-ttu-id="14fd5-283">最小限のアクセス許可レベル</span><span class="sxs-lookup"><span data-stu-id="14fd5-283">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="14fd5-284">ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="14fd5-284">ReadWriteItem</span></span></td></tr> <tr><td>[<span data-ttu-id="14fd5-285">適用可能な Outlook のモード</span><span class="sxs-lookup"><span data-stu-id="14fd5-285">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="14fd5-286">作成</span><span class="sxs-lookup"><span data-stu-id="14fd5-286">Compose</span></span></td></tr> <tr><td><span data-ttu-id="14fd5-287">エラー</span><span class="sxs-lookup"><span data-stu-id="14fd5-287">Errors</span></span></td><td><span data-ttu-id="14fd5-288">DataExceedsMaximumSize-data パラメーターは、100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-288">DataExceedsMaximumSize - The data parameter is longer than 1,000,000 characters.</span></span></td></tr> <tr><td></td><td><span data-ttu-id="14fd5-289">invalidformaterror-coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-289">InvalidFormatError - The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span></td></tr> </table>
-  name: setSelectedDataAsync(data, callback)
-  fullName: setSelectedDataAsync(data, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: data
-      description: <span data-ttu-id="14fd5-290">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="14fd5-290">The string that will replace the existing body.</span></span> <span data-ttu-id="14fd5-291">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="14fd5-291">The string is limited to 1,000,000 characters.</span></span>
-      type:
-      - string
-    - id: callback
-      description: <span data-ttu-id="14fd5-292">省略可能。</span><span class="sxs-lookup"><span data-stu-id="14fd5-292">Optional.</span></span> <span data-ttu-id="14fd5-293">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="14fd5-293">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="14fd5-294">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="14fd5-294">Any errors encountered will be provided in the asyncResult.error property.</span></span>
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body
+    summary: |-
+      <span data-ttu-id="6662c-101">body オブジェクトには、メッセージまたは予定の内容を追加および更新するためのメソッドが用意されています。</span><span class="sxs-lookup"><span data-stu-id="6662c-101">The body object provides methods for adding and updating the content of the message or appointment.</span></span> <span data-ttu-id="6662c-102">これは、選択されたアイテムの body プロパティで返されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-102">It is returned in the body property of the selected item.</span></span>
+
+      <span data-ttu-id="6662c-103">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-103">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-104">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="6662c-104">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="6662c-105">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り</span><span class="sxs-lookup"><span data-stu-id="6662c-105">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+    name: Office.Body
+    fullName: Office.Body
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.Body.getAsync
+      - outlook.Office.Body.getAsync_1
+      - outlook.Office.Body.getTypeAsync
+      - outlook.Office.Body.getTypeAsync_1
+      - outlook.Office.Body.prependAsync
+      - outlook.Office.Body.prependAsync_1
+      - outlook.Office.Body.setAsync
+      - outlook.Office.Body.setAsync_1
+      - outlook.Office.Body.setSelectedDataAsync
+      - outlook.Office.Body.setSelectedDataAsync_1
+  - uid: outlook.Office.Body.getAsync
+    summary: |-
+      <span data-ttu-id="6662c-106">現在の本文を指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="6662c-106">Returns the current body in a specified format.</span></span>
+
+      <span data-ttu-id="6662c-107">このメソッドは、現在の本文全体を coercionType で指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="6662c-107">This method returns the entire current body in the format specified by coercionType.</span></span>
+
+      <span data-ttu-id="6662c-108">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="6662c-108">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="6662c-109">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="6662c-109">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="6662c-110">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="6662c-110">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="6662c-111">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-111">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-112">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="6662c-112">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="6662c-113">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り</span><span class="sxs-lookup"><span data-stu-id="6662c-113">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="6662c-114">例</span><span class="sxs-lookup"><span data-stu-id="6662c-114">Examples</span></span>
+
+      ```javascript
+      // This example gets the body of the item as plain text.
+      Office.context.mailbox.item.body.getAsync(
+          "text",
+          { asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Do something with the result.
+          });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value": "TEXT of whole body (including threads below)",
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: 'getAsync(coercionType, options, callback)'
+    fullName: 'getAsync(coercionType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(coercionType: Office.CoercionType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: coercionType
+          description: <span data-ttu-id="6662c-115">返される本文の形式です。</span><span class="sxs-lookup"><span data-stu-id="6662c-115">The format for the returned body.</span></span>
+          type:
+            - Office.CoercionType
+        - id: options
+          description: '<span data-ttu-id="6662c-116">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-116">Optional.</span></span> <span data-ttu-id="6662c-117">次のプロパティの1つ以上を含むオブジェクトリテラル。 asynccontext: 開発者は、コールバックメソッドで、アクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="6662c-117">An object literal that contains one or more of the following properties: asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="6662c-118">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-118">Optional.</span></span> <span data-ttu-id="6662c-119">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-119">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-120">本文は、asyncResult. value プロパティの要求された形式で提供されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-120">The body is provided in the requested format in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.Body.getAsync_1
+    summary: |-
+      <span data-ttu-id="6662c-121">現在の本文を指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="6662c-121">Returns the current body in a specified format.</span></span>
+
+      <span data-ttu-id="6662c-122">このメソッドは、現在の本文全体を coercionType で指定された形式で返します。</span><span class="sxs-lookup"><span data-stu-id="6662c-122">This method returns the entire current body in the format specified by coercionType.</span></span>
+
+      <span data-ttu-id="6662c-123">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="6662c-123">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="6662c-124">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="6662c-124">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="6662c-125">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="6662c-125">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="6662c-126">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-126">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-127">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="6662c-127">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="6662c-128">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り</span><span class="sxs-lookup"><span data-stu-id="6662c-128">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+    name: 'getAsync(coercionType, callback)'
+    fullName: 'getAsync(coercionType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(coercionType: Office.CoercionType, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: coercionType
+          description: <span data-ttu-id="6662c-129">返される本文の形式です。</span><span class="sxs-lookup"><span data-stu-id="6662c-129">The format for the returned body.</span></span>
+          type:
+            - Office.CoercionType
+        - id: callback
+          description: '<span data-ttu-id="6662c-130">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-130">Optional.</span></span> <span data-ttu-id="6662c-131">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-131">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-132">本文は、asyncResult. value プロパティの要求された形式で提供されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-132">The body is provided in the requested format in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.Body.getTypeAsync
+    summary: |-
+      <span data-ttu-id="6662c-133">コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。</span><span class="sxs-lookup"><span data-stu-id="6662c-133">Gets a value that indicates whether the content is in HTML or text format.</span></span>
+
+      <span data-ttu-id="6662c-134">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-134">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-135">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="6662c-135">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="6662c-136">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-136">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+    name: 'getTypeAsync(options, callback)'
+    fullName: 'getTypeAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTypeAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '<span data-ttu-id="6662c-137">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-137">Optional.</span></span> <span data-ttu-id="6662c-138">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="6662c-138">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="6662c-139">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="6662c-139">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="6662c-140">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-140">Optional.</span></span> <span data-ttu-id="6662c-141">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-141">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-142">コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-142">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
+  - uid: outlook.Office.Body.getTypeAsync_1
+    summary: |-
+      <span data-ttu-id="6662c-143">コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。</span><span class="sxs-lookup"><span data-stu-id="6662c-143">Gets a value that indicates whether the content is in HTML or text format.</span></span>
+
+      <span data-ttu-id="6662c-144">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-144">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-145">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="6662c-145">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="6662c-146">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-146">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="6662c-147">例</span><span class="sxs-lookup"><span data-stu-id="6662c-147">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.body.getTypeAsync(function (asyncResult) {
+          if (asyncResult.status === "failed") {
+              console.log("Action failed with error: " + asyncResult.error.message);
+          } else {
+              console.log("Body type: " + asyncResult.value);
+          }
+      });
+      ```
+    name: getTypeAsync(callback)
+    fullName: getTypeAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '<span data-ttu-id="6662c-148">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-148">Optional.</span></span> <span data-ttu-id="6662c-149">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-149">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-150">コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-150">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
+  - uid: outlook.Office.Body.prependAsync
+    summary: |-
+      <span data-ttu-id="6662c-151">アイテム本文の先頭に指定の内容を追加します。</span><span class="sxs-lookup"><span data-stu-id="6662c-151">Adds the specified content to the beginning of the item body.</span></span>
+
+      <span data-ttu-id="6662c-152">prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。</span><span class="sxs-lookup"><span data-stu-id="6662c-152">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="6662c-153">挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-153">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
+
+      <span data-ttu-id="6662c-154">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-154">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-155">a</span><span class="sxs-lookup"><span data-stu-id="6662c-155">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-156">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-156">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-157">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-157">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-158">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-158">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-159">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-159">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-160">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-160">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-161">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-161">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="6662c-162">例</span><span class="sxs-lookup"><span data-stu-id="6662c-162">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.prependAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      ```
+    name: 'prependAsync(data, options, callback)'
+    fullName: 'prependAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'prependAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-163">本文の先頭に挿入する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-163">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="6662c-164">文字列の最大長は 1,000,000 文字です。</span><span class="sxs-lookup"><span data-stu-id="6662c-164">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="6662c-165">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-165">Optional.</span></span> <span data-ttu-id="6662c-166">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="6662c-166">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="6662c-167">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="6662c-167">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="6662c-168">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="6662c-168">coercionType: The desired format for the body.</span></span> <span data-ttu-id="6662c-169">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-169">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="6662c-170">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-170">Optional.</span></span> <span data-ttu-id="6662c-171">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-171">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-172">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-172">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.prependAsync_1
+    summary: |-
+      <span data-ttu-id="6662c-173">アイテム本文の先頭に指定の内容を追加します。</span><span class="sxs-lookup"><span data-stu-id="6662c-173">Adds the specified content to the beginning of the item body.</span></span>
+
+      <span data-ttu-id="6662c-174">prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。</span><span class="sxs-lookup"><span data-stu-id="6662c-174">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="6662c-175">挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-175">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
+
+      <span data-ttu-id="6662c-176">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-176">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-177">a</span><span class="sxs-lookup"><span data-stu-id="6662c-177">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-178">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-178">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-179">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-179">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-180">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-180">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-181">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-181">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-182">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-182">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-183">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-183">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+    name: 'prependAsync(data, callback)'
+    fullName: 'prependAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-184">本文の先頭に挿入する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-184">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="6662c-185">文字列の最大長は 1,000,000 文字です。</span><span class="sxs-lookup"><span data-stu-id="6662c-185">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="6662c-186">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-186">Optional.</span></span> <span data-ttu-id="6662c-187">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-187">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-188">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-188">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setAsync
+    summary: |-
+      <span data-ttu-id="6662c-189">本文全体を指定されたテキストに置換します。</span><span class="sxs-lookup"><span data-stu-id="6662c-189">Replaces the entire body with the specified text.</span></span>
+
+      <span data-ttu-id="6662c-190">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="6662c-190">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="6662c-191">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="6662c-191">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="6662c-192">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="6662c-192">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="6662c-193">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-193">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-194">a</span><span class="sxs-lookup"><span data-stu-id="6662c-194">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-195">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-195">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-196">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-196">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-197">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-197">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-198">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-198">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-199">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-199">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-200">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-200">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="6662c-201">invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="6662c-201">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="6662c-202">例</span><span class="sxs-lookup"><span data-stu-id="6662c-202">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.setAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      Office.context.mailbox.item.body.setAsync(
+          "<b>(replaces all body, including threads you are replying to that may be on the bottom)</b>",
+          { coercionType: "html", asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Process the result.
+      });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value":null,
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: 'setAsync(data, options, callback)'
+    fullName: 'setAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-203">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-203">The string that will replace the existing body.</span></span> <span data-ttu-id="6662c-204">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="6662c-204">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="6662c-205">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-205">Optional.</span></span> <span data-ttu-id="6662c-206">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="6662c-206">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="6662c-207">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="6662c-207">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="6662c-208">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="6662c-208">coercionType: The desired format for the body.</span></span> <span data-ttu-id="6662c-209">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-209">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="6662c-210">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-210">Optional.</span></span> <span data-ttu-id="6662c-211">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-211">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-212">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-212">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setAsync_1
+    summary: |-
+      <span data-ttu-id="6662c-213">本文全体を指定されたテキストに置換します。</span><span class="sxs-lookup"><span data-stu-id="6662c-213">Replaces the entire body with the specified text.</span></span>
+
+      <span data-ttu-id="6662c-214">HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。</span><span class="sxs-lookup"><span data-stu-id="6662c-214">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="6662c-215">getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。</span><span class="sxs-lookup"><span data-stu-id="6662c-215">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="6662c-216">クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。</span><span class="sxs-lookup"><span data-stu-id="6662c-216">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="6662c-217">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-217">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-218">a</span><span class="sxs-lookup"><span data-stu-id="6662c-218">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-219">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-219">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-220">\[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-220">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-221">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-221">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-222">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-222">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-223">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-223">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-224">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-224">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="6662c-225">invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="6662c-225">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+    name: 'setAsync(data, callback)'
+    fullName: 'setAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-226">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-226">The string that will replace the existing body.</span></span> <span data-ttu-id="6662c-227">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="6662c-227">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="6662c-228">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-228">Optional.</span></span> <span data-ttu-id="6662c-229">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-229">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-230">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-230">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setSelectedDataAsync
+    summary: |-
+      <span data-ttu-id="6662c-231">本文の選択部分を、指定のテキストに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="6662c-231">Replaces the selection in the body with the specified text.</span></span>
+
+      <span data-ttu-id="6662c-232">setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。</span><span class="sxs-lookup"><span data-stu-id="6662c-232">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="6662c-233">カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-233">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="6662c-234">挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。</span><span class="sxs-lookup"><span data-stu-id="6662c-234">After insertion, the cursor is placed at the end of the inserted content.</span></span>
+
+      <span data-ttu-id="6662c-235">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-235">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-236">a</span><span class="sxs-lookup"><span data-stu-id="6662c-236">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-237">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-237">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-238">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-238">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-239">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-239">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-240">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-240">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-241">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-241">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-242">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-242">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="6662c-243">invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="6662c-243">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="6662c-244">例</span><span class="sxs-lookup"><span data-stu-id="6662c-244">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.setSelectedDataAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      ```
+    name: 'setSelectedDataAsync(data, options, callback)'
+    fullName: 'setSelectedDataAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-245">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-245">The string that will replace the existing body.</span></span> <span data-ttu-id="6662c-246">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="6662c-246">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="6662c-247">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-247">Optional.</span></span> <span data-ttu-id="6662c-248">次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。</span><span class="sxs-lookup"><span data-stu-id="6662c-248">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="6662c-249">asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。</span><span class="sxs-lookup"><span data-stu-id="6662c-249">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="6662c-250">coercionType: 本文に必要な形式。</span><span class="sxs-lookup"><span data-stu-id="6662c-250">coercionType: The desired format for the body.</span></span> <span data-ttu-id="6662c-251">data パラメーターの文字列は、この形式に変換されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-251">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="6662c-252">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-252">Optional.</span></span> <span data-ttu-id="6662c-253">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-253">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-254">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-254">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setSelectedDataAsync_1
+    summary: |-
+      <span data-ttu-id="6662c-255">本文の選択部分を、指定のテキストに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="6662c-255">Replaces the selection in the body with the specified text.</span></span>
+
+      <span data-ttu-id="6662c-256">setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。</span><span class="sxs-lookup"><span data-stu-id="6662c-256">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="6662c-257">カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-257">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="6662c-258">挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。</span><span class="sxs-lookup"><span data-stu-id="6662c-258">After insertion, the cursor is placed at the end of the inserted content.</span></span>
+
+      <span data-ttu-id="6662c-259">HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (</span><span class="sxs-lookup"><span data-stu-id="6662c-259">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="6662c-260">a</span><span class="sxs-lookup"><span data-stu-id="6662c-260">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="6662c-261">) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。</span><span class="sxs-lookup"><span data-stu-id="6662c-261">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="6662c-262">\[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6662c-262">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="6662c-263">**[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem</span><span class="sxs-lookup"><span data-stu-id="6662c-263">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="6662c-264">**[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成</span><span class="sxs-lookup"><span data-stu-id="6662c-264">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="6662c-265">**エラー**:</span><span class="sxs-lookup"><span data-stu-id="6662c-265">**Errors**:</span></span>
+
+      - <span data-ttu-id="6662c-266">DataExceedsMaximumSize: data パラメーターが100万文字を超えています。</span><span class="sxs-lookup"><span data-stu-id="6662c-266">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="6662c-267">invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。</span><span class="sxs-lookup"><span data-stu-id="6662c-267">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+    name: 'setSelectedDataAsync(data, callback)'
+    fullName: 'setSelectedDataAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="6662c-268">既存の本文を置換する文字列。</span><span class="sxs-lookup"><span data-stu-id="6662c-268">The string that will replace the existing body.</span></span> <span data-ttu-id="6662c-269">文字列の長さは 1,000,000 文字までに制限されています。</span><span class="sxs-lookup"><span data-stu-id="6662c-269">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="6662c-270">省略可能です。</span><span class="sxs-lookup"><span data-stu-id="6662c-270">Optional.</span></span> <span data-ttu-id="6662c-271">メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。</span><span class="sxs-lookup"><span data-stu-id="6662c-271">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="6662c-272">発生したエラーは、asyncResult. error プロパティに表示されます。</span><span class="sxs-lookup"><span data-stu-id="6662c-272">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
