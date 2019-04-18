@@ -1,358 +1,426 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bc724ea7fc6e5a67dd34313d83f94878fd6f9895
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30105497"
 items:
-- uid: excel_release.Excel.PivotTable
-  summary: >-
-    <span data-ttu-id="32eb2-101">Excel のピボットテーブルを表します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-101">Represents an Excel PivotTable.</span></span>
+  - uid: excel_release.Excel.PivotTable
+    summary: |-
+      <span data-ttu-id="37869-101">Excel のピボットテーブルを表します。</span><span class="sxs-lookup"><span data-stu-id="37869-101">Represents an Excel PivotTable.</span></span>
+
+      <span data-ttu-id="37869-102">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-102">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.PivotTable
+    fullName: Excel.PivotTable
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.PivotTable.columnHierarchies
+      - excel_release.Excel.PivotTable.context
+      - excel_release.Excel.PivotTable.dataHierarchies
+      - excel_release.Excel.PivotTable.delete
+      - excel_release.Excel.PivotTable.filterHierarchies
+      - excel_release.Excel.PivotTable.hierarchies
+      - excel_release.Excel.PivotTable.id
+      - excel_release.Excel.PivotTable.layout
+      - excel_release.Excel.PivotTable.load
+      - excel_release.Excel.PivotTable.load_1
+      - excel_release.Excel.PivotTable.load_2
+      - excel_release.Excel.PivotTable.name
+      - excel_release.Excel.PivotTable.refresh
+      - excel_release.Excel.PivotTable.rowHierarchies
+      - excel_release.Excel.PivotTable.set
+      - excel_release.Excel.PivotTable.set_1
+      - excel_release.Excel.PivotTable.toJSON
+      - excel_release.Excel.PivotTable.worksheet
+  - uid: excel_release.Excel.PivotTable.columnHierarchies
+    summary: |-
+      <span data-ttu-id="37869-103">ピボットテーブルの列ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="37869-103">The Column Pivot Hierarchies of the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-104">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-104">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: columnHierarchies
+    fullName: columnHierarchies
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly columnHierarchies: Excel.RowColumnPivotHierarchyCollection;'
+      return:
+        type:
+          - excel.Excel.RowColumnPivotHierarchyCollection
+        description: |-
 
 
-    <span data-ttu-id="32eb2-102">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-102">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: Excel.PivotTable
-  fullName: Excel.PivotTable
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel_release
-  children:
-  - excel_release.Excel.PivotTable.columnHierarchies
-  - excel_release.Excel.PivotTable.context
-  - excel_release.Excel.PivotTable.dataHierarchies
-  - excel_release.Excel.PivotTable.delete
-  - excel_release.Excel.PivotTable.filterHierarchies
-  - excel_release.Excel.PivotTable.hierarchies
-  - excel_release.Excel.PivotTable.id
-  - excel_release.Excel.PivotTable.layout
-  - excel_release.Excel.PivotTable.load
-  - excel_release.Excel.PivotTable.load_1
-  - excel_release.Excel.PivotTable.load_2
-  - excel_release.Excel.PivotTable.name
-  - excel_release.Excel.PivotTable.refresh
-  - excel_release.Excel.PivotTable.rowHierarchies
-  - excel_release.Excel.PivotTable.set
-  - excel_release.Excel.PivotTable.set_1
-  - excel_release.Excel.PivotTable.toJSON
-  - excel_release.Excel.PivotTable.worksheet
-- uid: excel_release.Excel.PivotTable.columnHierarchies
-  summary: >-
-    <span data-ttu-id="32eb2-103">ピボットテーブルの列ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="32eb2-103">The Column Pivot Hierarchies of the PivotTable.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="37869-105">例</span><span class="sxs-lookup"><span data-stu-id="37869-105">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");       
+
+              // check if the PivotTable already has a column
+              const column = pivotTable.columnHierarchies.getItemOrNullObject("Farm");
+              column.load("id");
+              await context.sync();
+
+              if (column.isNullObject) {
+                  // ading the farm column to the column hierarchy automatically removes it from the row hierarchy
+                  pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem("Farm"));
+              } else {
+                  pivotTable.columnHierarchies.remove(column);
+              }
+
+              await context.sync();
+          });
+          ```
+  - uid: excel_release.Excel.PivotTable.context
+    summary: <span data-ttu-id="37869-106">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="37869-106">The request context associated with the object.</span></span> <span data-ttu-id="37869-107">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="37869-107">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.PivotTable.dataHierarchies
+    summary: |-
+      <span data-ttu-id="37869-108">ピボットテーブルのデータ ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="37869-108">The Data Pivot Hierarchies of the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-109">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-109">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: dataHierarchies
+    fullName: dataHierarchies
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly dataHierarchies: Excel.DataPivotHierarchyCollection;'
+      return:
+        type:
+          - excel.Excel.DataPivotHierarchyCollection
+        description: |-
 
 
-    <span data-ttu-id="32eb2-104">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-104">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: columnHierarchies
-  fullName: columnHierarchies
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly columnHierarchies: Excel.RowColumnPivotHierarchyCollection;'
-    return:
-      type:
-      - excel.Excel.RowColumnPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"32eb2-105\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"32eb2-105\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // ading the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
-- uid: excel_release.Excel.PivotTable.context
-  summary: <span data-ttu-id="32eb2-106">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="32eb2-106">The request context associated with the object.</span></span> <span data-ttu-id="32eb2-107">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-107">This connects the add-in's process to the Office host application's process.</span></span>
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel_release.Excel.PivotTable.dataHierarchies
-  summary: >-
-    <span data-ttu-id="32eb2-108">ピボットテーブルのデータ ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="32eb2-108">The Data Pivot Hierarchies of the PivotTable.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="37869-110">例</span><span class="sxs-lookup"><span data-stu-id="37869-110">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+              pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem("Crates Sold at Farm"));
+              pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem("Crates Sold Wholesale"));
+
+              await context.sync();
+          });
+          ```
+  - uid: excel_release.Excel.PivotTable.delete
+    summary: |-
+      <span data-ttu-id="37869-111">ピボットテーブルを削除します。</span><span class="sxs-lookup"><span data-stu-id="37869-111">Deletes the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-112">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-112">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    <span data-ttu-id="32eb2-109">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-109">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: dataHierarchies
-  fullName: dataHierarchies
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly dataHierarchies: Excel.DataPivotHierarchyCollection;'
-    return:
-      type:
-      - excel.Excel.DataPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"32eb2-110\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"32eb2-110\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold at Farm\"));\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold Wholesale\"));\n\n    await context.sync();\n});\n```"
-- uid: excel_release.Excel.PivotTable.delete
-  summary: >-
-    <span data-ttu-id="32eb2-111">ピボットテーブルを削除します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-111">Deletes the PivotTable.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="37869-113">例</span><span class="sxs-lookup"><span data-stu-id="37869-113">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              context.workbook.worksheets.getItem("Pivot").pivotTables.getItem("Farm Sales").delete();
+
+              await context.sync();
+          });
+          ```
+  - uid: excel_release.Excel.PivotTable.filterHierarchies
+    summary: |-
+      <span data-ttu-id="37869-114">ピボットテーブルのフィルター ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="37869-114">The Filter Pivot Hierarchies of the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-115">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-115">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: filterHierarchies
+    fullName: filterHierarchies
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly filterHierarchies: Excel.FilterPivotHierarchyCollection;'
+      return:
+        type:
+          - excel.Excel.FilterPivotHierarchyCollection
+        description: |-
 
 
-    <span data-ttu-id="32eb2-112">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-112">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"32eb2-113\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"32eb2-113\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
-- uid: excel_release.Excel.PivotTable.filterHierarchies
-  summary: >-
-    <span data-ttu-id="32eb2-114">ピボットテーブルのフィルター ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="32eb2-114">The Filter Pivot Hierarchies of the PivotTable.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="37869-116">例</span><span class="sxs-lookup"><span data-stu-id="37869-116">Examples</span></span>
+
+          ```typescript
+          async function filter(functionType: Excel.AggregationFunction) {
+              await Excel.run(async (context) => {
+                  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+                  const filters = pivotTable.filterHierarchies;
+                  const filter = filters.getItemOrNullObject("Classification");
+                  filter.load();
+                  await context.sync();
+
+                  // add the Classification hierarchy to the filter, if it's not already there
+                  if (filter.isNullObject) {
+                      filters.add(pivotTable.hierarchies.getItem("Classification"));
+                      await context.sync();
+                  }
+              });
+          }
+          ```
+  - uid: excel_release.Excel.PivotTable.hierarchies
+    summary: |-
+      <span data-ttu-id="37869-117">ピボットテーブルのピボット階層。</span><span class="sxs-lookup"><span data-stu-id="37869-117">The Pivot Hierarchies of the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-118">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-118">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: hierarchies
+    fullName: hierarchies
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly hierarchies: Excel.PivotHierarchyCollection;'
+      return:
+        type:
+          - excel.Excel.PivotHierarchyCollection
+  - uid: excel_release.Excel.PivotTable.id
+    summary: |-
+      <span data-ttu-id="37869-119">ピボットテーブルの ID。</span><span class="sxs-lookup"><span data-stu-id="37869-119">Id of the PivotTable.</span></span> <span data-ttu-id="37869-120">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="37869-120">Read-only.</span></span>
+
+      <span data-ttu-id="37869-121">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-121">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel_release.Excel.PivotTable.layout
+    summary: |-
+      <span data-ttu-id="37869-122">ピボットテーブルのレイアウトとビジュアル構造を記述する PivotLayout。</span><span class="sxs-lookup"><span data-stu-id="37869-122">The PivotLayout describing the layout and visual structure of the PivotTable.</span></span>
+
+      <span data-ttu-id="37869-123">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-123">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: layout
+    fullName: layout
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly layout: Excel.PivotLayout;'
+      return:
+        type:
+          - excel.Excel.PivotLayout
+        description: |-
 
 
-    <span data-ttu-id="32eb2-115">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-115">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: filterHierarchies
-  fullName: filterHierarchies
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly filterHierarchies: Excel.FilterPivotHierarchyCollection;'
-    return:
-      type:
-      - excel.Excel.FilterPivotHierarchyCollection
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"32eb2-116\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"32eb2-116\">Examples</span></span>\n\n```typescript\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
-- uid: excel_release.Excel.PivotTable.hierarchies
-  summary: >-
-    <span data-ttu-id="32eb2-117">ピボットテーブルのピボット階層。</span><span class="sxs-lookup"><span data-stu-id="32eb2-117">The Pivot Hierarchies of the PivotTable.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="37869-124">例</span><span class="sxs-lookup"><span data-stu-id="37869-124">Examples</span></span>
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+              pivotTable.layout.load("layoutType");
+              await context.sync();
 
-    <span data-ttu-id="32eb2-118">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-118">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: hierarchies
-  fullName: hierarchies
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly hierarchies: Excel.PivotHierarchyCollection;'
-    return:
-      type:
-      - excel.Excel.PivotHierarchyCollection
-- uid: excel_release.Excel.PivotTable.id
-  summary: >-
-    <span data-ttu-id="32eb2-p102">ピボットテーブルの ID。読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="32eb2-p102">Id of the PivotTable. Read-only.</span></span>
+              // cycle between the three layout types
+              if (pivotTable.layout.layoutType === "Compact") {
+                  pivotTable.layout.layoutType = "Outline";
+              } else if (pivotTable.layout.layoutType === "Outline") {
+                  pivotTable.layout.layoutType = "Tabular";
+              } else {
+                  pivotTable.layout.layoutType = "Compact";
+              }
+              await context.sync();
+              console.log("Pivot layout is now " + pivotTable.layout.layoutType);
+          });
+          ```
+  - uid: excel_release.Excel.PivotTable.load
+    summary: <span data-ttu-id="37869-125">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="37869-125">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="37869-126">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="37869-126">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="37869-127">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="37869-127">In addition to this signature, this method has the following signatures:</span></span>
 
+      <span data-ttu-id="37869-128">`load(option?: string | string[]): Excel.PivotTable`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="37869-128">`load(option?: string | string[]): Excel.PivotTable` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
 
-    <span data-ttu-id="32eb2-121">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-121">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: id
-  fullName: id
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly id: string;'
-    return:
-      type:
-      - string
-- uid: excel_release.Excel.PivotTable.layout
-  summary: >-
-    <span data-ttu-id="32eb2-122">ピボットテーブルのレイアウトとビジュアル構造を記述する PivotLayout。</span><span class="sxs-lookup"><span data-stu-id="32eb2-122">The PivotLayout describing the layout and visual structure of the PivotTable.</span></span>
+      <span data-ttu-id="37869-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="37869-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
+      <span data-ttu-id="37869-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="37869-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable` - Only available on collection types.</span></span> <span data-ttu-id="37869-131">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="37869-131">It is similar to the preceding signature.</span></span> <span data-ttu-id="37869-132">top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="37869-132">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="37869-133">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="37869-133">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="37869-134">option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="37869-134">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.PivotTableLoadOptions): Excel.PivotTable;'
+      return:
+        type:
+          - excel.Excel.PivotTable
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.PivotTableLoadOptions
+  - uid: excel_release.Excel.PivotTable.load_1
+    summary: <span data-ttu-id="37869-135">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="37869-135">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="37869-136">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="37869-136">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.PivotTable;'
+      return:
+        type:
+          - excel.Excel.PivotTable
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="37869-137">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="37869-137">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.PivotTable.load_2
+    summary: <span data-ttu-id="37869-138">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="37869-138">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="37869-139">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="37869-139">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.PivotTable;'
+      return:
+        type:
+          - excel.Excel.PivotTable
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="37869-140">ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="37869-140">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.PivotTable.name
+    summary: |-
+      <span data-ttu-id="37869-141">ピボットテーブルの名前。</span><span class="sxs-lookup"><span data-stu-id="37869-141">Name of the PivotTable.</span></span>
 
-    <span data-ttu-id="32eb2-123">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-123">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: layout
-  fullName: layout
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly layout: Excel.PivotLayout;'
-    return:
-      type:
-      - excel.Excel.PivotLayout
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"32eb2-124\">例</span><span class=\"sxs-lookup\"><span data-stu-id=\"32eb2-124\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.layout.load(\"layoutType\");\n    await context.sync();\n\n    // cycle between the three layout types\n    if (pivotTable.layout.layoutType === \"Compact\") {\n        pivotTable.layout.layoutType = \"Outline\";\n    } else if (pivotTable.layout.layoutType === \"Outline\") {\n        pivotTable.layout.layoutType = \"Tabular\";\n    } else {\n        pivotTable.layout.layoutType = \"Compact\";\n    }\n    await context.sync();\n    console.log(\"Pivot layout is now \" + pivotTable.layout.layoutType);\n});\n```"
-- uid: excel_release.Excel.PivotTable.load
-  summary: <span data-ttu-id="32eb2-125">オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-125">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="32eb2-126">プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="32eb2-126">You must call "context.sync()" before reading the properties.</span></span>
-  remarks: >-
-    <span data-ttu-id="32eb2-127">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="32eb2-127">In addition to this signature, this method has the following signatures:</span></span>
+      <span data-ttu-id="37869-142">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-142">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'name: string;'
+      return:
+        type:
+          - string
+  - uid: excel_release.Excel.PivotTable.refresh
+    summary: |-
+      <span data-ttu-id="37869-143">ピボットテーブルを更新します。</span><span class="sxs-lookup"><span data-stu-id="37869-143">Refreshes the PivotTable.</span></span>
 
+      <span data-ttu-id="37869-144">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-144">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: refresh()
+    fullName: refresh()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'refresh(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.PivotTable.rowHierarchies
+    summary: |-
+      <span data-ttu-id="37869-145">ピボットテーブルの行ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="37869-145">The Row Pivot Hierarchies of the PivotTable.</span></span>
 
-    <span data-ttu-id="32eb2-128">`load(option?: string | string[]): Excel.PivotTable`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="32eb2-128">`load(option?: string | string[]): Excel.PivotTable` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      <span data-ttu-id="37869-146">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-146">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: rowHierarchies
+    fullName: rowHierarchies
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly rowHierarchies: Excel.RowColumnPivotHierarchyCollection;'
+      return:
+        type:
+          - excel.Excel.RowColumnPivotHierarchyCollection
+  - uid: excel_release.Excel.PivotTable.set
+    summary: '<span data-ttu-id="37869-147">一度に1つのオブジェクトの複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="37869-147">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="37869-148">適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="37869-148">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="37869-149">このメソッドには、次の追加のシグネチャがあります。</span><span class="sxs-lookup"><span data-stu-id="37869-149">This method has the following additional signature:</span></span>
 
+      `set(properties: Excel.PivotTable): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.PivotTableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="37869-150">メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。</span><span class="sxs-lookup"><span data-stu-id="37869-150">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.PivotTableUpdateData
+        - id: options
+          description: <span data-ttu-id="37869-151">プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="37869-151">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel_release.Excel.PivotTable.set_1
+    summary: '<span data-ttu-id="37869-152">既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="37869-152">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.PivotTable): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.PivotTable
+  - uid: excel_release.Excel.PivotTable.toJSON
+    summary: '<span data-ttu-id="37869-153">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="37869-153">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="37869-154">.</span><span class="sxs-lookup"><span data-stu-id="37869-154"></span></span> <span data-ttu-id="37869-155">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="37869-155"></span></span><!-- --><span data-ttu-id="37869-156">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel PivotTable オブジェクトは API オブジェクトですが、このメソッド`toJSON`はプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Excel.Interfaces.PivotTableData`</span><span class="sxs-lookup"><span data-stu-id="37869-156">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.PivotTable object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.PivotTableData`</span></span><!-- --><span data-ttu-id="37869-157">) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。</span><span class="sxs-lookup"><span data-stu-id="37869-157">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.PivotTableData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.PivotTableData
+        description: ''
+  - uid: excel_release.Excel.PivotTable.worksheet
+    summary: |-
+      <span data-ttu-id="37869-158">現在のピボットテーブルを含んでいるワークシート。</span><span class="sxs-lookup"><span data-stu-id="37869-158">The worksheet containing the current PivotTable.</span></span>
 
-    <span data-ttu-id="32eb2-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="32eb2-129">`load(option?: { select?: string; expand?: string; }): Excel.PivotTable` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-
-
-    <span data-ttu-id="32eb2-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-130">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotTable` - Only available on collection types.</span></span> <span data-ttu-id="32eb2-131">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="32eb2-131">It is similar to the preceding signature.</span></span> <span data-ttu-id="32eb2-132">top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-132">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="32eb2-133">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-133">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="32eb2-134">option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-134">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.PivotTableLoadOptions): Excel.PivotTable;'
-    return:
-      type:
-      - excel.Excel.PivotTable
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.PivotTableLoadOptions
-- uid: excel_release.Excel.PivotTable.load_1
-  summary: <span data-ttu-id="32eb2-135">オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-135">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="32eb2-136">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="32eb2-136">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.PivotTable;'
-    return:
-      type:
-      - excel.Excel.PivotTable
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: <span data-ttu-id="32eb2-137">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="32eb2-137">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
-      type:
-      - string | string[]
-- uid: excel_release.Excel.PivotTable.load_2
-  summary: <span data-ttu-id="32eb2-138">オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-138">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="32eb2-139">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="32eb2-139">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.PivotTable;'
-    return:
-      type:
-      - excel.Excel.PivotTable
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: <span data-ttu-id="32eb2-140">ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="32eb2-140">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel_release.Excel.PivotTable.name
-  summary: >-
-    <span data-ttu-id="32eb2-141">ピボットテーブルの名前。</span><span class="sxs-lookup"><span data-stu-id="32eb2-141">Name of the PivotTable.</span></span>
-
-
-    <span data-ttu-id="32eb2-142">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-142">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: name
-  fullName: name
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'name: string;'
-    return:
-      type:
-      - string
-- uid: excel_release.Excel.PivotTable.refresh
-  summary: >-
-    <span data-ttu-id="32eb2-143">ピボットテーブルを更新します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-143">Refreshes the PivotTable.</span></span>
-
-
-    <span data-ttu-id="32eb2-144">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-144">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: refresh()
-  fullName: refresh()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'refresh(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel_release.Excel.PivotTable.rowHierarchies
-  summary: >-
-    <span data-ttu-id="32eb2-145">ピボットテーブルの行ピボット階層。</span><span class="sxs-lookup"><span data-stu-id="32eb2-145">The Row Pivot Hierarchies of the PivotTable.</span></span>
-
-
-    <span data-ttu-id="32eb2-146">\[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-146">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: rowHierarchies
-  fullName: rowHierarchies
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly rowHierarchies: Excel.RowColumnPivotHierarchyCollection;'
-    return:
-      type:
-      - excel.Excel.RowColumnPivotHierarchyCollection
-- uid: excel_release.Excel.PivotTable.set
-  summary: <span data-ttu-id="32eb2-147">一度に1つのオブジェクトの複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-147">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="32eb2-148">適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="32eb2-148">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>
-  remarks: >-
-    <span data-ttu-id="32eb2-149">このメソッドには、次の追加のシグネチャがあります。</span><span class="sxs-lookup"><span data-stu-id="32eb2-149">This method has the following additional signature:</span></span>
-
-
-    `set(properties: Excel.PivotTable): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.PivotTableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: <span data-ttu-id="32eb2-150">メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。</span><span class="sxs-lookup"><span data-stu-id="32eb2-150">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
-      type:
-      - Interfaces.PivotTableUpdateData
-    - id: options
-      description: <span data-ttu-id="32eb2-151">プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-151">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel_release.Excel.PivotTable.set_1
-  summary: <span data-ttu-id="32eb2-152">既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-152">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.PivotTable): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.PivotTable
-- uid: excel_release.Excel.PivotTable.toJSON
-  summary: <span data-ttu-id="32eb2-153">API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="32eb2-153">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="32eb2-154">(`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の PivotTable オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドは、元のオブジェクトから読み込まれ`Excel.Interfaces.PivotTableData` <!-- -->た子プロパティの浅いコピーを含む、プレーンな JavaScript オブジェクト (として型指定) を返します。</span><span class="sxs-lookup"><span data-stu-id="32eb2-154">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.PivotTable object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.PivotTableData`<!-- -->) that contains shallow copies of any loaded child properties from the original object.</span></span>
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.PivotTableData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.PivotTableData
-      description: ''
-- uid: excel_release.Excel.PivotTable.worksheet
-  summary: >-
-    <span data-ttu-id="32eb2-155">現在のピボットテーブルを含むワークシートです。</span><span class="sxs-lookup"><span data-stu-id="32eb2-155">The worksheet containing the current PivotTable.</span></span>
-
-
-    <span data-ttu-id="32eb2-156">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="32eb2-156">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: worksheet
-  fullName: worksheet
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly worksheet: Excel.Worksheet;'
-    return:
-      type:
-      - excel.Excel.Worksheet
+      <span data-ttu-id="37869-159">\[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="37869-159">\[ [API set: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: worksheet
+    fullName: worksheet
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly worksheet: Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
