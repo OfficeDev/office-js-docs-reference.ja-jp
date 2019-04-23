@@ -1,259 +1,332 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f8da0aa8f211304f6d54fd119af4a484795c66ae
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30105357"
 items:
-- uid: excel_release.Excel.Binding
-  summary: >-
-    ブックで定義されている Office.js のバインディングを表します。
+  - uid: excel_release.Excel.Binding
+    summary: |-
+      ブックで定義されている Office.js のバインディングを表します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Binding
+    fullName: Excel.Binding
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.Binding.context
+      - excel_release.Excel.Binding.delete
+      - excel_release.Excel.Binding.getRange
+      - excel_release.Excel.Binding.getTable
+      - excel_release.Excel.Binding.getText
+      - excel_release.Excel.Binding.id
+      - excel_release.Excel.Binding.load
+      - excel_release.Excel.Binding.load_1
+      - excel_release.Excel.Binding.load_2
+      - excel_release.Excel.Binding.onDataChanged
+      - excel_release.Excel.Binding.onSelectionChanged
+      - excel_release.Excel.Binding.toJSON
+      - excel_release.Excel.Binding.type
+  - uid: excel_release.Excel.Binding.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.Binding.delete
+    summary: |-
+      バインドを削除します。
+
+      \[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.Binding.getRange
+    summary: |-
+      バインディングによって表される範囲を返します。 バインドが正しい型ではない場合、エラーがスローされます。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
 
 
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.Binding
-  fullName: Excel.Binding
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel_release
-  children:
-  - excel_release.Excel.Binding.context
-  - excel_release.Excel.Binding.delete
-  - excel_release.Excel.Binding.getRange
-  - excel_release.Excel.Binding.getTable
-  - excel_release.Excel.Binding.getText
-  - excel_release.Excel.Binding.id
-  - excel_release.Excel.Binding.load
-  - excel_release.Excel.Binding.load_1
-  - excel_release.Excel.Binding.load_2
-  - excel_release.Excel.Binding.onDataChanged
-  - excel_release.Excel.Binding.onSelectionChanged
-  - excel_release.Excel.Binding.toJSON
-  - excel_release.Excel.Binding.type
-- uid: excel_release.Excel.Binding.context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel_release.Excel.Binding.delete
-  summary: >-
-    バインドを削除します。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var range = binding.getRange();
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel_release.Excel.Binding.getTable
+    summary: |-
+      バインドによって表されるテーブルを返します。 バインドが正しい型ではない場合、エラーがスローされます。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getTable()
+    fullName: getTable()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTable(): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
 
 
-    \[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel_release.Excel.Binding.getRange
-  summary: >-
-    バインディングによって表される範囲を返します。バインドが正しい型ではない場合、エラーがスローされます。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var table = binding.getTable();
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel_release.Excel.Binding.getText
+    summary: |-
+      バインドによって表されるテキストを返します。 バインドが正しい型ではない場合、エラーがスローされます。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getText()
+    fullName: getText()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getText(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
 
 
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getRange()
-  fullName: getRange()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRange(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var range = binding.getRange();\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel_release.Excel.Binding.getTable
-  summary: >-
-    バインドによって表されるテーブルを返します。バインドが正しい型ではない場合、エラーがスローされます。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var text = binding.getText();
+              binding.load('text');
+              return ctx.sync().then(function() {
+                  console.log(text);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel_release.Excel.Binding.id
+    summary: |-
+      バインド識別子を表します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel_release.Excel.Binding.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.Binding`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Binding`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.BindingLoadOptions
+  - uid: excel_release.Excel.Binding.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: |-
 
 
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getTable()
-  fullName: getTable()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getTable(): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var table = binding.getTable();\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel_release.Excel.Binding.getText
-  summary: >-
-    バインドによって表されるテキストを返します。バインドが正しい型ではない場合、エラーがスローされます。
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              binding.load('type');
+              return ctx.sync().then(function() {
+                  console.log(binding.type);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.Binding.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.Binding.onDataChanged
+    summary: |-
+      バインド内でデータまたは書式設定が変更されるときに発生します。
+
+      \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDataChanged
+    fullName: onDataChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDataChanged: OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>
+        description: |-
 
 
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getText()
-  fullName: getText()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getText(): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var text = binding.getText();\n    binding.load('text');\n    return ctx.sync().then(function() {\n        console.log(text);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel_release.Excel.Binding.id
-  summary: >-
-    バインド識別子を表します。読み取り専用です。
+          #### <a name="examples"></a>例
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");    
+              const salesTable = sheet.tables.getItem("SalesTable");
+              const salesByQuarterBinding = context.workbook.bindings.add(salesTable.getRange(), "Table", "SalesByQuarter");
+              salesByQuarterBinding.onDataChanged.add(onSalesDataChanged);
 
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: id
-  fullName: id
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly id: string;'
-    return:
-      type:
-      - string
-- uid: excel_release.Excel.Binding.load
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る前に、"context. sync ()" を呼び出す必要があります。
-  remarks: >-
-    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+              console.log("The data changed handler is registered.");
 
+              await context.sync();
+          });
+          ```
+  - uid: excel_release.Excel.Binding.onSelectionChanged
+    summary: |-
+      バインドで選択されているコンテンツが変更されたときに発生します。
 
-    `load(option?: string | string[]): Excel.Binding`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+      \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>
+  - uid: excel_release.Excel.Binding.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel Binding オブジェクトは API オブジェクトですが、このメソッド`toJSON`はプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Excel.Interfaces.BindingData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.BindingData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.BindingData
+        description: ''
+  - uid: excel_release.Excel.Binding.type
+    summary: |-
+      バインドの種類を返します。 詳細については、「Excel. bindingtype」を参照してください。 読み取り専用です。
 
-
-    `load(option?: { select?: string; expand?: string; }): Excel.Binding`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.BindingLoadOptions
-- uid: excel_release.Excel.Binding.load_1
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: "\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    binding.load('type');\n    return ctx.sync().then(function() {\n        console.log(binding.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-      type:
-      - string | string[]
-- uid: excel_release.Excel.Binding.load_2
-  summary: オブジェクトの指定されたプロパティを読み込むためのコマンドをキューに入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel_release.Excel.Binding.onDataChanged
-  summary: >-
-    バインド内でデータまたは書式設定が変更されるときに発生します。
-
-
-    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: onDataChanged
-  fullName: onDataChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onDataChanged: OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");    \n    const salesTable = sheet.tables.getItem(\"SalesTable\");\n    const salesByQuarterBinding = context.workbook.bindings.add(salesTable.getRange(), \"Table\", \"SalesByQuarter\");\n    salesByQuarterBinding.onDataChanged.add(onSalesDataChanged);\n\n    console.log(\"The data changed handler is registered.\");\n\n    await context.sync();\n});\n```"
-- uid: excel_release.Excel.Binding.onSelectionChanged
-  summary: >-
-    バインドで選択されているコンテンツが変更されたときに発生します。
-
-
-    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: onSelectionChanged
-  fullName: onSelectionChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>
-- uid: excel_release.Excel.Binding.toJSON
-  summary: API オブジェクトが`toJSON()`渡さ`JSON.stringify()` <!-- -->れるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。 (`JSON.stringify`<!-- -->つまり、によって渡さ`toJSON`れたオブジェクトのメソッドが呼び出されます)。元の Excel バインディングオブジェクトは API オブジェクトですが、メソッドは`toJSON` 、元のオブジェクトから読み込まれた子`Excel.Interfaces.BindingData` <!-- -->プロパティの浅いコピーを含む (として型指定された) プレーンな JavaScript オブジェクトを返します。
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.BindingData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.BindingData
-      description: ''
-- uid: excel_release.Excel.Binding.type
-  summary: >-
-    バインドの種類を返します。 詳細については、「Excel. bindingtype」を参照してください。 読み取り専用です。
-
-
-    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
-    return:
-      type:
-      - Excel.BindingType | "Range" | "Table" | "Text"
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
+      return:
+        type:
+          - Excel.BindingType | "Range" | "Table" | "Text"
