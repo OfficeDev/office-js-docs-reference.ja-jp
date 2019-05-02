@@ -4,7 +4,7 @@ items:
     summary: |-
       ブックまたはワークシート上のすべてのスライサーオブジェクトのコレクションを表します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: Excel.SlicerCollection
     fullName: Excel.SlicerCollection
@@ -30,7 +30,7 @@ items:
     summary: |-
       ブックに新しいスライサーを追加します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: 'add(slicerSource, sourceField, slicerDestination)'
     fullName: 'add(slicerSource, sourceField, slicerDestination)'
@@ -42,18 +42,33 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: 新しいスライサー。
+        description: |-
+          新しいスライサー。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
       parameters:
         - id: slicerSource
-          description: 新しいスライサーの基となるデータソース。 PivotTable オブジェクト、Table オブジェクト、または文字列を指定できます。 pivottable オブジェクトが渡されると、データソースは pivottable オブジェクトのソースになります。 table オブジェクトが渡されると、データソースは table オブジェクトになります。 文字列が渡されると、PivotTable/Table の名前または id として解釈されます。
+          description: 新しいスライサーの基となるデータソース。 PivotTable オブジェクト、Table オブジェクト、または文字列を指定できます。 PivotTable オブジェクトが渡されると、データソースは PivotTable オブジェクトのソースになります。 Table オブジェクトが渡されると、データソースは Table オブジェクトになります。 文字列が渡されると、PivotTable/Table の名前または id として解釈されます。
           type:
             - string | PivotTable | Table
         - id: sourceField
-          description: フィルター処理の対象となるデータソース内のフィールド。 pivotfield オブジェクト、TableColumn オブジェクト、pivotfield の id、または TableColumn の id または名前を指定できます。
+          description: フィルター処理の対象となるデータソース内のフィールド。 PivotField オブジェクト、TableColumn オブジェクト、PivotField の id、または TableColumn の id または名前を指定できます。
           type:
             - string | PivotField | number | TableColumn
         - id: slicerDestination
-          description: 省略可能です。 新しいスライサーを作成するワークシートを指定します。 ワークシートオブジェクト、またはワークシートの名前/id を指定できます。 スライサーコレクションをワークシートから取得する場合は、このパラメーターを省略できます。
+          description: 省略可能。 新しいスライサーを作成するワークシートを指定します。 ワークシートオブジェクト、またはワークシートの名前/id を指定できます。 スライサーコレクションをワークシートから取得する場合は、このパラメーターを省略できます。
           type:
             - string | Worksheet
   - uid: excel.Excel.SlicerCollection.context
@@ -73,7 +88,7 @@ items:
     summary: |-
       コレクションに含まれるスライサーの数を返します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getCount()
     fullName: getCount()
@@ -90,7 +105,7 @@ items:
     summary: |-
       名前または ID を使用してスライサー オブジェクトを取得します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItem(key)
     fullName: getItem(key)
@@ -102,7 +117,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const slicer = context.workbook.slicers.getItem("Fruit Slicer");
+              slicer.caption = "Fruit Types";
+              slicer.left = 395;
+              slicer.top = 15;
+              slicer.height = 135;
+              slicer.width = 150;
+              await context.sync();
+          });
+          ```
       parameters:
         - id: key
           description: スライサーの名前または id。
@@ -112,7 +142,7 @@ items:
     summary: |-
       コレクション内の位置に基づいてスライサーを取得します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItemAt(index)
     fullName: getItemAt(index)
@@ -134,7 +164,7 @@ items:
     summary: |-
       名前または ID に基づいてスライサーを取得します。スライサーが存在しない場合は null オブジェクトを返します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: getItemOrNullObject(key)
     fullName: getItemOrNullObject(key)
@@ -174,7 +204,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.SlicerCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SlicerCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SlicerCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     isPreview: true
     name: load(option)
     fullName: load(option)
