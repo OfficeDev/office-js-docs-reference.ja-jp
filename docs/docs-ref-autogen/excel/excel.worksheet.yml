@@ -53,6 +53,7 @@ items:
       - excel.Excel.Worksheet.onFormatChanged
       - excel.Excel.Worksheet.onRowSorted
       - excel.Excel.Worksheet.onSelectionChanged
+      - excel.Excel.Worksheet.onSingleClicked
       - excel.Excel.Worksheet.pageLayout
       - excel.Excel.Worksheet.pivotTables
       - excel.Excel.Worksheet.position
@@ -108,8 +109,7 @@ items:
     summary: |-
       ワークシートの AutoFilter オブジェクトを表します。 読み取り専用です。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: autoFilter
     fullName: autoFilter
     langs:
@@ -158,7 +158,7 @@ items:
             - boolean
   - uid: excel.Excel.Worksheet.charts
     summary: |-
-      ワークシートの一部になっているグラフのコレクションを返します。 値の取得のみ可能です。
+      ワークシートの一部になっているグラフのコレクションを返します。 読み取り専用です。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: charts
@@ -175,7 +175,7 @@ items:
     summary: |-
       ワークシート上のすべての Comments オブジェクトの集まりを返します。 読み取り専用です。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: comments
     fullName: comments
@@ -270,7 +270,7 @@ items:
             - excel.Excel.Worksheet
   - uid: excel.Excel.Worksheet.delete
     summary: |-
-      ブックからワークシートを削除します。
+      ブックからワークシートを削除します。 ワークシートの可視性が "非常に非表示" に設定されている場合は、削除操作が一般の例外によって失敗することに注意してください。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: delete()
@@ -305,8 +305,7 @@ items:
     summary: |-
       ワークシートの enableCalculation プロパティを取得または設定します。 True の場合、Excel は必要に応じてワークシートを再計算します。 False の場合、Excel はシートを再計算しません。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: enableCalculation
     fullName: enableCalculation
     langs:
@@ -321,8 +320,7 @@ items:
     summary: |-
       指定された条件に基づいて指定された文字列の発生箇所をすべて見つけ、1 つまたは複数の長方形範囲を構成する RangeAreas オブジェクトとして返します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'findAll(text, criteria)'
     fullName: 'findAll(text, criteria)'
     langs:
@@ -333,7 +331,7 @@ items:
       return:
         type:
           - excel.Excel.RangeAreas
-        description: 検索条件に一致する1つまたは複数の四角形の範囲で構成される rangearea オブジェクト。 この条件に一致するセルがない場合は、ItemNotFound エラーがスローされます。
+        description: 検索条件に一致する1つまたは複数の四角形の範囲で構成される RangeArea オブジェクト。 この条件に一致するセルがない場合は、ItemNotFound エラーがスローされます。
       parameters:
         - id: text
           description: 検索する文字列を指定します。
@@ -347,8 +345,7 @@ items:
     summary: |-
       指定された条件に基づいて指定された文字列の発生箇所をすべて見つけ、1 つまたは複数の長方形範囲を構成する RangeAreas オブジェクトとして返します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'findAllOrNullObject(text, criteria)'
     fullName: 'findAllOrNullObject(text, criteria)'
     langs:
@@ -360,7 +357,7 @@ items:
         type:
           - excel.Excel.RangeAreas
         description: |-
-          検索条件に一致する1つまたは複数の四角形の範囲で構成される rangearea オブジェクト。 一致しない場合、この関数は null オブジェクトを返します。
+          検索条件に一致する1つまたは複数の四角形の範囲で構成される RangeArea オブジェクト。 一致しない場合、この関数は null オブジェクトを返します。
 
           #### <a name="examples"></a>例
 
@@ -498,7 +495,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel.Excel.Worksheet.getNextOrNullObject
@@ -519,7 +516,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel.Excel.Worksheet.getPrevious
@@ -566,7 +563,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel.Excel.Worksheet.getPreviousOrNullObject
@@ -587,7 +584,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 省略可能。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel.Excel.Worksheet.getRange
@@ -687,8 +684,7 @@ items:
     summary: |-
       アドレスまたは名前で指定され、1 つまたは複数の長方形範囲ブロックを表す RangeAreas オブジェクトを取得します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getRanges(address)
     fullName: getRanges(address)
     langs:
@@ -716,7 +712,7 @@ items:
           ```
       parameters:
         - id: address
-          description: '省略可能。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、"A1: B2, A5: B5" とします。 指定しない場合、ワークシート全体の rangearea オブジェクトが返されます。'
+          description: '省略可能。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、"A1: B2, A5: B5" とします。 指定しない場合、ワークシート全体の RangeArea オブジェクトが返されます。'
           type:
             - string
   - uid: excel.Excel.Worksheet.getUsedRange
@@ -757,7 +753,7 @@ items:
           ```
       parameters:
         - id: valuesOnly
-          description: '省略可能。 true の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。 \[Api セット: excelapi 1.2\]'
+          description: '省略可能。 True の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。 \[Api セット: ExcelApi 1.2\]'
           type:
             - boolean
   - uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
@@ -785,8 +781,7 @@ items:
     summary: |-
       ワークシートの水平改ページをまとめて取得します。 このコレクションには、手動の改ページのみが含まれます。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: horizontalPageBreaks
     fullName: horizontalPageBreaks
     langs:
@@ -821,7 +816,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -1035,7 +1030,7 @@ items:
     summary: |-
       列に対して並べ替えを行うときに発生します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: onColumnSorted
     fullName: onColumnSorted
@@ -1083,7 +1078,7 @@ items:
     summary: |-
       フィルターが特定のワークシートに適用されたときに発生します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: onFiltered
     fullName: onFiltered
@@ -1099,8 +1094,7 @@ items:
     summary: |-
       フォーマットが特定のワークシートで変更されたときに発生します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: onFormatChanged
     fullName: onFormatChanged
     langs:
@@ -1115,7 +1109,7 @@ items:
     summary: |-
       行に対して並べ替えを行うときに発生します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: onRowSorted
     fullName: onRowSorted
@@ -1159,12 +1153,27 @@ items:
               return context.sync();
           });
           ```
+  - uid: excel.Excel.Worksheet.onSingleClicked
+    summary: |-
+      ワークシートで左クリック/タップ操作が行われると発生します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onSingleClicked
+    fullName: onSingleClicked
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>
   - uid: excel.Excel.Worksheet.pageLayout
     summary: |-
       ワークシートの PageLayout オブジェクトを取得します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: pageLayout
     fullName: pageLayout
     langs:
@@ -1224,8 +1233,7 @@ items:
     summary: |-
       現在のワークシート内で、指定された条件に基づき、指定された文字列を検索し、置換します。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'replaceAll(text, replacement, criteria)'
     fullName: 'replaceAll(text, replacement, criteria)'
     langs:
@@ -1298,8 +1306,7 @@ items:
     summary: |-
       ワークシート上のすべての Shape オブジェクトをまとめて返します。 読み取り専用です。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: shapes
     fullName: shapes
     langs:
@@ -1357,7 +1364,7 @@ items:
     summary: |-
       ワークシートに含まれるスライサーをまとめて返します。 読み取り専用です。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
     name: slicers
     fullName: slicers
@@ -1369,6 +1376,22 @@ items:
       return:
         type:
           - excel.Excel.SlicerCollection
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
   - uid: excel.Excel.Worksheet.standardHeight
     summary: |-
       ワークシート内のすべての行の標準 (既定) の高さ (ポイント数) を返します。 読み取り専用です。
@@ -1429,7 +1452,7 @@ items:
           ```
   - uid: excel.Excel.Worksheet.tables
     summary: |-
-      ワークシートの一部になっているグラフのコレクション。 値の取得のみ可能です。
+      ワークシートの一部になっているグラフのコレクション。 読み取り専用です。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: tables
@@ -1459,8 +1482,7 @@ items:
     summary: |-
       ワークシートの垂直改ページをまとめて取得します。 このコレクションには、手動の改ページのみが含まれます。
 
-      \[[API セット: excelapi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: verticalPageBreaks
     fullName: verticalPageBreaks
     langs:

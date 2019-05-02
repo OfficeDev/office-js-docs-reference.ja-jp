@@ -16,19 +16,23 @@ items:
     children:
       - excel_release.Excel.RangeFormat.autofitColumns
       - excel_release.Excel.RangeFormat.autofitRows
+      - excel_release.Excel.RangeFormat.autoIndent
       - excel_release.Excel.RangeFormat.borders
       - excel_release.Excel.RangeFormat.columnWidth
       - excel_release.Excel.RangeFormat.context
       - excel_release.Excel.RangeFormat.fill
       - excel_release.Excel.RangeFormat.font
       - excel_release.Excel.RangeFormat.horizontalAlignment
+      - excel_release.Excel.RangeFormat.indentLevel
       - excel_release.Excel.RangeFormat.load
       - excel_release.Excel.RangeFormat.load_1
       - excel_release.Excel.RangeFormat.load_2
       - excel_release.Excel.RangeFormat.protection
+      - excel_release.Excel.RangeFormat.readingOrder
       - excel_release.Excel.RangeFormat.rowHeight
       - excel_release.Excel.RangeFormat.set
       - excel_release.Excel.RangeFormat.set_1
+      - excel_release.Excel.RangeFormat.shrinkToFit
       - excel_release.Excel.RangeFormat.textOrientation
       - excel_release.Excel.RangeFormat.toJSON
       - excel_release.Excel.RangeFormat.useStandardHeight
@@ -67,6 +71,21 @@ items:
         type:
           - void
         description: ''
+  - uid: excel_release.Excel.RangeFormat.autoIndent
+    summary: |-
+      テキスト配置が均等割り付けに設定されている場合、テキストを自動的にインデントするかどうかを指定します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoIndent
+    fullName: autoIndent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'autoIndent: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.RangeFormat.borders
     summary: |-
       選択した範囲全体に適用する境界線オブジェクトのコレクション。 読み取り専用です。
@@ -154,6 +173,21 @@ items:
       return:
         type:
           - Excel.HorizontalAlignment | "General" | "Left" | "Center" | "Right" | "Fill" | "Justify" | "CenterAcrossSelection" | "Distributed"
+  - uid: excel_release.Excel.RangeFormat.indentLevel
+    summary: |-
+      インデント レベルを示す 0 から 250 までの整数。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: indentLevel
+    fullName: indentLevel
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'indentLevel: number;'
+      return:
+        type:
+          - number
   - uid: excel_release.Excel.RangeFormat.load
     summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
     remarks: |-
@@ -163,7 +197,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.RangeFormat`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFormat`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFormat`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -292,6 +326,21 @@ items:
       return:
         type:
           - excel.Excel.FormatProtection
+  - uid: excel_release.Excel.RangeFormat.readingOrder
+    summary: |-
+      範囲に適用される読み上げ順序。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: readingOrder
+    fullName: readingOrder
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readingOrder: Excel.ReadingOrder | "Context" | "LeftToRight" | "RightToLeft";'
+      return:
+        type:
+          - Excel.ReadingOrder | "Context" | "LeftToRight" | "RightToLeft"
   - uid: excel_release.Excel.RangeFormat.rowHeight
     summary: |-
       範囲内のすべての行の高さを取得または設定します。 行の高さが均一ではない場合は、null が返されます。
@@ -351,6 +400,21 @@ items:
           description: ''
           type:
             - excel.Excel.RangeFormat
+  - uid: excel_release.Excel.RangeFormat.shrinkToFit
+    summary: |-
+      使用可能な列幅に収まるように自動的に文字列が縮小されるかどうかを示します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: shrinkToFit
+    fullName: shrinkToFit
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'shrinkToFit: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.RangeFormat.textOrientation
     summary: |-
       該当する範囲内のすべてのセルのテキストの向きを設定します。 テキストの向きは、-90 から90、または180の整数である必要があります。垂直方向のテキスト。 範囲内の向きが均一ではない場合は、null が返されます。
@@ -384,7 +448,7 @@ items:
           });
           ```
   - uid: excel_release.Excel.RangeFormat.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel の rangeformat オブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.RangeFormatData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel の RangeFormat オブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.RangeFormatData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
     name: toJSON()
     fullName: toJSON()
     langs:

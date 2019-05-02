@@ -1,14 +1,8 @@
 ### YamlMime:UniversalReference
 items:
   - uid: office-runtime.OfficeRuntime.AsyncStorage
-    summary: Excel カスタム関数で使用できる、非同期、グローバル、永続的なキー値のストレージ。
-    remarks: |-
-      各アドインインスタンスには、ユーザーとそのデバイスに固有のストレージパーティションがあります。
-
-      アドインごとに許可される既定の記憶領域の合計は 5 mb です。
-
-      次に示す各メソッドは、Promise オブジェクトを返します。
-    isPreview: true
+    summary: 非同期、グローバル、および永続的なキー値のストレージ。 格納域の制限は、ドメインごとに 10 MB で、複数のアドインによって共有される場合があります。
+    remarks: 今後は使用されなくなります。代わりに、Office. Storage を使用してください。
     name: OfficeRuntime.AsyncStorage
     fullName: OfficeRuntime.AsyncStorage
     langs:
@@ -24,8 +18,7 @@ items:
       - office-runtime.OfficeRuntime.AsyncStorage.removeItem
       - office-runtime.OfficeRuntime.AsyncStorage.setItem
   - uid: office-runtime.OfficeRuntime.AsyncStorage.getAllKeys
-    summary: すべてのキーを使用して Promise を返します。
-    isPreview: true
+    summary: すべてのキーを取得し、終了時にコールバックを呼び出します。 Promise を返します。
     name: getAllKeys(callback)
     fullName: getAllKeys(callback)
     langs:
@@ -43,8 +36,7 @@ items:
           type:
             - '(error?: Error, keys?: string[]) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.getItem
-    summary: キーに基づいてオブジェクトを取得し、終了時にコールバックを呼び出します。 Promise を返します。
-    isPreview: true
+    summary: キーによってアイテムを取得し、コールバックを発行します。 Promise を返します。
     name: 'getItem(key, callback)'
     fullName: 'getItem(key, callback)'
     langs:
@@ -58,16 +50,15 @@ items:
         description: ''
       parameters:
         - id: key
-          description: ''
+          description: 取得するキーの名前を指定します。 文字列である必要があります。
           type:
             - string
         - id: callback
-          description: ''
+          description: 返された result は文字列です。
           type:
             - '(error?: Error, result?: string) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.multiGet
-    summary: '`keys`配列で指定されたキーのバッチをフェッチします。 キーが存在しない場合は、null を返します。'
-    isPreview: true
+    summary: ストレージから複数の項目を取得し、終了時にコールバックを呼び出します。 Promise を返します。
     name: 'multiGet(keys, callback)'
     fullName: 'multiGet(keys, callback)'
     langs:
@@ -81,7 +72,7 @@ items:
         description: ''
       parameters:
         - id: keys
-          description: ''
+          description: 取得するアイテムのキー。 文字列の配列であることが必要です。
           type:
             - 'string[]'
         - id: callback
@@ -89,8 +80,7 @@ items:
           type:
             - '(errors?: Error[], result?: string[][]) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.multiRemove
-    summary: '`keys`配列で指定されたキーのバッチを削除します。'
-    isPreview: true
+    summary: ストレージから複数の項目を削除し、終了時にコールバックを呼び出します。 Promise を返します。
     name: 'multiRemove(keys, callback)'
     fullName: 'multiRemove(keys, callback)'
     langs:
@@ -104,7 +94,7 @@ items:
         description: ''
       parameters:
         - id: keys
-          description: ''
+          description: 削除するアイテムのキー。 文字列の配列であることが必要です。
           type:
             - 'string[]'
         - id: callback
@@ -112,8 +102,7 @@ items:
           type:
             - '(errors?: Error[]) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.multiSet
-    summary: 複数のキーと値のペアを1つのバッチに格納します。 Promise を返します。 キーが存在しない場合は、null を返します。
-    isPreview: true
+    summary: 複数のキーと値のペアを設定し、終了時にコールバックを起動します。 Promise を返します。
     name: 'multiSet(keyValuePairs, callback)'
     fullName: 'multiSet(keyValuePairs, callback)'
     langs:
@@ -127,7 +116,7 @@ items:
         description: ''
       parameters:
         - id: keyValuePairs
-          description: ''
+          description: 文字列の配列である必要があります。
           type:
             - 'string[][]'
         - id: callback
@@ -135,8 +124,7 @@ items:
           type:
             - '(errors?: Error[]) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.removeItem
-    summary: 指定したキーの項目を削除し、終了時にコールバックを呼び出します。 Promise を返します。
-    isPreview: true
+    summary: キーによってアイテムを削除し、終了時にコールバックを呼び出します。 このメソッドは、要求されたキーと値を含むオブジェクトに解決される Promise を返します。
     name: 'removeItem(key, callback)'
     fullName: 'removeItem(key, callback)'
     langs:
@@ -150,7 +138,7 @@ items:
         description: ''
       parameters:
         - id: key
-          description: ''
+          description: 削除するアイテムのキー。 文字列である必要があります。
           type:
             - string
         - id: callback
@@ -158,8 +146,7 @@ items:
           type:
             - '(error?: Error) => void'
   - uid: office-runtime.OfficeRuntime.AsyncStorage.setItem
-    summary: キーと値のペアの値を割り当て、終了時にコールバックを呼び出します。 Promise を返します。
-    isPreview: true
+    summary: 新しいキーと値のペアをストレージに作成するか、既存のキーを新しい値で更新します。 Promise を返します。
     name: 'setItem(key, value, callback)'
     fullName: 'setItem(key, value, callback)'
     langs:
@@ -173,11 +160,11 @@ items:
         description: ''
       parameters:
         - id: key
-          description: ''
+          description: キーと値のペアのキーの名前。 文字列である必要があります。
           type:
             - string
         - id: value
-          description: ''
+          description: 値の名前。 文字列である必要があります。
           type:
             - string
         - id: callback

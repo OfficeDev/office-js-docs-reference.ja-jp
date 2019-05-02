@@ -15,20 +15,30 @@ items:
     package: excel_release
     children:
       - excel_release.Excel.Workbook.application
+      - excel_release.Excel.Workbook.autoSave
       - excel_release.Excel.Workbook.bindings
+      - excel_release.Excel.Workbook.calculationEngineVersion
+      - excel_release.Excel.Workbook.chartDataPointTrack
       - excel_release.Excel.Workbook.context
       - excel_release.Excel.Workbook.customXmlParts
       - excel_release.Excel.Workbook.dataConnections
       - excel_release.Excel.Workbook.functions
       - excel_release.Excel.Workbook.getActiveCell
+      - excel_release.Excel.Workbook.getActiveChart
+      - excel_release.Excel.Workbook.getActiveChartOrNullObject
+      - excel_release.Excel.Workbook.getIsActiveCollabSession
       - excel_release.Excel.Workbook.getSelectedRange
+      - excel_release.Excel.Workbook.getSelectedRanges
+      - excel_release.Excel.Workbook.isDirty
       - excel_release.Excel.Workbook.load
       - excel_release.Excel.Workbook.load_1
       - excel_release.Excel.Workbook.load_2
       - excel_release.Excel.Workbook.name
       - excel_release.Excel.Workbook.names
+      - excel_release.Excel.Workbook.onAutoSaveSettingChanged
       - excel_release.Excel.Workbook.onSelectionChanged
       - excel_release.Excel.Workbook.pivotTables
+      - excel_release.Excel.Workbook.previouslySaved
       - excel_release.Excel.Workbook.properties
       - excel_release.Excel.Workbook.protection
       - excel_release.Excel.Workbook.readOnly
@@ -38,6 +48,7 @@ items:
       - excel_release.Excel.Workbook.styles
       - excel_release.Excel.Workbook.tables
       - excel_release.Excel.Workbook.toJSON
+      - excel_release.Excel.Workbook.usePrecisionAsDisplayed
       - excel_release.Excel.Workbook.worksheets
   - uid: excel_release.Excel.Workbook.application
     summary: |-
@@ -54,6 +65,21 @@ items:
       return:
         type:
           - excel.Excel.Application
+  - uid: excel_release.Excel.Workbook.autoSave
+    summary: |-
+      ブックが自動保存モードかどうかを指定します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoSave
+    fullName: autoSave
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly autoSave: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.bindings
     summary: |-
       ブックの一部であるバインドのコレクションを表します。 読み取り専用です。
@@ -69,6 +95,36 @@ items:
       return:
         type:
           - excel.Excel.BindingCollection
+  - uid: excel_release.Excel.Workbook.calculationEngineVersion
+    summary: |-
+      Excel 計算エンジンのバージョンとして数字を返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationEngineVersion
+    fullName: calculationEngineVersion
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationEngineVersion: number;'
+      return:
+        type:
+          - number
+  - uid: excel_release.Excel.Workbook.chartDataPointTrack
+    summary: |-
+      関連付けられている実際のデータ ポイントをブックの全グラフが追跡している場合、true となります。 False の場合、グラフはデータポイントのインデックスを追跡します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: chartDataPointTrack
+    fullName: chartDataPointTrack
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'chartDataPointTrack: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.context
     summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
     name: context
@@ -158,6 +214,54 @@ items:
               console.log("The active cell is " + activeCell.address);
           });
           ```
+  - uid: excel_release.Excel.Workbook.getActiveChart
+    summary: |-
+      ブックで現在アクティブになっているグラフを取得します。 アクティブになっているグラフがない場合、このステートメントを呼び出すと、例外がスローされます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getActiveChart()
+    fullName: getActiveChart()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActiveChart(): Excel.Chart;'
+      return:
+        type:
+          - excel.Excel.Chart
+        description: ''
+  - uid: excel_release.Excel.Workbook.getActiveChartOrNullObject
+    summary: |-
+      ブックで現在アクティブになっているグラフを取得します。 アクティブになっているグラフがない場合、null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getActiveChartOrNullObject()
+    fullName: getActiveChartOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActiveChartOrNullObject(): Excel.Chart;'
+      return:
+        type:
+          - excel.Excel.Chart
+        description: ''
+  - uid: excel_release.Excel.Workbook.getIsActiveCollabSession
+    summary: |-
+      ブックが複数のユーザーによって編集されている場合 (共同編集)、true となります。 ブックの状態が変更されたときと、メソッドの結果に変更が反映されるまでには、多少の時間がかかる場合があるのでご注意ください。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getIsActiveCollabSession()
+    fullName: getIsActiveCollabSession()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getIsActiveCollabSession(): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<boolean>
+        description: ''
   - uid: excel_release.Excel.Workbook.getSelectedRange
     summary: |-
       ブックから現在選択されている1つのセル範囲を取得します。 複数の範囲が選択されている場合、このメソッドはエラーをスローします。
@@ -192,6 +296,50 @@ items:
               }
           });
           ```
+  - uid: excel_release.Excel.Workbook.getSelectedRanges
+    summary: |-
+      ブックから現在選択されている 1 つまたは複数の範囲を取得します。 getSelectedRange() の場合と同様に、このメソッドは、選択されているすべての範囲を表す RangeAreas オブジェクトを返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSelectedRanges()
+    fullName: getSelectedRanges()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedRanges(): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const selectedRanges = context.workbook.getSelectedRanges();
+              selectedRanges.format.fill.color = "lightblue";
+
+              await context.sync();
+          })
+          ```
+  - uid: excel_release.Excel.Workbook.isDirty
+    summary: |-
+      ブックが最後に保存された後に変更が行われたかどうかを指定します。 変更したブックを保存しない、または保存するかどうかを確認するダイアログボックスを非表示にして閉じる場合は、このプロパティを true に設定しておくことができます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: isDirty
+    fullName: isDirty
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'isDirty: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.load
     summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
     remarks: |-
@@ -201,7 +349,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.Workbook`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -284,6 +432,21 @@ items:
       return:
         type:
           - excel.Excel.NamedItemCollection
+  - uid: excel_release.Excel.Workbook.onAutoSaveSettingChanged
+    summary: |-
+      ブックで autoSave の設定が変更されると発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAutoSaveSettingChanged
+    fullName: onAutoSaveSettingChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAutoSaveSettingChanged: OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>
   - uid: excel_release.Excel.Workbook.onSelectionChanged
     summary: |-
       ドキュメント内で選択が変更されるときに発生します。
@@ -314,6 +477,21 @@ items:
       return:
         type:
           - excel.Excel.PivotTableCollection
+  - uid: excel_release.Excel.Workbook.previouslySaved
+    summary: |-
+      ブックがローカル環境またはオンライン環境に保存されたかどうかを指定します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: previouslySaved
+    fullName: previouslySaved
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly previouslySaved: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.properties
     summary: |-
       ブックのプロパティを取得します。 読み取り専用です。
@@ -492,6 +670,21 @@ items:
         type:
           - excel.Excel.Interfaces.WorkbookData
         description: ''
+  - uid: excel_release.Excel.Workbook.usePrecisionAsDisplayed
+    summary: |-
+      ブックを表示桁数でのみ計算する場合、true となります。 このプロパティを false から true に切り替えた場合、データは完全に正確に失われます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: usePrecisionAsDisplayed
+    fullName: usePrecisionAsDisplayed
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'usePrecisionAsDisplayed: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.Workbook.worksheets
     summary: |-
       ブックに関連付けられているワークシートのコレクションを表します。 読み取り専用です。

@@ -25,7 +25,9 @@ items:
       - excel_release.Excel.TableCollection.load
       - excel_release.Excel.TableCollection.load_1
       - excel_release.Excel.TableCollection.load_2
+      - excel_release.Excel.TableCollection.onAdded
       - excel_release.Excel.TableCollection.onChanged
+      - excel_release.Excel.TableCollection.onDeleted
       - excel_release.Excel.TableCollection.toJSON
   - uid: excel_release.Excel.TableCollection.add
     summary: |-
@@ -63,7 +65,7 @@ items:
           ```
       parameters:
         - id: address
-          description: 'Range オブジェクト、あるいはデータ ソースを表す範囲の文字列アドレスまたは名前。 アドレスにシート名が含まれていない場合は、現在作業中のシートが使用されます。 \[Api set: excelapi 1.1/1.3。 excelapi 1.3 より前の場合、このパラメーターは文字列である必要があります。 Excel Api 1.3 以降では、このパラメーターは Range オブジェクトまたは文字列の場合があります。\]'
+          description: 'Range オブジェクト、あるいはデータ ソースを表す範囲の文字列アドレスまたは名前。 アドレスにシート名が含まれていない場合は、現在作業中のシートが使用されます。 \[Api set: ExcelApi 1.1/1.3。 ExcelApi 1.3 より前の場合、このパラメーターは文字列である必要があります。 Excel Api 1.3 以降では、このパラメーターは Range オブジェクトまたは文字列の場合があります。\]'
           type:
             - Range | string
         - id: hasHeaders
@@ -234,7 +236,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.TableCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -323,6 +325,21 @@ items:
           description: ''
           type:
             - office.OfficeExtension.LoadOption
+  - uid: excel_release.Excel.TableCollection.onAdded
+    summary: |-
+      新しいテーブルがブックに追加されたときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
   - uid: excel_release.Excel.TableCollection.onChanged
     summary: |-
       ブックまたはワークシート内のテーブルでデータが変更されたときに発生します。
@@ -352,6 +369,21 @@ items:
               console.log("A handler has been registered for the table collection onChanged event");
           });
           ```
+  - uid: excel_release.Excel.TableCollection.onDeleted
+    summary: |-
+      指定されたテーブルがブックで削除されたときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
   - uid: excel_release.Excel.TableCollection.toJSON
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.TableCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
     name: toJSON()

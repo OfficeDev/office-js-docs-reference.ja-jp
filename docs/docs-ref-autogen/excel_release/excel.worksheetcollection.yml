@@ -29,8 +29,11 @@ items:
       - excel_release.Excel.WorksheetCollection.onActivated
       - excel_release.Excel.WorksheetCollection.onAdded
       - excel_release.Excel.WorksheetCollection.onCalculated
+      - excel_release.Excel.WorksheetCollection.onChanged
       - excel_release.Excel.WorksheetCollection.onDeactivated
       - excel_release.Excel.WorksheetCollection.onDeleted
+      - excel_release.Excel.WorksheetCollection.onFormatChanged
+      - excel_release.Excel.WorksheetCollection.onSelectionChanged
       - excel_release.Excel.WorksheetCollection.toJSON
   - uid: excel_release.Excel.WorksheetCollection.add
     summary: |-
@@ -136,7 +139,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 省略可能です。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel_release.Excel.WorksheetCollection.getFirst
@@ -187,7 +190,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 省略可能です。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel_release.Excel.WorksheetCollection.getItem
@@ -280,7 +283,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 省略可能です。 true の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          description: 省略可能。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
           type:
             - boolean
   - uid: excel_release.Excel.WorksheetCollection.items
@@ -304,7 +307,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -451,6 +454,21 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+  - uid: excel_release.Excel.WorksheetCollection.onChanged
+    summary: |-
+      ブックのワークシートが変更されたときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
   - uid: excel_release.Excel.WorksheetCollection.onDeactivated
     summary: |-
       ブック内のすべてのワークシートが非アクティブ化されたときに発生します。
@@ -495,6 +513,36 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
+  - uid: excel_release.Excel.WorksheetCollection.onFormatChanged
+    summary: |-
+      ブック内のワークシートの書式が変更されたときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onFormatChanged
+    fullName: onFormatChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel_release.Excel.WorksheetCollection.onSelectionChanged
+    summary: |-
+      ワークシートで選択範囲を変更したときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
   - uid: excel_release.Excel.WorksheetCollection.toJSON
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.WorksheetCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.WorksheetCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
     name: toJSON()

@@ -16,7 +16,9 @@ items:
     children:
       - excel_release.Excel.StyleCollection.add
       - excel_release.Excel.StyleCollection.context
+      - excel_release.Excel.StyleCollection.getCount
       - excel_release.Excel.StyleCollection.getItem
+      - excel_release.Excel.StyleCollection.getItemAt
       - excel_release.Excel.StyleCollection.items
       - excel_release.Excel.StyleCollection.load
       - excel_release.Excel.StyleCollection.load_1
@@ -81,6 +83,22 @@ items:
       return:
         type:
           - RequestContext
+  - uid: excel_release.Excel.StyleCollection.getCount
+    summary: |-
+      コレクション内のスタイルの数を取得します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
   - uid: excel_release.Excel.StyleCollection.getItem
     summary: |-
       名前に基づいてスタイルを取得します。
@@ -128,6 +146,27 @@ items:
           description: 取得するスタイルの名前を指定します。
           type:
             - string
+  - uid: excel_release.Excel.StyleCollection.getItemAt
+    summary: |-
+      コレクション内の位置に基づいてスタイルを取得します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.Style;'
+      return:
+        type:
+          - excel.Excel.Style
+        description: ''
+      parameters:
+        - id: index
+          description: 取得する style オブジェクトのインデックス値を指定します。 0 を起点とする番号になります。
+          type:
+            - number
   - uid: excel_release.Excel.StyleCollection.items
     summary: このコレクション内に読み込まれた子アイテムを取得します。
     name: items
@@ -149,7 +188,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:

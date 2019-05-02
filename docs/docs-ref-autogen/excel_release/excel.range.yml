@@ -16,6 +16,8 @@ items:
     children:
       - excel_release.Excel.Range.address
       - excel_release.Excel.Range.addressLocal
+      - excel_release.Excel.Range.autoFill
+      - excel_release.Excel.Range.autoFill_1
       - excel_release.Excel.Range.calculate
       - excel_release.Excel.Range.cellCount
       - excel_release.Excel.Range.clear
@@ -25,9 +27,16 @@ items:
       - excel_release.Excel.Range.columnIndex
       - excel_release.Excel.Range.conditionalFormats
       - excel_release.Excel.Range.context
+      - excel_release.Excel.Range.convertDataTypeToText
+      - excel_release.Excel.Range.convertToLinkedDataType
+      - excel_release.Excel.Range.copyFrom
+      - excel_release.Excel.Range.copyFrom_1
       - excel_release.Excel.Range.dataValidation
       - excel_release.Excel.Range.delete
       - excel_release.Excel.Range.delete_1
+      - excel_release.Excel.Range.find
+      - excel_release.Excel.Range.findOrNullObject
+      - excel_release.Excel.Range.flashFill
       - excel_release.Excel.Range.format
       - excel_release.Excel.Range.formulas
       - excel_release.Excel.Range.formulasLocal
@@ -35,7 +44,9 @@ items:
       - excel_release.Excel.Range.getAbsoluteResizedRange
       - excel_release.Excel.Range.getBoundingRect
       - excel_release.Excel.Range.getCell
+      - excel_release.Excel.Range.getCellProperties
       - excel_release.Excel.Range.getColumn
+      - excel_release.Excel.Range.getColumnProperties
       - excel_release.Excel.Range.getColumnsAfter
       - excel_release.Excel.Range.getColumnsBefore
       - excel_release.Excel.Range.getEntireColumn
@@ -49,9 +60,15 @@ items:
       - excel_release.Excel.Range.getOffsetRange
       - excel_release.Excel.Range.getResizedRange
       - excel_release.Excel.Range.getRow
+      - excel_release.Excel.Range.getRowProperties
       - excel_release.Excel.Range.getRowsAbove
       - excel_release.Excel.Range.getRowsBelow
+      - excel_release.Excel.Range.getSpecialCells
+      - excel_release.Excel.Range.getSpecialCells_1
+      - excel_release.Excel.Range.getSpecialCellsOrNullObject
+      - excel_release.Excel.Range.getSpecialCellsOrNullObject_1
       - excel_release.Excel.Range.getSurroundingRegion
+      - excel_release.Excel.Range.getTables
       - excel_release.Excel.Range.getUsedRange
       - excel_release.Excel.Range.getUsedRangeOrNullObject
       - excel_release.Excel.Range.getVisibleView
@@ -61,18 +78,25 @@ items:
       - excel_release.Excel.Range.insert_1
       - excel_release.Excel.Range.isEntireColumn
       - excel_release.Excel.Range.isEntireRow
+      - excel_release.Excel.Range.linkedDataTypeState
       - excel_release.Excel.Range.load
       - excel_release.Excel.Range.load_1
       - excel_release.Excel.Range.load_2
       - excel_release.Excel.Range.merge
       - excel_release.Excel.Range.numberFormat
       - excel_release.Excel.Range.numberFormatLocal
+      - excel_release.Excel.Range.removeDuplicates
+      - excel_release.Excel.Range.replaceAll
       - excel_release.Excel.Range.rowCount
       - excel_release.Excel.Range.rowHidden
       - excel_release.Excel.Range.rowIndex
       - excel_release.Excel.Range.select
       - excel_release.Excel.Range.set
       - excel_release.Excel.Range.set_1
+      - excel_release.Excel.Range.setCellProperties
+      - excel_release.Excel.Range.setColumnProperties
+      - excel_release.Excel.Range.setDirty
+      - excel_release.Excel.Range.setRowProperties
       - excel_release.Excel.Range.showCard
       - excel_release.Excel.Range.sort
       - excel_release.Excel.Range.style
@@ -114,6 +138,56 @@ items:
       return:
         type:
           - string
+  - uid: excel_release.Excel.Range.autoFill
+    summary: |-
+      現在の範囲から対象の範囲までの範囲に値を設定します。 移動先の範囲は、ソースを水平方向または垂直方向に拡張する必要があります。 連続していない範囲はサポートされていません。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'autoFill(destinationRange, autoFillType)'
+    fullName: 'autoFill(destinationRange, autoFillType)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'autoFill(destinationRange: Range | string, autoFillType?: Excel.AutoFillType): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: destinationRange
+          description: オートフィルの対象となるセル範囲を指定します。
+          type:
+            - Range | string
+        - id: autoFillType
+          description: オートフィルの種類を示します。 現在の範囲の内容に基づいて、移動先の範囲をどのように塗りつぶすかを指定します。 既定値は "FillDefault" です。
+          type:
+            - excel.Excel.AutoFillType
+  - uid: excel_release.Excel.Range.autoFill_1
+    summary: |-
+      現在の範囲から対象の範囲までの範囲に値を設定します。 移動先の範囲は、ソースを水平方向または垂直方向に拡張する必要があります。 連続していない範囲はサポートされていません。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'autoFill(destinationRange, autoFillTypeString)'
+    fullName: 'autoFill(destinationRange, autoFillTypeString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'autoFill(destinationRange: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: destinationRange
+          description: オートフィルの対象となるセル範囲を指定します。
+          type:
+            - Range | string
+        - id: autoFillTypeString
+          description: オートフィルの種類を示します。 現在の範囲の内容に基づいて、移動先の範囲をどのように塗りつぶすかを指定します。 既定値は "FillDefault" です。
+          type:
+            - '"FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"'
   - uid: excel_release.Excel.Range.calculate
     summary: |-
       ワークシート上のセルの範囲を計算します。
@@ -182,7 +256,7 @@ items:
           ```
       parameters:
         - id: applyTo
-          description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel. clearapplyto」を参照してください。
+          description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel. ClearApplyTo」を参照してください。
           type:
             - excel.Excel.ClearApplyTo
   - uid: excel_release.Excel.Range.clear_1
@@ -203,7 +277,7 @@ items:
         description: ''
       parameters:
         - id: applyToString
-          description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel. clearapplyto」を参照してください。
+          description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel. ClearApplyTo」を参照してください。
           type:
             - '"All" | "Formats" | "Contents" | "Hyperlinks" | "RemoveHyperlinks"'
   - uid: excel_release.Excel.Range.columnCount
@@ -253,7 +327,7 @@ items:
           - number
   - uid: excel_release.Excel.Range.conditionalFormats
     summary: |-
-      範囲に交差する conditionalformats のコレクションです。 読み取り専用です。
+      範囲に交差する ConditionalFormats のコレクションです。 読み取り専用です。
 
       \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: conditionalFormats
@@ -278,6 +352,129 @@ items:
       return:
         type:
           - RequestContext
+  - uid: excel_release.Excel.Range.convertDataTypeToText
+    summary: |-
+      データ型を含む範囲セルをテキストに変換します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: convertDataTypeToText()
+    fullName: convertDataTypeToText()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'convertDataTypeToText(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.Range.convertToLinkedDataType
+    summary: |-
+      ワークシート内で範囲セルをリンク付きデータ型に変換します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'convertToLinkedDataType(serviceID, languageCulture)'
+    fullName: 'convertToLinkedDataType(serviceID, languageCulture)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'convertToLinkedDataType(serviceID: number, languageCulture: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: serviceID
+          description: データのクエリに使用されるサービス ID。
+          type:
+            - number
+        - id: languageCulture
+          description: サービスを照会する言語カルチャ。
+          type:
+            - string
+  - uid: excel_release.Excel.Range.copyFrom
+    summary: |-
+      ソース範囲または RangeAreas から現在の範囲にセル データまたは書式設定をコピーします。 コピー先の範囲は、元の範囲または RangeAreas のサイズと異なる場合があります。 転送先は、ソースよりも小さい場合は自動的に展開されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
+    fullName: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.getRange("F2").values = [["Copied Formula"]];
+              sheet.getRange("F2").format.autofitColumns();
+
+              // copy a range preserving the formulas
+              // note: non-formula values are copied over as is
+              sheet.getRange("G2").copyFrom("A1:E1", Excel.RangeCopyType.formulas);
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: sourceRange
+          description: コピー元の範囲または RangeAreas を指定します。 ソース範囲に複数の範囲が含まれている場合は、列の範囲から完全な行または列を削除することによって作成できるアウトライン形式である必要があります。
+          type:
+            - Range | RangeAreas | string
+        - id: copyType
+          description: コピーするセルのデータまたは書式の種類を指定します。 既定値は "すべて" です。
+          type:
+            - excel.Excel.RangeCopyType
+        - id: skipBlanks
+          description: True の場合は、ソース範囲の空白セルをスキップします。 既定値は false です。
+          type:
+            - boolean
+        - id: transpose
+          description: True を指定すると、貼り付け先の範囲内のセルが転置されます。 既定値は false です。
+          type:
+            - boolean
+  - uid: excel_release.Excel.Range.copyFrom_1
+    summary: |-
+      ソース範囲または RangeAreas から現在の範囲にセル データまたは書式設定をコピーします。 コピー先の範囲は、元の範囲または RangeAreas のサイズと異なる場合があります。 転送先は、ソースよりも小さい場合は自動的に展開されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
+    fullName: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyTypeString?: "All" | "Formulas" | "Values" | "Formats", skipBlanks?: boolean, transpose?: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: sourceRange
+          description: コピー元の範囲または RangeAreas を指定します。 ソース範囲に複数の範囲が含まれている場合は、列の範囲から完全な行または列を削除することによって作成できるアウトライン形式である必要があります。
+          type:
+            - Range | RangeAreas | string
+        - id: copyTypeString
+          description: コピーするセルのデータまたは書式の種類を指定します。 既定値は "すべて" です。
+          type:
+            - '"All" | "Formulas" | "Values" | "Formats"'
+        - id: skipBlanks
+          description: True の場合は、ソース範囲の空白セルをスキップします。 既定値は false です。
+          type:
+            - boolean
+        - id: transpose
+          description: True を指定すると、貼り付け先の範囲内のセルが転置されます。 既定値は false です。
+          type:
+            - boolean
   - uid: excel_release.Excel.Range.dataValidation
     summary: |-
       dataValidation オブジェクトを返します。
@@ -353,6 +550,122 @@ items:
           description: セルをシフトする方向を指定します。 詳細については、「DeleteShiftDirection」を参照してください。
           type:
             - '"Up" | "Left"'
+  - uid: excel_release.Excel.Range.find
+    summary: |-
+      指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が1つのセルより大きい場合は、検索はその範囲に制限されます。それ以外の場合は、シート全体がそのセルの後に表示されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'find(text, criteria)'
+    fullName: 'find(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'find(text: string, criteria: Excel.SearchCriteria): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+          検索条件に一致する範囲を指定します。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const table = sheet.tables.getItem("ExpensesTable");
+              const searchRange = table.getRange();
+
+              // NOTE: If no match is found, an ItemNotFound error
+              // is thrown when Range.find is evaluated.
+              const foundRange = searchRange.find($("#searchText").text(), {
+                  completeMatch: completeMatch,
+                  matchCase: matchCase,
+                  searchDirection: searchDirection
+              });
+              
+              foundRange.load("address");
+              await context.sync();
+
+
+              console.log(foundRange.address);
+          });
+          ```
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: criteria
+          description: 追加の条件。
+          type:
+            - excel.Excel.SearchCriteria
+  - uid: excel_release.Excel.Range.findOrNullObject
+    summary: |-
+      指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が1つのセルより大きい場合は、検索はその範囲に制限されます。それ以外の場合は、シート全体がそのセルの後に表示されます。 一致しない場合、この関数は null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'findOrNullObject(text, criteria)'
+    fullName: 'findOrNullObject(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'findOrNullObject(text: string, criteria: Excel.SearchCriteria): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+          検索条件に一致する範囲を指定します。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const table = sheet.tables.getItem("ExpensesTable");
+              const searchRange = table.getRange();
+              const foundRange = searchRange.findOrNullObject($("#searchText").text(), {
+                  completeMatch: completeMatch,
+                  matchCase: matchCase,
+                  searchDirection: searchDirection
+              });
+              
+              foundRange.load("address");
+              await context.sync();
+
+              if (foundRange.isNullObject) {
+                  console.log("Text not found");
+              } else {
+                  console.log(foundRange.address);
+              }
+          });
+          ```
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: criteria
+          description: 追加の条件。
+          type:
+            - excel.Excel.SearchCriteria
+  - uid: excel_release.Excel.Range.flashFill
+    summary: |-
+      現在の範囲に対してフラッシュ フィルを実行します。フラッシュ フィルでは、パターンを感知して自動的にデータが設定されるので、範囲は単一列範囲で、かつパターンを検出できるように周囲にデータが存在する必要があります。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: flashFill()
+    fullName: flashFill()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'flashFill(): void;'
+      return:
+        type:
+          - void
+        description: ''
   - uid: excel_release.Excel.Range.format
     summary: |-
       Format オブジェクト (範囲のフォント、塗りつぶし、罫線、配置などのプロパティをカプセル化するオブジェクト) を返します。 読み取り専用です。
@@ -527,6 +840,27 @@ items:
           description: 取得セルの列番号。 0 を起点とする番号になります。
           type:
             - number
+  - uid: excel_release.Excel.Range.getCellProperties
+    summary: |-
+      2D 配列を返します。各セルのフォント、塗りつぶし、罫線、配置などのプロパティ データをカプセル化します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCellProperties(cellPropertiesLoadOptions)
+    fullName: getCellProperties(cellPropertiesLoadOptions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCellProperties(cellPropertiesLoadOptions: CellPropertiesLoadOptions): OfficeExtension.ClientResult<CellProperties[][]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<CellProperties[][]>'
+        description: 各項目が対応するセルの要求されたプロパティを表す2次元配列。
+      parameters:
+        - id: cellPropertiesLoadOptions
+          description: 読み込むセルのプロパティを表すオブジェクト。
+          type:
+            - CellPropertiesLoadOptions
   - uid: excel_release.Excel.Range.getColumn
     summary: |-
       範囲に含まれる列を 1 つ取得します。
@@ -568,6 +902,27 @@ items:
           description: 取得する範囲の列番号。 0 を起点とする番号になります。
           type:
             - number
+  - uid: excel_release.Excel.Range.getColumnProperties
+    summary: |-
+      一次元配列を返します。各列のフォント、塗りつぶし、罫線、配置などのプロパティ データをカプセル化します。 指定された列内の列間で一貫性のないプロパティについては、null が返されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getColumnProperties(columnPropertiesLoadOptions)
+    fullName: getColumnProperties(columnPropertiesLoadOptions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getColumnProperties(columnPropertiesLoadOptions: ColumnPropertiesLoadOptions): OfficeExtension.ClientResult<ColumnProperties[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<ColumnProperties[]>'
+        description: 各項目が対応する列の要求されたプロパティを表す配列。
+      parameters:
+        - id: columnPropertiesLoadOptions
+          description: 読み込む列のプロパティを表すオブジェクト。
+          type:
+            - ColumnPropertiesLoadOptions
   - uid: excel_release.Excel.Range.getColumnsAfter
     summary: |-
       現在の Range オブジェクトの右にある特定の列数を取得します。
@@ -612,7 +967,7 @@ items:
             - number
   - uid: excel_release.Excel.Range.getEntireColumn
     summary: |-
-      範囲の列全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4: E11" を表している`getEntireColumn`場合は、"b: E" という列を表す範囲)。
+      範囲の列全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4: E11" を表している`getEntireColumn`場合は、"B: E" という列を表す範囲)。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getEntireColumn()
@@ -1048,6 +1403,27 @@ items:
           description: 取得する範囲の行番号。 0 を起点とする番号になります。
           type:
             - number
+  - uid: excel_release.Excel.Range.getRowProperties
+    summary: |-
+      一次元配列を返します。各行のフォント、塗りつぶし、罫線、配置などのプロパティ データをカプセル化します。 指定された行内の列間で一貫性のないプロパティについては、null が返されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRowProperties(rowPropertiesLoadOptions)
+    fullName: getRowProperties(rowPropertiesLoadOptions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRowProperties(rowPropertiesLoadOptions: RowPropertiesLoadOptions): OfficeExtension.ClientResult<RowProperties[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<RowProperties[]>'
+        description: 各項目が対応する行の要求されたプロパティを表す配列。
+      parameters:
+        - id: rowPropertiesLoadOptions
+          description: 読み込む行プロパティを表すオブジェクト。
+          type:
+            - RowPropertiesLoadOptions
   - uid: excel_release.Excel.Range.getRowsAbove
     summary: |-
       現在の Range オブジェクトの上にある特定の行数を取得します。
@@ -1090,6 +1466,124 @@ items:
           description: 省略可能。結果の範囲に含める行の数です。通常、正の数値を使用して現在の範囲外に範囲を作成します。負の数値を使用して、現在の範囲内に範囲を作成することもできます。既定値は 1 です。
           type:
             - number
+  - uid: excel_release.Excel.Range.getSpecialCells
+    summary: |-
+      指定された型と値に一致するすべてのセルを表し、1 つまたは複数の長方形範囲で構成される RangeAreas オブジェクトを取得します。 特別なセルが見つからない場合は、ItemNotFound エラーがスローされます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getSpecialCells(cellType, cellValueType)'
+    fullName: 'getSpecialCells(cellType, cellValueType)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpecialCells(cellType: Excel.SpecialCellType, cellValueType?: Excel.SpecialCellValueType): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const usedRange = sheet.getUsedRange();
+
+              // Find the ranges with either text or logical (boolean)
+              // values
+              const formulaRanges = usedRange.getSpecialCells("Constants", "LogicalText");
+              formulaRanges.format.fill.color = "orange";
+
+              return context.sync();
+          });
+          ```
+      parameters:
+        - id: cellType
+          description: 含めるセルの種類を指定します。
+          type:
+            - excel.Excel.SpecialCellType
+        - id: cellValueType
+          description: CellType が定数または数式の場合は、この引数を使用して、結果に含めるセルの種類を決定します。 これらの値は、組み合わせて複数の型を返すことができます。 この引数を省略すると、すべての定数および数式が対象になります。
+          type:
+            - excel.Excel.SpecialCellValueType
+  - uid: excel_release.Excel.Range.getSpecialCells_1
+    summary: |-
+      指定された型と値に一致するすべてのセルを表し、1 つまたは複数の長方形範囲で構成される RangeAreas オブジェクトを取得します。 特別なセルが見つからない場合は、ItemNotFound エラーがスローされます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getSpecialCells(cellTypeString, cellValueType)'
+    fullName: 'getSpecialCells(cellTypeString, cellValueType)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpecialCells(cellTypeString: "ConditionalFormats" | "DataValidations" | "Blanks" | "Constants" | "Formulas" | "SameConditionalFormat" | "SameDataValidation" | "Visible", cellValueType?: "All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: ''
+      parameters:
+        - id: cellTypeString
+          description: 含めるセルの種類を指定します。
+          type:
+            - '"ConditionalFormats" | "DataValidations" | "Blanks" | "Constants" | "Formulas" | "SameConditionalFormat" | "SameDataValidation" | "Visible"'
+        - id: cellValueType
+          description: CellType が定数または数式の場合は、この引数を使用して、結果に含めるセルの種類を決定します。 これらの値は、組み合わせて複数の型を返すことができます。 この引数を省略すると、すべての定数および数式が対象になります。
+          type:
+            - '"All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"'
+  - uid: excel_release.Excel.Range.getSpecialCellsOrNullObject
+    summary: |-
+      指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特別なセルが見つからない場合は、null オブジェクトが返されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getSpecialCellsOrNullObject(cellType, cellValueType)'
+    fullName: 'getSpecialCellsOrNullObject(cellType, cellValueType)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpecialCellsOrNullObject(cellType: Excel.SpecialCellType, cellValueType?: Excel.SpecialCellValueType): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: ''
+      parameters:
+        - id: cellType
+          description: 含めるセルの種類を指定します。
+          type:
+            - excel.Excel.SpecialCellType
+        - id: cellValueType
+          description: CellType が定数または数式の場合は、この引数を使用して、結果に含めるセルの種類を決定します。 これらの値は、組み合わせて複数の型を返すことができます。 この引数を省略すると、すべての定数および数式が対象になります。
+          type:
+            - excel.Excel.SpecialCellValueType
+  - uid: excel_release.Excel.Range.getSpecialCellsOrNullObject_1
+    summary: |-
+      指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特別なセルが見つからない場合は、null オブジェクトが返されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getSpecialCellsOrNullObject(cellTypeString, cellValueType)'
+    fullName: 'getSpecialCellsOrNullObject(cellTypeString, cellValueType)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpecialCellsOrNullObject(cellTypeString: "ConditionalFormats" | "DataValidations" | "Blanks" | "Constants" | "Formulas" | "SameConditionalFormat" | "SameDataValidation" | "Visible", cellValueType?: "All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: ''
+      parameters:
+        - id: cellTypeString
+          description: 含めるセルの種類を指定します。
+          type:
+            - '"ConditionalFormats" | "DataValidations" | "Blanks" | "Constants" | "Formulas" | "SameConditionalFormat" | "SameDataValidation" | "Visible"'
+        - id: cellValueType
+          description: CellType が定数または数式の場合は、この引数を使用して、結果に含めるセルの種類を決定します。 これらの値は、組み合わせて複数の型を返すことができます。 この引数を省略すると、すべての定数および数式が対象になります。
+          type:
+            - '"All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"'
   - uid: excel_release.Excel.Range.getSurroundingRegion
     summary: |-
       指定された範囲の左上のセルを囲む領域を表す Range オブジェクトを返します。 周囲の領域は、この範囲に相対の空白の行と空白の列の任意の組み合わせで囲まれた範囲です。
@@ -1106,6 +1600,27 @@ items:
         type:
           - excel.Excel.Range
         description: ''
+  - uid: excel_release.Excel.Range.getTables
+    summary: |-
+      範囲と重なるテーブルの集まりを範囲限定で取得します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getTables(fullyContained)
+    fullName: getTables(fullyContained)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTables(fullyContained?: boolean): Excel.TableScopedCollection;'
+      return:
+        type:
+          - excel.Excel.TableScopedCollection
+        description: ''
+      parameters:
+        - id: fullyContained
+          description: True の場合は、範囲範囲内に完全に含まれるテーブルのみを返します。 既定値は false です。
+          type:
+            - boolean
   - uid: excel_release.Excel.Range.getUsedRange
     summary: |-
       指定した範囲オブジェクトのうち使用されている範囲を返します。範囲内に使用済みのセルがない場合、この関数は ItemNotFound エラーをスローします。
@@ -1201,7 +1716,7 @@ items:
           ```
       parameters:
         - id: valuesOnly
-          description: '値の入っているセルのみを使用セルと見なします。 \[Api セット: excelapi 1.2\]'
+          description: '値の入っているセルのみを使用セルと見なします。 \[Api セット: ExcelApi 1.2\]'
           type:
             - boolean
   - uid: excel_release.Excel.Range.getUsedRangeOrNullObject
@@ -1431,6 +1946,21 @@ items:
       return:
         type:
           - boolean
+  - uid: excel_release.Excel.Range.linkedDataTypeState
+    summary: |-
+      各セルのデータ型の状態を表します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: linkedDataTypeState
+    fullName: linkedDataTypeState
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly linkedDataTypeState: Excel.LinkedDataTypeState[][];'
+      return:
+        type:
+          - 'Excel.LinkedDataTypeState[][]'
   - uid: excel_release.Excel.Range.load
     summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
     remarks: |-
@@ -1440,7 +1970,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Excel.Range`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Range`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Range`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -1637,6 +2167,77 @@ items:
       return:
         type:
           - 'any[][]'
+  - uid: excel_release.Excel.Range.removeDuplicates
+    summary: |-
+      列によって指定される範囲から重複する値を削除します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'removeDuplicates(columns, includesHeader)'
+    fullName: 'removeDuplicates(columns, includesHeader)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeDuplicates(columns: number[], includesHeader: boolean): Excel.RemoveDuplicatesResult;'
+      return:
+        type:
+          - excel.Excel.RemoveDuplicatesResult
+        description: |-
+          削除された行の数と残りの一意の行の数を含む、結果のオブジェクト。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B2:D11");
+
+              const deleteResult = range.removeDuplicates([0],true);    
+              deleteResult.load();    
+              await context.sync();
+
+              console.log(deleteResult.removed + " entries with duplicate names removed.");
+              console.log(deleteResult.uniqueRemaining + " entries with unique names remain in the range.");
+          });
+          ```
+      parameters:
+        - id: columns
+          description: 重複が含まれる可能性がある範囲内の列。 少なくとも1つの列を指定する必要があります。 0 を起点とする番号になります。
+          type:
+            - 'number[]'
+        - id: includesHeader
+          description: True の場合は、入力データにヘッダーが含まれています。 既定値は false です。
+          type:
+            - boolean
+  - uid: excel_release.Excel.Range.replaceAll
+    summary: |-
+      現在の範囲内で、指定された条件に基づき、指定された文字列を検索し、置換します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'replaceAll(text, replacement, criteria)'
+    fullName: 'replaceAll(text, replacement, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'replaceAll(text: string, replacement: string, criteria: Excel.ReplaceCriteria): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: 実行された置換の数。
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: replacement
+          description: 元のと置き換える文字列。
+          type:
+            - string
+        - id: criteria
+          description: 置換条件を追加します。
+          type:
+            - excel.Excel.ReplaceCriteria
   - uid: excel_release.Excel.Range.rowCount
     summary: |-
       範囲に含まれる行の合計数を返します。 読み取り専用です。
@@ -1799,6 +2400,85 @@ items:
           description: ''
           type:
             - excel.Excel.Range
+  - uid: excel_release.Excel.Range.setCellProperties
+    summary: |-
+      セル プロパティの 2D 配列に基づいて範囲を更新します。フォント、塗りつぶし、罫線、配置などをカプセル化します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: setCellProperties(cellPropertiesData)
+    fullName: setCellProperties(cellPropertiesData)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setCellProperties(cellPropertiesData: SettableCellProperties[][]): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cellPropertiesData
+          description: 各セルに設定するプロパティを表す2D 配列。
+          type:
+            - 'SettableCellProperties[][]'
+  - uid: excel_release.Excel.Range.setColumnProperties
+    summary: |-
+      列プロパティの一次元配列に基づいて範囲を更新します。フォント、塗りつぶし、罫線、配置などをカプセル化します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: setColumnProperties(columnPropertiesData)
+    fullName: setColumnProperties(columnPropertiesData)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setColumnProperties(columnPropertiesData: SettableColumnProperties[]): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: columnPropertiesData
+          description: 各列に設定するプロパティを表す配列。
+          type:
+            - 'SettableColumnProperties[]'
+  - uid: excel_release.Excel.Range.setDirty
+    summary: |-
+      次の再計算が発生したときに再計算する範囲を設定します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: setDirty()
+    fullName: setDirty()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setDirty(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.Range.setRowProperties
+    summary: |-
+      行プロパティの一次元配列に基づいて範囲を更新します。フォント、塗りつぶし、罫線、配置などをカプセル化します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: setRowProperties(rowPropertiesData)
+    fullName: setRowProperties(rowPropertiesData)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setRowProperties(rowPropertiesData: SettableRowProperties[]): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: rowPropertiesData
+          description: 各行に設定するプロパティを表す配列。
+          type:
+            - 'SettableRowProperties[]'
   - uid: excel_release.Excel.Range.showCard
     summary: |-
       アクティブ セルに多数の値が含まれる場合、そのセルのカードを表示します。
