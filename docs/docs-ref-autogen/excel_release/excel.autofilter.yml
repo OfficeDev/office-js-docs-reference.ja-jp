@@ -1,0 +1,285 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel_release.Excel.AutoFilter
+    summary: |-
+      オートフィルターオブジェクトを表します。 オートフィルターは、Excel の列の値を、セルの内容に基づいて特定のフィルターに変換します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.AutoFilter
+    fullName: Excel.AutoFilter
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.AutoFilter.apply
+      - excel_release.Excel.AutoFilter.clearCriteria
+      - excel_release.Excel.AutoFilter.context
+      - excel_release.Excel.AutoFilter.criteria
+      - excel_release.Excel.AutoFilter.enabled
+      - excel_release.Excel.AutoFilter.getRange
+      - excel_release.Excel.AutoFilter.getRangeOrNullObject
+      - excel_release.Excel.AutoFilter.isDataFiltered
+      - excel_release.Excel.AutoFilter.load
+      - excel_release.Excel.AutoFilter.load_1
+      - excel_release.Excel.AutoFilter.load_2
+      - excel_release.Excel.AutoFilter.reapply
+      - excel_release.Excel.AutoFilter.remove
+      - excel_release.Excel.AutoFilter.toJSON
+  - uid: excel_release.Excel.AutoFilter.apply
+    summary: |-
+      指定範囲にオートフィルターを適用します。 列インデックスおよびフィルター条件が指定されている場合は、列をフィルター処理します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'apply(range, columnIndex, criteria)'
+    fullName: 'apply(range, columnIndex, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const farmData = sheet.getUsedRange();
+
+              // This filter will only show the rows with the top 25% of values in column 3.
+              sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: range
+          description: オートフィルターが適用される範囲を指定します。
+          type:
+            - Range | string
+        - id: columnIndex
+          description: オートフィルターが適用される0から始まる列インデックス。
+          type:
+            - number
+        - id: criteria
+          description: フィルター条件を選択します。
+          type:
+            - excel.Excel.FilterCriteria
+  - uid: excel_release.Excel.AutoFilter.clearCriteria
+    summary: |-
+      オートフィルターのフィルター条件をクリアします。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: clearCriteria()
+    fullName: clearCriteria()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearCriteria(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.AutoFilter.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.AutoFilter.criteria
+    summary: |-
+      オートフィルター範囲のすべてのフィルター条件を含む配列を指定します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: criteria
+    fullName: criteria
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly criteria: Excel.FilterCriteria[];'
+      return:
+        type:
+          - 'Excel.FilterCriteria[]'
+  - uid: excel_release.Excel.AutoFilter.enabled
+    summary: |-
+      AutoFilter が有効かどうかを示します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: enabled
+    fullName: enabled
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly enabled: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel_release.Excel.AutoFilter.getRange
+    summary: |-
+      AutoFilter が適用される範囲を表す Range オブジェクトを返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+  - uid: excel_release.Excel.AutoFilter.getRangeOrNullObject
+    summary: |-
+      AutoFilter が適用される範囲を表す Range オブジェクトを返します。 オートフィルターに関連付けられた Range オブジェクトがない場合、このメソッドは null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRangeOrNullObject()
+    fullName: getRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+  - uid: excel_release.Excel.AutoFilter.isDataFiltered
+    summary: |-
+      AutoFilter にフィルター条件が与えられているかどうかを示します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: isDataFiltered
+    fullName: isDataFiltered
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly isDataFiltered: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel_release.Excel.AutoFilter.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.AutoFilter`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.AutoFilter`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.AutoFilter`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
+      return:
+        type:
+          - excel.Excel.AutoFilter
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.AutoFilterLoadOptions
+  - uid: excel_release.Excel.AutoFilter.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
+      return:
+        type:
+          - excel.Excel.AutoFilter
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.AutoFilter.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.AutoFilter;'
+      return:
+        type:
+          - excel.Excel.AutoFilter
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.AutoFilter.reapply
+    summary: |-
+      その範囲で現在指定されている Autofilter オブジェクトを適用します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: reapply()
+    fullName: reapply()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'reapply(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.AutoFilter.remove
+    summary: |-
+      範囲の AutoFilter を削除します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: remove()
+    fullName: remove()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'remove(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.AutoFilter.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel のオートフィルターオブジェクトは API オブジェクトですが、 `toJSON`このメソッドは、プレーンな JavaScript オブジェクト (として型指定されます) を返します。`Excel.Interfaces.AutoFilterData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.AutoFilterData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.AutoFilterData
+        description: ''
