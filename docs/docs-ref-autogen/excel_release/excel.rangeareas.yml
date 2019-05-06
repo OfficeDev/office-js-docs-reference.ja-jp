@@ -57,7 +57,7 @@ items:
       - excel_release.Excel.RangeAreas.worksheet
   - uid: excel_release.Excel.RangeAreas.address
     summary: |-
-      A1 スタイルで RageAreas 参照を返します。 address 値にはセルの各長方形ブロックのワークシート名が含まれます ("Sheet1!A1:B4, Sheet1!D1:D4" など)。 読み取り専用です。
+      A1 スタイルで RageAreas 参照を返します。 address 値にはセルの各長方形ブロックのワークシート名が含まれます ("Sheet1!A1:B4, Sheet1!D1:D4" など)。 読み取り専用。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: address
@@ -72,7 +72,7 @@ items:
           - string
   - uid: excel_release.Excel.RangeAreas.addressLocal
     summary: |-
-      ユーザー ロケールで RageAreas 参照を返します。 読み取り専用です。
+      ユーザー ロケールで RageAreas 参照を返します。 読み取り専用。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: addressLocal
@@ -133,7 +133,7 @@ items:
         description: ''
   - uid: excel_release.Excel.RangeAreas.cellCount
     summary: |-
-      RangeAreas オブジェクトのセル数を返します。すべての個別長方形範囲のセル数が合計されます。 セル数が 2^31-1 (2,147,483,647) を超える場合、-1 を返します。 読み取り専用です。
+      RangeAreas オブジェクトのセル数を返します。すべての個別長方形範囲のセル数が合計されます。 セル数が 2^31-1 (2,147,483,647) を超える場合、-1 を返します。 読み取り専用。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: cellCount
@@ -352,6 +352,24 @@ items:
       return:
         type:
           - excel.Excel.RangeFormat
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const usedRange = sheet.getUsedRange();
+
+              // Find the ranges with formulas
+              const formulaRanges = usedRange.getSpecialCells("Formulas");
+              formulaRanges.format.fill.color = "lightgreen";
+
+              await context.sync();
+          });
+          ```
   - uid: excel_release.Excel.RangeAreas.getEntireColumn
     summary: |-
       RangeAreas の列全体を表す RangeAreas オブジェクトを返します (たとえば、現在の RangeAreas がセル "B4:E11, H2" を表す場合、列 "B:E, H:H" を表す RangeAreas が返されます)。
@@ -616,7 +634,7 @@ items:
             - boolean
   - uid: excel_release.Excel.RangeAreas.isEntireColumn
     summary: |-
-      この RangeAreas オブジェクトの全範囲が列全体を表すかどうかを示します ("A:C, Q:Z" など)。 読み取り専用です。
+      この RangeAreas オブジェクトの全範囲が列全体を表すかどうかを示します ("A:C, Q:Z" など)。 読み取り専用。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: isEntireColumn
