@@ -22,6 +22,7 @@ items:
       - word.Word.Range.expandTo
       - word.Word.Range.expandToOrNullObject
       - word.Word.Range.font
+      - word.Word.Range.getBookmarks
       - word.Word.Range.getHtml
       - word.Word.Range.getHyperlinkRanges
       - word.Word.Range.getNextTextRange
@@ -32,6 +33,7 @@ items:
       - word.Word.Range.getTextRanges
       - word.Word.Range.hyperlink
       - word.Word.Range.inlinePictures
+      - word.Word.Range.insertBookmark
       - word.Word.Range.insertBreak
       - word.Word.Range.insertBreak_1
       - word.Word.Range.insertContentControl
@@ -270,6 +272,32 @@ items:
       return:
         type:
           - word.Word.Font
+  - uid: word.Word.Range.getBookmarks
+    summary: |-
+      指定した範囲に含まれるすべてのブックマークの名前を取得します。 ブックマークは、その名前がアンダースコア文字で始まる場合は非表示になります。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'getBookmarks(includeHidden, includeAdjacent)'
+    fullName: 'getBookmarks(includeHidden, includeAdjacent)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<string[]>'
+        description: ''
+      parameters:
+        - id: includeHidden
+          description: 省略可能。 非表示のブックマークを含めるかどうかを示します。 既定値は false で、非表示のブックマークが除外されることを示します。
+          type:
+            - boolean
+        - id: includeAdjacent
+          description: 省略可能。 範囲に隣接するブックマークを含めるかどうかを示します。 既定値は false です。これは、隣接するブックマークが除外されることを示します。
+          type:
+            - boolean
   - uid: word.Word.Range.getHtml
     summary: |-
       Range オブジェクトの HTML 表記を取得します。 Web ページまたは HTML ビューアーでレンダリングされる場合、書式設定は、ドキュメントの書式設定と完全に一致しますが、完全に一致するとは限りません。 このメソッドは、異なるプラットフォーム (Windows、Mac、Word Online など) にある同じドキュメントに対して、まったく同じ HTML を返しません。 厳密な忠実性、または複数のプラットフォーム間で`Range.getOoxml()`の一貫性が必要な場合は、を使用して、返された XML を HTML に変換します。
@@ -552,6 +580,28 @@ items:
       return:
         type:
           - word.Word.InlinePictureCollection
+  - uid: word.Word.Range.insertBookmark
+    summary: |-
+      範囲にブックマークを挿入します。 同じ名前のブックマークが別の場所に存在する場合、最初に削除されます。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: insertBookmark(name)
+    fullName: insertBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 必須です。 ブックマーク名。大文字と小文字を区別しません。 名前の先頭にアンダースコア文字が含まれている場合、ブックマークは非表示になります。
+          type:
+            - string
   - uid: word.Word.Range.insertBreak
     summary: |-
       メイン文書の指定した位置に、区切りを挿入します。 insertLocation の値には、'Before' または 'After' を指定できます。
@@ -574,7 +624,7 @@ items:
           type:
             - word.Word.BreakType
         - id: insertLocation
-          description: 必須。 有効な値は、'Before' または 'After' です。
+          description: 必須です。 有効な値は、'Before' または 'After' です。
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertBreak_1
@@ -627,7 +677,7 @@ items:
           type:
             - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
         - id: insertLocation
-          description: 必須。 有効な値は、'Before' または 'After' です。
+          description: 必須です。 有効な値は、'Before' または 'After' です。
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertContentControl
@@ -1103,7 +1153,7 @@ items:
             - 'string[][]'
   - uid: word.Word.Range.insertTable_1
     summary: |-
-      指定した数の行と列を含むテーブルを挿入します。 有効な insertLocation の値は、'Before' または 'After' です。
+      指定した数の行と列を含むテーブルを挿入します。 insertLocation の値には、'Before' または 'After' を指定できます。
 
       \[[Api set: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertTable(rowCount, columnCount, insertLocationString, values)'
@@ -1493,7 +1543,7 @@ items:
         description: ''
       parameters:
         - id: searchText
-          description: 必須。 検索テキスト。
+          description: 必須です。 検索テキスト。
           type:
             - string
         - id: searchOptions
