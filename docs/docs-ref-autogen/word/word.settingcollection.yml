@@ -1,0 +1,419 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.SettingCollection
+    summary: |-
+      [設定](xref:word.Word.Setting)オブジェクトのコレクションが含まれています。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: Word.SettingCollection
+    fullName: Word.SettingCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: word
+    children:
+      - word.Word.SettingCollection.add
+      - word.Word.SettingCollection.context
+      - word.Word.SettingCollection.deleteAll
+      - word.Word.SettingCollection.getCount
+      - word.Word.SettingCollection.getItem
+      - word.Word.SettingCollection.getItemOrNullObject
+      - word.Word.SettingCollection.items
+      - word.Word.SettingCollection.load
+      - word.Word.SettingCollection.load_1
+      - word.Word.SettingCollection.load_2
+      - word.Word.SettingCollection.toJSON
+      - word.Word.SettingCollection.track
+      - word.Word.SettingCollection.untrack
+  - uid: word.Word.SettingCollection.add
+    summary: |-
+      新しい設定を作成するか、既存の設定を設定します。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'add(key, value)'
+    fullName: 'add(key, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(key: string, value: any): Word.Setting;'
+      return:
+        type:
+          - Word.Setting
+        description: ''
+      parameters:
+        - id: key
+          description: 必須です。 設定のキー。大文字と小文字を区別します。
+          type:
+            - string
+        - id: value
+          description: 必須です。 設定の値。
+          type:
+            - any
+  - uid: word.Word.SettingCollection.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    isPreview: true
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: word.Word.SettingCollection.deleteAll
+    summary: |-
+      このアドインのすべての設定を削除します。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: deleteAll()
+    fullName: deleteAll()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAll(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to get the count of settings.
+              var count = settings.getCount();
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(count.value);
+
+                  // Queue a command to delete all settings.
+                  settings.deleteAll();
+
+                  // Queue a command to get the new count of settings.
+                  count = settings.getCount();
+              })
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              .then(context.sync)
+              .then(function () {
+                  console.log(count.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.SettingCollection.getCount
+    summary: |-
+      設定の数を取得します。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to get the count of settings.
+              var count = settings.getCount();
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(count.value);
+
+                  // Queue a command to delete all settings.
+                  settings.deleteAll();
+
+                  // Queue a command to get the new count of settings.
+                  count = settings.getCount();
+              })
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              .then(context.sync)
+              .then(function () {
+                  console.log(count.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.SettingCollection.getItem
+    summary: |-
+      キーによって設定オブジェクトを取得します。大文字と小文字が区別されます。 設定が存在しない場合にスローされます。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Word.Setting;'
+      return:
+        type:
+          - Word.Setting
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to retrieve a setting.
+              var startMonth = settings.getItem('startMonth');
+
+              // Queue a command to load the setting.
+              context.load(startMonth);
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(JSON.stringify(startMonth.value));
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+              
+              // Queue commands to retrieve settings.
+              var startMonth = settings.getItemOrNullObject('startMonth');
+              var endMonth = settings.getItemOrNullObject('endMonth');
+
+              // Queue commands to load settings.
+              context.load(startMonth);
+              context.load(endMonth);
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+                 return context.sync().then(function () {
+                     if (startMonth.isNullObject) {
+                         console.log("No such setting.");
+                     }
+                     else {
+                         console.log(JSON.stringify(startMonth.value));
+                     }
+                      if (endMonth.isNullObject) {
+                         console.log("No such setting.");
+                     }
+                     else {
+                         console.log(JSON.stringify(endMonth.value));
+                     }
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: 設定オブジェクトを識別するキー。
+          type:
+            - string
+  - uid: word.Word.SettingCollection.getItemOrNullObject
+    summary: |-
+      キーによって設定オブジェクトを取得します。大文字と小文字が区別されます。 設定が存在しない場合は、null オブジェクトを返します。
+
+      \[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Word.Setting;'
+      return:
+        type:
+          - Word.Setting
+        description: ''
+      parameters:
+        - id: key
+          description: 必須です。 設定オブジェクトを識別するキー。
+          type:
+            - string
+  - uid: word.Word.SettingCollection.items
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    isPreview: true
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Word.Setting[];'
+      return:
+        type:
+          - 'Word.Setting[]'
+  - uid: word.Word.SettingCollection.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Word.SettingCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Word.SettingCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.SettingCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    isPreview: true
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.SettingCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Word.Interfaces.SettingCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+  - uid: word.Word.SettingCollection.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    isPreview: true
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: word.Word.SettingCollection.load_2
+    isPreview: true
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: word.Word.SettingCollection.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Word.SettingCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Word.Interfaces.SettingCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    isPreview: true
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.SettingCollectionData;'
+      return:
+        type:
+          - Word.Interfaces.SettingCollectionData
+        description: ''
+  - uid: word.Word.SettingCollection.track
+    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+    isPreview: true
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
+        description: ''
+  - uid: word.Word.SettingCollection.untrack
+    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+    isPreview: true
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
+        description: ''
