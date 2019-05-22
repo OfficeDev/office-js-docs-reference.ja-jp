@@ -2,7 +2,7 @@
 items:
   - uid: outlook.Office.Item
     summary: |-
-      item 名前空間は、現在選択されているメッセージ、会議出席依頼、または予定にアクセスするために使用されます。 `itemType`プロパティを使用して、アイテムの種類を調べることができます。
+      Item 名前空間は、現在選択されているメッセージ、会議出席依頼、または予定にアクセスするために使用されます。 `itemType`プロパティを使用して、アイテムの種類を調べることができます。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -49,7 +49,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -58,17 +58,17 @@ items:
         - id: eventType
           description: ハンドラーを呼び出す必要のあるイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: handler
-          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、Addハンドラ Async に渡される eventType パラメーターと一致します。
           type:
             - any
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Item.addHandlerAsync_1
@@ -102,7 +102,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -111,18 +111,18 @@ items:
         - id: eventType
           description: ハンドラーを呼び出す必要のあるイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: handler
-          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、Addハンドラ Async に渡される eventType パラメーターと一致します。
           type:
             - any
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Item.getAttachmentContentAsync
     summary: |-
-      メッセージまたは予定から添付ファイルを取得し、 **attachmentcontent**オブジェクトとして返します。
+      メッセージまたは予定から添付ファイルを取得し、 **Attachmentcontent**オブジェクトとして返します。
 
       メソッド`getAttachmentContentAsync`は、指定された id の添付ファイルをアイテムから取得します。 ベストプラクティスとして、識別子を使用して、または`getAttachmentsAsync` `item.attachments`の呼び出しで attachmentIds を取得したのと同じセッションの添付ファイルを取得する必要があります。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
 
@@ -185,16 +185,16 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
           type:
             - '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
   - uid: outlook.Office.Item.getAttachmentContentAsync_1
     summary: |-
-      メッセージまたは予定から添付ファイルを取得し、 **attachmentcontent**オブジェクトとして返します。
+      メッセージまたは予定から添付ファイルを取得し、 **Attachmentcontent**オブジェクトとして返します。
 
       メソッド`getAttachmentContentAsync`は、指定された id の添付ファイルをアイテムから取得します。 ベストプラクティスとして、識別子を使用して、または`getAttachmentsAsync` `item.attachments`の呼び出しで attachmentIds を取得したのと同じセッションの添付ファイルを取得する必要があります。 Outlook Web App とデバイス用 OWA では、添付ファイルの識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
 
@@ -225,14 +225,14 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
           type:
             - '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
   - uid: outlook.Office.Item.getInitializationContextAsync
     summary: |-
       [アクション可能なメッセージによってアドインがアクティブ化](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)されたときに渡される初期化データを取得します。<!-- -->.
 
-      **注**: このメソッドは、outlook 2016 for Windows (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の outlook for Office 365 でのみサポートされています。
+      **注**: このメソッドは、outlook 2016 for Windows (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の Outlook for Office 365 でのみサポートされています。
 
       \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -253,18 +253,18 @@ items:
         description: ''
       parameters:
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。 成功すると、初期化データが文字列として asyncResult プロパティに提供されます。 初期化コンテキストが存在しない場合、asyncResult オブジェクトには、code プロパティが9020に設定されている Error オブジェクトと、その name プロパティが genericresponseerror に設定されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 成功すると、初期化データが文字列として asyncResult プロパティに提供されます。 初期化コンテキストが存在しない場合、asyncResult オブジェクトには、code プロパティが9020に設定されている Error オブジェクトと、その name プロパティが GenericResponseError に設定されます。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.Item.getInitializationContextAsync_1
     summary: |-
       [アクション可能なメッセージによってアドインがアクティブ化](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)されたときに渡される初期化データを取得します。<!-- -->.
 
-      **注**: このメソッドは、outlook 2016 for Windows (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の outlook for Office 365 でのみサポートされています。
+      **注**: このメソッドは、outlook 2016 for Windows (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の Outlook for Office 365 でのみサポートされています。
 
       \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -311,7 +311,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。 成功すると、初期化データが文字列として asyncResult プロパティに提供されます。 初期化コンテキストが存在しない場合、asyncResult オブジェクトには、code プロパティが9020に設定されている Error オブジェクトと、その name プロパティが genericresponseerror に設定されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 成功すると、初期化データが文字列として asyncResult プロパティに提供されます。 初期化コンテキストが存在しない場合、asyncResult オブジェクトには、code プロパティが9020に設定されている Error オブジェクトと、その name プロパティが GenericResponseError に設定されます。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.Item.getSharedPropertiesAsync
@@ -337,7 +337,7 @@ items:
         description: ''
       parameters:
         - id: options
-          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
@@ -442,7 +442,7 @@ items:
           type:
             - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
         - id: userContext
-          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
+          description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
           type:
             - any
   - uid: outlook.Office.Item.removeHandlerAsync
@@ -462,7 +462,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -471,13 +471,13 @@ items:
         - id: eventType
           description: ハンドラーを取り消すイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Item.removeHandlerAsync_1
@@ -497,7 +497,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -506,9 +506,9 @@ items:
         - id: eventType
           description: ハンドラーを取り消すイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の asyncresult オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Item.body
@@ -589,7 +589,7 @@ items:
     summary: |-
       インスタンスが表しているアイテムの種類を取得します。
 
-      itemtype プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、itemtype 列挙値の1つを返します。
+      ItemType プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、ItemType 列挙値の1つを返します。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -612,10 +612,10 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'itemType: MailboxEnums.ItemType;'
+      content: 'itemType: MailboxEnums.ItemType | string;'
       return:
         type:
-          - MailboxEnums.ItemType
+          - MailboxEnums.ItemType | string
   - uid: outlook.Office.Item.notificationMessages
     summary: |-
       アイテムの通知メッセージを取得します。
@@ -650,11 +650,11 @@ items:
     summary: |-
       インスタンスが属する系列の id を取得します。
 
-      OWA および Outlook では、このアイテムが属している親 (シリーズ) アイテムの Exchange Web サービス (EWS) id を、系列 ID が返します。 ただし、iOS と Android では、系列 id は親アイテムの REST id を返します。
+      OWA および Outlook では、このアイテムが属している親 (シリーズ) アイテムの Exchange Web サービス (EWS) ID を、系列 ID が返します。 ただし、iOS と Android では、系列 Id は親アイテムの REST ID を返します。
 
-      **注**: [系列 id] プロパティによって返される識別子は、Exchange Web サービスのアイテム識別子と同じです。 "系列 id" プロパティは、outlook REST API で使用される outlook id と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの outlook REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api)」を参照してください。<!-- -->.
+      **注**: [系列 id] プロパティによって返される識別子は、Exchange Web サービスのアイテム識別子と同じです。 "系列 Id" プロパティは、Outlook REST API で使用される Outlook Id と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api)」を参照してください。<!-- -->.
 
-      個別の予定、一連のアイテム、会議出席依頼などの親アイテムがないアイテムに対しては、[区分 id] プロパティは null を返し、会議出席依頼以外のアイテムについては未定義を返します。
+      個別の予定、一連のアイテム、会議出席依頼などの親アイテムがないアイテムに対しては、[区分 Id] プロパティは null を返し、会議出席依頼以外のアイテムについては未定義を返します。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-

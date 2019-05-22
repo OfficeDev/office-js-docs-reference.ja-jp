@@ -2,7 +2,7 @@
 items:
   - uid: outlook.Office.Body
     summary: |-
-      body オブジェクトには、メッセージまたは予定の内容を追加および更新するためのメソッドが用意されています。 これは、選択されたアイテムの body プロパティで返されます。
+      Body オブジェクトには、メッセージまたは予定の内容を追加および更新するためのメソッドが用意されています。 これは、選択されたアイテムの body プロパティで返されます。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -32,7 +32,7 @@ items:
 
       このメソッドは、現在の本文全体を coercionType で指定された形式で返します。
 
-      HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。 getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。
+      HTML 形式の本文で作業する場合は、getAsync メソッドと Body 非同期メソッドが等にないことに注意してください。 GetAsync メソッドから返される値は、必ずしも setAsync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setAsync に渡された値を変更することができます。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -64,7 +64,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'getAsync(coercionType: Office.CoercionType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      content: 'getAsync(coercionType: Office.CoercionType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
       return:
         type:
           - void
@@ -73,13 +73,13 @@ items:
         - id: coercionType
           description: 返される本文の形式です。
           type:
-            - Office.CoercionType
+            - Office.CoercionType | string
         - id: options
-          description: '省略可能です。 次のプロパティの1つ以上を含むオブジェクトリテラル。 asynccontext: 開発者は、コールバックメソッドで、アクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティの1つ以上を含むオブジェクトリテラル。 asyncContext: 開発者は、コールバックメソッドで、アクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 本文は、asyncResult. value プロパティの要求された形式で提供されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 本文は、asyncResult. value プロパティの要求された形式で提供されます。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.Body.getAsync_1
@@ -88,7 +88,7 @@ items:
 
       このメソッドは、現在の本文全体を coercionType で指定された形式で返します。
 
-      HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。 getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。
+      HTML 形式の本文で作業する場合は、getAsync メソッドと Body 非同期メソッドが等にないことに注意してください。 GetAsync メソッドから返される値は、必ずしも setAsync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setAsync に渡された値を変更することができます。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -101,7 +101,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'getAsync(coercionType: Office.CoercionType, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      content: 'getAsync(coercionType: Office.CoercionType | string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
       return:
         type:
           - void
@@ -110,9 +110,9 @@ items:
         - id: coercionType
           description: 返される本文の形式です。
           type:
-            - Office.CoercionType
+            - Office.CoercionType | string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 本文は、asyncResult. value プロパティの要求された形式で提供されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 本文は、asyncResult. value プロパティの要求された形式で提供されます。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.Body.getTypeAsync
@@ -137,11 +137,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。
           type:
             - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
   - uid: outlook.Office.Body.getTypeAsync_1
@@ -178,16 +178,16 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 コンテンツタイプは、CoercionType の値の1つとして、asyncResult プロパティに返されます。
           type:
             - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
   - uid: outlook.Office.Body.prependAsync
     summary: |-
       アイテム本文の先頭に指定の内容を追加します。
 
-      prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。 挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。
+      PrependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。 挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -226,20 +226,20 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 data パラメーターの文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 Data パラメーターの文字列は、この形式に変換されます。'
           type:
             - Office.AsyncContextOptions & CoercionTypeOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Body.prependAsync_1
     summary: |-
       アイテム本文の先頭に指定の内容を追加します。
 
-      prependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。 挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。
+      PrependAsync メソッドは、指定された文字列をアイテム本文の先頭に挿入します。 挿入した後、挿入されたコンテンツを基準として、カーソルが元の位置に戻されます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -267,16 +267,16 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Body.setAsync
     summary: |-
       本文全体を指定されたテキストに置換します。
 
-      HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。 getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。
+      HTML 形式の本文で作業する場合は、getAsync メソッドと Body 非同期メソッドが等にないことに注意してください。 GetAsync メソッドから返される値は、必ずしも setAsync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setAsync に渡された値を変更することができます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -288,7 +288,7 @@ items:
 
       - DataExceedsMaximumSize: data パラメーターが100万文字を超えています。
 
-      - invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。
+      - InvalidFormatError: coercionType パラメーターは CoercionType に設定されており、メッセージ本文はプレーンテキストになっています。
 
       #### <a name="examples"></a>例
 
@@ -330,20 +330,20 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 data パラメーターの文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 Data パラメーターの文字列は、この形式に変換されます。'
           type:
             - Office.AsyncContextOptions & CoercionTypeOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Body.setAsync_1
     summary: |-
       本文全体を指定されたテキストに置換します。
 
-      HTML 形式の本文で作業する場合は、getAsync メソッドと body 非同期メソッドが等にないことに注意してください。 getAsync メソッドから返される値は、必ずしも setasync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setasync に渡された値を変更することができます。
+      HTML 形式の本文で作業する場合は、getAsync メソッドと Body 非同期メソッドが等にないことに注意してください。 GetAsync メソッドから返される値は、必ずしも setAsync メソッドに渡された値と厳密には同じではありません。 クライアントは、レンダリングエンジンで効率よくレンダリングされるように、setAsync に渡された値を変更することができます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -355,7 +355,7 @@ items:
 
       - DataExceedsMaximumSize: data パラメーターが100万文字を超えています。
 
-      - invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。
+      - InvalidFormatError: coercionType パラメーターは CoercionType に設定されており、メッセージ本文はプレーンテキストになっています。
     name: 'setAsync(data, callback)'
     fullName: 'setAsync(data, callback)'
     langs:
@@ -373,16 +373,16 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Body.setSelectedDataAsync
     summary: |-
       本文の選択部分を、指定のテキストに置き換えます。
 
-      setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
+      SetSelectedDataAsync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -394,7 +394,7 @@ items:
 
       - DataExceedsMaximumSize: data パラメーターが100万文字を超えています。
 
-      - invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。
+      - InvalidFormatError: coercionType パラメーターは CoercionType に設定されており、メッセージ本文はプレーンテキストになっています。
 
       #### <a name="examples"></a>例
 
@@ -423,20 +423,20 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asynccontext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 data パラメーターの文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 coercionType: 本文に必要な形式。 Data パラメーターの文字列は、この形式に変換されます。'
           type:
             - Office.AsyncContextOptions & CoercionTypeOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: outlook.Office.Body.setSelectedDataAsync_1
     summary: |-
       本文の選択部分を、指定のテキストに置き換えます。
 
-      setselecteddataasync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
+      SetSelectedDataAsync メソッドは、指定された文字列を、アイテムの本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択したテキストを置換します。 カーソルがアイテムの本文内にない場合、または UI でフォーカスが失われた場合は、本文のコンテンツの先頭に文字列が挿入されます。 挿入後、挿入されたコンテンツの末尾にカーソルが置かれます。
 
-      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "lpnolp" にします (サンプルについては、「例」セクションを参照してください)。
+      HTML マークアップにリンクを含める場合は、アンカーの id 属性を設定することによって、オンラインリンクプレビューを無効にすることができます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" にします (サンプルについては、「例」セクションを参照してください)。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -448,7 +448,7 @@ items:
 
       - DataExceedsMaximumSize: data パラメーターが100万文字を超えています。
 
-      - invalidformaterror: coercionType パラメーターは coercionType に設定されており、メッセージ本文はプレーンテキストになっています。
+      - InvalidFormatError: coercionType パラメーターは CoercionType に設定されており、メッセージ本文はプレーンテキストになっています。
     name: 'setSelectedDataAsync(data, callback)'
     fullName: 'setSelectedDataAsync(data, callback)'
     langs:
@@ -466,6 +466,6 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 発生したエラーは、asyncResult. error プロパティに表示されます。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'

@@ -61,7 +61,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -70,17 +70,17 @@ items:
         - id: eventType
           description: ハンドラーを呼び出す必要のあるイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: handler
-          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、Addハンドラ Async に渡される eventType パラメーターと一致します。
           type:
             - '(type: Office.EventType) => void'
         - id: options
-          description: 省略可能です。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          description: 省略可能。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: Outlook_1_5.Office.Mailbox.addHandlerAsync_1
@@ -119,7 +119,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -128,22 +128,22 @@ items:
         - id: eventType
           description: ハンドラーを呼び出す必要のあるイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: handler
-          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、addハンドラ async に渡される eventType パラメーターと一致します。
+          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、Addハンドラ Async に渡される eventType パラメーターと一致します。
           type:
             - '(type: Office.EventType) => void'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: Outlook_1_5.Office.Mailbox.convertToEwsId
     summary: |-
       REST 形式のアイテム ID を EWS 形式に変換します。
 
-      REST API (Outlook Mail API や Microsoft Graph など) で取得されたアイテム ID は、Exchange Web サービス (EWS) に使用される形式とは異なる形式を使用します。 converttoewsid メソッドは、REST 形式の ID を EWS 用の適切な形式に変換します。
+      REST API (Outlook Mail API や Microsoft Graph など) で取得されたアイテム ID は、Exchange Web サービス (EWS) に使用される形式とは異なる形式を使用します。 ConvertToEwsId メソッドは、REST 形式の ID を EWS 用の適切な形式に変換します。
 
-      **注**: このメソッドは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -166,27 +166,27 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'convertToEwsId(itemId: string, restVersion: MailboxEnums.RestVersion): string;'
+      content: 'convertToEwsId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
       return:
         type:
           - string
         description: ''
       parameters:
         - id: itemId
-          description: Outlook REST api 用に書式設定されたアイテム ID。
+          description: Outlook REST Api 用に書式設定されたアイテム ID。
           type:
             - string
         - id: restVersion
           description: アイテム ID の取得に使用された Outlook REST API のバージョンを示す値。
           type:
-            - MailboxEnums.RestVersion
+            - MailboxEnums.RestVersion | string
   - uid: Outlook_1_5.Office.Mailbox.convertToLocalClientTime
     summary: |-
       クライアントのローカル時間で時間情報が含まれている辞書を取得します。
 
       Outlook 用メール アプリや Outlook Web App で使う日付と時刻では、異なるタイム ゾーンを使うことができます。Outlook では、クライアント コンピューターのタイム ゾーンを使います。Outlook Web App では、Exchange 管理センター (EAC) で設定されたタイム ゾーンを使います。ユーザー インターフェイスに表示される値が、常にユーザーが期待するタイム ゾーンと一致するように日付と時刻の値を処理する必要があります。
 
-      メールアプリが Outlook で実行されている場合、converttolocalclienttime メソッドは、クライアントコンピューターのタイムゾーンに設定された値を持つ dictionary オブジェクトを返します。 メールアプリが Outlook Web app で実行されている場合、converttolocalclienttime メソッドは、EAC で指定されたタイムゾーンに設定された値を持つ dictionary オブジェクトを返します。
+      メールアプリが Outlook で実行されている場合、convertToLocalClientTime メソッドは、クライアントコンピューターのタイムゾーンに設定された値を持つ dictionary オブジェクトを返します。 メールアプリが Outlook Web App で実行されている場合、convertToLocalClientTime メソッドは、EAC で指定されたタイムゾーンに設定された値を持つ dictionary オブジェクトを返します。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -213,7 +213,7 @@ items:
     summary: |-
       EWS 形式のアイテム ID を REST 形式に変換します。
 
-      **注**: このメソッドは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -221,7 +221,7 @@ items:
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
 
-      EWS 経由で取得したアイテム id、または itemId プロパティを使用して取得したアイテム id は、REST api で使用される形式 ( [Outlook メール API](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)や[Microsoft Graph](https://graph.microsoft.io/)など) とは異なる形式を使用します。<!-- -->. converttorestid メソッドは、EWS 形式の id を REST 用の適切な形式に変換します。
+      EWS 経由で取得したアイテム Id、または itemId プロパティを使用して取得したアイテム Id は、REST Api で使用される形式 ( [Outlook メール API](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)や[Microsoft Graph](https://graph.microsoft.io/)など) とは異なる形式を使用します。<!-- -->. ConvertToRestId メソッドは、EWS 形式の ID を REST 用の適切な形式に変換します。
 
       #### <a name="examples"></a>例
 
@@ -238,7 +238,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'convertToRestId(itemId: string, restVersion: MailboxEnums.RestVersion): string;'
+      content: 'convertToRestId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
       return:
         type:
           - string
@@ -251,12 +251,12 @@ items:
         - id: restVersion
           description: 変換後の ID を使用する Outlook REST API のバージョンを示す値。
           type:
-            - MailboxEnums.RestVersion
+            - MailboxEnums.RestVersion | string
   - uid: Outlook_1_5.Office.Mailbox.convertToUtcClientTime
     summary: |-
       時間情報が含まれているディクショナリから日付オブジェクトを取得します。
 
-      convertToUtcClientTime メソッドは、ローカルの日付と時刻を含むディクショナリを、ローカルの日付と時刻の正しい値を持つ date オブジェクトに変換します。
+      ConvertToUtcClientTime メソッドは、ローカルの日付と時刻を含むディクショナリを、ローカルの日付と時刻の正しい値を持つ Date オブジェクトに変換します。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -283,7 +283,7 @@ items:
     summary: |-
       既存の予定を表示します。
 
-      displayAppointmentForm メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存の予定表の予定を開きます。
+      DisplayAppointmentForm メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存の予定表の予定を開きます。
 
       Outlook for Mac では、この方法を使って、定期的な系列の一部ではない単一の予定や定期的な系列のマスター予定を表示できます。ただし、系列のインスタンスは表示できません。これは、Outlook for Mac においては定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないためです。
 
@@ -291,7 +291,7 @@ items:
 
       指定のアイテム識別子が既存の予定を表していない場合は、クライアント コンピューターまたはデバイスで空のウィンドウが開き、エラー メッセージは返されません。
 
-      **注**: このメソッドは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -324,15 +324,15 @@ items:
     summary: |-
       既存のメッセージを表示します。
 
-      displaymessageform メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存のメッセージを開きます。
+      DisplayMessageForm メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存のメッセージを開きます。
 
       Outlook Web App では、このメソッドは指定されたフォームの本文が 32 KB 以下の文字数の場合にフォームを開きます。
 
       指定のアイテム識別子が既存のメッセージを表していない場合は、クライアント コンピューターにはメッセージは表示されず、エラー メッセージも返されません。
 
-      予定を表す itemId を使用して displaymessageform を使用しないでください。 displayAppointmentForm メソッドを使用して既存の予定を表示し、displayNewAppointmentForm を使用して新しい予定を作成するためのフォームを表示します。
+      予定を表す itemId を使用して displayMessageForm を使用しないでください。 DisplayAppointmentForm メソッドを使用して既存の予定を表示し、displayNewAppointmentForm を使用して新しい予定を作成するためのフォームを表示します。
 
-      **注**: このメソッドは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -365,15 +365,15 @@ items:
     summary: |-
       新しい予定を作成するためのフォームを表示します。
 
-      displayNewAppointmentForm メソッドは、ユーザーが新しい予定または会議を作成できるようにするフォームを開きます。 パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
+      DisplayNewAppointmentForm メソッドは、ユーザーが新しい予定または会議を作成できるようにするフォームを開きます。 パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
 
       このメソッドは、Outlook Web App と OWA for Devices において、出席者フィールドが含まれるフォームを必ず表示します。 入力引数として出席者を指定しないと、このメソッドにより [保存] ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と [送信] ボタンが表示されます。
 
-      outlook リッチクライアントおよび outlook RT では、requiredatthe の出席者またはリソースを指定した場合、このメソッドは [送信] ボタンを含む会議フォームを表示します。 受信者を指定しない場合、このメソッドは [ &amp;閉じる] ボタンの付いた予定フォームを表示します。
+      Outlook リッチクライアントおよび Outlook RT では、Requiredatthe の出席者またはリソースを指定した場合、このメソッドは [送信] ボタンを含む会議フォームを表示します。 受信者を指定しない場合、このメソッドは [ &amp;閉じる] ボタンの付いた予定フォームを表示します。
 
       パラメーターのいずれかが指定のサイズ制限を超える場合、または不明なパラメーター名が指定されている場合は、例外がスローされます。
 
-      **注**: このメソッドは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメソッドは、Outlook for iOS または Outlook for Android ではサポートされていません。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -420,19 +420,19 @@ items:
     summary: |-
       REST API または Exchange Web サービスを呼び出すために使用するトークンを含む文字列を取得します。
 
-      getた tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
+      Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
 
       *REST トークン*
 
-      rest トークンが要求されると (オプション isrest = true)、生成されたトークンは Exchange Web サービス呼び出しの認証には機能しません。 このトークンは、アドインがマニフェストで ReadWriteMailbox アクセス許可を指定していない限り、現在のアイテムとその添付ファイルへの読み取り専用アクセスに制限されます。 ReadWriteMailbox アクセス許可が指定されている場合、結果のトークンによって、メール、予定表、および連絡先に対する読み取り/書き込みアクセス許可が付与されます。これにより、メールを送信することもできます。
+      REST トークンが要求されると (オプション isRest = true)、生成されたトークンは Exchange Web サービス呼び出しの認証には機能しません。 このトークンは、アドインがマニフェストで ReadWriteMailbox アクセス許可を指定していない限り、現在のアイテムとその添付ファイルへの読み取り専用アクセスに制限されます。 ReadWriteMailbox アクセス許可が指定されている場合、結果のトークンによって、メール、予定表、および連絡先に対する読み取り/書き込みアクセス許可が付与されます。これにより、メールを送信することもできます。
 
-      アドインでは、office.context.mailbox.resturl がプロパティを使用して、REST API 呼び出しを行うときに使用する正しい URL を決定する必要があります。
+      アドインでは、Office.context.mailbox.resturl がプロパティを使用して、REST API 呼び出しを行うときに使用する正しい URL を決定する必要があります。
 
       *EWS トークン*
 
-      EWS トークンが要求されると (オプション isrest = false)、生成されたトークンは REST API 呼び出しを認証するために機能しません。 トークンの範囲は、現在のアイテムへのアクセスに制限されます。
+      EWS トークンが要求されると (オプション isRest = false)、生成されたトークンは REST API 呼び出しを認証するために機能しません。 トークンの範囲は、現在のアイテムへのアクセスに制限されます。
 
-      アドインでは、ewsurl プロパティを使用して、EWS 呼び出しを行うときに使用する正しい URL を決定する必要があります。
+      アドインでは、ewsUrl プロパティを使用して、EWS 呼び出しを行うときに使用する正しい URL を決定する必要があります。
 
       **注**: 可能であれば、アドインでは Exchange Web サービスの代わりに REST api を使用することをお勧めします。
 
@@ -471,7 +471,7 @@ items:
         description: ''
       parameters:
         - id: options
-          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 isrest: 指定されたトークンが Outlook REST api または Exchange Web サービスで使用されるかどうかを決定します。 既定値は False です。 asynccontext: 非同期メソッドに渡される状態データ。'
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 isRest: 指定されたトークンが Outlook REST Api または Exchange Web サービスで使用されるかどうかを決定します。 既定値は False です。 asyncContext: 非同期メソッドに渡される状態データ。'
           type:
             - 'Office.AsyncContextOptions & { isRest?: boolean }'
         - id: callback
@@ -482,13 +482,13 @@ items:
     summary: |-
       Exchange Server から添付ファイルやアイテムを取得するために使うトークンを含む文字列を取得します。
 
-      getた tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
+      Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
 
       トークンと予定の識別子またはアイテムの識別子をサードパーティ システムに渡すことができます。 サードパーティ システムは、トークンをベアラー承認トークンとして使用し、Exchange Web サービス (EWS) GetAttachment または GetItem 操作を呼び出して、添付ファイルまたはアイテムを返します。 For example, you can create a remote service to get attachments from the selected item.
 
-      アプリには、読み取りモードで getReadItem tokenasync メソッドを呼び出すために、マニフェストに指定されたアクセス許可が必要です。
+      アプリには、読み取りモードで GetReadItem Tokenasync メソッドを呼び出すために、マニフェストに指定されたアクセス許可が必要です。
 
-      新規作成モードでは、saveAsync メソッドを呼び出して、情報 tokenasync メソッドに渡すアイテム識別子を取得する必要があります。 アプリには、saveAsync メソッドを呼び出すための readwriteitem 権限が必要です。
+      新規作成モードでは、saveAsync メソッドを呼び出して、情報 tokenasync メソッドに渡すアイテム識別子を取得する必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem 権限が必要です。
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -524,7 +524,7 @@ items:
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
-          description: 省略可能です。 非同期メソッドに渡される状態データです。
+          description: 省略可能。 非同期メソッドに渡される状態データです。
           type:
             - any
   - uid: Outlook_1_5.Office.Mailbox.getUserIdentityTokenAsync
@@ -539,7 +539,7 @@ items:
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
 
-      getuseridentity tokenasync メソッドは、[アドインとユーザーをサードパーティのシステムで](https://docs.microsoft.com/outlook/add-ins/authentication)識別して認証するために使用できるトークンを返します。<!-- -->.
+      Getuseridentity Tokenasync メソッドは、[アドインとユーザーをサードパーティのシステムで](https://docs.microsoft.com/outlook/add-ins/authentication)識別して認証するために使用できるトークンを返します。<!-- -->.
 
       #### <a name="examples"></a>例
 
@@ -569,32 +569,32 @@ items:
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
-          description: 省略可能です。 非同期メソッドに渡される状態データです。\|
+          description: 省略可能。 非同期メソッドに渡される状態データです。\|
           type:
             - any
   - uid: Outlook_1_5.Office.Mailbox.makeEwsRequestAsync
     summary: |-
-      ユーザーのメールボックスをホストしている exchange サーバー上の exchange Web サービス (EWS) サービスに対して非同期の要求を行います。
+      ユーザーのメールボックスをホストしている Exchange サーバー上の Exchange Web サービス (EWS) サービスに対して非同期の要求を行います。
 
       このような場合は、アドインでは REST API を使用して、代わりにユーザーのメールボックスにアクセスする必要があります。
 
-      makeEwsRequestAsync メソッドは、アドインの代わりに Exchange に EWS 要求を送信します。
+      MakeEwsRequestAsync メソッドは、アドインの代わりに Exchange に EWS 要求を送信します。
 
-      makeEwsRequestAsync メソッドを使用して、フォルダーに関連付けられたアイテムを要求することはできません。
+      MakeEwsRequestAsync メソッドを使用して、フォルダーに関連付けられたアイテムを要求することはできません。
 
       XML 要求では UTF-8 エンコードを指定する必要があります。 &lt;<!-- -->? xml バージョン = "1.0" encoding = "utf-8"?<!-- -->&gt;
 
-      アドインには、makeEwsRequestAsync メソッドを使用するための ReadWriteMailbox アクセス許可が必要です。 makeEwsRequestAsync メソッドで呼び出すことができる ReadWriteMailbox アクセス許可と EWS 操作の使用方法については、「[ユーザーのメールボックスへのメールアドインアクセスのアクセス許可を指定](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)する」を参照してください。<!-- -->.
+      アドインには、makeEwsRequestAsync メソッドを使用するための ReadWriteMailbox アクセス許可が必要です。 MakeEwsRequestAsync メソッドで呼び出すことができる ReadWriteMailbox アクセス許可と EWS 操作の使用方法については、「[ユーザーのメールボックスへのメールアドインアクセスのアクセス許可を指定](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)する」を参照してください。<!-- -->.
 
       EWS 呼び出しの XML 結果は、asyncResult プロパティに文字列として提供されます。 結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
 
       **注**: このメソッドは、次のシナリオではサポートされていません。
 
-      - outlook for iOS または outlook for Android。
+      - Outlook for iOS または Outlook for Android。
 
       - アドインが Gmail メールボックスに読み込まれている場合。
 
-      **注**: サーバー管理者は、クライアントアクセスサーバーの ews ディレクトリで oauthauthentication を true に設定して、makeEwsRequestAsync メソッドで EWS 要求を行うことができるようにする必要があります。
+      **注**: サーバー管理者は、クライアントアクセスサーバーの ews ディレクトリで OAuthAuthentication を true に設定して、makeEwsRequestAsync メソッドで EWS 要求を行うことができるようにする必要があります。
 
       *バージョンの相違点*
 
@@ -674,7 +674,7 @@ items:
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
-          description: 省略可能です。 非同期メソッドに渡される状態データです。
+          description: 省略可能。 非同期メソッドに渡される状態データです。
           type:
             - any
   - uid: Outlook_1_5.Office.Mailbox.removeHandlerAsync
@@ -694,7 +694,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -703,13 +703,13 @@ items:
         - id: eventType
           description: ハンドラーを取り消すイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: options
-          description: 省略可能です。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          description: 省略可能。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
           type:
             - Office.AsyncContextOptions
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: Outlook_1_5.Office.Mailbox.removeHandlerAsync_1
@@ -729,7 +729,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -738,9 +738,9 @@ items:
         - id: eventType
           description: ハンドラーを取り消すイベント。
           type:
-            - Office.EventType
+            - Office.EventType | string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
   - uid: Outlook_1_5.Office.Mailbox.diagnostics
@@ -749,11 +749,11 @@ items:
 
       次のメンバーが含まれています。
 
-      - hostName (string): ホストアプリケーションの名前を表す文字列。 次のいずれかの値になります: outlook、Mac outlook、outlookios、または outlookios。
+      - hostName (string): ホストアプリケーションの名前を表す文字列。 次のいずれかの値になります: Outlook、Mac Outlook、OutlookIOS、または Outlookios。
 
-      - hostversion (string): ホストアプリケーションまたは Exchange サーバーのバージョンを表す文字列。 メールアドインが outlook デスクトップクライアントまたは iOS 用の outlook で実行されている場合、hostversion プロパティはホストアプリケーションのバージョン (outlook) を返します。 Outlook Web App では、プロパティは、Exchange Server のバージョンを返します。 例として、文字列15.0.468.0 が挙げられます。
+      - hostVersion (string): ホストアプリケーションまたは Exchange サーバーのバージョンを表す文字列。 メールアドインが Outlook デスクトップクライアントまたは iOS 用の Outlook で実行されている場合、hostVersion プロパティはホストアプリケーションのバージョン (Outlook) を返します。 Outlook Web App では、プロパティは、Exchange Server のバージョンを返します。 例として、文字列15.0.468.0 が挙げられます。
 
-      - owaview (MailboxEnums または string): Outlook Web App の現在のビューを表す列挙 (または文字列リテラル)。 ホストアプリケーションが Outlook Web App ではない場合、このプロパティにアクセスすると undefined が返されます。 Outlook Web App には、画面の幅が狭い場合に表示される3つのビュー (onecolumn)、画面の幅が広い場合は2列、画面の幅に対応した ThreeColumns 表示、画面の幅、および列の数が表示されます。が表示されます。
+      - OWAView (MailboxEnums または string): Outlook Web App の現在のビューを表す列挙 (または文字列リテラル)。 ホストアプリケーションが Outlook Web App ではない場合、このプロパティにアクセスすると undefined が返されます。 Outlook Web App には、画面の幅が狭い場合に表示される3つのビュー (OneColumn)、画面の幅が広い場合は2列、画面の幅に対応した ThreeColumns 表示、画面の幅、および列の数が表示されます。が表示されます。
 
       詳細については[、「Office. Diagnostics](xref:Outlook_1_5.Office.Diagnostics) 」を参照してください。<!-- -->.
 
@@ -776,9 +776,9 @@ items:
     summary: |-
       Gets the URL of the Exchange Web Services (EWS) endpoint for this email account. Read mode only.
 
-      アプリには、閲覧モードで ewsurl メンバーを呼び出すために、マニフェストに指定された ReadItem アクセス許可が必要です。
+      アプリには、閲覧モードで ewsUrl メンバーを呼び出すために、マニフェストに指定された ReadItem アクセス許可が必要です。
 
-      新規作成モードでは、ewsurl メンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための readwriteitem 権限が必要です。
+      新規作成モードでは、ewsUrl メンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem 権限が必要です。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -786,9 +786,9 @@ items:
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
 
-      ewsurl の値は、リモートサービスでユーザーのメールボックスへの EWS 呼び出しを行うために使用できます。 たとえば、[選択されたアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモートサービスを作成できます。<!-- -->.
+      EwsUrl の値は、リモートサービスでユーザーのメールボックスへの EWS 呼び出しを行うために使用できます。 たとえば、[選択されたアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモートサービスを作成できます。<!-- -->.
 
-      **注**: このメンバーは、outlook for iOS または outlook for Android ではサポートされていません。
+      **注**: このメンバーは、Outlook for iOS または Outlook for Android ではサポートされていません。
     name: ewsUrl
     fullName: ewsUrl
     langs:
@@ -815,9 +815,9 @@ items:
     summary: |-
       この電子メール アカウントの REST エンドポイントの URL を取得します。
 
-      アプリは、読み取りモードで office.context.mailbox.resturl がメンバーを呼び出すために、マニフェストに指定された ReadItem アクセス許可を持っている必要があります。
+      アプリは、読み取りモードで Office.context.mailbox.resturl がメンバーを呼び出すために、マニフェストに指定された ReadItem アクセス許可を持っている必要があります。
 
-      新規作成モードでは、office.context.mailbox.resturl がメンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための readwriteitem 権限が必要です。
+      新規作成モードでは、Office.context.mailbox.resturl がメンバーを使用する前に、saveAsync メソッドを呼び出す必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem 権限が必要です。
 
       \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -825,7 +825,7 @@ items:
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
 
-      office.context.mailbox.resturl が値を使用して、ユーザーのメールボックスへの[REST API](https://docs.microsoft.com/outlook/rest/)呼び出しを行うことができます。
+      Office.context.mailbox.resturl が値を使用して、ユーザーのメールボックスへの[REST API](https://docs.microsoft.com/outlook/rest/)呼び出しを行うことができます。
     name: restUrl
     fullName: restUrl
     langs:
