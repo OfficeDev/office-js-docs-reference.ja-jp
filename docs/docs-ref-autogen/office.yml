@@ -12,6 +12,7 @@ items:
       - office.Office.AddBindingFromPromptOptions
       - office.Office.AddBindingFromSelectionOptions
       - office.Office.AddinCommands.Event
+      - office.Office.AddinCommands.EventCompletedOptions
       - office.Office.AddinCommands.Source
       - office.Office.AsyncContextOptions
       - office.Office.AsyncResult
@@ -103,7 +104,7 @@ items:
     summary: |-
       ランタイム環境が読み込まれ、アプリケーションやホストされたドキュメントを対話操作するアドインの準備ができたときに発生します。
 
-      initialize イベントリスナー関数の reason パラメーターは、初期化が`InitializationReason`行われた方法を指定する列挙値を返します。 作業ウィンドウ アドインまたはコンテンツ アドインは、次の 2 つの場合に初期化できます。
+      Initialize イベントリスナー関数の reason パラメーターは、初期化が`InitializationReason`行われた方法を指定する列挙値を返します。 作業ウィンドウ アドインまたはコンテンツ アドインは、次の 2 つの場合に初期化できます。
 
       - ユーザーは、Office ホストアプリケーションのリボンの [挿入] タブにあるアドインのドロップダウンリストの [最近使用したアドイン] セクションから、または [アドインの挿入] ダイアログボックスからアドインを挿入しただけです。
 
@@ -115,7 +116,7 @@ items:
 
       次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。
 
-      office ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
+      Office ホストアプリケーションとサーバーの要件の詳細については、「 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
 
       *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> OWA for Devices </th><th> Office for Mac </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>出席</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>しまう</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>
 
@@ -161,7 +162,7 @@ items:
           type:
             - office.Office.InitializationReason
   - uid: office.Office.onReady
-    summary: Office JavaScript api がアドインによって呼び出される準備が整っていることを確認します。 フレームワークがまだ初期化されていない場合、コールバックまたは promise は Office ホストが API 呼び出しを受け入れる準備ができるまで待機します。 この API は Office アドイン内で使用することを目的としていますが、アドインの外部でも使用できます。 その場合は、office ホストアプリケーションの外部で実行されていると判断された後、そのコールバックを呼び出し、ホストとプラットフォームの両方に対して "null" を使用して promise を解決します。
+    summary: Office JavaScript Api がアドインによって呼び出される準備が整っていることを確認します。 フレームワークがまだ初期化されていない場合、コールバックまたは promise は Office ホストが API 呼び出しを受け入れる準備ができるまで待機します。 この API は Office アドイン内で使用することを目的としていますが、アドインの外部でも使用できます。 その場合は、office ホストアプリケーションの外部で実行されていると判断された後、そのコールバックを呼び出し、ホストとプラットフォームの両方に対して "null" を使用して promise を解決します。
     name: Office.onReady
     fullName: Office.onReady
     langs:
@@ -185,7 +186,7 @@ items:
 
       次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。
 
-      office ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
+      Office ホストアプリケーションとサーバーの要件の詳細については、「 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
 
       *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> </td><td> Y </td></tr> </table>
 
@@ -215,11 +216,11 @@ items:
         description: ''
       parameters:
         - id: expression
-          description: '取得するオブジェクトを指定します。 "bindings\#bindingname" の例は、'' bindingname '' という名前のバインドのためのバインド保証を取得します。'
+          description: '取得するオブジェクトを指定します。 "Bindings\#bindingname" の例は、'' bindingname '' という名前のバインドのためのバインド保証を取得します。'
           type:
             - string
         - id: callback
-          description: '省略可能です。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
           type:
             - '(result: AsyncResult<any>) => void'
   - uid: office.Office.useShortNamespace
@@ -229,7 +230,7 @@ items:
 
       次の表で、大文字 Y は、このメソッドは、対応する Office ホスト アプリケーションでサポートされていることを示します。空のセルは、Office ホスト アプリケーションでこのメソッドをサポートしないことを示します。
 
-      office ホストアプリケーションとサーバーの要件の詳細については、「 [office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
+      Office ホストアプリケーションとサーバーの要件の詳細については、「 [Office アドインを実行するための要件](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)」を参照してください。<!-- -->.
 
       *サポートされるホスト (プラットフォーム別)* <table> <tr><th> </th><th> Windows デスクトップ版 Office </th><th> Office Online (ブラウザー) </th><th> Office for iPad </th><th> OWA for Devices </th><th> Office for Mac </th></tr> <tr><td><strong>接続</strong></td><td> </td><td> Y </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>シート</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>出席</strong></td><td> Y </td><td> Y </td><td> </td><td> Y </td><td> Y </td></tr> <tr><td><strong>しまう</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> <tr><td><strong>プロジェクト</strong></td><td> Y </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>段落</strong></td><td> Y </td><td> Y </td><td> Y </td><td> </td><td> </td></tr> </table>
 
@@ -288,6 +289,8 @@ references:
     name: Office.AddBindingFromSelectionOptions
   - uid: office.Office.AddinCommands.Event
     name: Office.AddinCommands.Event
+  - uid: office.Office.AddinCommands.EventCompletedOptions
+    name: Office.AddinCommands.EventCompletedOptions
   - uid: office.Office.AddinCommands.Source
     name: Office.AddinCommands.Source
   - uid: office.Office.AsyncContextOptions
