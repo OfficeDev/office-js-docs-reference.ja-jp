@@ -92,7 +92,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Visio.CommentCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.CommentCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.CommentCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
 
       #### <a name="examples"></a>例
 
@@ -101,12 +101,12 @@ items:
           var activePage = ctx.document.getActivePage();
           var shapeName = "Position Belt.41";
           var shape = activePage.shapes.getItem(shapeName);
-          var shapecomments= shape.comments;
-          shapecomments.load();
+          var shapeComments= shape.comments;
+          shapeComments.load(["author", "text"]);
           return ctx.sync().then(function () {
-              for(var i=0; i<shapecomments.items.length;i++)
+              for(var i = 0; i < shapeComments.items.length; i++)
               {
-                  var comment= shapecomments.items[i];
+                  var comment = shapeComments.items[i];
                   console.log("comment Author: " + comment.author);
                   console.log("Comment Text: " + comment.text);
                   console.log("Date " + comment.date);

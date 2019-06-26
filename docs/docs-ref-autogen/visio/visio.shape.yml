@@ -113,42 +113,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Visio.Shape`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Shape`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shapeName = "Sample Name";
-          var shape = activePage.shapes.getItem(shapeName);
-          shape.load();
-          return ctx.sync().then(function () {
-              console.log(shape.name );
-              console.log(shape.id );
-              console.log(shape.Text );
-              console.log(shape.Select );
-          });
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shape = activePage.shapes.getItem(0);
-          shape.view.highlight = { color: "#E7E7E7", width: 100 };
-          return ctx.sync();
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Shape`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
     name: load(option)
     fullName: load(option)
     langs:
@@ -177,7 +142,43 @@ items:
       return:
         type:
           - Visio.Shape
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shapeName = "Sample Name";
+              var shape = activePage.shapes.getItem(shapeName);
+              shape.load(["name", "id", "text", "select"]);
+              return ctx.sync().then(function () {
+                  console.log(shape.name);
+                  console.log(shape.id);
+                  console.log(shape.text);
+                  console.log(shape.select);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shape = activePage.shapes.getItem(0);
+              shape.view.highlight = { color: "#E7E7E7", width: 100 };
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
         - id: propertyNames
           description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。

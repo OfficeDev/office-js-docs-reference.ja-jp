@@ -736,7 +736,7 @@ items:
           - number
   - uid: excel_release.Excel.PageLayout.zoom
     summary: |-
-      ワークシートの拡大印刷オプションを取得または設定します。
+      ワークシートの拡大印刷オプションを取得または設定します。 `PageLayoutZoomOptions`オブジェクトは JSON オブジェクトとして設定する必要が`x.zoom = {...}`あります (の代わりに使用します)。`x.zoom.scale = ...`<!-- -->).
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: zoom
@@ -749,3 +749,15 @@ items:
       return:
         type:
           - excel.Excel.PageLayoutZoomOptions
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const farmSheet = context.workbook.worksheets.getItem("Print");
+              farmSheet.pageLayout.zoom = { scale: 200 };
+              await context.sync();
+          });
+          ```

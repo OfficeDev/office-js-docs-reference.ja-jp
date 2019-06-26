@@ -92,7 +92,7 @@ items:
 
       `load(option?: { select?: string; expand?: string; }): Visio.ShapeDataItemCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeDataItemCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeDataItemCollection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
 
       #### <a name="examples"></a>例
 
@@ -101,10 +101,9 @@ items:
           var activePage = ctx.document.getActivePage();
           var shape = activePage.shapes.getItem(0);
           var shapeDataItems = shape.shapeDataItems;
-          shapeDataItems.load();
+          shapeDataItems.load(["label", "value"]);
           return ctx.sync().then(function() {
-              for (var i = 0; i < shapeDataItems.items.length; i++)
-              {
+              for (var i = 0; i < shapeDataItems.items.length; i++) {
                   console.log(shapeDataItems.items[i].label);
                   console.log(shapeDataItems.items[i].value);
               }
