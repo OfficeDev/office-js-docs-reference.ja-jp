@@ -2,9 +2,9 @@
 items:
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions
     summary: |-
-      <span data-ttu-id="9b046-101">`format.font`オブジェクトに読み込むプロパティを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-101">Specifies which properties to load on the `format.font` object.</span></span>
+      <span data-ttu-id="fcb38-101">`format.font`オブジェクトに読み込むプロパティを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-101">Specifies which properties to load on the `format.font` object.</span></span>
 
-      <span data-ttu-id="9b046-102">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-102">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-102">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-102">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: Excel.CellPropertiesFontLoadOptions
     fullName: Excel.CellPropertiesFontLoadOptions
     langs:
@@ -24,9 +24,9 @@ items:
       - excel_release.Excel.CellPropertiesFontLoadOptions.underline
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.bold
     summary: |-
-      <span data-ttu-id="9b046-103">`bold`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-103">Specifies whether to load on the `bold` property.</span></span>
+      <span data-ttu-id="fcb38-103">`bold`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-103">Specifies whether to load on the `bold` property.</span></span>
 
-      <span data-ttu-id="9b046-104">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-104">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-104">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-104">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: bold
     fullName: bold
     langs:
@@ -39,9 +39,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.color
     summary: |-
-      <span data-ttu-id="9b046-105">`color`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-105">Specifies whether to load on the `color` property.</span></span>
+      <span data-ttu-id="fcb38-105">`color`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-105">Specifies whether to load on the `color` property.</span></span>
 
-      <span data-ttu-id="9b046-106">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-106">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-106">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-106">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: color
     fullName: color
     langs:
@@ -52,11 +52,41 @@ items:
       return:
         type:
           - boolean
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="fcb38-107">例</span><span class="sxs-lookup"><span data-stu-id="fcb38-107">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const cell = context.workbook.getActiveCell();
+
+              // Define the cell properties to get by setting the matching LoadOptions to true.
+              const propertiesToGet = cell.getCellProperties({
+                  address: true,
+                  format: {
+                      fill: {
+                          color: true
+                      },
+                      font: {
+                          color: true
+                      }
+                  },
+                  style: true
+              });
+
+              // Sync to get the data from the workbook.
+              await context.sync();
+              const cellProperties = propertiesToGet.value[0][0];
+              console.log(
+                  `Address: ${cellProperties.address}\nStyle: ${cellProperties.style}\nFill Color: ${cellProperties.format.fill.color}\nFont Color: ${cellProperties.format.font.color}`);
+          });
+          ```
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.italic
     summary: |-
-      <span data-ttu-id="9b046-107">`italic`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-107">Specifies whether to load on the `italic` property.</span></span>
+      <span data-ttu-id="fcb38-108">`italic`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-108">Specifies whether to load on the `italic` property.</span></span>
 
-      <span data-ttu-id="9b046-108">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-108">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-109">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-109">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: italic
     fullName: italic
     langs:
@@ -69,9 +99,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.name
     summary: |-
-      <span data-ttu-id="9b046-109">`name`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-109">Specifies whether to load on the `name` property.</span></span>
+      <span data-ttu-id="fcb38-110">`name`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-110">Specifies whether to load on the `name` property.</span></span>
 
-      <span data-ttu-id="9b046-110">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-110">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-111">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-111">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: name
     fullName: name
     langs:
@@ -84,9 +114,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.size
     summary: |-
-      <span data-ttu-id="9b046-111">`size`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-111">Specifies whether to load on the `size` property.</span></span>
+      <span data-ttu-id="fcb38-112">`size`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-112">Specifies whether to load on the `size` property.</span></span>
 
-      <span data-ttu-id="9b046-112">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-112">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-113">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-113">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: size
     fullName: size
     langs:
@@ -99,9 +129,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.strikethrough
     summary: |-
-      <span data-ttu-id="9b046-113">`strikethrough`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-113">Specifies whether to load on the `strikethrough` property.</span></span>
+      <span data-ttu-id="fcb38-114">`strikethrough`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-114">Specifies whether to load on the `strikethrough` property.</span></span>
 
-      <span data-ttu-id="9b046-114">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-114">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-115">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-115">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: strikethrough
     fullName: strikethrough
     langs:
@@ -114,9 +144,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.subscript
     summary: |-
-      <span data-ttu-id="9b046-115">`subscript`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-115">Specifies whether to load on the `subscript` property.</span></span>
+      <span data-ttu-id="fcb38-116">`subscript`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-116">Specifies whether to load on the `subscript` property.</span></span>
 
-      <span data-ttu-id="9b046-116">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-116">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-117">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-117">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: subscript
     fullName: subscript
     langs:
@@ -129,9 +159,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.superscript
     summary: |-
-      <span data-ttu-id="9b046-117">`superscript`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-117">Specifies whether to load on the `superscript` property.</span></span>
+      <span data-ttu-id="fcb38-118">`superscript`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-118">Specifies whether to load on the `superscript` property.</span></span>
 
-      <span data-ttu-id="9b046-118">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-118">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-119">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-119">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: superscript
     fullName: superscript
     langs:
@@ -144,9 +174,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.tintAndShade
     summary: |-
-      <span data-ttu-id="9b046-119">`tintAndShade`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-119">Specifies whether to load on the `tintAndShade` property.</span></span>
+      <span data-ttu-id="fcb38-120">`tintAndShade`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-120">Specifies whether to load on the `tintAndShade` property.</span></span>
 
-      <span data-ttu-id="9b046-120">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-120">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-121">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-121">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: tintAndShade
     fullName: tintAndShade
     langs:
@@ -159,9 +189,9 @@ items:
           - boolean
   - uid: excel_release.Excel.CellPropertiesFontLoadOptions.underline
     summary: |-
-      <span data-ttu-id="9b046-121">`underline`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="9b046-121">Specifies whether to load on the `underline` property.</span></span>
+      <span data-ttu-id="fcb38-122">`underline`プロパティに読み込むかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="fcb38-122">Specifies whether to load on the `underline` property.</span></span>
 
-      <span data-ttu-id="9b046-122">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9b046-122">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+      <span data-ttu-id="fcb38-123">\[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="fcb38-123">\[ [API set: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
     name: underline
     fullName: underline
     langs:
