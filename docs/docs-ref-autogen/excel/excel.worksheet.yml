@@ -51,6 +51,7 @@ items:
       - excel.Excel.Worksheet.onDeactivated
       - excel.Excel.Worksheet.onFiltered
       - excel.Excel.Worksheet.onFormatChanged
+      - excel.Excel.Worksheet.onRowHiddenChanged
       - excel.Excel.Worksheet.onRowSorted
       - excel.Excel.Worksheet.onSelectionChanged
       - excel.Excel.Worksheet.onSingleClicked
@@ -270,7 +271,7 @@ items:
             - excel.Excel.Worksheet
   - uid: excel.Excel.Worksheet.delete
     summary: |-
-      ブックからワークシートを削除します。 ワークシートの可視性が "非常に非表示" に設定されている場合は、削除操作が一般の例外によって失敗することに注意してください。
+      ブックからワークシートを削除します。 ワークシートの可視性が "非常に非表示" に設定されている場合は、削除`InvalidOperation`操作が失敗して例外が発生します。 最初に表示を削除する前に、表示を非表示または表示に変更する必要があります。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: delete()
@@ -1105,6 +1106,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel.Excel.Worksheet.onRowHiddenChanged
+    summary: |-
+      特定のワークシートで行の非表示の状態が変更されたときに発生します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onRowHiddenChanged
+    fullName: onRowHiddenChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>
   - uid: excel.Excel.Worksheet.onRowSorted
     summary: |-
       行を並べ替えたときに発生します。

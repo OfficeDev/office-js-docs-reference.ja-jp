@@ -24,7 +24,7 @@ items:
       - excel.Excel.CellPropertiesFont.underline
   - uid: excel.Excel.CellPropertiesFont.bold
     summary: |-
-      `format.font.bold`プロパティを表します。
+      `format.font.bold` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: bold
@@ -39,7 +39,7 @@ items:
           - boolean
   - uid: excel.Excel.CellPropertiesFont.color
     summary: |-
-      `format.font.color`プロパティを表します。
+      `format.font.color` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: color
@@ -52,9 +52,86 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // Creating the SettableCellProperties objects to use for the range.
+              // In your add-in, these should be created once, outside the function.
+              const topHeaderProps: Excel.SettableCellProperties = {
+                  // The style property takes a string matching the name of an Excel style.
+                  // Note that a style will overwrite any formatting,
+                  // so do not use the format property with the style property.
+                  style: "Heading1"
+              };
+
+              const headerProps: Excel.SettableCellProperties = {
+                  // Any subproperties of format that are not set will not be changed when these cell properties are set.
+                  format: {
+                      fill: {
+                          color: "Blue"
+                      },
+                      font: {
+                          color: "White",
+                          bold: true
+                      }
+                  }
+              };
+
+              const nonApplicableProps: Excel.SettableCellProperties = {
+                  format: {
+                      fill: {
+                          pattern: Excel.FillPattern.gray25
+                      },
+                      font: {
+                          color: "Gray",
+                          italic: true
+                      }
+                  }
+              };
+
+              const matchupScoreProps: Excel.SettableCellProperties = {
+                  format: {
+                      borders: {
+                          bottom: {
+                              style: Excel.BorderLineStyle.continuous
+                          },
+                          left: {
+                              style: Excel.BorderLineStyle.continuous
+                          },
+                          right: {
+                              style: Excel.BorderLineStyle.continuous
+                          },
+                          top: {
+                              style: Excel.BorderLineStyle.continuous
+                          }
+                      }
+                  }
+              };
+
+              const range = sheet.getRange("A1:E5");
+
+              // You can use empty JSON objects to avoid changing a cell's properties.
+              range.setCellProperties([
+                  [topHeaderProps, {}, {}, {}, {}],
+                  [{}, {}, headerProps, headerProps, headerProps],
+                  [{}, headerProps, nonApplicableProps, matchupScoreProps, matchupScoreProps],
+                  [{}, headerProps, matchupScoreProps, nonApplicableProps, matchupScoreProps],
+                  [{}, headerProps, matchupScoreProps, matchupScoreProps, nonApplicableProps]
+              ]);
+
+              sheet.getUsedRange().format.autofitColumns();
+              await context.sync();
+          });
+          ```
   - uid: excel.Excel.CellPropertiesFont.italic
     summary: |-
-      `format.font.italic`プロパティを表します。
+      `format.font.italic` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: italic
@@ -69,7 +146,7 @@ items:
           - boolean
   - uid: excel.Excel.CellPropertiesFont.name
     summary: |-
-      `format.font.name`プロパティを表します。
+      `format.font.name` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
@@ -84,7 +161,7 @@ items:
           - string
   - uid: excel.Excel.CellPropertiesFont.size
     summary: |-
-      `format.font.size`プロパティを表します。
+      `format.font.size` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: size
@@ -99,7 +176,7 @@ items:
           - number
   - uid: excel.Excel.CellPropertiesFont.strikethrough
     summary: |-
-      `format.font.strikethrough`プロパティを表します。
+      `format.font.strikethrough` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: strikethrough
@@ -114,7 +191,7 @@ items:
           - boolean
   - uid: excel.Excel.CellPropertiesFont.subscript
     summary: |-
-      `format.font.subscript`プロパティを表します。
+      `format.font.subscript` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: subscript
@@ -129,7 +206,7 @@ items:
           - boolean
   - uid: excel.Excel.CellPropertiesFont.superscript
     summary: |-
-      `format.font.superscript`プロパティを表します。
+      `format.font.superscript` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: superscript
@@ -144,7 +221,7 @@ items:
           - boolean
   - uid: excel.Excel.CellPropertiesFont.tintAndShade
     summary: |-
-      `format.font.tintAndShade`プロパティを表します。
+      `format.font.tintAndShade` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: tintAndShade
@@ -159,7 +236,7 @@ items:
           - number
   - uid: excel.Excel.CellPropertiesFont.underline
     summary: |-
-      `format.font.underline`プロパティを表します。
+      `format.font.underline` プロパティを表します。
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: underline

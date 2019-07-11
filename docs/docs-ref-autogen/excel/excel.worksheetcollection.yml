@@ -37,8 +37,10 @@ items:
       - excel.Excel.WorksheetCollection.onDeleted
       - excel.Excel.WorksheetCollection.onFiltered
       - excel.Excel.WorksheetCollection.onFormatChanged
+      - excel.Excel.WorksheetCollection.onRowHiddenChanged
       - excel.Excel.WorksheetCollection.onRowSorted
       - excel.Excel.WorksheetCollection.onSelectionChanged
+      - excel.Excel.WorksheetCollection.onSingleClicked
       - excel.Excel.WorksheetCollection.toJSON
   - uid: excel.Excel.WorksheetCollection.add
     summary: |-
@@ -571,7 +573,7 @@ items:
           - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
   - uid: excel.Excel.WorksheetCollection.onColumnSorted
     summary: |-
-      列に対して並べ替えを行うときに発生します。
+      列を並べ替えたときに発生します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -660,9 +662,25 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel.Excel.WorksheetCollection.onRowHiddenChanged
+    summary: |-
+      ブック内のすべてのワークシートの行の非表示状態が変更されたときに発生します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onRowHiddenChanged
+    fullName: onRowHiddenChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>
   - uid: excel.Excel.WorksheetCollection.onRowSorted
     summary: |-
-      行に対して並べ替えを行うときに発生します。
+      行を並べ替えたときに発生します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -691,6 +709,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+  - uid: excel.Excel.WorksheetCollection.onSingleClicked
+    summary: |-
+      ワークシートのコレクションで左クリック/タップ操作が行われるときに発生します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onSingleClicked
+    fullName: onSingleClicked
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>
   - uid: excel.Excel.WorksheetCollection.toJSON
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.WorksheetCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.WorksheetCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
     name: toJSON()
