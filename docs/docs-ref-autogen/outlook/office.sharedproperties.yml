@@ -19,7 +19,8 @@ items:
     children:
       - outlook.Office.SharedProperties.delegatePermissions
       - outlook.Office.SharedProperties.owner
-      - outlook.Office.SharedProperties.restUrl
+      - outlook.Office.SharedProperties.targetMailbox
+      - outlook.Office.SharedProperties.targetRestUrl
   - uid: outlook.Office.SharedProperties.delegatePermissions
     summary: 代理人が共有フォルダーに対して持っているアクセス許可。
     isPreview: true
@@ -42,20 +43,39 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'owner: String;'
+      content: 'owner: string;'
       return:
         type:
-          - String
-  - uid: outlook.Office.SharedProperties.restUrl
-    summary: 所有者のメールボックスに関連するリモート REST URL。
+          - string
+  - uid: outlook.Office.SharedProperties.targetMailbox
+    summary: |-
+      ターゲット/所有者のメールボックス。 REST 操作の URL を作成するには、targetRestUrl と組み合わせて使用します。
+
+      使用例:`targetRestUrl + "/{api_version}/users/" + targetMailbox + "/{REST_operation}"`
     isPreview: true
-    name: restUrl
-    fullName: restUrl
+    name: targetMailbox
+    fullName: targetMailbox
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'restUrl: String;'
+      content: 'targetMailbox: string;'
       return:
         type:
-          - String
+          - string
+  - uid: outlook.Office.SharedProperties.targetRestUrl
+    summary: |-
+      REST API のベース URL (現在https://outlook.office.com/api)。 TargetMailbox を使用して REST 操作の URL を作成します。
+
+      使用例:`targetRestUrl + "/{api_version}/users/" + targetMailbox + "/{REST_operation}"`
+    isPreview: true
+    name: targetRestUrl
+    fullName: targetRestUrl
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'targetRestUrl: string;'
+      return:
+        type:
+          - string
