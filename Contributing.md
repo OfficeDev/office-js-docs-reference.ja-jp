@@ -20,20 +20,21 @@
 
 ## <a name="contribute-using-github"></a>GitHub を使用して投稿する
 
-リポジトリをデスクトップに複製せずにこのドキュメントに投稿するには、GitHub を使用します。これは、このリポジトリでプル リクエストを作成する最も簡単な方法です。コードの変更に関係しない小さな変更を加えるには、この方法を使用します。 
+> **重要**: このリポジトリの参照コンテンツは自動的に生成されます。 ファイルを編集する前に、[ドキュメントツールのメモ](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)を参照してください。
 
-**注** この方法では、一度に 1 つの記事に参加できます。
+リポジトリをデスクトップに複製せずにこのドキュメントに投稿するには、GitHub を使用します。これは、このリポジトリでプル リクエストを作成する最も簡単な方法です。コードの変更に関係しない小さな変更を加えるには、この方法を使用します。
+
+このメソッドを使用すると、一度に1つの記事に投稿できます。
 
 ### <a name="to-contribute-using-github"></a>GitHub を使用して投稿するには
 
 1. 投稿する記事を GitHub で検索します。
 2. GitHub で記事が表示されたら、GitHub にサインインします (無料アカウントを取得するには、「[Join GitHub](https://github.com/join)」 (GitHub に参加) にアクセスします)。
-3. **鉛筆アイコン** (このプロジェクトのフォークでファイルを編集します) を選択し、**[<>ファイルの編集]** ウィンドウで変更を加えます。 
+3. **鉛筆アイコン** (このプロジェクトのフォークでファイルを編集します) を選択し、**[<>ファイルの編集]** ウィンドウで変更を加えます。
 4. 一番下までスクロールし、説明を入力します。
 5. [**ファイル変更の提案**] > [**プル リクエストの作成**] を選択します。
 
-これでプル リクエストを正常に提出できました。プル リクエストは、通常 10 営業日以内に審査されます。 
-
+これでプル リクエストを正常に提出できました。プル リクエストは、通常 10 営業日以内に審査されます。
 
 ## <a name="contribute-using-git"></a>Git を使用して投稿する
 
@@ -46,7 +47,7 @@
 
 ### <a name="to-contribute-using-git"></a>Git を使用して投稿するには
 
-1. GitHub アカウントを持っていない場合は、[GitHub](https://github.com/join) でセットアップします。 
+1. GitHub アカウントを持っていない場合は、[GitHub](https://github.com/join) でセットアップします。
 2. アカウントを取得したら、ご利用のコンピューターに Git をインストールします。 「[Set up Git]」 (Git の設定) チュートリアルの手順を実行します。
 3. Git を使用してプル要求を送信するには、「[GitHub、Git、およびこのリポジトリを使用する](#use-github-git-and-this-repository)」の手順を実行します。
 4. 次の場合は、投稿者のライセンス同意書に署名するように求められます。
@@ -66,10 +67,10 @@ CLA への署名により、メイン リポジトリにコミットする権限
 
 ### <a name="to-set-up-your-fork-of-the-repository"></a>リポジトリのフォークをセットアップするには
 
-1.  このプロジェクトに投稿できるように、GitHub のアカウントをセットアップします。まだ行っていない場合は、今すぐ [GitHub](https://github.com/join) にアクセスしてセットアップします。
-2.  ご利用のコンピューターに Git をインストールします。 「[Set up Git]」 (Git の設定) チュートリアルの手順を実行します。
-3.  このリポジトリの独自のフォークを作成します。これを行うには、ページの上部にある [**フォーク**] ボタンを選択します。
-4.  フォークをコンピューターにコピーします。これを行うには、Git Bash を開きます。コマンド プロンプトで、次のように入力します。
+1. このプロジェクトに投稿できるように、GitHub のアカウントをセットアップします。まだ行っていない場合は、今すぐ [GitHub](https://github.com/join) にアクセスしてセットアップします。
+2. ご利用のコンピューターに Git をインストールします。 「[Set up Git]」 (Git の設定) チュートリアルの手順を実行します。
+3. このリポジトリの独自のフォークを作成します。これを行うには、ページの上部にある [**フォーク**] ボタンを選択します。
+4. フォークをコンピューターにコピーします。これを行うには、Git Bash を開きます。コマンド プロンプトで、次のように入力します。
 
         git clone https://github.com/<your user name>/<repo name>.git
 
@@ -100,10 +101,10 @@ CLA への署名により、メイン リポジトリにコミットする権限
 
 #### <a name="to-create-a-new-branch"></a>新しい分岐を作成するには
 
-1.  Git Bash を開きます。
-2.  At the Git Bash command prompt, type `git pull upstream master:<new branch name>`. This creates a new branch locally that is copied from the latest OfficeDev master branch.
-3.  At the Git Bash command prompt, type `git push origin <new branch name>`. This alerts GitHub to the new branch. You should now see the new branch in your fork of the repository on GitHub.
-4.  At the Git Bash command prompt, type `git checkout <new branch name>` to switch to your new branch.
+1. Git Bash を開きます。
+2. At the Git Bash command prompt, type `git pull upstream master:<new branch name>`. This creates a new branch locally that is copied from the latest OfficeDev master branch.
+3. At the Git Bash command prompt, type `git push origin <new branch name>`. This alerts GitHub to the new branch. You should now see the new branch in your fork of the repository on GitHub.
+4. At the Git Bash command prompt, type `git checkout <new branch name>` to switch to your new branch.
 
 #### <a name="add-new-content-or-edit-existing-content"></a>新しい内容を追加するか既存の内容を編集する
 
@@ -128,13 +129,13 @@ The files in `C:\Users\<yourusername>\<repo name>` are a working copy of the new
 
 #### <a name="to-submit-a-pull-request-to-the-main-repository"></a>メイン リポジトリにプル リクエストを送信するには
 
-1.  In the Git Bash command prompt, type `git push origin <new branch name>`. In your local repository, `origin` refers to your GitHub repository that you cloned the local repository from. This command pushes the current state of your new branch, including all commits made in the previous steps, to your GitHub fork.
-2.  GitHub サイト上のフォーク内で、新しい分岐まで移動します。
-3.  ページの上部にある [**プル リクエスト**] ボタンを選択します。
-4.  Verify the Base branch is `OfficeDev/<repo name>@master` and the Head branch is `<your username>/<repo name>@<branch name>`.
-5.  [**コミット範囲の更新**] ボタンを選択します。
-6.  プル リクエストにタイトルを追加し、作成しているすべての変更についての説明を入力します。
-7.  プル リクエストを提出します。
+1. In the Git Bash command prompt, type `git push origin <new branch name>`. In your local repository, `origin` refers to your GitHub repository that you cloned the local repository from. This command pushes the current state of your new branch, including all commits made in the previous steps, to your GitHub fork.
+2. GitHub サイト上のフォーク内で、新しい分岐まで移動します。
+3. ページの上部にある [**プル リクエスト**] ボタンを選択します。
+4. Verify the Base branch is `OfficeDev/<repo name>@master` and the Head branch is `<your username>/<repo name>@<branch name>`.
+5. [**コミット範囲の更新**] ボタンを選択します。
+6. プル リクエストにタイトルを追加し、作成しているすべての変更についての説明を入力します。
+7. プル リクエストを提出します。
 
 One of the site administrators will process your pull request. Your pull request will surface on the OfficeDev/<repo name> site under Issues. When the pull request is accepted, the issue will be resolved.
 
@@ -160,9 +161,9 @@ One of the site administrators will process your pull request. Your pull request
 
 #### <a name="to-delete-a-branch"></a>分岐を削除するには
 
-1.  Git Bash のコマンド プロンプトで、「`git checkout master`」と入力します。これにより、削除される分岐にいないことが保証されます (削除される分岐にいることは許可されません)。
-2.  Next, at the command prompt, type `git branch -d <branch name>`. This deletes the branch on your computer only if it has been successfully merged to the upstream repository. (You can override this behavior with the `–D` flag, but first be sure you want to do this.)
-3.  Finally, type `git push origin :<branch name>` at the command prompt (a space before the colon and no space after it).  This will delete the branch on your github fork.  
+1. Git Bash のコマンド プロンプトで、「`git checkout master`」と入力します。これにより、削除される分岐にいないことが保証されます (削除される分岐にいることは許可されません)。
+2. Next, at the command prompt, type `git branch -d <branch name>`. This deletes the branch on your computer only if it has been successfully merged to the upstream repository. (You can override this behavior with the `–D` flag, but first be sure you want to do this.)
+3. Finally, type `git push origin :<branch name>` at the command prompt (a space before the colon and no space after it).  This will delete the branch on your github fork.  
 
 おめでとうございます。プロジェクトに正しく投稿できました。
 
@@ -171,16 +172,16 @@ One of the site administrators will process your pull request. Your pull request
 ### <a name="markdown"></a>Markdown
 
 このリポジトリ内のすべての記事では、Markdown を使用しています。 完全な紹介 (および、すべての構文のリスト) は、「[Daring Fireball - Markdown]」にあります。
- 
+
 ## <a name="faq"></a>FAQ
 
 ### <a name="how-do-i-get-a-github-account"></a>GitHub アカウントを取得する方法を教えてください。
 
-無料の GitHub アカウントを開設するには、「[Join GitHub](https://github.com/join)」(GitHub に参加) にあるフォームに記入します。 
+無料の GitHub アカウントを開設するには、「[Join GitHub](https://github.com/join)」(GitHub に参加) にあるフォームに記入します。
 
 ### <a name="where-do-i-get-a-contributors-license-agreement"></a>投稿者のライセンス同意書はどこで入手するのでしょうか。 
 
-プル リクエストで投稿者のライセンス同意書 (CLA) が必要な場合、CLA の署名が必要であることを述べる通知が自動的に送信されます。 
+プル リクエストで投稿者のライセンス同意書 (CLA) が必要な場合、CLA の署名が必要であることを述べる通知が自動的に送信されます。
 
 コミュニティ メンバーは、**このプロジェクトへの大規模な投稿を行う前に投稿者のライセンス同意書 (CLA) に署名する必要があります**。このドキュメントに記入して送信する必要があるのは 1 回だけです。注意深く確認してください。雇用主がこのドキュメントに署名することが要求される場合もあります。
 
@@ -195,7 +196,6 @@ One of the site administrators will process your pull request. Your pull request
 ### <a name="how-soon-will-i-get-a-response-about-my-change-request"></a>変更リクエストに関する応答をどのくらいの期間内に受けることができますか。
 
 プル リクエストは、通常 10 営業日以内に審査されます。
-
 
 ## <a name="more-resources"></a>その他のリソース
 

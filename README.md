@@ -12,13 +12,11 @@ Office JavaScript API リファレンスドキュメントリポジトリへよ�
 
 * また、このドキュメントへの投稿も歓迎します。 投稿するには、このリポジトリを fork し、必要に応じてファイルを更新し、提案された変更内容を使用してプル要求を送信します。 詳細については、「[このドキュメントに投稿する](Contributing.md)」を参照してください。
 
-    > **重要**: このリポジトリの[/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルを変更しないでください。 そのフォルダー内のすべてのファイルは自動生成されるので、プル要求で更新することはできません。 [/Docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルに対する変更を要求するには、このリポジトリに[問題を送信](https://github.com/OfficeDev/office-js-docs-reference/issues)してください。
+    > **重要**: このリポジトリの[/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルを変更しないでください。 そのフォルダー内のすべてのファイルは自動生成されるので、プル要求で更新することはできません。 [/Docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルに対する変更を要求するには、このリポジトリに[問題を送信](https://github.com/OfficeDev/office-js-docs-reference/issues)してください。 このリポジトリのツールの詳細については、[こちら](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)を参照してください。
 
 * プログラミングの経験と、今後のバージョン、コード サンプルなどのご希望をご連絡いただく場合は、「[Office Developer Platform UserVoice](https://officespdev.uservoice.com/)」でご提案やアイデアを入力してください。
-
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft Open Source Code of Conduct
 
 このプロジェクトでは、[Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) が採用されています。
 詳細については、「[よく寄せ](https://opensource.microsoft.com/codeofconduct/faq/)られる質問」または「 [opencode@microsoft.com](mailto:opencode@microsoft.com) contact」を参照してください。
-
