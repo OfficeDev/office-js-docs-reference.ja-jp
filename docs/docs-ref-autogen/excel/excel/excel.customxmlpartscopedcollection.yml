@@ -1,0 +1,314 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.CustomXmlPartScopedCollection
+    summary: |-
+      <span data-ttu-id="98c2e-101">カスタム XML パーツのスコープ付きコレクション。</span><span class="sxs-lookup"><span data-stu-id="98c2e-101">A scoped collection of custom XML parts.</span></span> <span data-ttu-id="98c2e-102">スコープ指定されたコレクションは、名前空間によるフィルターなど、いくつかの操作の結果です。</span><span class="sxs-lookup"><span data-stu-id="98c2e-102">A scoped collection is the result of some operation, e.g. filtering by namespace.</span></span> <span data-ttu-id="98c2e-103">スコープ指定されたコレクションは、スコープを追加することはできません。</span><span class="sxs-lookup"><span data-stu-id="98c2e-103">A scoped collection cannot be scoped any further.</span></span>
+
+      <span data-ttu-id="98c2e-104">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-104">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.CustomXmlPartScopedCollection
+    fullName: Excel.CustomXmlPartScopedCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.CustomXmlPartScopedCollection.context
+      - excel.Excel.CustomXmlPartScopedCollection.getCount
+      - excel.Excel.CustomXmlPartScopedCollection.getItem
+      - excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
+      - excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
+      - excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
+      - excel.Excel.CustomXmlPartScopedCollection.items
+      - excel.Excel.CustomXmlPartScopedCollection.load
+      - excel.Excel.CustomXmlPartScopedCollection.load_1
+      - excel.Excel.CustomXmlPartScopedCollection.load_2
+      - excel.Excel.CustomXmlPartScopedCollection.toJSON
+  - uid: excel.Excel.CustomXmlPartScopedCollection.context
+    summary: <span data-ttu-id="98c2e-105">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="98c2e-105">The request context associated with the object.</span></span> <span data-ttu-id="98c2e-106">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-106">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getCount
+    summary: |-
+      <span data-ttu-id="98c2e-107">コレクションに含まれる CustomXML パーツの数を取得します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-107">Gets the number of CustomXML parts in this collection.</span></span>
+
+      <span data-ttu-id="98c2e-108">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-108">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="98c2e-109">例</span><span class="sxs-lookup"><span data-stu-id="98c2e-109">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              $("#display-xml").text("");
+              const contosoNamespace = "http://schemas.contoso.com/review/1.0";
+              const customXmlParts = context.workbook.customXmlParts;
+              const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);
+              const numberOfPartsInNamespace = filteredXmlParts.getCount();
+
+              await context.sync();
+
+              if (numberOfPartsInNamespace.value == 1) {
+                  const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();
+                  const xmlBlob = onlyXmlPartInNamespace.getXml();
+
+                  await context.sync();
+
+                  // Make it a bit more readable.
+                  const readableXml = xmlBlob.value.replace(/></g, ">\n<");
+
+                  $("#display-xml").text(`The only XML part in the namespace ${contosoNamespace} is:
+                      ${readableXml}`);
+
+              } else {
+                  console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);
+              }        
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getItem
+    summary: |-
+      <span data-ttu-id="98c2e-110">ID に基づいて、カスタム XML パーツを取得します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-110">Gets a custom XML part based on its ID.</span></span>
+
+      <span data-ttu-id="98c2e-111">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-111">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(id)
+    fullName: getItem(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(id: string): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: ''
+      parameters:
+        - id: id
+          description: <span data-ttu-id="98c2e-112">取得するオブジェクトの ID を指定します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-112">ID of the object to be retrieved.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="98c2e-113">ID に基づいて、カスタム XML パーツを取得します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-113">Gets a custom XML part based on its ID.</span></span> <span data-ttu-id="98c2e-114">CustomXmlPart が存在しない場合、返されるオブジェクトの isNull プロパティは true になります。</span><span class="sxs-lookup"><span data-stu-id="98c2e-114">If the CustomXmlPart does not exist, the return object's isNull property will be true.</span></span>
+
+      <span data-ttu-id="98c2e-115">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-115">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(id)
+    fullName: getItemOrNullObject(id)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(id: string): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="98c2e-116">例</span><span class="sxs-lookup"><span data-stu-id="98c2e-116">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const settings = context.workbook.settings;
+              const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
+              await context.sync();
+
+              if (xmlPartIDSetting.value) {   
+                  let customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);
+                  const xmlBlob = customXmlPart.getXml();
+                  customXmlPart.delete();
+                  customXmlPart = context.workbook.customXmlParts.getItemOrNullObject(xmlPartIDSetting.value);
+
+                  await context.sync();
+
+                  if (customXmlPart.isNullObject) {
+                      $("#display-xml").text(`The XML part with the id ${xmlPartIDSetting.value} has been deleted.`);
+
+                      // Delete the unneeded setting too.
+                      xmlPartIDSetting.delete();            
+                  } else {
+                      const readableXml = addLineBreaksToXML(xmlBlob.value);
+                      const strangeMessage = `This is strange. The XML part with the id ${xmlPartIDSetting.value} has not been deleted:\n${readableXml}`
+                      $("#display-xml").text(strangeMessage);
+                  }
+
+                  await context.sync();
+              }
+          });
+          ```
+      parameters:
+        - id: id
+          description: <span data-ttu-id="98c2e-117">取得するオブジェクトの ID を指定します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-117">ID of the object to be retrieved.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItem
+    summary: |-
+      <span data-ttu-id="98c2e-118">コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-118">If the collection contains exactly one item, this method returns it.</span></span> <span data-ttu-id="98c2e-119">それ以外の場合、このメソッドはエラーを生成します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-119">Otherwise, this method produces an error.</span></span>
+
+      <span data-ttu-id="98c2e-120">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-120">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getOnlyItem()
+    fullName: getOnlyItem()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOnlyItem(): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="98c2e-121">例</span><span class="sxs-lookup"><span data-stu-id="98c2e-121">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              $("#display-xml").text("");
+              const contosoNamespace = "http://schemas.contoso.com/review/1.0";
+              const customXmlParts = context.workbook.customXmlParts;
+              const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);
+              const numberOfPartsInNamespace = filteredXmlParts.getCount();
+
+              await context.sync();
+
+              if (numberOfPartsInNamespace.value == 1) {
+                  const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();
+                  const xmlBlob = onlyXmlPartInNamespace.getXml();
+
+                  await context.sync();
+
+                  // Make it a bit more readable.
+                  const readableXml = xmlBlob.value.replace(/></g, ">\n<");
+
+                  $("#display-xml").text(`The only XML part in the namespace ${contosoNamespace} is:
+                      ${readableXml}`);
+
+              } else {
+                  console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);
+              }        
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.CustomXmlPartScopedCollection.getOnlyItemOrNullObject
+    summary: |-
+      <span data-ttu-id="98c2e-122">コレクションに含まれる項目が 1 つだけの場合、このメソッドはその項目を返します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-122">If the collection contains exactly one item, this method returns it.</span></span> <span data-ttu-id="98c2e-123">それ以外の場合、このメソッドは Null を返します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-123">Otherwise, this method returns Null.</span></span>
+
+      <span data-ttu-id="98c2e-124">\[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="98c2e-124">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getOnlyItemOrNullObject()
+    fullName: getOnlyItemOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOnlyItemOrNullObject(): Excel.CustomXmlPart;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPart
+        description: ''
+  - uid: excel.Excel.CustomXmlPartScopedCollection.items
+    summary: <span data-ttu-id="98c2e-125">このコレクション内に読み込まれた子アイテムを取得します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-125">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.CustomXmlPart[];'
+      return:
+        type:
+          - 'Excel.CustomXmlPart[]'
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load
+    summary: <span data-ttu-id="98c2e-126">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-126">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="98c2e-127">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="98c2e-127">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="98c2e-128">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="98c2e-128">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="98c2e-129">`load(option?: string | string[]): Excel.CustomXmlPartScopedCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="98c2e-129">`load(option?: string | string[]): Excel.CustomXmlPartScopedCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="98c2e-130">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPartScopedCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="98c2e-130">`load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPartScopedCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="98c2e-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPartScopedCollection`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPartScopedCollection` - Only available on collection types.</span></span> <span data-ttu-id="98c2e-132">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="98c2e-132">It is similar to the preceding signature.</span></span> <span data-ttu-id="98c2e-133">Top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-133">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="98c2e-134">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="98c2e-134">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="98c2e-135">Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-135">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.CustomXmlPartScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load_1
+    summary: <span data-ttu-id="98c2e-136">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-136">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="98c2e-137">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="98c2e-137">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="98c2e-138">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="98c2e-138">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.CustomXmlPartScopedCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.CustomXmlPartScopedCollection;'
+      return:
+        type:
+          - excel.Excel.CustomXmlPartScopedCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.CustomXmlPartScopedCollection.toJSON
+    summary: '<span data-ttu-id="98c2e-139">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="98c2e-139">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="98c2e-140">.</span><span class="sxs-lookup"><span data-stu-id="98c2e-140"></span></span> <span data-ttu-id="98c2e-141">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="98c2e-141"></span></span><!-- --><span data-ttu-id="98c2e-142">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.CustomXmlPartScopedCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.CustomXmlPartScopedCollectionData`</span><span class="sxs-lookup"><span data-stu-id="98c2e-142">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.CustomXmlPartScopedCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.CustomXmlPartScopedCollectionData`</span></span><!-- --><span data-ttu-id="98c2e-143">) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。</span><span class="sxs-lookup"><span data-stu-id="98c2e-143">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.CustomXmlPartScopedCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.CustomXmlPartScopedCollectionData
+        description: ''
