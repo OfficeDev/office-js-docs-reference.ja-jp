@@ -1,0 +1,517 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.Worksheet
+    summary: |-
+      <span data-ttu-id="dcd68-101">Excel のワークシートは、セルのグリッドです。</span><span class="sxs-lookup"><span data-stu-id="dcd68-101">An Excel worksheet is a grid of cells.</span></span> <span data-ttu-id="dcd68-102">データ、表、グラフなどを含めることができます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-102">It can contain data, tables, charts, etc.</span></span>
+
+      <span data-ttu-id="dcd68-103">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-103">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.Worksheet
+    fullName: Excel.Worksheet
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.Worksheet.activate
+      - excel.Excel.Worksheet.charts
+      - excel.Excel.Worksheet.context
+      - excel.Excel.Worksheet.delete
+      - excel.Excel.Worksheet.getCell
+      - excel.Excel.Worksheet.getRange
+      - excel.Excel.Worksheet.getUsedRange
+      - excel.Excel.Worksheet.id
+      - excel.Excel.Worksheet.load
+      - excel.Excel.Worksheet.load_1
+      - excel.Excel.Worksheet.load_2
+      - excel.Excel.Worksheet.name
+      - excel.Excel.Worksheet.position
+      - excel.Excel.Worksheet.protection
+      - excel.Excel.Worksheet.set
+      - excel.Excel.Worksheet.set_1
+      - excel.Excel.Worksheet.tables
+      - excel.Excel.Worksheet.toJSON
+      - excel.Excel.Worksheet.visibility
+  - uid: excel.Excel.Worksheet.activate
+    summary: |-
+      <span data-ttu-id="dcd68-104">Excel UI でワークシートをアクティブにします。</span><span class="sxs-lookup"><span data-stu-id="dcd68-104">Activate the worksheet in the Excel UI.</span></span>
+
+      <span data-ttu-id="dcd68-105">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-105">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: activate()
+    fullName: activate()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'activate(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-106">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-106">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.activate();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Worksheet.charts
+    summary: |-
+      <span data-ttu-id="dcd68-107">ワークシートの一部になっているグラフのコレクションを返します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-107">Returns collection of charts that are part of the worksheet.</span></span> <span data-ttu-id="dcd68-108">値の取得のみ可能です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-108">Read-only.</span></span>
+
+      <span data-ttu-id="dcd68-109">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-109">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: charts
+    fullName: charts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly charts: Excel.ChartCollection;'
+      return:
+        type:
+          - excel.Excel.ChartCollection
+  - uid: excel.Excel.Worksheet.context
+    summary: <span data-ttu-id="dcd68-110">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="dcd68-110">The request context associated with the object.</span></span> <span data-ttu-id="dcd68-111">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-111">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.Worksheet.delete
+    summary: |-
+      <span data-ttu-id="dcd68-112">ブックからワークシートを削除します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-112">Deletes the worksheet from the workbook.</span></span> <span data-ttu-id="dcd68-113">ワークシートの可視性が "非常に非表示" に設定されている場合は、削除操作が一般の例外によって失敗することに注意してください。</span><span class="sxs-lookup"><span data-stu-id="dcd68-113">Note that if the worksheet's visibility is set to "VeryHidden", the delete operation will fail with a GeneralException.</span></span>
+
+      <span data-ttu-id="dcd68-114">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-114">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-115">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-115">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Worksheet.getCell
+    summary: |-
+      <span data-ttu-id="dcd68-116">行と列の番号に基づいて、1 つのセルを含んだ範囲オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-116">Gets the range object containing the single cell based on row and column numbers.</span></span> <span data-ttu-id="dcd68-117">ワークシートのグリッド内に収まるセルは、親の範囲の境界の外側にある場合があります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-117">The cell can be outside the bounds of its parent range, so long as it stays within the worksheet grid.</span></span>
+
+      <span data-ttu-id="dcd68-118">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-118">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: 'getCell(row, column)'
+    fullName: 'getCell(row, column)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCell(row: number, column: number): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-119">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-119">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var cell = worksheet.getCell(0,0);
+              cell.load('address');
+              return ctx.sync().then(function() {
+                  console.log(cell.address);
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: row
+          description: <span data-ttu-id="dcd68-120">取得するセルの行番号。</span><span class="sxs-lookup"><span data-stu-id="dcd68-120">The row number of the cell to be retrieved.</span></span> <span data-ttu-id="dcd68-121">0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-121">Zero-indexed.</span></span>
+          type:
+            - number
+        - id: column
+          description: <span data-ttu-id="dcd68-122">取得するセルの列番号。</span><span class="sxs-lookup"><span data-stu-id="dcd68-122">the column number of the cell to be retrieved.</span></span> <span data-ttu-id="dcd68-123">0 を起点とする番号になります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-123">Zero-indexed.</span></span>
+          type:
+            - number
+  - uid: excel.Excel.Worksheet.getRange
+    summary: |-
+      <span data-ttu-id="dcd68-124">アドレスまたは名前で指定された、セルの単一の四角形のブロックを表す range オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-124">Gets the range object, representing a single rectangular block of cells, specified by the address or name.</span></span>
+
+      <span data-ttu-id="dcd68-125">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-125">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getRange(address)
+    fullName: getRange(address)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(address?: string): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-126">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-126">Examples</span></span>
+
+          ```javascript
+          // Below example uses range address to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Below example uses a named-range to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeName = 'MyRange';
+              var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);
+              range.load('address');
+              return ctx.sync().then(function() {
+                  console.log(range.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: address
+          description: '<span data-ttu-id="dcd68-127">省略可能。</span><span class="sxs-lookup"><span data-stu-id="dcd68-127">Optional.</span></span> <span data-ttu-id="dcd68-128">範囲のアドレスまたは名前を表す文字列。</span><span class="sxs-lookup"><span data-stu-id="dcd68-128">The string representing the address or name of the range.</span></span> <span data-ttu-id="dcd68-129">たとえば、"A1: B2" となります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-129">For example, "A1:B2".</span></span> <span data-ttu-id="dcd68-130">指定されていない場合は、ワークシート全体の範囲が返されます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-130">If not specified, the entire worksheet range is returned.</span></span>'
+          type:
+            - string
+  - uid: excel.Excel.Worksheet.getUsedRange
+    summary: |-
+      <span data-ttu-id="dcd68-131">使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-131">The used range is the smallest range that encompasses any cells that have a value or formatting assigned to them.</span></span> <span data-ttu-id="dcd68-132">ワークシート全体が空白の場合、この関数は左上のセルを返します (つまり、エラーはスローされ*ません*)。</span><span class="sxs-lookup"><span data-stu-id="dcd68-132">If the entire worksheet is blank, this function will return the top left cell (i.e. it will *not* throw an error).</span></span>
+
+      <span data-ttu-id="dcd68-133">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-133">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getUsedRange(valuesOnly)
+    fullName: getUsedRange(valuesOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-134">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-134">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              var usedRange = worksheet.getUsedRange();
+              usedRange.load('address');
+              return ctx.sync().then(function() {
+                      console.log(usedRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: valuesOnly
+          description: '<span data-ttu-id="dcd68-135">省略可能。</span><span class="sxs-lookup"><span data-stu-id="dcd68-135">Optional.</span></span> <span data-ttu-id="dcd68-136">True の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。</span><span class="sxs-lookup"><span data-stu-id="dcd68-136">If true, considers only cells with values as used cells (ignoring formatting).</span></span> <span data-ttu-id="dcd68-137">\[Api セット: ExcelApi 1.2\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-137">\[Api set: ExcelApi 1.2\]</span></span>'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.id
+    summary: |-
+      <span data-ttu-id="dcd68-p111">指定されたブックのワークシートを一意に識別する値を返します。この識別子の値は、ワークシートの名前を変更したり移動したりしても同じままです。値の取得のみ可能です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-p111">Returns a value that uniquely identifies the worksheet in a given workbook. The value of the identifier remains the same even when the worksheet is renamed or moved. Read-only.</span></span>
+
+      <span data-ttu-id="dcd68-141">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-141">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Worksheet.load
+    summary: <span data-ttu-id="dcd68-142">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-142">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="dcd68-143">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-143">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="dcd68-144">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dcd68-144">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="dcd68-145">`load(option?: string | string[]): Excel.Worksheet`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-145">`load(option?: string | string[]): Excel.Worksheet` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="dcd68-146">`load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-146">`load(option?: { select?: string; expand?: string; }): Excel.Worksheet` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="dcd68-147">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-147">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet` - Only available on collection types.</span></span> <span data-ttu-id="dcd68-148">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="dcd68-148">It is similar to the preceding signature.</span></span> <span data-ttu-id="dcd68-149">Top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-149">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="dcd68-150">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-150">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="dcd68-151">Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-151">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.WorksheetLoadOptions): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.WorksheetLoadOptions
+  - uid: excel.Excel.Worksheet.load_1
+    summary: <span data-ttu-id="dcd68-152">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-152">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="dcd68-153">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-153">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dcd68-154">例</span><span class="sxs-lookup"><span data-stu-id="dcd68-154">Examples</span></span>
+
+          ```javascript
+          // Get worksheet properties based on sheet name.
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.load('position')
+              return ctx.sync().then(function() {
+                      console.log(worksheet.position);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="dcd68-155">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="dcd68-155">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Worksheet.load_2
+    summary: <span data-ttu-id="dcd68-156">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-156">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="dcd68-157">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-157">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="dcd68-158">ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-158">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Worksheet.name
+    summary: |-
+      <span data-ttu-id="dcd68-159">ワークシートの表示名。</span><span class="sxs-lookup"><span data-stu-id="dcd68-159">The display name of the worksheet.</span></span>
+
+      <span data-ttu-id="dcd68-160">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-160">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'name: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Worksheet.position
+    summary: |-
+      <span data-ttu-id="dcd68-161">0 を起点とした、ブック内のワークシートの位置。</span><span class="sxs-lookup"><span data-stu-id="dcd68-161">The zero-based position of the worksheet within the workbook.</span></span>
+
+      <span data-ttu-id="dcd68-162">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-162">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: position
+    fullName: position
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'position: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.Worksheet.protection
+    summary: |-
+      <span data-ttu-id="dcd68-163">ワークシートのシート保護オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-163">Returns sheet protection object for a worksheet.</span></span> <span data-ttu-id="dcd68-164">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-164">Read-only.</span></span>
+
+      <span data-ttu-id="dcd68-165">\[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-165">\[ [API set: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: protection
+    fullName: protection
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly protection: Excel.WorksheetProtection;'
+      return:
+        type:
+          - excel.Excel.WorksheetProtection
+  - uid: excel.Excel.Worksheet.set
+    summary: '<span data-ttu-id="dcd68-166">一度に1つのオブジェクトの複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-166">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="dcd68-167">適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="dcd68-167">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="dcd68-168">このメソッドには、次の追加のシグネチャがあります。</span><span class="sxs-lookup"><span data-stu-id="dcd68-168">This method has the following additional signature:</span></span>
+
+      `set(properties: Excel.Worksheet): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.WorksheetUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="dcd68-169">メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。</span><span class="sxs-lookup"><span data-stu-id="dcd68-169">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.WorksheetUpdateData
+        - id: options
+          description: <span data-ttu-id="dcd68-170">プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-170">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.Worksheet.set_1
+    summary: '<span data-ttu-id="dcd68-171">既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-171">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Worksheet): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Worksheet
+  - uid: excel.Excel.Worksheet.tables
+    summary: |-
+      <span data-ttu-id="dcd68-172">ワークシートの一部になっているグラフのコレクション。</span><span class="sxs-lookup"><span data-stu-id="dcd68-172">Collection of tables that are part of the worksheet.</span></span> <span data-ttu-id="dcd68-173">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="dcd68-173">Read-only.</span></span>
+
+      <span data-ttu-id="dcd68-174">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-174">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: tables
+    fullName: tables
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly tables: Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+  - uid: excel.Excel.Worksheet.toJSON
+    summary: '<span data-ttu-id="dcd68-175">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="dcd68-175">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="dcd68-176">.</span><span class="sxs-lookup"><span data-stu-id="dcd68-176"></span></span> <span data-ttu-id="dcd68-177">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="dcd68-177"></span></span><!-- --><span data-ttu-id="dcd68-178">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Worksheet オブジェクトは API オブジェクトであるのに対して`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.WorksheetData`</span><span class="sxs-lookup"><span data-stu-id="dcd68-178">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.Worksheet object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.WorksheetData`</span></span><!-- --><span data-ttu-id="dcd68-179">) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。</span><span class="sxs-lookup"><span data-stu-id="dcd68-179">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.WorksheetData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.WorksheetData
+        description: ''
+  - uid: excel.Excel.Worksheet.visibility
+    summary: |-
+      <span data-ttu-id="dcd68-180">ワークシートの可視性。</span><span class="sxs-lookup"><span data-stu-id="dcd68-180">The Visibility of the worksheet.</span></span>
+
+      <span data-ttu-id="dcd68-181">\[[API set: 表示を読み取るための excelapi 1.1、設定用の 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) 。</span><span class="sxs-lookup"><span data-stu-id="dcd68-181">\[ [API set: ExcelApi 1.1 for reading visibility; 1.2 for setting it.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)</span></span> <span data-ttu-id="dcd68-182">\]</span><span class="sxs-lookup"><span data-stu-id="dcd68-182"></span></span>
+    name: visibility
+    fullName: visibility
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'visibility: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden";'
+      return:
+        type:
+          - Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"
