@@ -1,0 +1,397 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.NamedItem
+    summary: |-
+      セルまたは値の範囲の定義済みの名前を表します。 名前には、プリミティブという名前のオブジェクト、range オブジェクト、または範囲への参照を指定できます。 このオブジェクトを使用して、名前に関連付けられた範囲オブジェクトを取得することができます。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.NamedItem
+    fullName: Excel.NamedItem
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.NamedItem.comment
+      - excel.Excel.NamedItem.context
+      - excel.Excel.NamedItem.delete
+      - excel.Excel.NamedItem.getRange
+      - excel.Excel.NamedItem.getRangeOrNullObject
+      - excel.Excel.NamedItem.load
+      - excel.Excel.NamedItem.load_1
+      - excel.Excel.NamedItem.load_2
+      - excel.Excel.NamedItem.name
+      - excel.Excel.NamedItem.scope
+      - excel.Excel.NamedItem.set
+      - excel.Excel.NamedItem.set_1
+      - excel.Excel.NamedItem.toJSON
+      - excel.Excel.NamedItem.type
+      - excel.Excel.NamedItem.value
+      - excel.Excel.NamedItem.visible
+      - excel.Excel.NamedItem.worksheet
+      - excel.Excel.NamedItem.worksheetOrNullObject
+  - uid: excel.Excel.NamedItem.comment
+    summary: |-
+      この名前に関連付けられているコメントを表します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: comment
+    fullName: comment
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'comment: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.NamedItem.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.NamedItem.delete
+    summary: |-
+      指定された名前を削除します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const totalName = sheet.names.getItemOrNullObject("TotalAmount");
+              totalName.load();
+              await context.sync();
+
+              if (totalName.value) {
+                  totalName.delete();
+
+                  // Replace the named item (TotalAmount) with the actual formula for TotalAmount to avoid displaying #NAME in the cell.
+                  sheet.getRange("D11").values = [["=SUM(ExpensesTable[AMOUNT])"]];
+              } else {
+                  console.log("No named item created for the formula.");
+              }
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.NamedItem.getRange
+    summary: |-
+      名前に関連付けられている範囲オブジェクトを返します。 名前付きアイテムの型が範囲でない場合、エラーをスローします。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Returns the Range object that is associated with the name. 
+          // null if the name is not of the type Range.
+          // Note: This API currently supports only the Workbook scoped items.
+          Excel.run(function (ctx) { 
+              var names = ctx.workbook.names;
+              var range = names.getItem('MyRange').getRange();
+              range.load('address');
+              return ctx.sync().then(function() {
+                  console.log(range.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.NamedItem.getRangeOrNullObject
+    summary: |-
+      名前に関連付けられている範囲オブジェクトを返します。 名前付きアイテムの型が範囲でない場合は、null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRangeOrNullObject()
+    fullName: getRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+  - uid: excel.Excel.NamedItem.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Excel.NamedItem`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Excel.NamedItem`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItem`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.NamedItemLoadOptions): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.NamedItemLoadOptions
+  - uid: excel.Excel.NamedItem.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var names = ctx.workbook.names;
+              var namedItem = names.getItem('MyRange');
+              namedItem.load('type');
+              return ctx.sync().then(function() {
+                      console.log(namedItem.type);
+              });
+          }).catch(function(error) {
+                  console.log("Error: " + error);
+                  if (error instanceof OfficeExtension.Error) {
+                      console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                  }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.NamedItem.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.NamedItem.name
+    summary: |-
+      オブジェクトの名前。 値の取得のみ可能です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly name: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.NamedItem.scope
+    summary: |-
+      ブックまたは特定のワークシートに対して名前のスコープを設定するかどうかを示します。 可能な値は次のとおりです。ワークシート、ブック。 読み取り専用です。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: scope
+    fullName: scope
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly scope: Excel.NamedItemScope | "Worksheet" | "Workbook";'
+      return:
+        type:
+          - Excel.NamedItemScope | "Worksheet" | "Workbook"
+  - uid: excel.Excel.NamedItem.set
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Excel.NamedItem): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - Interfaces.NamedItemUpdateData
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.NamedItem.set_1
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.NamedItem): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.NamedItem
+  - uid: excel.Excel.NamedItem.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel の NamedItem オブジェクトは API オブジェクトであるのに`toJSON`対して、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.NamedItemData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.NamedItemData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.NamedItemData
+        description: ''
+  - uid: excel.Excel.NamedItem.type
+    summary: |-
+      名前の数式によって返される値の型を示します。 詳細については、「Excel. NamedItemType」を参照してください。 読み取り専用です。
+
+      \[[API set: ExcelApi 1.1 For String、Integer、Double、Boolean、Range、Error; 1.7 (配列](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets))\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array";'
+      return:
+        type:
+          - Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array"
+  - uid: excel.Excel.NamedItem.value
+    summary: |-
+      名前の数式で計算された値を表します。 名前付き範囲の場合は範囲のアドレスを返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly value: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.NamedItem.visible
+    summary: |-
+      オブジェクトを表示するかどうかを指定します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: visible
+    fullName: visible
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'visible: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.NamedItem.worksheet
+    summary: |-
+      名前付きのアイテムの対象になるワークシートを返します。 アイテムのスコープがブックに設定されている場合は、エラーをスローします。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: worksheet
+    fullName: worksheet
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly worksheet: Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+  - uid: excel.Excel.NamedItem.worksheetOrNullObject
+    summary: |-
+      名前付きのアイテムの対象になるワークシートを返します。 アイテムがブックを対象にしている場合は、null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: worksheetOrNullObject
+    fullName: worksheetOrNullObject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly worksheetOrNullObject: Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
