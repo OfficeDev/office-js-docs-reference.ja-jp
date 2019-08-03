@@ -1,0 +1,280 @@
+### YamlMime:UniversalReference
+items:
+  - uid: outlook.Office.MasterCategories
+    summary: |-
+      メールボックスのカテゴリマスターリストを表します。
+
+      Outlook では、ユーザーはカテゴリを使用してメッセージと予定を色分けしてグループ化できます。 ユーザーは自分のメールボックスのマスター リストにカテゴリを定義します。 その後、アイテムに 1 つ以上のカテゴリを適用できます。
+
+      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readmailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    isPreview: true
+    name: Office.MasterCategories
+    fullName: Office.MasterCategories
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.MasterCategories.addAsync
+      - outlook.Office.MasterCategories.addAsync_1
+      - outlook.Office.MasterCategories.getAsync
+      - outlook.Office.MasterCategories.getAsync_1
+      - outlook.Office.MasterCategories.removeAsync
+      - outlook.Office.MasterCategories.removeAsync_1
+  - uid: outlook.Office.MasterCategories.addAsync
+    summary: メールボックスのマスターリストにカテゴリを追加します。 各カテゴリには一意の名前を付ける必要がありますが、複数の分類項目で同じ色を使用することができます。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteMailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **エラー**:
+
+      - DuplicateCategory: 提供されているカテゴリの1つは、マスターカテゴリリストに既に含まれています。
+
+      - PermissionDenied: ユーザーにこの操作を実行する権限がありません。
+    isPreview: true
+    name: 'addAsync(categories, options, callback)'
+    fullName: 'addAsync(categories, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(categories: CategoryDetails[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: categories
+          description: メールボックスのマスターリストに追加するカテゴリ。
+          type:
+            - 'CategoryDetails[]'
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.MasterCategories.addAsync_1
+    summary: メールボックスのマスターリストにカテゴリを追加します。 各カテゴリには一意の名前を付ける必要がありますが、複数の分類項目で同じ色を使用することができます。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteMailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **エラー**:
+
+      - DuplicateCategory: 提供されているカテゴリの1つは、マスターカテゴリリストに既に含まれています。
+
+      - PermissionDenied: ユーザーにこの操作を実行する権限がありません。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      var masterCategoriesToAdd = [
+          {
+              "displayName": "Urgent!",
+              "color": Office.MailboxEnums.CategoryColor.Preset0
+          }
+      ];
+
+      Office.context.mailbox.masterCategories.addAsync(masterCategoriesToAdd, function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log("Successfully added categories to master list");
+          } else {
+              console.log("masterCategories.addAsync call failed with error: " + asyncResult.error.message);
+          }
+      });
+      ```
+    isPreview: true
+    name: 'addAsync(categories, callback)'
+    fullName: 'addAsync(categories, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(categories: CategoryDetails[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: categories
+          description: メールボックスのマスターリストに追加するカテゴリ。
+          type:
+            - 'CategoryDetails[]'
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.MasterCategories.getAsync
+    summary: メールボックスのカテゴリのマスターリストを取得します。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readmailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    isPreview: true
+    name: 'getAsync(options, callback)'
+    fullName: 'getAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
+  - uid: outlook.Office.MasterCategories.getAsync_1
+    summary: メールボックスのカテゴリのマスターリストを取得します。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readmailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.masterCategories.getAsync(function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+              console.log("Action failed with error: " + asyncResult.error.message);
+          } else {
+              var masterCategories = asyncResult.value;
+              console.log("Master categories:");
+              masterCategories.forEach(function (item) {
+                  console.log("-- " + JSON.stringify(item));
+              });
+          }
+      });
+      ```
+    isPreview: true
+    name: getAsync(callback)
+    fullName: getAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
+  - uid: outlook.Office.MasterCategories.removeAsync
+    summary: メールボックスのマスターリストからカテゴリを削除します。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteMailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **エラー**:
+
+      - PermissionDenied: ユーザーにこの操作を実行する権限がありません。
+    isPreview: true
+    name: 'removeAsync(categories, options, callback)'
+    fullName: 'removeAsync(categories, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: categories
+          description: メールボックスのマスターリストから削除するカテゴリ。
+          type:
+            - 'string[]'
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの削除が失敗した場合、asyncResult. error プロパティにエラーコードが格納されます。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.MasterCategories.removeAsync_1
+    summary: メールボックスのマスターリストからカテゴリを削除します。
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteMailbox
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **エラー**:
+
+      - PermissionDenied: ユーザーにこの操作を実行する権限がありません。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      var masterCategoriesToRemove = ["Urgent!"];
+
+      Office.context.mailbox.masterCategories.removeAsync(masterCategoriesToRemove, function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log("Successfully removed categories from master list");
+          } else {
+              console.log("masterCategories.removeAsync call failed with error: " + asyncResult.error.message);
+          }
+      });
+      ```
+    isPreview: true
+    name: 'removeAsync(categories, callback)'
+    fullName: 'removeAsync(categories, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAsync(categories: string[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: categories
+          description: メールボックスのマスターリストから削除するカテゴリ。
+          type:
+            - 'string[]'
+        - id: callback
+          description: |-
+            メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの削除が失敗した場合、asyncResult. error プロパティにエラーコードが格納されます。
+
+            \[Api セット: メールボックスのプレビュー\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
