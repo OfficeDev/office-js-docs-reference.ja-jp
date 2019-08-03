@@ -1,0 +1,202 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.UI
+    summary: |-
+      Office アドインで、ダイアログボックスなどの UI コンポーネントを作成および操作するために使用できるオブジェクトとメソッドを提供します。
+
+      「[Office アドインでダイアログ API を使用する」を](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins)参照してください。<!-- -->詳細については、「」を参照してください。
+    name: Office.UI
+    fullName: Office.UI
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.UI.closeContainer
+      - office.Office.UI.displayDialogAsync
+      - office.Office.UI.displayDialogAsync_1
+      - office.Office.UI.messageParent
+  - uid: office.Office.UI.closeContainer
+    summary: JavaScript が実行されている UI コンテナーを閉じます。
+    remarks: |-
+      **ホスト**: Excel、Word、PowerPoint、Outlook (最小要件セット: メールボックス 1.5)
+
+      **要件セット**: [](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets) //
+
+      このメソッドの動作は、次のように指定されています。
+
+      - UI レスコマンドボタンから呼び出されます。効果はありません。 displayDialogAsync によって開かれたダイアログは開いたままになります。
+
+      - 作業ウィンドウから呼び出されます。作業ウィンドウが閉じます。 DisplayDialogAsync によって開かれたすべてのダイアログも閉じます。 作業ウィンドウが固定されていて、ユーザーによって固定されている場合は、固定解除されます。
+
+      - モジュール拡張機能から呼び出されます。効果はありません。
+    name: closeContainer()
+    fullName: closeContainer()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'closeContainer(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: office.Office.UI.displayDialogAsync
+    summary: ユーザーの情報を表示または収集したり、Web ナビゲーションを容易にしたりするためのダイアログを表示します。
+    remarks: |-
+      **ホスト**: Word、Excel、Outlook、PowerPoint
+
+      **要件セット**:
+
+      - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+      - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+      このメソッドは、Word、Excel、または PowerPoint のアドインの場合は、[メールボックス要件セット 1.4] の [テキスト] で使用できます。 マニフェストで要件セットを指定する方法の詳細については、「 [Office ホストと API 要件を指定](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)する」を参照してください。<!-- -->.
+
+      最初のページは、親ページと同じドメイン (startAddress パラメーター) に配置する必要があります。 初期ページが読み込まれた後、他のドメインに移動できます。
+
+      ページ呼び出し`office.context.ui.messageParent`は、親ページと同じドメインにある必要もあります。
+
+      **設計上の考慮事項**:
+
+      ダイアログ ボックスの設計には次のような考慮事項が適用されます。
+
+      - Office アドイン作業ウィンドウでは、一度に1つのダイアログボックスを開くことができます。 アドインコマンド (カスタムリボンボタンまたはメニュー項目) から複数のダイアログを同時に開くことができます。
+
+      - ユーザーは、すべてのダイアログ ボックスを移動およびサイズ変更できます。
+
+      - すべてのダイアログ ボックスは、画面の中央に開かれます。
+
+      - ダイアログ ボックスは、ホスト アプリケーションの前面に、作成された順序で表示されます。
+
+      ダイアログ ボックスは次のような場合に使用します。
+
+      - ユーザーの資格情報を収集する認証ページを表示します。
+
+      - ShowTaskpane または ExecuteAction コマンドから、エラー/進捗/入力画面を表示します。
+
+      - ユーザーがタスクの完了に利用できる表示領域を一時的に拡大します。
+
+      ドキュメントとの対話にはダイアログ ボックスを使用しないでください。代わりに作業ウィンドウを使用してください。
+
+      ダイアログ ボックスの作成に使用できるデザイン パターンについては、GitHub の Office アドイン UX デザイン パターン リポジトリの「[クライアント ダイアログ](https://github.com/OfficeDev/Office-Add-in-UX-Design-Patterns/blob/master/Patterns/Client_Dialog.md)」を参照してください。
+
+      **Displaydialogasync のエラー**:
+
+      <table> <tr> <th>コード番号</th> <th>意味</th> </tr> <tr> <td>12004</td> <td>DisplayDialogAsync に渡された URL のドメインが信頼されていません。 ドメインは、ホスト ページと同じドメイン (プロトコルとポート番号を含む) にするか、またはアドイン マニフェストの <AppDomains> セクションで登録する必要があります。</td> </tr> <tr> <td>12005</td> <td>DisplayDialogAsync に渡される URL は、HTTP プロトコルを使用します。 HTTPS が必要です。 (Office の一部のバージョンでは、12004 で返されるのと同じエラー メッセージが、12005 でも返されます)。</td> </tr> <tr> <td>12007</td> <td>ダイアログ ボックスは、作業ウィンドウで既に開いています。作業ウィンドウ アドインで一度に開けるダイアログ ボックスは 1 つだけです。</td> </tr> <tr> <td>12009</td> <td>ダイアログ ボックスを無視するようにユーザーが選択しました。 このエラーは、ダイアログの表示をアドインに許可しないようにユーザーが選択すると、Office のオンライン バージョンで発生することがあります。</td> </tr> </table>
+
+      DisplayDialogAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して、次の情報を返すことができます。
+
+      <table> <tr> <th>プロパティ</th> <th>使用対象</th> </tr> <tr> <td>AsyncResult.value</td> <td>Dialog オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>ユーザー定義の object または値を asyncContext パラメーターとして渡した場合に、そのオブジェクトまたは値にアクセスします。</td> </tr> </table>
+    name: 'displayDialogAsync(startAddress, options, callback)'
+    fullName: 'displayDialogAsync(startAddress, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult<Dialog>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: startAddress
+          description: ダイアログに表示される最初の HTTPS URL を受け入れます。
+          type:
+            - string
+        - id: options
+          description: '省略可能。 ダイアログの表示を定義するのには、 [Office のオプション](xref:office.Office.DialogOptions)オブジェクトを受け取ります。'
+          type:
+            - office.Office.DialogOptions
+        - id: callback
+          description: 省略可能。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult は Dialog オブジェクトを指定します。
+          type:
+            - '(result: AsyncResult<Dialog>) => void'
+  - uid: office.Office.UI.displayDialogAsync_1
+    summary: ユーザーの情報を表示または収集したり、Web ナビゲーションを容易にしたりするためのダイアログを表示します。
+    remarks: |-
+      **ホスト**: Excel、Outlook、PowerPoint、Word
+
+      **要件セット**:
+
+      - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+      - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+      このメソッドは、Word、Excel、または PowerPoint のアドインの場合は、[メールボックス要件セット 1.4] の [テキスト] で使用できます。 マニフェストで要件セットを指定する方法の詳細については、「 [Office ホストと API 要件を指定](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)する」を参照してください。<!-- -->.
+
+      最初のページは、親ページと同じドメイン (startAddress パラメーター) に配置する必要があります。 初期ページが読み込まれた後、他のドメインに移動できます。
+
+      ページ呼び出し`office.context.ui.messageParent`は、親ページと同じドメインにある必要もあります。
+
+      **設計上の考慮事項**:
+
+      ダイアログ ボックスの設計には次のような考慮事項が適用されます。
+
+      - Office アドイン作業ウィンドウでは、一度に1つのダイアログボックスを開くことができます。 アドインコマンド (カスタムリボンボタンまたはメニュー項目) から複数のダイアログを同時に開くことができます。
+
+      - ユーザーは、すべてのダイアログ ボックスを移動およびサイズ変更できます。
+
+      - すべてのダイアログ ボックスは、画面の中央に開かれます。
+
+      - ダイアログ ボックスは、ホスト アプリケーションの前面に、作成された順序で表示されます。
+
+      ダイアログ ボックスは次のような場合に使用します。
+
+      - ユーザーの資格情報を収集する認証ページを表示します。
+
+      - ShowTaskpane または ExecuteAction コマンドから、エラー/進捗/入力画面を表示します。
+
+      - ユーザーがタスクの完了に利用できる表示領域を一時的に拡大します。
+
+      ドキュメントとの対話にはダイアログ ボックスを使用しないでください。代わりに作業ウィンドウを使用してください。
+
+      ダイアログ ボックスの作成に使用できるデザイン パターンについては、GitHub の Office アドイン UX デザイン パターン リポジトリの「[クライアント ダイアログ](https://github.com/OfficeDev/Office-Add-in-UX-Design-Patterns/blob/master/Patterns/Client_Dialog.md)」を参照してください。
+
+      **Displaydialogasync のエラー**:
+
+      <table> <tr> <th>コード番号</th> <th>意味</th> </tr> <tr> <td>12004</td> <td>DisplayDialogAsync に渡された URL のドメインが信頼されていません。 ドメインは、ホスト ページと同じドメイン (プロトコルとポート番号を含む) にするか、またはアドイン マニフェストの <AppDomains> セクションで登録する必要があります。</td> </tr> <tr> <td>12005</td> <td>DisplayDialogAsync に渡される URL は、HTTP プロトコルを使用します。 HTTPS が必要です。 (Office の一部のバージョンでは、12004 で返されるのと同じエラー メッセージが、12005 でも返されます)。</td> </tr> <tr> <td>12007</td> <td>ダイアログ ボックスは、作業ウィンドウで既に開いています。作業ウィンドウ アドインで一度に開けるダイアログ ボックスは 1 つだけです。</td> </tr> <tr> <td>12009</td> <td>ダイアログ ボックスを無視するようにユーザーが選択しました。 このエラーは、ダイアログの表示をアドインに許可しないようにユーザーが選択すると、Office のオンライン バージョンで発生することがあります。</td> </tr> </table>
+
+      DisplayDialogAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して、次の情報を返すことができます。
+
+      <table> <tr> <th>プロパティ</th> <th>使用対象</th> </tr> <tr> <td>AsyncResult.value</td> <td>Dialog オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>ユーザー定義の object または値を asyncContext パラメーターとして渡した場合に、そのオブジェクトまたは値にアクセスします。</td> </tr> </table>
+    name: 'displayDialogAsync(startAddress, callback)'
+    fullName: 'displayDialogAsync(startAddress, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayDialogAsync(startAddress: string, callback?: (result: AsyncResult<Dialog>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: startAddress
+          description: ダイアログに表示される最初の HTTPS URL を受け入れます。
+          type:
+            - string
+        - id: callback
+          description: 省略可能。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult は Dialog オブジェクトを指定します。
+          type:
+            - '(result: AsyncResult<Dialog>) => void'
+  - uid: office.Office.UI.messageParent
+    summary: メッセージをダイアログ ボックスからその親/オープナー ページに配信します。 この API を呼び出すページは、親と同じドメインにある必要があります。
+    remarks: '**要件セット**: [](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets) //'
+    name: messageParent(message)
+    fullName: messageParent(message)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'messageParent(message: boolean | string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: message
+          description: ダイアログからメッセージを受け付け、アドインに配信します。 Boolean に加えて、JSON と XML を含む文字列にシリアル化できるすべてのものを送信できます。
+          type:
+            - boolean | string
