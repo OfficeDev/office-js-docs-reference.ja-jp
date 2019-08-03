@@ -1,0 +1,293 @@
+### YamlMime:UniversalReference
+items:
+  - uid: outlook.Office.Recurrence
+    summary: |-
+      定期的オブジェクトは、予定の定期的なパターンを取得および設定するメソッドを提供しますが、会議出席依頼の定期的なパターンのみを取得します。 SeriesTime、recurrenceType、recurrenceProperties、および recurrenceTimeZone (省略可能) の各キーを含むディクショナリがあります。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **示し**
+
+      <table> <tr> <th>State</th> <th>可能?</th> <th>ビュー?</th> </tr> <tr> <td>予定の開催者-シリーズの新規作成</td> <td>はい (setAsync)</td> <td>はい (getAsync)</td> </tr> <tr> <td>予定の開催者-新規インスタンス</td> <td>いいえ (setAsync はエラーを返します)</td> <td>はい (getAsync)</td> </tr> <tr> <td>予定の出席者-定期的なアイテムの読み取り</td> <td>いいえ (setAsync を使用できません)</td> <td>はい (定期的なアイテム)</td> </tr> <tr> <td>予定の出席者-インスタンスの読み取り</td> <td>いいえ (setAsync を使用できません)</td> <td>はい (定期的なアイテム)</td> </tr> <tr> <td>会議出席依頼-定期的なアイテムの読み取り</td> <td>いいえ (setAsync を使用できません)</td> <td>はい (定期的なアイテム)</td> </tr> <tr> <td>会議出席依頼-インスタンスの読み取り</td> <td>いいえ (setAsync を使用できません)</td> <td>はい (定期的なアイテム)</td> </tr> </table>
+    name: Office.Recurrence
+    fullName: Office.Recurrence
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.Recurrence.getAsync
+      - outlook.Office.Recurrence.getAsync_1
+      - outlook.Office.Recurrence.setAsync
+      - outlook.Office.Recurrence.setAsync_1
+      - outlook.Office.Recurrence.recurrenceProperties
+      - outlook.Office.Recurrence.recurrenceTimeZone
+      - outlook.Office.Recurrence.recurrenceType
+      - outlook.Office.Recurrence.seriesTime
+  - uid: outlook.Office.Recurrence.getAsync
+    summary: |-
+      定期的な予定の現在の繰り返しオブジェクトを返します。
+
+      このメソッドは、定期的な予定の繰り返しオブジェクト全体を返します。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: 'getAsync(options, callback)'
+    fullName: 'getAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 Result `value`のプロパティは、定期的なオブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<Recurrence>) => void'
+  - uid: outlook.Office.Recurrence.getAsync_1
+    summary: |-
+      定期的な予定の現在の繰り返しオブジェクトを返します。
+
+      このメソッドは、定期的な予定の繰り返しオブジェクト全体を返します。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // This example gets the Recurrence object of an appointment item.
+      Office.context.mailbox.item.recurrence.getAsync(callback);
+
+      function callback(asyncResult) {
+          var context = asyncResult.context;
+          var recurrence = asyncResult.value;
+          if (!recurrence) {
+              console.log("One-time appointment or meeting");
+          } else {
+              console.log(JSON.stringify(recurrence));
+          }
+      }
+
+      // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
+      // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
+      // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
+      // recurrence date and time properties.
+      Recurrence = {
+          "recurrenceType": "weekly",
+          "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
+          "seriesTime": {seriesTimeObject},
+          "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
+      }
+      ```
+    name: getAsync(callback)
+    fullName: getAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 Result `value`のプロパティは、定期的なオブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<Recurrence>) => void'
+  - uid: outlook.Office.Recurrence.setAsync
+    summary: |-
+      予定の定期的なパターンを設定します。
+
+      **注**: setasync は series アイテムに対してのみ使用可能で、インスタンスアイテムに対してのみ使用できます。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成
+
+      **エラー**:
+
+      - InvalidEndTime: 予定の終了時刻が開始時刻より前になっています。
+    name: 'setAsync(recurrencePattern, options, callback)'
+    fullName: 'setAsync(recurrencePattern, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(recurrencePattern: Recurrence, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: recurrencePattern
+          description: 定期的なオブジェクト。
+          type:
+            - outlook.Office.Recurrence
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Recurrence.setAsync_1
+    summary: |-
+      予定の定期的なパターンを設定します。
+
+      **注**: setasync は series アイテムに対してのみ使用可能で、インスタンスアイテムに対してのみ使用できます。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成
+
+      **エラー**:
+
+      - InvalidEndTime: 予定の終了時刻が開始時刻より前になっています。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // The following example sets the recurrence pattern of an appointment series.
+      var seriesTimeObject = new Office.SeriesTime();
+      seriesTimeObject.setStartDate(2019,10,2);
+      seriesTimeObject.setEndDate(2019,11,2);
+      seriesTimeObject.setStartTime(10,30);
+      seriesTimeObject.setDuration(30);
+
+      var pattern = {
+          "seriesTime": seriesTimeObject,
+          "recurrenceType": "weekly",
+          "recurrenceProperties": {"interval": 1, "days": ["tue", "thu"], "firstDayOfWeek": "sun"},
+          "recurrenceTimeZone": {"name": "Pacific Standard Time"}};
+
+      Office.context.mailbox.item.recurrence.setAsync(pattern, callback);
+
+      function callback(asyncResult)
+      {
+          console.log(JSON.stringify(asyncResult));
+      }
+
+      // Result: This created a recurring event from November 2, 2019 to December 2, 2019
+      //         at 10:30 A.M. to 11 A.M. PST every Tuesday and Thursday.
+      ```
+    name: 'setAsync(recurrencePattern, callback)'
+    fullName: 'setAsync(recurrencePattern, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(recurrencePattern: Recurrence, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: recurrencePattern
+          description: 定期的なオブジェクト。
+          type:
+            - outlook.Office.Recurrence
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Recurrence.recurrenceProperties
+    summary: |-
+      一連の定期的な予定のプロパティを取得または設定します。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: recurrenceProperties
+    fullName: recurrenceProperties
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'recurrenceProperties: RecurrenceProperties;'
+      return:
+        type:
+          - outlook.Office.RecurrenceProperties
+  - uid: outlook.Office.Recurrence.recurrenceTimeZone
+    summary: |-
+      一連の定期的な予定のプロパティを取得または設定します。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: recurrenceTimeZone
+    fullName: recurrenceTimeZone
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'recurrenceTimeZone: RecurrenceTimeZone;'
+      return:
+        type:
+          - RecurrenceTimeZone
+  - uid: outlook.Office.Recurrence.recurrenceType
+    summary: |-
+      一連の定期的な予定の種類を取得または設定します。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: recurrenceType
+    fullName: recurrenceType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'recurrenceType: MailboxEnums.RecurrenceType | string;'
+      return:
+        type:
+          - MailboxEnums.RecurrenceType | string
+  - uid: outlook.Office.Recurrence.seriesTime
+    summary: |-
+      [SeriesTime](xref:outlook.Office.SeriesTime)オブジェクトを使用すると、定期的な予定のシリーズの開始日と終了日と、通常はインスタンスの開始時刻と終了時刻を管理できます。 **このオブジェクトは UTC 時刻ではありません。** 代わりに、recurrenceTimeZone 値で指定されたタイムゾーン、またはアイテムのタイムゾーンに既定で設定されます。
+
+      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: seriesTime
+    fullName: seriesTime
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'seriesTime: SeriesTime;'
+      return:
+        type:
+          - outlook.Office.SeriesTime
