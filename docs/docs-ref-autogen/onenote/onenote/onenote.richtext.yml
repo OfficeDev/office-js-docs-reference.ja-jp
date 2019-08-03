@@ -1,0 +1,280 @@
+### YamlMime:UniversalReference
+items:
+  - uid: onenote.OneNote.RichText
+    summary: |-
+      Paragraph 内の RichText オブジェクトを表します。
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: OneNote.RichText
+    fullName: OneNote.RichText
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: onenote
+    children:
+      - onenote.OneNote.RichText.context
+      - onenote.OneNote.RichText.getHtml
+      - onenote.OneNote.RichText.id
+      - onenote.OneNote.RichText.languageId
+      - onenote.OneNote.RichText.load
+      - onenote.OneNote.RichText.load_1
+      - onenote.OneNote.RichText.load_2
+      - onenote.OneNote.RichText.paragraph
+      - onenote.OneNote.RichText.text
+      - onenote.OneNote.RichText.toJSON
+      - onenote.OneNote.RichText.track
+      - onenote.OneNote.RichText.untrack
+  - uid: onenote.OneNote.RichText.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - onenote.OneNote.RequestContext
+  - uid: onenote.OneNote.RichText.getHtml
+    summary: |-
+      リッチ テキストの HTML を取得します
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: getHtml()
+    fullName: getHtml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: リッチテキストの html
+  - uid: onenote.OneNote.RichText.id
+    summary: |-
+      RichText オブジェクトの ID を取得します。 読み取り専用です。
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: onenote.OneNote.RichText.languageId
+    summary: |-
+      テキストの言語 ID です。 読み取り専用です。
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: languageId
+    fullName: languageId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly languageId: string;'
+      return:
+        type:
+          - string
+  - uid: onenote.OneNote.RichText.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): OneNote.RichText`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): OneNote.RichText`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OneNote.Interfaces.RichTextLoadOptions): OneNote.RichText;'
+      return:
+        type:
+          - onenote.OneNote.RichText
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - onenote.OneNote.Interfaces.RichTextLoadOptions
+  - uid: onenote.OneNote.RichText.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): OneNote.RichText;'
+      return:
+        type:
+          - onenote.OneNote.RichText
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          OneNote.run(function (context) {
+
+              // Get the collection of pageContent items from the page.
+              var pageContents = context.application.getActivePage().contents;
+
+              // Get the first PageContent on the page, and then get its outline's paragraphs.
+              var outlinePageContents = ;
+              var paragraphs = ;
+              var richTextParagraphs = ;
+              // Queue a command to load the id and type of each page content in the outline.
+              pageContents.load("id,type");
+
+              // Run the queued commands, and return a promise to indicate task completion.
+              return context.sync()
+                  .then(function () {
+                      // Load all page contents of type Outline
+                      $.each(pageContents.items, function(index, pageContent) {
+                          if(pageContent.type == 'Outline')
+                          {
+                              pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');
+                              outlinePageContents.push(pageContent);
+                          }
+                      });
+                      return context.sync();
+                  })
+                  .then(function () {
+                      // Load all rich text paragraphs across outlines
+                      $.each(outlinePageContents, function(index, outlinePageContent) {
+                          var outline = outlinePageContent.outline;
+                          paragraphs = paragraphs.concat(outline.paragraphs.items);
+                      });
+                      $.each(paragraphs, function(index, paragraph) {
+                          if(paragraph.type == 'RichText')
+                          {
+                              richTextParagraphs.push(paragraph);
+                              paragraph.load("id,richText/text");
+                          }
+                      });
+                      return context.sync();
+                  })
+                  .then(function () {
+                      // Display all rich text paragraphs to the console
+                      $.each(richTextParagraphs, function(index, richTextParagraph) {
+                          var richText = richTextParagraph.richText;
+                          console.log(
+                              "Paragraph found with richtext content : " + 
+                              richText.text + " and richtext id : " + richText.id);
+                      });
+                      return context.sync();
+                  });
+          });
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          }); 
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: onenote.OneNote.RichText.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.RichText;'
+      return:
+        type:
+          - onenote.OneNote.RichText
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: onenote.OneNote.RichText.paragraph
+    summary: |-
+      RichText オブジェクトを含む Paragraph オブジェクトを取得します。 読み取り専用です。
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: paragraph
+    fullName: paragraph
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly paragraph: OneNote.Paragraph;'
+      return:
+        type:
+          - onenote.OneNote.Paragraph
+  - uid: onenote.OneNote.RichText.text
+    summary: |-
+      RichText オブジェクトのテキスト コンテンツを取得します。 読み取り専用です。
+
+      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly text: string;'
+      return:
+        type:
+          - string
+  - uid: onenote.OneNote.RichText.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の "リッチな形式" オブジェクトは API オブジェクトである`toJSON`のに対して、メソッドはプレーンな JavaScript オブジェクト (として入力します) を返します。`OneNote.Interfaces.RichTextData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): OneNote.Interfaces.RichTextData;'
+      return:
+        type:
+          - onenote.OneNote.Interfaces.RichTextData
+        description: ''
+  - uid: onenote.OneNote.RichText.track
+    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): OneNote.RichText;'
+      return:
+        type:
+          - onenote.OneNote.RichText
+        description: ''
+  - uid: onenote.OneNote.RichText.untrack
+    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): OneNote.RichText;'
+      return:
+        type:
+          - onenote.OneNote.RichText
+        description: ''

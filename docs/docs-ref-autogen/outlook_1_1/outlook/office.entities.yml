@@ -1,0 +1,184 @@
+### YamlMime:UniversalReference
+items:
+  - uid: Outlook.Office.Entities
+    summary: |-
+      電子メール メッセージまたは予定に含まれているエンティティのコレクションを表します。 閲覧モードのみ。
+
+      エンティティオブジェクトは、アイテム (電子メールメッセージまたは予定) に、サーバーによって検出された1つ以上のエンティティが含まれている場合に、getEntities および getEntitiesByType メソッドによって返されるエンティティ配列のコンテナーです。 これらのエンティティをコード内で使用することにより、アイテム内のアドレスへのマップなどの追加のコンテキスト情報をビューアーに提供したり、アイテム内の電話番号に対してダイヤラーを開いたりできます。
+
+      プロパティで指定された型のエンティティがアイテム内に存在しない場合、そのエンティティに関連付けられているプロパティは null になります。 たとえば、メッセージに番地と電話番号が含まれている場合、addresses プロパティと phoneNumbers プロパティには情報が含まれ、その他のプロパティは null になります。
+
+      住所として認識されるには、文字列に米国の住所 (少なくとも番地、通り名、都市名、州名、郵便番号の要素を含む) が含まれている必要があります。
+
+      電話番号として認識されるためには、北アメリカの電話番号の形式を文字列に含める必要があります。
+
+      エンティティの認識には、大量のデータの機械学習に基づいた自然言語認識を利用しています。エンティティの認識は決定論的ではなく、結果がアイテムの特定のコンテキストに左右されることがあります。
+
+      GetEntitiesByType メソッドによってプロパティ配列が返される場合、指定されたエンティティのプロパティだけにデータが含まれます。その他のプロパティはすべて null になります。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: Office.Entities
+    fullName: Office.Entities
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook
+    children:
+      - Outlook.Office.Entities.addresses
+      - Outlook.Office.Entities.contacts
+      - Outlook.Office.Entities.emailAddresses
+      - Outlook.Office.Entities.meetingSuggestions
+      - Outlook.Office.Entities.phoneNumbers
+      - Outlook.Office.Entities.taskSuggestions
+      - Outlook.Office.Entities.urls
+  - uid: Outlook.Office.Entities.addresses
+    summary: 電子メール メッセージまたは予定に含まれている物理的な住所 (番地または郵送先住所) を取得します。
+    name: addresses
+    fullName: addresses
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'addresses: string[];'
+      return:
+        type:
+          - 'string[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);
+          ```
+  - uid: Outlook.Office.Entities.contacts
+    summary: 電子メール アドレスまたは予定に含まれている連絡先を取得します。
+    name: contacts
+    fullName: contacts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'contacts: Contact[];'
+      return:
+        type:
+          - 'Contact[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var contacts = item.getEntitiesByType(Office.MailboxEnums.EntityType.Contact);
+          ```
+  - uid: Outlook.Office.Entities.emailAddresses
+    summary: 電子メール メッセージまたは予定に含まれている電子メール アドレスを取得します。
+    name: emailAddresses
+    fullName: emailAddresses
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'emailAddresses: string[];'
+      return:
+        type:
+          - 'string[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var emailAddresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.EmailAddress);
+          ```
+  - uid: Outlook.Office.Entities.meetingSuggestions
+    summary: 電子メール メッセージ含まれている会議の提案を取得します。
+    name: meetingSuggestions
+    fullName: meetingSuggestions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'meetingSuggestions: MeetingSuggestion[];'
+      return:
+        type:
+          - 'MeetingSuggestion[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var meetingSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.MeetingSuggestion);
+          ```
+  - uid: Outlook.Office.Entities.phoneNumbers
+    summary: 電子メール メッセージや予定に含まれている電話番号を取得します。
+    name: phoneNumbers
+    fullName: phoneNumbers
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'phoneNumbers: PhoneNumber[];'
+      return:
+        type:
+          - 'PhoneNumber[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);
+          ```
+  - uid: Outlook.Office.Entities.taskSuggestions
+    summary: 電子メール メッセージまたは予定に含まれている、タスクの提案を取得します。
+    name: taskSuggestions
+    fullName: taskSuggestions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'taskSuggestions: string[];'
+      return:
+        type:
+          - 'string[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var taskSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.TaskSuggestion);
+          ```
+  - uid: Outlook.Office.Entities.urls
+    summary: 電子メール メッセージまたは予定に含まれているインターネット URL を取得します。
+    name: urls
+    fullName: urls
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'urls: string[];'
+      return:
+        type:
+          - 'string[]'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var item = Office.context.mailbox.item;
+          var urls = item.getEntitiesByType(Office.MailboxEnums.EntityType.Url);
+          ```

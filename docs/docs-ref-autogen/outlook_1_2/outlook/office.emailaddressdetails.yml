@@ -1,0 +1,114 @@
+### YamlMime:UniversalReference
+items:
+  - uid: Outlook.Office.EmailAddressDetails
+    summary: |-
+      電子メール メッセージまたは予定の送信者または指定受信者の電子メール プロパティを提供します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+    name: Office.EmailAddressDetails
+    fullName: Office.EmailAddressDetails
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook
+    children:
+      - Outlook.Office.EmailAddressDetails.appointmentResponse
+      - Outlook.Office.EmailAddressDetails.displayName
+      - Outlook.Office.EmailAddressDetails.emailAddress
+      - Outlook.Office.EmailAddressDetails.recipientType
+  - uid: Outlook.Office.EmailAddressDetails.appointmentResponse
+    summary: 予定に対して出席者が戻した応答を取得します。 このプロパティは、予定の出席者にのみ適用されます。このプロパティは、任意出席者または Requiredatthe Dees プロパティで表されます。 このプロパティは、他のシナリオでは undefined を返します。
+    name: appointmentResponse
+    fullName: appointmentResponse
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'appointmentResponse: MailboxEnums.ResponseType | string;'
+      return:
+        type:
+          - MailboxEnums.ResponseType | string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // The following sample provides the responses from required attendees.
+          // Note that this sample needs the add-in to be in Appointment Read (Attendee) mode.
+          var requiredAttendees = Office.context.mailbox.item.requiredAttendees;
+          console.log("There are " + requiredAttendees.length + " required attendees.")
+          requiredAttendees.forEach(function (requiredAttendee) {
+              console.log("Attendee " + requiredAttendee.displayName + ": " + requiredAttendee.appointmentResponse);
+          });
+          ```
+  - uid: Outlook.Office.EmailAddressDetails.displayName
+    summary: 電子メール アドレスに関連付けられた表示名を取得します。
+    name: displayName
+    fullName: displayName
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'displayName: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var organizerName = Office.context.mailbox.item.organizer.displayName;
+          console.log("Organizer: " + organizerName);
+          ```
+  - uid: Outlook.Office.EmailAddressDetails.emailAddress
+    summary: SMTP 電子メール アドレスを取得します。
+    name: emailAddress
+    fullName: emailAddress
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'emailAddress: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var organizerAddress = Office.context.mailbox.item.organizer.emailAddress;
+          console.log("Organizer's email address: " + organizerAddress);
+          ```
+  - uid: Outlook.Office.EmailAddressDetails.recipientType
+    summary: 受信者の電子メール アドレスの種類を取得します。
+    name: recipientType
+    fullName: recipientType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'recipientType: MailboxEnums.RecipientType | string;'
+      return:
+        type:
+          - MailboxEnums.RecipientType | string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          var requiredAttendees = Office.context.mailbox.item.requiredAttendees;
+          console.log("There are " + requiredAttendees.length + " required attendees.")
+          requiredAttendees.forEach(function (requiredAttendee) {
+              console.log("Attendee " + requiredAttendee.displayName + ": " + requiredAttendee.recipientType);
+          });
+          ```

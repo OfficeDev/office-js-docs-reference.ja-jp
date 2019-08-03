@@ -1,0 +1,228 @@
+### YamlMime:UniversalReference
+items:
+  - uid: visio.Visio.Comment
+    summary: |-
+      コメントを表します。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.Comment
+    fullName: Visio.Comment
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: visio
+    children:
+      - visio.Visio.Comment.author
+      - visio.Visio.Comment.context
+      - visio.Visio.Comment.date
+      - visio.Visio.Comment.load
+      - visio.Visio.Comment.load_1
+      - visio.Visio.Comment.load_2
+      - visio.Visio.Comment.set
+      - visio.Visio.Comment.set_1
+      - visio.Visio.Comment.text
+      - visio.Visio.Comment.toJSON
+  - uid: visio.Visio.Comment.author
+    summary: |-
+      コメントの作成者の名前を指定する文字列です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: author
+    fullName: author
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'author: string;'
+      return:
+        type:
+          - string
+  - uid: visio.Visio.Comment.context
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - visio.Visio.RequestContext
+  - uid: visio.Visio.Comment.date
+    summary: |-
+      コメントが作成された日付を指定する文字列です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: date
+    fullName: date
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'date: string;'
+      return:
+        type:
+          - string
+  - uid: visio.Visio.Comment.load
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Visio.Comment`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Visio.Comment`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Comment`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Visio.run(session, function (ctx) {
+          var activePage = ctx.document.getActivePage();
+          var shapeName = "Position Belt.41";
+          var shape = activePage.shapes.getItem(shapeName);
+          var shapeComments= shape.comments;
+          shapeComments.load(["author", "text"]);
+          return ctx.sync().then(function () {
+              for(var i = 0; i < shapeComments.items.length; i++)
+              {
+                  var comment = shapeComments.items[i];
+                  console.log("comment Author: " + comment.author);
+                  console.log("Comment Text: " + comment.text);
+                  console.log("Date " + comment.date);
+              }
+          });
+      }).catch(function(error) {
+          console.log("Error: " + error);
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Visio.Interfaces.CommentLoadOptions): Visio.Comment;'
+      return:
+        type:
+          - visio.Visio.Comment
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - visio.Visio.Interfaces.CommentLoadOptions
+  - uid: visio.Visio.Comment.load_1
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Visio.Comment;'
+      return:
+        type:
+          - visio.Visio.Comment
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: visio.Visio.Comment.load_2
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Comment;'
+      return:
+        type:
+          - visio.Visio.Comment
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: visio.Visio.Comment.set
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Visio.Comment): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.CommentUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - Interfaces.CommentUpdateData
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: visio.Visio.Comment.set_1
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Visio.Comment): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - visio.Visio.Comment
+  - uid: visio.Visio.Comment.text
+    summary: |-
+      コメント テキストを含む文字列です。
+
+      \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'text: string;'
+      return:
+        type:
+          - string
+  - uid: visio.Visio.Comment.toJSON
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Visio. Comment オブジェクトは API オブジェクトですが、この`toJSON`メソッドはプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Visio.Interfaces.CommentData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Visio.Interfaces.CommentData;'
+      return:
+        type:
+          - visio.Visio.Interfaces.CommentData
+        description: ''

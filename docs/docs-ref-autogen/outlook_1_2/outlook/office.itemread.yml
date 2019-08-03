@@ -1,0 +1,354 @@
+### YamlMime:UniversalReference
+items:
+  - uid: Outlook.Office.ItemRead
+    summary: |-
+      Office の読み取りモード ([アイテム](xref:Outlook.Office.Item))<!-- -->.
+
+      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、Office の1つのモードとして扱う必要があります。 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.2/office.context.mailbox.item)」ページを参照してください。
+    name: Office.ItemRead
+    fullName: Office.ItemRead
+    langs:
+      - typeScript
+    type: interface
+    extends:
+      - Outlook.Office.Item
+    package: Outlook
+    children:
+      - Outlook.Office.ItemRead.displayReplyAllForm
+      - Outlook.Office.ItemRead.displayReplyForm
+      - Outlook.Office.ItemRead.getEntities
+      - Outlook.Office.ItemRead.getEntitiesByType
+      - Outlook.Office.ItemRead.getFilteredEntitiesByName
+      - Outlook.Office.ItemRead.getRegExMatches
+      - Outlook.Office.ItemRead.getRegExMatchesByName
+      - Outlook.Office.ItemRead.attachments
+      - Outlook.Office.ItemRead.itemClass
+      - Outlook.Office.ItemRead.itemId
+      - Outlook.Office.ItemRead.normalizedSubject
+      - Outlook.Office.ItemRead.subject
+  - uid: Outlook.Office.ItemRead.displayReplyAllForm
+    summary: |-
+      選択したメッセージの送信者とすべての受信者、または選択した予定の開催者とすべての参加者を示した回答フォームが表示されます。
+
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
+
+      文字列パラメーターのいずれかが制限を超えると、displayReplyAllForm は例外をスローします。
+
+      FormData/attachments パラメーターで添付ファイルが指定されている場合、web 上の Outlook およびデスクトップクライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: 'displayReplyAllForm(formData, callback)'
+    fullName: 'displayReplyAllForm(formData, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyAllForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:Outlook.Office.ReplyFormData)オブジェクトに制限されます。'
+          type:
+            - string | ReplyFormData
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook.Office.ItemRead.displayReplyForm
+    summary: |-
+      選択したメッセージの送信者のみ、または選択した予定の開催者のみを含む回答フォームが表示されます。
+
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
+
+      文字列パラメーターのいずれかが制限を超えると、displayReplyForm は例外をスローします。
+
+      FormData/attachments パラメーターで添付ファイルが指定されている場合、web 上の Outlook およびデスクトップクライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: 'displayReplyForm(formData, callback)'
+    fullName: 'displayReplyForm(formData, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:Outlook.Office.ReplyFormData)オブジェクトに制限されます。'
+          type:
+            - string | ReplyFormData
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook.Office.ItemRead.getEntities
+    summary: |-
+      選択したアイテムの本文にあるエンティティを取得します。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: getEntities()
+    fullName: getEntities()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getEntities(): Entities;'
+      return:
+        type:
+          - Outlook.Office.Entities
+        description: ''
+  - uid: Outlook.Office.ItemRead.getEntitiesByType
+    summary: |-
+      選択したアイテムの本文内で検出された指定のエンティティ型のすべてのエンティティを含む配列を取得します。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: 制限付き
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+
+      このメソッドを使用する最小限のアクセス許可レベルは Restricted ですが、一部のエンティティ型には、次の表で指定されているように、アクセスに ReadItem が必要です。
+
+      <table> <tr> <th>EntityType の値</th> <th>返される配列内のオブジェクトの型</th> <th>必要なアクセス許可のレベル</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
+    name: getEntitiesByType(entityType)
+    fullName: getEntitiesByType(entityType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getEntitiesByType(entityType: MailboxEnums.EntityType | string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+      return:
+        type:
+          - '(string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]'
+        description: EntityType で渡された値が EntityType 列挙の有効なメンバーでない場合、このメソッドは null を返します。 指定した型のエンティティがアイテムの本文に存在しない場合、メソッドは空の配列を返します。 それ以外の場合、返される配列内のオブジェクトの型は、entityType パラメーターで要求されたエンティティの型によって異なります。
+      parameters:
+        - id: entityType
+          description: EntityType 列挙値の 1 つ。
+          type:
+            - MailboxEnums.EntityType | string
+  - uid: Outlook.Office.ItemRead.getFilteredEntitiesByName
+    summary: |-
+      マニフェスト XML ファイルで定義された名前付きフィルターを通過する、選択したアイテム内の既知のエンティティを返します。
+
+      GetFilteredEntitiesByName メソッドは、指定された FilterName 要素の値を持つマニフェスト XML ファイルの ItemHasKnownEntity ルール要素で定義された正規表現に一致するエンティティを返します。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: getFilteredEntitiesByName(name)
+    fullName: getFilteredEntitiesByName(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFilteredEntitiesByName(name: string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+      return:
+        type:
+          - '(string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]'
+        description: Name パラメーターに一致する FilterName 要素の値を持つ ItemHasKnownEntity 要素がマニフェストにない場合、このメソッドは null を返します。 Name パラメーターがマニフェストの ItemHasKnownEntity 要素と一致するが、現在のアイテムに一致するエンティティがない場合、メソッドは空の配列を返します。
+      parameters:
+        - id: name
+          description: 一致するフィルターを定義する ItemHasKnownEntity ルール要素の名前。
+          type:
+            - string
+  - uid: Outlook.Office.ItemRead.getRegExMatches
+    summary: |-
+      選択したアイテム内の、マニフェスト XML ファイルで定義された正規表現に一致する文字列の値を返します。
+
+      GetRegExMatches メソッドは、マニフェスト XML ファイル内の各 ItemHasRegularExpressionMatch または ItemHasKnownEntity ルール要素で定義された正規表現に一致する文字列を返します。 ItemHasRegularExpressionMatch ルールでは、一致する文字列が、そのルールによって指定されたアイテムのプロパティである必要があります。 PropertyName 単純型は、サポートされているプロパティを定義します。
+
+      アイテムの body プロパティに ItemHasRegularExpressionMatch ルールを指定する場合、正規表現では本文をさらにフィルター処理する必要があり、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 代わりに、本文全体を取得するには、getAsync メソッドを使用します。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: getRegExMatches()
+    fullName: getRegExMatches()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRegExMatches(): any;'
+      return:
+        type:
+          - any
+        description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。 各配列の名前は、一致する ItemHasRegularExpressionMatch ルールまたは一致する ItemHasKnownEntity ルールの FilterName 属性の RegExName 属性の対応する値と同じです。
+  - uid: Outlook.Office.ItemRead.getRegExMatchesByName
+    summary: |-
+      選択したアイテム内の、マニフェスト XML ファイルで定義された、指定された正規表現に一致する文字列の値を返します。
+
+      GetRegExMatchesByName メソッドは、指定された RegExName 要素の値を持つマニフェスト XML ファイルの ItemHasRegularExpressionMatch rule 要素で定義された正規表現に一致する文字列を返します。
+
+      アイテムの body プロパティに ItemHasRegularExpressionMatch ルールを指定する場合、正規表現では本文をさらにフィルター処理する必要があり、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: getRegExMatchesByName(name)
+    fullName: getRegExMatchesByName(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRegExMatchesByName(name: string): string[];'
+      return:
+        type:
+          - 'string[]'
+        description: マニフェスト XML ファイルで定義された正規表現に一致する文字列が格納された配列。
+      parameters:
+        - id: name
+          description: 一致するフィルターを定義する ItemHasRegularExpressionMatch rule 要素の名前。
+          type:
+            - string
+  - uid: Outlook.Office.ItemRead.attachments
+    summary: |-
+      アイテムの添付ファイルを配列として取得します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+
+      **注**: セキュリティ上の問題が発生する可能性があるため、特定の種類のファイルが Outlook によってブロックされているため、返されません。 詳細については、「 [Outlook のブロック](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)された添付ファイル」を参照してください。<!-- -->.
+    name: attachments
+    fullName: attachments
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'attachments: AttachmentDetails[];'
+      return:
+        type:
+          - 'AttachmentDetails[]'
+  - uid: Outlook.Office.ItemRead.itemClass
+    summary: |-
+      選択されたアイテムの Exchange Web サービスのアイテム クラスを取得します。
+
+      既定のメッセージクラスを拡張するカスタムメッセージクラス (たとえば、カスタム予定表メッセージクラス IPM) を作成できます。予定。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+
+      ItemClass プロパティは、選択されているアイテムのメッセージクラスを指定します。 次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
+
+      <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
+    name: itemClass
+    fullName: itemClass
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemClass: string;'
+      return:
+        type:
+          - string
+  - uid: Outlook.Office.ItemRead.itemId
+    summary: |-
+      現在のアイテムの Exchange Web サービスのアイテム識別子を取得します。
+
+      ItemId プロパティは、新規作成モードでは使用できません。 アイテム識別子が必要な場合は、saveAsync メソッドを使用してアイテムをストアに保存することができます。これにより、コールバック関数の asyncResult パラメーターにアイテム識別子が返されます。
+
+      **注**: itemId プロパティによって返される識別子は、Exchange Web サービスのアイテム識別子と同じです。 ItemId プロパティは、outlook のエントリ ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: itemId
+    fullName: itemId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemId: string;'
+      return:
+        type:
+          - string
+  - uid: Outlook.Office.ItemRead.normalizedSubject
+    summary: |-
+      すべてのプレフィックスが削除されたアイテムの件名を取得します (RE: および早送りを含む)。
+
+      NormalizedSubject プロパティは、任意の標準プレフィックス (RE: や FW:) など) を使用して、アイテムの件名を取得します。電子メールプログラムによって追加されます。 プレフィックスをそのまま使用してアイテムの件名を取得するには、subject プロパティを使用します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: normalizedSubject
+    fullName: normalizedSubject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'normalizedSubject: string;'
+      return:
+        type:
+          - string
+  - uid: Outlook.Office.ItemRead.subject
+    summary: |-
+      アイテムの subject フィールドに表示される説明を取得します。
+
+      Subject プロパティは、電子メールサーバーによって送信されたアイテムの件名全体を取得または設定します。
+
+      Subject プロパティは、文字列を返します。 NormalizedSubject プロパティを使用して、"RE:" や "FW:" などの先頭のプレフィックスを除いた、件名を取得します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 読み取り
+    name: subject
+    fullName: subject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'subject: string;'
+      return:
+        type:
+          - string
