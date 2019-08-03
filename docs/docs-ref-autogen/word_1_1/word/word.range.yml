@@ -1,0 +1,1134 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.Range
+    summary: |-
+      <span data-ttu-id="a2b2d-101">文書内の連続した領域を表します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-101">Represents a contiguous area in a document.</span></span>
+
+      <span data-ttu-id="a2b2d-102">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-102">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: Word.Range
+    fullName: Word.Range
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.Range.clear
+      - word.Word.Range.contentControls
+      - word.Word.Range.context
+      - word.Word.Range.delete
+      - word.Word.Range.font
+      - word.Word.Range.getHtml
+      - word.Word.Range.getOoxml
+      - word.Word.Range.insertBreak
+      - word.Word.Range.insertBreak_1
+      - word.Word.Range.insertContentControl
+      - word.Word.Range.insertFileFromBase64
+      - word.Word.Range.insertFileFromBase64_1
+      - word.Word.Range.insertHtml
+      - word.Word.Range.insertHtml_1
+      - word.Word.Range.insertOoxml
+      - word.Word.Range.insertOoxml_1
+      - word.Word.Range.insertParagraph
+      - word.Word.Range.insertParagraph_1
+      - word.Word.Range.insertText
+      - word.Word.Range.insertText_1
+      - word.Word.Range.load
+      - word.Word.Range.load_1
+      - word.Word.Range.load_2
+      - word.Word.Range.paragraphs
+      - word.Word.Range.parentContentControl
+      - word.Word.Range.search
+      - word.Word.Range.select
+      - word.Word.Range.select_1
+      - word.Word.Range.set
+      - word.Word.Range.set_1
+      - word.Word.Range.style
+      - word.Word.Range.text
+      - word.Word.Range.toJSON
+      - word.Word.Range.track
+      - word.Word.Range.untrack
+  - uid: word.Word.Range.clear
+    summary: |-
+      <span data-ttu-id="a2b2d-103">範囲オブジェクトの内容をクリアします。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-103">Clears the contents of the range object.</span></span> <span data-ttu-id="a2b2d-104">ユーザーは、消去された内容を元に戻す操作を実行できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-104">The user can perform the undo operation on the cleared content.</span></span>
+
+      <span data-ttu-id="a2b2d-105">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-105">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-106">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-106">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to clear the contents of the proxy range object.
+              range.clear();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Cleared the selection (range object)');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Range.contentControls
+    summary: |-
+      <span data-ttu-id="a2b2d-107">範囲内のコンテンツコントロールオブジェクトのコレクションを取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-107">Gets the collection of content control objects in the range.</span></span> <span data-ttu-id="a2b2d-108">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-108">Read-only.</span></span>
+
+      <span data-ttu-id="a2b2d-109">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-109">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: contentControls
+    fullName: contentControls
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly contentControls: Word.ContentControlCollection;'
+      return:
+        type:
+          - word.Word.ContentControlCollection
+  - uid: word.Word.Range.context
+    summary: <span data-ttu-id="a2b2d-110">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-110">The request context associated with the object.</span></span> <span data-ttu-id="a2b2d-111">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-111">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.Range.delete
+    summary: |-
+      <span data-ttu-id="a2b2d-112">文書から範囲と、その範囲の内容を削除します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-112">Deletes the range and its content from the document.</span></span>
+
+      <span data-ttu-id="a2b2d-113">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-113">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-114">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-114">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to delete the range object.
+              range.delete();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Deleted the selection (range object)');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Range.font
+    summary: |-
+      <span data-ttu-id="a2b2d-115">範囲のテキスト形式を取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-115">Gets the text format of the range.</span></span> <span data-ttu-id="a2b2d-116">これを使用して、フォント名、サイズ、色、およびその他のプロパティを取得および設定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-116">Use this to get and set font name, size, color, and other properties.</span></span> <span data-ttu-id="a2b2d-117">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-117">Read-only.</span></span>
+
+      <span data-ttu-id="a2b2d-118">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-118">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: font
+    fullName: font
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly font: Word.Font;'
+      return:
+        type:
+          - word.Word.Font
+  - uid: word.Word.Range.getHtml
+    summary: |-
+      <span data-ttu-id="a2b2d-119">Range オブジェクトの HTML 表記を取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-119">Gets an HTML representation of the range object.</span></span> <span data-ttu-id="a2b2d-120">Web ページまたは HTML ビューアーでレンダリングされる場合、書式設定は、ドキュメントの書式設定と完全に一致しますが、完全に一致するとは限りません。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-120">When rendered in a web page or HTML viewer, the formatting will be a close, but not exact, match to the formatting of the document.</span></span> <span data-ttu-id="a2b2d-121">このメソッドは、異なるプラットフォーム (Windows、Mac など) の同じドキュメントに対して、まったく同じ HTML を返しません。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-121">This method does not return the exact same HTML for the same document on different platforms (Windows, Mac, etc.).</span></span> <span data-ttu-id="a2b2d-122">厳密な忠実性、または複数のプラットフォーム間で`Range.getOoxml()`の一貫性が必要な場合は、を使用して、返された XML を HTML に変換します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-122">If you need exact fidelity, or consistency across platforms, use `Range.getOoxml()` and convert the returned XML to HTML.</span></span>
+
+      <span data-ttu-id="a2b2d-123">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-123">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getHtml()
+    fullName: getHtml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-124">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-124">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to get the HTML of the current selection.
+              var html = range.getHtml();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The HTML read from the document was: ' + html.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Range.getOoxml
+    summary: |-
+      <span data-ttu-id="a2b2d-125">Range オブジェクトの OOXML 表記を取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-125">Gets the OOXML representation of the range object.</span></span>
+
+      <span data-ttu-id="a2b2d-126">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-126">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: getOoxml()
+    fullName: getOoxml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-127">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-127">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to get the OOXML of the current selection.
+              var ooxml = range.getOoxml();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The OOXML read from the document was:  ' + ooxml.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Range.insertBreak
+    summary: |-
+      <span data-ttu-id="a2b2d-128">メイン文書の指定した位置に、区切りを挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-128">Inserts a break at the specified location in the main document.</span></span> <span data-ttu-id="a2b2d-129">insertLocation の値には、'Before' または 'After' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-129">The insertLocation value can be 'Before' or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-130">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-130">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertBreak(breakType, insertLocation)'
+    fullName: 'insertBreak(breakType, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: breakType
+          description: <span data-ttu-id="a2b2d-131">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-131">Required.</span></span> <span data-ttu-id="a2b2d-132">追加する区切りの種類を示します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-132">The break type to add.</span></span>
+          type:
+            - word.Word.BreakType
+        - id: insertLocation
+          description: <span data-ttu-id="a2b2d-133">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-133">Required.</span></span> <span data-ttu-id="a2b2d-134">有効な値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-134">The value can be 'Before' or 'After'.</span></span>
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertBreak_1
+    summary: |-
+      <span data-ttu-id="a2b2d-135">メイン文書の指定した位置に、区切りを挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-135">Inserts a break at the specified location in the main document.</span></span> <span data-ttu-id="a2b2d-136">insertLocation の値には、'Before' または 'After' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-136">The insertLocation value can be 'Before' or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-137">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-137">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertBreak(breakTypeString, insertLocation)'
+    fullName: 'insertBreak(breakTypeString, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-138">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-138">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert a page break after the selected text.
+              range.insertBreak('page', 'After');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Inserted a page break after the selected text.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: breakTypeString
+          description: <span data-ttu-id="a2b2d-139">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-139">Required.</span></span> <span data-ttu-id="a2b2d-140">追加する区切りの種類を示します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-140">The break type to add.</span></span>
+          type:
+            - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
+        - id: insertLocation
+          description: <span data-ttu-id="a2b2d-141">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-141">Required.</span></span> <span data-ttu-id="a2b2d-142">有効な値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-142">The value can be 'Before' or 'After'.</span></span>
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.insertContentControl
+    summary: |-
+      <span data-ttu-id="a2b2d-143">範囲オブジェクトを、リッチ テキストのコンテンツ コントロールでラップします。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-143">Wraps the range object with a rich text content control.</span></span>
+
+      <span data-ttu-id="a2b2d-144">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-144">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: insertContentControl()
+    fullName: insertContentControl()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertContentControl(): Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-145">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-145">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert a content control around the selected text,
+              // and create a proxy content control object. We'll update the properties
+              // on the content control.
+              var myContentControl = range.insertContentControl();
+              myContentControl.tag = "Customer-Address";
+              myContentControl.title = "Enter Customer Address Here:";
+              myContentControl.style = "Normal";
+              myContentControl.insertText("One Microsoft Way, Redmond, WA 98052", 'Replace');
+              myContentControl.cannotEdit = true;
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Wrapped a content control around the selected text.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+              let results = context.document.body.search("Contractor");
+              results.load("font/bold");
+
+              // Check to make sure these content controls haven't been added yet.
+              let customerContentControls = context.document.contentControls.getByTag("customer");
+              customerContentControls.load("text");
+              await context.sync();
+
+            if (customerContentControls.items.length === 0) {
+              for (var i = 0; i < results.items.length; i++) { 
+                  results.items[i].font.bold = true;
+                  var cc = results.items[i].insertContentControl();
+                  cc.tag = "customer";  // This value is used in the next step of this sample.
+                  cc.title = "Customer Name " + i;
+              }
+            }
+              await context.sync();
+          });
+          ```
+  - uid: word.Word.Range.insertFileFromBase64
+    summary: |-
+      <span data-ttu-id="a2b2d-146">指定した位置に文書を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-146">Inserts a document at the specified location.</span></span> <span data-ttu-id="a2b2d-147">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-147">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-148">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-148">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertFileFromBase64(base64File, insertLocation)'
+    fullName: 'insertFileFromBase64(base64File, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-149">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-149">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert base64 encoded .docx at the beginning of the range.
+              // You'll need to implement getBase64() to make this work.
+              range.insertFileFromBase64(getBase64(), Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Added base64 encoded text to the beginning of the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: base64File
+          description: <span data-ttu-id="a2b2d-150">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-150">Required.</span></span> <span data-ttu-id="a2b2d-151">.Docx ファイルの base64 でエンコードされたコンテンツ。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-151">The base64 encoded content of a .docx file.</span></span>
+          type:
+            - string
+        - id: insertLocation
+          description: '<span data-ttu-id="a2b2d-152">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-152">Required.</span></span> <span data-ttu-id="a2b2d-153">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-153">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertFileFromBase64_1
+    summary: |-
+      <span data-ttu-id="a2b2d-154">指定した位置に文書を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-154">Inserts a document at the specified location.</span></span> <span data-ttu-id="a2b2d-155">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-155">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-156">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-156">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertFileFromBase64(base64File, insertLocationString)'
+    fullName: 'insertFileFromBase64(base64File, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: base64File
+          description: <span data-ttu-id="a2b2d-157">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-157">Required.</span></span> <span data-ttu-id="a2b2d-158">.Docx ファイルの base64 でエンコードされたコンテンツ。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-158">The base64 encoded content of a .docx file.</span></span>
+          type:
+            - string
+        - id: insertLocationString
+          description: '<span data-ttu-id="a2b2d-159">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-159">Required.</span></span> <span data-ttu-id="a2b2d-160">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-160">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.insertHtml
+    summary: |-
+      <span data-ttu-id="a2b2d-161">指定した位置に HTML を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-161">Inserts HTML at the specified location.</span></span> <span data-ttu-id="a2b2d-162">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-162">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-163">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-163">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertHtml(html, insertLocation)'
+    fullName: 'insertHtml(html, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-164">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-164">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert HTML in to the beginning of the range.
+              range.insertHtml('<strong>This is text inserted with range.insertHtml()</strong>', Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('HTML added to the beginning of the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: html
+          description: <span data-ttu-id="a2b2d-165">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-165">Required.</span></span> <span data-ttu-id="a2b2d-166">挿入する HTML を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-166">The HTML to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocation
+          description: '<span data-ttu-id="a2b2d-167">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-167">Required.</span></span> <span data-ttu-id="a2b2d-168">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-168">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertHtml_1
+    summary: |-
+      <span data-ttu-id="a2b2d-169">指定した位置に HTML を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-169">Inserts HTML at the specified location.</span></span> <span data-ttu-id="a2b2d-170">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-170">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-171">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-171">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertHtml(html, insertLocationString)'
+    fullName: 'insertHtml(html, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: html
+          description: <span data-ttu-id="a2b2d-172">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-172">Required.</span></span> <span data-ttu-id="a2b2d-173">挿入する HTML を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-173">The HTML to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocationString
+          description: '<span data-ttu-id="a2b2d-174">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-174">Required.</span></span> <span data-ttu-id="a2b2d-175">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-175">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.insertOoxml
+    summary: |-
+      <span data-ttu-id="a2b2d-176">指定した位置に OOXML を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-176">Inserts OOXML at the specified location.</span></span> <span data-ttu-id="a2b2d-177">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-177">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-178">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-178">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertOoxml(ooxml, insertLocation)'
+    fullName: 'insertOoxml(ooxml, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-179">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-179">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert OOXML in to the beginning of the range.
+              range.insertOoxml("<pkg:package xmlns:pkg='http://schemas.microsoft.com/office/2006/xmlPackage'><pkg:part pkg:name='/_rels/.rels' pkg:contentType='application/vnd.openxmlformats-package.relationships+xml' pkg:padding='512'><pkg:xmlData><Relationships xmlns='http://schemas.openxmlformats.org/package/2006/relationships'><Relationship Id='rId1' Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument' Target='word/document.xml'/></Relationships></pkg:xmlData></pkg:part><pkg:part pkg:name='/word/document.xml' pkg:contentType='application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'><pkg:xmlData><w:document xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' ><w:body><w:p><w:pPr><w:spacing w:before='360' w:after='0' w:line='480' w:lineRule='auto'/><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr></w:pPr><w:r><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr><w:t>This text has formatting directly applied to achieve its font size, color, line spacing, and paragraph spacing.</w:t></w:r></w:p></w:body></w:document></pkg:xmlData></pkg:part></pkg:package>", Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('OOXML added to the beginning of the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // Read "Create better add-ins for Word with Office Open XML" for guidance on working with OOXML.
+          // https://docs.microsoft.com/office/dev/add-ins/word/create-better-add-ins-for-word-with-office-open-xml
+          ```
+      parameters:
+        - id: ooxml
+          description: <span data-ttu-id="a2b2d-180">必須。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-180">Required.</span></span> <span data-ttu-id="a2b2d-181">挿入する OOXML を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-181">The OOXML to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocation
+          description: '<span data-ttu-id="a2b2d-182">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-182">Required.</span></span> <span data-ttu-id="a2b2d-183">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-183">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertOoxml_1
+    summary: |-
+      <span data-ttu-id="a2b2d-184">指定した位置に OOXML を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-184">Inserts OOXML at the specified location.</span></span> <span data-ttu-id="a2b2d-185">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-185">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-186">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-186">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertOoxml(ooxml, insertLocationString)'
+    fullName: 'insertOoxml(ooxml, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: ooxml
+          description: <span data-ttu-id="a2b2d-187">必須。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-187">Required.</span></span> <span data-ttu-id="a2b2d-188">挿入する OOXML を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-188">The OOXML to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocationString
+          description: '<span data-ttu-id="a2b2d-189">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-189">Required.</span></span> <span data-ttu-id="a2b2d-190">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-190">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.insertParagraph
+    summary: |-
+      <span data-ttu-id="a2b2d-191">指定した位置に、段落を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-191">Inserts a paragraph at the specified location.</span></span> <span data-ttu-id="a2b2d-192">有効な insertLocation の値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-192">The insertLocation value can be 'Before' or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-193">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-193">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertParagraph(paragraphText, insertLocation)'
+    fullName: 'insertParagraph(paragraphText, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-194">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-194">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert the paragraph after the range.
+              range.insertParagraph('Content of a new paragraph', Word.InsertLocation.after);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Paragraph added to the end of the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: paragraphText
+          description: <span data-ttu-id="a2b2d-195">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-195">Required.</span></span> <span data-ttu-id="a2b2d-196">挿入する段落テキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-196">The paragraph text to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocation
+          description: <span data-ttu-id="a2b2d-197">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-197">Required.</span></span> <span data-ttu-id="a2b2d-198">有効な値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-198">The value can be 'Before' or 'After'.</span></span>
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertParagraph_1
+    summary: |-
+      <span data-ttu-id="a2b2d-199">指定した位置に、段落を挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-199">Inserts a paragraph at the specified location.</span></span> <span data-ttu-id="a2b2d-200">有効な insertLocation の値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-200">The insertLocation value can be 'Before' or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-201">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-201">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertParagraph(paragraphText, insertLocationString)'
+    fullName: 'insertParagraph(paragraphText, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+      return:
+        type:
+          - word.Word.Paragraph
+        description: ''
+      parameters:
+        - id: paragraphText
+          description: <span data-ttu-id="a2b2d-202">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-202">Required.</span></span> <span data-ttu-id="a2b2d-203">挿入する段落テキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-203">The paragraph text to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocationString
+          description: <span data-ttu-id="a2b2d-204">必須。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-204">Required.</span></span> <span data-ttu-id="a2b2d-205">有効な値は、'Before' または 'After' です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-205">The value can be 'Before' or 'After'.</span></span>
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.insertText
+    summary: |-
+      <span data-ttu-id="a2b2d-206">指定した位置にテキストを挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-206">Inserts text at the specified location.</span></span> <span data-ttu-id="a2b2d-207">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-207">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-208">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-208">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertText(text, insertLocation)'
+    fullName: 'insertText(text, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-209">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-209">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert the paragraph at the end of the range.
+              range.insertText('New text inserted into the range.', Word.InsertLocation.end);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Text added to the end of the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: text
+          description: <span data-ttu-id="a2b2d-210">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-210">Required.</span></span> <span data-ttu-id="a2b2d-211">挿入するテキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-211">Text to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocation
+          description: '<span data-ttu-id="a2b2d-212">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-212">Required.</span></span> <span data-ttu-id="a2b2d-213">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-213">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - word.Word.InsertLocation
+  - uid: word.Word.Range.insertText_1
+    summary: |-
+      <span data-ttu-id="a2b2d-214">指定した位置にテキストを挿入します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-214">Inserts text at the specified location.</span></span> <span data-ttu-id="a2b2d-215">InsertLocation の値には、' Replace '、' Start '、' End '、' Before '、または ' After ' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-215">The insertLocation value can be 'Replace', 'Start', 'End', 'Before', or 'After'.</span></span>
+
+      <span data-ttu-id="a2b2d-216">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-216">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'insertText(text, insertLocationString)'
+    fullName: 'insertText(text, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: text
+          description: <span data-ttu-id="a2b2d-217">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-217">Required.</span></span> <span data-ttu-id="a2b2d-218">挿入するテキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-218">Text to be inserted.</span></span>
+          type:
+            - string
+        - id: insertLocationString
+          description: '<span data-ttu-id="a2b2d-219">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-219">Required.</span></span> <span data-ttu-id="a2b2d-220">値には、'' Replace ''、'' Start ''、'' End ''、'' Before ''、または '' After '' を指定できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-220">The value can be ''Replace'', ''Start'', ''End'', ''Before'', or ''After''.</span></span>'
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: word.Word.Range.load
+    summary: <span data-ttu-id="a2b2d-221">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-221">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="a2b2d-222">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-222">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="a2b2d-223">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-223">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="a2b2d-224">`load(option?: string | string[]): Word.Range`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-224">`load(option?: string | string[]): Word.Range` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="a2b2d-225">`load(option?: { select?: string; expand?: string; }): Word.Range`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-225">`load(option?: { select?: string; expand?: string; }): Word.Range` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="a2b2d-226">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Range`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-226">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Range` - Only available on collection types.</span></span> <span data-ttu-id="a2b2d-227">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-227">It is similar to the preceding signature.</span></span> <span data-ttu-id="a2b2d-228">Top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-228">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="a2b2d-229">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-229">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="a2b2d-230">Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-230">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.RangeLoadOptions): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - word.Word.Interfaces.RangeLoadOptions
+  - uid: word.Word.Range.load_1
+    summary: <span data-ttu-id="a2b2d-231">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-231">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="a2b2d-232">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-232">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="a2b2d-233">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-233">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: word.Word.Range.load_2
+    summary: <span data-ttu-id="a2b2d-234">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-234">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="a2b2d-235">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-235">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="a2b2d-236">ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-236">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Range.paragraphs
+    summary: |-
+      <span data-ttu-id="a2b2d-237">範囲内の paragraph オブジェクトのコレクションを取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-237">Gets the collection of paragraph objects in the range.</span></span> <span data-ttu-id="a2b2d-238">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-238">Read-only.</span></span>
+
+      <span data-ttu-id="a2b2d-239">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-239">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: paragraphs
+    fullName: paragraphs
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly paragraphs: Word.ParagraphCollection;'
+      return:
+        type:
+          - word.Word.ParagraphCollection
+  - uid: word.Word.Range.parentContentControl
+    summary: |-
+      <span data-ttu-id="a2b2d-240">範囲を格納するコンテンツ コントロールを取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-240">Gets the content control that contains the range.</span></span> <span data-ttu-id="a2b2d-241">親コンテンツコントロールがない場合にスローされます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-241">Throws if there isn't a parent content control.</span></span> <span data-ttu-id="a2b2d-242">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-242">Read-only.</span></span>
+
+      <span data-ttu-id="a2b2d-243">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-243">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: parentContentControl
+    fullName: parentContentControl
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly parentContentControl: Word.ContentControl;'
+      return:
+        type:
+          - word.Word.ContentControl
+  - uid: word.Word.Range.search
+    summary: |-
+      <span data-ttu-id="a2b2d-244">Range オブジェクトの範囲に対して、指定した SearchOptions を使用して検索を実行します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-244">Performs a search with the specified SearchOptions on the scope of the range object.</span></span> <span data-ttu-id="a2b2d-245">検索結果は、範囲オブジェクトのコレクションです。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-245">The search results are a collection of range objects.</span></span>
+
+      <span data-ttu-id="a2b2d-246">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-246">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: 'search(searchText, searchOptions)'
+    fullName: 'search(searchText, searchOptions)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        search(searchText: string, searchOptions?: Word.SearchOptions | {
+                    ignorePunct?: boolean;
+                    ignoreSpace?: boolean;
+                    matchCase?: boolean;
+                    matchPrefix?: boolean;
+                    matchSuffix?: boolean;
+                    matchWholeWord?: boolean;
+                    matchWildcards?: boolean;
+                }): Word.RangeCollection;
+      return:
+        type:
+          - word.Word.RangeCollection
+        description: ''
+      parameters:
+        - id: searchText
+          description: <span data-ttu-id="a2b2d-247">必須です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-247">Required.</span></span> <span data-ttu-id="a2b2d-248">検索テキスト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-248">The search text.</span></span>
+          type:
+            - string
+        - id: searchOptions
+          description: <span data-ttu-id="a2b2d-249">省略可能。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-249">Optional.</span></span> <span data-ttu-id="a2b2d-250">検索のオプション。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-250">Options for the search.</span></span>
+          type:
+            - |-
+              Word.SearchOptions | {
+                          ignorePunct?: boolean;
+                          ignoreSpace?: boolean;
+                          matchCase?: boolean;
+                          matchPrefix?: boolean;
+                          matchSuffix?: boolean;
+                          matchWholeWord?: boolean;
+                          matchWildcards?: boolean;
+                      }
+  - uid: word.Word.Range.select
+    summary: |-
+      <span data-ttu-id="a2b2d-251">範囲を選択して、その範囲に Word の UI を移動します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-251">Selects and navigates the Word UI to the range.</span></span>
+
+      <span data-ttu-id="a2b2d-252">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-252">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: select(selectionMode)
+    fullName: select(selectionMode)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionMode?: Word.SelectionMode): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="a2b2d-253">例</span><span class="sxs-lookup"><span data-stu-id="a2b2d-253">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue a command to get the current selection and then
+              // create a proxy range object with the results.
+              var range = context.document.getSelection();
+
+              // Queue a commmand to insert HTML in to the beginning of the range.
+              range.insertHtml('<strong>This is text inserted with range.insertHtml()</strong>', Word.InsertLocation.start);
+
+              // Queue a command to select the HTML that was inserted.
+              range.select();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Selected the range.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: selectionMode
+          description: '<span data-ttu-id="a2b2d-254">省略可能。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-254">Optional.</span></span> <span data-ttu-id="a2b2d-255">選択モードは、''Select''、''Start''、''End'' のいずれかになります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-255">The selection mode can be ''Select'', ''Start'', or ''End''.</span></span> <span data-ttu-id="a2b2d-256">''Select'' が既定値です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-256">''Select'' is the default.</span></span>'
+          type:
+            - word.Word.SelectionMode
+  - uid: word.Word.Range.select_1
+    summary: |-
+      <span data-ttu-id="a2b2d-257">範囲を選択して、その範囲に Word の UI を移動します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-257">Selects and navigates the Word UI to the range.</span></span>
+
+      <span data-ttu-id="a2b2d-258">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-258">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: select(selectionModeString)
+    fullName: select(selectionModeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: selectionModeString
+          description: '<span data-ttu-id="a2b2d-259">省略可能。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-259">Optional.</span></span> <span data-ttu-id="a2b2d-260">選択モードは、''Select''、''Start''、''End'' のいずれかになります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-260">The selection mode can be ''Select'', ''Start'', or ''End''.</span></span> <span data-ttu-id="a2b2d-261">''Select'' が既定値です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-261">''Select'' is the default.</span></span>'
+          type:
+            - '"Select" | "Start" | "End"'
+  - uid: word.Word.Range.set
+    summary: '<span data-ttu-id="a2b2d-262">一度に1つのオブジェクトの複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-262">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="a2b2d-263">適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-263">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="a2b2d-264">このメソッドには、次の追加のシグネチャがあります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-264">This method has the following additional signature:</span></span>
+
+      `set(properties: Word.Range): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.RangeUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="a2b2d-265">メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-265">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.RangeUpdateData
+        - id: options
+          description: <span data-ttu-id="a2b2d-266">プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-266">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: word.Word.Range.set_1
+    summary: '<span data-ttu-id="a2b2d-267">既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-267">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Range): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - word.Word.Range
+  - uid: word.Word.Range.style
+    summary: |-
+      <span data-ttu-id="a2b2d-268">範囲のスタイル名を取得または設定します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-268">Gets or sets the style name for the range.</span></span> <span data-ttu-id="a2b2d-269">カスタム スタイルとローカライズされたスタイルの名前には、このプロパティを使用します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-269">Use this property for custom styles and localized style names.</span></span> <span data-ttu-id="a2b2d-270">ロケール間で移植可能な組み込みスタイルを使用するには、"styleBuiltIn" プロパティを参照してください。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-270">To use the built-in styles that are portable between locales, see the "styleBuiltIn" property.</span></span>
+
+      <span data-ttu-id="a2b2d-271">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-271">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: style
+    fullName: style
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'style: string;'
+      return:
+        type:
+          - string
+  - uid: word.Word.Range.text
+    summary: |-
+      <span data-ttu-id="a2b2d-272">範囲のテキストを取得します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-272">Gets the text of the range.</span></span> <span data-ttu-id="a2b2d-273">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-273">Read-only.</span></span>
+
+      <span data-ttu-id="a2b2d-274">\[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="a2b2d-274">\[ [API set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly text: string;'
+      return:
+        type:
+          - string
+  - uid: word.Word.Range.toJSON
+    summary: '<span data-ttu-id="a2b2d-275">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="a2b2d-275">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="a2b2d-276">.</span><span class="sxs-lookup"><span data-stu-id="a2b2d-276"></span></span> <span data-ttu-id="a2b2d-277">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="a2b2d-277"></span></span><!-- --><span data-ttu-id="a2b2d-278">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Word の Range オブジェクトは API オブジェクトであるのに`toJSON`対して、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Word.Interfaces.RangeData`</span><span class="sxs-lookup"><span data-stu-id="a2b2d-278">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Word.Range object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Word.Interfaces.RangeData`</span></span><!-- --><span data-ttu-id="a2b2d-279">) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-279">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.RangeData;'
+      return:
+        type:
+          - word.Word.Interfaces.RangeData
+        description: ''
+  - uid: word.Word.Range.track
+    summary: '<span data-ttu-id="a2b2d-280">ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-280">Track the object for automatic adjustment based on surrounding changes in the document.</span></span> <span data-ttu-id="a2b2d-281">これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-281">This call is a shorthand for context.trackedObjects.add(thisObject).</span></span> <span data-ttu-id="a2b2d-282">".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-282">If you are using this object across ".sync" calls and outside the sequential execution of a ".run" batch, and get an "InvalidObjectPath" error when setting a property or invoking a method on the object, you needed to have added the object to the tracked object collection when the object was first created.</span></span>'
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
+  - uid: word.Word.Range.untrack
+    summary: '<span data-ttu-id="a2b2d-283">前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-283">Release the memory associated with this object, if it has previously been tracked.</span></span> <span data-ttu-id="a2b2d-284">これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-284">This call is shorthand for context.trackedObjects.remove(thisObject).</span></span> <span data-ttu-id="a2b2d-285">追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-285">Having many tracked objects slows down the host application, so please remember to free any objects you add, once you''re done using them.</span></span> <span data-ttu-id="a2b2d-286">メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2b2d-286">You will need to call "context.sync()" before the memory release takes effect.</span></span>'
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Range;'
+      return:
+        type:
+          - word.Word.Range
+        description: ''
