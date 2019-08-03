@@ -1,0 +1,493 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.CustomXmlPart
+    summary: '[CustomXmlParts](xref:office.Office.CustomXmlParts)コレクション内の1つの CustomXMLPart を表します。'
+    remarks: '**ホスト**: Word'
+    name: Office.CustomXmlPart
+    fullName: Office.CustomXmlPart
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.CustomXmlPart.addHandlerAsync
+      - office.Office.CustomXmlPart.addHandlerAsync_1
+      - office.Office.CustomXmlPart.deleteAsync
+      - office.Office.CustomXmlPart.deleteAsync_1
+      - office.Office.CustomXmlPart.getNodesAsync
+      - office.Office.CustomXmlPart.getNodesAsync_1
+      - office.Office.CustomXmlPart.getXmlAsync
+      - office.Office.CustomXmlPart.getXmlAsync_1
+      - office.Office.CustomXmlPart.removeHandlerAsync
+      - office.Office.CustomXmlPart.removeHandlerAsync_1
+      - office.Office.CustomXmlPart.builtIn
+      - office.Office.CustomXmlPart.id
+      - office.Office.CustomXmlPart.namespaceManager
+  - uid: office.Office.CustomXmlPart.addHandlerAsync
+    summary: 指定したイベントの種類を使用して、オブジェクトにイベントハンドラーを追加します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。
+    name: 'addHandlerAsync(eventType, handler, options, callback)'
+    fullName: 'addHandlerAsync(eventType, handler, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: any) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: '追加するイベントの種類を指定します。 CustomXmlPart オブジェクトの場合、eventType パラメーターには、`Office.EventType.NodeDeleted`<!-- -->, `Office.EventType.NodeInserted`<!-- -->そして`Office.EventType.NodeReplaced`<!-- -->.'
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: '追加するイベントハンドラー関数。これは、唯一のパラメーターが NodeDeletedEventArgs 型であることを示し[ます。](xref:office.Office.NodeDeletedEventArgs)<!-- -->、 [NodeInsertedEventArgs](xref:office.Office.NodeInsertedEventArgs)<!-- -->、または[NodeReplacedEventArgs](xref:office.Office.NodeReplacedEventArgs)'
+          type:
+            - '(result: any) => void'
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.addHandlerAsync_1
+    summary: 指定したイベントの種類を使用して、オブジェクトにイベントハンドラーを追加します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // To add an event handler for the NodeDeleted event, use the addHandlerAsync method of the CustomXmlPart object.
+      function addNodeDeletedEvent() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.addHandlerAsync(Office.EventType.NodeDeleted, function (eventArgs) {
+                  write("A node has been deleted.");
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message;
+      }
+      ```
+      ```javascript
+      // To add an event handler for the NodeInserted event, use the addHandlerAsync method of the CustomXmlPart object.
+      function addNodeInsertedEvent() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.addHandlerAsync(Office.EventType.NodeInserted, function (eventArgs) {
+                  write("A node has been inserted.");
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message;
+      }
+      ```
+      ```javascript
+      // To add an event handler for the NodeReplaced event, use the addHandlerAsync method of the CustomXmlPart object.
+      function addNodeReplacedEvent() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.addHandlerAsync(Office.EventType.NodeReplaced, function (eventArgs) {
+                  write("A node has been replaced.");
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message;
+      }
+      ```
+    name: 'addHandlerAsync(eventType, handler, callback)'
+    fullName: 'addHandlerAsync(eventType, handler, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: any) => void, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: '追加するイベントの種類を指定します。 CustomXmlPart オブジェクトの場合、eventType パラメーターには、`Office.EventType.NodeDeleted`<!-- -->, `Office.EventType.NodeInserted`<!-- -->そして`Office.EventType.NodeReplaced`<!-- -->.'
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: '追加するイベントハンドラー関数。これは、唯一のパラメーターが NodeDeletedEventArgs 型であることを示し[ます。](xref:office.Office.NodeDeletedEventArgs)<!-- -->、 [NodeInsertedEventArgs](xref:office.Office.NodeInsertedEventArgs)<!-- -->、または[NodeReplacedEventArgs](xref:office.Office.NodeReplacedEventArgs)'
+          type:
+            - '(result: any) => void'
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.deleteAsync
+    summary: カスタム XML パーツを削除します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'deleteAsync(options, callback)'
+    fullName: 'deleteAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.deleteAsync_1
+    summary: カスタム XML パーツを削除します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function deleteXMLPart() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.deleteAsync(function (eventArgs) {
+                  write("The XML Part has been deleted.");
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: deleteAsync(callback)
+    fullName: deleteAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAsync(callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.getNodesAsync
+    summary: 指定された XPath に一致するこのカスタム XML パーツ内の CustomXmlNodes を非同期に取得します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getNodesAsync(xPath, options, callback)'
+    fullName: 'getNodesAsync(xPath, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNodesAsync(xPath: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlNode[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xPath
+          description: 取得するノードを指定する XPath 式。 必須です。
+          type:
+            - string
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、xpath パラメーターに渡される xpath 式によって指定されたノードを表す customxmlnode オブジェクトの配列です。'
+          type:
+            - '(result: AsyncResult<CustomXmlNode[]>) => void'
+  - uid: office.Office.CustomXmlPart.getNodesAsync_1
+    summary: 指定された XPath に一致するこのカスタム XML パーツ内の CustomXmlNodes を非同期に取得します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function showXmlNodeType() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.getNodesAsync('*/*', function (nodeResults) {
+                  for (i = 0; i < nodeResults.value.length; i++) {
+                      var node = nodeResults.value[i];
+                      write(node.nodeType);
+                  }
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getNodesAsync(xPath, callback)'
+    fullName: 'getNodesAsync(xPath, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNodesAsync(xPath: string, callback?: (result: AsyncResult<CustomXmlNode[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xPath
+          description: 取得するノードを指定する XPath 式。 必須です。
+          type:
+            - string
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、xpath パラメーターに渡される xpath 式によって指定されたノードを表す customxmlnode オブジェクトの配列です。'
+          type:
+            - '(result: AsyncResult<CustomXmlNode[]>) => void'
+  - uid: office.Office.CustomXmlPart.getXmlAsync
+    summary: このカスタム XML パーツ内の XML を非同期的に取得します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getXmlAsync(options, callback)'
+    fullName: 'getXmlAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getXmlAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、参照されている CustomXmlPart オブジェクトの XML を含む文字列です。'
+          type:
+            - '(result: AsyncResult<string>) => void'
+  - uid: office.Office.CustomXmlPart.getXmlAsync_1
+    summary: このカスタム XML パーツ内の XML を非同期的に取得します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function showXMLPartInnerXML() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.getXmlAsync(function (eventArgs) {
+                  write(eventArgs.value);
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: getXmlAsync(callback)
+    fullName: getXmlAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getXmlAsync(callback?: (result: AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、参照されている CustomXmlPart オブジェクトの XML を含む文字列です。'
+          type:
+            - '(result: AsyncResult<string>) => void'
+  - uid: office.Office.CustomXmlPart.removeHandlerAsync
+    summary: 指定したイベントの種類のイベントハンドラーを削除します。
+    remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'removeHandlerAsync(eventType, handler, options, callback)'
+    fullName: 'removeHandlerAsync(eventType, handler, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeHandlerAsync(eventType: Office.EventType, handler?: (result: any) => void, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: '削除するイベントの型を指定します。 CustomXmlPart オブジェクトの場合、eventType パラメーターには、`Office.EventType.NodeDeleted`<!-- -->, `Office.EventType.NodeInserted`<!-- -->そして`Office.EventType.NodeReplaced`<!-- -->.'
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: 削除するハンドラーの名前。
+          type:
+            - '(result: any) => void'
+        - id: options
+          description: 削除するイベントハンドラーを決めるためのオプションを提供します。
+          type:
+            - office.Office.RemoveHandlerOptions
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.removeHandlerAsync_1
+    summary: 指定したイベントの種類のイベントハンドラーを削除します。
+    remarks: |-
+      **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function removeNodeInsertedEventHandler() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}",
+              function (result) {
+                  var xmlPart = result.value;
+                  xmlPart.removeHandlerAsync(Office.EventType.DataNodeInserted, {handler:myHandler});
+          });
+      }
+      ```
+    name: 'removeHandlerAsync(eventType, handler, callback)'
+    fullName: 'removeHandlerAsync(eventType, handler, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeHandlerAsync(eventType: Office.EventType, handler?: (result: any) => void, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: '削除するイベントの型を指定します。 CustomXmlPart オブジェクトの場合、eventType パラメーターには、`Office.EventType.NodeDeleted`<!-- -->, `Office.EventType.NodeInserted`<!-- -->そして`Office.EventType.NodeReplaced`<!-- -->.'
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: 削除するハンドラーの名前。
+          type:
+            - '(result: any) => void'
+        - id: callback
+          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.CustomXmlPart.builtIn
+    summary: カスタム XML パーツが組み込まれている場合は True。それ以外の場合は false。
+    name: builtIn
+    fullName: builtIn
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'builtIn: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          function showXMLPartBuiltIn() {
+              Office.context.document.customXmlParts.getByIdAsync(
+                  "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+                  var xmlPart = result.value;
+                  write(xmlPart.builtIn);
+              });
+          }
+
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.CustomXmlPart.id
+    summary: CustomXMLPart の GUID を取得します。
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'id: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          function showXMLPartBuiltId() {
+              Office.context.document.customXmlParts.getByIdAsync(
+                  "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+                  var xmlPart = result.value;
+                  write(xmlPart.id);
+              });
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.CustomXmlPart.namespaceManager
+    summary: '名前空間プレフィックスマッピングのセットを取得し[ます (CustomXmlPrefixMappings](xref:office.Office.CustomXmlPrefixMappings)<!-- -->) 現在の CustomXmlPart に対して使用されます。'
+    name: namespaceManager
+    fullName: namespaceManager
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'namespaceManager: CustomXmlPrefixMappings;'
+      return:
+        type:
+          - office.Office.CustomXmlPrefixMappings
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          function setXMLPartNamespaceManagerNamespace() {
+              Office.context.document.customXmlParts.getByIdAsync(
+                  "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+                  var xmlPart = result.value;
+                  xmlPart.namespaceManager.addNamespaceAsync("myPrefix", "myNamespace");
+              });
+          }
+          ```
