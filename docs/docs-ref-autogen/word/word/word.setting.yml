@@ -1,0 +1,304 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.Setting
+    summary: |-
+      <span data-ttu-id="d3b49-101">アドインの設定を表します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-101">Represents a setting of the add-in.</span></span>
+
+      <span data-ttu-id="d3b49-102">\[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d3b49-102">\[ [API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: Word.Setting
+    fullName: Word.Setting
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.Setting._replaceDateWithStringDate
+      - word.Word.Setting.context
+      - word.Word.Setting.delete
+      - word.Word.Setting.key
+      - word.Word.Setting.load
+      - word.Word.Setting.load_1
+      - word.Word.Setting.load_2
+      - word.Word.Setting.set
+      - word.Word.Setting.set_1
+      - word.Word.Setting.toJSON
+      - word.Word.Setting.track
+      - word.Word.Setting.untrack
+      - word.Word.Setting.value
+  - uid: word.Word.Setting._replaceDateWithStringDate
+    isPreview: true
+    name: _replaceDateWithStringDate(value)
+    fullName: _replaceDateWithStringDate(value)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'static _replaceDateWithStringDate(value: any): any;'
+      return:
+        type:
+          - any
+        description: ''
+      parameters:
+        - id: value
+          description: ''
+          type:
+            - any
+  - uid: word.Word.Setting.context
+    summary: <span data-ttu-id="d3b49-103">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="d3b49-103">The request context associated with the object.</span></span> <span data-ttu-id="d3b49-104">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-104">This connects the add-in's process to the Office host application's process.</span></span>
+    isPreview: true
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.Setting.delete
+    summary: |-
+      <span data-ttu-id="d3b49-105">設定を削除します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-105">Deletes the setting.</span></span>
+
+      <span data-ttu-id="d3b49-106">\[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d3b49-106">\[ [API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="d3b49-107">例</span><span class="sxs-lookup"><span data-stu-id="d3b49-107">Examples</span></span>
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              var startMonth = settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to get the count of settings.
+              var count = settings.getCount();
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(count.value);
+
+                  // Queue a command to delete the setting.
+                  startMonth.delete();
+
+                  // Queue a command to get the new count of settings.
+                  count = settings.getCount();
+              })
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              .then(context.sync)
+              .then(function () {
+                  console.log(count.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.Setting.key
+    summary: |-
+      <span data-ttu-id="d3b49-108">設定のキーを取得します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-108">Gets the key of the setting.</span></span> <span data-ttu-id="d3b49-109">読み取り専用です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-109">Read only.</span></span>
+
+      <span data-ttu-id="d3b49-110">\[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d3b49-110">\[ [API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: key
+    fullName: key
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly key: string;'
+      return:
+        type:
+          - string
+  - uid: word.Word.Setting.load
+    summary: <span data-ttu-id="d3b49-111">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-111">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d3b49-112">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d3b49-112">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="d3b49-113">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="d3b49-113">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="d3b49-114">`load(option?: string | string[]): Word.Setting`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-114">`load(option?: string | string[]): Word.Setting` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="d3b49-115">`load(option?: { select?: string; expand?: string; }): Word.Setting`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-115">`load(option?: { select?: string; expand?: string; }): Word.Setting` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="d3b49-116">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Setting`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-116">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Setting` - Only available on collection types.</span></span> <span data-ttu-id="d3b49-117">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="d3b49-117">It is similar to the preceding signature.</span></span> <span data-ttu-id="d3b49-118">Top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-118">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="d3b49-119">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-119">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="d3b49-120">Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-120">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    isPreview: true
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.SettingLoadOptions): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - word.Word.Interfaces.SettingLoadOptions
+  - uid: word.Word.Setting.load_1
+    summary: <span data-ttu-id="d3b49-121">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-121">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d3b49-122">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d3b49-122">You must call `context.sync()` before reading the properties.</span></span>
+    isPreview: true
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="d3b49-123">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="d3b49-123">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: word.Word.Setting.load_2
+    summary: <span data-ttu-id="d3b49-124">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-124">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="d3b49-125">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d3b49-125">You must call `context.sync()` before reading the properties.</span></span>
+    isPreview: true
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="d3b49-126">ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-126">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Setting.set
+    summary: '<span data-ttu-id="d3b49-127">一度に1つのオブジェクトの複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-127">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="d3b49-128">適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="d3b49-128">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="d3b49-129">このメソッドには、次の追加のシグネチャがあります。</span><span class="sxs-lookup"><span data-stu-id="d3b49-129">This method has the following additional signature:</span></span>
+
+      `set(properties: Word.Setting): void`
+    isPreview: true
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="d3b49-130">メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。</span><span class="sxs-lookup"><span data-stu-id="d3b49-130">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.SettingUpdateData
+        - id: options
+          description: <span data-ttu-id="d3b49-131">プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-131">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: word.Word.Setting.set_1
+    summary: '<span data-ttu-id="d3b49-132">既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-132">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    isPreview: true
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Setting): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - word.Word.Setting
+  - uid: word.Word.Setting.toJSON
+    summary: '<span data-ttu-id="d3b49-133">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="d3b49-133">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="d3b49-134">.</span><span class="sxs-lookup"><span data-stu-id="d3b49-134"></span></span> <span data-ttu-id="d3b49-135">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="d3b49-135"></span></span><!-- --><span data-ttu-id="d3b49-136">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Word 設定オブジェクトは API オブジェクトですが、このメソッド`toJSON`はプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Word.Interfaces.SettingData`</span><span class="sxs-lookup"><span data-stu-id="d3b49-136">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Word.Setting object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Word.Interfaces.SettingData`</span></span><!-- --><span data-ttu-id="d3b49-137">) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-137">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    isPreview: true
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.SettingData;'
+      return:
+        type:
+          - word.Word.Interfaces.SettingData
+        description: ''
+  - uid: word.Word.Setting.track
+    summary: '<span data-ttu-id="d3b49-138">ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-138">Track the object for automatic adjustment based on surrounding changes in the document.</span></span> <span data-ttu-id="d3b49-139">これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-139">This call is a shorthand for context.trackedObjects.add(thisObject).</span></span> <span data-ttu-id="d3b49-140">".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。</span><span class="sxs-lookup"><span data-stu-id="d3b49-140">If you are using this object across ".sync" calls and outside the sequential execution of a ".run" batch, and get an "InvalidObjectPath" error when setting a property or invoking a method on the object, you needed to have added the object to the tracked object collection when the object was first created.</span></span>'
+    isPreview: true
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+  - uid: word.Word.Setting.untrack
+    summary: '<span data-ttu-id="d3b49-141">前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-141">Release the memory associated with this object, if it has previously been tracked.</span></span> <span data-ttu-id="d3b49-142">これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。</span><span class="sxs-lookup"><span data-stu-id="d3b49-142">This call is shorthand for context.trackedObjects.remove(thisObject).</span></span> <span data-ttu-id="d3b49-143">追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。</span><span class="sxs-lookup"><span data-stu-id="d3b49-143">Having many tracked objects slows down the host application, so please remember to free any objects you add, once you''re done using them.</span></span> <span data-ttu-id="d3b49-144">メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="d3b49-144">You will need to call "context.sync()" before the memory release takes effect.</span></span>'
+    isPreview: true
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+  - uid: word.Word.Setting.value
+    summary: |-
+      <span data-ttu-id="d3b49-145">設定の値を取得または設定します。</span><span class="sxs-lookup"><span data-stu-id="d3b49-145">Gets or sets the value of the setting.</span></span>
+
+      <span data-ttu-id="d3b49-146">\[[API set: WORDAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="d3b49-146">\[ [API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]</span></span>
+    isPreview: true
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'value: any;'
+      return:
+        type:
+          - any
