@@ -1,0 +1,297 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.NamedItemCollection
+    summary: |-
+      <span data-ttu-id="dbdbd-101">ブックまたはワークシートの一部であるすべての NamedItem オブジェクトのコレクションです。これに到達した方法によって異なります。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-101">A collection of all the NamedItem objects that are part of the workbook or worksheet, depending on how it was reached.</span></span>
+
+      <span data-ttu-id="dbdbd-102">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.NamedItemCollection
+    fullName: Excel.NamedItemCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.NamedItemCollection.add
+      - excel.Excel.NamedItemCollection.addFormulaLocal
+      - excel.Excel.NamedItemCollection.context
+      - excel.Excel.NamedItemCollection.getCount
+      - excel.Excel.NamedItemCollection.getItem
+      - excel.Excel.NamedItemCollection.getItemOrNullObject
+      - excel.Excel.NamedItemCollection.items
+      - excel.Excel.NamedItemCollection.load
+      - excel.Excel.NamedItemCollection.load_1
+      - excel.Excel.NamedItemCollection.load_2
+      - excel.Excel.NamedItemCollection.toJSON
+  - uid: excel.Excel.NamedItemCollection.add
+    summary: |-
+      <span data-ttu-id="dbdbd-103">指定のスコープのコレクションに新しい名前を追加します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-103">Adds a new name to the collection of the given scope.</span></span>
+
+      <span data-ttu-id="dbdbd-104">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-104">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: 'add(name, reference, comment)'
+    fullName: 'add(name, reference, comment)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(name: string, reference: Range | string, comment?: string): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dbdbd-105">例</span><span class="sxs-lookup"><span data-stu-id="dbdbd-105">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const headerRange = sheet.getRange("A1:D1");
+
+              sheet.names.add("ExpensesHeader", headerRange);
+              const namedItems = sheet.names.load("name, type");
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: name
+          description: <span data-ttu-id="dbdbd-106">名前付きの項目の名前。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-106">The name of the named item.</span></span>
+          type:
+            - string
+        - id: reference
+          description: <span data-ttu-id="dbdbd-107">名前が参照する数式または範囲。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-107">The formula or the range that the name will refer to.</span></span>
+          type:
+            - Range | string
+        - id: comment
+          description: <span data-ttu-id="dbdbd-108">省略可能。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-108">Optional.</span></span> <span data-ttu-id="dbdbd-109">名前付きアイテムに関連付けられているコメント。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-109">The comment associated with the named item.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.NamedItemCollection.addFormulaLocal
+    summary: |-
+      <span data-ttu-id="dbdbd-110">ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-110">Adds a new name to the collection of the given scope using the user's locale for the formula.</span></span>
+
+      <span data-ttu-id="dbdbd-111">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-111">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: 'addFormulaLocal(name, formula, comment)'
+    fullName: 'addFormulaLocal(name, formula, comment)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFormulaLocal(name: string, formula: string, comment?: string): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: name
+          description: <span data-ttu-id="dbdbd-112">名前付きアイテムの "名前"。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-112">The "name" of the named item.</span></span>
+          type:
+            - string
+        - id: formula
+          description: <span data-ttu-id="dbdbd-113">名前が参照するユーザーのロケールの数式。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-113">The formula in the user's locale that the name will refer to.</span></span>
+          type:
+            - string
+        - id: comment
+          description: <span data-ttu-id="dbdbd-114">省略可能。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-114">Optional.</span></span> <span data-ttu-id="dbdbd-115">名前付きアイテムに関連付けられているコメント。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-115">The comment associated with the named item.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.NamedItemCollection.context
+    summary: <span data-ttu-id="dbdbd-116">オブジェクトに関連付けられている要求コンテキスト。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-116">The request context associated with the object.</span></span> <span data-ttu-id="dbdbd-117">これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-117">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.NamedItemCollection.getCount
+    summary: |-
+      <span data-ttu-id="dbdbd-118">コレクションに含まれる名前付きアイテムの数を取得します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-118">Gets the number of named items in the collection.</span></span>
+
+      <span data-ttu-id="dbdbd-119">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-119">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.NamedItemCollection.getItem
+    summary: |-
+      <span data-ttu-id="dbdbd-120">名前を使用して、NamedItem オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-120">Gets a NamedItem object using its name.</span></span>
+
+      <span data-ttu-id="dbdbd-121">\[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-121">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(name)
+    fullName: getItem(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(name: string): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dbdbd-122">例</span><span class="sxs-lookup"><span data-stu-id="dbdbd-122">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = 'Sheet1';
+              var nameditem = ctx.workbook.names.getItem(sheetName);
+              nameditem.load('type');
+              return ctx.sync().then(function() {
+                      console.log(nameditem.type);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: name
+          description: <span data-ttu-id="dbdbd-123">Nameditem 名。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-123">Nameditem name.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.NamedItemCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="dbdbd-124">名前を使用して、NamedItem オブジェクトを取得します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-124">Gets a NamedItem object using its name.</span></span> <span data-ttu-id="dbdbd-125">nameditem オブジェクトが存在しない場合は null オブジェクトを返します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-125">If the nameditem object does not exist, will return a null object.</span></span>
+
+      <span data-ttu-id="dbdbd-126">\[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="dbdbd-126">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(name)
+    fullName: getItemOrNullObject(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(name: string): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: name
+          description: <span data-ttu-id="dbdbd-127">Nameditem 名。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-127">Nameditem name.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.NamedItemCollection.items
+    summary: <span data-ttu-id="dbdbd-128">このコレクション内に読み込まれた子アイテムを取得します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-128">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.NamedItem[];'
+      return:
+        type:
+          - 'Excel.NamedItem[]'
+  - uid: excel.Excel.NamedItemCollection.load
+    summary: <span data-ttu-id="dbdbd-129">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-129">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="dbdbd-130">プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-130">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="dbdbd-131">このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-131">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="dbdbd-132">`load(option?: string | string[]): Excel.NamedItemCollection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-132">`load(option?: string | string[]): Excel.NamedItemCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="dbdbd-133">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-133">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="dbdbd-134">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection`-コレクション型でのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-134">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection` - Only available on collection types.</span></span> <span data-ttu-id="dbdbd-135">これは、前述の署名に似ています。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-135">It is similar to the preceding signature.</span></span> <span data-ttu-id="dbdbd-136">Top は、結果に含めることができるコレクション項目の最大数を指定します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-136">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="dbdbd-137">省略すると、スキップされ、結果に含まれないアイテムの数を指定します。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-137">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="dbdbd-138">Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-138">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.NamedItemCollection.load_1
+    summary: <span data-ttu-id="dbdbd-139">オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-139">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="dbdbd-140">プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-140">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="dbdbd-141">例</span><span class="sxs-lookup"><span data-stu-id="dbdbd-141">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var nameditems = ctx.workbook.names;
+              nameditems.load('items');
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < nameditems.items.length; i++)
+                  {
+                      console.log(nameditems.items[i].name);
+                      console.log(nameditems.items[i].index);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="dbdbd-142">読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-142">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.NamedItemCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.NamedItemCollection.toJSON
+    summary: '<span data-ttu-id="dbdbd-143">API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="dbdbd-143">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="dbdbd-144">.</span><span class="sxs-lookup"><span data-stu-id="dbdbd-144"></span></span> <span data-ttu-id="dbdbd-145">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="dbdbd-145"></span></span><!-- --><span data-ttu-id="dbdbd-146">その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.NamedItemCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.NamedItemCollectionData`</span><span class="sxs-lookup"><span data-stu-id="dbdbd-146">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.NamedItemCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.NamedItemCollectionData`</span></span><!-- --><span data-ttu-id="dbdbd-147">) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。</span><span class="sxs-lookup"><span data-stu-id="dbdbd-147">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.NamedItemCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.NamedItemCollectionData
+        description: ''
