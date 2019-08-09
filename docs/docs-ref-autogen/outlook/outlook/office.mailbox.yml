@@ -497,6 +497,8 @@ items:
 
       Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
 
+      トークンは、 `asyncResult.value`プロパティの文字列として返されます。
+
       *REST トークン*
 
       REST トークンが要求されると (オプション isRest = true)、生成されたトークンは Exchange Web サービス呼び出しの認証には機能しません。 このトークンは、アドインがマニフェストで ReadWriteMailbox アクセス許可を指定していない限り、現在のアイテムとその添付ファイルへの読み取り専用アクセスに制限されます。 ReadWriteMailbox アクセス許可が指定されている場合、結果のトークンによって、メール、予定表、および連絡先に対する読み取り/書き込みアクセス許可が付与されます。これにより、メールを送信することもできます。
@@ -516,6 +518,14 @@ items:
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
+
+      **エラー**:
+
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
 
       #### <a name="examples"></a>例
 
@@ -550,7 +560,7 @@ items:
           type:
             - 'Office.AsyncContextOptions & { isRest?: boolean }'
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、プロパティ`asyncResult.error`と`asyncResult.diagnostics`プロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.Mailbox.getCallbackTokenAsync_1
@@ -559,14 +569,24 @@ items:
 
       Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
 
+      トークンは、 `asyncResult.value`プロパティの文字列として返されます。
+
       トークンと予定の識別子またはアイテムの識別子をサードパーティ システムに渡すことができます。 サードパーティ システムは、トークンをベアラー承認トークンとして使用し、Exchange Web サービス (EWS) GetAttachment または GetItem 操作を呼び出して、添付ファイルまたはアイテムを返します。 For example, you can create a remote service to get attachments from the selected item.
 
       アプリには、読み取りモードで GetReadItem Tokenasync メソッドを呼び出すために、マニフェストに指定されたアクセス許可が必要です。
 
       新規作成モードでは、saveAsync メソッドを呼び出して、情報 tokenasync メソッドに渡すアイテム識別子を取得する必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem 権限が必要です。
 
-      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
+      **エラー**:
+
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
+
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
@@ -595,7 +615,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、プロパティ`asyncResult.error`と`asyncResult.diagnostics`プロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
@@ -606,7 +626,7 @@ items:
     summary: |-
       ユーザーと Office アドインを識別するトークンを取得します。
 
-      このトークンは、asyncResult プロパティの文字列として提供されます。
+      トークンは、 `asyncResult.value`プロパティの文字列として返されます。
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -615,6 +635,14 @@ items:
       **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 新規作成または読み取り
 
       Getuseridentity Tokenasync メソッドは、[アドインとユーザーをサードパーティのシステムで](https://docs.microsoft.com/outlook/add-ins/authentication)識別して認証するために使用できるトークンを返します。<!-- -->.
+
+      **エラー**:
+
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
 
       #### <a name="examples"></a>例
 
@@ -640,7 +668,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、`asyncResult.value` プロパティで文字列として提供されます。 エラーが発生した場合、プロパティ`asyncResult.error`と`asyncResult.diagnostics`プロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
@@ -824,9 +852,9 @@ items:
 
       次のメンバーが含まれています。
 
-      - hostName (string): ホストアプリケーションの名前を表す文字列。 "Outlook"、"OutlookWebApp"、"Outlookwebapp"、または "Outlookwebapp" のいずれかの値です。
+      - hostName (string): ホストアプリケーションの名前を表す文字列。 "Outlook"、"OutlookWebApp"、"Outlookwebapp"、または "Outlookwebapp" のいずれかの値であることが必要です。 **注**: デスクトップクライアント (Windows および Mac) の outlook では、"outlook" 値が返されます。
 
-      - hostVersion (string): ホストアプリケーションまたは Exchange サーバーのバージョンを表す文字列。 メールアドインがデスクトップクライアントまたは iOS の Outlook で実行されている場合、hostVersion プロパティはホストアプリケーションのバージョン (Outlook) を返します。 Web 上の Outlook では、このプロパティは Exchange サーバーのバージョンを返します。 例として、"15.0.468.0" という文字列があります。
+      - hostVersion (string): ホストアプリケーションまたは Exchange サーバー (例: "15.0.468.0") のバージョンを表す文字列。 メールアドインがデスクトップまたはモバイルクライアントの Outlook で実行されている場合、hostVersion プロパティはホストアプリケーションのバージョン (Outlook) を返します。 Web 上の Outlook では、このプロパティは Exchange サーバーのバージョンを返します。
 
       - OWAView (MailboxEnums または string): web 上の Outlook の現在のビューを表す列挙 (または文字列リテラル)。 ホストアプリケーションが web 上の Outlook 上にない場合、このプロパティにアクセスすると undefined が返されます。 Outlook on the web には、画面の幅に応じて表示されているときに表示される3つのビュー (「OneColumn」)、画面の幅が広い場合に表示される「ThreeColumns」、画面とウィンドウの幅に対応して表示される「」、およびその数が表示されます。表示できる列。
 
