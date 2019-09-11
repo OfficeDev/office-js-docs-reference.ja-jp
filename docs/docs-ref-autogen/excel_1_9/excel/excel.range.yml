@@ -140,7 +140,9 @@ items:
           - string
   - uid: excel.Excel.Range.autoFill
     summary: |-
-      現在の範囲から対象の範囲までの範囲に値を設定します。 移動先の範囲は、ソースを水平方向または垂直方向に拡張する必要があります。 連続していない範囲はサポートされていません。
+      指定したオートフィルロジックを使用して、現在の範囲から移動先の範囲に範囲を埋めます。 変換先の範囲は null にすることも、ソースを水平方向または垂直方向に拡張することもできます。 引数 destination に null を指定すると、周囲のセル (UI の範囲の塗りつぶしハンドルをダブルクリックしたときの動作) に基づいてデータが入力されます。 連続していない範囲はサポートされていません。
+
+      詳細については、「[オートフィルおよびフラッシュフィルの使用](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)」を参照してください。<!-- -->.
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
@@ -165,7 +167,9 @@ items:
             - excel.Excel.AutoFillType
   - uid: excel.Excel.Range.autoFill_1
     summary: |-
-      現在の範囲から対象の範囲までの範囲に値を設定します。 移動先の範囲は、ソースを水平方向または垂直方向に拡張する必要があります。 連続していない範囲はサポートされていません。
+      指定したオートフィルロジックを使用して、現在の範囲から移動先の範囲に範囲を埋めます。 変換先の範囲は null にすることも、ソースを水平方向または垂直方向に拡張することもできます。 引数 destination に null を指定すると、周囲のセル (UI の範囲の塗りつぶしハンドルをダブルクリックしたときの動作) に基づいてデータが入力されます。 連続していない範囲はサポートされていません。
+
+      詳細については、「[オートフィルおよびフラッシュフィルの使用](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)」を参照してください。<!-- -->.
 
       \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
@@ -579,9 +583,9 @@ items:
               // NOTE: If no match is found, an ItemNotFound error
               // is thrown when Range.find is evaluated.
               const foundRange = searchRange.find($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
@@ -626,9 +630,9 @@ items:
               const table = sheet.tables.getItem("ExpensesTable");
               const searchRange = table.getRange();
               const foundRange = searchRange.findOrNullObject($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
