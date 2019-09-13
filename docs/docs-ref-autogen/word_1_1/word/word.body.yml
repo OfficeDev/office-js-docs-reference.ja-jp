@@ -1,0 +1,1406 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'word!Word.Body:class'
+    summary: |-
+      文書またはセクションの本文を表します。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: Word.Body
+    fullName: Word.Body
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'word!OfficeExtension.ClientObject:class'
+    package: word!
+    children:
+      - 'word!Word.Body#clear:member(1)'
+      - 'word!Word.Body#contentControls:member'
+      - 'word!Word.Body#context:member'
+      - 'word!Word.Body#font:member'
+      - 'word!Word.Body#getHtml:member(1)'
+      - 'word!Word.Body#getOoxml:member(1)'
+      - 'word!Word.Body#inlinePictures:member'
+      - 'word!Word.Body#insertBreak:member(1)'
+      - 'word!Word.Body#insertBreak:member(2)'
+      - 'word!Word.Body#insertContentControl:member(1)'
+      - 'word!Word.Body#insertFileFromBase64:member(1)'
+      - 'word!Word.Body#insertFileFromBase64:member(2)'
+      - 'word!Word.Body#insertHtml:member(1)'
+      - 'word!Word.Body#insertHtml:member(2)'
+      - 'word!Word.Body#insertOoxml:member(1)'
+      - 'word!Word.Body#insertOoxml:member(2)'
+      - 'word!Word.Body#insertParagraph:member(1)'
+      - 'word!Word.Body#insertParagraph:member(2)'
+      - 'word!Word.Body#insertText:member(1)'
+      - 'word!Word.Body#insertText:member(2)'
+      - 'word!Word.Body#load:member(1)'
+      - 'word!Word.Body#load:member(2)'
+      - 'word!Word.Body#load:member(3)'
+      - 'word!Word.Body#paragraphs:member'
+      - 'word!Word.Body#parentContentControl:member'
+      - 'word!Word.Body#search:member(1)'
+      - 'word!Word.Body#select:member(1)'
+      - 'word!Word.Body#select:member(2)'
+      - 'word!Word.Body#set:member(1)'
+      - 'word!Word.Body#set:member(2)'
+      - 'word!Word.Body#style:member'
+      - 'word!Word.Body#text:member'
+      - 'word!Word.Body#toJSON:member(1)'
+      - 'word!Word.Body#track:member(1)'
+      - 'word!Word.Body#untrack:member(1)'
+  - uid: 'word!Word.Body#clear:member(1)'
+    summary: |-
+      本文オブジェクトの内容を消去します。 ユーザーは、消去された内容を元に戻す操作を実行できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to clear the contents of the body.
+              body.clear();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Cleared the body contents.');
+              });
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // The Silly stories add-in sample shows how the 
+          // clear method can be used to clear the contents of a document.
+          // https://aka.ms/sillystorywordaddin
+          ```
+  - uid: 'word!Word.Body#contentControls:member'
+    summary: |-
+      本文に含まれるリッチテキストコンテンツコントロールオブジェクトのコレクションを取得します。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: contentControls
+    fullName: contentControls
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly contentControls: Word.ContentControlCollection;'
+      return:
+        type:
+          - 'word!Word.ContentControlCollection:class'
+  - uid: 'word!Word.Body#context:member'
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'word!Word.RequestContext:class'
+  - uid: 'word!Word.Body#font:member'
+    summary: |-
+      本文のテキスト形式を取得します。 フォント名、サイズ、色、およびその他のプロパティを取得および設定するために使用します。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: font
+    fullName: font
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly font: Word.Font;'
+      return:
+        type:
+          - 'word!Word.Font:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Get the style and the font size, font name, and font color properties on the body object.
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to load font and style information for the document body.
+              context.load(body, 'font/size, font/name, font/color, style');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  // Show the results of the load method. Here we show the
+                  // property values on the body object.
+                  var results = 'Font size: ' + body.font.size +
+                                '; Font name: ' + body.font.name +
+                                '; Font color: ' + body.font.color +
+                                '; Body style: ' + body.style;
+
+                  console.log(results);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'word!Word.Body#getHtml:member(1)'
+    summary: |-
+      Body オブジェクトの HTML 表記を取得します。 Web ページまたは HTML ビューアーでレンダリングされる場合、書式設定は、ドキュメントの書式設定と完全に一致しますが、完全に一致するとは限りません。 このメソッドは、異なるプラットフォーム (Windows、Mac など) の同じドキュメントに対して、まったく同じ HTML を返しません。 厳密な忠実性、または複数のプラットフォーム間で`Body.getOoxml()`の一貫性が必要な場合は、を使用して、返された XML を HTML に変換します。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getHtml()
+    fullName: getHtml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - 'word!Word.Body#getHtml~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to get the HTML contents of the body.
+              var bodyHTML = body.getHtml();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log("Body HTML contents: " + bodyHTML.value);
+              });
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'word!Word.Body#getOoxml:member(1)'
+    summary: |-
+      本文オブジェクトの OOXML (Office オープン XML) 表記を取得します。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getOoxml()
+    fullName: getOoxml()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - 'word!Word.Body#getOoxml~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to get the OOXML contents of the body.
+              var bodyOOXML = body.getOoxml();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log("Body OOXML contents: " + bodyOOXML.value);
+              });
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'word!Word.Body#inlinePictures:member'
+    summary: |-
+      本文にある InlinePicture オブジェクトのコレクションを取得します。 コレクションに浮動イメージは含まれません。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: inlinePictures
+    fullName: inlinePictures
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly inlinePictures: Word.InlinePictureCollection;'
+      return:
+        type:
+          - 'word!Word.InlinePictureCollection:class'
+  - uid: 'word!Word.Body#insertBreak:member(1)'
+    summary: |-
+      メイン文書の指定した位置に、区切りを挿入します。 insertLocation の値には、'Start' または 'End' を指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertBreak(breakType, insertLocation)'
+    fullName: 'insertBreak(breakType, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (ctx) {
+
+              // Create a proxy object for the document body.
+              var body = ctx.document.body;
+
+              // Queue a command to insert a page break at the start of the document body.
+              body.insertBreak(Word.BreakType.page, Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return ctx.sync().then(function () {
+                  console.log('Added a page break at the start of the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: breakType
+          description: 必須です。 本文に追加する区切りの種類。
+          type:
+            - 'word!Word.BreakType:enum'
+        - id: insertLocation
+          description: 必須です。 有効な値は、'Start' または 'End' です。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertBreak:member(2)'
+    summary: |-
+      メイン文書の指定した位置に、区切りを挿入します。 insertLocation の値には、'Start' または 'End' を指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertBreak(breakTypeString, insertLocation)'
+    fullName: 'insertBreak(breakTypeString, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: breakTypeString
+          description: 必須です。 本文に追加する区切りの種類。
+          type:
+            - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
+        - id: insertLocation
+          description: 必須です。 有効な値は、'Start' または 'End' です。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#insertContentControl:member(1)'
+    summary: |-
+      リッチ テキスト コンテンツ コントロールで本文オブジェクトをラップします。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: insertContentControl()
+    fullName: insertContentControl()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertContentControl(): Word.ContentControl;'
+      return:
+        type:
+          - 'word!Word.ContentControl:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to wrap the body in a content control.
+              body.insertContentControl();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Wrapped the body in a content control.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'word!Word.Body#insertFileFromBase64:member(1)'
+    summary: |-
+      文書を本文の指定された位置に挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertFileFromBase64(base64File, insertLocation)'
+    fullName: 'insertFileFromBase64(base64File, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to insert base64 encoded .docx at the beginning of the content body.
+              // You will need to implement getBase64() to pass in a string of a base64 encoded docx file.
+              body.insertFileFromBase64(getBase64(), Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Added base64 encoded text to the beginning of the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: base64File
+          description: 必須です。 .Docx ファイルの base64 でエンコードされたコンテンツ。
+          type:
+            - string
+        - id: insertLocation
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertFileFromBase64:member(2)'
+    summary: |-
+      文書を本文の指定された位置に挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertFileFromBase64(base64File, insertLocationString)'
+    fullName: 'insertFileFromBase64(base64File, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: ''
+      parameters:
+        - id: base64File
+          description: 必須です。 .Docx ファイルの base64 でエンコードされたコンテンツ。
+          type:
+            - string
+        - id: insertLocationString
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#insertHtml:member(1)'
+    summary: |-
+      指定した位置に HTML を挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertHtml(html, insertLocation)'
+    fullName: 'insertHtml(html, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to insert HTML in to the beginning of the body.
+              body.insertHtml(
+                  '<strong>This is text inserted with body.insertHtml()</strong>', Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('HTML added to the beginning of the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: html
+          description: 必須です。 文書に挿入する HTML。
+          type:
+            - string
+        - id: insertLocation
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertHtml:member(2)'
+    summary: |-
+      指定した位置に HTML を挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertHtml(html, insertLocationString)'
+    fullName: 'insertHtml(html, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: ''
+      parameters:
+        - id: html
+          description: 必須です。 文書に挿入する HTML。
+          type:
+            - string
+        - id: insertLocationString
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#insertOoxml:member(1)'
+    summary: |-
+      指定した位置に OOXML を挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertOoxml(ooxml, insertLocation)'
+    fullName: 'insertOoxml(ooxml, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: ''
+      parameters:
+        - id: ooxml
+          description: 必須です。 挿入する OOXML を指定します。
+          type:
+            - string
+        - id: insertLocation
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertOoxml:member(2)'
+    summary: |-
+      指定した位置に OOXML を挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertOoxml(ooxml, insertLocationString)'
+    fullName: 'insertOoxml(ooxml, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: ''
+      parameters:
+        - id: ooxml
+          description: 必須です。 挿入する OOXML を指定します。
+          type:
+            - string
+        - id: insertLocationString
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#insertParagraph:member(1)'
+    summary: |-
+      指定した位置に、段落を挿入します。 insertLocation の値には、'Start' または 'End' を指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertParagraph(paragraphText, insertLocation)'
+    fullName: 'insertParagraph(paragraphText, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
+      return:
+        type:
+          - 'word!Word.Paragraph:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to insert the paragraph at the end of the document body.
+              body.insertParagraph('Content of a new paragraph', Word.InsertLocation.end);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Paragraph added at the end of the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // The Word-Add-in-DocumentAssembly sample shows how you can use the insertParagraph method to assemble a document.
+          // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+              let paragraph = context.document.body.insertParagraph("Timeline", "End");
+              paragraph.style = "Heading 2";
+              let paragraph2 = context.document.body.insertParagraph("The Services shall commence on July 31, 2015, and shall continue through July 29, 2015.", "End");
+              paragraph2.style = "Normal";
+              let paragraph3 = context.document.body.insertParagraph("Project Costs by Phase", "End");
+              paragraph3.style = "Heading 2";
+              // Note a content control with the title of "ProjectCosts" is added. Content will be replaced later.
+              let paragraph4 = context.document.body.insertParagraph("<Add Project Costs Here>", "End");
+              paragraph4.style = "Normal";
+              paragraph4.font.highlightColor = "#FFFF00";
+              let contentControl = paragraph4.insertContentControl();
+              contentControl.title = "ProjectCosts";
+              let paragraph5 = context.document.body.insertParagraph("Project Team", "End");
+              paragraph5.style = "Heading 2";
+              paragraph5.font.highlightColor = "#FFFFFF";
+              let paragraph6 = context.document.body.insertParagraph("Terms of Work", "End");
+              paragraph6.style = "Heading 1";
+              let paragraph7 = context.document.body.insertParagraph("Contractor shall provide the Services and Deliverable(s) as follows:", "End");
+              paragraph7.style = "Normal";
+              let paragraph8 = context.document.body.insertParagraph("Out-of-Pocket Expenses / Invoice Procedures", "End");
+              paragraph8.style = "Heading 2";
+              let paragraph9 = context.document.body.insertParagraph("Client will be invoiced monthly for the consulting services and T&L expenses. Standard Contractor invoicing is assumed to be acceptable. Invoices are due upon receipt. client will be invoiced all costs associated with out-of-pocket expenses (including, without limitation, costs and expenses associated with meals, lodging, local transportation and any other applicable business expenses) listed on the invoice as a separate line item. Reimbursement for out-of-pocket expenses in connection with performance of this SOW, when authorized and up to the limits set forth in this SOW, shall be in accordance with Client's then-current published policies governing travel and associated business expenses, which information shall be provided by the Client Project Manager.", "End");
+              paragraph9.style = "Normal";
+              // Insert a page break at the end of the document.
+              context.document.body.insertBreak("Page", "End");
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: paragraphText
+          description: 必須です。 挿入する段落テキスト。
+          type:
+            - string
+        - id: insertLocation
+          description: 必須です。 有効な値は、'Start' または 'End' です。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertParagraph:member(2)'
+    summary: |-
+      指定した位置に、段落を挿入します。 insertLocation の値には、'Start' または 'End' を指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertParagraph(paragraphText, insertLocationString)'
+    fullName: 'insertParagraph(paragraphText, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+      return:
+        type:
+          - 'word!Word.Paragraph:class'
+        description: ''
+      parameters:
+        - id: paragraphText
+          description: 必須です。 挿入する段落テキスト。
+          type:
+            - string
+        - id: insertLocationString
+          description: 必須です。 有効な値は、'Start' または 'End' です。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#insertText:member(1)'
+    summary: |-
+      テキストを本文の指定された位置に挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertText(text, insertLocation)'
+    fullName: 'insertText(text, insertLocation)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to insert text in to the beginning of the body.
+              body.insertText('This is text inserted with body.insertText()', Word.InsertLocation.start);
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Text added to the beginning of the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: text
+          description: 必須です。 挿入するテキスト。
+          type:
+            - string
+        - id: insertLocation
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - 'word!Word.InsertLocation:enum'
+  - uid: 'word!Word.Body#insertText:member(2)'
+    summary: |-
+      テキストを本文の指定された位置に挿入します。 insertLocation 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'insertText(text, insertLocationString)'
+    fullName: 'insertText(text, insertLocationString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      return:
+        type:
+          - 'word!Word.Range:class'
+        description: ''
+      parameters:
+        - id: text
+          description: 必須です。 挿入するテキスト。
+          type:
+            - string
+        - id: insertLocationString
+          description: 必須。 値には、'Replace'、'Start'、'End' のいずれかを指定できます。
+          type:
+            - '"Before" | "After" | "Start" | "End" | "Replace"'
+  - uid: 'word!Word.Body#load:member(1)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+    remarks: |-
+      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+      `load(option?: string | string[]): Word.Body`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+      `load(option?: { select?: string; expand?: string; }): Word.Body`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Body`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.BodyLoadOptions): Word.Body;'
+      return:
+        type:
+          - 'word!Word.Body:class'
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - 'word!Word.Interfaces.BodyLoadOptions:interface'
+  - uid: 'word!Word.Body#load:member(2)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Body;'
+      return:
+        type:
+          - 'word!Word.Body:class'
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: 'word!Word.Body#load:member(3)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Body;'
+      return:
+        type:
+          - 'word!Word.Body:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: 'word!Word.Body#paragraphs:member'
+    summary: |-
+      本文に含まれる paragraph オブジェクトのコレクションを取得します。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: paragraphs
+    fullName: paragraphs
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly paragraphs: Word.ParagraphCollection;'
+      return:
+        type:
+          - 'word!Word.ParagraphCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Word.run(async (context) => {
+            let paragraphs = context.document.body.paragraphs;
+            paragraphs.load("text");
+            await context.sync();
+
+            let text = [];
+            paragraphs.items.forEach((item) => {
+              let paragraph = item.text.trim();
+              if (paragraph) {
+                paragraph.split(" ").forEach((term) => {
+                  let currentTerm = term.trim();
+                  if (currentTerm) {
+                    text.push(currentTerm);
+                  }
+                });
+              }
+            });
+
+            let makeTextDistinct = new Set(text);
+            let distinctText = Array.from(makeTextDistinct);
+            let allSearchResults = [];
+
+            for (let i = 0; i < distinctText.length; i++) {
+              let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
+              results.load("text");
+
+              // Map search term with its results.
+              let correlatedResults = {
+                searchTerm: distinctText[i],
+                hits: results
+              };
+
+              allSearchResults.push(correlatedResults);
+            }
+
+            await context.sync();
+
+            // Display counts.
+            allSearchResults.forEach((result) => {
+              let length = result.hits.items.length;
+
+              console.log("Search term: " + result.searchTerm + " => Count: " + length);
+            });
+          });
+          ```
+  - uid: 'word!Word.Body#parentContentControl:member'
+    summary: |-
+      本文を含むコンテンツ コントロールを取得します。 親コンテンツコントロールがない場合にスローされます。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: parentContentControl
+    fullName: parentContentControl
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly parentContentControl: Word.ContentControl;'
+      return:
+        type:
+          - 'word!Word.ContentControl:class'
+  - uid: 'word!Word.Body#search:member(1)'
+    summary: |-
+      Body オブジェクトのスコープで、指定された SearchOptions を使用して検索を実行します。 検索結果は、範囲オブジェクトのコレクションです。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: 'search(searchText, searchOptions)'
+    fullName: 'search(searchText, searchOptions)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        search(searchText: string, searchOptions?: Word.SearchOptions | {
+                    ignorePunct?: boolean;
+                    ignoreSpace?: boolean;
+                    matchCase?: boolean;
+                    matchPrefix?: boolean;
+                    matchSuffix?: boolean;
+                    matchWholeWord?: boolean;
+                    matchWildcards?: boolean;
+                }): Word.RangeCollection;
+      return:
+        type:
+          - 'word!Word.RangeCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to search the document.
+              var searchResults = context.document.body.search('video', {matchCase: false});
+
+              // Queue a command to load the results.
+              context.load(searchResults, 'text, font');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  var results = 'Found count: ' + searchResults.items.length +
+                                '; we highlighted the results.';
+
+                  // Queue a command to change the font for each found item.
+                  for (var i = 0; i < searchResults.items.length; i++) {
+                    searchResults.items[i].font.color = '#FF0000'    // Change color to Red
+                    searchResults.items[i].font.highlightColor = '#FFFF00';
+                    searchResults.items[i].font.bold = true;
+                  }
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log(results);
+                  });
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+
+          // The Word-Add-in-DocumentAssembly sample provides another example of how to search a document.
+          // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            let results = context.document.body.search("Online");
+            results.load("length");
+
+            await context.sync();
+
+            // Let's traverse the search results... and highlight...
+            for (let i = 0; i < results.items.length; i++) {
+              results.items[i].font.highlightColor = "yellow";
+            }
+
+            await context.sync();
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            // Check out how wildcard expression are built, also use the second parameter of the search method to include search modes
+            // (i.e. use wildcards).
+            let results = context.document.body.search("$*.[0-9][0-9]", { matchWildcards: true });
+            results.load("length");
+
+            await context.sync();
+
+            // Let's traverse the search results... and highlight...
+            for (let i = 0; i < results.items.length; i++) {
+              results.items[i].font.highlightColor = "red";
+              results.items[i].font.color = "white";
+            }
+
+            await context.sync();
+          });
+          ```
+          ```typescript
+          await Word.run(async (context) => {
+            let paragraphs = context.document.body.paragraphs;
+            paragraphs.load("text");
+            await context.sync();
+
+            let text = [];
+            paragraphs.items.forEach((item) => {
+              let paragraph = item.text.trim();
+              if (paragraph) {
+                paragraph.split(" ").forEach((term) => {
+                  let currentTerm = term.trim();
+                  if (currentTerm) {
+                    text.push(currentTerm);
+                  }
+                });
+              }
+            });
+
+            let makeTextDistinct = new Set(text);
+            let distinctText = Array.from(makeTextDistinct);
+            let allSearchResults = [];
+
+            for (let i = 0; i < distinctText.length; i++) {
+              let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
+              results.load("text");
+
+              // Map search term with its results.
+              let correlatedResults = {
+                searchTerm: distinctText[i],
+                hits: results
+              };
+
+              allSearchResults.push(correlatedResults);
+            }
+
+            await context.sync();
+
+            // Display counts.
+            allSearchResults.forEach((result) => {
+              let length = result.hits.items.length;
+
+              console.log("Search term: " + result.searchTerm + " => Count: " + length);
+            });
+          });
+          ```
+      parameters:
+        - id: searchText
+          description: 必須です。 検索テキスト。 最大255文字を指定できます。
+          type:
+            - string
+        - id: searchOptions
+          description: 省略可能。 検索のオプション。
+          type:
+            - 'word!Word.Body#search~0:complex'
+  - uid: 'word!Word.Body#select:member(1)'
+    summary: |-
+      本文を選択し、その本文に Word の UI を移動します。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: select(selectionMode)
+    fullName: select(selectionMode)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionMode?: Word.SelectionMode): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to select the document body. The Word UI will
+              // move to the selected document body.
+              body.select();
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('Selected the document body.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: selectionMode
+          description: 省略可能。 選択モードは、'Select'、'Start'、'End' のいずれかになります。 'Select' が既定値です。
+          type:
+            - 'word!Word.SelectionMode:enum'
+  - uid: 'word!Word.Body#select:member(2)'
+    summary: |-
+      本文を選択し、その本文に Word の UI を移動します。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: select(selectionModeString)
+    fullName: select(selectionModeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: selectionModeString
+          description: 省略可能。 選択モードは、'Select'、'Start'、'End' のいずれかになります。 'Select' が既定値です。
+          type:
+            - '"Select" | "Start" | "End"'
+  - uid: 'word!Word.Body#set:member(1)'
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Word.Body): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.BodyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - 'word!Word.Interfaces.BodyUpdateData:interface'
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - 'word!OfficeExtension.UpdateOptions:interface'
+  - uid: 'word!Word.Body#set:member(2)'
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Body): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'word!Word.Body:class'
+  - uid: 'word!Word.Body#style:member'
+    summary: |-
+      本文のスタイル名を取得または設定します。カスタム スタイルとローカライズされたスタイルの名前には、このプロパティを使用します。ロケール間で移植可能な組み込みスタイルを使用するには、"styleBuiltIn" プロパティを参照してください。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: style
+    fullName: style
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'style: string;'
+      return:
+        type:
+          - string
+  - uid: 'word!Word.Body#text:member'
+    summary: |-
+      本文のテキストを取得します。 insertText メソッドを使用して、テキストを挿入します。 読み取り専用です。
+
+      \[[Api set: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: text
+    fullName: text
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly text: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Get the text property on the body object
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the document body.
+              var body = context.document.body;
+
+              // Queue a command to load the text in document body.
+              context.load(body, 'text');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log("Body contents: " + body.text);
+              });
+          })
+          .catch(function (error) {
+              console.log("Error: " + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'word!Word.Body#toJSON:member(1)'
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Word のオブジェクトは API オブジェクトであるのに対し`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Word.Interfaces.BodyData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.BodyData;'
+      return:
+        type:
+          - 'word!Word.Interfaces.BodyData:interface'
+        description: ''
+  - uid: 'word!Word.Body#track:member(1)'
+    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Body;'
+      return:
+        type:
+          - 'word!Word.Body:class'
+        description: ''
+  - uid: 'word!Word.Body#untrack:member(1)'
+    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Body;'
+      return:
+        type:
+          - 'word!Word.Body:class'
+        description: ''
+references:
+  - uid: 'word!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'word!Word.ContentControlCollection:class'
+    name: Word.ContentControlCollection
+  - uid: 'word!Word.RequestContext:class'
+    name: RequestContext
+  - uid: 'word!Word.Font:class'
+    name: Word.Font
+  - uid: 'word!Word.Body#getHtml~0:complex'
+    name: OfficeExtension.ClientResult<string>
+    fullName: OfficeExtension.ClientResult<string>
+    spec.typeScript:
+      - uid: 'word!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <string>
+        fullName: <string>
+  - uid: 'word!Word.Body#getOoxml~0:complex'
+    name: OfficeExtension.ClientResult<string>
+    fullName: OfficeExtension.ClientResult<string>
+    spec.typeScript:
+      - uid: 'word!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <string>
+        fullName: <string>
+  - uid: 'word!Word.InlinePictureCollection:class'
+    name: Word.InlinePictureCollection
+  - uid: 'word!Word.BreakType:enum'
+    name: Word.BreakType
+  - uid: 'word!Word.InsertLocation:enum'
+    name: Word.InsertLocation
+  - uid: 'word!Word.ContentControl:class'
+    name: Word.ContentControl
+  - uid: 'word!Word.Range:class'
+    name: Word.Range
+  - uid: 'word!Word.Paragraph:class'
+    name: Word.Paragraph
+  - uid: 'word!Word.Body:class'
+    name: Word.Body
+  - uid: 'word!Word.Interfaces.BodyLoadOptions:interface'
+    name: Word.Interfaces.BodyLoadOptions
+  - uid: 'word!Word.ParagraphCollection:class'
+    name: Word.ParagraphCollection
+  - uid: 'word!Word.RangeCollection:class'
+    name: Word.RangeCollection
+  - uid: 'word!Word.Body#search~0:complex'
+    name: |-
+      Word.SearchOptions | {
+                  ignorePunct?: boolean;
+                  ignoreSpace?: boolean;
+                  matchCase?: boolean;
+                  matchPrefix?: boolean;
+                  matchSuffix?: boolean;
+                  matchWholeWord?: boolean;
+                  matchWildcards?: boolean;
+              }
+    fullName: |-
+      Word.SearchOptions | {
+                  ignorePunct?: boolean;
+                  ignoreSpace?: boolean;
+                  matchCase?: boolean;
+                  matchPrefix?: boolean;
+                  matchSuffix?: boolean;
+                  matchWholeWord?: boolean;
+                  matchWildcards?: boolean;
+              }
+    spec.typeScript:
+      - uid: 'word!Word.SearchOptions:class'
+        name: Word.SearchOptions
+        fullName: Word.SearchOptions
+      - name: |2-
+           | {
+                      ignorePunct?: boolean;
+                      ignoreSpace?: boolean;
+                      matchCase?: boolean;
+                      matchPrefix?: boolean;
+                      matchSuffix?: boolean;
+                      matchWholeWord?: boolean;
+                      matchWildcards?: boolean;
+                  }
+        fullName: |2-
+           | {
+                      ignorePunct?: boolean;
+                      ignoreSpace?: boolean;
+                      matchCase?: boolean;
+                      matchPrefix?: boolean;
+                      matchSuffix?: boolean;
+                      matchWholeWord?: boolean;
+                      matchWildcards?: boolean;
+                  }
+  - uid: 'word!Word.SelectionMode:enum'
+    name: Word.SelectionMode
+  - uid: 'word!Word.Interfaces.BodyUpdateData:interface'
+    name: Interfaces.BodyUpdateData
+  - uid: 'word!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
+  - uid: 'word!Word.Interfaces.BodyData:interface'
+    name: Word.Interfaces.BodyData
