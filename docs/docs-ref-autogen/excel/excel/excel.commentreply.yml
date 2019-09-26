@@ -2,7 +2,7 @@
 items:
   - uid: 'excel!Excel.CommentReply:class'
     summary: |-
-      ブック内のセルのコメント reply オブジェクトを表します。
+      ブック内のコメントの返信を表します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -27,10 +27,13 @@ items:
       - 'excel!Excel.CommentReply#load:member(1)'
       - 'excel!Excel.CommentReply#load:member(2)'
       - 'excel!Excel.CommentReply#load:member(3)'
+      - 'excel!Excel.CommentReply#mentions:member'
       - 'excel!Excel.CommentReply#resolved:member'
+      - 'excel!Excel.CommentReply#richContent:member'
       - 'excel!Excel.CommentReply#set:member(1)'
       - 'excel!Excel.CommentReply#set:member(2)'
       - 'excel!Excel.CommentReply#toJSON:member(1)'
+      - 'excel!Excel.CommentReply#updateMentions:member(1)'
   - uid: 'excel!Excel.CommentReply#authorEmail:member'
     summary: |-
       コメント返信作成者のメール アドレスを取得します。
@@ -202,30 +205,22 @@ items:
         type:
           - string
   - uid: 'excel!Excel.CommentReply#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.CommentReply`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.CommentReply`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CommentReply`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentReplyLoadOptions): Excel.CommentReply;'
+      content: 'load(options?: Excel.Interfaces.CommentReplyLoadOptions): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.CommentReplyLoadOptions:interface'
   - uid: 'excel!Excel.CommentReply#load:member(2)'
@@ -256,16 +251,40 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.CommentReply;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.CommentReply;
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.CommentReply#mentions:member'
+    summary: |-
+      コメントに記載されているエンティティ (人物など) を取得します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly mentions: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.CommentReply#mentions~0:complex'
   - uid: 'excel!Excel.CommentReply#resolved:member'
     summary: |-
       コメントの返信状態を取得または設定します。 値 "true" は、コメント応答が解決された状態であることを意味します。
@@ -282,6 +301,22 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.CommentReply#richContent:member'
+    summary: |-
+      リッチコメントの内容 (コメントに含まれるメンションなど) を取得します。 この文字列は、エンドユーザーに表示されることを意図したものではありません。 アドインでは、リッチコメントコンテンツを解析するためにのみ使用する必要があります。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly richContent: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.CommentReply#set:member(1)'
     summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
     remarks: |-
@@ -342,6 +377,28 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentReplyData:interface'
         description: ''
+  - uid: 'excel!Excel.CommentReply#updateMentions:member(1)'
+    summary: |-
+      特別に書式設定された文字列とメンションの一覧を使用して、コメントの内容を更新します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: updateMentions(contentWithMentions)
+    fullName: updateMentions(contentWithMentions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: contentWithMentions
+          description: コメントの内容を示します。 これには、特別に書式設定された文字列と、Excel で表示されるときに文字列に解析されるメンションの一覧が含まれています。
+          type:
+            - 'excel!Excel.CommentRichContent:interface'
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
@@ -357,9 +414,20 @@ references:
     name: Excel.CommentReply
   - uid: 'excel!Excel.Interfaces.CommentReplyLoadOptions:interface'
     name: Excel.Interfaces.CommentReplyLoadOptions
+  - uid: 'excel!Excel.CommentReply#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.Interfaces.CommentReplyUpdateData:interface'
     name: Interfaces.CommentReplyUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentReplyData:interface'
     name: Excel.Interfaces.CommentReplyData
+  - uid: 'excel!Excel.CommentRichContent:interface'
+    name: Excel.CommentRichContent

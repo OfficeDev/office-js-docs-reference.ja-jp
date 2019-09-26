@@ -2,7 +2,7 @@
 items:
   - uid: 'excel!Excel.Comment:class'
     summary: |-
-      ブック内のセルのコメントオブジェクトを表します。
+      ブック内のコメントを表します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -26,11 +26,14 @@ items:
       - 'excel!Excel.Comment#load:member(1)'
       - 'excel!Excel.Comment#load:member(2)'
       - 'excel!Excel.Comment#load:member(3)'
+      - 'excel!Excel.Comment#mentions:member'
       - 'excel!Excel.Comment#replies:member'
       - 'excel!Excel.Comment#resolved:member'
+      - 'excel!Excel.Comment#richContent:member'
       - 'excel!Excel.Comment#set:member(1)'
       - 'excel!Excel.Comment#set:member(2)'
       - 'excel!Excel.Comment#toJSON:member(1)'
+      - 'excel!Excel.Comment#updateMentions:member(1)'
   - uid: 'excel!Excel.Comment#authorEmail:member'
     summary: |-
       コメント作成者のメール アドレスを取得します。
@@ -122,7 +125,7 @@ items:
           - '!Date:interface'
   - uid: 'excel!Excel.Comment#delete:member(1)'
     summary: |-
-      コメント スレッドを削除します。
+      コメントと、接続されているすべての返信を削除します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -181,30 +184,22 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Comment#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.Comment`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Comment`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Comment`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentLoadOptions): Excel.Comment;'
+      content: 'load(options?: Excel.Interfaces.CommentLoadOptions): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.CommentLoadOptions:interface'
   - uid: 'excel!Excel.Comment#load:member(2)'
@@ -249,16 +244,40 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Comment;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Comment;
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.Comment#mentions:member'
+    summary: |-
+      コメントに記載されているエンティティ (人物など) を取得します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly mentions: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.Comment#mentions~0:complex'
   - uid: 'excel!Excel.Comment#replies:member'
     summary: |-
       コメントに関連付けられている返信オブジェクトのコレクションを表します。 読み取り専用です。
@@ -291,6 +310,22 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.Comment#richContent:member'
+    summary: |-
+      リッチコメントの内容 (コメントに含まれるメンションなど) を取得します。 この文字列は、エンドユーザーに表示されることを意図したものではありません。 アドインでは、リッチコメントコンテンツを解析するためにのみ使用する必要があります。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly richContent: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.Comment#set:member(1)'
     summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
     remarks: |-
@@ -351,6 +386,28 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentData:interface'
         description: ''
+  - uid: 'excel!Excel.Comment#updateMentions:member(1)'
+    summary: |-
+      特別に書式設定された文字列とメンションの一覧を使用して、コメントの内容を更新します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: updateMentions(contentWithMentions)
+    fullName: updateMentions(contentWithMentions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: contentWithMentions
+          description: コメントの内容を示します。 これには、特別に書式設定された文字列と、Excel で表示されるときに文字列に解析されるメンションの一覧が含まれています。
+          type:
+            - 'excel!Excel.CommentRichContent:interface'
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
@@ -364,6 +421,15 @@ references:
     name: Excel.Comment
   - uid: 'excel!Excel.Interfaces.CommentLoadOptions:interface'
     name: Excel.Interfaces.CommentLoadOptions
+  - uid: 'excel!Excel.Comment#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.CommentReplyCollection:class'
     name: Excel.CommentReplyCollection
   - uid: 'excel!Excel.Interfaces.CommentUpdateData:interface'
@@ -372,3 +438,5 @@ references:
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
     name: Excel.Interfaces.CommentData
+  - uid: 'excel!Excel.CommentRichContent:interface'
+    name: Excel.CommentRichContent
