@@ -340,49 +340,42 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Style#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.Style`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Style`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Style`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-
-      #### <a name="examples"></a>例
-
-      ```typescript
-      await Excel.run(async (context) => {
-          let style = context.workbook.styles.getItem("Diagonal Orientation Style");            
-          style.load("textOrientation, horizontalAlignment, autoIndent, readingOrder, wrapText, includeProtection, shrinkToFit, locked");
-
-          await context.sync();
-
-          console.log("Orientation: " + style.textOrientation);
-          console.log("Horizontal alignment: " + style.horizontalAlignment);
-          console.log("Add indent: " + style.autoIndent);
-          console.log("Reading order: " + style.readingOrder);
-          console.log("Wrap text: " + style.wrapText);
-          console.log("Include protection: " + style.includeProtection);
-          console.log("Shrink to fit: " + style.shrinkToFit);
-          console.log("Style locked: " + style.locked);
-      });
-      ```
-    name: load(option)
-    fullName: load(option)
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.StyleLoadOptions): Excel.Style;'
+      content: 'load(options?: Excel.Interfaces.StyleLoadOptions): Excel.Style;'
       return:
         type:
           - 'excel!Excel.Style:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let style = context.workbook.styles.getItem("Diagonal Orientation Style");            
+              style.load("textOrientation, horizontalAlignment, autoIndent, readingOrder, wrapText, includeProtection, shrinkToFit, locked");
+
+              await context.sync();
+
+              console.log("Orientation: " + style.textOrientation);
+              console.log("Horizontal alignment: " + style.horizontalAlignment);
+              console.log("Add indent: " + style.autoIndent);
+              console.log("Reading order: " + style.readingOrder);
+              console.log("Wrap text: " + style.wrapText);
+              console.log("Include protection: " + style.includeProtection);
+              console.log("Shrink to fit: " + style.shrinkToFit);
+              console.log("Style locked: " + style.locked);
+          });
+          ```
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.StyleLoadOptions:interface'
   - uid: 'excel!Excel.Style#load:member(2)'
@@ -411,16 +404,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Style;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Style;
       return:
         type:
           - 'excel!Excel.Style:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Style#locked:member'
     summary: |-
       ワークシートが保護されている場合、オブジェクトがロックされるかどうかを示します。
