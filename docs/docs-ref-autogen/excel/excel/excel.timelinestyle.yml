@@ -74,30 +74,22 @@ items:
           - 'excel!Excel.TimelineStyle:class'
         description: この TimelineStyle から複製された新しい TimelineStyle オブジェクト。
   - uid: 'excel!Excel.TimelineStyle#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.TimelineStyle`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.TimelineStyle`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TimelineStyle`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.TimelineStyleLoadOptions): Excel.TimelineStyle;'
+      content: 'load(options?: Excel.Interfaces.TimelineStyleLoadOptions): Excel.TimelineStyle;'
       return:
         type:
           - 'excel!Excel.TimelineStyle:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.TimelineStyleLoadOptions:interface'
   - uid: 'excel!Excel.TimelineStyle#load:member(2)'
@@ -128,16 +120,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TimelineStyle;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.TimelineStyle;
       return:
         type:
           - 'excel!Excel.TimelineStyle:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.TimelineStyle#name:member'
     summary: |-
       TimelineStyle の名前を取得します。

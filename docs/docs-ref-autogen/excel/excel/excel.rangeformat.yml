@@ -14,6 +14,7 @@ items:
       - 'excel!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.RangeFormat#adjustIndent:member(1)'
       - 'excel!Excel.RangeFormat#autofitColumns:member(1)'
       - 'excel!Excel.RangeFormat#autofitRows:member(1)'
       - 'excel!Excel.RangeFormat#autoIndent:member'
@@ -39,6 +40,28 @@ items:
       - 'excel!Excel.RangeFormat#useStandardWidth:member'
       - 'excel!Excel.RangeFormat#verticalAlignment:member'
       - 'excel!Excel.RangeFormat#wrapText:member'
+  - uid: 'excel!Excel.RangeFormat#adjustIndent:member(1)'
+    summary: |-
+      範囲の書式のインデントを調整します。 インデントの値の範囲は 0 ~ 250 です。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: adjustIndent(amount)
+    fullName: adjustIndent(amount)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'adjustIndent(amount: number): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: amount
+          description: '現在のインデントを調整する文字間隔の数を指定します。 この値は、-250 と250の間である必要があります。 * メモ * *: 数値が250上のインデントレベルを上げる場合、インデントレベルは250になります。 同様に、この金額が0未満のインデントレベルを下げる場合は、インデントレベルは0のままになります。'
+          type:
+            - number
   - uid: 'excel!Excel.RangeFormat#autofitColumns:member(1)'
     summary: |-
       現在の列のデータに基づいて、現在の範囲の列の幅を最適な幅に変更します。
@@ -189,29 +212,21 @@ items:
         type:
           - number
   - uid: 'excel!Excel.RangeFormat#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.RangeFormat`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.RangeFormat`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFormat`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeFormatLoadOptions): Excel.RangeFormat;'
+      content: 'load(options?: Excel.Interfaces.RangeFormatLoadOptions): Excel.RangeFormat;'
       return:
         type:
           - 'excel!Excel.RangeFormat:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.RangeFormatLoadOptions:interface'
   - uid: 'excel!Excel.RangeFormat#load:member(2)'
@@ -301,16 +316,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.RangeFormat;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.RangeFormat;
       return:
         type:
           - 'excel!Excel.RangeFormat:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.RangeFormat#protection:member'
     summary: |-
       範囲に対する書式保護オブジェクトを返します。 読み取り専用。
