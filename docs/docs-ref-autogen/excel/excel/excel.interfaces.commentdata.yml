@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
-    summary: '"Comment. toJSON ()" の呼び出しによって返されるデータを記述するインターフェイス。'
+    summary: 呼び出しによって返されるデータを記述するインターフェイス`comment.toJSON()`<!-- -->.
     name: Excel.Interfaces.CommentData
     fullName: Excel.Interfaces.CommentData
     langs:
@@ -14,8 +14,10 @@ items:
       - 'excel!Excel.Interfaces.CommentData#content:member'
       - 'excel!Excel.Interfaces.CommentData#creationDate:member'
       - 'excel!Excel.Interfaces.CommentData#id:member'
+      - 'excel!Excel.Interfaces.CommentData#mentions:member'
       - 'excel!Excel.Interfaces.CommentData#replies:member'
       - 'excel!Excel.Interfaces.CommentData#resolved:member'
+      - 'excel!Excel.Interfaces.CommentData#richContent:member'
   - uid: 'excel!Excel.Interfaces.CommentData#authorEmail:member'
     summary: |-
       コメント作成者のメール アドレスを取得します。
@@ -96,6 +98,22 @@ items:
       return:
         type:
           - string
+  - uid: 'excel!Excel.Interfaces.CommentData#mentions:member'
+    summary: |-
+      コメントに記載されているエンティティ (人物など) を取得します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'mentions?: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.CommentData#mentions~0:complex'
   - uid: 'excel!Excel.Interfaces.CommentData#replies:member'
     summary: |-
       コメントに関連付けられている返信オブジェクトのコレクションを表します。 読み取り専用です。
@@ -128,9 +146,34 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.Interfaces.CommentData#richContent:member'
+    summary: |-
+      リッチコメントの内容 (コメントに含まれるメンションなど) を取得します。 この文字列は、エンドユーザーに表示されることを意図したものではありません。 アドインでは、リッチコメントコンテンツを解析するためにのみ使用する必要があります。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'richContent?: string;'
+      return:
+        type:
+          - string
 references:
   - uid: '!Date:interface'
     name: Date
+  - uid: 'excel!Excel.Interfaces.CommentData#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.Interfaces.CommentData#replies~0:complex'
     name: 'Excel.Interfaces.CommentReplyData[]'
     fullName: 'Excel.Interfaces.CommentReplyData[]'
