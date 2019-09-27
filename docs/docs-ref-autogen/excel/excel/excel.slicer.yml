@@ -143,7 +143,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Slicer#height:member'
     summary: |-
-      スライサーの高さ (ポイント数) を表します。 負の値で設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
+      スライサーの高さ (ポイント数) を表します。 "引数が無効であるか、存在しないか、または形式が正しくありません。" という例外がスローされます。 負の値で設定した場合、または入力に0の場合は例外。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -191,7 +191,7 @@ items:
           - boolean
   - uid: 'excel!Excel.Slicer#left:member'
     summary: |-
-      スライサーの左側からワークシートの左までの距離を表します (ポイント数)。 入力に負の値を設定すると、無効な引数の例外がスローされます。
+      スライサーの左側からワークシートの左までの距離を表します (ポイント数)。 "引数が無効であるか、存在しないか、または形式が正しくありません。" という例外がスローされます。 負の値を入力として設定した場合の例外。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -206,30 +206,22 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Slicer#load:member(1)'
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.Slicer`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Slicer`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Slicer`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
+      content: 'load(options?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
           type:
             - 'excel!Excel.Interfaces.SlicerLoadOptions:interface'
   - uid: 'excel!Excel.Slicer#load:member(2)'
@@ -260,16 +252,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Slicer;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Slicer;
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Slicer#name:member'
     summary: |-
       スライサーの名前を表します。
@@ -304,7 +304,7 @@ items:
           - string
   - uid: 'excel!Excel.Slicer#selectItems:member(1)'
     summary: |-
-      キーに基づいてスライサー アイテムを選択します。 前の選択は消去されます。 配列が空の場合、既定ではすべてのアイテムが選択されます。
+      キーに基づいてスライサーアイテムを選択します。 以前の選択はクリアされます。 配列が空の場合、既定ではすべてのアイテムが選択されます。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -399,7 +399,7 @@ items:
           - 'excel!Excel.SlicerItemCollection:class'
   - uid: 'excel!Excel.Slicer#sortBy:member'
     summary: |-
-      スライサーに含まれるアイテムの並べ替え順序を表します。 指定可能な値は DataSourceOrder、Ascending、Descending です。
+      スライサーに含まれるアイテムの並べ替え順序を表します。 可能な値は、"DataSourceOrder"、"昇順"、"降順" です。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -457,7 +457,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Slicer#top:member'
     summary: |-
-      スライサーの上端からワークシートの上端までの距離を表します (ポイント数)。 入力に負の値を設定すると、無効な引数の例外がスローされます。
+      スライサーの上端からワークシートの上端までの距離を表します (ポイント数)。 "引数が無効であるか、存在しないか、または形式が正しくありません。" という例外がスローされます。 負の値を入力として設定した場合の例外。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -473,7 +473,7 @@ items:
           - number
   - uid: 'excel!Excel.Slicer#width:member'
     summary: |-
-      スライサーの幅 (ポイント数) を表します。 負の値で設定した場合、または入力に0を指定した場合、無効な引数の例外がスローされます。
+      スライサーの幅 (ポイント数) を表します。 "引数が無効であるか、存在しないか、または形式が正しくありません。" という例外がスローされます。 負の値で設定した場合、または入力に0の場合は例外。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
