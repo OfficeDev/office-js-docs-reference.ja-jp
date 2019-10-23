@@ -203,7 +203,7 @@ items:
           - 'excel!Excel.RequestContext:class'
   - uid: 'excel!Excel.Worksheet#copy:member(1)'
     summary: |-
-      ワークシートをコピーして、指定した位置に配置します。 コピーしたワークシートを返します。
+      ワークシートをコピーし、指定した位置に配置します。
 
       \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionType, relativeTo)'
@@ -217,7 +217,7 @@ items:
         type:
           - 'excel!Excel.Worksheet:class'
         description: |-
-
+          新しく作成されたワークシート。
 
           #### <a name="examples"></a>例
 
@@ -238,16 +238,16 @@ items:
           ```
       parameters:
         - id: positionType
-          description: 省略可能。
+          description: 新しく作成されたワークシートを配置するブック内の位置を指定します。 既定値は "None" で、ワークシートの先頭にワークシートを挿入します。
           type:
             - 'excel!Excel.WorksheetPositionType:enum'
         - id: relativeTo
-          description: 省略可能。
+          description: 新しく作成されたワークシートの位置を決定する既存のワークシート。 これは、が " `positionType` Before" または "After" の場合にのみ必要になります。
           type:
             - 'excel!Excel.Worksheet:class'
   - uid: 'excel!Excel.Worksheet#copy:member(2)'
     summary: |-
-      ワークシートをコピーして、指定した位置に配置します。 コピーしたワークシートを返します。
+      ワークシートをコピーし、指定した位置に配置します。
 
       \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionTypeString, relativeTo)'
@@ -260,14 +260,14 @@ items:
       return:
         type:
           - 'excel!Excel.Worksheet:class'
-        description: ''
+        description: 新しく作成されたワークシート。
       parameters:
         - id: positionTypeString
-          description: 省略可能。
+          description: 新しく作成されたワークシートを配置するブック内の位置を指定します。 既定値は "None" で、ワークシートの先頭にワークシートを挿入します。
           type:
             - '"None" | "Before" | "After" | "Beginning" | "End"'
         - id: relativeTo
-          description: 省略可能。
+          description: 新しく作成されたワークシートの位置を決定する既存のワークシート。 これは、が " `positionType` Before" または "After" の場合にのみ必要になります。
           type:
             - 'excel!Excel.Worksheet:class'
   - uid: 'excel!Excel.Worksheet#delete:member(1)'
@@ -1030,7 +1030,7 @@ items:
           ```
   - uid: 'excel!Excel.Worksheet#onColumnSorted:member'
     summary: |-
-      1つ以上の列が並べ替えられたときに発生します。 これは、左から右への並べ替え操作の結果として発生します。
+      1 つ以上の列を並べ替えたときに発生します。 これは、左から右に並べ替えを実行したときに発生します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1152,7 +1152,7 @@ items:
           - 'excel!Excel.Worksheet#onRowHiddenChanged~0:complex'
   - uid: 'excel!Excel.Worksheet#onRowSorted:member'
     summary: |-
-      1つ以上の行が並べ替えられたときに発生します。 これは、上から下への並べ替え操作の結果として発生します。
+      1 つ以上の行を並べ替えたときに発生します。 これは、上から下に並べ替えを実行したときに発生します。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1472,7 +1472,29 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This collapses the entire outline.
+              sheet.showOutlineLevels(1, 1);
+              await context.sync();
+          });
+          ```
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This shows the top 3 outline levels; collapsing any additional sublevels.
+              sheet.showOutlineLevels(3, 3);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: rowLevels
           description: 表示するアウトラインの行レベルの数を指定します。
