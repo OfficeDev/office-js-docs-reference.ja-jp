@@ -76,11 +76,11 @@ items:
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~1:complex'
         - id: options
-          description: 省略可能。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          description: 省略可能です。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~2:complex'
   - uid: 'outlook!Office.Mailbox#addHandlerAsync:member(2)'
@@ -134,7 +134,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~4:complex'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~5:complex'
   - uid: 'outlook!Office.Mailbox#convertToEwsId:member(1)'
@@ -336,9 +336,9 @@ items:
 
       DisplayAppointmentForm メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存の予定表の予定を開きます。
 
-      Outlook on the Mac では、このメソッドを使用して、定期的なアイテムの一部ではない単一の予定を表示したり、定期的なアイテムのマスター予定を表示したりすることはできませんが、一連のインスタンスを表示することはできません。 これは、Mac 上の Outlook では、定期的なアイテムのインスタンスのプロパティ (アイテム ID を含む) にアクセスできないためです。
+      Outlook on Mac では、このメソッドを使用して定期的な系列に含まれない単発の予定や定期的な系列のマスター予定を表示できます。ただし、系列のインスタンスは表示できません。これは、Outlook on Mac では定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないためです。
 
-      Web 上の Outlook では、フォームの本文が 32 KB 以下の文字である場合にのみ、このメソッドは指定されたフォームを開きます。
+      Outlook on the web では、このメソッドはフォームの本文が 32KB 以下の文字数の場合にのみ指定のフォームを開きます。
 
       指定のアイテム識別子が既存の予定を表していない場合は、クライアント コンピューターまたはデバイスで空のウィンドウが開き、エラー メッセージは返されません。
 
@@ -377,7 +377,7 @@ items:
 
       DisplayMessageForm メソッドは、デスクトップ上の新しいウィンドウまたはモバイルデバイス上のダイアログボックスに既存のメッセージを開きます。
 
-      Web 上の Outlook では、フォームの本文が 32 KB の文字数以下の場合にのみ、このメソッドは指定されたフォームを開きます。
+      Outlook on the web では、このメソッドはフォームの本文が 32 KB 以下の文字数の場合にのみ指定のフォームを開きます。
 
       指定のアイテム識別子が既存のメッセージを表していない場合は、クライアント コンピューターにはメッセージは表示されず、エラー メッセージも返されません。
 
@@ -498,9 +498,13 @@ items:
     summary: |-
       REST API または Exchange Web サービスを呼び出すために使用するトークンを含む文字列を取得します。
 
-      Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
+      `getCallbackTokenAsync` メソッドは、ユーザーのメールボックスをホストする Exchange Server から不透明なトークンを取得する非同期の呼び出しを行います。コールバック トークンの有効期間は 5 分です。
 
       トークンは、 `asyncResult.value`プロパティの文字列として返されます。
+
+      読み取りモード`getCallbackTokenAsync`でメソッドを呼び出すには、 **ReadItem**の最低限のアクセス許可レベルが必要です。
+
+      新規作成`getCallbackTokenAsync`モードでメソッドを呼び出すには、アイテムを保存しておく必要があります。 この`saveAsync`メソッドには、 **readwriteitem**の最小アクセス許可レベルが必要です。
 
       *REST トークン*
 
@@ -514,6 +518,8 @@ items:
 
       アドインでは、ewsUrl プロパティを使用して、EWS 呼び出しを行うときに使用する正しい URL を決定する必要があります。
 
+      トークンと、添付ファイル識別子またはアイテム識別子の両方をサードパーティのシステムに渡すことができます。 サードパーティシステムは、トークンをベアラー認証トークンとして使用して、Exchange Web サービス (EWS) の[Getattachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation)操作または[GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation)操作を呼び出して、添付ファイルまたはアイテムを返します。 たとえば、[選択されたアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモートサービスを作成できます。<!-- -->.
+
       **注**: 可能であれば、アドインでは Exchange Web サービスの代わりに REST api を使用することをお勧めします。
 
       \[[API set: Mailbox 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -524,11 +530,11 @@ items:
 
       **エラー**:
 
-      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。
 
-      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。
 
-      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、やり直してください。
 
       #### <a name="examples"></a>例
 
@@ -563,24 +569,24 @@ items:
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~0:complex'
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~1:complex'
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(2)'
     summary: |-
       Exchange Server から添付ファイルやアイテムを取得するために使うトークンを含む文字列を取得します。
 
-      Getた Tokenasync メソッドは、ユーザーのメールボックスをホストする Exchange サーバーから非透過トークンを取得するために非同期呼び出しを行います。 コールバック トークンの有効期間は 5 分です。
+      `getCallbackTokenAsync` メソッドは、ユーザーのメールボックスをホストする Exchange Server から不透明なトークンを取得する非同期の呼び出しを行います。コールバック トークンの有効期間は 5 分です。
 
       トークンは、 `asyncResult.value`プロパティの文字列として返されます。
 
-      トークンと予定の識別子またはアイテムの識別子をサードパーティ システムに渡すことができます。 サードパーティ システムは、トークンをベアラー承認トークンとして使用し、Exchange Web サービス (EWS) GetAttachment または GetItem 操作を呼び出して、添付ファイルまたはアイテムを返します。 For example, you can create a remote service to get attachments from the selected item.
+      トークンと、添付ファイル識別子またはアイテム識別子の両方をサードパーティのシステムに渡すことができます。 サードパーティシステムは、トークンをベアラー認証トークンとして使用して、Exchange Web サービス (EWS) の[Getattachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation)操作または[GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation)操作を呼び出して、添付ファイルまたはアイテムを返します。 たとえば、[選択されたアイテムから添付ファイルを取得](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)するリモートサービスを作成できます。<!-- -->.
 
-      アプリには、読み取りモードで GetReadItem Tokenasync メソッドを呼び出すために、マニフェストに指定されたアクセス許可が必要です。
+      読み取りモード`getCallbackTokenAsync`でメソッドを呼び出すには、 **ReadItem**の最低限のアクセス許可レベルが必要です。
 
-      新規作成モードでは、saveAsync メソッドを呼び出して、情報 tokenasync メソッドに渡すアイテム識別子を取得する必要があります。 アプリには、saveAsync メソッドを呼び出すための ReadWriteItem 権限が必要です。
+      新規作成`getCallbackTokenAsync`モードでメソッドを呼び出すには、アイテムを保存しておく必要があります。 この`saveAsync`メソッドには、 **readwriteitem**の最小アクセス許可レベルが必要です。
 
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[API set: メールボックス1.0 の読み取りモードのサポート、新規作成モードサポート (1.3)](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -588,11 +594,11 @@ items:
 
       **エラー**:
 
-      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。
 
-      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。
 
-      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、やり直してください。
 
       #### <a name="examples"></a>例
 
@@ -618,11 +624,11 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~2:complex'
         - id: userContext
-          description: 省略可能。 非同期メソッドに渡される状態データです。
+          description: 省略可能です。 非同期メソッドに渡される状態データです。
           type:
             - any
   - uid: 'outlook!Office.Mailbox#getUserIdentityTokenAsync:member(1)'
@@ -641,11 +647,11 @@ items:
 
       **エラー**:
 
-      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードについては、diagnostics オブジェクトを参照してください。
+      - HTTPRequestFailure: 要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。
 
-      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、「diagnostics オブジェクト」を参照してください。
+      - InternalServerError: Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。
 
-      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、もう一度実行してください。
+      - NetworkError: ユーザーがネットワークに接続されていません。 ネットワーク接続を確認し、やり直してください。
 
       #### <a name="examples"></a>例
 
@@ -671,11 +677,11 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合は`asyncResult.error` 、 `asyncResult.diagnostics`プロパティとプロパティによって追加情報が提供されることがあります。
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 トークンは、 `asyncResult.value`プロパティの文字列として返されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
           type:
             - 'outlook!Office.Mailbox#getUserIdentityTokenAsync~0:complex'
         - id: userContext
-          description: 省略可能。 非同期メソッドに渡される状態データです。
+          description: 省略可能です。 非同期メソッドに渡される状態データです。
           type:
             - any
   - uid: 'outlook!Office.Mailbox#item:member'
@@ -792,7 +798,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#makeEwsRequestAsync~0:complex'
         - id: userContext
-          description: 省略可能。 非同期メソッドに渡される状態データです。
+          description: 省略可能です。 非同期メソッドに渡される状態データです。
           type:
             - any
   - uid: 'outlook!Office.Mailbox#removeHandlerAsync:member(1)'
@@ -823,11 +829,11 @@ items:
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~0:complex'
         - id: options
-          description: 省略可能。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+          description: 省略可能です。 コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.Mailbox#removeHandlerAsync:member(2)'
@@ -858,7 +864,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~2:complex'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.Mailbox#restUrl:member'

@@ -1,0 +1,376 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.TableColumnCollection:class'
+    summary: |-
+      表の一部であるすべての列のコレクションを表します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableColumnCollection
+    fullName: Excel.TableColumnCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'excel!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.TableColumnCollection#add:member(1)'
+      - 'excel!Excel.TableColumnCollection#context:member'
+      - 'excel!Excel.TableColumnCollection#count:member'
+      - 'excel!Excel.TableColumnCollection#getCount:member(1)'
+      - 'excel!Excel.TableColumnCollection#getItem:member(1)'
+      - 'excel!Excel.TableColumnCollection#getItemAt:member(1)'
+      - 'excel!Excel.TableColumnCollection#getItemOrNullObject:member(1)'
+      - 'excel!Excel.TableColumnCollection#items:member'
+      - 'excel!Excel.TableColumnCollection#load:member(1)'
+      - 'excel!Excel.TableColumnCollection#load:member(2)'
+      - 'excel!Excel.TableColumnCollection#load:member(3)'
+      - 'excel!Excel.TableColumnCollection#toJSON:member(1)'
+  - uid: 'excel!Excel.TableColumnCollection#add:member(1)'
+    summary: |-
+      テーブルに新しい列を追加します。
+
+      \[[API set: excelapi 1.1 には、合計列数より小さいインデックスが必要です。1.4 では、インデックスを省略可能 (null または-1) し、最後に列を追加することができます。1.4 では、作成時に name パラメーターを指定できます](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)。 \]
+    name: 'add(index, values, name)'
+    fullName: 'add(index, values, name)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
+      return:
+        type:
+          - 'excel!Excel.TableColumn:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample"], ["Values"], ["For"], ["New"], ["Column"]];
+              var column = tables.getItem("Table1").columns.add(null, values);
+              column.load('name');
+              return ctx.sync().then(function() {
+                  console.log(column.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 省略可能。新しい列の相対位置を指定します。null または -1 の場合、最後に追加が行われます。上位のインデックスを持つ列は横にシフトされます。0 を起点とする番号になります。
+          type:
+            - number
+        - id: values
+          description: 省略可能。 テーブルの列の、書式設定されていない値の 2 次元の配列。
+          type:
+            - 'excel!Excel.TableColumnCollection#add~0:complex'
+        - id: name
+          description: 省略可能。 新しい列の名前を指定します。 null の場合は既定の名前が使用されます。
+          type:
+            - string
+  - uid: 'excel!Excel.TableColumnCollection#context:member'
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.TableColumnCollection#count:member'
+    summary: |-
+      テーブルの列数を返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.TableColumnCollection#getCount:member(1)'
+    summary: |-
+      表の列数を取得します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - 'excel!Excel.TableColumnCollection#getCount~0:complex'
+        description: ''
+  - uid: 'excel!Excel.TableColumnCollection#getItem:member(1)'
+    summary: |-
+      名前または ID を使用して列オブジェクトを取得します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - 'excel!Excel.TableColumn:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: 列名または ID。
+          type:
+            - number | string
+  - uid: 'excel!Excel.TableColumnCollection#getItemAt:member(1)'
+    summary: |-
+      コレクション内の位置に基づいて列を取得します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableColumn;'
+      return:
+        type:
+          - 'excel!Excel.TableColumn:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+          type:
+            - number
+  - uid: 'excel!Excel.TableColumnCollection#getItemOrNullObject:member(1)'
+    summary: |-
+      名前または ID によって、列オブジェクトを取得します。 列が存在しない場合は null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - 'excel!Excel.TableColumn:class'
+        description: ''
+      parameters:
+        - id: key
+          description: 列名または ID。
+          type:
+            - number | string
+  - uid: 'excel!Excel.TableColumnCollection#items:member'
+    summary: このコレクション内に読み込まれた子アイテムを取得します。
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableColumn[];'
+      return:
+        type:
+          - 'excel!Excel.TableColumnCollection#items~0:complex'
+  - uid: 'excel!Excel.TableColumnCollection#load:member(1)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
+      return:
+        type:
+          - 'excel!Excel.TableColumnCollection:class'
+        description: ''
+      parameters:
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+          type:
+            - 'excel!Excel.TableColumnCollection#load~0:complex'
+  - uid: 'excel!Excel.TableColumnCollection#load:member(2)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
+      return:
+        type:
+          - 'excel!Excel.TableColumnCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;
+              tablecolumns.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablecolumns Count: " + tablecolumns.count);
+                  for (var i = 0; i < tablecolumns.items.length; i++) {
+                      console.log(tablecolumns.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.TableColumnCollection#load:member(3)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
+      return:
+        type:
+          - 'excel!Excel.TableColumnCollection:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          type:
+            - 'excel!OfficeExtension.LoadOption:interface'
+  - uid: 'excel!Excel.TableColumnCollection#toJSON:member(1)'
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.TableColumnCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableColumnCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.TableColumnCollectionData:interface'
+        description: ''
+references:
+  - uid: 'excel!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.TableColumn:class'
+    name: Excel.TableColumn
+  - uid: 'excel!Excel.TableColumnCollection#add~0:complex'
+    name: Array<Array<boolean | string | number>> | boolean | string | number
+    fullName: Array<Array<boolean | string | number>> | boolean | string | number
+    spec.typeScript:
+      - uid: '!Array:interface'
+        name: Array
+        fullName: Array
+      - name: <
+        fullName: <
+      - uid: '!Array:interface'
+        name: Array
+        fullName: Array
+      - name: <boolean | string | number>> | boolean | string | number
+        fullName: <boolean | string | number>> | boolean | string | number
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.TableColumnCollection#getCount~0:complex'
+    name: OfficeExtension.ClientResult<number>
+    fullName: OfficeExtension.ClientResult<number>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <number>
+        fullName: <number>
+  - uid: 'excel!Excel.TableColumnCollection#items~0:complex'
+    name: 'Excel.TableColumn[]'
+    fullName: 'Excel.TableColumn[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.TableColumn:class'
+        name: Excel.TableColumn
+        fullName: Excel.TableColumn
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'excel!Excel.TableColumnCollection:class'
+    name: Excel.TableColumnCollection
+  - uid: 'excel!Excel.TableColumnCollection#load~0:complex'
+    name: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+    fullName: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+    spec.typeScript:
+      - uid: 'excel!Excel.Interfaces.TableColumnCollectionLoadOptions:interface'
+        name: Excel.Interfaces.TableColumnCollectionLoadOptions
+        fullName: Excel.Interfaces.TableColumnCollectionLoadOptions
+      - name: ' & '
+        fullName: ' & '
+      - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
+        name: Excel.Interfaces.CollectionLoadOptions
+        fullName: Excel.Interfaces.CollectionLoadOptions
+  - uid: 'excel!OfficeExtension.LoadOption:interface'
+    name: OfficeExtension.LoadOption
+  - uid: 'excel!Excel.Interfaces.TableColumnCollectionData:interface'
+    name: Excel.Interfaces.TableColumnCollectionData
