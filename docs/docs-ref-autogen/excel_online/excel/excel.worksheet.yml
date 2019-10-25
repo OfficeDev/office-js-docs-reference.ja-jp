@@ -1,0 +1,1807 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.Worksheet:class'
+    summary: |-
+      Excel のワークシートは、セルのグリッドです。 データ、表、グラフなどを含めることができます。ワークシートオブジェクトモデルの詳細については、「 [Excel JAVASCRIPT API を使用してワークシートを操作](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)する」を参照してください。<!-- -->.
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Worksheet
+    fullName: Excel.Worksheet
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'excel!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.Worksheet#activate:member(1)'
+      - 'excel!Excel.Worksheet#autoFilter:member'
+      - 'excel!Excel.Worksheet#calculate:member(1)'
+      - 'excel!Excel.Worksheet#charts:member'
+      - 'excel!Excel.Worksheet#comments:member'
+      - 'excel!Excel.Worksheet#context:member'
+      - 'excel!Excel.Worksheet#copy:member(1)'
+      - 'excel!Excel.Worksheet#copy:member(2)'
+      - 'excel!Excel.Worksheet#delete:member(1)'
+      - 'excel!Excel.Worksheet#enableCalculation:member'
+      - 'excel!Excel.Worksheet#findAll:member(1)'
+      - 'excel!Excel.Worksheet#findAllOrNullObject:member(1)'
+      - 'excel!Excel.Worksheet#freezePanes:member'
+      - 'excel!Excel.Worksheet#getCell:member(1)'
+      - 'excel!Excel.Worksheet#getNext:member(1)'
+      - 'excel!Excel.Worksheet#getNextOrNullObject:member(1)'
+      - 'excel!Excel.Worksheet#getPrevious:member(1)'
+      - 'excel!Excel.Worksheet#getPreviousOrNullObject:member(1)'
+      - 'excel!Excel.Worksheet#getRange:member(1)'
+      - 'excel!Excel.Worksheet#getRangeByIndexes:member(1)'
+      - 'excel!Excel.Worksheet#getRanges:member(1)'
+      - 'excel!Excel.Worksheet#getUsedRange:member(1)'
+      - 'excel!Excel.Worksheet#getUsedRangeOrNullObject:member(1)'
+      - 'excel!Excel.Worksheet#horizontalPageBreaks:member'
+      - 'excel!Excel.Worksheet#id:member'
+      - 'excel!Excel.Worksheet#load:member(1)'
+      - 'excel!Excel.Worksheet#load:member(2)'
+      - 'excel!Excel.Worksheet#load:member(3)'
+      - 'excel!Excel.Worksheet#name:member'
+      - 'excel!Excel.Worksheet#names:member'
+      - 'excel!Excel.Worksheet#onActivated:member'
+      - 'excel!Excel.Worksheet#onCalculated:member'
+      - 'excel!Excel.Worksheet#onChanged:member'
+      - 'excel!Excel.Worksheet#onColumnSorted:member'
+      - 'excel!Excel.Worksheet#onDeactivated:member'
+      - 'excel!Excel.Worksheet#onFormatChanged:member'
+      - 'excel!Excel.Worksheet#onRowSorted:member'
+      - 'excel!Excel.Worksheet#onSelectionChanged:member'
+      - 'excel!Excel.Worksheet#onSingleClicked:member'
+      - 'excel!Excel.Worksheet#pageLayout:member'
+      - 'excel!Excel.Worksheet#pivotTables:member'
+      - 'excel!Excel.Worksheet#position:member'
+      - 'excel!Excel.Worksheet#protection:member'
+      - 'excel!Excel.Worksheet#replaceAll:member(1)'
+      - 'excel!Excel.Worksheet#set:member(1)'
+      - 'excel!Excel.Worksheet#set:member(2)'
+      - 'excel!Excel.Worksheet#shapes:member'
+      - 'excel!Excel.Worksheet#showGridlines:member'
+      - 'excel!Excel.Worksheet#showHeadings:member'
+      - 'excel!Excel.Worksheet#showOutlineLevels:member(1)'
+      - 'excel!Excel.Worksheet#slicers:member'
+      - 'excel!Excel.Worksheet#standardHeight:member'
+      - 'excel!Excel.Worksheet#standardWidth:member'
+      - 'excel!Excel.Worksheet#tabColor:member'
+      - 'excel!Excel.Worksheet#tables:member'
+      - 'excel!Excel.Worksheet#toJSON:member(1)'
+      - 'excel!Excel.Worksheet#verticalPageBreaks:member'
+      - 'excel!Excel.Worksheet#visibility:member'
+  - uid: 'excel!Excel.Worksheet#activate:member(1)'
+    summary: |-
+      Excel UI でワークシートをアクティブにします。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: activate()
+    fullName: activate()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'activate(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.activate();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#autoFilter:member'
+    summary: |-
+      ワークシートの AutoFilter オブジェクトを表します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoFilter
+    fullName: autoFilter
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly autoFilter: Excel.AutoFilter;'
+      return:
+        type:
+          - 'excel!Excel.AutoFilter:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const farmData = sheet.getUsedRange();
+
+              // This filter will only show the rows with the top 25% of values in column 3.
+              sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#calculate:member(1)'
+    summary: |-
+      ワークシート上のすべてのセルを計算します。
+
+      \[[API セット: excelapi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(markAllDirty)
+    fullName: calculate(markAllDirty)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(markAllDirty: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: markAllDirty
+          description: True を設定すると、すべてがダーティとしてマークされます。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#charts:member'
+    summary: |-
+      ワークシートの一部であるグラフのコレクションを返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: charts
+    fullName: charts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly charts: Excel.ChartCollection;'
+      return:
+        type:
+          - 'excel!Excel.ChartCollection:class'
+  - uid: 'excel!Excel.Worksheet#comments:member'
+    summary: |-
+      ワークシート上のすべての Comments オブジェクトの集まりを返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: comments
+    fullName: comments
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly comments: Excel.CommentCollection;'
+      return:
+        type:
+          - 'excel!Excel.CommentCollection:class'
+  - uid: 'excel!Excel.Worksheet#context:member'
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.Worksheet#copy:member(1)'
+    summary: |-
+      ワークシートをコピーし、指定した位置に配置します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copy(positionType, relativeTo)'
+    fullName: 'copy(positionType, relativeTo)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: |-
+          新しく作成されたワークシート。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              let myWorkbook = context.workbook;
+              let sampleSheet = myWorkbook.worksheets.getActiveWorksheet();
+              let copiedSheet = sampleSheet.copy("End")
+
+              sampleSheet.load("name");
+              copiedSheet.load("name");
+
+              await context.sync();
+
+              console.log("'" + sampleSheet.name + "' was copied to '" + copiedSheet.name + "'")
+          });
+          ```
+      parameters:
+        - id: positionType
+          description: 新しく作成されたワークシートを配置するブック内の位置を指定します。 既定値は "None" で、ワークシートの先頭にワークシートを挿入します。
+          type:
+            - 'excel!Excel.WorksheetPositionType:enum'
+        - id: relativeTo
+          description: 新しく作成されたワークシートの位置を決定する既存のワークシート。 これは、が " `positionType` Before" または "After" の場合にのみ必要になります。
+          type:
+            - 'excel!Excel.Worksheet:class'
+  - uid: 'excel!Excel.Worksheet#copy:member(2)'
+    summary: |-
+      ワークシートをコピーし、指定した位置に配置します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copy(positionTypeString, relativeTo)'
+    fullName: 'copy(positionTypeString, relativeTo)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copy(positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: 新しく作成されたワークシート。
+      parameters:
+        - id: positionTypeString
+          description: 新しく作成されたワークシートを配置するブック内の位置を指定します。 既定値は "None" で、ワークシートの先頭にワークシートを挿入します。
+          type:
+            - '"None" | "Before" | "After" | "Beginning" | "End"'
+        - id: relativeTo
+          description: 新しく作成されたワークシートの位置を決定する既存のワークシート。 これは、が " `positionType` Before" または "After" の場合にのみ必要になります。
+          type:
+            - 'excel!Excel.Worksheet:class'
+  - uid: 'excel!Excel.Worksheet#delete:member(1)'
+    summary: |-
+      ブックからワークシートを削除します。 ワークシートの可視性が "非常に非表示" に設定されている場合は、削除`InvalidOperation`操作が失敗して例外が発生します。 最初に表示を削除する前に、表示を非表示または表示に変更する必要があります。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#enableCalculation:member'
+    summary: |-
+      ワークシートの enableCalculation プロパティを取得または設定します。 True の場合、Excel は必要に応じてワークシートを再計算します。 False の場合、Excel はシートを再計算しません。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: enableCalculation
+    fullName: enableCalculation
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'enableCalculation: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'excel!Excel.Worksheet#findAll:member(1)'
+    summary: |-
+      指定された条件に基づいて指定された文字列の発生箇所をすべて見つけ、1 つまたは複数の長方形範囲を構成する RangeAreas オブジェクトとして返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'findAll(text, criteria)'
+    fullName: 'findAll(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'findAll(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: 検索条件に一致する1つまたは複数の四角形の範囲で構成される RangeArea オブジェクト。 この条件に一致するセルがない場合は、ItemNotFound エラーがスローされます。
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: criteria
+          description: 検索条件には、セル全体に一致するかどうか、または大文字と小文字を区別するかどうかなどの追加の検索条件があります。
+          type:
+            - 'excel!Excel.WorksheetSearchCriteria:interface'
+  - uid: 'excel!Excel.Worksheet#findAllOrNullObject:member(1)'
+    summary: |-
+      指定された条件に基づいて指定された文字列の発生箇所をすべて見つけ、1 つまたは複数の長方形範囲を構成する RangeAreas オブジェクトとして返します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'findAllOrNullObject(text, criteria)'
+    fullName: 'findAllOrNullObject(text, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: |-
+          検索条件に一致する1つまたは複数の四角形の範囲で構成される RangeArea オブジェクト。 一致しない場合、この関数は null オブジェクトを返します。
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const foundRanges = sheet.findAllOrNullObject("Complete", {
+                  completeMatch: true,
+                  matchCase: false
+              });
+
+              await context.sync();
+
+              if (foundRanges.isNullObject) {
+                  console.log("No complete projects");
+              } else {
+                  foundRanges.format.fill.color = "green"
+              }
+          });
+          ```
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: criteria
+          description: 検索条件には、セル全体に一致するかどうか、または大文字と小文字を区別するかどうかなどの追加の検索条件があります。
+          type:
+            - 'excel!Excel.WorksheetSearchCriteria:interface'
+  - uid: 'excel!Excel.Worksheet#freezePanes:member'
+    summary: |-
+      ワークシート上の固定されたウィンドウを操作するために使用できるオブジェクトを取得します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: freezePanes
+    fullName: freezePanes
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly freezePanes: Excel.WorksheetFreezePanes;'
+      return:
+        type:
+          - 'excel!Excel.WorksheetFreezePanes:class'
+  - uid: 'excel!Excel.Worksheet#getCell:member(1)'
+    summary: |-
+      行と列の番号に基づいて、1 つのセルを含んだ範囲オブジェクトを取得します。 ワークシートのグリッド内に収まるセルは、親の範囲の境界の外側にある場合があります。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getCell(row, column)'
+    fullName: 'getCell(row, column)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCell(row: number, column: number): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var cell = worksheet.getCell(0,0);
+              cell.load('address');
+              return ctx.sync().then(function() {
+                  console.log(cell.address);
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: row
+          description: 取得するセルの行番号。 0 を起点とする番号になります。
+          type:
+            - number
+        - id: column
+          description: 取得するセルの列番号。 0 を起点とする番号になります。
+          type:
+            - number
+  - uid: 'excel!Excel.Worksheet#getNext:member(1)'
+    summary: |-
+      これに続くワークシートを取得します。 このメソッドに続くワークシートがない場合、このメソッドはエラーをスローします。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getNext(visibleOnly)
+    fullName: getNext(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+
+              // We don't want to include the default worksheet that was created
+              // when the workbook was created, so our "firstSheet" will be the one
+              // after the literal first. Note chaining of navigation methods.
+              const firstSheet = sheets.getFirst().getNext();
+              const lastSheet = sheets.getLast();
+              const firstTaxRateRange = firstSheet.getRange("B2");
+              const lastTaxRateRange = lastSheet.getRange("B2");
+
+              firstSheet.load("name");
+              lastSheet.load("name");
+              firstTaxRateRange.load("text");
+              lastTaxRateRange.load("text");
+
+              await context.sync();
+
+              let firstYear = firstSheet.name.substr(5, 4);
+              let lastYear = lastSheet.name.substr(5, 4);
+              console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: 省略可能です。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#getNextOrNullObject:member(1)'
+    summary: |-
+      これに続くワークシートを取得します。 このメソッドに続くワークシートがない場合、このメソッドは null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getNextOrNullObject(visibleOnly)
+    fullName: getNextOrNullObject(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: ''
+      parameters:
+        - id: visibleOnly
+          description: 省略可能です。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#getPrevious:member(1)'
+    summary: |-
+      これより前のワークシートを取得します。 前のワークシートがない場合、このメソッドはエラーをスローします。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getPrevious(visibleOnly)
+    fullName: getPrevious(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+              const currentSheet = sheets.getActiveWorksheet();
+              const previousYearSheet = currentSheet.getPrevious();
+              const currentTaxDueRange = currentSheet.getRange("C2");
+              const previousTaxDueRange = previousYearSheet.getRange("C2");
+
+              currentSheet.load("name");
+              previousYearSheet.load("name");
+              currentTaxDueRange.load("text");
+              previousTaxDueRange.load("text");
+
+              await context.sync();
+
+              let currentYear = currentSheet.name.substr(5, 4);
+              let previousYear = previousYearSheet.name.substr(5, 4);
+              console.log("Two Year Tax Due Comparison", `Tax due for ${currentYear} was ${currentTaxDueRange.text[0][0]}\nTax due for ${previousYear} was ${previousTaxDueRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: 省略可能です。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#getPreviousOrNullObject:member(1)'
+    summary: |-
+      これより前のワークシートを取得します。 前のワークシートがない場合、このメソッドは null の objet を返します。
+
+      \[[API セット: excelapi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getPreviousOrNullObject(visibleOnly)
+    fullName: getPreviousOrNullObject(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: ''
+      parameters:
+        - id: visibleOnly
+          description: 省略可能です。 True の場合は、表示されているワークシートのみを考慮し、非表示のワークシートについてはスキップします。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#getRange:member(1)'
+    summary: |-
+      アドレスまたは名前で指定された、セルの単一の四角形のブロックを表す range オブジェクトを取得します。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange(address)
+    fullName: getRange(address)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(address?: string): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Below example uses range address to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Below example uses a named-range to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeName = 'MyRange';
+              var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);
+              range.load('address');
+              return ctx.sync().then(function() {
+                  console.log(range.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: address
+          description: '省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1: B2" となります。 指定されていない場合は、ワークシート全体の範囲が返されます。'
+          type:
+            - string
+  - uid: 'excel!Excel.Worksheet#getRangeByIndexes:member(1)'
+    summary: |-
+      特定の行インデックスと列インデックスから開始し、一定数の行と列にわたる、Range オブジェクトを取得します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
+    fullName: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+      parameters:
+        - id: startRow
+          description: 開始行 (ゼロインデックス)。
+          type:
+            - number
+        - id: startColumn
+          description: 開始列 (ゼロインデックス)。
+          type:
+            - number
+        - id: rowCount
+          description: 範囲に含める行の数を指定します。
+          type:
+            - number
+        - id: columnCount
+          description: 範囲に含める列の数を指定します。
+          type:
+            - number
+  - uid: 'excel!Excel.Worksheet#getRanges:member(1)'
+    summary: |-
+      アドレスまたは名前で指定され、1 つまたは複数の長方形範囲ブロックを表す RangeAreas オブジェクトを取得します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRanges(address)
+    fullName: getRanges(address)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRanges(address?: string): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const specifiedRanges = sheet.getRanges("D3:D5, G3:G5");
+              specifiedRanges.format.fill.color = "pink";
+
+              await context.sync();
+          })
+          ```
+      parameters:
+        - id: address
+          description: '省略可能です。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、"A1: B2, A5: B5" とします。 指定しない場合、ワークシート全体の RangeArea オブジェクトが返されます。'
+          type:
+            - string
+  - uid: 'excel!Excel.Worksheet#getUsedRange:member(1)'
+    summary: |-
+      使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。 ワークシート全体が空白の場合、この関数は左上のセルを返します (つまり、エラーはスローされ*ません*)。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getUsedRange(valuesOnly)
+    fullName: getUsedRange(valuesOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              var usedRange = worksheet.getUsedRange();
+              usedRange.load('address');
+              return ctx.sync().then(function() {
+                      console.log(usedRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: valuesOnly
+          description: '省略可能です。 True の場合は、値を持つセルのみを使用セルと見なします (書式設定は無視されます)。 \[Api セット: ExcelApi 1.2\]'
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#getUsedRangeOrNullObject:member(1)'
+    summary: |-
+      使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。ワークシート全体が空白の場合、この関数は null オブジェクトを返します。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getUsedRangeOrNullObject(valuesOnly)
+    fullName: getUsedRangeOrNullObject(valuesOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getUsedRangeOrNullObject(valuesOnly?: boolean): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+      parameters:
+        - id: valuesOnly
+          description: 省略可能。 値の入っているセルのみを使用セルと見なします。
+          type:
+            - boolean
+  - uid: 'excel!Excel.Worksheet#horizontalPageBreaks:member'
+    summary: |-
+      ワークシートの水平改ページをまとめて取得します。 このコレクションには、手動の改ページのみが含まれます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: horizontalPageBreaks
+    fullName: horizontalPageBreaks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly horizontalPageBreaks: Excel.PageBreakCollection;'
+      return:
+        type:
+          - 'excel!Excel.PageBreakCollection:class'
+  - uid: 'excel!Excel.Worksheet#id:member'
+    summary: |-
+      指定されたブックのワークシートを一意に識別する値を返します。この識別子の値は、ワークシートの名前を変更したり移動したりしても同じままです。値の取得のみ可能です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: 'excel!Excel.Worksheet#load:member(1)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.WorksheetLoadOptions): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: ''
+      parameters:
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+          type:
+            - 'excel!Excel.Interfaces.WorksheetLoadOptions:interface'
+  - uid: 'excel!Excel.Worksheet#load:member(2)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Worksheet;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Get worksheet properties based on sheet name.
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.load('position')
+              return ctx.sync().then(function() {
+                      console.log(worksheet.position);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.Worksheet#load:member(3)'
+    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Worksheet;
+      return:
+        type:
+          - 'excel!Excel.Worksheet:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          type:
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.Worksheet#name:member'
+    summary: |-
+      ワークシートの表示名。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'name: string;'
+      return:
+        type:
+          - string
+  - uid: 'excel!Excel.Worksheet#names:member'
+    summary: |-
+      現在のワークシートにスコープされている名前のコレクション。 読み取り専用です。
+
+      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: names
+    fullName: names
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly names: Excel.NamedItemCollection;'
+      return:
+        type:
+          - 'excel!Excel.NamedItemCollection:class'
+  - uid: 'excel!Excel.Worksheet#onActivated:member'
+    summary: |-
+      ワークシートがアクティブになるときに発生します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onActivated
+    fullName: onActivated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onActivated~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onActivated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The activated worksheet ID is: " + event.worksheetId);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onCalculated:member'
+    summary: |-
+      ワークシートが計算されるときに発生します。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onCalculated
+    fullName: onCalculated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onCalculated: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onCalculated~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onCalculated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The worksheet has recalculated.");
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onChanged:member'
+    summary: |-
+      特定のワークシートでデータが変更されたときに発生します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onChanged~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onChanged.add(onChange);
+
+              await context.sync();
+              console.log("A handler has been registered for the onChanged event.");
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onColumnSorted:member'
+    summary: |-
+      1 つ以上の列を並べ替えたときに発生します。 これは、左から右に並べ替えを実行したときに発生します。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onColumnSorted
+    fullName: onColumnSorted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onColumnSorted: OfficeExtension.EventHandlers<Excel.WorksheetColumnSortedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onColumnSorted~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              console.log("Adding column handler");
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This will fire whenever a column has been moved as the result of a sort action.
+              sheet.onColumnSorted.add((event) => {
+                  return Excel.run((context) => {
+                      console.log("Column sorted: " + event.address);
+                      const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+                      // Clear formatting for section, then highlight the sorted area.
+                      sheet.getRange("A1:E5").format.fill.clear();
+                      if (event.address !== "") {
+                          sheet.getRanges(event.address).format.fill.color = "yellow";
+                      }
+
+                      return context.sync();
+                  });
+              });
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onDeactivated:member'
+    summary: |-
+      ワークシートが非アクティブになるときに発生します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeactivated
+    fullName: onDeactivated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onDeactivated~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onDeactivated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The deactivated worksheet is: " + event.worksheetId);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onFormatChanged:member'
+    summary: |-
+      フォーマットが特定のワークシートで変更されたときに発生します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onFormatChanged
+    fullName: onFormatChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onFormatChanged~0:complex'
+  - uid: 'excel!Excel.Worksheet#onRowSorted:member'
+    summary: |-
+      1 つ以上の行を並べ替えたときに発生します。 これは、上から下に並べ替えを実行したときに発生します。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onRowSorted
+    fullName: onRowSorted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowSorted: OfficeExtension.EventHandlers<Excel.WorksheetRowSortedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onRowSorted~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              console.log("Adding row handler");
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This will fire whenever a row has been moved as the result of a sort action.
+              sheet.onRowSorted.add((event) => {
+                  return Excel.run((context) => {
+                      console.log("Row sorted: " + event.address);
+                      const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+                      // Clear formatting for section, then highlight the sorted area.
+                      sheet.getRange("A1:E5").format.fill.clear();
+                      if (event.address !== "") {
+                          sheet.getRanges(event.address).format.fill.color = "yellow";
+                      }
+
+                      return context.sync();
+                  });
+              });
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onSelectionChanged:member'
+    summary: |-
+      特定のワークシートで選択範囲が変更されたときに発生します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onSelectionChanged~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onSelectionChanged.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The selected range has changed to: " + event.address);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#onSingleClicked:member'
+    summary: |-
+      左クリック/タップ操作がワークシートで発生したときに発生します。 このイベントは、次のケースをクリックしても発生しません。
+
+      - ユーザーがマウスをドラッグして複数選択します。
+
+      - 数式参照のセルの引数が選択されている場合、ユーザーはモードでセルを選択します。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSingleClicked
+    fullName: onSingleClicked
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#onSingleClicked~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              sheet.onSingleClicked.add((event) => {
+                  return Excel.run((context) => {
+                      console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);
+                      return context.sync();
+                  });
+              });
+
+              console.log("The worksheet click handler is registered.");
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#pageLayout:member'
+    summary: |-
+      ワークシートの PageLayout オブジェクトを取得します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: pageLayout
+    fullName: pageLayout
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pageLayout: Excel.PageLayout;'
+      return:
+        type:
+          - 'excel!Excel.PageLayout:class'
+  - uid: 'excel!Excel.Worksheet#pivotTables:member'
+    summary: |-
+      ワークシートの一部になっているピボットテーブルのコレクション。 読み取り専用です。
+
+      \[[API セット: excelapi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: pivotTables
+    fullName: pivotTables
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pivotTables: Excel.PivotTableCollection;'
+      return:
+        type:
+          - 'excel!Excel.PivotTableCollection:class'
+  - uid: 'excel!Excel.Worksheet#position:member'
+    summary: |-
+      0 を起点とした、ブック内のワークシートの位置。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: position
+    fullName: position
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'position: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.Worksheet#protection:member'
+    summary: |-
+      ワークシートのシート保護オブジェクトを返します。 読み取り専用。
+
+      \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: protection
+    fullName: protection
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly protection: Excel.WorksheetProtection;'
+      return:
+        type:
+          - 'excel!Excel.WorksheetProtection:class'
+  - uid: 'excel!Excel.Worksheet#replaceAll:member(1)'
+    summary: |-
+      現在のワークシート内で、指定された条件に基づき、指定された文字列を検索し、置換します。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'replaceAll(text, replacement, criteria)'
+    fullName: 'replaceAll(text, replacement, criteria)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'replaceAll(text: string, replacement: string, criteria: Excel.ReplaceCriteria): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#replaceAll~0:complex'
+        description: 実行された置換の数。
+      parameters:
+        - id: text
+          description: 検索する文字列を指定します。
+          type:
+            - string
+        - id: replacement
+          description: 元のと置き換える文字列。
+          type:
+            - string
+        - id: criteria
+          description: 置換条件を追加します。
+          type:
+            - 'excel!Excel.ReplaceCriteria:interface'
+  - uid: 'excel!Excel.Worksheet#set:member(1)'
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Excel.Worksheet): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.WorksheetUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - 'excel!Excel.Interfaces.WorksheetUpdateData:interface'
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'excel!Excel.Worksheet#set:member(2)'
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Worksheet): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'excel!Excel.Worksheet:class'
+  - uid: 'excel!Excel.Worksheet#shapes:member'
+    summary: |-
+      ワークシート上のすべての Shape オブジェクトをまとめて返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: shapes
+    fullName: shapes
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly shapes: Excel.ShapeCollection;'
+      return:
+        type:
+          - 'excel!Excel.ShapeCollection:class'
+  - uid: 'excel!Excel.Worksheet#showGridlines:member'
+    summary: |-
+      ワークシートの gridlines フラグを取得または設定します。 このフラグは、グリッド線をユーザーに表示するかどうかを指定します。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showGridlines
+    fullName: showGridlines
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showGridlines: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              sheet.showGridlines = true;
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#showHeadings:member'
+    summary: |-
+      ワークシートの headings フラグを取得または設定します。 このフラグは、ユーザーに見出しを表示するかどうかを指定します。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showHeadings
+    fullName: showHeadings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showHeadings: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'excel!Excel.Worksheet#showOutlineLevels:member(1)'
+    summary: |-
+      アウトラインレベルで行または列のグループを表示します。 グループ化して、ワークシート内のデータの一覧を要約します。 パラメーター `rowLevels`と`columnLevels`は、表示するアウトラインのレベルの数を指定します。 指定できる引数の範囲は 0 ~ 8 です。 0を指定すると、現在の表示が変更されません。 現在のレベル数より大きい値を指定すると、すべてのレベルが表示されます。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'showOutlineLevels(rowLevels, columnLevels)'
+    fullName: 'showOutlineLevels(rowLevels, columnLevels)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'showOutlineLevels(rowLevels: number, columnLevels: number): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This collapses the entire outline.
+              sheet.showOutlineLevels(1, 1);
+              await context.sync();
+          });
+          ```
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This shows the top 3 outline levels; collapsing any additional sublevels.
+              sheet.showOutlineLevels(3, 3);
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: rowLevels
+          description: 表示するアウトラインの行レベルの数を指定します。
+          type:
+            - number
+        - id: columnLevels
+          description: アウトラインで表示する列のレベル数を指定します。
+          type:
+            - number
+  - uid: 'excel!Excel.Worksheet#slicers:member'
+    summary: |-
+      ワークシートの一部であるスライサーのコレクションを返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: slicers
+    fullName: slicers
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly slicers: Excel.SlicerCollection;'
+      return:
+        type:
+          - 'excel!Excel.SlicerCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#standardHeight:member'
+    summary: |-
+      ワークシート内のすべての行の標準 (既定) の高さ (ポイント数) を返します。 読み取り専用です。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: standardHeight
+    fullName: standardHeight
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly standardHeight: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.Worksheet#standardWidth:member'
+    summary: |-
+      ワークシートのすべての列の標準 (既定) の幅を返すか設定します。 列幅の単位は、標準スタイルの 1 文字分の幅に相当します。 プロポーショナル フォントでは、数字の 0 の幅が列幅の単位になります。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: standardWidth
+    fullName: standardWidth
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'standardWidth: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.Worksheet#tabColor:member'
+    summary: |-
+      ワークシートのタブの色を取得または設定します。 タブの色を取得するときに、ワークシートが非表示の場合、値は null になります。 ワークシートが表示されているにもかかわらず、tab の色が auto に設定されている場合は、空の文字列が返されます。 それ以外の場合は、プロパティは "\#123456" という色を設定するときに、"" という形式で設定されます。色を設定するときは、空の文字列を使用して "auto" 色を設定するか、または実際の色を設定します。
+
+      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tabColor
+    fullName: tabColor
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'tabColor: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const activeSheet = context.workbook.worksheets.getActiveWorksheet();
+              activeSheet.tabColor = "#FF0000";
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Worksheet#tables:member'
+    summary: |-
+      ワークシートの一部になっているグラフのコレクション。 読み取り専用です。
+
+      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tables
+    fullName: tables
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly tables: Excel.TableCollection;'
+      return:
+        type:
+          - 'excel!Excel.TableCollection:class'
+  - uid: 'excel!Excel.Worksheet#toJSON:member(1)'
+    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Worksheet オブジェクトは API オブジェクトであるのに対して`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.WorksheetData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.WorksheetData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.WorksheetData:interface'
+        description: ''
+  - uid: 'excel!Excel.Worksheet#verticalPageBreaks:member'
+    summary: |-
+      ワークシートの垂直改ページをまとめて取得します。 このコレクションには、手動の改ページのみが含まれます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: verticalPageBreaks
+    fullName: verticalPageBreaks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly verticalPageBreaks: Excel.PageBreakCollection;'
+      return:
+        type:
+          - 'excel!Excel.PageBreakCollection:class'
+  - uid: 'excel!Excel.Worksheet#visibility:member'
+    summary: |-
+      ワークシートの可視性。
+
+      \[[API set: 表示を読み取るための excelapi 1.1、設定用の 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) 。 \]
+    name: visibility
+    fullName: visibility
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'visibility: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden";'
+      return:
+        type:
+          - 'excel!Excel.Worksheet#visibility~0:complex'
+references:
+  - uid: 'excel!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.AutoFilter:class'
+    name: Excel.AutoFilter
+  - uid: 'excel!Excel.ChartCollection:class'
+    name: Excel.ChartCollection
+  - uid: 'excel!Excel.CommentCollection:class'
+    name: Excel.CommentCollection
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.Worksheet:class'
+    name: Excel.Worksheet
+  - uid: 'excel!Excel.WorksheetPositionType:enum'
+    name: Excel.WorksheetPositionType
+  - uid: 'excel!Excel.RangeAreas:class'
+    name: Excel.RangeAreas
+  - uid: 'excel!Excel.WorksheetSearchCriteria:interface'
+    name: Excel.WorksheetSearchCriteria
+  - uid: 'excel!Excel.WorksheetFreezePanes:class'
+    name: Excel.WorksheetFreezePanes
+  - uid: 'excel!Excel.Range:class'
+    name: Excel.Range
+  - uid: 'excel!Excel.PageBreakCollection:class'
+    name: Excel.PageBreakCollection
+  - uid: 'excel!Excel.Interfaces.WorksheetLoadOptions:interface'
+    name: Excel.Interfaces.WorksheetLoadOptions
+  - uid: 'excel!Excel.NamedItemCollection:class'
+    name: Excel.NamedItemCollection
+  - uid: 'excel!Excel.Worksheet#onActivated~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetActivatedEventArgs:interface'
+        name: Excel.WorksheetActivatedEventArgs
+        fullName: Excel.WorksheetActivatedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onCalculated~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetCalculatedEventArgs:interface'
+        name: Excel.WorksheetCalculatedEventArgs
+        fullName: Excel.WorksheetCalculatedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onChanged~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetChangedEventArgs:interface'
+        name: Excel.WorksheetChangedEventArgs
+        fullName: Excel.WorksheetChangedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onColumnSorted~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetColumnSortedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetColumnSortedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetColumnSortedEventArgs:interface'
+        name: Excel.WorksheetColumnSortedEventArgs
+        fullName: Excel.WorksheetColumnSortedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onDeactivated~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetDeactivatedEventArgs:interface'
+        name: Excel.WorksheetDeactivatedEventArgs
+        fullName: Excel.WorksheetDeactivatedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onFormatChanged~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetFormatChangedEventArgs:interface'
+        name: Excel.WorksheetFormatChangedEventArgs
+        fullName: Excel.WorksheetFormatChangedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onRowSorted~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetRowSortedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetRowSortedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetRowSortedEventArgs:interface'
+        name: Excel.WorksheetRowSortedEventArgs
+        fullName: Excel.WorksheetRowSortedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onSelectionChanged~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetSelectionChangedEventArgs:interface'
+        name: Excel.WorksheetSelectionChangedEventArgs
+        fullName: Excel.WorksheetSelectionChangedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.Worksheet#onSingleClicked~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.WorksheetSingleClickedEventArgs:interface'
+        name: Excel.WorksheetSingleClickedEventArgs
+        fullName: Excel.WorksheetSingleClickedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.PageLayout:class'
+    name: Excel.PageLayout
+  - uid: 'excel!Excel.PivotTableCollection:class'
+    name: Excel.PivotTableCollection
+  - uid: 'excel!Excel.WorksheetProtection:class'
+    name: Excel.WorksheetProtection
+  - uid: 'excel!Excel.Worksheet#replaceAll~0:complex'
+    name: OfficeExtension.ClientResult<number>
+    fullName: OfficeExtension.ClientResult<number>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <number>
+        fullName: <number>
+  - uid: 'excel!Excel.ReplaceCriteria:interface'
+    name: Excel.ReplaceCriteria
+  - uid: 'excel!Excel.Interfaces.WorksheetUpdateData:interface'
+    name: Interfaces.WorksheetUpdateData
+  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.ShapeCollection:class'
+    name: Excel.ShapeCollection
+  - uid: 'excel!Excel.SlicerCollection:class'
+    name: Excel.SlicerCollection
+  - uid: 'excel!Excel.TableCollection:class'
+    name: Excel.TableCollection
+  - uid: 'excel!Excel.Interfaces.WorksheetData:interface'
+    name: Excel.Interfaces.WorksheetData
+  - uid: 'excel!Excel.Worksheet#visibility~0:complex'
+    name: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"
+    fullName: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"
+    spec.typeScript:
+      - uid: 'excel!Excel.SheetVisibility:enum'
+        name: Excel.SheetVisibility
+        fullName: Excel.SheetVisibility
+      - name: ' | "Visible" | "Hidden" | "VeryHidden"'
+        fullName: ' | "Visible" | "Hidden" | "VeryHidden"'
