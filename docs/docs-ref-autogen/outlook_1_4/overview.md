@@ -1,13 +1,13 @@
 ---
 title: Office JavaScript API リファレンス
 description: ホスト要件セットごとの Office JavaScript Api
-ms.date: 07/25/2019
-ms.openlocfilehash: e4b45370dcaf82a60d39264a97f1e28c0dab543d
-ms.sourcegitcommit: ceb67bed1111b63e75e3a69a9a42a27ccc4d5749
+ms.date: 10/24/2019
+ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
+ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/02/2019
-ms.locfileid: "36150915"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "37908976"
 ---
 # <a name="office-javascript-api-reference"></a>Office JavaScript API リファレンス
 
@@ -21,6 +21,7 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
 ## <a name="excel"></a>Excel
 
 - [ExcelApi プレビュー](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
 - [ExcelApi 1.7](/javascript/api/excel?view=excel-js-1.7)
@@ -38,6 +39,7 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
 ## <a name="outlook"></a>Outlook
 
 - [メールボックスプレビュー](/javascript/api/outlook?view=outlook-js-preview)
+- [メールボックス1.8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
