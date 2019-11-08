@@ -26,6 +26,7 @@ items:
       - 'outlook!Office.MessageRead#dateTimeModified:member'
       - 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
+      - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
@@ -43,6 +44,7 @@ items:
       - 'outlook!Office.MessageRead#itemId:member'
       - 'outlook!Office.MessageRead#itemType:member'
       - 'outlook!Office.MessageRead#loadCustomPropertiesAsync:member(1)'
+      - 'outlook!Office.MessageRead#location:member'
       - 'outlook!Office.MessageRead#normalizedSubject:member'
       - 'outlook!Office.MessageRead#notificationMessages:member'
       - 'outlook!Office.MessageRead#recurrence:member'
@@ -50,6 +52,7 @@ items:
       - 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.MessageRead#sender:member'
       - 'outlook!Office.MessageRead#seriesId:member'
+      - 'outlook!Office.MessageRead#start:member'
       - 'outlook!Office.MessageRead#subject:member'
       - 'outlook!Office.MessageRead#to:member'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(1)'
@@ -560,6 +563,29 @@ items:
           description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~1:complex'
+  - uid: 'outlook!Office.MessageRead#end:member'
+    summary: |-
+      予定が終了する日付と時刻を取得します。
+
+      End プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される Date オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、end プロパティの値をクライアントのローカルの日付と時刻に変換できます。
+
+      Time. setAsync メソッドを使用して終了時刻を設定する場合は、convertToUtcClientTime メソッドを使用して、クライアントの現地時刻をサーバーの UTC に変換する必要があります。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+    name: end
+    fullName: end
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'end: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#from:member'
     summary: |-
       メッセージの送信者の電子メール アドレスを取得します。
@@ -1062,7 +1088,7 @@ items:
 
       ItemClass プロパティは、選択されているアイテムのメッセージクラスを指定します。 次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
 
-      <table> <tr> <th>種類</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
+      <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
 
       #### <a name="examples"></a>例
 
@@ -1082,11 +1108,11 @@ items:
           - string
   - uid: 'outlook!Office.MessageRead#itemId:member'
     summary: |-
-      現在のアイテムの Exchange Web サービスのアイテム識別子を取得します。
+      現在のアイテムの[Exchange Web サービスのアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)を取得します。
 
       ItemId プロパティは、新規作成モードでは使用できません。 アイテム識別子が必要な場合は、saveAsync メソッドを使用してアイテムをストアに保存することができます。これにより、コールバック関数の asyncResult パラメーターにアイテム識別子が返されます。
 
-      **注**: itemId プロパティによって返される識別子は、Exchange Web サービスのアイテム識別子と同じです。 ItemId プロパティは、outlook のエントリ ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
+      **注**: itemId プロパティによって返される識別子は、 [Exchange Web サービスのアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)と同じです。<!-- -->. ItemId プロパティは、outlook のエントリ ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
 
       \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -1182,6 +1208,27 @@ items:
           description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
           type:
             - any
+  - uid: 'outlook!Office.MessageRead#location:member'
+    summary: |-
+      会議出席依頼の場所を取得します。
+
+      Location プロパティは、予定の場所を含む文字列を返します。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+    name: location
+    fullName: location
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'location: string;'
+      return:
+        type:
+          - string
   - uid: 'outlook!Office.MessageRead#normalizedSubject:member'
     summary: |-
       すべてのプレフィックスが削除されたアイテムの件名を取得します (RE: および早送りを含む)。
@@ -1408,6 +1455,27 @@ items:
       return:
         type:
           - string
+  - uid: 'outlook!Office.MessageRead#start:member'
+    summary: |-
+      予定が開始される日付と時刻を取得します。
+
+      Start プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される Date オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、値をクライアントのローカルの日付と時刻に変換できます。
+
+      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+    name: start
+    fullName: start
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'start: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#subject:member'
     summary: |-
       アイテムの subject フィールドに表示される説明を取得します。
