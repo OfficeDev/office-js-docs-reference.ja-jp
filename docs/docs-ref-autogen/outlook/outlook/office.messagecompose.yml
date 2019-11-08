@@ -941,9 +941,11 @@ items:
     summary: |-
       メッセージの件名または本文から非同期的に選択したデータを返します。
 
-      選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは InvalidSelection エラーを返します。
+      選択されていないが、カーソルが本文または件名にある場合、メソッドは選択されたデータに対して空の文字列を返します。 本文または件名以外のフィールドが選択されている場合、このメソッドは InvalidSelection エラーを返します。
 
       コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
+
+      **注**: web 上の Outlook では、テキストが選択されておらず、カーソルが本文にある場合、このメソッドは文字列 "null" を返します。
 
       \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -963,11 +965,13 @@ items:
           var text = asyncResult.value.data;
           var prop = asyncResult.value.sourceProperty;
 
-          Office.context.mailbox.item.setSelectedDataAsync('Setting ' + prop + ': ' + text, {}, setCallback);
-      }
+          // Handle where Outlook on the web erroneously returns "null" instead of empty string.
+          if (Office.context.mailbox.diagnostics.hostName === 'OutlookWebApp'
+              && asyncResult.value.endPosition === asyncResult.value.startPosition) {
+              text = "";
+          }
 
-      function setCallback(asyncResult) {
-          // Check for errors.
+          console.log("Selected text in " + prop + ": " + text);
       }
       ```
     name: 'getSelectedDataAsync(coercionType, options, callback)'
@@ -998,9 +1002,11 @@ items:
     summary: |-
       メッセージの件名または本文から非同期的に選択したデータを返します。
 
-      選択したデータがなく、カーソルが本文または件名にある場合、選択したデータに対して null が返されます。 本文または件名以外のフィールドが選択されている場合、このメソッドは InvalidSelection エラーを返します。
+      選択されていないが、カーソルが本文または件名にある場合、メソッドは選択されたデータに対して空の文字列を返します。 本文または件名以外のフィールドが選択されている場合、このメソッドは InvalidSelection エラーを返します。
 
       コールバックメソッドから選択したデータにアクセスするには、asyncResult. 値データを呼び出します。 選択範囲のソースプロパティにアクセスするには、sourceProperty を呼び出します。このプロパティは、本文または件名のどちらかになります。
+
+      **注**: web 上の Outlook では、テキストが選択されておらず、カーソルが本文にある場合、このメソッドは文字列 "null" を返します。
 
       \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
