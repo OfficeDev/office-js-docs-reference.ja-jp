@@ -1,13 +1,13 @@
 ---
 title: Office JavaScript API リファレンス
 description: ホスト要件セットごとの Office JavaScript Api
-ms.date: 10/24/2019
-ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
-ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
+ms.date: 11/19/2019
+ms.openlocfilehash: f4072c23cb0d6e0d5375cf79d92b4f6dd9b35f0f
+ms.sourcegitcommit: d37268ff5254061632a886b196ec28f2f4087377
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "37906209"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "38758618"
 ---
 # <a name="office-javascript-api-reference"></a>Office JavaScript API リファレンス
 
@@ -15,12 +15,15 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
 
 ホスト固有の要件セット (およびクロスホスト共通 Api) の一覧を次に示します。 各アイテムは、その要件セットでサポートされているバージョンの API リファレンスドキュメント (ExcelApi 1.3 に、ExcelApi 1.1、1.2、1.3 および Common API の Api を示します) へのリンクを掲載しています。
 
+`ExcelApiOnline 1.1`特別な要件セットです。 Web 上の Excel 用の最新の Api が含まれていますが、これらの Api はすべてのプラットフォームで完全にサポートされているわけではありません。 詳細については、「 [Excel JAVASCRIPT API online 専用の要件セット](/office/dev/add-ins/reference/requirement-sets/excel-api-online-requirement-set)」を参照してください。
+
 > [!TIP]
 > このページのリンクを選択して、指定された要件セットでサポートされている Api の参照ドキュメントを表示するか、または目次の上にある [フィルターの選択] ドロップダウンメニューを使用して、要件セットをいつでも変更できます。
 
 ## <a name="excel"></a>Excel
 
 - [ExcelApi プレビュー](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApiOnline 1.1](/javascript/api/excel?view=excel-js-online)
 - [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
@@ -39,7 +42,7 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
 ## <a name="outlook"></a>Outlook
 
 - [メールボックスプレビュー](/javascript/api/outlook?view=outlook-js-preview)
-- [メールボックス1.8](/javascript/api/outlook?view=outlook-js-1.8)
+- [Mailbox 1.8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
