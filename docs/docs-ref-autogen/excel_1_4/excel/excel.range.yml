@@ -56,6 +56,7 @@ items:
       - 'excel!Excel.Range#load:member(2)'
       - 'excel!Excel.Range#load:member(3)'
       - 'excel!Excel.Range#merge:member(1)'
+      - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
       - 'excel!Excel.Range#rowCount:member'
       - 'excel!Excel.Range#rowHidden:member'
@@ -865,7 +866,7 @@ items:
                   ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);
               range.load('address');
               return ctx.sync().then(function() {
-                  console.log(range.address); // prints Sheet1!H3:K5
+                  console.log(range.address); // prints Sheet1!H3:J5
               });
           }).catch(function(error) {
               console.log("Error: " + error);
@@ -1416,6 +1417,27 @@ items:
           description: 省略可能。 指定した範囲のセルを行ごとに結合して、行ごとに別のセルを作成する場合は True に設定します。 既定値は False です。
           type:
             - boolean
+  - uid: 'excel!Excel.Range#moveTo:member(1)'
+    summary: |-
+      セルの値、書式設定、および数式を現在の範囲から移動先の範囲に移動し、そのセルの古い情報を置き換えます。 移動先の範囲は、現在の範囲よりも小さい場合は自動的に展開されます。 元の範囲の領域の外にある、移動先の範囲内のすべてのセルが変更されることはありません。
+
+      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: moveTo(destinationRange)
+    fullName: moveTo(destinationRange)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'moveTo(destinationRange: Range | string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: destinationRange
+          description: destinationRange この範囲内の情報の移動先となる範囲を指定します。
+          type:
+            - 'excel!Excel.Range#moveTo~0:complex'
   - uid: 'excel!Excel.Range#numberFormat:member'
     summary: |-
       指定された範囲の Excel の数値書式コードを表します。 数値の表示形式を範囲に設定する場合、引数 value には単一の値 (文字列) または2次元配列を指定できます。 引数に1つの値を指定すると、範囲内のすべてのセルに適用されます。
@@ -1668,7 +1690,7 @@ items:
           - 'excel!Excel.Interfaces.RangeData:interface'
         description: ''
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。`context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間で`.sync`このオブジェクトを使用していて、"..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを追跡対象オブジェクトに追加する必要があります。オブジェクトが最初に作成されたときのコレクションです。
+    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。`context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間で`.sync`このオブジェクトを使用していて、"..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
     name: track()
     fullName: track()
     langs:
@@ -1841,6 +1863,15 @@ references:
     name: Excel.InsertShiftDirection
   - uid: 'excel!Excel.Interfaces.RangeLoadOptions:interface'
     name: Excel.Interfaces.RangeLoadOptions
+  - uid: 'excel!Excel.Range#moveTo~0:complex'
+    name: Range | string
+    fullName: Excel.Range | string
+    spec.typeScript:
+      - uid: 'excel!Excel.Range:class'
+        name: Range
+        fullName: Excel.Range
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.Interfaces.RangeUpdateData:interface'
     name: Interfaces.RangeUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
