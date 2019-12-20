@@ -5,6 +5,12 @@ items:
       Office のメッセージの読み取りモード[。アイテム](xref:outlook!Office.Item:interface)<!-- -->.
 
       **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、Office の1つのモードとして扱う必要があります。 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item)」ページを参照してください。
+
+      親インターフェイス:
+
+      - [ItemRead](xref:outlook!Office.ItemRead:interface)
+
+      - [Message](xref:outlook!Office.Message:interface)
     name: Office.MessageRead
     fullName: Office.MessageRead
     langs:
@@ -30,6 +36,8 @@ items:
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
+      - 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
+      - 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
       - 'outlook!Office.MessageRead#getEntities:member(1)'
       - 'outlook!Office.MessageRead#getEntitiesByType:member(1)'
       - 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -37,6 +45,8 @@ items:
       - 'outlook!Office.MessageRead#getRegExMatchesByName:member(1)'
       - 'outlook!Office.MessageRead#getSelectedEntities:member(1)'
       - 'outlook!Office.MessageRead#getSelectedRegExMatches:member(1)'
+      - 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(1)'
+      - 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(2)'
       - 'outlook!Office.MessageRead#internetMessageId:member'
       - 'outlook!Office.MessageRead#itemClass:member'
       - 'outlook!Office.MessageRead#itemId:member'
@@ -128,10 +138,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#attachments:member'
-    summary: |-
-      アイテムの添付ファイルを配列として取得します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: アイテムの添付ファイルを配列として取得します。
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -245,8 +252,6 @@ items:
       メッセージの CC (カーボン コピー) の受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
 
       Cc プロパティは、メッセージの Cc 行に記載されている各受信者の EmailAddressDetails オブジェクトを含む配列を返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、最大 500 人のメンバーを取得できます。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -274,8 +279,6 @@ items:
       メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
 
       新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。 ユーザーが件名を設定し、アイテムを保存した場合、conversationId プロパティは値を返します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -298,10 +301,7 @@ items:
         type:
           - string
   - uid: 'outlook!Office.MessageRead#dateTimeCreated:member'
-    summary: |-
-      アイテムが作成された日時を取得します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: アイテムが作成された日時を取得します。
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -324,10 +324,7 @@ items:
         type:
           - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#dateTimeModified:member'
-    summary: |-
-      アイテムが最後に変更された日時を取得します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: アイテムが最後に変更された日時を取得します。
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -362,8 +359,6 @@ items:
       FormData/attachments パラメーターで添付ファイルが指定されている場合、web 上の Outlook およびデスクトップクライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -467,8 +462,6 @@ items:
       FormData/attachments パラメーターで添付ファイルが指定されている場合、web 上の Outlook およびデスクトップクライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -568,8 +561,6 @@ items:
       End プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される Date オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、end プロパティの値をクライアントのローカルの日付と時刻に変換できます。
 
       Time. setAsync メソッドを使用して終了時刻を設定する場合は、convertToUtcClientTime メソッドを使用して、クライアントの現地時刻をサーバーの UTC に変換する必要があります。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -593,8 +584,6 @@ items:
       **注**: from プロパティの EmailAddressDetails オブジェクトの "受信者の種類" プロパティは、定義されていません。
 
       From プロパティは、EmailAddressDetails オブジェクトを返します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -690,13 +679,85 @@ items:
           description: '省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 成功した場合、インターネットヘッダーデータは、文字列として asyncResult プロパティに提供されます。 返される文字列値の書式情報については、 [RFC 2183](https://tools.ietf.org/html/rfc2183)を参照してください。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが含まれます。'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
+  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
+    summary: |-
+      メッセージまたは予定から添付ファイルを取得し、 **Attachmentcontent**オブジェクトとして返します。
+
+      メソッド`getAttachmentContentAsync`は、指定された id の添付ファイルをアイテムから取得します。 ベストプラクティスとして、識別子を使用して、または`getAttachmentsAsync` `item.attachments`の呼び出しで attachmentIds を取得したのと同じセッションの添付ファイルを取得する必要があります。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+
+      \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+
+      **エラー**:
+
+      - InvalidAttachmentId: 添付ファイル識別子が存在しません。
+    name: 'getAttachmentContentAsync(attachmentId, options, callback)'
+    fullName: 'getAttachmentContentAsync(attachmentId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: 取得する添付ファイルの識別子を指定します。
+          type:
+            - string
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
+          type:
+            - 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
+  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
+    summary: |-
+      メッセージまたは予定から添付ファイルを取得し、 **Attachmentcontent**オブジェクトとして返します。
+
+      メソッド`getAttachmentContentAsync`は、指定された id の添付ファイルをアイテムから取得します。 ベストプラクティスとして、識別子を使用して、または`getAttachmentsAsync` `item.attachments`の呼び出しで attachmentIds を取得したのと同じセッションの添付ファイルを取得する必要があります。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+
+      \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+
+      **エラー**:
+
+      - InvalidAttachmentId: 添付ファイル識別子が存在しません。
+    name: 'getAttachmentContentAsync(attachmentId, callback)'
+    fullName: 'getAttachmentContentAsync(attachmentId, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: 取得する添付ファイルの識別子を指定します。
+          type:
+            - string
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、callback パラメーターに渡された関数が、1つのパラメーター asyncResult を使用して呼び出されます。これは、Office の AsyncResult オブジェクトです。 呼び出しが失敗した場合、asyncResult. error プロパティには、エラーの理由と共にエラーコードが格納されます。
+          type:
+            - 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getEntities:member(1)'
     summary: |-
       選択したアイテムの本文にあるエンティティを取得します。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -725,8 +786,6 @@ items:
       選択したアイテムの本文内で検出された指定のエンティティ型のすべてのエンティティを含む配列を取得します。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: 制限付き
 
@@ -777,8 +836,6 @@ items:
       GetFilteredEntitiesByName メソッドは、指定された FilterName 要素の値を持つマニフェスト XML ファイルの ItemHasKnownEntity ルール要素で定義された正規表現に一致するエンティティを返します。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -808,8 +865,6 @@ items:
       アイテムの body プロパティに ItemHasRegularExpressionMatch ルールを指定する場合、正規表現では本文をさらにフィルター処理する必要があり、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 代わりに、本文全体を取得するには、getAsync メソッドを使用します。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -860,8 +915,6 @@ items:
       アイテムの body プロパティに ItemHasRegularExpressionMatch ルールを指定する場合、正規表現では本文をさらにフィルター処理する必要があり、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -986,11 +1039,62 @@ items:
         type:
           - any
         description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。 各配列の名前は、一致する ItemHasRegularExpressionMatch ルールまたは一致する ItemHasKnownEntity ルールの FilterName 属性の RegExName 属性の対応する値と同じです。
-  - uid: 'outlook!Office.MessageRead#internetMessageId:member'
+  - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(1)'
     summary: |-
-      電子メール メッセージのインターネット メッセージ ID を取得します。
+      共有フォルダー、予定表、またはメールボックス内の予定またはメッセージのプロパティを取得します。
 
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+    name: 'getSharedPropertiesAsync(options, callback)'
+    fullName: 'getSharedPropertiesAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSharedPropertiesAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 結果`value`のプロパティは、共有アイテムのプロパティです。
+          type:
+            - 'outlook!Office.MessageRead#getSharedPropertiesAsync~0:complex'
+  - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(2)'
+    summary: |-
+      共有フォルダー、予定表、またはメールボックス内の予定またはメッセージのプロパティを取得します。
+
+      \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: メッセージの読み取り
+    name: getSharedPropertiesAsync(callback)
+    fullName: getSharedPropertiesAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSharedPropertiesAsync(callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 結果`value`のプロパティは、共有アイテムのプロパティです。
+          type:
+            - 'outlook!Office.MessageRead#getSharedPropertiesAsync~1:complex'
+  - uid: 'outlook!Office.MessageRead#internetMessageId:member'
+    summary: 電子メール メッセージのインターネット メッセージ ID を取得します。
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1017,8 +1121,6 @@ items:
       選択されたアイテムの Exchange Web サービスのアイテム クラスを取得します。
 
       既定のメッセージクラスを拡張するカスタムメッセージクラス (たとえば、カスタム予定表メッセージクラス IPM) を作成できます。予定。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1026,7 +1128,7 @@ items:
 
       ItemClass プロパティは、選択されているアイテムのメッセージクラスを指定します。 次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
 
-      <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
+      <table> <tr> <th>種類</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
 
       #### <a name="examples"></a>例
 
@@ -1051,8 +1153,6 @@ items:
       ItemId プロパティは、新規作成モードでは使用できません。 アイテム識別子が必要な場合は、saveAsync メソッドを使用してアイテムをストアに保存することができます。これにより、コールバック関数の asyncResult パラメーターにアイテム識別子が返されます。
 
       **注**: itemId プロパティによって返される識別子は、 [Exchange Web サービスのアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)と同じです。<!-- -->. ItemId プロパティは、outlook のエントリ ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API を呼び出す前に、Office.context.mailbox.convertToRestId を使用して変換する必要があります。 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1065,6 +1165,8 @@ items:
       // identifier. If the `itemId` property returns `null` or
       // `undefined`, it saves the item to the store and gets the
       // item identifier from the asynchronous result.
+      // **Important**: `saveAsync` was introduced with requirement set 1.3
+      // so you can't get the `itemId` in Compose mode in earlier sets.
       var itemId = Office.context.mailbox.item.itemId;
       if (itemId === null || itemId == undefined) {
           Office.context.mailbox.item.saveAsync(function(result) {
@@ -1087,8 +1189,6 @@ items:
       インスタンスが表しているアイテムの種類を取得します。
 
       ItemType プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、ItemType 列挙値の1つを返します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1120,8 +1220,6 @@ items:
       カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
 
       カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1151,8 +1249,6 @@ items:
       会議出席依頼の場所を取得します。
 
       Location プロパティは、予定の場所を含む文字列を返します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1172,8 +1268,6 @@ items:
       すべてのプレフィックスが削除されたアイテムの件名を取得します (RE: および早送りを含む)。
 
       NormalizedSubject プロパティは、任意の標準プレフィックス (RE: や FW:) など) を使用して、アイテムの件名を取得します。電子メールプログラムによって追加されます。 プレフィックスをそのまま使用してアイテムの件名を取得するには、subject プロパティを使用します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1330,8 +1424,6 @@ items:
       From プロパティと sender プロパティは、メッセージが代理人によって送信されていない限り、同じユーザーを表します。 その場合、from プロパティは委任者を表し、sender プロパティは代理人を表します。
 
       **注**: sender プロパティの EmailAddressDetails オブジェクトの "受信者の種類" プロパティは、定義されていません。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1398,8 +1490,6 @@ items:
       予定が開始される日付と時刻を取得します。
 
       Start プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される Date オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、値をクライアントのローカルの日付と時刻に変換できます。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1421,8 +1511,6 @@ items:
       Subject プロパティは、電子メールサーバーによって送信されたアイテムの件名全体を取得または設定します。
 
       Subject プロパティは、文字列を返します。 NormalizedSubject プロパティを使用して、"RE:" や "FW:" などの先頭のプレフィックスを除いた、件名を取得します。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1461,8 +1549,6 @@ items:
       メッセージの To 行にある受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
 
       To プロパティは、メッセージの宛先行に記載されている各受信者の EmailAddressDetails オブジェクトを含む配列を返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、最大 500 人のメンバーを取得できます。
-
-      \[[API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
 
@@ -1618,6 +1704,38 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
+  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.AttachmentContent:interface'
+        name: AttachmentContent
+        fullName: Office.AttachmentContent
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.AttachmentContent:interface'
+        name: AttachmentContent
+        fullName: Office.AttachmentContent
+      - name: '>) => void'
+        fullName: '>) => void'
   - uid: 'outlook!Office.Entities:interface'
     name: Entities
   - uid: 'outlook!Office.MessageRead#getEntitiesByType~0:complex'
@@ -1681,6 +1799,38 @@ references:
         fullName: Office.TaskSuggestion
       - name: ')[]'
         fullName: ')[]'
+  - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<SharedProperties>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.SharedProperties>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.SharedProperties:interface'
+        name: SharedProperties
+        fullName: Office.SharedProperties
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<SharedProperties>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.SharedProperties>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.SharedProperties:interface'
+        name: SharedProperties
+        fullName: Office.SharedProperties
+      - name: '>) => void'
+        fullName: '>) => void'
   - uid: 'outlook!Office.MessageRead#itemType~0:complex'
     name: MailboxEnums.ItemType | string
     fullName: Office.MailboxEnums.ItemType | string
