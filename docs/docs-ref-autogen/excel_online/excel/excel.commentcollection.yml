@@ -16,6 +16,7 @@ items:
     children:
       - 'excel!Excel.CommentCollection#add:member(1)'
       - 'excel!Excel.CommentCollection#add:member(2)'
+      - 'excel!Excel.CommentCollection#add:member(3)'
       - 'excel!Excel.CommentCollection#context:member'
       - 'excel!Excel.CommentCollection#getCount:member(1)'
       - 'excel!Excel.CommentCollection#getItem:member(1)'
@@ -31,7 +32,7 @@ items:
     summary: |-
       指定したセルで、指定した内容の新しいコメントを作成します。 指定`InvalidArgument`した範囲が1つのセルより大きい場合は、エラーがスローされます。
 
-      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'add(cellAddress, content, contentType)'
     fullName: 'add(cellAddress, content, contentType)'
     langs:
@@ -62,18 +63,18 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~0:complex'
         - id: content
-          description: 'コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string、ExcelApiOnline 1.1 for CommentRichContent オブジェクト\]'
+          description: コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。
           type:
             - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: 列挙型 contenttype 用の ExcelApi 1.10。標準、ExcelApiOnline 1.1 for Enum ContentType\]'
+          description: 省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->.
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
     summary: |-
       指定したセルで、指定した内容の新しいコメントを作成します。 指定`InvalidArgument`した範囲が1つのセルより大きい場合は、エラーがスローされます。
 
-      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'add(cellAddress, content, contentTypeString)'
     fullName: 'add(cellAddress, content, contentTypeString)'
     langs:
@@ -91,13 +92,38 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~2:complex'
         - id: content
-          description: 'コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string、ExcelApiOnline 1.1 for CommentRichContent オブジェクト\]'
+          description: コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。
           type:
             - 'excel!Excel.CommentCollection#add~3:complex'
         - id: contentTypeString
-          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: 列挙型 contenttype 用の ExcelApi 1.10。標準、ExcelApiOnline 1.1 for Enum ContentType\]'
+          description: 省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->.
           type:
             - '"Plain" | "Mention"'
+  - uid: 'excel!Excel.CommentCollection#add:member(3)'
+    summary: |-
+      指定したセルで、指定した内容の新しいコメントを作成します。 指定`InvalidArgument`した範囲が1つのセルより大きい場合は、エラーがスローされます。
+
+      \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'add(cellAddress, content)'
+    fullName: 'add(cellAddress, content)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(cellAddress: Range | string, content: string): Excel.Comment;'
+      return:
+        type:
+          - 'excel!Excel.Comment:class'
+        description: ''
+      parameters:
+        - id: cellAddress
+          description: コメントを追加するセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列型 (string) の場合は、シート名を含む完全な住所が含まれている必要があります。 指定`InvalidArgument`した範囲が1つのセルより大きい場合は、エラーがスローされます。
+          type:
+            - 'excel!Excel.CommentCollection#add~4:complex'
+        - id: content
+          description: コメントの内容を、プレーンテキストを表す文字列で指定します。
+          type:
+            - string
   - uid: 'excel!Excel.CommentCollection#context:member'
     summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
     name: context
@@ -330,6 +356,15 @@ references:
       - uid: 'excel!Excel.CommentRichContent:interface'
         name: CommentRichContent
         fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~4:complex'
+    name: Range | string
+    fullName: Excel.Range | string
+    spec.typeScript:
+      - uid: 'excel!Excel.Range:class'
+        name: Range
+        fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
