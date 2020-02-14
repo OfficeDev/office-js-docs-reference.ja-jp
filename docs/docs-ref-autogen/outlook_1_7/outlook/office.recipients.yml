@@ -57,11 +57,11 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~0:complex'
         - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 受信者の追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
+          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 受信者の追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
           type:
             - 'outlook!Office.Recipients#addAsync~1:complex'
   - uid: 'outlook!Office.Recipients#addAsync:member(2)'
@@ -127,7 +127,7 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~2:complex'
         - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 受信者の追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
+          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 受信者の追加に失敗すると、asyncResult. error プロパティにエラーコードが格納されます。
           type:
             - 'outlook!Office.Recipients#addAsync~3:complex'
   - uid: 'outlook!Office.Recipients#getAsync:member(1)'
@@ -187,6 +187,83 @@ items:
               });
               console.log(msg);
           }
+      });
+      ```
+      ```javascript
+      Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var msgBcc = asyncResult.value;
+          console.log("Message being bcc'd to:");
+          for (var i = 0; i < msgBcc.length; i++) {
+            console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var msgCc = asyncResult.value;
+          console.log("Message being copied to:");
+          for (var i = 0; i < msgCc.length; i++) {
+            console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      Office.context.mailbox.item.optionalAttendees.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var apptOptionalAttendees = asyncResult.value;
+          for (var i = 0; i < apptOptionalAttendees.length; i++) {
+            console.log(
+              "Optional attendees: " +
+                apptOptionalAttendees[i].displayName +
+                " (" +
+                apptOptionalAttendees[i].emailAddress +
+                ") - response: " +
+                apptOptionalAttendees[i].appointmentResponse
+            );
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      Office.context.mailbox.item.requiredAttendees.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var apptRequiredAttendees = asyncResult.value;
+          for (var i = 0; i < apptRequiredAttendees.length; i++) {
+            console.log(
+              "Required attendees: " +
+                apptRequiredAttendees[i].displayName +
+                " (" +
+                apptRequiredAttendees[i].emailAddress +
+                ") - response: " +
+                apptRequiredAttendees[i].appointmentResponse
+            );
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      Office.context.mailbox.item.to.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var msgTo = asyncResult.value;
+          console.log("Message being sent to:");
+          for (var i = 0; i < msgTo.length; i++) {
+            console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
       });
       ```
     name: getAsync(callback)
