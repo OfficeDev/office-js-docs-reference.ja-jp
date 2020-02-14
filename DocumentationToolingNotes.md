@@ -24,12 +24,18 @@ Office JS リファレンスドキュメントを作成するために、次の2
   - [Outlook (プレビュー)](https://docs.microsoft.com/javascript/api/outlook)
   - [Word (プレビュー)](https://docs.microsoft.com/javascript/api/word)
   - [共通 API](https://docs.microsoft.com/javascript/api/office)
-- [カスタム-関数-ランタイム](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts)(Excel カスタム関数ランタイム定義)
+- [カスタム-関数-ランタイム/インデックス](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts)(Excel カスタム関数ランタイム定義)。
   - [カスタム関数](https://docs.microsoft.com/javascript/api/custom-functions-runtime)
-- [office ランタイム](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts)(カスタム関数プラットフォームの office ランタイム定義)
+- [office ランタイム/インデックス](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts)(カスタム関数プラットフォーム用の office ランタイム定義) を使用します。
   - [Office ランタイム](https://docs.microsoft.com/javascript/api/office-runtime)
 
 以前のバージョンの Api には独自の d-u-n-s ファイルがあります。 これらは、新しい API 要件セットがリリースされるときに保持されます。 また、[バージョン Remover ツール](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/tools/VersionRemover.ts)を使用して生成することもできます。 これらの古い d-u-n-s ファイルは保持されているため、イベント Api にパッチまたは変更があっても、元の動作はまだ文書化されています。 これは、古いバージョンの API を対象にする必要がある場合に役立ちます。
+
+#### <a name="testing-type-definition-file-changes"></a>種類の定義ファイルの変更をテストする
+
+Office JavaScript API のドキュメント変更は、前述の4つの d-u-n-s ファイルを編集することによって行われます。 ただし、markdown を作成する前に、(たとえば、書式設定がにどのように変換されるかをテストする必要がある場合は)、「[ドキュメントの生成](https://github.com/OfficeDev/office-js-docs-reference/tree/master/generate-docs/script-inputs)」および「 [generatedocs](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd)」で対応するファイルを編集することによって、PR を入力する前に、変更をテストすることができます。 メッセージが表示されたら、[ローカルファイル] オプションを選択します。
+
+このリポジトリのリモートブランチに変更を加えると、docs.microsoft.com プラットフォームによってテストブランチが構築されます。 この分岐は review.docs.microsoft.com に表示されます。これは、Microsoft の内部担当者のみがアクセスできます。 PR をレビューしているユーザーは、レビューサイトが正確であるかどうかを確認します。
 
 ### <a name="code-snippets"></a>コード スニペット
 
