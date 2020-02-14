@@ -53,12 +53,12 @@ items:
           type:
             - 'outlook!Office.MasterCategories#addAsync~0:complex'
         - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
           description: |-
-            省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+            オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
 
             \[Api set: Mailbox 1.8\]
           type:
@@ -168,6 +168,20 @@ items:
           }
       });
       ```
+      ```javascript
+      Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var categories = asyncResult.value;
+          if (categories) {
+            console.log(categories);
+          } else {
+            console.log("There are no categories in the master list.");
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
     name: getAsync(callback)
     fullName: getAsync(callback)
     langs:
@@ -214,12 +228,12 @@ items:
           type:
             - 'string[]'
         - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
           description: |-
-            省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの削除が失敗した場合、asyncResult. error プロパティにエラーコードが格納されます。
+            オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 カテゴリの削除が失敗した場合、asyncResult. error プロパティにエラーコードが格納されます。
 
             \[Api set: Mailbox 1.8\]
           type:
