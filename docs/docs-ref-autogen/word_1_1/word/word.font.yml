@@ -49,6 +49,35 @@ items:
       return:
         type:
           - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Bold format text
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to make the current selection bold.
+              selection.font.bold = true;
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The selection is now bold.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#color:member'
     summary: |-
       指定されたフォントの色を取得または設定します。 値は、'\#RRGGBB ' の形式または色の名前で指定できます。
@@ -64,6 +93,35 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Change the font color
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to change the font color of the current selection.
+              selection.font.color = 'blue';
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The font color of the selection has been changed.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#context:member'
     summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
     name: context
@@ -106,6 +164,35 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Highlight selected text
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to highlight the current selection.
+              selection.font.highlightColor = '#FFFF00'; // Yellow
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The selection has been highlighted.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#italic:member'
     summary: |-
       フォントが斜体かどうかを示す値を取得または設定します。 フォントが斜体の場合は true、それ以外の場合は false です。
@@ -131,177 +218,6 @@ items:
       `load(option?: { select?: string; expand?: string; }): Word.Font`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
       `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Font`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Change the font name
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to change the current selection's font name.
-          selection.font.name = 'Arial';
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The font name has changed.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Change the font color
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to change the font color of the current selection.
-          selection.font.color = 'blue';
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The font color of the selection has been changed.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Change the font size
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to change the current selection's font size.
-          selection.font.size = 20;
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The font size has changed.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Highlight selected text
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to highlight the current selection.
-          selection.font.highlightColor = '#FFFF00'; // Yellow
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The selection has been highlighted.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Bold format text
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to make the current selection bold.
-          selection.font.bold = true;
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The selection is now bold.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Underline format text
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to underline the current selection.
-          selection.font.underline = Word.UnderlineType.single;
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The selection now has an underline style.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      // Strike format text
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a range proxy object for the current selection.
-          var selection = context.document.getSelection();
-
-          // Queue a command to strikethrough the font of the current selection.
-          selection.font.strikeThrough = true;
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              console.log('The selection now has a strikethrough.');
-          });
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
     name: load(option)
     fullName: load(option)
     langs:
@@ -369,6 +285,35 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Change the font name
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to change the current selection's font name.
+              selection.font.name = 'Arial';
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The font name has changed.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#set:member(1)'
     summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
     remarks: |-
@@ -428,6 +373,35 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Change the font size
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to change the current selection's font size.
+              selection.font.size = 20;
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The font size has changed.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#strikeThrough:member'
     summary: |-
       フォントに取り消し線を表示するかどうかを示す値を取得または設定します。 フォントの書式が取り消し線付きのテキストである場合は true、それ以外の場合は false です。
@@ -443,6 +417,35 @@ items:
       return:
         type:
           - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Strike format text
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to strikethrough the font of the current selection.
+              selection.font.strikeThrough = true;
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The selection now has a strikethrough.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#subscript:member'
     summary: |-
       フォントが下付き文字かどうかを示す値を取得または設定します。 フォントの書式が下付き文字である場合は true、それ以外の場合は false です。
@@ -514,6 +517,35 @@ items:
       return:
         type:
           - 'word!Word.Font#underline~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Underline format text
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a range proxy object for the current selection.
+              var selection = context.document.getSelection();
+
+              // Queue a command to underline the current selection.
+              selection.font.underline = Word.UnderlineType.single;
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log('The selection now has an underline style.');
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'word!Word.Font#untrack:member(1)'
     summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
     name: untrack()

@@ -75,7 +75,7 @@ items:
           type:
             - 'excel!Excel.ChartAxisType:enum'
         - id: group
-          description: 省略可能。 軸のグループを指定します。 詳細については、「ChartAxisGroup」を参照してください。
+          description: オプション。 軸のグループを指定します。 詳細については、「ChartAxisGroup」を参照してください。
           type:
             - 'excel!Excel.ChartAxisGroup:enum'
   - uid: 'excel!Excel.ChartAxes#getItem:member(2)'
@@ -100,7 +100,7 @@ items:
           type:
             - '"Invalid" | "Category" | "Value" | "Series"'
         - id: group
-          description: 省略可能。 軸のグループを指定します。 詳細については、「ChartAxisGroup」を参照してください。
+          description: オプション。 軸のグループを指定します。 詳細については、「ChartAxisGroup」を参照してください。
           type:
             - '"Primary" | "Secondary"'
   - uid: 'excel!Excel.ChartAxes#load:member(1)'
@@ -252,6 +252,29 @@ items:
       return:
         type:
           - 'excel!Excel.ChartAxis:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Set the maximum, minimum, majorUnit, minorUnit of valueAxis. 
+          Excel.run(function (ctx) { 
+              var chart = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1");    
+              chart.axes.valueAxis.maximum = 5;
+              chart.axes.valueAxis.minimum = 0;
+              chart.axes.valueAxis.majorUnit = 1;
+              chart.axes.valueAxis.minorUnit = 0.2;
+              return ctx.sync().then(function() {
+                      console.log("Axis Settings Changed");
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
