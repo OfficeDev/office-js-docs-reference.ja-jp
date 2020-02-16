@@ -226,7 +226,7 @@ items:
           ```
       parameters:
         - id: address
-          description: '省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1: B2" となります。 指定されていない場合は、ワークシート全体の範囲が返されます。'
+          description: 'オプション。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1: B2" となります。 指定されていない場合は、ワークシート全体の範囲が返されます。'
           type:
             - string
   - uid: 'excel!Excel.Worksheet#id:member'
@@ -295,20 +295,6 @@ items:
               }
           });
           ```
-          ```javascript
-          // Set worksheet position. 
-          Excel.run(function (ctx) { 
-              var wSheetName = 'Sheet1';
-              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
-              worksheet.position = 2;
-              return ctx.sync(); 
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
       parameters:
         - id: propertyNames
           description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
@@ -370,6 +356,25 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#set:member(1)'
     summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
     remarks: |-
