@@ -4,7 +4,7 @@ items:
     summary: |-
       予定の開催者モードの[Office. mailbox](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、Office の1つのモードとして扱う必要があります。 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item)」ページを参照してください。
+      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。`Office.context.mailbox.item`<!-- -->. 詳細については、「[オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item)」ページを参照してください。
 
       親インターフェイス:
 
@@ -40,25 +40,25 @@ items:
     summary: |-
       ファイルを添付ファイルとしてメッセージまたは予定に追加します。
 
-      AddFileAttachmentAsync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+      `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
 
-      その後、removeAttachmentAsync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
       **重要**: Windows 上の Outlook の最近のビルドでは、このアクションに`Authorization: Bearer`ヘッダーを誤って追加するバグが導入されています (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、要件セット 1.8 `addFileAttachmentFromBase64`で導入された API の使用を試みることができます。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - AttachmentSizeExceeded: 添付ファイルが許可されているサイズを超えています。
+      - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
 
-      - FileTypeNotSupported: 添付ファイルの拡張子が許可されていません。
+      - `FileTypeNotSupported`<!-- -->: 添付ファイルの拡張子が許可されていません。
 
-      - NumberOfAttachmentsExceeded: メッセージまたは予定に添付ファイルが多すぎます。
+      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
 
       #### <a name="examples"></a>例
 
@@ -108,36 +108,36 @@ items:
           type:
             - string
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 isInline: true の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: True の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する Error オブジェクトが格納されます。
+          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)'
     summary: |-
       ファイルを添付ファイルとしてメッセージまたは予定に追加します。
 
-      AddFileAttachmentAsync メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+      `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
 
-      その後、removeAttachmentAsync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
       **重要**: Windows 上の Outlook の最近のビルドでは、このアクションに`Authorization: Bearer`ヘッダーを誤って追加するバグが導入されています (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、要件セット 1.8 `addFileAttachmentFromBase64`で導入された API の使用を試みることができます。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - AttachmentSizeExceeded: 添付ファイルが許可されているサイズを超えています。
+      - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
 
-      - FileTypeNotSupported: 添付ファイルの拡張子が許可されていません。
+      - `FileTypeNotSupported`<!-- -->: 添付ファイルの拡張子が許可されていません。
 
-      - NumberOfAttachmentsExceeded: メッセージまたは予定に添付ファイルが多すぎます。
+      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
     name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
     fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
     langs:
@@ -159,28 +159,28 @@ items:
           type:
             - string
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルのアップロードが失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する Error オブジェクトが格納されます。
+          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(1)'
     summary: |-
       メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
 
-      AddItemAttachmentAsync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
+      メソッド`addItemAttachmentAsync`は、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーターで呼び出されます。`asyncResult`<!-- -->には、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 `options`パラメーターを使用して、必要に応じて、コールバックメソッドに状態情報を渡すことができます。
 
-      その後、removeAttachmentAsync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
-      Office アドインが Outlook on the web で実行されている場合、addItemAttachmentAsync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
+      Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - NumberOfAttachmentsExceeded: メッセージまたは予定に添付ファイルが多すぎます。
+      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
 
       #### <a name="examples"></a>例
 
@@ -234,32 +234,32 @@ items:
           type:
             - string
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する Error オブジェクトが格納されます。
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が、1つのパラメーター型 (type) によって呼び出されます。`Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~0:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(2)'
     summary: |-
       メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
 
-      AddItemAttachmentAsync メソッドは、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーター asyncResult を指定して呼び出されます。これには、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
+      メソッド`addItemAttachmentAsync`は、指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーターで呼び出されます。`asyncResult`<!-- -->には、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 `options`パラメーターを使用して、必要に応じて、コールバックメソッドに状態情報を渡すことができます。
 
-      その後、removeAttachmentAsync メソッドで識別子を使用して、同じセッションの添付ファイルを削除することができます。
+      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
-      Office アドインが Outlook on the web で実行されている場合、addItemAttachmentAsync メソッドは、編集しているアイテム以外のアイテムにアイテムを添付できます。ただし、これはサポートされておらず、推奨されていません。
+      Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - NumberOfAttachmentsExceeded: メッセージまたは予定に添付ファイルが多すぎます。
+      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
     name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
     fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
     langs:
@@ -281,7 +281,7 @@ items:
           type:
             - string
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 成功すると、添付ファイルの識別子が asyncResult プロパティに提供されます。 添付ファイルの追加が失敗した場合、asyncResult オブジェクトには、エラーの説明を提供する Error オブジェクトが格納されます。
+          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#body:member'
@@ -290,9 +290,9 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -326,13 +326,13 @@ items:
     summary: |-
       予定が終了する日時を取得または設定します。
 
-      End プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される[Time](xref:outlook!Office.Time:interface)オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、end プロパティの値をクライアントのローカルの日付と時刻に変換できます。
+      `end`プロパティは、協定世界時 (UTC) の日付と時刻の値として表される[Time](xref:outlook!Office.Time:interface)オブジェクトです。 `convertToLocalClientTime`メソッドを使用すると、プロパティの`end`値をクライアントのローカルの日付と時刻に変換できます。
 
-      Time. setAsync メソッドを使用して終了時刻を設定する場合は、convertToUtcClientTime メソッドを使用して、クライアントの現地時刻をサーバーの UTC に変換する必要があります。
+      `Time.setAsync` メソッドを使用して終了時刻を設定する場合、`convertToUtcClientTime` メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -367,11 +367,11 @@ items:
     summary: |-
       インスタンスが表しているアイテムの種類を取得します。
 
-      ItemType プロパティは、アイテムのオブジェクトインスタンスがメッセージであるか予定であるかを示す、ItemType 列挙値の1つを返します。
+      `itemType` プロパティは、`ItemType` 列挙値の 1 つを返します。これは `item` オブジェクト インスタンスがメッセージと予定のどちらであるかを示すものです。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -396,13 +396,13 @@ items:
     summary: |-
       選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
 
-      カスタムプロパティは、アプリごとのアイテムごとにキーと値のペアとして格納されます。 このメソッドは、コールバックで CustomProperties オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタムプロパティにアクセスするためのメソッドを提供します。 カスタムプロパティはアイテムで暗号化されていないので、セキュリティで保護されたストレージとして使用しないでください。
+      カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで `CustomProperties` オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
 
-      カスタムプロパティは、CustomProperties オブジェクトとして、asyncResult プロパティによって提供されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
+      カスタム プロパティは `asyncResult.value` プロパティの `CustomProperties` オブジェクトとして指定されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -465,19 +465,19 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。
+          description: メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->.
           type:
             - 'outlook!Office.AppointmentCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: オプション。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の asyncResult コンテキストプロパティによってアクセスできます。
+          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
           type:
             - any
   - uid: 'outlook!Office.AppointmentCompose#location:member'
-    summary: '予定の場所を取得または設定します。 Location プロパティは、予定の場所を取得および設定するために使用されるメソッドを提供する[location](xref:outlook!Office.Location:interface)オブジェクトを返します。'
+    summary: '予定の場所を取得または設定します。 この`location`プロパティは、予定の場所を取得および設定するために使用されるメソッドを提供する[location](xref:outlook!Office.Location:interface)オブジェクトを返します。'
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -504,15 +504,15 @@ items:
     summary: |-
       イベントの任意出席者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
 
-      Optional 出席者のプロパティは、会議の任意出席者を取得または更新するメソッドを提供する[Recipients](xref:outlook!Office.Recipients:interface)オブジェクトを返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、次の制限が適用されます。
+      プロパティ`optionalAttendees`は、会議の任意出席者を取得または更新するためのメソッドを提供する[Recipients](xref:outlook!Office.Recipients:interface)オブジェクトを返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、次の制限が適用されます。
 
       - 最大 500 人のメンバーを取得します。
 
       - 呼び出しごとに最大 100 人のメンバーを設定し、合計で最大 500 人のメンバーを設定します。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -558,17 +558,17 @@ items:
     summary: |-
       メッセージまたは予定から添付ファイルを削除します。
 
-      RemoveAttachmentAsync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+      `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - InvalidAttachmentId: 添付ファイル識別子が存在しません。
+      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
 
       #### <a name="examples"></a>例
 
@@ -614,28 +614,28 @@ items:
           type:
             - string
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 asyncContext: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~0:complex'
   - uid: 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(2)'
     summary: |-
       メッセージまたは予定から添付ファイルを削除します。
 
-      RemoveAttachmentAsync メソッドは、指定された識別子を持つ添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+      `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: readwriteitem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       **エラー**:
 
-      - InvalidAttachmentId: 添付ファイル識別子が存在しません。
+      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
     name: 'removeAttachmentAsync(attachmentId, callback)'
     fullName: 'removeAttachmentAsync(attachmentId, callback)'
     langs:
@@ -653,22 +653,22 @@ items:
           type:
             - string
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が呼び出され、1つのパラメーターの型が事務であるということになります。 添付ファイルの削除が失敗した場合、エラーコードにはエラーの理由と共にエラーコードが含まれます。
+          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
           type:
             - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#requiredAttendees:member'
     summary: |-
       イベントの必須出席者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
 
-      Requiredatthe Dees プロパティは、会議の必須出席者を取得または更新するメソッドを提供する[Recipients](xref:outlook!Office.Recipients:interface)オブジェクトを返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、次の制限が適用されます。
+      プロパティ`requiredAttendees`は、会議の必須出席者を取得または更新するメソッドを提供する[Recipients](xref:outlook!Office.Recipients:interface)オブジェクトを返します。 既定では、コレクションは最大 100 人のメンバーに制限されています。 ただし、Windows および Mac では、次の制限が適用されます。
 
       - 最大 500 人のメンバーを取得します。
 
       - 呼び出しごとに最大 100 人のメンバーを設定し、合計で最大 500 人のメンバーを設定します。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -715,13 +715,13 @@ items:
     summary: |-
       予定を開始する日時を取得または設定します。
 
-      Start プロパティは、世界協定時刻 (UTC) の日付と時刻の値として表される[Time](xref:outlook!Office.Time:interface)オブジェクトです。 ConvertToLocalClientTime メソッドを使用すると、値をクライアントのローカルの日付と時刻に変換できます。
+      `start`プロパティは、協定世界時 (UTC) の日付と時刻の値として表される[Time](xref:outlook!Office.Time:interface)オブジェクトです。 `convertToLocalClientTime`メソッドを使用すると、クライアントのローカルの日付と時刻に値を変換できます。
 
-      Time. setAsync メソッドを使用して開始時刻を設定する場合は、convertToUtcClientTime メソッドを使用して、クライアントのローカル時刻をサーバーの UTC に変換する必要があります。
+      `Time.setAsync` メソッドを使用して開始時刻を設定する場合、`convertToUtcClientTime` メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
@@ -756,13 +756,13 @@ items:
     summary: |-
       アイテムの件名フィールドに示される説明を取得または設定します。
 
-      Subject プロパティは、電子メールサーバーによって送信されたアイテムの件名全体を取得または設定します。
+      `subject` プロパティは、電子メール サーバーによって送信されたアイテムの件名全体を取得または設定します。
 
-      Subject プロパティは、件名を取得および設定するためのメソッドを提供する Subject オブジェクトを返します。
+      `subject` プロパティは件名を取得および設定するためのメソッドを提供する `Subject` オブジェクトを返します。
     remarks: |-
-      **[最低限のアクセス許可レベル](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: 予定の開催者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 予定の開催者
 
       #### <a name="examples"></a>例
 
