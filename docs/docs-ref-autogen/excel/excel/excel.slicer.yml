@@ -31,7 +31,9 @@ items:
       - 'excel!Excel.Slicer#selectItems:member(1)'
       - 'excel!Excel.Slicer#set:member(1)'
       - 'excel!Excel.Slicer#set:member(2)'
+      - 'excel!Excel.Slicer#setStyle:member(1)'
       - 'excel!Excel.Slicer#slicerItems:member'
+      - 'excel!Excel.Slicer#slicerStyle:member'
       - 'excel!Excel.Slicer#sortBy:member'
       - 'excel!Excel.Slicer#style:member'
       - 'excel!Excel.Slicer#toJSON:member(1)'
@@ -317,7 +319,7 @@ items:
           ```
       parameters:
         - id: items
-          description: 省略可能です。 選択するスライサーアイテムの名前を指定します。
+          description: 省略可能。 選択するスライサーアイテムの名前を指定します。
           type:
             - 'string[]'
   - uid: 'excel!Excel.Slicer#set:member(1)'
@@ -364,6 +366,28 @@ items:
           description: ''
           type:
             - 'excel!Excel.Slicer:class'
+  - uid: 'excel!Excel.Slicer#setStyle:member(1)'
+    summary: |-
+      スライサーに適用されるスタイルを設定します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: setStyle(style)
+    fullName: setStyle(style)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setStyle(style: string | PivotTableStyle | BuiltInSlicerStyle): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: style
+          description: ピボットテーブルに適用するスタイルを設定します。 任意`InvalidArgumentException`のスタイルの名前と一致しない文字列が指定されている場合は、がスローされます。
+          type:
+            - 'excel!Excel.Slicer#setStyle~0:complex'
   - uid: 'excel!Excel.Slicer#slicerItems:member'
     summary: |-
       スライサーに含まれる SlicerItems のコレクションを表します。 読み取り専用です。
@@ -379,6 +403,22 @@ items:
       return:
         type:
           - 'excel!Excel.SlicerItemCollection:class'
+  - uid: 'excel!Excel.Slicer#slicerStyle:member'
+    summary: |-
+      スライサーに適用されるスタイルです。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: slicerStyle
+    fullName: slicerStyle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly slicerStyle: Excel.SlicerStyle;'
+      return:
+        type:
+          - 'excel!Excel.SlicerStyle:class'
   - uid: 'excel!Excel.Slicer#sortBy:member'
     summary: |-
       スライサーに含まれるアイテムの並べ替え順序を表します。 可能な値は、"DataSourceOrder"、"昇順"、"降順" です。
@@ -501,8 +541,24 @@ references:
     name: Interfaces.SlicerUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Slicer#setStyle~0:complex'
+    name: string | PivotTableStyle | BuiltInSlicerStyle
+    fullName: string | Excel.PivotTableStyle | Excel.BuiltInSlicerStyle
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'excel!Excel.PivotTableStyle:class'
+        name: PivotTableStyle
+        fullName: Excel.PivotTableStyle
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.BuiltInSlicerStyle:enum'
+        name: BuiltInSlicerStyle
+        fullName: Excel.BuiltInSlicerStyle
   - uid: 'excel!Excel.SlicerItemCollection:class'
     name: Excel.SlicerItemCollection
+  - uid: 'excel!Excel.SlicerStyle:class'
+    name: Excel.SlicerStyle
   - uid: 'excel!Excel.Slicer#sortBy~0:complex'
     name: Excel.SlicerSortType | "DataSourceOrder" | "Ascending" | "Descending"
     fullName: Excel.SlicerSortType | "DataSourceOrder" | "Ascending" | "Descending"

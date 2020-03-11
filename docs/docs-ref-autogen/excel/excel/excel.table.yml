@@ -40,6 +40,7 @@ items:
       - 'excel!Excel.Table#rows:member'
       - 'excel!Excel.Table#set:member(1)'
       - 'excel!Excel.Table#set:member(2)'
+      - 'excel!Excel.Table#setStyle:member(1)'
       - 'excel!Excel.Table#showBandedColumns:member'
       - 'excel!Excel.Table#showBandedRows:member'
       - 'excel!Excel.Table#showFilterButton:member'
@@ -47,6 +48,7 @@ items:
       - 'excel!Excel.Table#showTotals:member'
       - 'excel!Excel.Table#sort:member'
       - 'excel!Excel.Table#style:member'
+      - 'excel!Excel.Table#tableStyle:member'
       - 'excel!Excel.Table#toJSON:member(1)'
       - 'excel!Excel.Table#worksheet:member'
   - uid: 'excel!Excel.Table#autoFilter:member'
@@ -494,7 +496,9 @@ items:
                       }
   - uid: 'excel!Excel.Table#name:member'
     summary: |-
-      テーブルの名前を指定します。 テーブルの名前を設定する場合は、「 [Excel テーブル](https://support.office.com/article/Rename-an-Excel-table-FBF49A4F-82A3-43EB-8BA2-44D21233B114)の名前を変更する」の記事で指定されているガイドラインに従う必要があります。
+      テーブルの名前。
+
+      表のセット名は、「 [Excel テーブルの名前を変更](https://support.office.com/article/Rename-an-Excel-table-FBF49A4F-82A3-43EB-8BA2-44D21233B114)する」の記事で指定されているガイドラインに従う必要があります。
 
       \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
@@ -656,6 +660,28 @@ items:
           description: ''
           type:
             - 'excel!Excel.Table:class'
+  - uid: 'excel!Excel.Table#setStyle:member(1)'
+    summary: |-
+      スライサーに適用されるスタイルを設定します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: setStyle(style)
+    fullName: setStyle(style)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setStyle(style: string | PivotTableStyle | BuiltInTableStyle): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: style
+          description: ピボットテーブルに適用するスタイルを設定します。 任意`InvalidArgumentException`のスタイルの名前と一致しない文字列が指定されている場合は、がスローされます。
+          type:
+            - 'excel!Excel.Table#setStyle~0:complex'
   - uid: 'excel!Excel.Table#showBandedColumns:member'
     summary: |-
       テーブルを見やすくするため、奇数列を偶数列とは異なる方法で強調表示する書式設定にして、列を縞模様で表示するかどうかを示します。
@@ -785,6 +811,22 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Table#tableStyle:member'
+    summary: |-
+      表に適用されるスタイルです。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: tableStyle
+    fullName: tableStyle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly tableStyle: Excel.TableStyle;'
+      return:
+        type:
+          - 'excel!Excel.TableStyle:class'
   - uid: 'excel!Excel.Table#toJSON:member(1)'
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の Excel Table オブジェクトは API オブジェクトであるのに対し`toJSON` 、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
     name: toJSON()
@@ -876,8 +918,24 @@ references:
     name: Interfaces.TableUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Table#setStyle~0:complex'
+    name: string | PivotTableStyle | BuiltInTableStyle
+    fullName: string | Excel.PivotTableStyle | Excel.BuiltInTableStyle
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'excel!Excel.PivotTableStyle:class'
+        name: PivotTableStyle
+        fullName: Excel.PivotTableStyle
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.BuiltInTableStyle:enum'
+        name: BuiltInTableStyle
+        fullName: Excel.BuiltInTableStyle
   - uid: 'excel!Excel.TableSort:class'
     name: Excel.TableSort
+  - uid: 'excel!Excel.TableStyle:class'
+    name: Excel.TableStyle
   - uid: 'excel!Excel.Interfaces.TableData:interface'
     name: Excel.Interfaces.TableData
   - uid: 'excel!Excel.Worksheet:class'
