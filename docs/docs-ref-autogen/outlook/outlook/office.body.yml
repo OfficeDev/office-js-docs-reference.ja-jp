@@ -16,6 +16,8 @@ items:
     type: interface
     package: outlook!
     children:
+      - 'outlook!Office.Body#appendOnSendAsync:member(1)'
+      - 'outlook!Office.Body#appendOnSendAsync:member(2)'
       - 'outlook!Office.Body#getAsync:member(1)'
       - 'outlook!Office.Body#getAsync:member(2)'
       - 'outlook!Office.Body#getTypeAsync:member(1)'
@@ -26,6 +28,108 @@ items:
       - 'outlook!Office.Body#setAsync:member(2)'
       - 'outlook!Office.Body#setSelectedDataAsync:member(1)'
       - 'outlook!Office.Body#setSelectedDataAsync:member(2)'
+  - uid: 'outlook!Office.Body#appendOnSendAsync:member(1)'
+    summary: |-
+      を追加します。指定されたコンテンツを、署名後にアイテム本文の末尾に送信します。
+
+      [マニフェストで itemsend \`\`を使用して、送信時機能](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)を実装しているアドインをユーザーが実行している場合<!-- -->、送信時に送信時実行を追加します。
+
+      **重要**: を使用するには`appendOnSendAsync`<!-- -->、マニフェスト`AppendOnSend`の`ExtendedPermissions`ノードに拡張アクセス許可が含まれている必要があります。
+
+      **注**: 以前`appendOnSendAsync`の呼び出しからデータを消去するには、パラメーターをに設定`data`して再度呼び出すことができます。`null`<!-- -->.
+
+      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 新規作成
+
+      **エラー**:
+
+      - `DataExceedsMaximumSize`<!-- -->: パラメーター `data`が5000文字を超えています。
+
+      - `InvalidFormatError`<!-- -->: `options.coercionType`パラメーターはに`Office.CoercionType.Html`設定されていますが、メッセージ本文はプレーンテキストになっています。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      Office.context.mailbox.item.body.appendOnSendAsync(
+          "P.S. This text was appended on send.",
+          {coercionType: Office.CoercionType.Html},
+          function (asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                  console.log("Action failed with error: " + asyncResult.error.message);
+              }
+          }
+      );
+      ```
+    isPreview: true
+    name: 'appendOnSendAsync(data, options, callback)'
+    fullName: 'appendOnSendAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'appendOnSendAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: 本文の末尾に追加する文字列を指定します。 文字列は5000文字までに制限されています。
+          type:
+            - string
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 追加するデータに必要な形式を指定します。 パラメーター内の文字列は、この形式に変換されます。'
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~0:complex'
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~1:complex'
+  - uid: 'outlook!Office.Body#appendOnSendAsync:member(2)'
+    summary: |-
+      を追加します。指定されたコンテンツを、署名後にアイテム本文の末尾に送信します。
+
+      [マニフェストで itemsend \`\`を使用して、送信時機能](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)を実装しているアドインをユーザーが実行している場合<!-- -->、送信時に送信時実行を追加します。
+
+      **重要**: を使用するには`appendOnSendAsync`<!-- -->、マニフェスト`AppendOnSend`の`ExtendedPermissions`ノードに拡張アクセス許可が含まれている必要があります。
+
+      **注**: 以前`appendOnSendAsync`の呼び出しからデータを消去するには、パラメーターをに設定`data`して再度呼び出すことができます。`null`<!-- -->.
+
+      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadWriteItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 新規作成
+
+      **エラー**:
+
+      - `DataExceedsMaximumSize`<!-- -->: パラメーター `data`が5000文字を超えています。
+
+      - `InvalidFormatError`<!-- -->: `options.coercionType`パラメーターはに`Office.CoercionType.Html`設定されていますが、メッセージ本文はプレーンテキストになっています。
+    isPreview: true
+    name: 'appendOnSendAsync(data, callback)'
+    fullName: 'appendOnSendAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'appendOnSendAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: 本文の末尾に追加する文字列を指定します。 文字列は5000文字までに制限されています。
+          type:
+            - string
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~2:complex'
   - uid: 'outlook!Office.Body#getAsync:member(1)'
     summary: |-
       現在の本文を指定された形式で返します。
@@ -75,11 +179,11 @@ items:
           type:
             - 'outlook!Office.Body#getAsync~0:complex'
         - id: options
-          description: '省略可能です。 次のプロパティの1つ以上を含むオブジェクトリテラル。`asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティの1つ以上を含むオブジェクトリテラル。`asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 本文は、 `asyncResult.value`プロパティの要求された形式で提供されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 本文は、 `asyncResult.value`プロパティの要求された形式で提供されます。
           type:
             - 'outlook!Office.Body#getAsync~1:complex'
   - uid: 'outlook!Office.Body#getAsync:member(2)'
@@ -112,7 +216,7 @@ items:
           type:
             - 'outlook!Office.Body#getAsync~2:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 本文は、 `asyncResult.value`プロパティの要求された形式で提供されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 本文は、 `asyncResult.value`プロパティの要求された形式で提供されます。
           type:
             - 'outlook!Office.Body#getAsync~3:complex'
   - uid: 'outlook!Office.Body#getTypeAsync:member(1)'
@@ -137,11 +241,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. コンテンツタイプは、 `CoercionType` `asyncResult.value`プロパティの値の1つとして返されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. コンテンツタイプは、 `CoercionType` `asyncResult.value`プロパティの値の1つとして返されます。
           type:
             - 'outlook!Office.Body#getTypeAsync~0:complex'
   - uid: 'outlook!Office.Body#getTypeAsync:member(2)'
@@ -178,7 +282,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. コンテンツタイプは、 `CoercionType` `asyncResult.value`プロパティの値の1つとして返されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. コンテンツタイプは、 `CoercionType` `asyncResult.value`プロパティの値の1つとして返されます。
           type:
             - 'outlook!Office.Body#getTypeAsync~1:complex'
   - uid: 'outlook!Office.Body#prependAsync:member(1)'
@@ -226,11 +330,11 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
           type:
             - 'outlook!Office.Body#prependAsync~0:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#prependAsync~1:complex'
   - uid: 'outlook!Office.Body#prependAsync:member(2)'
@@ -267,7 +371,7 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#prependAsync~2:complex'
   - uid: 'outlook!Office.Body#setAsync:member(1)'
@@ -288,7 +392,7 @@ items:
 
       - `DataExceedsMaximumSize`<!-- -->: Data パラメーターが100万文字を超えています。
 
-      - `InvalidFormatError`<!-- -->: CoercionType パラメーターはに`Office.CoercionType.Html`設定されており、メッセージ本文はプレーンテキストになっています。
+      - `InvalidFormatError`<!-- -->: `options.coercionType`パラメーターはに`Office.CoercionType.Html`設定されており、メッセージ本文はプレーンテキストです。
 
       #### <a name="examples"></a>例
 
@@ -330,11 +434,11 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
           type:
             - 'outlook!Office.Body#setAsync~0:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が呼び出されて、1つのパラメーターである型は Office. AsyncResult になります。 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#setAsync~1:complex'
   - uid: 'outlook!Office.Body#setAsync:member(2)'
@@ -373,7 +477,7 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#setAsync~2:complex'
   - uid: 'outlook!Office.Body#setSelectedDataAsync:member(1)'
@@ -423,11 +527,11 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式。 パラメーター内の文字列は、この形式に変換されます。'
           type:
             - 'outlook!Office.Body#setSelectedDataAsync~0:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#setSelectedDataAsync~1:complex'
   - uid: 'outlook!Office.Body#setSelectedDataAsync:member(2)'
@@ -466,10 +570,44 @@ items:
           type:
             - string
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
           type:
             - 'outlook!Office.Body#setSelectedDataAsync~2:complex'
 references:
+  - uid: 'outlook!Office.Body#appendOnSendAsync~0:complex'
+    name: Office.AsyncContextOptions & CoercionTypeOptions
+    fullName: Office.AsyncContextOptions & Office.CoercionTypeOptions
+    spec.typeScript:
+      - uid: 'outlook!Office.AsyncContextOptions:interface'
+        name: Office.AsyncContextOptions
+        fullName: Office.AsyncContextOptions
+      - name: ' & '
+        fullName: ' & '
+      - uid: 'outlook!Office.CoercionTypeOptions:interface'
+        name: CoercionTypeOptions
+        fullName: Office.CoercionTypeOptions
+  - uid: 'outlook!Office.Body#appendOnSendAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.Body#appendOnSendAsync~2:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.Body#getAsync~0:complex'
     name: Office.CoercionType | string
     fullName: Office.CoercionType | string
