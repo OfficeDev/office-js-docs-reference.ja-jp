@@ -14,8 +14,15 @@ items:
       - 'excel!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.PivotField#applyFilter:member(1)'
+      - 'excel!Excel.PivotField#clearAllFilters:member(1)'
+      - 'excel!Excel.PivotField#clearFilter:member(1)'
+      - 'excel!Excel.PivotField#clearFilter:member(2)'
       - 'excel!Excel.PivotField#context:member'
+      - 'excel!Excel.PivotField#getFilters:member(1)'
       - 'excel!Excel.PivotField#id:member'
+      - 'excel!Excel.PivotField#isFiltered:member(1)'
+      - 'excel!Excel.PivotField#isFiltered:member(2)'
       - 'excel!Excel.PivotField#items:member'
       - 'excel!Excel.PivotField#load:member(1)'
       - 'excel!Excel.PivotField#load:member(2)'
@@ -29,6 +36,88 @@ items:
       - 'excel!Excel.PivotField#sortByValues:member(2)'
       - 'excel!Excel.PivotField#subtotals:member'
       - 'excel!Excel.PivotField#toJSON:member(1)'
+  - uid: 'excel!Excel.PivotField#applyFilter:member(1)'
+    summary: |-
+      フィールドの現在の PivotFilters を1つまたは複数設定し、フィールドに適用します。 指定したフィルターが無効であるか、適用できない場合は、例外がスローされます。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: applyFilter(filter)
+    fullName: applyFilter(filter)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'applyFilter(filter: PivotValueFilter | PivotLabelFilter | PivotManualFilter | PivotDateFilter | PivotFilters): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filter
+          description: 構成された特定の PivotFilter または複数の構成されたフィルターを含む PivotFilters インターフェイス。
+          type:
+            - 'excel!Excel.PivotField#applyFilter~0:complex'
+  - uid: 'excel!Excel.PivotField#clearAllFilters:member(1)'
+    summary: |-
+      すべてのフィールドフィルターのすべての条件をクリアします。 これにより、そのフィールドのアクティブなフィルター処理がすべて削除されます。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: clearAllFilters()
+    fullName: clearAllFilters()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearAllFilters(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: 'excel!Excel.PivotField#clearFilter:member(1)'
+    summary: |-
+      指定した種類のフィールドのフィルターから、すべての既存の条件を削除します (現在適用されている場合)。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: clearFilter(filterType)
+    fullName: clearFilter(filterType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFilter(filterType: Excel.PivotFilterType): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filterType
+          description: すべての条件をクリアするフィールドのフィルターの種類を指定します。
+          type:
+            - 'excel!Excel.PivotFilterType:enum'
+  - uid: 'excel!Excel.PivotField#clearFilter:member(2)'
+    summary: |-
+      指定した種類のフィールドのフィルターから、すべての既存の条件を削除します (現在適用されている場合)。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: clearFilter(filterTypeString)
+    fullName: clearFilter(filterTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFilter(filterTypeString: "Unknown" | "Value" | "Manual" | "Label" | "Date"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: filterTypeString
+          description: すべての条件をクリアするフィールドのフィルターの種類を指定します。
+          type:
+            - '"Unknown" | "Value" | "Manual" | "Label" | "Date"'
   - uid: 'excel!Excel.PivotField#context:member'
     summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
     name: context
@@ -41,6 +130,23 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.PivotField#getFilters:member(1)'
+    summary: |-
+      フィールドに現在適用されているすべてのフィルターを取得します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getFilters()
+    fullName: getFilters()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFilters(): OfficeExtension.ClientResult<Excel.PivotFilters>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#getFilters~0:complex'
+        description: すべてのアクティブなフィルターを使用した PivotFilters インターフェイス。
   - uid: 'excel!Excel.PivotField#id:member'
     summary: |-
       PivotField の ID。
@@ -56,6 +162,49 @@ items:
       return:
         type:
           - string
+  - uid: 'excel!Excel.PivotField#isFiltered:member(1)'
+    summary: |-
+      フィールドに適用されているフィルターがあるかどうかを確認します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: isFiltered(filterType)
+    fullName: isFiltered(filterType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isFiltered(filterType?: Excel.PivotFilterType): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#isFiltered~0:complex'
+        description: True の場合は、フィールドの種類`filterType`のフィルターが適用されています。 FilterType が指定されていない場合、フィールドにフィルターが適用されている場合は true が返されます。
+      parameters:
+        - id: filterType
+          description: 確認するフィルターの種類を示します。 型が指定されていない場合、このメソッドはフィルターが適用されているかどうかを確認します。
+          type:
+            - 'excel!Excel.PivotFilterType:enum'
+  - uid: 'excel!Excel.PivotField#isFiltered:member(2)'
+    summary: |-
+      フィールドに適用されているフィルターがあるかどうかを確認します。
+
+      \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: isFiltered(filterTypeString)
+    fullName: isFiltered(filterTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'isFiltered(filterTypeString?: "Unknown" | "Value" | "Manual" | "Label" | "Date"): OfficeExtension.ClientResult<boolean>;'
+      return:
+        type:
+          - 'excel!Excel.PivotField#isFiltered~1:complex'
+        description: True の場合は、フィールドの種類`filterType`のフィルターが適用されています。 FilterType が指定されていない場合、フィールドにフィルターが適用されている場合は true が返されます。
+      parameters:
+        - id: filterTypeString
+          description: 確認するフィルターの種類を示します。 型が指定されていない場合、このメソッドはフィルターが適用されているかどうかを確認します。
+          type:
+            - '"Unknown" | "Value" | "Manual" | "Label" | "Date"'
   - uid: 'excel!Excel.PivotField#items:member'
     summary: |-
       PivotField に関連付けられているピボット フィールドを返します。
@@ -317,8 +466,69 @@ items:
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.PivotField#applyFilter~0:complex'
+    name: PivotValueFilter | PivotLabelFilter | PivotManualFilter | PivotDateFilter | PivotFilters
+    fullName: Excel.PivotValueFilter | Excel.PivotLabelFilter | Excel.PivotManualFilter | Excel.PivotDateFilter | Excel.PivotFilters
+    spec.typeScript:
+      - uid: 'excel!Excel.PivotValueFilter:interface'
+        name: PivotValueFilter
+        fullName: Excel.PivotValueFilter
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.PivotLabelFilter:interface'
+        name: PivotLabelFilter
+        fullName: Excel.PivotLabelFilter
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.PivotManualFilter:interface'
+        name: PivotManualFilter
+        fullName: Excel.PivotManualFilter
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.PivotDateFilter:interface'
+        name: PivotDateFilter
+        fullName: Excel.PivotDateFilter
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.PivotFilters:interface'
+        name: PivotFilters
+        fullName: Excel.PivotFilters
+  - uid: 'excel!Excel.PivotFilterType:enum'
+    name: Excel.PivotFilterType
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
+  - uid: 'excel!Excel.PivotField#getFilters~0:complex'
+    name: OfficeExtension.ClientResult<Excel.PivotFilters>
+    fullName: OfficeExtension.ClientResult<Excel.PivotFilters>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.PivotFilters:interface'
+        name: Excel.PivotFilters
+        fullName: Excel.PivotFilters
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.PivotField#isFiltered~0:complex'
+    name: OfficeExtension.ClientResult<boolean>
+    fullName: OfficeExtension.ClientResult<boolean>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <boolean>
+        fullName: <boolean>
+  - uid: 'excel!Excel.PivotField#isFiltered~1:complex'
+    name: OfficeExtension.ClientResult<boolean>
+    fullName: OfficeExtension.ClientResult<boolean>
+    spec.typeScript:
+      - uid: 'excel!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: <boolean>
+        fullName: <boolean>
   - uid: 'excel!Excel.PivotItemCollection:class'
     name: Excel.PivotItemCollection
   - uid: 'excel!Excel.PivotField:class'
