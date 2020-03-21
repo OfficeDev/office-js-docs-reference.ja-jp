@@ -116,6 +116,33 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // This will convert a number like "14,37" to "14.37"
+          // (assuming the system decimal separator is ".").
+            await Excel.run(async (context) => {
+          const sheet = context.workbook.worksheets.getItem("Sample");
+          const decimalSource = sheet.getRange("B2");
+          decimalSource.load("values");
+          context.application.cultureInfo.numberFormat.load("numberDecimalSeparator");
+          await context.sync();
+
+          const systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;
+          const oldDecimalString: string = decimalSource.values[0][0];
+
+          // This assumes the input column is standardized to use "," as the decimal separator. 
+          const newDecimalString = oldDecimalString.replace(",", systemDecimalSeparator);
+
+          const resultRange = sheet.getRange("C2");
+          resultRange.values = [[newDecimalString]];
+          resultRange.format.autofitColumns();
+          await context.sync();
+            });
+          ```
   - uid: 'excel!Excel.NumberFormatInfo#numberGroupSeparator:member'
     summary: |-
       数値の小数点の左側にある数字のグループを区切るために使用される文字列を取得します。 これは、現在のシステム設定に基づいています。
@@ -132,6 +159,33 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+            // This will convert a number like "123-456-789" to "123,456,789"
+            // (assuming the system thousands separator is ",").
+            const sheet = context.workbook.worksheets.getItem("Sample");
+            const bigNumberSource = sheet.getRange("B3");
+            bigNumberSource.load("values");
+            context.application.cultureInfo.numberFormat.load("numberGroupSeparator");
+            await context.sync();
+
+            const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;
+            const oldBigNumberString: string = bigNumberSource.values[0][0];
+            
+            // This assumes the input column is standardized to use "-" as the number group separator. 
+            const newBigNumberString = oldBigNumberString.replace(/-/g, systemThousandsSeparator);
+
+            const resultRange = sheet.getRange("C3");
+            resultRange.values = [[newBigNumberString]];
+            resultRange.format.autofitColumns();
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.NumberFormatInfo#toJSON:member(1)'
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の NumberFormatInfo オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.NumberFormatInfoData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
     isPreview: true
