@@ -179,6 +179,36 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+            context.application.load("decimalSeparator,thousandsSeparator");
+            context.application.cultureInfo.numberFormat.load("numberDecimalSeparator,numberGroupSeparator");
+            await context.sync();
+
+            // Local settings are set under the "Options > Advanced" menu.
+            const localDecimalSeparator = context.application.decimalSeparator;
+            const localThousandsSeparator = context.application.thousandsSeparator;
+
+            const systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;
+            const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;
+
+            console.log("Local character settings: ");
+            console.log(`  Local decimal separator: ${localDecimalSeparator}`);
+            console.log(`  Local thousands separator: ${localThousandsSeparator}`);
+
+            console.log("System culture settings: ");
+            console.log(`  System decimal separator: ${systemDecimalSeparator}`);
+            console.log(`  System thousands separator: ${systemThousandsSeparator}`);
+            console.log(`  `);
+
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Application#iterativeCalculation:member'
     summary: |-
       反復計算の設定を返します。 Windows と Mac の Excel では、設定は Excel アプリケーションに適用されます。 Web 上の Excel およびその他のプラットフォームでは、設定は作業中のブックに適用されます。
