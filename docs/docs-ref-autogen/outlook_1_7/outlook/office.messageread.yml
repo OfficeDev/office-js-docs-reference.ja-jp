@@ -88,11 +88,11 @@ items:
           type:
             - any
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
@@ -141,7 +141,7 @@ items:
           type:
             - any
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#attachments:member'
@@ -239,9 +239,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      console.log(JSON.stringify(Office.context.mailbox.item.cc));
-      ```
       ```javascript
       var msgCc = Office.context.mailbox.item.cc;
       console.log("Message copied to:");
@@ -601,10 +598,6 @@ items:
       #### <a name="examples"></a>例
 
       ```javascript
-      var from = Office.context.mailbox.item.from;
-      console.log("From " + from);
-      ```
-      ```javascript
       var msgFrom = Office.context.mailbox.item.from;
       console.log("Message received from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
       ```
@@ -630,11 +623,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      // The following example accesses the contacts entities in the current item's body.
-
-      var contacts = Office.context.mailbox.item.getEntities().contacts;
-      ```
       ```javascript
       var entities = Office.context.mailbox.item.getEntities();
       var entityTypesFound = 0;
@@ -701,22 +689,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      // The following example shows how to access an array of strings that represent postal addresses
-      // in the current item's body.
-
-      // The initialize function is required for all apps.
-      Office.initialize = function () {
-          // Checks for the DOM to load using the jQuery ready function.
-          $(document).ready(function () {
-              // After the DOM is loaded, app-specific code can run.
-              var item = Office.context.mailbox.item;
-              // Get an array of strings that represent postal addresses in the current item's body.
-              var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);
-              // Continue processing the array of addresses.
-          });
-      };
-      ```
       ```javascript
       console.log(Office.context.mailbox.item.getEntitiesByType(Office.MailboxEnums.EntityType.Address));
       ```
@@ -898,11 +870,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      // The following example accesses the addresses entities in the highlighted
-      // match selected by the user.
-      var addresses = Office.context.mailbox.item.getSelectedEntities().addresses;
-      ```
       ```javascript
       var entities = Office.context.mailbox.item.getSelectedEntities();
       var entityTypesFound = 0;
@@ -1215,7 +1182,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
+          description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
           type:
             - any
   - uid: 'outlook!Office.MessageRead#location:member'
@@ -1275,14 +1242,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      // Get all notifications.
-      Office.context.mailbox.item.notificationMessages.getAllAsync(
-          function (asyncResult) {
-              console.log(JSON.stringify(asyncResult));
-          }
-      );
-      ```
       ```javascript
       var id = $("#notificationId").val();
       var details =
@@ -1363,10 +1322,6 @@ items:
 
       ```javascript
       var recurrence = Office.context.mailbox.item.recurrence;
-      console.log("Recurrence: " + JSON.stringify(recurrence));
-      ```
-      ```javascript
-      var recurrence = Office.context.mailbox.item.recurrence;
 
       if (recurrence === undefined) {
         console.log("This item is a message but not a meeting request.");
@@ -1414,11 +1369,11 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~0:complex'
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
@@ -1449,7 +1404,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~2:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->。 `Office.AsyncResult`オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#sender:member'
@@ -1466,11 +1421,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      var senderName = Office.context.mailbox.item.sender.displayName;
-      var senderAddress = Office.context.mailbox.item.sender.emailAddress;
-      console.log("Sender: " + senderName + " (" + senderAddress + ")");
-      ```
       ```javascript
       var msgSender = Office.context.mailbox.item.sender;
       console.log("Sender: " + msgSender.displayName + " (" + msgSender.emailAddress + ")");
@@ -1503,17 +1453,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      var seriesId = Office.context.mailbox.item.seriesId;
-
-      // The seriesId property returns null for items that do
-      // not have parent items (such as single appointments,
-      // series items, or meeting requests) and returns
-      // undefined for messages that are not meeting requests.
-      var isSeriesInstance = (seriesId != null);
-      console.log("SeriesId is " + seriesId 
-          + " and isSeriesInstance is " + isSeriesInstance);
-      ```
       ```javascript
       var seriesId = Office.context.mailbox.item.seriesId;
 
@@ -1606,9 +1545,6 @@ items:
 
       #### <a name="examples"></a>例
 
-      ```javascript
-      console.log(JSON.stringify(Office.context.mailbox.item.to));
-      ```
       ```javascript
       var msgTo = Office.context.mailbox.item.to;
       console.log("Message sent to:");
