@@ -60,11 +60,11 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~0:complex'
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
           type:
             - 'outlook!Office.Recipients#addAsync~1:complex'
   - uid: 'outlook!Office.Recipients#addAsync:member(2)'
@@ -130,7 +130,7 @@ items:
           type:
             - 'outlook!Office.Recipients#addAsync~2:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
           type:
             - 'outlook!Office.Recipients#addAsync~3:complex'
   - uid: 'outlook!Office.Recipients#getAsync:member(1)'
@@ -179,24 +179,10 @@ items:
       #### <a name="examples"></a>例
 
       ```javascript
-      // The following example gets the optional attendees of a meeting.
-      Office.context.mailbox.item.optionalAttendees.getAsync(function(result) {
-          if (result.error) {
-              console.log(result.error);
-          } else {
-              var msg = "";
-              result.value.forEach(function(recip, index) {
-                  msg = msg + recip.displayName + " (" + recip.emailAddress + ");";
-              });
-              console.log(msg);
-          }
-      });
-      ```
-      ```javascript
       Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
         if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
           var msgBcc = asyncResult.value;
-          console.log("Message being bcc'd to:");
+          console.log("Message being blind-copied to:");
           for (var i = 0; i < msgBcc.length; i++) {
             console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
           }
@@ -378,6 +364,71 @@ items:
           } else {
               console.log("Recipients overwritten");
           }
+      });
+      ```
+      ```javascript
+      var email = $("#emailBcc")
+        .val()
+        .toString();
+      var emailArray = [email];
+      Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Succeeded in setting Bcc field.");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      var email = $("#emailCc")
+        .val()
+        .toString();
+      var emailArray = [email];
+      Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Succeeded in setting Cc field.");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      var email = $("#emailOptional")
+        .val()
+        .toString();
+      var emailArray = [email];
+      Office.context.mailbox.item.optionalAttendees.setAsync(emailArray, function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Succeeded in setting optional attendees field.");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      var email = $("#emailRequired")
+        .val()
+        .toString();
+      var emailArray = [email];
+      Office.context.mailbox.item.requiredAttendees.setAsync(emailArray, function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Succeeded in setting required attendees field.");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+      ```javascript
+      var email = $("#emailTo")
+        .val()
+        .toString();
+      var emailArray = [email];
+      Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Succeeded in setting To field.");
+        } else {
+          console.error(asyncResult.error);
+        }
       });
       ```
     name: 'setAsync(recipients, callback)'
