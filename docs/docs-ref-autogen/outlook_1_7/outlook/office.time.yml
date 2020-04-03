@@ -66,13 +66,12 @@ items:
       #### <a name="examples"></a>例
 
       ```javascript
-      Office.context.mailbox.item.start.getAsync(function (asyncResult) {
-          if (asyncResult.status === "failed") {
-              console.log("Action failed with error: " + asyncResult.error.message);
-          }
-          else {
-              console.log("Start date and time: " + asyncResult.value);
-          }
+      Office.context.mailbox.item.start.getAsync((result) => {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+          console.error(`Action failed with message ${result.error.message}`);
+          return;
+        }
+        console.log(`Appointment starts: ${result.value}`);
       });
       ```
     name: getAsync(callback)
@@ -143,11 +142,11 @@ items:
           type:
             - '!Date:interface'
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
           type:
             - 'outlook!Office.Time#setAsync~0:complex'
   - uid: 'outlook!Office.Time#setAsync:member(2)'
@@ -167,6 +166,20 @@ items:
       **エラー**:
 
       - `InvalidEndTime`<!-- -->: 予定の終了時刻が予定の開始時刻よりも前になっています。
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      var start = new Date(); // Represents current date and time.
+      start.setDate(start.getDate() + 2); // Add 2 days to current date.
+      Office.context.mailbox.item.start.setAsync(start, (result) => {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+          console.error(`Action failed with message ${result.error.message}`);
+          return;
+        }
+        console.log(`Successfully set start date and time to ${start}`);
+      });
+      ```
     name: 'setAsync(dateTime, callback)'
     fullName: 'setAsync(dateTime, callback)'
     langs:
@@ -184,7 +197,7 @@ items:
           type:
             - '!Date:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
           type:
             - 'outlook!Office.Time#setAsync~1:complex'
 references:
