@@ -46,7 +46,7 @@ Office JavaScript API のドキュメント変更は、前述の4つの d-u-n-s 
 
 ローカルスニペットは、ホスト固有の yaml ファイルにあります。 これらのコンテンツはクラスとフィールドによって整理されているため、参照ページ内の適切な場所にマップできます。 スニペットの言語 (JavaScript または TypeScript) は、await ステートメントの使用によって推論されます。
 
-スクリプトラボスニペットは、作業用サンプルから引き出されています。 現在、Excel と Word のサンプルは、[マッピングファイルのペア](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata)を使用して、参照文書のセクションにマップされています。 これらは、個々のサンプルメソッドを API のプロパティまたはメソッドと照合します。 Office js-スニペットリポジトリを`yarn start`実行すると、すべてのマップされたスニペットを含む[yaml ファイル](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml)が作成されます。 この yaml ファイルは、リファレンスドキュメントツールへの入力です。
+スクリプトラボスニペットは、作業用サンプルから引き出されています。 現時点では、Excel、Outlook、および Word のサンプルは、[マッピングファイル](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata)によって参照ドキュメントのセクションにマッピングされています。 これらは、個々のサンプルメソッドを API のプロパティまたはメソッドと照合します。 Office js-スニペットリポジトリを`yarn start`実行すると、すべてのマップされたスニペットを含む[yaml ファイル](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml)が作成されます。 この yaml ファイルは、リファレンスドキュメントツールへの入力です。
 
 ## <a name="tooling-pipeline"></a>ツールパイプライン
 
@@ -64,7 +64,7 @@ Office JavaScript API のドキュメント変更は、前述の4つの d-u-n-s 
 
 API エクストラクターは、d-u-n-s ファイルを JSON データに変換します。 このトークンは、解析を簡単にするために、すべての型データを有効にします。
 
-Midprocessor は、コードスニペットを取得し、適切なホストとペアにします。
+Midprocessor は、コードスニペットを取得し、それらを適切なホストとペアにして、Outlook と共通 API オブジェクト間のクロスリンクをクリーンアップします。
 
 API 解析ツールは、JSON データを yml ファイルに変換します。 Yml ファイルは、ドキュメントを docs.microsoft.com に公開する Open Publishing システムによって markdown に変換されます。 API の解析には、コードスニペットを挿入する Office 固有の拡張機能も含まれています。
 
