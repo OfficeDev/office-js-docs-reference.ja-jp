@@ -11,7 +11,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.CommentReplyCollection#add:member(1)'
@@ -36,7 +36,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.CommentReply;'
+      content: 'add(content: string, contentType?: Excel.ContentType): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
@@ -57,11 +57,11 @@ items:
           ```
       parameters:
         - id: content
-          description: 'コメントの内容を示します。 これは、string または Interface CommentRichContent (メンション付きのコメントなど) のいずれかになります。 \[Api set: ExcelApi 1.10 for string、ExcelApiOnline 1.1 for CommentRichContent オブジェクト\]'
+          description: 'コメントの内容を示します。 これは、string または Interface CommentRichContent (例: メンション付きコメント) です。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent オブジェクト\]'
           type:
-            - 'excel!Excel.CommentReplyCollection#add~0:complex'
+            - string
         - id: contentType
-          description: '省略可能です。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: 列挙型 contenttype 用の ExcelApi 1.10。標準、ExcelApiOnline 1.1 for Enum ContentType\]'
+          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentReplyCollection#add:member(2)'
@@ -75,18 +75,18 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
+      content: 'add(content: string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
         - id: content
-          description: 'コメントの内容を示します。 これは、string または Interface CommentRichContent (メンション付きのコメントなど) のいずれかになります。 \[Api set: ExcelApi 1.10 for string、ExcelApiOnline 1.1 for CommentRichContent オブジェクト\]'
+          description: 'コメントの内容を示します。 これは、string または Interface CommentRichContent (例: メンション付きコメント) です。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent オブジェクト\]'
           type:
-            - 'excel!Excel.CommentReplyCollection#add~1:complex'
+            - string
         - id: contentTypeString
-          description: '省略可能です。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: 列挙型 contenttype 用の ExcelApi 1.10。標準、ExcelApiOnline 1.1 for Enum ContentType\]'
+          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
           type:
             - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentReplyCollection#context:member'
@@ -119,7 +119,7 @@ items:
         description: ''
   - uid: 'excel!Excel.CommentReplyCollection#getItem:member(1)'
     summary: |-
-      その ID で識別されるコメント返信を返します。 読み取り専用です。
+      その ID で識別されるコメント返信を返します。
 
       \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(commentReplyId)
@@ -224,7 +224,7 @@ items:
         - id: propertyNamesAndPaths
           description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で`propertyNamesAndPaths.expand` 、読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
-            - 'excel!OfficeExtension.LoadOption:interface'
+            - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CommentReplyCollection#toJSON:member(1)'
     summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元`Excel.CommentReplyCollection`のオブジェクトは API オブジェクトであるのに`toJSON`対し、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.CommentReplyCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。
     name: toJSON()
@@ -239,37 +239,19 @@ items:
           - 'excel!Excel.Interfaces.CommentReplyCollectionData:interface'
         description: ''
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.CommentReply:class'
     name: Excel.CommentReply
-  - uid: 'excel!Excel.CommentReplyCollection#add~0:complex'
-    name: CommentRichContent | string
-    fullName: Excel.CommentRichContent | string
-    spec.typeScript:
-      - uid: 'excel!Excel.CommentRichContent:interface'
-        name: CommentRichContent
-        fullName: Excel.CommentRichContent
-      - name: ' | string'
-        fullName: ' | string'
   - uid: 'excel!Excel.ContentType:enum'
     name: Excel.ContentType
-  - uid: 'excel!Excel.CommentReplyCollection#add~1:complex'
-    name: CommentRichContent | string
-    fullName: Excel.CommentRichContent | string
-    spec.typeScript:
-      - uid: 'excel!Excel.CommentRichContent:interface'
-        name: CommentRichContent
-        fullName: Excel.CommentRichContent
-      - name: ' | string'
-        fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
   - uid: 'excel!Excel.CommentReplyCollection#getCount~0:complex'
     name: OfficeExtension.ClientResult<number>
     fullName: OfficeExtension.ClientResult<number>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.ClientResult:class'
+      - uid: 'office!OfficeExtension.ClientResult:class'
         name: OfficeExtension.ClientResult
         fullName: OfficeExtension.ClientResult
       - name: <number>
@@ -297,7 +279,7 @@ references:
       - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
         name: Excel.Interfaces.CollectionLoadOptions
         fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'excel!OfficeExtension.LoadOption:interface'
+  - uid: 'office!OfficeExtension.LoadOption:interface'
     name: OfficeExtension.LoadOption
   - uid: 'excel!Excel.Interfaces.CommentReplyCollectionData:interface'
     name: Excel.Interfaces.CommentReplyCollectionData
