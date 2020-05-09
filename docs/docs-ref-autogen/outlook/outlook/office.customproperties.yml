@@ -17,6 +17,7 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.CustomProperties#get:member(1)'
+      - 'outlook!Office.CustomProperties#getAll:member(1)'
       - 'outlook!Office.CustomProperties#remove:member(1)'
       - 'outlook!Office.CustomProperties#saveAsync:member(1)'
       - 'outlook!Office.CustomProperties#set:member(1)'
@@ -52,6 +53,30 @@ items:
           description: 取得するカスタム プロパティの名前。
           type:
             - string
+  - uid: 'outlook!Office.CustomProperties#getAll:member(1)'
+    summary: |-
+      名前と値のペアのコレクション内のすべてのカスタムプロパティを持つオブジェクトを返します。 以下は同等です。
+
+      `customProps.get("name")`
+
+      `var dictionary = customProps.getAll(); dictionary["name"]`
+
+      Dictionary オブジェクトを反復処理して、すべて`names`のおよびを検出することができます。`values`<!-- -->.
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->**:`ReadItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->**: 新規作成または読み取り
+    name: getAll()
+    fullName: getAll()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAll(): any;'
+      return:
+        type:
+          - any
+        description: 名前と値のペアのコレクション内のすべてのカスタムプロパティを含むオブジェクト。
   - uid: 'outlook!Office.CustomProperties#remove:member(1)'
     summary: |-
       カスタム プロパティ コレクションから指定のプロパティを削除します。
@@ -152,11 +177,11 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->.
+          description: 省略可能。 メソッドが完了すると、 `callback`パラメーターに渡された関数が、型の1つのパラメーターで呼び出されます。`Office.AsyncResult`<!-- -->.
           type:
             - 'outlook!Office.CustomProperties#saveAsync~0:complex'
         - id: asyncContext
-          description: 省略可能です。 コールバック メソッドに渡される状態データです。
+          description: 省略可能。 コールバック メソッドに渡される状態データです。
           type:
             - any
   - uid: 'outlook!Office.CustomProperties#set:member(1)'
