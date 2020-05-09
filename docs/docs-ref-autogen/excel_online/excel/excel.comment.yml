@@ -11,7 +11,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.Comment#authorEmail:member'
@@ -27,6 +27,7 @@ items:
       - 'excel!Excel.Comment#load:member(3)'
       - 'excel!Excel.Comment#mentions:member'
       - 'excel!Excel.Comment#replies:member'
+      - 'excel!Excel.Comment#resolved:member'
       - 'excel!Excel.Comment#richContent:member'
       - 'excel!Excel.Comment#set:member(1)'
       - 'excel!Excel.Comment#set:member(2)'
@@ -64,7 +65,7 @@ items:
           - string
   - uid: 'excel!Excel.Comment#content:member'
     summary: |-
-      コメントの内容を取得または設定します。 文字列はテキスト形式です。
+      コメントの内容を示します。 文字列はテキスト形式です。
 
       \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: content
@@ -163,7 +164,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Comment#id:member'
     summary: |-
-      コメント ID を表します。 読み取り専用です。
+      コメント識別子を指定します。
 
       \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: id
@@ -255,9 +256,9 @@ items:
                       }
   - uid: 'excel!Excel.Comment#mentions:member'
     summary: |-
-      コメントに記載されているエンティティ (人物など) を取得します。
+      コメントに記載されているエンティティ (ユーザーなど) を取得します。
 
-      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: excelapi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: mentions
     fullName: mentions
     langs:
@@ -270,7 +271,7 @@ items:
           - 'excel!Excel.Comment#mentions~0:complex'
   - uid: 'excel!Excel.Comment#replies:member'
     summary: |-
-      コメントに関連付けられている返信オブジェクトのコレクションを表します。 読み取り専用です。
+      コメントに関連付けられている返信オブジェクトのコレクションを表します。
 
       \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: replies
@@ -283,11 +284,39 @@ items:
       return:
         type:
           - 'excel!Excel.CommentReplyCollection:class'
+  - uid: 'excel!Excel.Comment#resolved:member'
+    summary: |-
+      コメントスレッドの状態。 値 "true" は、コメントスレッドが解決されることを意味します。
+
+      \[[API セット: excelapi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: resolved
+    fullName: resolved
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'resolved: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-resolution.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Comments");
+              sheet.comments.getItemAt(0).resolved = true;
+              await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Comment#richContent:member'
     summary: |-
-      リッチコメントの内容 (コメントに含まれるメンションなど) を取得します。 この文字列は、エンドユーザーに表示されることを意図したものではありません。 アドインでは、リッチコメントコンテンツを解析するためにのみ使用する必要があります。
+      リッチコメントの内容 (コメント内のメンションなど) を取得します。 この文字列は、エンドユーザーに表示されることを意図したものではありません。 アドインでは、リッチコメントコンテンツを解析するためにのみ使用する必要があります。
 
-      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: excelapi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: richContent
     fullName: richContent
     langs:
@@ -323,7 +352,7 @@ items:
         - id: options
           description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
           type:
-            - 'excel!OfficeExtension.UpdateOptions:interface'
+            - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'excel!Excel.Comment#set:member(2)'
     summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
     name: set(properties)
@@ -359,7 +388,7 @@ items:
     summary: |-
       特別に書式設定された文字列とメンションの一覧を使用して、コメントの内容を更新します。
 
-      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: excelapi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: updateMentions(contentWithMentions)
     fullName: updateMentions(contentWithMentions)
     langs:
@@ -377,7 +406,7 @@ items:
           type:
             - 'excel!Excel.CommentRichContent:interface'
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
@@ -402,7 +431,7 @@ references:
     name: Excel.CommentReplyCollection
   - uid: 'excel!Excel.Interfaces.CommentUpdateData:interface'
     name: Interfaces.CommentUpdateData
-  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
     name: Excel.Interfaces.CommentData
