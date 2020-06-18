@@ -31,7 +31,9 @@ items:
       - 'outlook!Office.MessageRead#dateTimeCreated:member'
       - 'outlook!Office.MessageRead#dateTimeModified:member'
       - 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
+      - 'outlook!Office.MessageRead#displayReplyAllFormAsync:member(1)'
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
+      - 'outlook!Office.MessageRead#displayReplyFormAsync:member(1)'
       - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
@@ -97,11 +99,11 @@ items:
           type:
             - any
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
@@ -150,7 +152,7 @@ items:
           type:
             - any
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#attachments:member'
@@ -358,9 +360,9 @@ items:
     summary: |-
       特定のメッセージが含まれている電子メールの会話の識別子を取得します。
 
-      メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
+      You can get an integer for this property if your mail app is activated in read forms or responses in compose forms. If subsequently the user changes the subject of the reply message, upon sending the reply, the conversation ID for that message will change and that value you obtained earlier will no longer apply.
 
-      新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。ユーザーが件名を設定し、アイテムを保存する場合、`conversationId` プロパティは値を返します。
+      You get null for this property for a new item in a compose form. If the user sets a subject and saves the item, the `conversationId` property will return a value.
     remarks: |-
       **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
 
@@ -433,13 +435,13 @@ items:
           - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
     summary: |-
-      選択したメッセージの送信者とすべての受信者、または選択した予定の開催者とすべての参加者を示した回答フォームが表示されます。
+      選択したメッセージの送信者とすべての受信者、または選択した予定の開催者およびすべての出席者を含む返信フォームが表示されます。
 
-      Outlook on the web では、回答フォームは、3 列表示のポップアウト形式、および 2 列または 1 列表示のポップアップ形式で表示されます。
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
 
       文字列パラメーターのいずれかが制限値を超えると、`displayReplyAllForm` は例外をスローします。
 
-      `formData.attachments` パラメーターで添付ファイルを指定すると、Outlook on the web とデスクトップ クライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。添付ファイルの追加に失敗すると、フォーム UI にエラーが表示されます。表示できない場合に、エラー メッセージはスローされません。
+      パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
@@ -536,15 +538,57 @@ items:
           description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:outlook!Office.ReplyFormData:interface)オブジェクトに制限されます。'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync:member(1)'
+    summary: |-
+      選択したメッセージの送信者とすべての受信者、または選択した予定の開催者およびすべての出席者を含む返信フォームが表示されます。
+
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
+
+      文字列パラメーターのいずれかが制限値を超えると、`displayReplyAllFormAsync` は例外をスローします。
+
+      パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの読み取り
+    isPreview: true
+    name: 'displayReplyAllFormAsync(formData, options, callback)'
+    fullName: 'displayReplyAllFormAsync(formData, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyAllFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:outlook!Office.ReplyFormData:interface)オブジェクトに制限されます。'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyAllFormAsync~0:complex'
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          type:
+            - 'outlook!Office.MessageRead#displayReplyAllFormAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
     summary: |-
       選択したメッセージの送信者のみ、または選択した予定の開催者のみを含む回答フォームが表示されます。
 
-      Outlook on the web では、回答フォームは、3 列表示のポップアウト形式、および 2 列または 1 列表示のポップアップ形式で表示されます。
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
 
       文字列パラメーターのいずれかが制限値を超えると、`displayReplyForm` は例外をスローします。
 
-      `formData.attachments` パラメーターで添付ファイルを指定すると、Outlook on the web とデスクトップ クライアントは、すべての添付ファイルをダウンロードして、返信フォームに添付しようとします。添付ファイルの追加に失敗すると、フォーム UI にエラーが表示されます。表示できない場合に、エラー メッセージはスローされません。
+      パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
@@ -661,6 +705,48 @@ items:
           description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:outlook!Office.ReplyFormData:interface)オブジェクトに制限されます。'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync:member(1)'
+    summary: |-
+      選択したメッセージの送信者のみ、または選択した予定の開催者のみを含む回答フォームが表示されます。
+
+      Web 上の Outlook では、返信フォームは、3列表示のポップアップフォームとして表示され、2列または1列表示のポップアップフォームとして表示されます。
+
+      文字列パラメーターのいずれかが制限値を超えると、`displayReplyFormAsync` は例外をスローします。
+
+      パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+
+      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+
+      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの読み取り
+    isPreview: true
+    name: 'displayReplyFormAsync(formData, options, callback)'
+    fullName: 'displayReplyFormAsync(formData, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: '回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は 32 KB または本文または添付ファイルのデータとコールバック関数を含む[ReplyFormData](xref:outlook!Office.ReplyFormData:interface)オブジェクトに制限されます。'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyFormAsync~0:complex'
+        - id: options
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          type:
+            - 'outlook!Office.MessageRead#displayReplyFormAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#end:member'
     summary: |-
       予定が終了する日付と時刻を取得します。
@@ -762,11 +848,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、プロパティでインターネットヘッダーのデータが `asyncResult.value` 文字列として提供されます。 返される文字列値の書式情報については、 [RFC 2183](https://tools.ietf.org/html/rfc2183)を参照してください。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。'
+          description: '省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、プロパティでインターネットヘッダーのデータが `asyncResult.value` 文字列として提供されます。 返される文字列値の書式情報については、 [RFC 2183](https://tools.ietf.org/html/rfc2183)を参照してください。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
@@ -791,7 +877,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功した場合、インターネットヘッダーデータは、文字列として asyncResult プロパティに提供されます。 返される文字列値の書式情報については、 [RFC 2183](https://tools.ietf.org/html/rfc2183)を参照してください。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。'
+          description: '省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功した場合、インターネットヘッダーデータは、文字列として asyncResult プロパティに提供されます。 返される文字列値の書式情報については、 [RFC 2183](https://tools.ietf.org/html/rfc2183)を参照してください。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
@@ -869,11 +955,11 @@ items:
           type:
             - string
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
           type:
             - 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
@@ -910,7 +996,7 @@ items:
           type:
             - string
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
           type:
             - 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getEntities:member(1)'
@@ -1077,11 +1163,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。`GenericResponseError`<!-- -->.
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。`GenericResponseError`<!-- -->.
           type:
             - 'outlook!Office.MessageRead#getInitializationContextAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getInitializationContextAsync:member(2)'
@@ -1135,14 +1221,14 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: オプション。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。`GenericResponseError`<!-- -->.
+          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。`GenericResponseError`<!-- -->.
           type:
             - 'outlook!Office.MessageRead#getInitializationContextAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getRegExMatches:member(1)'
     summary: |-
       選択したアイテム内の、マニフェスト XML ファイルで定義された正規表現に一致する文字列の値を返します。
 
-      `getRegExMatches` メソッドは、マニフェスト XML ファイル内の、各 `ItemHasRegularExpressionMatch` または `ItemHasKnownEntity` ルール要素で定義された正規表現に一致する文字列を返します。`ItemHasRegularExpressionMatch` ルールの場合、そのルールで指定されたアイテムのプロパティに一致する文字列が発生する必要があります。`PropertyName` 単純型は、サポートされるプロパティを定義します。
+      The `getRegExMatches` method returns the strings that match the regular expression defined in each `ItemHasRegularExpressionMatch` or `ItemHasKnownEntity` rule element in the manifest XML file. For an `ItemHasRegularExpressionMatch` rule, a matching string has to occur in the property of the item that is specified by that rule. The `PropertyName` simple type defines the supported properties.
 
       アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 この場合、代わりに `Body.getAsync` メソッドを使用して本文全体を取得します。
 
@@ -1192,7 +1278,7 @@ items:
       return:
         type:
           - any
-        description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。各配列の名前は、一致する `ItemHasRegularExpressionMatch` ルールの `RegExName` 属性、または一致する `ItemHasKnownEntity` ルールの `FilterName` 属性の対応する値と等しくなります。
+        description: An object that contains arrays of strings that match the regular expressions defined in the manifest XML file. The name of each array is equal to the corresponding value of the `RegExName` attribute of the matching `ItemHasRegularExpressionMatch` rule or the `FilterName` attribute of the matching `ItemHasKnownEntity` rule.
   - uid: 'outlook!Office.MessageRead#getRegExMatchesByName:member(1)'
     summary: |-
       選択したアイテム内の、マニフェスト XML ファイルで定義された、指定された正規表現に一致する文字列の値を返します。
@@ -1322,7 +1408,7 @@ items:
     summary: |-
       マニフェスト XML ファイルで定義した正規表現と一致する、強調表示された一致内の文字列値を返します。 強調表示された一致は、コンテキスト アドインに適用されます。
 
-      `getSelectedRegExMatches` メソッドは、マニフェスト XML ファイル内の、各 `ItemHasRegularExpressionMatch` または `ItemHasKnownEntity` ルール要素で定義された正規表現に一致する文字列を返します。`ItemHasRegularExpressionMatch` ルールの場合、そのルールで指定されたアイテムのプロパティに一致する文字列が発生する必要があります。`PropertyName` 単純型は、サポートされるプロパティを定義します。
+      The `getSelectedRegExMatches` method returns the strings that match the regular expression defined in each `ItemHasRegularExpressionMatch` or `ItemHasKnownEntity` rule element in the manifest XML file. For an `ItemHasRegularExpressionMatch` rule, a matching string has to occur in the property of the item that is specified by that rule. The `PropertyName` simple type defines the supported properties.
 
       アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 この場合、代わりに `Body.getAsync` メソッドを使用して本文全体を取得します。
 
@@ -1379,7 +1465,7 @@ items:
       return:
         type:
           - any
-        description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。各配列の名前は、一致する `ItemHasRegularExpressionMatch` ルールの `RegExName` 属性、または一致する `ItemHasKnownEntity` ルールの `FilterName` 属性の対応する値と等しくなります。
+        description: An object that contains arrays of strings that match the regular expressions defined in the manifest XML file. The name of each array is equal to the corresponding value of the `RegExName` attribute of the matching `ItemHasRegularExpressionMatch` rule or the `FilterName` attribute of the matching `ItemHasKnownEntity` rule.
   - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(1)'
     summary: |-
       共有フォルダー、予定表、またはメールボックス内の予定またはメッセージのプロパティを取得します。
@@ -1530,7 +1616,7 @@ items:
 
       **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの読み取り
 
-      `itemClass` プロパティには、選択したアイテムのメッセージ クラスを指定します。次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
+      The `itemClass` property specifies the message class of the selected item. The following are the default message classes for the message or appointment item.
 
       <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテムクラス IPM の予定表アイテムです。予定または IPM.予定発生。</td> <td>IPM.予定、IPM.予定の発生</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージクラス IPM を持つ電子メールメッセージが含まれます。注、会議出席依頼、返信、および取り消しは、IPM を使用しています。基本メッセージクラスとしての会議をスケジュールします。</td> <td>IPM.注、IPM.会議の出席依頼、IPM.Neg、IPM.Schedule、IPM.予約します。会議の予約を取り消します。</td> </tr> </table>
 
@@ -1618,7 +1704,7 @@ items:
     summary: |-
       選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
 
-      カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで `CustomProperties` オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
+      Custom properties are stored as key/value pairs on a per-app, per-item basis. This method returns a `CustomProperties` object in the callback, which provides methods to access the custom properties specific to the current item and the current add-in. Custom properties are not encrypted on the item, so this should not be used as secure storage.
 
       カスタム プロパティは `asyncResult.value` プロパティの `CustomProperties` オブジェクトとして指定されます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
     remarks: |-
@@ -1692,7 +1778,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: オプション。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
+          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
           type:
             - any
   - uid: 'outlook!Office.MessageRead#location:member'
@@ -1893,11 +1979,11 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~0:complex'
         - id: options
-          description: 'オプション。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
@@ -1928,7 +2014,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~2:complex'
         - id: callback
-          description: オプション。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
+          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。`asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#sender:member'
@@ -2164,6 +2250,26 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.MessageRead#displayReplyForm~0:complex'
     name: string | ReplyFormData
     fullName: string | Office.ReplyFormData
@@ -2173,6 +2279,26 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.EmailAddressDetails:interface'
     name: EmailAddressDetails
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
