@@ -35,7 +35,7 @@ Office JS リファレンスドキュメントを作成するために、次の2
 
 Office JavaScript API のドキュメント変更は、前述の4つの d-u-n-s ファイルを編集することによって行われます。 ただし、markdown を作成する前に、(たとえば、書式設定がにどのように変換されるかをテストする必要がある場合は)、「[ドキュメントの生成](https://github.com/OfficeDev/office-js-docs-reference/tree/master/generate-docs/script-inputs)」および「 [generatedocs](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd)」で対応するファイルを編集することによって、PR を入力する前に、変更をテストすることができます。 メッセージが表示されたら、[ローカルファイル] オプションを選択します。
 
-このリポジトリのリモートブランチに変更を加えると、docs.microsoft.com プラットフォームによってテストブランチが構築されます。 この分岐は review.docs.microsoft.com に表示されます。これは、Microsoft の内部担当者のみがアクセスできます。 PR をレビューしているユーザーは、レビューサイトが正確であるかどうかを確認します。
+このリポジトリのリモートブランチに変更を加えると、docs.microsoft.com プラットフォームによってテストブランチが構築されます。 この分岐は review.docs.microsoft.com に表示されます。これは、内部の Microsoft 担当者のみがアクセスできます。 PR をレビューしているユーザーは、レビューサイトが正確であるかどうかを確認します。
 
 ### <a name="code-snippets"></a>コード スニペット
 
@@ -46,7 +46,7 @@ Office JavaScript API のドキュメント変更は、前述の4つの d-u-n-s 
 
 ローカルスニペットは、ホスト固有の yaml ファイルにあります。 これらのコンテンツはクラスとフィールドによって整理されているため、参照ページ内の適切な場所にマップできます。 スニペットの言語 (JavaScript または TypeScript) は、await ステートメントの使用によって推論されます。
 
-スクリプトラボスニペットは、作業用サンプルから引き出されています。 現時点では、Excel、Outlook、および Word のサンプルは、[マッピングファイル](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata)によって参照ドキュメントのセクションにマッピングされています。 これらは、個々のサンプルメソッドを API のプロパティまたはメソッドと照合します。 Office js-スニペットリポジトリを`yarn start`実行すると、すべてのマップされたスニペットを含む[yaml ファイル](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml)が作成されます。 この yaml ファイルは、リファレンスドキュメントツールへの入力です。
+スクリプトラボスニペットは、作業用サンプルから引き出されています。 現時点では、Excel、Outlook、および Word のサンプルは、[マッピングファイル](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata)によって参照ドキュメントのセクションにマッピングされています。 これらは、個々のサンプルメソッドを API のプロパティまたはメソッドと照合します。 Office js-スニペットリポジトリを実行すると `yarn start` 、すべてのマップされたスニペットを含む[yaml ファイル](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml)が作成されます。 この yaml ファイルは、リファレンスドキュメントツールへの入力です。
 
 ## <a name="tooling-pipeline"></a>ツールパイプライン
 
