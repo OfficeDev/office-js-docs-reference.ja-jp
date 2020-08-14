@@ -27,20 +27,20 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addEventHandler(eventType: Office.EventType, handler: Function): void;'
+      content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
       return:
         type:
           - void
         description: ''
       parameters:
         - id: eventType
-          description: ''
+          description: DialogMessageReceived または DialogEventReceived のいずれかである必要があります。
           type:
             - 'office!Office.EventType:enum'
         - id: handler
-          description: ''
+          description: Eventtype が DialogMessageReceived の場合はプロパティを指定し、オブジェクトを指定する場合は、eventType が渡された場合は、プロパティを持つオブジェクトを受け取り `message` `error` ます。
           type:
-            - '!Function:interface'
+            - '(args: {message: string | boolean} | {error: number}) => void'
   - uid: 'office!Office.Dialog#close:member(1)'
     summary: 対応するダイアログ ボックスを閉じるために親ページから呼び出されます。
     name: close()
@@ -95,5 +95,3 @@ items:
 references:
   - uid: 'office!Office.EventType:enum'
     name: Office.EventType
-  - uid: '!Function:interface'
-    name: Function

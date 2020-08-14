@@ -40,14 +40,34 @@ items:
       return:
         type:
           - 'excel!Excel.CustomProperty:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/custom-properties.yaml
+          await Excel.run(async (context) => {
+            // Get the key/value pair from the task pane.
+            const userKey = $("#key").text();
+            const userValue = $("#value").text();
+
+            // Add the custom property.
+            const customDocProperties = context.workbook.properties.custom;
+            customDocProperties.add(userKey, userValue);
+
+            await context.sync();
+
+            console.log(`Successfully set custom document property ${userKey}:${userValue}.`);
+          });
+          ```
       parameters:
         - id: key
-          description: 必須。 カスタムプロパティのキー。大文字と小文字は区別されません。 このキーは、Excel の外部にある255文字までに制限されます (大きなキーは、他のプラットフォームでは自動的に255文字にトリミングされます)。
+          description: 必須です。 カスタムプロパティのキー。大文字と小文字は区別されません。 このキーは、Excel の外部にある255文字までに制限されます (大きなキーは、他のプラットフォームでは自動的に255文字にトリミングされます)。
           type:
             - string
         - id: value
-          description: 必須。 カスタムプロパティの値。 この値は、Excel の外部にある255文字までに制限されています (他のプラットフォームでは、大きな値は自動的に255文字にトリミングされます)。
+          description: 必須です。 カスタムプロパティの値。 この値は、Excel の外部にある255文字までに制限されています (他のプラットフォームでは、大きな値は自動的に255文字にトリミングされます)。
           type:
             - any
   - uid: 'excel!Excel.CustomPropertyCollection#context:member'
@@ -133,7 +153,7 @@ items:
         description: ''
       parameters:
         - id: key
-          description: 必須。 カスタムプロパティオブジェクトを識別するキー。
+          description: 必須です。 カスタムプロパティオブジェクトを識別するキー。
           type:
             - string
   - uid: 'excel!Excel.CustomPropertyCollection#items:member'
@@ -199,7 +219,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CustomPropertyCollection#toJSON:member(1)'
