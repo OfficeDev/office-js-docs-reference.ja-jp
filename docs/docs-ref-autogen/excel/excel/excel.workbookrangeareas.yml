@@ -29,7 +29,7 @@ items:
       - 'excel!Excel.WorkbookRangeAreas#untrack:member(1)'
   - uid: 'excel!Excel.WorkbookRangeAreas#addresses:member'
     summary: |-
-      A1 形式のアドレスの配列を返します。 Address 値には、セルの各長方形ブロックのワークシート名が格納されます (例: "Sheet1!A1: B4、Sheet1!D1: D4 ")。 読み取り専用です。
+      A1 形式のアドレスの配列を返します。 Address 値には、セルの各長方形ブロックのワークシート名が格納されます (例: "Sheet1!A1: B4、Sheet1!D1: D4 ")。 読み取り専用。
 
       \[[API セット: EXCELAPI BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -59,6 +59,32 @@ items:
       return:
         type:
           - 'excel!Excel.RangeAreasCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/direct-precedents.yaml
+          await Excel.run(async (context) => {
+            // Precedents are cells referenced by the formula in a cell.
+            let range = context.workbook.getActiveCell();
+            let directPrecedents = range.getDirectPrecedents();
+            range.load("address");
+            directPrecedents.areas.load("address");
+            await context.sync();
+
+            console.log(`Direct precedent cells of ${range.address}:`);
+
+            // Use the direct precedents API to loop through precedents of the active cell. 
+            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+              // Highlight and console the address of each precedent cell.
+              directPrecedents.areas.items[i].format.fill.color = "Yellow";
+              console.log(`  ${directPrecedents.areas.items[i].address}`);
+            }
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.WorkbookRangeAreas#context:member'
     summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
     isPreview: true
@@ -174,7 +200,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
             - |-
               {
@@ -212,7 +238,7 @@ items:
           - 'excel!Excel.Interfaces.WorkbookRangeAreasData:interface'
         description: ''
   - uid: 'excel!Excel.WorkbookRangeAreas#track:member(1)'
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。`context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間でこのオブジェクトを使用していて、 `.sync` "..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
+    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。 `context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間でこのオブジェクトを使用していて、 `.sync` "..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
     isPreview: true
     name: track()
     fullName: track()
@@ -226,7 +252,7 @@ items:
           - 'excel!Excel.WorkbookRangeAreas:class'
         description: ''
   - uid: 'excel!Excel.WorkbookRangeAreas#untrack:member(1)'
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、の短縮形です。`context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリリリースを有効にするには、を呼び出す必要があり `context.sync()` ます。
+    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、の短縮形です。 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリリリースを有効にするには、を呼び出す必要があり `context.sync()` ます。
     isPreview: true
     name: untrack()
     fullName: untrack()
