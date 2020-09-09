@@ -127,7 +127,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
             - |-
               {
@@ -229,6 +229,28 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          await Excel.run(async (context) => {
+            // Get a chart named "Sales Chart" from the "Sample" worksheet.
+            const sheet = context.workbook.worksheets.getItem("Sample");
+            let chart = sheet.charts.getItem("Sales Chart");
+
+            // Set the value axis title to "Profits".
+            chart.axes.valueAxis.title.text = "Profits";
+
+            /* Set the value axis text orientation to 0.
+              For charts with a y-axis, this makes the label on the y-axis horizontal, 
+              instead of the default look of rotated-vertically.
+              */ 
+            chart.axes.valueAxis.title.textOrientation = 0;
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.ChartAxisTitle#toJSON:member(1)'
     summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の ChartAxisTitle オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.ChartAxisTitleData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
     name: toJSON()
