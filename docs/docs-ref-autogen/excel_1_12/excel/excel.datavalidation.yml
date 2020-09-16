@@ -1,0 +1,436 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.DataValidation:class'
+    summary: |-
+      現在の範囲に適用されるデータの入力規則を表します。 データ検証オブジェクトモデルの詳細については、「 [Excel 範囲へのデータ検証の追加](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-data-validation)」を参照してください。<!-- -->.
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.DataValidation
+    fullName: Excel.DataValidation
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'office!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.DataValidation#clear:member(1)'
+      - 'excel!Excel.DataValidation#context:member'
+      - 'excel!Excel.DataValidation#errorAlert:member'
+      - 'excel!Excel.DataValidation#getInvalidCells:member(1)'
+      - 'excel!Excel.DataValidation#getInvalidCellsOrNullObject:member(1)'
+      - 'excel!Excel.DataValidation#ignoreBlanks:member'
+      - 'excel!Excel.DataValidation#load:member(1)'
+      - 'excel!Excel.DataValidation#load:member(2)'
+      - 'excel!Excel.DataValidation#load:member(3)'
+      - 'excel!Excel.DataValidation#prompt:member'
+      - 'excel!Excel.DataValidation#rule:member'
+      - 'excel!Excel.DataValidation#set:member(1)'
+      - 'excel!Excel.DataValidation#set:member(2)'
+      - 'excel!Excel.DataValidation#toJSON:member(1)'
+      - 'excel!Excel.DataValidation#type:member'
+      - 'excel!Excel.DataValidation#valid:member'
+  - uid: 'excel!Excel.DataValidation#clear:member(1)'
+    summary: |-
+      現在の範囲からデータの入力規則をクリアします。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: 'excel!Excel.DataValidation#context:member'
+    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.DataValidation#errorAlert:member'
+    summary: |-
+      無効なデータが入力された場合のエラー警告。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: errorAlert
+    fullName: errorAlert
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'errorAlert: Excel.DataValidationErrorAlert;'
+      return:
+        type:
+          - 'excel!Excel.DataValidationErrorAlert:interface'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/22-data-validation/data-validation.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const commentsRange = 
+                  sheet.tables.getItem("NameOptionsTable").columns.getItem("Comments").getDataBodyRange();
+
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              commentsRange.dataValidation.clear();   
+
+              // If the value of A2 is contained in the value of C2, then 
+              // SEARCH(A2,C2) returns the number where it begins. Otherwise,
+              // it does not return a number.
+              let redundantStringRule = {
+                  custom: {
+                      formula: "=NOT(ISNUMBER(SEARCH(A2,C2)))"
+                  }
+              };
+              commentsRange.dataValidation.rule = redundantStringRule;
+              commentsRange.dataValidation.errorAlert = {
+                  message: "It is redundant to include the baby name in the comment.",
+                  showAlert: true,
+                  style: "Information",
+                  title: "Baby Name in Comment"
+              };
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.DataValidation#getInvalidCells:member(1)'
+    summary: |-
+      1 つまたは複数の長方形範囲で構成され、無効なセル値を含む RangeAreas を返します。 すべてのセル値が有効な場合、この関数からは ItemNotFound エラーがスローされます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getInvalidCells()
+    fullName: getInvalidCells()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getInvalidCells(): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: ''
+  - uid: 'excel!Excel.DataValidation#getInvalidCellsOrNullObject:member(1)'
+    summary: |-
+      1 つまたは複数の長方形範囲で構成され、無効なセル値を含む RangeAreas を返します。 すべてのセル値が有効な場合、この関数からは null が返されます。
+
+      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getInvalidCellsOrNullObject()
+    fullName: getInvalidCellsOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: ''
+  - uid: 'excel!Excel.DataValidation#ignoreBlanks:member'
+    summary: |-
+      空白セルでデータの入力規則を実行するかどうかを指定します。既定では true に設定されています。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: ignoreBlanks
+    fullName: ignoreBlanks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'ignoreBlanks: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'excel!Excel.DataValidation#load:member(1)'
+    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.DataValidationLoadOptions): Excel.DataValidation;'
+      return:
+        type:
+          - 'excel!Excel.DataValidation:class'
+        description: ''
+      parameters:
+        - id: options
+          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+          type:
+            - 'excel!Excel.Interfaces.DataValidationLoadOptions:interface'
+  - uid: 'excel!Excel.DataValidation#load:member(2)'
+    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.DataValidation;'
+      return:
+        type:
+          - 'excel!Excel.DataValidation:class'
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.DataValidation#load:member(3)'
+    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.DataValidation;
+      return:
+        type:
+          - 'excel!Excel.DataValidation:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          type:
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.DataValidation#prompt:member'
+    summary: |-
+      ユーザーがセルを選択したときにメッセージを表示します。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: prompt
+    fullName: prompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'prompt: Excel.DataValidationPrompt;'
+      return:
+        type:
+          - 'excel!Excel.DataValidationPrompt:interface'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/22-data-validation/data-validation.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const rankingRange = sheet.tables.getItem("NameOptionsTable").columns.getItem("Ranking").getDataBodyRange();
+
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              rankingRange.dataValidation.clear();
+
+              let greaterThanZeroRule = {
+                  wholeNumber: {
+                      formula1: 0,
+                      operator: Excel.DataValidationOperator.greaterThan
+                  }
+              };
+              rankingRange.dataValidation.rule = greaterThanZeroRule;
+
+              rankingRange.dataValidation.prompt = {
+                  message: "Please enter a positive number.",
+                  showPrompt: true,
+                  title: "Positive numbers only."
+              };
+
+              rankingRange.dataValidation.errorAlert = {
+                  message: "Sorry, only positive numbers are allowed",
+                  showAlert: true,
+                  style: "Stop",
+                  title: "Negative Number Entered"
+              };
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.DataValidation#rule:member'
+    summary: |-
+      さまざまな種類のデータ検証条件を含むデータ入力規則。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: rule
+    fullName: rule
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rule: Excel.DataValidationRule;'
+      return:
+        type:
+          - 'excel!Excel.DataValidationRule:interface'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/22-data-validation/data-validation.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const nameRange = 
+                  sheet.tables.getItem("NameOptionsTable").columns.getItem("Baby Name").getDataBodyRange();
+
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              nameRange.dataValidation.clear();
+
+              const nameSourceRange = context.workbook.worksheets.getItem("Names").getRange("A1:A3");
+
+              let approvedListRule = {
+                  list: {
+                      inCellDropDown: true,
+                      source: nameSourceRange
+                  }
+              };
+              nameRange.dataValidation.rule = approvedListRule;
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.DataValidation#set:member(1)'
+    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+    remarks: |-
+      このメソッドには、次の追加のシグネチャがあります。
+
+      `set(properties: Excel.DataValidation): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.DataValidationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+          type:
+            - 'excel!Excel.Interfaces.DataValidationUpdateData:interface'
+        - id: options
+          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+          type:
+            - 'office!OfficeExtension.UpdateOptions:interface'
+  - uid: 'excel!Excel.DataValidation#set:member(2)'
+    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.DataValidation): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'excel!Excel.DataValidation:class'
+  - uid: 'excel!Excel.DataValidation#toJSON:member(1)'
+    summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の DataValidation オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.DataValidationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.DataValidationData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.DataValidationData:interface'
+        description: ''
+  - uid: 'excel!Excel.DataValidation#type:member'
+    summary: |-
+      データの入力規則の種類。詳細については、Excel.DataValidationType を参照してください。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria";'
+      return:
+        type:
+          - 'excel!Excel.DataValidation#type~0:complex'
+  - uid: 'excel!Excel.DataValidation#valid:member'
+    summary: |-
+      すべてのセルの値がデータの入力規則に従っているかどうかを表します。 すべてのセルの値が有効な場合は true、すべてのセルの値が無効な場合は false を返します。 範囲内に有効で無効なセル値がある場合は、null を返します。
+
+      \[[API セット: excelapi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: valid
+    fullName: valid
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly valid: boolean;'
+      return:
+        type:
+          - boolean
+references:
+  - uid: 'office!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.DataValidationErrorAlert:interface'
+    name: Excel.DataValidationErrorAlert
+  - uid: 'excel!Excel.RangeAreas:class'
+    name: Excel.RangeAreas
+  - uid: 'excel!Excel.DataValidation:class'
+    name: Excel.DataValidation
+  - uid: 'excel!Excel.Interfaces.DataValidationLoadOptions:interface'
+    name: Excel.Interfaces.DataValidationLoadOptions
+  - uid: 'excel!Excel.DataValidationPrompt:interface'
+    name: Excel.DataValidationPrompt
+  - uid: 'excel!Excel.DataValidationRule:interface'
+    name: Excel.DataValidationRule
+  - uid: 'excel!Excel.Interfaces.DataValidationUpdateData:interface'
+    name: Interfaces.DataValidationUpdateData
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Interfaces.DataValidationData:interface'
+    name: Excel.Interfaces.DataValidationData
+  - uid: 'excel!Excel.DataValidation#type~0:complex'
+    name: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
+    fullName: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
+    spec.typeScript:
+      - uid: 'excel!Excel.DataValidationType:enum'
+        name: Excel.DataValidationType
+        fullName: Excel.DataValidationType
+      - name: ' | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"'
+        fullName: ' | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"'
