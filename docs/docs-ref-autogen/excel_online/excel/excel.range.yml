@@ -49,6 +49,7 @@ items:
       - 'excel!Excel.Range#getColumnProperties:member(1)'
       - 'excel!Excel.Range#getColumnsAfter:member(1)'
       - 'excel!Excel.Range#getColumnsBefore:member(1)'
+      - 'excel!Excel.Range#getDirectPrecedents:member(1)'
       - 'excel!Excel.Range#getEntireColumn:member(1)'
       - 'excel!Excel.Range#getEntireRow:member(1)'
       - 'excel!Excel.Range#getImage:member(1)'
@@ -68,6 +69,10 @@ items:
       - 'excel!Excel.Range#getSpecialCells:member(2)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(1)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(2)'
+      - 'excel!Excel.Range#getSpillingToRange:member(1)'
+      - 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+      - 'excel!Excel.Range#getSpillParent:member(1)'
+      - 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
       - 'excel!Excel.Range#getSurroundingRegion:member(1)'
       - 'excel!Excel.Range#getTables:member(1)'
       - 'excel!Excel.Range#getUsedRange:member(1)'
@@ -75,6 +80,7 @@ items:
       - 'excel!Excel.Range#getVisibleView:member(1)'
       - 'excel!Excel.Range#group:member(1)'
       - 'excel!Excel.Range#group:member(2)'
+      - 'excel!Excel.Range#hasSpill:member'
       - 'excel!Excel.Range#height:member'
       - 'excel!Excel.Range#hidden:member'
       - 'excel!Excel.Range#hideGroupDetails:member(1)'
@@ -92,12 +98,14 @@ items:
       - 'excel!Excel.Range#merge:member(1)'
       - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
+      - 'excel!Excel.Range#numberFormatCategories:member'
       - 'excel!Excel.Range#numberFormatLocal:member'
       - 'excel!Excel.Range#removeDuplicates:member(1)'
       - 'excel!Excel.Range#replaceAll:member(1)'
       - 'excel!Excel.Range#rowCount:member'
       - 'excel!Excel.Range#rowHidden:member'
       - 'excel!Excel.Range#rowIndex:member'
+      - 'excel!Excel.Range#savedAsArray:member'
       - 'excel!Excel.Range#select:member(1)'
       - 'excel!Excel.Range#set:member(1)'
       - 'excel!Excel.Range#set:member(2)'
@@ -1032,6 +1040,47 @@ items:
           description: 省略可能。結果の範囲に含める列の数です。通常、正の数値を使用して現在の範囲外に範囲を作成します。負の数値を使用して、現在の範囲内に範囲を作成することもできます。既定値は 1 です。
           type:
             - number
+  - uid: 'excel!Excel.Range#getDirectPrecedents:member(1)'
+    summary: |-
+      同じワークシートまたは複数のワークシート内のセルのすべての直接の参照元を含む範囲を表す WorkbookRangeAreas オブジェクトを返します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDirectPrecedents()
+    fullName: getDirectPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDirectPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/direct-precedents.yaml
+          await Excel.run(async (context) => {
+            // Precedents are cells referenced by the formula in a cell.
+            let range = context.workbook.getActiveCell();
+            let directPrecedents = range.getDirectPrecedents();
+            range.load("address");
+            directPrecedents.areas.load("address");
+            await context.sync();
+
+            console.log(`Direct precedent cells of ${range.address}:`);
+
+            // Use the direct precedents API to loop through precedents of the active cell. 
+            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+              // Highlight and console the address of each precedent cell.
+              directPrecedents.areas.items[i].format.fill.color = "Yellow";
+              console.log(`  ${directPrecedents.areas.items[i].address}`);
+            }
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Range#getEntireColumn:member(1)'
     summary: |-
       範囲の列全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4: E11" を表している場合 `getEntireColumn` は、"B: E" という列を表す範囲)。
@@ -1411,7 +1460,7 @@ items:
     summary: |-
       範囲に重なっているピボットテーブルのスコープ設定されたコレクションを取得します。
 
-      \[[API set: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getPivotTables(fullyContained)
     fullName: getPivotTables(fullyContained)
     langs:
@@ -1704,6 +1753,94 @@ items:
           description: CellType が定数または数式の場合は、この引数を使用して、結果に含めるセルの種類を決定します。 これらの値は、組み合わせて複数の型を返すことができます。 この引数を省略すると、すべての定数および数式が対象になります。
           type:
             - '"All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"'
+  - uid: 'excel!Excel.Range#getSpillingToRange:member(1)'
+    summary: |-
+      アンカー セルで呼び出されたとき、スピル範囲を含む範囲オブジェクトを取得します。 複数のセルを含む範囲に適用される場合は失敗します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillingToRange()
+    fullName: getSpillingToRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRange(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>例
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/dynamic-arrays.yaml
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+
+            // Set G4 to a formula that returns a dynamic array.
+            const targetCell = sheet.getRange("G4");
+            targetCell.formulas = [["=A4:D4"]];
+
+            // Get the address of the cells that the dynamic array spilled into.
+            const spillRange = targetCell.getSpillingToRange();
+            spillRange.load("address");
+
+            // Fit the columns for readability.
+            sheet.getUsedRange().format.autofitColumns();
+            await context.sync();
+
+            console.log(`Copying the table headers spilled into ${spillRange.address}.`);
+          });
+          ```
+  - uid: 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+    summary: |-
+      アンカー セルで呼び出されたとき、スピル範囲を含む範囲オブジェクトを取得します。 指定範囲がアンカーセルでない場合、またはスピル範囲が見つからない場合は、null オブジェクトが返されます。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillingToRangeOrNullObject()
+    fullName: getSpillingToRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParent:member(1)'
+    summary: |-
+      スピルするセルのアンカー セルを含む範囲オブジェクトを取得します。 複数のセルを含む範囲に適用される場合は失敗します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillParent()
+    fullName: getSpillParent()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParent(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
+    summary: |-
+      スピルするセルのアンカー セルを含む範囲オブジェクトを取得します。 スピルセルが指定されていない場合、または複数のセルが指定されている場合は、null オブジェクトが返されます。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillParentOrNullObject()
+    fullName: getSpillParentOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParentOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
   - uid: 'excel!Excel.Range#getSurroundingRegion:member(1)'
     summary: |-
       指定された範囲の左上のセルを囲む領域を表す Range オブジェクトを返します。 周囲の領域は、この範囲に相対の空白の行と空白の列の任意の組み合わせで囲まれた範囲です。
@@ -1961,6 +2098,21 @@ items:
           description: 行または列によって範囲をグループ化する方法を指定します。 `InvalidArgument`グループのオプションが範囲のまたはプロパティと異なる場合、エラーがスローされます `isEntireRow` `isEntireColumn` (つまり、true で、 `range.isEntireRow` `groupOption` "bycolumns" または True で、 `range.isEntireColumn` `groupOption` "bycolumns")。
           type:
             - '"ByRows" | "ByColumns"'
+  - uid: 'excel!Excel.Range#hasSpill:member'
+    summary: |-
+      すべてのセルにスピル ボーダーがあるかどうかを表します。 すべてのセルにスピル枠がある場合は true を返し、すべてのセルにスピル境界線がない場合は false を返します。 範囲内の罫線を左右に左右しないセルがある場合は、null を返します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: hasSpill
+    fullName: hasSpill
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly hasSpill: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#height:member'
     summary: |-
       100% ズームの場合の、範囲の上端から範囲の下端までの距離を、ポイント単位で返します。 
@@ -2404,6 +2556,21 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Range#numberFormatCategories:member'
+    summary: |-
+      各セルの数値形式のカテゴリを表します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: numberFormatCategories
+    fullName: numberFormatCategories
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly numberFormatCategories: Excel.NumberFormatCategory[][];'
+      return:
+        type:
+          - 'excel!Excel.Range#numberFormatCategories~0:complex'
   - uid: 'excel!Excel.Range#numberFormatLocal:member'
     summary: |-
       ユーザーの言語設定に基づいて、指定された範囲の Excel の数値書式コードを表します。 Excel では、プロパティを取得または設定するときに、言語や書式の強制変換は実行されません `numberFormatLocal` 。 返されるテキストには、システム設定で指定された言語に基づいてローカルに書式設定された文字列が使用されます。
@@ -2536,6 +2703,21 @@ items:
       return:
         type:
           - number
+  - uid: 'excel!Excel.Range#savedAsArray:member'
+    summary: |-
+      すべてのセルが配列数式として保存されるかどうかを表します。 すべてのセルが配列数式として保存される場合は true を返し、すべてのセルが配列数式として保存されない場合は false を返します。 一部のセルが配列数式として保存される場合は null を返し、それ以外の場合は null を返します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: savedAsArray
+    fullName: savedAsArray
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly savedAsArray: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#select:member(1)'
     summary: |-
       Excel UI で指定した範囲を選択します。
@@ -3307,6 +3489,8 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.ColumnPropertiesLoadOptions:interface'
     name: ColumnPropertiesLoadOptions
+  - uid: 'excel!Excel.WorkbookRangeAreas:class'
+    name: Excel.WorkbookRangeAreas
   - uid: 'excel!Excel.Range#getImage~0:complex'
     name: OfficeExtension.ClientResult<string>
     fullName: OfficeExtension.ClientResult<string>
@@ -3388,6 +3572,15 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.Range#numberFormatCategories~0:complex'
+    name: 'Excel.NumberFormatCategory[][]'
+    fullName: 'Excel.NumberFormatCategory[][]'
+    spec.typeScript:
+      - uid: 'excel!Excel.NumberFormatCategory:enum'
+        name: Excel.NumberFormatCategory
+        fullName: Excel.NumberFormatCategory
+      - name: '[][]'
+        fullName: '[][]'
   - uid: 'excel!Excel.RemoveDuplicatesResult:class'
     name: Excel.RemoveDuplicatesResult
   - uid: 'excel!Excel.Range#replaceAll~0:complex'
