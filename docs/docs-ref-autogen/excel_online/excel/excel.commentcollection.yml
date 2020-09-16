@@ -26,6 +26,9 @@ items:
       - 'excel!Excel.CommentCollection#load:member(1)'
       - 'excel!Excel.CommentCollection#load:member(2)'
       - 'excel!Excel.CommentCollection#load:member(3)'
+      - 'excel!Excel.CommentCollection#onAdded:member'
+      - 'excel!Excel.CommentCollection#onChanged:member'
+      - 'excel!Excel.CommentCollection#onDeleted:member'
       - 'excel!Excel.CommentCollection#toJSON:member(1)'
   - uid: 'excel!Excel.CommentCollection#add:member(1)'
     summary: |-
@@ -67,7 +70,7 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
+          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。 `ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
@@ -96,7 +99,7 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~3:complex'
         - id: contentTypeString
-          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。`ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
+          description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。 `ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
           type:
             - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentCollection#context:member'
@@ -274,9 +277,54 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
+  - uid: 'excel!Excel.CommentCollection#onAdded:member'
+    summary: |-
+      コメントが追加されるときに発生します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.CommentAddedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.CommentCollection#onAdded~0:complex'
+  - uid: 'excel!Excel.CommentCollection#onChanged:member'
+    summary: |-
+      返信が削除されたときを含め、コメントのコレクション内のコメントまたは返信が変更されたときに発生します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.CommentChangedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.CommentCollection#onChanged~0:complex'
+  - uid: 'excel!Excel.CommentCollection#onDeleted:member'
+    summary: |-
+      コメントのコレクションでコメントが削除されると発生します。
+
+      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.CommentDeletedEventArgs>;'
+      return:
+        type:
+          - 'excel!Excel.CommentCollection#onDeleted~0:complex'
   - uid: 'excel!Excel.CommentCollection#toJSON:member(1)'
     summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Excel.CommentCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.CommentCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
     name: toJSON()
@@ -378,5 +426,47 @@ references:
         fullName: Excel.Interfaces.CollectionLoadOptions
   - uid: 'office!OfficeExtension.LoadOption:interface'
     name: OfficeExtension.LoadOption
+  - uid: 'excel!Excel.CommentCollection#onAdded~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.CommentAddedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.CommentAddedEventArgs>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.CommentAddedEventArgs:interface'
+        name: Excel.CommentAddedEventArgs
+        fullName: Excel.CommentAddedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.CommentCollection#onChanged~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.CommentChangedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.CommentChangedEventArgs>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.CommentChangedEventArgs:interface'
+        name: Excel.CommentChangedEventArgs
+        fullName: Excel.CommentChangedEventArgs
+      - name: '>'
+        fullName: '>'
+  - uid: 'excel!Excel.CommentCollection#onDeleted~0:complex'
+    name: OfficeExtension.EventHandlers<Excel.CommentDeletedEventArgs>
+    fullName: OfficeExtension.EventHandlers<Excel.CommentDeletedEventArgs>
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.EventHandlers:class'
+        name: OfficeExtension.EventHandlers
+        fullName: OfficeExtension.EventHandlers
+      - name: <
+        fullName: <
+      - uid: 'excel!Excel.CommentDeletedEventArgs:interface'
+        name: Excel.CommentDeletedEventArgs
+        fullName: Excel.CommentDeletedEventArgs
+      - name: '>'
+        fullName: '>'
   - uid: 'excel!Excel.Interfaces.CommentCollectionData:interface'
     name: Excel.Interfaces.CommentCollectionData

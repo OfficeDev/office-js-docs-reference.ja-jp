@@ -9,13 +9,35 @@ items:
     type: interface
     package: office!
     children:
+      - 'office!Office.Auth#getAccessToken:member(1)'
       - 'office!Office.Auth#getAccessTokenAsync:member(1)'
       - 'office!Office.Auth#getAccessTokenAsync:member(2)'
-  - uid: 'office!Office.Auth#getAccessTokenAsync:member(1)'
-    summary: |-
-      Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.
+  - uid: 'office!Office.Auth#getAccessToken:member(1)'
+    summary: 'Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->. この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Office ユーザーは、組織のアカウントと Microsoft アカウントを使用してサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。'
+    remarks: |-
+      **ホスト**: Excel、OneNote、Outlook、PowerPoint、Word
 
       **重要**: Outlook では、アドインが Outlook.com または Gmail メールボックスに読み込まれている場合、この API はサポートされていません。
+
+      **要件セット**: 「id」 [api](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+    name: getAccessToken(options)
+    fullName: getAccessToken(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAccessToken(options?: AuthOptions): Promise<string>;'
+      return:
+        type:
+          - 'office!Office.Auth#getAccessToken~0:complex'
+        description: アクセストークンへの約束。
+      parameters:
+        - id: options
+          description: 省略可能。 `AuthOptions`サインオン動作を定義するオブジェクトを受け入れます。
+          type:
+            - 'office!Office.AuthOptions:interface'
+  - uid: 'office!Office.Auth#getAccessTokenAsync:member(1)'
+    summary: 'Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.'
     remarks: |-
       **ホスト**: Excel、OneNote、Outlook、PowerPoint、Word
 
@@ -35,6 +57,11 @@ items:
           }
       });
       ```
+    deprecated:
+      content: |-
+        Use Office.auth.getAccessToken instead.
+
+        \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
     name: 'getAccessTokenAsync(options, callback)'
     fullName: 'getAccessTokenAsync(options, callback)'
     langs:
@@ -56,16 +83,18 @@ items:
           type:
             - 'office!Office.Auth#getAccessTokenAsync~0:complex'
   - uid: 'office!Office.Auth#getAccessTokenAsync:member(2)'
-    summary: |-
-      Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.
-
-      **重要**: Outlook では、アドインが Outlook.com または Gmail メールボックスに読み込まれている場合、この API はサポートされていません。
+    summary: 'Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.'
     remarks: |-
       **ホスト**: Excel、OneNote、Outlook、PowerPoint、Word
 
       **要件セット**: 「id」 [api](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
       この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Office ユーザーは、組織のアカウントと Microsoft アカウントを使用してサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
+    deprecated:
+      content: |-
+        Use `Office.auth.getAccessToken` instead.
+
+        \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
     name: getAccessTokenAsync(callback)
     fullName: getAccessTokenAsync(callback)
     langs:
@@ -83,6 +112,15 @@ items:
           type:
             - 'office!Office.Auth#getAccessTokenAsync~1:complex'
 references:
+  - uid: 'office!Office.Auth#getAccessToken~0:complex'
+    name: Promise<string>
+    fullName: Promise<string>
+    spec.typeScript:
+      - uid: '!Promise:interface'
+        name: Promise
+        fullName: Promise
+      - name: <string>
+        fullName: <string>
   - uid: 'office!Office.AuthOptions:interface'
     name: AuthOptions
   - uid: 'office!Office.Auth#getAccessTokenAsync~0:complex'
