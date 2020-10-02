@@ -10,7 +10,7 @@ items:
 
       - [ItemCompose 作成](xref:outlook!Office.ItemCompose:interface)
 
-      - [Message](xref:outlook!Office.Message:interface)
+      - [メッセージ](xref:outlook!Office.Message:interface)
     name: Office.MessageCompose
     fullName: Office.MessageCompose
     langs:
@@ -1280,6 +1280,14 @@ items:
     summary: |-
       共有フォルダー、予定表、またはメールボックス内の予定またはメッセージのプロパティを取得します。
 
+      **重要**: メッセージ作成モードでは、次の条件が満たされない限り、この API は web 上の Outlook ではサポートされていません。
+
+      1. 所有者は、代理人と共に少なくとも1つのメールボックスフォルダーを共有します。
+
+      2. 代理人は、共有フォルダー内のメッセージを下書きします。
+
+      送信されたメッセージは、通常は代理人の [ **送信済みアイテム** ] フォルダーにあります。
+
       この API の使用に関する詳細については、「 [代理人アクセス](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) 」の記事を参照してください。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
@@ -1310,7 +1318,7 @@ items:
               let sharedProperties = result2.value;
               let delegatePermissions = sharedProperties.delegatePermissions;
 
-              // Determine if user can do the expected operation, e.g., do they have Write permission?
+              // Determine if user has the appropriate permission to do the operation.
               if ((delegatePermissions & Office.MailboxEnums.DelegatePermissions.Read) != 0) {
                 var ewsId = Office.context.mailbox.item.itemId;
                 var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
@@ -1358,6 +1366,14 @@ items:
     summary: |-
       共有フォルダー、予定表、またはメールボックス内の予定またはメッセージのプロパティを取得します。
 
+      **重要**: メッセージ作成モードでは、次の条件が満たされない限り、この API は web 上の Outlook ではサポートされていません。
+
+      1. 所有者は、代理人と共に少なくとも1つのメールボックスフォルダーを共有します。
+
+      2. 代理人は、共有フォルダー内のメッセージを下書きします。
+
+      送信されたメッセージは、通常は代理人の [ **送信済みアイテム** ] フォルダーにあります。
+
       この API の使用に関する詳細については、「 [代理人アクセス](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) 」の記事を参照してください。
 
       **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
@@ -1373,7 +1389,7 @@ items:
       ```javascript
       // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/65-delegates-and-shared-folders/get-shared-properties.yaml
       if (!Office.context.mailbox.item.getSharedPropertiesAsync) {
-        console.error("Try this sample on a message from a shared folder.");
+        console.error("Try this sample on an item from a shared folder.");
         return;
       }
 
