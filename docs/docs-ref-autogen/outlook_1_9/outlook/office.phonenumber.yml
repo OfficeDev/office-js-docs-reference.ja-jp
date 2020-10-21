@@ -1,0 +1,71 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'outlook!Office.PhoneNumber:interface'
+    summary: |-
+      アイテム内の識別される電話番号を表します。 閲覧モードのみ。
+
+      `PhoneNumber`電子メールメッセージに含まれている電話番号を含むオブジェクトの配列は、 `phoneNumbers` 選択した `Entities` アイテムのメソッドを呼び出したときに返されるオブジェクトのプロパティで返され `getEntities` ます。
+    remarks: |-
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 読み取り
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      var item = Office.context.mailbox.item;
+      // Get an array of strings that represent phone numbers in the current item's body.
+      var phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);
+      console.log("There are " + phoneNumbers.length + " phone numbers.")
+      phoneNumbers.forEach(function (phoneNumber) {
+          console.log("Phone number: " + JSON.stringify(phoneNumber.phoneString));
+          console.log("Type: " + JSON.stringify(phoneNumber.type));
+          console.log("Source text: " + JSON.stringify(phoneNumber.originalPhoneString));
+      });
+      ```
+    name: Office.PhoneNumber
+    fullName: Office.PhoneNumber
+    langs:
+      - typeScript
+    type: interface
+    package: outlook!
+    children:
+      - 'outlook!Office.PhoneNumber#originalPhoneString:member'
+      - 'outlook!Office.PhoneNumber#phoneString:member'
+      - 'outlook!Office.PhoneNumber#type:member'
+  - uid: 'outlook!Office.PhoneNumber#originalPhoneString:member'
+    summary: アイテム内の電話番号として識別されたテキストを取得します。
+    name: originalPhoneString
+    fullName: originalPhoneString
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'originalPhoneString: string;'
+      return:
+        type:
+          - string
+  - uid: 'outlook!Office.PhoneNumber#phoneString:member'
+    summary: 電話番号が含まれている文字列を取得します。この文字列は、電話番号の数字のみを含みます。元のアイテムにかっこやハイフンなどの文字が含まれている場合でも、この文字列にはそれらの文字は含まれません。
+    name: phoneString
+    fullName: phoneString
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'phoneString: string;'
+      return:
+        type:
+          - string
+  - uid: 'outlook!Office.PhoneNumber#type:member'
+    summary: 電話番号の種類を識別する文字列を取得します。自宅、勤務先、モバイル、未確定。
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: string;'
+      return:
+        type:
+          - string
