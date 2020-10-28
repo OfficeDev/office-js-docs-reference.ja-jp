@@ -6,9 +6,9 @@ items:
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
 
       **示し**
 
@@ -21,13 +21,11 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.Recurrence#getAsync:member(1)'
-      - 'outlook!Office.Recurrence#getAsync:member(2)'
       - 'outlook!Office.Recurrence#recurrenceProperties:member'
       - 'outlook!Office.Recurrence#recurrenceTimeZone:member'
       - 'outlook!Office.Recurrence#recurrenceType:member'
       - 'outlook!Office.Recurrence#seriesTime:member'
       - 'outlook!Office.Recurrence#setAsync:member(1)'
-      - 'outlook!Office.Recurrence#setAsync:member(2)'
   - uid: 'outlook!Office.Recurrence#getAsync:member(1)'
     summary: |-
       定期的な予定の現在の繰り返しオブジェクトを返します。
@@ -36,9 +34,27 @@ items:
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/50-recurrence/get-set-recurrence-appointment-organizer.yaml
+      Office.context.mailbox.item.recurrence.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var recurrence = asyncResult.value;
+          if (recurrence === null) {
+            console.log("This is a single appointment.");
+          } else {
+            console.log(`Recurrence pattern: ${JSON.stringify(recurrence)}`);
+          }
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
     name: 'getAsync(options, callback)'
     fullName: 'getAsync(options, callback)'
     langs:
@@ -59,60 +75,15 @@ items:
           description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 `value`Result のプロパティは `Recurrence` オブジェクトです。
           type:
             - 'outlook!Office.Recurrence#getAsync~0:complex'
-  - uid: 'outlook!Office.Recurrence#getAsync:member(2)'
-    summary: |-
-      定期的な予定の現在の繰り返しオブジェクトを返します。
-
-      このメソッドは `Recurrence` 、定期的な予定のオブジェクト全体を返します。
-
-      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/50-recurrence/get-set-recurrence-appointment-organizer.yaml
-      Office.context.mailbox.item.recurrence.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var recurrence = asyncResult.value;
-          if (recurrence === null) {
-            console.log("This is a single appointment.");
-          } else {
-            console.log(`Recurrence pattern: ${JSON.stringify(recurrence)}`);
-          }
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: getAsync(callback)
-    fullName: getAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(callback?: (asyncResult: Office.AsyncResult<Recurrence>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 `value`Result のプロパティは `Recurrence` オブジェクトです。
-          type:
-            - 'outlook!Office.Recurrence#getAsync~1:complex'
   - uid: 'outlook!Office.Recurrence#recurrenceProperties:member'
     summary: |-
       一連の定期的な予定のプロパティを取得または設定します。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
     name: recurrenceProperties
     fullName: recurrenceProperties
     langs:
@@ -129,9 +100,9 @@ items:
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
     name: recurrenceTimeZone
     fullName: recurrenceTimeZone
     langs:
@@ -148,9 +119,9 @@ items:
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
     name: recurrenceType
     fullName: recurrenceType
     langs:
@@ -167,9 +138,9 @@ items:
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成または読み取り
     name: seriesTime
     fullName: seriesTime
     langs:
@@ -184,54 +155,15 @@ items:
     summary: |-
       予定の定期的なパターンを設定します。
 
-      **注**: `setAsync` 系列アイテムに対してのみ使用可能で、インスタンスアイテムは使用できません。
+      **注** : `setAsync` 系列アイテムに対してのみ使用可能で、インスタンスアイテムは使用できません。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 新規作成
 
-      **エラー**:
-
-      - `InvalidEndTime`<!-- -->: 予定の終了時刻が開始時刻より前になっています。
-    name: 'setAsync(recurrencePattern, options, callback)'
-    fullName: 'setAsync(recurrencePattern, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setAsync(recurrencePattern: Recurrence, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: recurrencePattern
-          description: 定期的なオブジェクト。
-          type:
-            - 'outlook!Office.Recurrence:interface'
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
-          type:
-            - 'outlook!Office.Recurrence#setAsync~0:complex'
-  - uid: 'outlook!Office.Recurrence#setAsync:member(2)'
-    summary: |-
-      予定の定期的なパターンを設定します。
-
-      **注**: `setAsync` 系列アイテムに対してのみ使用可能で、インスタンスアイテムは使用できません。
-
-      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成
-
-      **エラー**:
+      **エラー** :
 
       - `InvalidEndTime`<!-- -->: 予定の終了時刻が開始時刻より前になっています。
 
@@ -275,13 +207,13 @@ items:
         console.log(`Succeeded in setting recurrence pattern ${JSON.stringify(pattern)}`);
       });
       ```
-    name: 'setAsync(recurrencePattern, callback)'
-    fullName: 'setAsync(recurrencePattern, callback)'
+    name: 'setAsync(recurrencePattern, options, callback)'
+    fullName: 'setAsync(recurrencePattern, options, callback)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'setAsync(recurrencePattern: Recurrence, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'setAsync(recurrencePattern: Recurrence, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
@@ -291,30 +223,18 @@ items:
           description: 定期的なオブジェクト。
           type:
             - 'outlook!Office.Recurrence:interface'
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
         - id: callback
           description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
-            - 'outlook!Office.Recurrence#setAsync~1:complex'
+            - 'outlook!Office.Recurrence#setAsync~0:complex'
 references:
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.Recurrence#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<Recurrence>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.Recurrence>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.Recurrence:interface'
-        name: Recurrence
-        fullName: Office.Recurrence
-      - name: '>) => void'
-        fullName: '>) => void'
-  - uid: 'outlook!Office.Recurrence#getAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<Recurrence>) => void'
     fullName: '(asyncResult: Office.AsyncResult<Office.Recurrence>) => void'
     spec.typeScript:
@@ -348,17 +268,6 @@ references:
   - uid: 'outlook!Office.Recurrence:interface'
     name: Recurrence
   - uid: 'outlook!Office.Recurrence#setAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Recurrence#setAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:

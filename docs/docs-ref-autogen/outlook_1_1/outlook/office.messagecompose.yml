@@ -4,7 +4,7 @@ items:
     summary: |-
       メッセージ作成モードの [Office. mailbox。](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) 」ページを参照してください。
+      **重要** : これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) 」ページを参照してください。
 
       親インターフェイス:
 
@@ -22,9 +22,7 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)'
       - 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)'
       - 'outlook!Office.MessageCompose#bcc:member'
       - 'outlook!Office.MessageCompose#body:member'
       - 'outlook!Office.MessageCompose#cc:member'
@@ -32,7 +30,6 @@ items:
       - 'outlook!Office.MessageCompose#itemType:member'
       - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)'
       - 'outlook!Office.MessageCompose#removeAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#removeAttachmentAsync:member(2)'
       - 'outlook!Office.MessageCompose#subject:member'
       - 'outlook!Office.MessageCompose#to:member'
   - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)'
@@ -43,15 +40,15 @@ items:
 
       その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
-      **重要**: Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーを誤って追加するバグが導入されて `Authorization: Bearer` います (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、 `addFileAttachmentFromBase64` 要件セット1.8 で導入された API の使用を試みることができます。
+      **重要** : Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーを誤って追加するバグが導入されて `Authorization: Bearer` います (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、 `addFileAttachmentFromBase64` 要件セット1.8 で導入された API の使用を試みることができます。
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      **エラー**:
+      **エラー** :
 
       - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
 
@@ -128,60 +125,13 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: True の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: True の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~1:complex'
-  - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)'
-    summary: |-
-      ファイルを添付ファイルとしてメッセージまたは予定に追加します。
-
-      `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
-
-      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
-
-      **重要**: Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーを誤って追加するバグが導入されて `Authorization: Bearer` います (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、 `addFileAttachmentFromBase64` 要件セット1.8 で導入された API の使用を試みることができます。
-
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
-
-      **エラー**:
-
-      - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
-
-      - `FileTypeNotSupported`<!-- -->: 添付ファイルの拡張子が許可されていません。
-
-      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
-    name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
-    fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: uri
-          description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
-          type:
-            - string
-        - id: attachmentName
-          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-          type:
-            - string
-        - id: callback
-          description: 省略可能です。 メソッドが完了すると、callback パラメーターで渡された関数が、1つのパラメーター型 (type) によって呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
     summary: |-
       メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
@@ -194,11 +144,11 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      **エラー**:
+      **エラー** :
 
       - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
 
@@ -255,56 +205,13 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
           type:
             - 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)'
-    summary: |-
-      メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
-
-      メソッドは、 `addItemAttachmentAsync` 指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->には、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
-
-      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
-
-      Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
-
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
-
-      **エラー**:
-
-      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
-    name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
-    fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: itemId
-          description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
-          type:
-            - any
-        - id: attachmentName
-          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-          type:
-            - string
-        - id: callback
-          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#bcc:member'
     summary: |-
       メッセージの **Bcc** (ブラインドカーボンコピー) 行の受信者を取得または更新するメソッドを提供するオブジェクトを取得します。
@@ -313,9 +220,9 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -372,9 +279,9 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -410,9 +317,9 @@ items:
 
       `cc` プロパティは、メッセージの **Cc** 行にある受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -471,9 +378,9 @@ items:
 
       新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。ユーザーが件名を設定し、アイテムを保存する場合、`conversationId` プロパティは値を返します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -497,9 +404,9 @@ items:
 
       プロパティは、 `itemType` 列挙値の1つを返し `ItemType` ます。これは、アイテムのオブジェクトインスタンスがメッセージと予定のどちらであるかを示します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -525,9 +432,9 @@ items:
 
       カスタムプロパティは、asyncResult. value プロパティのオブジェクトとして提供され `CustomProperties` ます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -595,7 +502,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
+          description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
           type:
             - any
   - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(1)'
@@ -606,11 +513,11 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      **エラー**:
+      **エラー** :
 
       - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
 
@@ -659,48 +566,13 @@ items:
           type:
             - string
         - id: options
-          description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
+          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
           type:
             - 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(2)'
-    summary: |-
-      メッセージまたは予定から添付ファイルを削除します。
-
-      `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
-
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadWriteItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
-
-      **エラー**:
-
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
-    name: 'removeAttachmentAsync(attachmentId, callback)'
-    fullName: 'removeAttachmentAsync(attachmentId, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: attachmentId
-          description: 削除する添付ファイルの識別子。
-          type:
-            - string
-        - id: callback
-          description: 省略可能です。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#subject:member'
     summary: |-
       アイテムの件名フィールドに示される説明を取得または設定します。
@@ -709,9 +581,9 @@ items:
 
       `subject` プロパティは件名を取得および設定するためのメソッドを提供する `Subject` オブジェクトを返します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -752,9 +624,9 @@ items:
 
       `to` プロパティは、メッセージの **To** 行の受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: メッセージの作成
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
       #### <a name="examples"></a>例
 
@@ -830,31 +702,9 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
-  - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync~2:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<string>) => void'
     fullName: '(asyncResult: Office.AsyncResult<string>) => void'
     spec.typeScript:
@@ -895,17 +745,6 @@ references:
       - name: '>) => void'
         fullName: '>) => void'
   - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
