@@ -4,7 +4,7 @@ items:
     summary: |-
       予定の出席者モードの [Office. メールボックス](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item) 」ページを参照してください。
+      **重要** : これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item) 」ページを参照してください。
 
       親インターフェイス:
 
@@ -22,7 +22,6 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.AppointmentRead#addHandlerAsync:member(1)'
-      - 'outlook!Office.AppointmentRead#addHandlerAsync:member(2)'
       - 'outlook!Office.AppointmentRead#attachments:member'
       - 'outlook!Office.AppointmentRead#body:member'
       - 'outlook!Office.AppointmentRead#categories:member'
@@ -35,12 +34,10 @@ items:
       - 'outlook!Office.AppointmentRead#end:member'
       - 'outlook!Office.AppointmentRead#enhancedLocation:member'
       - 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(1)'
-      - 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(2)'
       - 'outlook!Office.AppointmentRead#getEntities:member(1)'
       - 'outlook!Office.AppointmentRead#getEntitiesByType:member(1)'
       - 'outlook!Office.AppointmentRead#getFilteredEntitiesByName:member(1)'
       - 'outlook!Office.AppointmentRead#getInitializationContextAsync:member(1)'
-      - 'outlook!Office.AppointmentRead#getInitializationContextAsync:member(2)'
       - 'outlook!Office.AppointmentRead#getRegExMatches:member(1)'
       - 'outlook!Office.AppointmentRead#getRegExMatchesByName:member(1)'
       - 'outlook!Office.AppointmentRead#getSelectedEntities:member(1)'
@@ -59,7 +56,6 @@ items:
       - 'outlook!Office.AppointmentRead#organizer:member'
       - 'outlook!Office.AppointmentRead#recurrence:member'
       - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(1)'
-      - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.AppointmentRead#requiredAttendees:member'
       - 'outlook!Office.AppointmentRead#sensitivity:member'
       - 'outlook!Office.AppointmentRead#seriesId:member'
@@ -67,15 +63,29 @@ items:
       - 'outlook!Office.AppointmentRead#subject:member'
   - uid: 'outlook!Office.AppointmentRead#addHandlerAsync:member(1)'
     summary: |-
-      サポートされているイベントのイベント ハンドラーを追加します。 **注**: イベントは作業ウィンドウでのみ使用できます。
+      サポートされているイベントのイベント ハンドラーを追加します。 **注** : イベントは作業ウィンドウでのみ使用できます。
 
       サポートされているイベントについては、「Item object model [events」セクション](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) を参照してください。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
+
+      #### <a name="examples"></a>例
+
+      ```javascript
+      function myHandlerFunction(eventarg) {
+          if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
+              var attachment = eventarg.attachmentDetails;
+              console.log("Event Fired and Attachment Added!");
+              getAttachmentContentAsync(attachment.id, options, callback);
+          }
+      }
+
+      Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
+      ```
     name: 'addHandlerAsync(eventType, handler, options, callback)'
     fullName: 'addHandlerAsync(eventType, handler, options, callback)'
     langs:
@@ -104,63 +114,14 @@ items:
           description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.AppointmentRead#addHandlerAsync~1:complex'
-  - uid: 'outlook!Office.AppointmentRead#addHandlerAsync:member(2)'
-    summary: |-
-      サポートされているイベントのイベント ハンドラーを追加します。 **注**: イベントは作業ウィンドウでのみ使用できます。
-
-      サポートされているイベントについては、「Item object model [events」セクション](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) を参照してください。
-
-      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      function myHandlerFunction(eventarg) {
-          if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
-              var attachment = eventarg.attachmentDetails;
-              console.log("Event Fired and Attachment Added!");
-              getAttachmentContentAsync(attachment.id, options, callback);
-          }
-      }
-
-      Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
-      ```
-    name: 'addHandlerAsync(eventType, handler, callback)'
-    fullName: 'addHandlerAsync(eventType, handler, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: ハンドラーを呼び出す必要のあるイベント。
-          type:
-            - 'outlook!Office.AppointmentRead#addHandlerAsync~2:complex'
-        - id: handler
-          description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、に渡されるパラメーターと一致します。 `eventType``addHandlerAsync`<!-- -->.
-          type:
-            - any
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
-          type:
-            - 'outlook!Office.AppointmentRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.AppointmentRead#attachments:member'
     summary: アイテムの添付ファイルを配列として取得します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
-      **注**: セキュリティ上の問題が発生する可能性があるため、特定の種類のファイルが Outlook によってブロックされているため、返されません。 詳細については、「 [Outlook のブロック](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)された添付ファイル」を参照してください。<!-- -->.
+      **注** : セキュリティ上の問題が発生する可能性があるため、特定の種類のファイルが Outlook によってブロックされているため、返されません。 詳細については、「 [Outlook のブロック](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)された添付ファイル」を参照してください。<!-- -->.
 
       #### <a name="examples"></a>例
 
@@ -205,9 +166,9 @@ items:
 
       \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -243,9 +204,9 @@ items:
 
       \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -327,9 +288,9 @@ items:
   - uid: 'outlook!Office.AppointmentRead#dateTimeCreated:member'
     summary: アイテムが作成された日時を取得します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -351,11 +312,11 @@ items:
     summary: |-
       アイテムが最後に変更された日時を取得します。
 
-      **注**: このメンバーは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメンバーは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -383,11 +344,11 @@ items:
 
       パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -486,13 +447,13 @@ items:
 
       パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -538,11 +499,11 @@ items:
 
       パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -657,13 +618,13 @@ items:
 
       パラメーターに添付ファイルが指定されている場合 `formData.attachments` 、Outlook はすべての添付ファイルをダウンロードしようとして、返信フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -724,9 +685,9 @@ items:
 
       `Time.setAsync` メソッドを使用して終了時刻を設定する場合、`convertToUtcClientTime` メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -752,9 +713,9 @@ items:
 
       \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -796,11 +757,11 @@ items:
 
       \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
-      **エラー**:
+      **エラー** :
 
       - `AttachmentTypeNotSupported`<!-- -->: 添付ファイルの種類はサポートされていません。 サポートされていない型には、リッチテキスト形式の埋め込み画像、または電子メールや予定表アイテム (連絡先やタスクアイテムなど) 以外のアイテムの添付ファイルタイプがあります。
 
@@ -870,52 +831,15 @@ items:
           description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
           type:
             - 'outlook!Office.AppointmentRead#getAttachmentContentAsync~0:complex'
-  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(2)'
-    summary: |-
-      メッセージまたは予定から添付ファイルを取得し、それをオブジェクトとして返し `AttachmentContent` ます。
-
-      メソッドは、 `getAttachmentContentAsync` 指定された id の添付ファイルをアイテムから取得します。 ベストプラクティスとして、識別子を使用して、またはの呼び出しで attachmentIds を取得したのと同じセッションの添付ファイルを取得する必要があり `getAttachmentsAsync` `item.attachments` ます。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
-
-      \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
-
-      **エラー**:
-
-      - `AttachmentTypeNotSupported`<!-- -->: 添付ファイルの種類はサポートされていません。 サポートされていない型には、リッチテキスト形式の埋め込み画像、または電子メールや予定表アイテム (連絡先やタスクアイテムなど) 以外のアイテムの添付ファイルタイプがあります。
-
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
-    name: 'getAttachmentContentAsync(attachmentId, callback)'
-    fullName: 'getAttachmentContentAsync(attachmentId, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: attachmentId
-          description: 取得する添付ファイルの識別子を指定します。
-          type:
-            - string
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 呼び出しが失敗した場合、 `asyncResult.error` プロパティにはエラーの理由と共にエラーコードが含まれます。
-          type:
-            - 'outlook!Office.AppointmentRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentRead#getEntities:member(1)'
     summary: |-
       選択したアイテムの本文にあるエンティティを取得します。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -978,11 +902,11 @@ items:
     summary: |-
       選択したアイテムの本文内で検出された指定のエンティティ型のすべてのエンティティを含む配列を取得します。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`Restricted`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`Restricted`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1017,11 +941,11 @@ items:
 
       この `getFilteredEntitiesByName` メソッドは、 `ItemHasKnownEntity` 指定された要素値を持つマニフェスト XML ファイルの rule 要素で定義されている正規表現に一致するエンティティを返し `FilterName` ます。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1050,45 +974,13 @@ items:
     summary: |-
       [アクション可能なメッセージによってアドインがアクティブ化](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)されたときに渡される初期化データを取得します。<!-- -->.
 
-      **注**: このメソッドは、outlook 2016 以降 (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の Outlook for Office 365 でのみサポートされています。
+      **注** : このメソッドは、outlook 2016 以降 (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の Outlook for Office 365 でのみサポートされています。
 
       \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
-    isPreview: true
-    name: 'getInitializationContextAsync(options, callback)'
-    fullName: 'getInitializationContextAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。 `GenericResponseError`<!-- -->.
-          type:
-            - 'outlook!Office.AppointmentRead#getInitializationContextAsync~0:complex'
-  - uid: 'outlook!Office.AppointmentRead#getInitializationContextAsync:member(2)'
-    summary: |-
-      [アクション可能なメッセージによってアドインがアクティブ化](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)されたときに渡される初期化データを取得します。<!-- -->.
-
-      **注**: このメソッドは、outlook 2016 以降 (16.0.8413.1000 より大きいクイック実行バージョン) と web 上の Outlook for Office 365 でのみサポートされています。
-
-      \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1116,22 +1008,26 @@ items:
       );
       ```
     isPreview: true
-    name: getInitializationContextAsync(callback)
-    fullName: getInitializationContextAsync(callback)
+    name: 'getInitializationContextAsync(options, callback)'
+    fullName: 'getInitializationContextAsync(options, callback)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'getInitializationContextAsync(callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
       return:
         type:
           - void
         description: ''
       parameters:
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。 `GenericResponseError`<!-- -->.
+        - id: options
+          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
           type:
-            - 'outlook!Office.AppointmentRead#getInitializationContextAsync~1:complex'
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。 成功すると、初期化データが `asyncResult.value` 文字列としてプロパティに提供されます。 初期化コンテキストがない場合、オブジェクトには、 `asyncResult` `Error` その `code` プロパティが9020に設定され、その `name` プロパティがに設定されたオブジェクトが含まれます。 `GenericResponseError`<!-- -->.
+          type:
+            - 'outlook!Office.AppointmentRead#getInitializationContextAsync~0:complex'
   - uid: 'outlook!Office.AppointmentRead#getRegExMatches:member(1)'
     summary: |-
       選択したアイテム内の、マニフェスト XML ファイルで定義された正規表現に一致する文字列の値を返します。
@@ -1140,11 +1036,11 @@ items:
 
       アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 この場合、代わりに `Body.getAsync` メソッドを使用して本文全体を取得します。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1195,11 +1091,11 @@ items:
 
       アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1247,13 +1143,13 @@ items:
     summary: |-
       強調表示された一致内で見つかったユーザーが選択しているエンティティを取得します。 強調表示された一致は、コンテキスト アドインに適用されます。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1320,13 +1216,13 @@ items:
 
       アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 . * などの正規表現を使用してアイテムの本文全体を取得しても、期待する結果が返されない場合があります。 代わりに、メソッドを使用し `Body.getAsync` て本文全体を取得します。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1380,13 +1276,13 @@ items:
 
       この API の使用に関する詳細については、「 [代理人アクセス](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) 」の記事を参照してください。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1458,13 +1354,13 @@ items:
 
       この API の使用に関する詳細については、「 [代理人アクセス](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) 」の記事を参照してください。
 
-      **注**: このメソッドは、iOS または Android の Outlook ではサポートされていません。
+      **注** : このメソッドは、iOS または Android の Outlook ではサポートされていません。
 
       \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1501,9 +1397,9 @@ items:
 
       \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1528,9 +1424,9 @@ items:
 
       既定のメッセージクラスを拡張するカスタムメッセージクラス (たとえば、カスタム予定表メッセージクラスなど) を作成できます。 `IPM.Appointment.Contoso`<!-- -->.
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       `itemClass` プロパティには、選択したアイテムのメッセージ クラスを指定します。次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
 
@@ -1558,11 +1454,11 @@ items:
 
       この `itemId` プロパティは、新規作成モードでは使用できません。 アイテム識別子が必要な場合は、このメソッドを使用して `saveAsync` アイテムをストアに保存することができます。これにより、コールバック関数のパラメーターにアイテム識別子が返され `asyncResult.value` ます。
 
-      **注**: プロパティによって返される識別子 `itemId` は、 [Exchange Web サービスのアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)と同じです。<!-- -->. `itemId` プロパティは、Outlook Entry ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API 呼び出しを行う前に、次のようにして変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
+      **注** : プロパティによって返される識別子 `itemId` は、 [Exchange Web サービスのアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)と同じです。<!-- -->. `itemId` プロパティは、Outlook Entry ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API 呼び出しを行う前に、次のようにして変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id)」を参照してください。<!-- -->.
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1596,9 +1492,9 @@ items:
 
       プロパティは、 `itemType` 列挙値の1つを返し `ItemType` ます。これは、アイテムのオブジェクトインスタンスがメッセージと予定のどちらであるかを示します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1624,9 +1520,9 @@ items:
 
       カスタムプロパティは、asyncResult. value プロパティのオブジェクトとして提供され `CustomProperties` ます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1703,9 +1599,9 @@ items:
 
       `location` プロパティは、予定の場所を格納した文字列を返します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1733,9 +1629,9 @@ items:
 
       プロパティは、 `normalizedSubject` アイテムの件名を任意の標準プレフィックス (RE: や FW:) など) で取得します。電子メールプログラムによって追加されます。 これらのプレフィックスが付いたままの状態でアイテムの件名を取得するには、`subject` プロパティを使用します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1759,9 +1655,9 @@ items:
 
       \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1843,9 +1739,9 @@ items:
 
       - その他: 制限なし
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1876,9 +1772,9 @@ items:
   - uid: 'outlook!Office.AppointmentRead#organizer:member'
     summary: 指定の会議の開催者の電子メール アドレスを取得します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1903,15 +1799,15 @@ items:
 
       この `recurrence` プロパティは、アイテムが series または series 内のインスタンスの場合、定期的な予定または会議出席依頼に対して [定期的](xref:outlook!Office.Recurrence:interface) なオブジェクトを返します。 `null` は、単一の予定および1つの予定の会議出席依頼に対して返されます。
 
-      **注**: 会議出席依頼の値は次のとおりです。 `itemClass``IPM.Schedule.Meeting.Request`<!-- -->.
+      **注** : 会議出席依頼の値は次のとおりです。 `itemClass``IPM.Schedule.Meeting.Request`<!-- -->.
 
-      **注**: 定期的なオブジェクトが null の場合は、そのオブジェクトが単一の予定または1つの予定の会議出席依頼であり、データ系列の一部ではないことを示します。
+      **注** : 定期的なオブジェクトが null の場合は、そのオブジェクトが単一の予定または1つの予定の会議出席依頼であり、データ系列の一部ではないことを示します。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -1939,15 +1835,15 @@ items:
           - 'outlook!Office.Recurrence:interface'
   - uid: 'outlook!Office.AppointmentRead#removeHandlerAsync:member(1)'
     summary: |-
-      サポートされているイベントの種類のイベント ハンドラーを削除します。 **注**: イベントは作業ウィンドウでのみ使用できます。
+      サポートされているイベントの種類のイベント ハンドラーを削除します。 **注** : イベントは作業ウィンドウでのみ使用できます。
 
       サポートされているイベントについては、「Item object model [events」セクション](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) を参照してください。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
     name: 'removeHandlerAsync(eventType, options, callback)'
     fullName: 'removeHandlerAsync(eventType, options, callback)'
     langs:
@@ -1972,37 +1868,6 @@ items:
           description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
           type:
             - 'outlook!Office.AppointmentRead#removeHandlerAsync~1:complex'
-  - uid: 'outlook!Office.AppointmentRead#removeHandlerAsync:member(2)'
-    summary: |-
-      サポートされているイベントの種類のイベント ハンドラーを削除します。 **注**: イベントは作業ウィンドウでのみ使用できます。
-
-      サポートされているイベントについては、「Item object model [events」セクション](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item#events) を参照してください。
-
-      \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
-    name: 'removeHandlerAsync(eventType, callback)'
-    fullName: 'removeHandlerAsync(eventType, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: ハンドラーを取り消すイベント。
-          type:
-            - 'outlook!Office.AppointmentRead#removeHandlerAsync~2:complex'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、callback パラメーターで渡された関数が1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->`Office.AsyncResult`。オブジェクトです。
-          type:
-            - 'outlook!Office.AppointmentRead#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.AppointmentRead#requiredAttendees:member'
     summary: |-
       イベントの必須出席者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
@@ -2015,9 +1880,9 @@ items:
 
       - その他: 制限なし
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -2051,9 +1916,9 @@ items:
 
       \[[API セット: メールボックスのプレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -2078,15 +1943,15 @@ items:
 
       Web 上の Outlook およびデスクトップクライアントでは、は、 `seriesId` このアイテムが属する親 (シリーズ) アイテムの Exchange Web サービス (EWS) ID を返します。 ただし、iOS と Android では、系列 Id は親アイテムの REST ID を返します。
 
-      **注**: プロパティによって返される識別子 `seriesId` は、Exchange Web サービスのアイテム識別子と同じです。 `seriesId`プロパティが OUTLOOK REST API で使用される Outlook id と同じではありません。 この値を使用して REST API 呼び出しを行う前に、次のようにして変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)」を参照してください。<!-- -->.
+      **注** : プロパティによって返される識別子 `seriesId` は、Exchange Web サービスのアイテム識別子と同じです。 `seriesId`プロパティが OUTLOOK REST API で使用される Outlook id と同じではありません。 この値を使用して REST API 呼び出しを行う前に、次のようにして変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については、「outlook[アドインからの OUTLOOK REST api の使用](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)」を参照してください。<!-- -->.
 
       `seriesId`このプロパティは、 `null` 単一の予定、系列のアイテム、会議出席依頼などの親アイテムを持たないアイテムに対して、 `undefined` 会議出席依頼以外のアイテムに対して返されます。
 
       \[[API set: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -2118,9 +1983,9 @@ items:
 
       `start`プロパティは、 `Date` 協定世界時 (UTC) の日付と時刻の値として表されるオブジェクトです。 メソッドを使用すると、 `convertToLocalClientTime` クライアントのローカルの日付と時刻に値を変換できます。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -2146,9 +2011,9 @@ items:
 
       `subject` プロパティは文字列を返します。 プロパティを使用し `normalizedSubject` て、"RE:" や "FW:" のような先頭にあるプレフィックスを除いた、件名を取得します。
     remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 予定の出席者
+      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : 予定の出席者
 
       #### <a name="examples"></a>例
 
@@ -2183,26 +2048,6 @@ references:
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.AppointmentRead#addHandlerAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.AppointmentRead#addHandlerAsync~2:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.AppointmentRead#addHandlerAsync~3:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
@@ -2304,22 +2149,6 @@ references:
         fullName: Office.AttachmentContent
       - name: '>) => void'
         fullName: '>) => void'
-  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.AttachmentContent:interface'
-        name: AttachmentContent
-        fullName: Office.AttachmentContent
-      - name: '>) => void'
-        fullName: '>) => void'
   - uid: 'outlook!Office.Entities:interface'
     name: Entities
   - uid: 'outlook!Office.AppointmentRead#getEntitiesByType~0:complex'
@@ -2384,17 +2213,6 @@ references:
       - name: ')[]'
         fullName: ')[]'
   - uid: 'outlook!Office.AppointmentRead#getInitializationContextAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.AppointmentRead#getInitializationContextAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<string>) => void'
     fullName: '(asyncResult: Office.AsyncResult<string>) => void'
     spec.typeScript:
@@ -2487,26 +2305,6 @@ references:
       - name: ' | string'
         fullName: ' | string'
   - uid: 'outlook!Office.AppointmentRead#removeHandlerAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.AppointmentRead#removeHandlerAsync~2:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.AppointmentRead#removeHandlerAsync~3:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
