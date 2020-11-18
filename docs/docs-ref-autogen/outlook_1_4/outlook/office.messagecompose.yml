@@ -1,1216 +1,1100 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.MessageCompose:interface'
-    summary: |-
-      メッセージ作成モードの [Office. mailbox。](xref:outlook!Office.Item:interface)<!-- -->.
+### YamlMime:TSType
+name: Office.MessageCompose
+uid: outlook!Office.MessageCompose:interface
+package: outlook!
+fullName: Office.MessageCompose
+summary: >-
+  メッセージ作成モードの [Office. mailbox。](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **重要** : これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) 」ページを参照してください。
 
-      親インターフェイス:
+  **重要**: これは、内部の Outlook オブジェクトであり、既存のインターフェイスを使用して直接公開されるものではありません。 これは、次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクトモデル](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) 」ページを参照してください。
 
-      - [ItemCompose 作成](xref:outlook!Office.ItemCompose:interface)
 
-      - [Message](xref:outlook!Office.Message:interface)
-    name: Office.MessageCompose
-    fullName: Office.MessageCompose
-    langs:
-      - typeScript
-    type: interface
-    extends:
-      - 'outlook!Office.Message:interface'
-      - 'outlook!Office.ItemCompose:interface'
-    package: outlook!
-    children:
-      - 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#bcc:member'
-      - 'outlook!Office.MessageCompose#body:member'
-      - 'outlook!Office.MessageCompose#cc:member'
-      - 'outlook!Office.MessageCompose#close:member(1)'
-      - 'outlook!Office.MessageCompose#conversationId:member'
-      - 'outlook!Office.MessageCompose#getSelectedDataAsync:member(1)'
-      - 'outlook!Office.MessageCompose#getSelectedDataAsync:member(2)'
-      - 'outlook!Office.MessageCompose#itemType:member'
-      - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)'
-      - 'outlook!Office.MessageCompose#notificationMessages:member'
-      - 'outlook!Office.MessageCompose#removeAttachmentAsync:member(1)'
-      - 'outlook!Office.MessageCompose#saveAsync:member(1)'
-      - 'outlook!Office.MessageCompose#saveAsync:member(2)'
-      - 'outlook!Office.MessageCompose#setSelectedDataAsync:member(1)'
-      - 'outlook!Office.MessageCompose#subject:member'
-      - 'outlook!Office.MessageCompose#to:member'
-  - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)'
-    summary: |-
-      ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+  親インターフェイス:
 
-      `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
 
-      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+  - [ItemCompose 作成](xref:outlook!Office.ItemCompose:interface)
 
-      **重要** : Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーを誤って追加するバグが導入されて `Authorization: Bearer` います (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、 `addFileAttachmentFromBase64` 要件セット1.8 で導入された API の使用を試みることができます。
 
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
+  - [Message](xref:outlook!Office.Message:interface)
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: bcc
+  uid: outlook!Office.MessageCompose#bcc:member
+  package: outlook!
+  fullName: bcc
+  summary: >-
+    メッセージの **Bcc** (ブラインドカーボンコピー) 行の受信者を取得または更新するメソッドを提供するオブジェクトを取得します。
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      **エラー** :
+    クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用される場合があります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
 
-      - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
 
-      - `FileTypeNotSupported`<!-- -->: 添付ファイルの拡張子が許可されていません。
+    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
 
-      #### <a name="examples"></a>例
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
 
-      ```javascript
-      function callback(result) {
-          if (result.error) {
-              console.log(result.error);
-          } else {
-              console.log("Attachment added");
-          }
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.bcc.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfBccRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+
+    Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgBcc = asyncResult.value;
+        console.log("Message being blind-copied to:");
+        for (var i = 0; i < msgBcc.length; i++) {
+          console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
       }
+    });
 
-      function addAttachment() {
-          // The values in asyncContext can be accessed in the callback.
-          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+    ```
 
-          var attachmentURL = "https://contoso.com/rtm/icon.png";
-          Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+
+    var email = $("#emailBcc")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Bcc field.");
+      } else {
+        console.error(asyncResult.error);
       }
-      ```
-      ```javascript
-      // The following example adds an image file as an inline attachment and
-      // references the attachment in the message body.
-      Office.context.mailbox.item.addFileAttachmentAsync(
-          "http://i.imgur.com/WJXklif.png",
-          "cute_bird.png",
-          {
-              isInline: true
-          },
-          function (asyncResult) {
-              Office.context.mailbox.item.body.setAsync(
-                  "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
-                  {
-                      "coercionType": "html"
-                  },
-                  function (asyncResult) {
-                      // Do something here.
-                  });
-          });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
-      var attachmentUrl = $("#attachmentUrl").val();
-      Office.context.mailbox.item.addFileAttachmentAsync(
-          attachmentUrl,
-          getFileName(attachmentUrl),
-          { "asyncContext" : { var1: 1, var2: true } },
-          function(result) { console.log(result); });
-      ```
-    name: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
-    fullName: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: uri
-          description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
-          type:
-            - string
-        - id: attachmentName
-          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-          type:
-            - string
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: True の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
-          type:
-            - 'outlook!Office.MessageCompose#addFileAttachmentAsync~0:complex'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#addFileAttachmentAsync~1:complex'
-  - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
-    summary: |-
-      メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
+    });
 
-      メソッドは、 `addItemAttachmentAsync` 指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->には、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'bcc: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+- name: body
+  uid: outlook!Office.MessageCompose#body:member
+  package: outlook!
+  fullName: body
+  summary: >-
+    アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
 
-      その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
-      Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
+    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
 
-      **エラー** :
 
-      - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
+    #### <a name="examples"></a>例
 
-      #### <a name="examples"></a>例
 
-      ```javascript
-      // The following example adds an existing Outlook item as an attachment
-      // with the name `My Attachment`.
-      function callback(result) {
-          if (result.error) {
-              console.log(result.error);
-          } else {
-              console.log("Attachment added");
-          }
+    ```javascript
+
+    // This example gets the body of the item as plain text.
+
+    Office.context.mailbox.item.body.getAsync(
+        "text",
+        { asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Do something with the result.
+        });
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value": "TEXT of whole body (including threads below)",
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'body: Body;'
+    return:
+      type: <xref uid="outlook!Office.Body:interface" />
+- name: cc
+  uid: outlook!Office.MessageCompose#cc:member
+  package: outlook!
+  fullName: cc
+  summary: >-
+    メッセージの CC (カーボン コピー) の受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+
+
+    `cc` プロパティは、メッセージの **Cc** 行にある受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.cc.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfCcRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+
+    Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgCc = asyncResult.value;
+        console.log("Message being copied to:");
+        for (var i = 0; i < msgCc.length; i++) {
+          console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
       }
+    });
 
-      function addAttachment() {
-          // EWS ID of item to attach (shortened for readability).
-          var itemId = "AAMkADI1...AAA=";
+    ```
 
-          // The values in asyncContext can be accessed in the callback.
-          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+    ```javascript
 
-          Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+
+    var email = $("#emailCc")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Cc field.");
+      } else {
+        console.error(asyncResult.error);
       }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
-      var attachmentItemId = $("#attachmentItemId").val();
-      Office.context.mailbox.item.addItemAttachmentAsync(
-          attachmentItemId,
-          "My attachment",
-          { "asyncContext" : { var3: 3, var4: false } },
-          function(result) { console.log(result); });
-      ```
-    name: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
-    fullName: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: itemId
-          description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
-          type:
-            - any
-        - id: attachmentName
-          description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
-          type:
-            - string
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.MessageCompose#bcc:member'
-    summary: |-
-      メッセージの **Bcc** (ブラインドカーボンコピー) 行の受信者を取得または更新するメソッドを提供するオブジェクトを取得します。
+    });
 
-      クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用される場合があります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'cc: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+- name: conversationId
+  uid: outlook!Office.MessageCompose#conversationId:member
+  package: outlook!
+  fullName: conversationId
+  summary: >-
+    特定のメッセージが含まれている電子メールの会話の識別子を取得します。
 
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
 
-      #### <a name="examples"></a>例
 
-      ```javascript
-      Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-      Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
-      Office.context.mailbox.item.bcc.getAsync(callback);
+    新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。ユーザーが件名を設定し、アイテムを保存する場合、`conversationId` プロパティは値を返します。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      function callback(asyncResult) {
-          var arrayOfBccRecipients = asyncResult.value;
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-conversation-id-message.yaml
+
+    console.log(`Conversation ID: ${Office.context.mailbox.item.conversationId}`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'conversationId: string;'
+    return:
+      type: string
+- name: itemType
+  uid: outlook!Office.MessageCompose#itemType:member
+  package: outlook!
+  fullName: itemType
+  summary: >-
+    インスタンスが表しているアイテムの種類を取得します。
+
+
+    プロパティは、 `itemType` 列挙値の1つを返し `ItemType` ます。これは、アイテムのオブジェクトインスタンスがメッセージと予定のどちらであるかを示します。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-item-type.yaml
+
+    console.log(`Item type: ${Office.context.mailbox.item.itemType}`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'itemType: MailboxEnums.ItemType | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.ItemType:enum" /> | string
+- name: notificationMessages
+  uid: outlook!Office.MessageCompose#notificationMessages:member
+  package: outlook!
+  fullName: notificationMessages
+  summary: >-
+    アイテムの通知メッセージを取得します。
+
+
+    \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"progressIndicator\",\n    message: \"Progress indicator with id = \" + id\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Non-persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: false\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: true\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nOffice.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          \n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.replaceAsync(\n  id,\n  {\n    type: \"informationalMessage\",\n    message: \"Notification message with id = \" + id + \" has been replaced with an informational message.\",\n    icon: \"icon2\",\n    persistent: false\n  },\n  handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'notificationMessages: NotificationMessages;'
+    return:
+      type: <xref uid="outlook!Office.NotificationMessages:interface" />
+- name: subject
+  uid: outlook!Office.MessageCompose#subject:member
+  package: outlook!
+  fullName: subject
+  summary: >-
+    アイテムの件名フィールドに示される説明を取得または設定します。
+
+
+    `subject` プロパティは、電子メール サーバーによって送信されたアイテムの件名全体を取得または設定します。
+
+
+    `subject` プロパティは件名を取得および設定するためのメソッドを提供する `Subject` オブジェクトを返します。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
+
+    Office.context.mailbox.item.subject.getAsync((result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
       }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
-      Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgBcc = asyncResult.value;
-          console.log("Message being blind-copied to:");
-          for (var i = 0; i < msgBcc.length; i++) {
-            console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
-          }
+      console.log(`Subject: ${result.value}`);
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
+
+    let subject = "Hello World!";
+
+    Office.context.mailbox.item.subject.setAsync(subject, (result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Successfully set subject to ${subject}`);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'subject: Subject;'
+    return:
+      type: <xref uid="outlook!Office.Subject:interface" />
+- name: to
+  uid: outlook!Office.MessageCompose#to:member
+  package: outlook!
+  fullName: to
+  summary: >-
+    メッセージの **To** 行にある受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+
+
+    `to` プロパティは、メッセージの **To** 行の受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.to.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfToRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+
+    Office.context.mailbox.item.to.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgTo = asyncResult.value;
+        console.log("Message being sent to:");
+        for (var i = 0; i < msgTo.length; i++) {
+          console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+
+    var email = $("#emailTo")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting To field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'to: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+methods:
+- name: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)
+  package: outlook!
+  fullName: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  summary: >-
+    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+
+
+    `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+
+
+    その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+
+
+    **重要**: Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーを誤って追加するバグが導入されて `Authorization: Bearer` います (この API または Outlook UI のどちらを使用する場合でも)。 この問題を回避するには、 `addFileAttachmentFromBase64` 要件セット1.8 で導入された API の使用を試みることができます。
+
+
+    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているサイズを超えています。
+
+
+    - `FileTypeNotSupported`<!-- -->: 添付ファイルの拡張子が許可されていません。
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function callback(result) {
+        if (result.error) {
+            console.log(result.error);
         } else {
-          console.error(asyncResult.error);
+            console.log("Attachment added");
         }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
-      var email = $("#emailBcc")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting Bcc field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: bcc
-    fullName: bcc
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'bcc: Recipients;'
-      return:
-        type:
-          - 'outlook!Office.Recipients:interface'
-  - uid: 'outlook!Office.MessageCompose#body:member'
-    summary: |-
-      アイテムの本文を操作するメソッドを提供するオブジェクトを取得します。
+    }
 
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    function addAttachment() {
+        // The values in asyncContext can be accessed in the callback.
+        var options = { 'asyncContext': { var1: 1, var2: 2 } };
 
-      #### <a name="examples"></a>例
+        var attachmentURL = "https://contoso.com/rtm/icon.png";
+        Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
+    }
 
-      ```javascript
-      // This example gets the body of the item as plain text.
-      Office.context.mailbox.item.body.getAsync(
-          "text",
-          { asyncContext: "This is passed to the callback" },
-          function callback(result) {
-              // Do something with the result.
-          });
+    ```
 
-      // The following is an example of the result parameter passed to the callback function.
-      {
-          "value": "TEXT of whole body (including threads below)",
-          "status": "succeeded",
-          "asyncContext": "This is passed to the callback"
-      }
-      ```
-    name: body
-    fullName: body
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'body: Body;'
-      return:
-        type:
-          - 'outlook!Office.Body:interface'
-  - uid: 'outlook!Office.MessageCompose#cc:member'
-    summary: |-
-      メッセージの CC (カーボン コピー) の受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+    ```javascript
 
-      `cc` プロパティは、メッセージの **Cc** 行にある受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
+    // The following example adds an image file as an inline attachment and
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    // references the attachment in the message body.
 
-      #### <a name="examples"></a>例
-
-      ```javascript
-      Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-      Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
-      Office.context.mailbox.item.cc.getAsync(callback);
-
-      function callback(asyncResult) {
-          var arrayOfCcRecipients = asyncResult.value;
-      }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
-      Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgCc = asyncResult.value;
-          console.log("Message being copied to:");
-          for (var i = 0; i < msgCc.length; i++) {
-            console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
-          }
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
-      var email = $("#emailCc")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting Cc field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: cc
-    fullName: cc
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'cc: Recipients;'
-      return:
-        type:
-          - 'outlook!Office.Recipients:interface'
-  - uid: 'outlook!Office.MessageCompose#close:member(1)'
-    summary: |-
-      構成されている現在のアイテムを閉じます。
-
-      Close メソッドの動作は、構成されているアイテムの現在の状態によって異なります。 アイテムに保存されていない変更がある場合、クライアントはユーザーに対して、操作を保存、破棄、または閉じることを求めるメッセージを表示します。
-
-      Outlook デスクトップクライアントでは、メッセージがインライン返信の場合、close メソッドは無効です。
-
-      **注** : web 上の Outlook では、アイテムが予定であり、以前に保存されています。 `saveAsync`<!-- -->、アイテムが最後に保存されてから変更が行われていない場合でも、ユーザーに対して保存、破棄、またはキャンセルを求めるメッセージが表示されます。
-
-      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`Restricted`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/25-item-save-and-close/close.yaml
-      Office.context.mailbox.item.close();
-      ```
-    name: close()
-    fullName: close()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'close(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'outlook!Office.MessageCompose#conversationId:member'
-    summary: |-
-      特定のメッセージが含まれている電子メールの会話の識別子を取得します。
-
-      メール アプリを閲覧フォームでアクティブ化するか、新規作成フォームの返信でアクティブ化すると、このプロパティで整数を取得することができます。その後、ユーザーが返信の件名を変更した場合、その返信の送信時にメッセージの会話 ID が変更され、以前に取得した値は適用されなくなります。
-
-      新規作成フォームで新しいアイテムに対してこのプロパティに null を取得します。ユーザーが件名を設定し、アイテムを保存する場合、`conversationId` プロパティは値を返します。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-conversation-id-message.yaml
-      console.log(`Conversation ID: ${Office.context.mailbox.item.conversationId}`);
-      ```
-    name: conversationId
-    fullName: conversationId
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'conversationId: string;'
-      return:
-        type:
-          - string
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync:member(1)'
-    summary: |-
-      メッセージの件名または本文から非同期的に選択したデータを返します。
-
-      選択されていない状態でカーソルが本文または件名にある場合、メソッドは選択されたデータに対し空の文字列を返します。本文または件名以外のフィールドが選択されている場合には、メソッドは`InvalidSelection`エラーを返します。
-
-      コールバックメソッドから選択したデータにアクセスするには、 `asyncResult.value.data`<!-- -->. 選択によって取得される source プロパティにアクセスするには、を呼び出します。 `asyncResult.value.sourceProperty`<!-- -->、またはのいずれかになります。 `body``subject`<!-- -->.
-
-      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Get selected data.
-      Office.initialize = function () {
-          Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
-      };
-
-      function getCallback(asyncResult) {
-          var text = asyncResult.value.data;
-          var prop = asyncResult.value.sourceProperty;
-
-          console.log("Selected text in " + prop + ": " + text);
-      }
-      ```
-    name: 'getSelectedDataAsync(coercionType, options, callback)'
-    fullName: 'getSelectedDataAsync(coercionType, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
-      return:
-        type:
-          - void
-        description: 選択されたデータを、によって決まる形式の文字列として指定します。 `coercionType`<!-- -->.
-      parameters:
-        - id: coercionType
-          description: データの形式を要求します。 もし `Text`<!-- -->、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 もし `Html`<!-- -->の場合、このメソッドは、選択されているテキスト (プレーンテキストまたは HTML) を返します。
-          type:
-            - 'outlook!Office.MessageCompose#getSelectedDataAsync~0:complex'
-        - id: options
-          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#getSelectedDataAsync~1:complex'
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync:member(2)'
-    summary: |-
-      メッセージの件名または本文から非同期的に選択したデータを返します。
-
-      選択されていない状態でカーソルが本文または件名にある場合、メソッドは選択されたデータに対し空の文字列を返します。本文または件名以外のフィールドが選択されている場合には、メソッドは`InvalidSelection`エラーを返します。
-
-      コールバックメソッドから選択したデータにアクセスするには、 `asyncResult.value.data`<!-- -->. 選択によって取得される source プロパティにアクセスするには、を呼び出します。 `asyncResult.value.sourceProperty`<!-- -->、またはのいずれかになります。 `body``subject`<!-- -->.
-
-      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/get-selected-data.yaml
-      Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var text = asyncResult.value.data;
-          var prop = asyncResult.value.sourceProperty;
-          console.log("Selected text in " + prop + ": " + text);
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: 'getSelectedDataAsync(coercionType, callback)'
-    fullName: 'getSelectedDataAsync(coercionType, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
-      return:
-        type:
-          - void
-        description: 選択されたデータを、によって決まる形式の文字列として指定します。 `coercionType`<!-- -->.
-      parameters:
-        - id: coercionType
-          description: データの形式を要求します。 もし `Text`<!-- -->、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 もし `Html`<!-- -->の場合、このメソッドは、選択されているテキスト (プレーンテキストまたは HTML) を返します。
-          type:
-            - 'outlook!Office.MessageCompose#getSelectedDataAsync~2:complex'
-        - id: callback
-          description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#getSelectedDataAsync~3:complex'
-  - uid: 'outlook!Office.MessageCompose#itemType:member'
-    summary: |-
-      インスタンスが表しているアイテムの種類を取得します。
-
-      プロパティは、 `itemType` 列挙値の1つを返し `ItemType` ます。これは、アイテムのオブジェクトインスタンスがメッセージと予定のどちらであるかを示します。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-item-type.yaml
-      console.log(`Item type: ${Office.context.mailbox.item.itemType}`);
-      ```
-    name: itemType
-    fullName: itemType
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'itemType: MailboxEnums.ItemType | string;'
-      return:
-        type:
-          - 'outlook!Office.MessageCompose#itemType~0:complex'
-  - uid: 'outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)'
-    summary: |-
-      選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
-
-      カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで `CustomProperties` オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
-
-      カスタムプロパティは、asyncResult. value プロパティのオブジェクトとして提供され `CustomProperties` ます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // The following example shows how to use the loadCustomPropertiesAsync method
-      // to asynchronously load custom properties that are specific to the current item.
-      // The example also shows how to use the saveAsync method to save these properties
-      // back to the server. After loading the custom properties, the example uses the
-      // get method to read the custom property myProp, the set method to write the
-      // custom property otherProp, and then finally calls the saveAsync method to save
-      // the custom properties.
-      Office.initialize = function () {
-          // Checks for the DOM to load using the jQuery ready function.
-          $(document).ready(function () {
-              // After the DOM is loaded, add-in-specific code can run.
-              var mailbox = Office.context.mailbox;
-              mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
-          });
-      };
-
-      function customPropsCallback(asyncResult) {
-          var customProps = asyncResult.value;
-          var myProp = customProps.get("myProp");
-
-          customProps.set("otherProp", "value");
-          customProps.saveAsync(saveCallback);
-      }
-
-      function saveCallback(asyncResult) {
-      }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
-      Office.context.mailbox.item.loadCustomPropertiesAsync(function (result) {
-        if (result.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Loaded following custom properties:");
-          customProps = result.value;
-          var dataKey = Object.keys(customProps)[0];
-          var data = customProps[dataKey];
-          for (var propertyName in data)
-          {
-            var propertyValue = data[propertyName];
-            console.log(`${propertyName}: ${propertyValue}`);
-          }              
-        }
-        else {
-          console.error(`loadCustomPropertiesAsync failed with message ${result.error.message}`);
-        }
-      });
-      ```
-    name: 'loadCustomPropertiesAsync(callback, userContext)'
-    fullName: 'loadCustomPropertiesAsync(callback, userContext)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync~0:complex'
-        - id: userContext
-          description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
-          type:
-            - any
-  - uid: 'outlook!Office.MessageCompose#notificationMessages:member'
-    summary: |-
-      アイテムの通知メッセージを取得します。
-
-      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
-
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      var id = $("#notificationId").val();
-      var details =
+    Office.context.mailbox.item.addFileAttachmentAsync(
+        "http://i.imgur.com/WJXklif.png",
+        "cute_bird.png",
         {
-          type: "progressIndicator",
-          message: "Progress indicator with id = " + id
-        };
-      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      var id = $("#notificationId").val();
-      var details =
-        {
-          type: "informationalMessage",
-          message: "Non-persistent informational notification message with id = " + id,
-          icon: "icon1",
-          persistent: false
-        };
-      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      var id = $("#notificationId").val();
-      var details =
-        {
-          type: "informationalMessage",
-          message: "Persistent informational notification message with id = " + id,
-          icon: "icon1",
-          persistent: true
-        };
-      Office.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      Office.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      var id = $("#notificationId").val();
-      Office.context.mailbox.item.notificationMessages.replaceAsync(
-        id,
-        {
-          type: "informationalMessage",
-          message: "Notification message with id = " + id + " has been replaced with an informational message.",
-          icon: "icon2",
-          persistent: false
+            isInline: true
         },
-        handleResult);
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/35-notifications/add-getall-remove.yaml
-      var id = $("#notificationId").val();
-      Office.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);
-      ```
-    name: notificationMessages
-    fullName: notificationMessages
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'notificationMessages: NotificationMessages;'
-      return:
-        type:
-          - 'outlook!Office.NotificationMessages:interface'
-  - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(1)'
-    summary: |-
-      メッセージまたは予定から添付ファイルを削除します。
+        function (asyncResult) {
+            Office.context.mailbox.item.body.setAsync(
+                "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
+                {
+                    "coercionType": "html"
+                },
+                function (asyncResult) {
+                    // Do something here.
+                });
+        });
+    ```
 
-      `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+    ```javascript
 
-      \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    var attachmentUrl = $("#attachmentUrl").val();
 
-      **エラー** :
+    Office.context.mailbox.item.addFileAttachmentAsync(
+        attachmentUrl,
+        getFileName(attachmentUrl),
+        { "asyncContext" : { var1: 1, var2: true } },
+        function(result) { console.log(result); });
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: uri
+      description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
+      type: string
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+      type: string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: True の場合は、添付ファイルがインラインでメッセージ本文に表示され、添付ファイル一覧に表示されないことを示します。'
+      type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  uid: outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)
+  package: outlook!
+  fullName: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  summary: >-
+    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
 
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
 
-      #### <a name="examples"></a>例
+    メソッドは、 `addItemAttachmentAsync` 指定された Exchange 識別子を持つアイテムを新規作成フォームのアイテムに添付します。 コールバックメソッドを指定すると、メソッドは1つのパラメーターで呼び出されます。 `asyncResult`<!-- -->には、添付ファイルの識別子、またはアイテムの添付中に発生したエラーを示すコードが含まれます。 必要に応じて、options パラメーターを使用して、コールバックメソッドに状態情報を渡すことができます。
 
-      ```javascript
-      // The following code removes an attachment with an identifier of '0'.
-      Office.context.mailbox.item.removeAttachmentAsync(
-          '0',
-          { asyncContext : null },
-          function (asyncResult)
-          {
-              console.log(asyncResult.status);
-          }
-      );
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
-      Office.context.mailbox.item.removeAttachmentAsync(
-          $("#attachmentId").val(),
-          { asyncContext : null },
-          function(result)
-          {
-              if (result.status !== Office.AsyncResultStatus.Succeeded) {
-                  console.error(`${result.error.message}`);
-              } else {
-                  console.log(`Attachment removed successfully.`);
-              }
-          }
-      );
-      ```
-    name: 'removeAttachmentAsync(attachmentId, options, callback)'
-    fullName: 'removeAttachmentAsync(attachmentId, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: attachmentId
-          description: 削除する添付ファイルの識別子。
-          type:
-            - string
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
-          type:
-            - 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.MessageCompose#saveAsync:member(1)'
-    summary: |-
-      項目を非同期的に保存します。
 
-      このメソッドを呼び出すと、現在のメッセージが下書きとして保存され、コールバックメソッドによってアイテム ID が返されます。 Outlook on the web またはオンライン モードの Outlook では、サーバーにアイテムが保存されます。 キャッシュ モードの Outlook では、ローカル キャッシュにアイテムが保存されます。
+    その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
 
-      予定はドラフト状態にはならないため、作成モードで予定に `saveAsync` が呼び出される場合、そのアイテムはユーザーの予定表に通常の予定として保存されます。以前に保存されていない新しい予定の場合、招待状は送信されません。既存の予定を保存すると、追加または削除された出席者に更新が送信されます。
 
-      **注** : `saveAsync` EWS または REST API で使用するアイテム ID を取得するために、アドインが新規作成モードのアイテムに対して呼び出しを行う場合、Outlook がキャッシュモードになっている場合は、アイテムが実際にサーバーと同期されるまでに少し時間がかかることに注意してください。 アイテムが同期されるまで、itemId を使用するとエラーが返されます。
+    Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
 
-      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
-      **エラー** :
 
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
-    name: 'saveAsync(options, callback)'
-    fullName: 'saveAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'saveAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#saveAsync~0:complex'
-  - uid: 'outlook!Office.MessageCompose#saveAsync:member(2)'
-    summary: |-
-      項目を非同期的に保存します。
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
 
-      呼び出されると、このメソッドは現在のメッセージを下書きとして保存し、コールバック メソッドを使用してアイテム ID を返します。 Outlook on the web またはオンライン モードの Outlook では、サーバーにアイテムが保存されます。 キャッシュ モードの Outlook では、ローカル キャッシュにアイテムが保存されます。
 
-      予定はドラフト状態にはならないため、作成モードで予定に `saveAsync` が呼び出される場合、そのアイテムはユーザーの予定表に通常の予定として保存されます。以前に保存されていない新しい予定の場合、招待状は送信されません。既存の予定を保存すると、追加または削除された出席者に更新が送信されます。
+    **エラー**:
 
-      **注** : `saveAsync` EWS または REST API で使用するアイテム ID を取得するために、アドインが新規作成モードのアイテムに対して呼び出しを行う場合、Outlook がキャッシュモードになっている場合は、アイテムが実際にサーバーと同期されるまでに少し時間がかかることに注意してください。 アイテムが同期されるまで、`itemId` を使用するとエラーが返されます。
 
-      \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
+    - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定に含まれている添付ファイルが多すぎます。
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      **エラー** :
+    #### <a name="examples"></a>例
 
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
 
-      #### <a name="examples"></a>例
+    ```javascript
 
-      ```javascript
-      Office.context.mailbox.item.saveAsync(
-          function callback(result) {
-              // Process the result.
-          });
+    // The following example adds an existing Outlook item as an attachment
 
-      // The following is an example of the
-      // `result` parameter passed to the
-      // callback function. The `value`
-      // property contains the item ID of
-      // the item.
-      {
-          "value": "AAMkADI5...AAA=",
-          "status": "succeeded"
+    // with the name `My Attachment`.
+
+    function callback(result) {
+        if (result.error) {
+            console.log(result.error);
+        } else {
+            console.log("Attachment added");
+        }
+    }
+
+
+    function addAttachment() {
+        // EWS ID of item to attach (shortened for readability).
+        var itemId = "AAMkADI1...AAA=";
+
+        // The values in asyncContext can be accessed in the callback.
+        var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+        Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
+
+    var attachmentItemId = $("#attachmentItemId").val();
+
+    Office.context.mailbox.item.addItemAttachmentAsync(
+        attachmentItemId,
+        "My attachment",
+        { "asyncContext" : { var3: 3, var4: false } },
+        function(result) { console.log(result); });
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: itemId
+      description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
+      type: any
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+      type: string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: close()
+  uid: outlook!Office.MessageCompose#close:member(1)
+  package: outlook!
+  fullName: close()
+  summary: >-
+    構成されている現在のアイテムを閉じます。
+
+
+    Close メソッドの動作は、構成されているアイテムの現在の状態によって異なります。 アイテムに保存されていない変更がある場合、クライアントはユーザーに対して、操作を保存、破棄、または閉じることを求めるメッセージを表示します。
+
+
+    Outlook デスクトップクライアントでは、メッセージがインライン返信の場合、close メソッドは無効です。
+
+
+    **注**: web 上の Outlook では、アイテムが予定であり、以前に保存されています。 `saveAsync`<!-- -->、アイテムが最後に保存されてから変更が行われていない場合でも、ユーザーに対して保存、破棄、またはキャンセルを求めるメッセージが表示されます。
+
+
+    \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/25-item-save-and-close/close.yaml
+
+    Office.context.mailbox.item.close();
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'close(): void;'
+    return:
+      type: void
+      description: ''
+- name: getSelectedDataAsync(coercionType, options, callback)
+  uid: outlook!Office.MessageCompose#getSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: getSelectedDataAsync(coercionType, options, callback)
+  summary: >-
+    メッセージの件名または本文から非同期的に選択したデータを返します。
+
+
+    選択されていない状態でカーソルが本文または件名にある場合、メソッドは選択されたデータに対し空の文字列を返します。本文または件名以外のフィールドが選択されている場合には、メソッドは`InvalidSelection`エラーを返します。
+
+
+    コールバックメソッドから選択したデータにアクセスするには、 `asyncResult.value.data`<!-- -->. 選択によって取得される source プロパティにアクセスするには、を呼び出します。 `asyncResult.value.sourceProperty`<!-- -->、またはのいずれかになります。 `body``subject`<!-- -->.
+
+
+    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Get selected data.
+
+    Office.initialize = function () {
+        Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
+    };
+
+
+    function getCallback(asyncResult) {
+        var text = asyncResult.value.data;
+        var prop = asyncResult.value.sourceProperty;
+
+        console.log("Selected text in " + prop + ": " + text);
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: データの形式を要求します。 もし `Text`<!-- -->、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 もし `Html`<!-- -->の場合、このメソッドは、選択されているテキスト (プレーンテキストまたは HTML) を返します。
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: 選択されたデータを、によって決まる形式の文字列として指定します。 `coercionType`<!-- -->.
+- name: getSelectedDataAsync(coercionType, callback)
+  uid: outlook!Office.MessageCompose#getSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: getSelectedDataAsync(coercionType, callback)
+  summary: >-
+    メッセージの件名または本文から非同期的に選択したデータを返します。
+
+
+    選択されていない状態でカーソルが本文または件名にある場合、メソッドは選択されたデータに対し空の文字列を返します。本文または件名以外のフィールドが選択されている場合には、メソッドは`InvalidSelection`エラーを返します。
+
+
+    コールバックメソッドから選択したデータにアクセスするには、 `asyncResult.value.data`<!-- -->. 選択によって取得される source プロパティにアクセスするには、を呼び出します。 `asyncResult.value.sourceProperty`<!-- -->、またはのいずれかになります。 `body``subject`<!-- -->.
+
+
+    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/get-selected-data.yaml
+
+    Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var text = asyncResult.value.data;
+        var prop = asyncResult.value.sourceProperty;
+        console.log("Selected text in " + prop + ": " + text);
+      } else {
+        console.error(asyncResult.error);
       }
-      ```
-    name: saveAsync(callback)
-    fullName: saveAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'saveAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#saveAsync~1:complex'
-  - uid: 'outlook!Office.MessageCompose#setSelectedDataAsync:member(1)'
-    summary: |-
-      メッセージの本文または件名に非同期的にデータを挿入します。
+    });
 
-      `setSelectedDataAsync` メソッドは、指定された文字列をアイテムのサブジェクトまたは本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択されたテキストを置き換えます。本文または件名フィールド内にカーソルがない場合は、エラーが返されます。挿入後、カーソルは挿入されたコンテンツの末尾に置かれます。
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: データの形式を要求します。 もし `Text`<!-- -->、このメソッドはプレーンテキストを文字列として返し、HTML タグがある場合はそれを削除します。 もし `Html`<!-- -->の場合、このメソッドは、選択されているテキスト (プレーンテキストまたは HTML) を返します。
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: callback
+      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: 選択されたデータを、によって決まる形式の文字列として指定します。 `coercionType`<!-- -->.
+- name: loadCustomPropertiesAsync(callback, userContext)
+  uid: outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)
+  package: outlook!
+  fullName: loadCustomPropertiesAsync(callback, userContext)
+  summary: >-
+    選択されたアイテムのこのアドインのカスタム プロパティを非同期に読み込みます。
 
-      \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadWriteItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    カスタム プロパティは、アプリケーションごと、アイテムごとのキーと値のペアとして格納されます。このメソッドは、コールバックで `CustomProperties` オブジェクトを返します。このオブジェクトは、現在のアイテムおよび現在のアドインに固有のカスタム プロパティにアクセスするためのメソッドを提供します。カスタム プロパティは、アイテム上では暗号化されません。そのため、セキュリティ保護記憶域として使用するべきではありません。
 
-      **エラー** :
 
-      - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+    カスタムプロパティは、asyncResult. value プロパティのオブジェクトとして提供され `CustomProperties` ます。 このオブジェクトは、アイテムからカスタム プロパティを取得、設定、削除し、サーバーに設定し直すカスタム プロパティへの変更を保存するために使用できます。
+  remarks: "**[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example shows how to use the loadCustomPropertiesAsync method\n// to asynchronously load custom properties that are specific to the current item.\n// The example also shows how to use the saveAsync method to save these properties\n// back to the server. After loading the custom properties, the example uses the\n// get method to read the custom property myProp, the set method to write the\n// custom property otherProp, and then finally calls the saveAsync method to save\n// the custom properties.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, add-in-specific code can run.\n        var mailbox = Office.context.mailbox;\n        mailbox.item.loadCustomPropertiesAsync(customPropsCallback);\n    });\n};\n\nfunction customPropsCallback(asyncResult) {\n    var customProps = asyncResult.value;\n    var myProp = customProps.get(\"myProp\");\n\n    customProps.set(\"otherProp\", \"value\");\n    customProps.saveAsync(saveCallback);\n}\n\nfunction saveCallback(asyncResult) {\n}\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml\nOffice.context.mailbox.item.loadCustomPropertiesAsync(function (result) {\n  if (result.status === Office.AsyncResultStatus.Succeeded) {\n    console.log(\"Loaded following custom properties:\");\n    customProps = result.value;\n    var dataKey = Object.keys(customProps)[0];\n    var data = customProps[dataKey];\n    for (var propertyName in data)\n    {\n      var propertyValue = data[propertyName];\n      console.log(`${propertyName}: ${propertyValue}`);\n    }              \n  }\n  else {\n    console.error(`loadCustomPropertiesAsync failed with message ${result.error.message}`);\n  }\n});\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CustomProperties:interface" />&gt;) =&gt; void'
+    - id: userContext
+      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
+      type: any
+    return:
+      type: void
+      description: ''
+- name: removeAttachmentAsync(attachmentId, options, callback)
+  uid: outlook!Office.MessageCompose#removeAttachmentAsync:member(1)
+  package: outlook!
+  fullName: removeAttachmentAsync(attachmentId, options, callback)
+  summary: >-
+    メッセージまたは予定から添付ファイルを削除します。
 
-      #### <a name="examples"></a>例
 
-      ```javascript
-      Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
-      ```
-      ```javascript
-      Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/set-selected-data.yaml
-      Office.context.mailbox.item.setSelectedDataAsync("Replaced", function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Selected text has been updated successfully.");
-        } else {
-          console.error(asyncResult.error);
+    `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じたとき、またはインラインフォームの作成が開始されたときに、別のウィンドウで続行するためにフォームをポップアウトした後、セッションが終了します。
+
+
+    \[[API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // The following code removes an attachment with an identifier of '0'.
+
+    Office.context.mailbox.item.removeAttachmentAsync(
+        '0',
+        { asyncContext : null },
+        function (asyncResult)
+        {
+            console.log(asyncResult.status);
         }
-      });
-      ```
-    name: 'setSelectedDataAsync(data, options, callback)'
-    fullName: 'setSelectedDataAsync(data, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: data
-          description: '挿入されるデータ。データの最大の長さは 1,000,000 文字です。1,000,000 文字を超えるデータが渡されると、`ArgumentOutOfRange` 例外がスローされます。'
-          type:
-            - string
-        - id: options
-          description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: テキストの場合、現在のスタイルが Outlook on the web およびデスクトップクライアントで適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でもテキスト データのみが挿入されます。 Html とフィールドが HTML をサポートする場合 (件名は含まれません)、現在のスタイルが web 上の Outlook で適用され、既定のスタイルが Outlook on the デスクトップクライアントで適用されます。 フィールドがテキスト フィールドの場合、`InvalidDataFormat` エラーが返されます。 `coercionType` が設定されていない場合、結果はフィールドによって変わります。フィールドが HTML の場合は HTML が使用されます。フィールドがテキストの場合はプレーン テキストが使用されます。'
-          type:
-            - 'outlook!Office.MessageCompose#setSelectedDataAsync~0:complex'
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.MessageCompose#setSelectedDataAsync~1:complex'
-  - uid: 'outlook!Office.MessageCompose#subject:member'
-    summary: |-
-      アイテムの件名フィールドに示される説明を取得または設定します。
+    );
 
-      `subject` プロパティは、電子メール サーバーによって送信されたアイテムの件名全体を取得または設定します。
+    ```
 
-      `subject` プロパティは件名を取得および設定するためのメソッドを提供する `Subject` オブジェクトを返します。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
+    ```javascript
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/40-attachments/attachments-compose.yaml
 
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
-      Office.context.mailbox.item.subject.getAsync((result) => {
-        if (result.status !== Office.AsyncResultStatus.Succeeded) {
-          console.error(`Action failed with message ${result.error.message}`);
-          return;
+    Office.context.mailbox.item.removeAttachmentAsync(
+        $("#attachmentId").val(),
+        { asyncContext : null },
+        function(result)
+        {
+            if (result.status !== Office.AsyncResultStatus.Succeeded) {
+                console.error(`${result.error.message}`);
+            } else {
+                console.log(`Attachment removed successfully.`);
+            }
         }
-        console.log(`Subject: ${result.value}`);
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
-      let subject = "Hello World!";
-      Office.context.mailbox.item.subject.setAsync(subject, (result) => {
-        if (result.status !== Office.AsyncResultStatus.Succeeded) {
-          console.error(`Action failed with message ${result.error.message}`);
-          return;
-        }
-        console.log(`Successfully set subject to ${subject}`);
-      });
-      ```
-    name: subject
-    fullName: subject
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'subject: Subject;'
-      return:
-        type:
-          - 'outlook!Office.Subject:interface'
-  - uid: 'outlook!Office.MessageCompose#to:member'
-    summary: |-
-      メッセージの **To** 行にある受信者へのアクセスを提供します。 オブジェクトの種類とアクセスのレベルは、現在のアイテムのモードによって異なります。
+    );
 
-      `to` プロパティは、メッセージの **To** 行の受信者を取得または更新するメソッドを提供する `Recipients` オブジェクトを返します。 ただし、クライアント/プラットフォーム (Windows、Mac など) によっては、取得または更新できる受信者の数に制限が適用されることがあります。 詳細については、 [Recipients](xref:outlook!Office.Recipients:interface) オブジェクトを参照してください。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->** :`ReadItem`
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: 削除する添付ファイルの識別子。
+      type: string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(options, callback)
+  uid: outlook!Office.MessageCompose#saveAsync:member(1)
+  package: outlook!
+  fullName: saveAsync(options, callback)
+  summary: >-
+    項目を非同期的に保存します。
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** : メッセージの作成
 
-      #### <a name="examples"></a>例
+    このメソッドを呼び出すと、現在のメッセージが下書きとして保存され、コールバックメソッドによってアイテム ID が返されます。 Outlook on the web またはオンライン モードの Outlook では、サーバーにアイテムが保存されます。 キャッシュ モードの Outlook では、ローカル キャッシュにアイテムが保存されます。
 
-      ```javascript
-      Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
-      Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
-      Office.context.mailbox.item.to.getAsync(callback);
 
-      function callback(asyncResult) {
-          var arrayOfToRecipients = asyncResult.value;
+    予定はドラフト状態にはならないため、作成モードで予定に `saveAsync` が呼び出される場合、そのアイテムはユーザーの予定表に通常の予定として保存されます。以前に保存されていない新しい予定の場合、招待状は送信されません。既存の予定を保存すると、追加または削除された出席者に更新が送信されます。
+
+
+    **注**: `saveAsync` EWS または REST API で使用するアイテム ID を取得するために、アドインが新規作成モードのアイテムに対して呼び出しを行う場合、Outlook がキャッシュモードになっている場合は、アイテムが実際にサーバーと同期されるまでに少し時間がかかることに注意してください。 アイテムが同期されるまで、itemId を使用するとエラーが返されます。
+
+
+    \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback)
+  uid: outlook!Office.MessageCompose#saveAsync:member(2)
+  package: outlook!
+  fullName: saveAsync(callback)
+  summary: >-
+    項目を非同期的に保存します。
+
+
+    呼び出されると、このメソッドは現在のメッセージを下書きとして保存し、コールバック メソッドを使用してアイテム ID を返します。 Outlook on the web またはオンライン モードの Outlook では、サーバーにアイテムが保存されます。 キャッシュ モードの Outlook では、ローカル キャッシュにアイテムが保存されます。
+
+
+    予定はドラフト状態にはならないため、作成モードで予定に `saveAsync` が呼び出される場合、そのアイテムはユーザーの予定表に通常の予定として保存されます。以前に保存されていない新しい予定の場合、招待状は送信されません。既存の予定を保存すると、追加または削除された出席者に更新が送信されます。
+
+
+    **注**: `saveAsync` EWS または REST API で使用するアイテム ID を取得するために、アドインが新規作成モードのアイテムに対して呼び出しを行う場合、Outlook がキャッシュモードになっている場合は、アイテムが実際にサーバーと同期されるまでに少し時間がかかることに注意してください。 アイテムが同期されるまで、`itemId` を使用するとエラーが返されます。
+
+
+    \[[API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.saveAsync(
+        function callback(result) {
+            // Process the result.
+        });
+
+    // The following is an example of the
+
+    // `result` parameter passed to the
+
+    // callback function. The `value`
+
+    // property contains the item ID of
+
+    // the item.
+
+    {
+        "value": "AAMkADI5...AAA=",
+        "status": "succeeded"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, options, callback)
+  uid: outlook!Office.MessageCompose#setSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, options, callback)
+  summary: >-
+    メッセージの本文または件名に非同期的にデータを挿入します。
+
+
+    `setSelectedDataAsync` メソッドは、指定された文字列をアイテムのサブジェクトまたは本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択されたテキストを置き換えます。本文または件名フィールド内にカーソルがない場合は、エラーが返されます。挿入後、カーソルは挿入されたコンテンツの末尾に置かれます。
+
+
+    \[[API set: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
+
+    ```
+
+    ```javascript
+
+    Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/set-selected-data.yaml
+
+    Office.context.mailbox.item.setSelectedDataAsync("Replaced", function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Selected text has been updated successfully.");
+      } else {
+        console.error(asyncResult.error);
       }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
-      Office.context.mailbox.item.to.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgTo = asyncResult.value;
-          console.log("Message being sent to:");
-          for (var i = 0; i < msgTo.length; i++) {
-            console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
-          }
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
-      var email = $("#emailTo")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting To field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: to
-    fullName: to
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'to: Recipients;'
-      return:
-        type:
-          - 'outlook!Office.Recipients:interface'
-references:
-  - uid: 'outlook!Office.Message:interface'
-    name: Message
-  - uid: 'outlook!Office.ItemCompose:interface'
-    name: ItemCompose
-  - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync~0:complex'
-    name: 'Office.AsyncContextOptions & { isInline: boolean }'
-    fullName: 'Office.AsyncContextOptions & { isInline: boolean }'
-    spec.typeScript:
-      - uid: 'office!Office.AsyncContextOptions:interface'
-        name: Office.AsyncContextOptions
-        fullName: Office.AsyncContextOptions
-      - name: ' & { isInline: boolean }'
-        fullName: ' & { isInline: boolean }'
-  - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'office!Office.AsyncContextOptions:interface'
-    name: Office.AsyncContextOptions
-  - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.Recipients:interface'
-    name: Recipients
-  - uid: 'outlook!Office.Body:interface'
-    name: Body
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync~0:complex'
-    name: Office.CoercionType | string
-    fullName: Office.CoercionType | string
-    spec.typeScript:
-      - uid: 'office!Office.CoercionType:enum'
-        name: Office.CoercionType
-        fullName: Office.CoercionType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<any>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<any>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <any>) => void
-        fullName: <any>) => void
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync~2:complex'
-    name: Office.CoercionType | string
-    fullName: Office.CoercionType | string
-    spec.typeScript:
-      - uid: 'office!Office.CoercionType:enum'
-        name: Office.CoercionType
-        fullName: Office.CoercionType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.MessageCompose#getSelectedDataAsync~3:complex'
-    name: '(asyncResult: Office.AsyncResult<any>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<any>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <any>) => void
-        fullName: <any>) => void
-  - uid: 'outlook!Office.MessageCompose#itemType~0:complex'
-    name: MailboxEnums.ItemType | string
-    fullName: Office.MailboxEnums.ItemType | string
-    spec.typeScript:
-      - uid: 'outlook!Office.MailboxEnums.ItemType:enum'
-        name: MailboxEnums.ItemType
-        fullName: Office.MailboxEnums.ItemType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.MessageCompose#loadCustomPropertiesAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.CustomProperties>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.CustomProperties:interface'
-        name: CustomProperties
-        fullName: Office.CustomProperties
-      - name: '>) => void'
-        fullName: '>) => void'
-  - uid: 'outlook!Office.NotificationMessages:interface'
-    name: NotificationMessages
-  - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.MessageCompose#saveAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.MessageCompose#saveAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.MessageCompose#setSelectedDataAsync~0:complex'
-    name: Office.AsyncContextOptions & CoercionTypeOptions
-    fullName: Office.AsyncContextOptions & Office.CoercionTypeOptions
-    spec.typeScript:
-      - uid: 'office!Office.AsyncContextOptions:interface'
-        name: Office.AsyncContextOptions
-        fullName: Office.AsyncContextOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.CoercionTypeOptions:interface'
-        name: CoercionTypeOptions
-        fullName: Office.CoercionTypeOptions
-  - uid: 'outlook!Office.MessageCompose#setSelectedDataAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Subject:interface'
-    name: Subject
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 挿入されるデータ。データの最大の長さは 1,000,000 文字です。1,000,000 文字を超えるデータが渡されると、`ArgumentOutOfRange` 例外がスローされます。
+      type: string
+    - id: options
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: テキストの場合、現在のスタイルが Outlook on the web およびデスクトップクライアントで適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でもテキスト データのみが挿入されます。 Html とフィールドが HTML をサポートする場合 (件名は含まれません)、現在のスタイルが web 上の Outlook で適用され、既定のスタイルが Outlook on the デスクトップクライアントで適用されます。 フィールドがテキスト フィールドの場合、`InvalidDataFormat` エラーが返されます。 `coercionType` が設定されていない場合、結果はフィールドによって変わります。フィールドが HTML の場合は HTML が使用されます。フィールドがテキストの場合はプレーン テキストが使用されます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+extends: <xref uid="outlook!Office.Message:interface" />
+metadata:
+  ms.openlocfilehash: a0393a75fd42b3248a8161325cd056c453b5cae3
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49143310"
