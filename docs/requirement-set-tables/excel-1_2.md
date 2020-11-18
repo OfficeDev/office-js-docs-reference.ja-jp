@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[Binding](/javascript/api/excel/excel.binding)|[onDataChanged](/javascript/api/excel/excel.binding#ondatachanged)|バインド内でデータまたは書式設定が変更されるときに発生します。|
 ||[onSelectionChanged](/javascript/api/excel/excel.binding#onselectionchanged)|バインドで選択されているコンテンツが変更されたときに発生します。|
-|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|`Binding`イベントを発生させたオブジェクトの ID を含む一時オブジェクトを取得し `Binding` ます。|
-|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|`Binding`イベントを発生させたオブジェクトの ID を含む一時オブジェクトを取得し `Binding` ます。|
+|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)| `Binding`    `Binding`   イベントを発生させたオブジェクトの ID を含む一時オブジェクトを取得します。その ID をで使用して `BindingCollection.getItem(id)`   バインドを取得します。|
+|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)| `Binding`    `Binding`   イベントを発生させたオブジェクトの ID を含む一時オブジェクトを取得します。その ID をで使用して `BindingCollection.getItem(id)`   バインドを取得します。|
 ||[columnCount](/javascript/api/excel/excel.bindingselectionchangedeventargs#columncount)|選択されている列の数を取得します。|
 ||[rowCount](/javascript/api/excel/excel.bindingselectionchangedeventargs#rowcount)|選択されている行の数を取得します。|
 ||[startColumn](/javascript/api/excel/excel.bindingselectionchangedeventargs#startcolumn)|選択範囲の先頭列のインデックス (0 から始まる) を取得します。|
@@ -210,7 +210,7 @@
 ||[f_Dist_RT (x: RangeReference を指定します。 degFreedom1: number excel. degFreedom2: number excel. \| \| \| <any> RangeReference result \| \| \| <any> ,: number excel. \| \| \| result <any> /RangeReference の範囲で指定します。](/javascript/api/excel/excel.functions#f-dist_rt-x--degfreedom1--degfreedom2-)|2つのデータセットの F 確率分布 (左右の度合い) を返します。|
 ||[f_Inv (確率: RangeReference excel. \| \| \| result, degFreedom1: Number Excel. <any> \| \| \| <any> RangeReference Result, degFreedom2: number excel. \| \| \| Result <any> ) (excel で指定したセル範囲の RangeReference を指定)](/javascript/api/excel/excel.functions#f-inv-probability--degfreedom1--degfreedom2-)|(左辺の) F 確率分布の逆関数の値を返します。 p = F (x,...) の場合は、F (p,...) = x となります。|
 ||[f_Inv_RT (確率: RangeReference excel. \| \| \| result, degFreedom1: Number Excel. <any> \| \| \| <any> RangeReference Result, degFreedom2: number excel. \| \| \| Result <any> ) (excel で指定したセル範囲の RangeReference を指定)](/javascript/api/excel/excel.functions#f-inv_rt-probability--degfreedom1--degfreedom2-)|F が指定されている場合、(右側の) F 確率分布の逆関数の値を返します。RT (x,...)、次に f..RT (p,...) = x。|
-||[ファクト (数値: RangeReference のように数値を指定します。 \| \| \| <any>](/javascript/api/excel/excel.functions#fact-number-)|数値の階乗を返します。 *2**~ 3 の* 値件数.|
+||[ファクト (数値: RangeReference のように数値を指定します。 \| \| \| <any>](/javascript/api/excel/excel.functions#fact-number-)|数値の階乗を返します。*2**~ 3 の* 値件数.|
 ||[factDouble (数値: 数値 \| 文字列 \| ブール値 \| excel. \| RangeReference \| excel. functionresult <any> )](/javascript/api/excel/excel.functions#factdouble-number-)|数値の二重階乗を返します。|
 ||[false ()](/javascript/api/excel/excel.functions#false--)|論理値 FALSE を返します。|
 ||[検索する (findText: string excel. \| \| RangeReference エクセル. RangeReference の範囲内の Excel. \| RangeReference result <any> \| \| \| <any> , startnum?: \| \| \| <any> Excel. 範囲 excel. @. の excel. functionresult) (excel)](/javascript/api/excel/excel.functions#find-findtext--withintext--startnum-)|別のテキスト文字列内の1つのテキスト文字列の開始位置を返します。|
