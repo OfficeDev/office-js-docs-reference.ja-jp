@@ -1,241 +1,272 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.CustomProperties:interface'
-    summary: |-
-      `CustomProperties` オブジェクトが表すカスタム プロパティは、特定のアイテムに固有であり、Outlook 用のメール アドインに固有です。 たとえば、メール アドインは、アドインをアクティブ化する現在のメール メッセージに固有のいくつかのデータを保存する必要があります。 ユーザーが、将来同じメッセージを再び取り上げ、もう一度メール アドインをアクティブ化する場合、アドインは、カスタム プロパティとして保存されていたデータを取得することができます。 **重要**: JSON オブジェクトの最大長 `CustomProperties` は2500文字です。
+### YamlMime:TSType
+name: Office.CustomProperties
+uid: outlook!Office.CustomProperties:interface
+package: outlook!
+fullName: Office.CustomProperties
+summary: >-
+  `CustomProperties` オブジェクトが表すカスタム プロパティは、特定のアイテムに固有であり、Outlook 用のメール アドインに固有です。 たとえば、メール アドインは、アドインをアクティブ化する現在のメール メッセージに固有のいくつかのデータを保存する必要があります。 ユーザーが、将来同じメッセージを再び取り上げ、もう一度メール アドインをアクティブ化する場合、アドインは、カスタム プロパティとして保存されていたデータを取得することができます。 **重要**: JSON オブジェクトの最大長 `CustomProperties` は2500文字です。
 
-      Outlook on Mac はカスタムプロパティをキャッシュに入れないため、ユーザーのネットワークがダウンした場合、メールアドインはカスタムプロパティにアクセスできなくなります。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
-    name: Office.CustomProperties
-    fullName: Office.CustomProperties
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.CustomProperties#get:member(1)'
-      - 'outlook!Office.CustomProperties#getAll:member(1)'
-      - 'outlook!Office.CustomProperties#remove:member(1)'
-      - 'outlook!Office.CustomProperties#saveAsync:member(1)'
-      - 'outlook!Office.CustomProperties#set:member(1)'
-  - uid: 'outlook!Office.CustomProperties#get:member(1)'
-    summary: 指定したカスタム プロパティの値を返します。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+  Outlook on Mac はカスタムプロパティをキャッシュに入れないため、ユーザーのネットワークがダウンした場合、メールアドインはカスタムプロパティにアクセスできなくなります。
+remarks: >-
+  **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
 
-      #### <a name="examples"></a>例
+  **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: get(name)
+  uid: outlook!Office.CustomProperties#get:member(1)
+  package: outlook!
+  fullName: get(name)
+  summary: 指定したカスタム プロパティの値を返します。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
-      var propertyName = $("#propertyName").val();
-      var propertyValue = customProps.get(propertyName);
-      $("#propertyValue").val(propertyValue);
-      console.log(`The value of custom property "${propertyName}" is "${propertyValue}".`);
-      ```
-    name: get(name)
-    fullName: get(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'get(name: string): any;'
-      return:
-        type:
-          - any
-        description: 指定したカスタム プロパティの値。
-      parameters:
-        - id: name
-          description: 取得するカスタム プロパティの名前。
-          type:
-            - string
-  - uid: 'outlook!Office.CustomProperties#getAll:member(1)'
-    summary: |-
-      名前と値のペアのコレクション内のすべてのカスタムプロパティを持つオブジェクトを返します。 以下は同等です。
 
-      `customProps.get("name")`
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
-      `var dictionary = customProps.getAll(); dictionary["name"]`
 
-      Dictionary オブジェクトを反復処理して、すべてのとを検出することができます。 `names``values`<!-- -->.
+    #### <a name="examples"></a>例
 
-      \[[API set: Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
-    name: getAll()
-    fullName: getAll()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAll(): any;'
-      return:
-        type:
-          - any
-        description: 名前と値のペアのコレクション内のすべてのカスタムプロパティを含むオブジェクト。
-  - uid: 'outlook!Office.CustomProperties#remove:member(1)'
-    summary: |-
-      カスタム プロパティ コレクションから指定のプロパティを削除します。
+    ```javascript
 
-      プロパティを永続的に削除するには、オブジェクトのメソッドを呼び出す必要があり `saveAsync` `CustomProperties` ます。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+    var propertyName = $("#propertyName").val();
 
-      #### <a name="examples"></a>例
+    var propertyValue = customProps.get(propertyName);
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
-      var propertyName = $("#propertyName").val();
-      customProps.remove(propertyName);
-      console.log(`Custom property "${propertyName}" removed.`);
-      ```
-    name: remove(name)
-    fullName: remove(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'remove(name: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: name
-          description: '`name`削除するプロパティのを指定します。'
-          type:
-            - string
-  - uid: 'outlook!Office.CustomProperties#saveAsync:member(1)'
-    summary: |-
-      アイテム固有のカスタム プロパティをサーバーに保存します。
+    $("#propertyValue").val(propertyValue);
 
-      メソッドを呼び出して、 `saveAsync` `set` メソッドまたはオブジェクトのメソッドに加えられた変更を保持する必要があり `remove` `CustomProperties` ます。 保存操作は非同期です。
+    console.log(`The value of custom property "${propertyName}" is "${propertyValue}".`);
 
-      コールバック関数を使用してエラーを確認してから処理することをお勧めします。 `saveAsync`<!-- -->. 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態でアドインが `saveAsync` を呼び出す場合、`saveAsync` はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'get(name: string): any;'
+    parameters:
+    - id: name
+      description: 取得するカスタム プロパティの名前。
+      type: string
+    return:
+      type: any
+      description: 指定したカスタム プロパティの値。
+- name: getAll()
+  uid: outlook!Office.CustomProperties#getAll:member(1)
+  package: outlook!
+  fullName: getAll()
+  summary: >-
+    名前と値のペアのコレクション内のすべてのカスタムプロパティを持つオブジェクトを返します。 以下は同等です。
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
 
-      #### <a name="examples"></a>例
+    `customProps.get("name")`
 
-      ```javascript
-      // The following JavaScript code sample shows how to asynchronously use
-      // the loadCustomPropertiesAsync method to load custom properties that
-      // are specific to the current item, and the saveAsync method to save
-      // these properties back to the server. After loading the custom properties,
-      // the code sample uses the get method to read the custom property myProp,
-      // the set method to write the custom property myProp, and then finally
-      // calls the saveAsync method to save the custom properties.
 
-      // The initialize function is required for all add-ins.
-      Office.initialize = function () {
-          // Checks for the DOM to load using the jQuery ready function.
-          $(document).ready(function () {
-              // After the DOM is loaded, add-in-specific code can run.
-              var item = Office.context.mailbox.item;
-              item.loadCustomPropertiesAsync(customPropsCallback);
-          });
-      };
+    `var dictionary = customProps.getAll(); dictionary["name"]`
 
-      function customPropsCallback(asyncResult) {
-          var customProps = asyncResult.value;
-          var myProp = customProps.get("myProp");
-          console.log("myProp: " + myProp); // First run on current item will return `undefined`.
 
-          // Set myProp custom property.
-          customProps.set("myProp", "value");
-          customProps.saveAsync(saveCallback);
-      }
+    Dictionary オブジェクトを反復処理して、すべてのとを検出することができます。 `names``values`<!-- -->.
 
-      function saveCallback(asyncResult) {
-          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-              console.error(asyncResult.error.message);
-          }
-          else {
-              // Async call to save custom properties completed.
-              // Proceed to do the appropriate for your add-in.
-          }
-      }
-      ```
-    name: 'saveAsync(callback, asyncContext)'
-    fullName: 'saveAsync(callback, asyncContext)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
-          type:
-            - 'outlook!Office.CustomProperties#saveAsync~0:complex'
-        - id: asyncContext
-          description: 省略可能。 コールバック メソッドに渡される状態データです。
-          type:
-            - any
-  - uid: 'outlook!Office.CustomProperties#set:member(1)'
-    summary: |-
-      指定のプロパティを指定の値に設定します。
 
-      `set` メソッドは、指定のプロパティを指定の値に設定します。 `saveAsync`プロパティをサーバーに保存するには、メソッドを使用する必要があります。
+    \[[API set: Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
-      指定のプロパティが存在しない場合、`set` メソッドによって新しいプロパティが作成されます。存在する場合は、既存の値が新しい値に置き換えられます。`value` パラメーターには任意の型を使用できます。ただし、サーバーには常に文字列として渡されます。
-    remarks: |-
-      **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> **:`ReadItem`
 
-      **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> **: 新規作成または読み取り
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAll(): any;'
+    return:
+      type: any
+      description: 名前と値のペアのコレクション内のすべてのカスタムプロパティを含むオブジェクト。
+- name: remove(name)
+  uid: outlook!Office.CustomProperties#remove:member(1)
+  package: outlook!
+  fullName: remove(name)
+  summary: >-
+    カスタム プロパティ コレクションから指定のプロパティを削除します。
 
-      #### <a name="examples"></a>例
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
-      var propertyName = $("#propertyName").val();
-      var propertyValue = $("#propertyValue").val();
-      customProps.set(propertyName, propertyValue);
-      console.log(`Custom property "${propertyName}" set to value "${propertyValue}".`);
-      ```
-    name: 'set(name, value)'
-    fullName: 'set(name, value)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(name: string, value: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: name
-          description: 設定するプロパティの名前。
-          type:
-            - string
-        - id: value
-          description: 設定するプロパティの値。
-          type:
-            - string
-references:
-  - uid: 'outlook!Office.CustomProperties#saveAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
+    プロパティを永続的に削除するには、オブジェクトのメソッドを呼び出す必要があり `saveAsync` `CustomProperties` ます。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
+
+    var propertyName = $("#propertyName").val();
+
+    customProps.remove(propertyName);
+
+    console.log(`Custom property "${propertyName}" removed.`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(name: string): void;'
+    parameters:
+    - id: name
+      description: '`name`削除するプロパティのを指定します。'
+      type: string
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback, asyncContext)
+  uid: outlook!Office.CustomProperties#saveAsync:member(1)
+  package: outlook!
+  fullName: saveAsync(callback, asyncContext)
+  summary: >-
+    アイテム固有のカスタム プロパティをサーバーに保存します。
+
+
+    メソッドを呼び出して、 `saveAsync` `set` メソッドまたはオブジェクトのメソッドに加えられた変更を保持する必要があり `remove` `CustomProperties` ます。 保存操作は非同期です。
+
+
+    コールバック関数を使用してエラーを確認してから処理することをお勧めします。 `saveAsync`<!-- -->. 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態でアドインが `saveAsync` を呼び出す場合、`saveAsync` はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // The following JavaScript code sample shows how to asynchronously use
+
+    // the loadCustomPropertiesAsync method to load custom properties that
+
+    // are specific to the current item, and the saveAsync method to save
+
+    // these properties back to the server. After loading the custom properties,
+
+    // the code sample uses the get method to read the custom property myProp,
+
+    // the set method to write the custom property myProp, and then finally
+
+    // calls the saveAsync method to save the custom properties.
+
+
+    // The initialize function is required for all add-ins.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, add-in-specific code can run.
+            var item = Office.context.mailbox.item;
+            item.loadCustomPropertiesAsync(customPropsCallback);
+        });
+    };
+
+
+    function customPropsCallback(asyncResult) {
+        var customProps = asyncResult.value;
+        var myProp = customProps.get("myProp");
+        console.log("myProp: " + myProp); // First run on current item will return `undefined`.
+
+        // Set myProp custom property.
+        customProps.set("myProp", "value");
+        customProps.saveAsync(saveCallback);
+    }
+
+
+    function saveCallback(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+            console.error(asyncResult.error.message);
+        }
+        else {
+            // Async call to save custom properties completed.
+            // Proceed to do the appropriate for your add-in.
+        }
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
+    parameters:
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    - id: asyncContext
+      description: 省略可能。 コールバック メソッドに渡される状態データです。
+      type: any
+    return:
+      type: void
+      description: ''
+- name: set(name, value)
+  uid: outlook!Office.CustomProperties#set:member(1)
+  package: outlook!
+  fullName: set(name, value)
+  summary: >-
+    指定のプロパティを指定の値に設定します。
+
+
+    `set` メソッドは、指定のプロパティを指定の値に設定します。 `saveAsync`プロパティをサーバーに保存するには、メソッドを使用する必要があります。
+
+
+    指定のプロパティが存在しない場合、`set` メソッドによって新しいプロパティが作成されます。存在する場合は、既存の値が新しい値に置き換えられます。`value` パラメーターには任意の型を使用できます。ただし、サーバーには常に文字列として渡されます。
+  remarks: >-
+    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/15-item-custom-properties/load-set-get-save.yaml
+
+    var propertyName = $("#propertyName").val();
+
+    var propertyValue = $("#propertyValue").val();
+
+    customProps.set(propertyName, propertyValue);
+
+    console.log(`Custom property "${propertyName}" set to value "${propertyValue}".`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(name: string, value: string): void;'
+    parameters:
+    - id: name
+      description: 設定するプロパティの名前。
+      type: string
+    - id: value
+      description: 設定するプロパティの値。
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 011a32516abe6df3b212caf28996b247a76c34e6
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49143436"
