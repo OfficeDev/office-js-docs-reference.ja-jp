@@ -1,212 +1,95 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'office!Office.AsyncResult:interface'
-    summary: |-
-      要求が失敗した場合の状態やエラー情報など、非同期要求の結果をカプセル化するオブジェクト。
-
-      `callback`"Async" メソッドのパラメーターに渡す関数が実行されると、AsyncResult オブジェクトを受け取ります。このオブジェクトには、 `callback` 関数の唯一のパラメーターからアクセスできます。
-    name: Office.AsyncResult
-    fullName: Office.AsyncResult
-    langs:
-      - typeScript
-    type: interface
-    syntax:
-      typeParameters:
-        - id: T
-    package: office!
-    remarks: |-
+### YamlMime:TSType
+name: Office.AsyncResult
+uid: office!Office.AsyncResult:interface
+package: office!
+fullName: Office.AsyncResult
+summary: >-
+  要求が失敗した場合の状態やエラー情報など、非同期要求の結果をカプセル化するオブジェクト。
 
 
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // The following is an example applicable to content and task pane add-ins.
-      // The example shows a call to the getSelectedDataAsync method of the Document object.
-      Office.context.document.getSelectedDataAsync("text", {
-              valueFormat: "unformatted",
-              filterType: "all"
-          },
-          function (result) {
-              if (result.status === Office.AsyncResultStatus.Succeeded) {
-                  var dataValue = result.value; // Get selected data.
-                  console.log('Selected data is ' + dataValue);
-              } else {
-                  var err = result.error;
-                  console.log(err.name + ": " + err.message);
-              }
-          });
-      // The anonymous function passed as the callback argument ( function (result){...}) has a single 
-      // parameter named result that provides access to an AsyncResult object when the function executes.
-      // When the call to the getSelectedDataAsync method completes, the callback function executes, 
-      // and the following line of code accesses the value property of the AsyncResult object to 
-      // return the data selected in the document:
-      var dataValue = result.value;
-      // Note that other lines of code in the function use the result parameter of the callback function 
-      // to access the status and error properties of the AsyncResult object.
-      ```
-    children:
-      - 'office!Office.AsyncResult#asyncContext:member'
-      - 'office!Office.AsyncResult#diagnostics:member'
-      - 'office!Office.AsyncResult#error:member'
-      - 'office!Office.AsyncResult#status:member'
-      - 'office!Office.AsyncResult#value:member'
-  - uid: 'office!Office.AsyncResult#asyncContext:member'
-    summary: 呼び出されたメソッドの省略可能なパラメーターに渡されたユーザー定義アイテムを、 `asyncContext` 渡されたときと同じ状態で取得します。 これにより、ユーザー定義のアイテムが返されます。これは、呼び出されたメソッドの省略可能なパラメーターに渡される任意の種類の JavaScript の型 (String、Number、Boolean、Object、Array、Null、または Undefined) を返します。 `asyncContext` asyncContext パラメーターに値を渡していない場合は、 Undefined が戻されます。
-    name: asyncContext
-    fullName: asyncContext
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'asyncContext: any;'
-      return:
-        type:
-          - any
-        description: |-
+  `callback`"Async" メソッドのパラメーターに渡す関数が実行されると、AsyncResult オブジェクトを受け取ります。このオブジェクトには、 `callback` 関数の唯一のパラメーターからアクセスできます。
+remarks: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === Office.AsyncResultStatus.Succeeded) {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: asyncContext
+  uid: office!Office.AsyncResult#asyncContext:member
+  package: office!
+  fullName: asyncContext
+  summary: 呼び出されたメソッドの省略可能なパラメーターに渡されたユーザー定義アイテムを、 `asyncContext` 渡されたときと同じ状態で取得します。 これにより、ユーザー定義のアイテムが返されます。これは、呼び出されたメソッドの省略可能なパラメーターに渡される任意の種類の JavaScript の型 (String、Number、Boolean、Object、Array、Null、または Undefined) を返します。 `asyncContext` asyncContext パラメーターに値を渡していない場合は、 Undefined が戻されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'asyncContext: any;'
+    return:
+      type: any
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getDataWithContext() {\n    var format = \"Your data: \";\n    Office.context.document.getSelectedDataAsync(\n        Office.CoercionType.Text, \n        { asyncContext: format }, \n        showDataWithContext);\n}\n\nfunction showDataWithContext(asyncResult) {\n    write(asyncResult.asyncContext + asyncResult.value);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- name: diagnostics
+  uid: office!Office.AsyncResult#diagnostics:member
+  package: office!
+  fullName: diagnostics
+  summary: '[エラー](xref:office!Office.Error:interface)が発生した場合に追加情報を提供する可能性があるオブジェクトを取得します。'
+  remarks: >-
+    これらのサポートされている Api で次のエラーが発生した場合、このプロパティは追加情報を返します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          function getDataWithContext() {
-              var format = "Your data: ";
-              Office.context.document.getSelectedDataAsync(
-                  Office.CoercionType.Text, 
-                  { asyncContext: format }, 
-                  showDataWithContext);
-          }
-
-          function showDataWithContext(asyncResult) {
-              write(asyncResult.asyncContext + asyncResult.value);
-          }
-          // Function that writes to a div with id='message' on the page.
-          function write(message){
-              document.getElementById('message').innerText += message; 
-          }
-          ```
-  - uid: 'office!Office.AsyncResult#diagnostics:member'
-    summary: '[エラー](xref:office!Office.Error:interface)が発生した場合に追加情報を提供する可能性があるオブジェクトを取得します。'
-    remarks: |-
-      これらのサポートされている Api で次のエラーが発生した場合、このプロパティは追加情報を返します。
-
-      *サポートされる Api*
-
-      `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
-
-      *サポートされるエラー* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>返される診断オブジェクトの説明 </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。 </td><td>JSON オブジェクトの HTTP エラーコード例:`{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。</td><td>JSON オブジェクト内の Exchange サーバーからのエラーメッセージ例:`{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
-    name: diagnostics
-    fullName: diagnostics
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'diagnostics: any;'
-      return:
-        type:
-          - any
-  - uid: 'office!Office.AsyncResult#error:member'
-    summary: 'エラーが発生した場合は、エラーの説明を提供する[Office の error](xref:office!Office.Error:interface)オブジェクトを取得します。'
-    name: error
-    fullName: error
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'error: Office.Error;'
-      return:
-        type:
-          - 'office!Office.Error:interface'
-        description: |-
+    *サポートされる Api*
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          function getData() {
-              Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
-                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                      write(asyncResult.error.message);
-                  }
-                  else {
-                      write(asyncResult.value);
-                  }
-              });
-          }
-          // Function that writes to a div with id='message' on the page.
-          function write(message){
-              document.getElementById('message').innerText += message; 
-          }
-          ```
-  - uid: 'office!Office.AsyncResult#status:member'
-    summary: '非同期操作の[AsyncResultStatus](xref:office!Office.AsyncResultStatus:enum)を取得します。'
-    name: status
-    fullName: status
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'status: AsyncResultStatus;'
-      return:
-        type:
-          - 'office!Office.AsyncResultStatus:enum'
-        description: |-
+    `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          function getData() {
-              Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
-                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                      write(asyncResult.error.message);
-                  }
-                  else {
-                      write(asyncResult.value);
-                  }
-              });
-          }
-          // Function that writes to a div with id='message' on the page.
-          function write(message){
-              document.getElementById('message').innerText += message; 
-          }
-          ```
-  - uid: 'office!Office.AsyncResult#value:member'
-    summary: この非同期操作のペイロードまたはコンテンツを取得します (ある場合)。
-    remarks: |-
-      "Async" メソッドの callback パラメーターに引数として渡される関数で、AsyncResult オブジェクトにアクセスします。たとえば、 `getSelectedDataAsync` `setSelectedDataAsync` [Document](xref:office!Office.Document:interface)オブジェクトのメソッドやメソッドなどです。
-
-      **注**: 特定の "Async" メソッドに対して value プロパティが返す内容は、そのメソッドの目的とコンテキストによって異なります。 To determine what is returned by the value property for an "Async" method, refer to the "Callback value" section of the method's topic.
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      function getData() {
-          Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
-              if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                  write(asyncResult.error.message);
-              }
-              else {
-                  write(asyncResult.value);
-              }
-          });
-      }
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-    name: value
-    fullName: value
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'value: T;'
-      return:
-        type:
-          - T
-references:
-  - uid: 'office!Office.Error:interface'
-    name: Office.Error
-  - uid: 'office!Office.AsyncResultStatus:enum'
-    name: AsyncResultStatus
+    *サポートされるエラー* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>返される診断オブジェクトの説明 </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。 </td><td>JSON オブジェクトの HTTP エラーコード例: `{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。</td><td>JSON オブジェクト内の Exchange サーバーからのエラーメッセージ例: `{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'diagnostics: any;'
+    return:
+      type: any
+- name: error
+  uid: office!Office.AsyncResult#error:member
+  package: office!
+  fullName: error
+  summary: エラーが発生した場合は、エラーの説明を提供する [Office の error](xref:office!Office.Error:interface) オブジェクトを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'error: Office.Error;'
+    return:
+      type: <xref uid="office!Office.Error:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- name: status
+  uid: office!Office.AsyncResult#status:member
+  package: office!
+  fullName: status
+  summary: 非同期操作の [AsyncResultStatus](xref:office!Office.AsyncResultStatus:enum) を取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'status: AsyncResultStatus;'
+    return:
+      type: <xref uid="office!Office.AsyncResultStatus:enum" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- name: value
+  uid: office!Office.AsyncResult#value:member
+  package: office!
+  fullName: value
+  summary: この非同期操作のペイロードまたはコンテンツを取得します (ある場合)。
+  remarks: "\"Async\" メソッドの callback パラメーターに引数として渡される関数で、AsyncResult オブジェクトにアクセスします。たとえば、 `getSelectedDataAsync` `setSelectedDataAsync` [Document](xref:office!Office.Document:interface) オブジェクトのメソッドやメソッドなどです。\n\n**注**: 特定の \"Async\" メソッドに対して value プロパティが返す内容は、そのメソッドの目的とコンテキストによって異なります。 To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'value: T;'
+    return:
+      type: T
+metadata:
+  ms.openlocfilehash: 61b33f43f91124b85b395617cbb540fc0a7d63f8
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49265900"
