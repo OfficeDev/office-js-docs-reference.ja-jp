@@ -1,195 +1,157 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.Image:class'
-    summary: |-
-      ワークシート内のイメージを表します。 対応する Shape オブジェクトを取得するには、イメージの図形を使用します。
-
-      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.Image
-    fullName: Excel.Image
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.Image#context:member'
-      - 'excel!Excel.Image#format:member'
-      - 'excel!Excel.Image#id:member'
-      - 'excel!Excel.Image#load:member(1)'
-      - 'excel!Excel.Image#load:member(2)'
-      - 'excel!Excel.Image#load:member(3)'
-      - 'excel!Excel.Image#shape:member'
-      - 'excel!Excel.Image#toJSON:member(1)'
-  - uid: 'excel!Excel.Image#context:member'
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.Image#format:member'
-    summary: |-
-      画像の形式を返します。
-
-      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: format
-    fullName: format
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly format: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG";'
-      return:
-        type:
-          - 'excel!Excel.Image#format~0:complex'
-        description: |-
+### YamlMime:TSType
+name: Excel.Image
+uid: excel!Excel.Image:class
+package: excel!
+fullName: Excel.Image
+summary: >-
+  ワークシート内のイメージを表します。 対応する Shape オブジェクトを取得するには、イメージの図形を使用します。
 
 
-          #### <a name="examples"></a>例
+  \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.Image#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: format
+  uid: excel!Excel.Image#format:member
+  package: excel!
+  fullName: format
+  summary: >-
+    画像の形式を返します。
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/44-shape/shape-images.yaml
-          await Excel.run(async (context) => {
-              const sheet = context.workbook.worksheets.getItem("Shapes");
-              const image = sheet.shapes.getItem("Image").image;
-              image.load("format");
-              await context.sync();
 
-              console.log("The image's format is: " + image.format);
-              await context.sync();
-          });
-          ```
-  - uid: 'excel!Excel.Image#id:member'
-    summary: |-
-      Image オブジェクトの図形識別子を指定します。
+    \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly format: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG";'
+    return:
+      type: <xref uid="excel!Excel.PictureFormat:enum" /> | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/44-shape/shape-images.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const image = sheet.shapes.getItem(\"Image\").image;\n    image.load(\"format\");\n    await context.sync();\n\n    console.log(\"The image's format is: \" + image.format);\n    await context.sync();\n});\n```"
+- name: id
+  uid: excel!Excel.Image#id:member
+  package: excel!
+  fullName: id
+  summary: >-
+    Image オブジェクトの図形識別子を指定します。
 
-      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: 'excel!Excel.Image#load:member(1)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.ImageLoadOptions): Excel.Image;'
-      return:
-        type:
-          - 'excel!Excel.Image:class'
-        description: ''
-      parameters:
-        - id: options
-          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
-          type:
-            - 'excel!Excel.Interfaces.ImageLoadOptions:interface'
-  - uid: 'excel!Excel.Image#load:member(2)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.Image;'
-      return:
-        type:
-          - 'excel!Excel.Image:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.Image#load:member(3)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+
+    \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: shape
+  uid: excel!Excel.Image#shape:member
+  package: excel!
+  fullName: shape
+  summary: >-
+    画像に関連付けられた Shape オブジェクトを返します。
+
+
+    \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly shape: Excel.Shape;'
+    return:
+      type: <xref uid="excel!Excel.Shape:class" />
+methods:
+- name: load(options)
+  uid: excel!Excel.Image#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.ImageLoadOptions): Excel.Image;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.ImageLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.Image:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.Image#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Image;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.Image:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.Image#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.Image;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Excel.Image;
-      return:
-        type:
-          - 'excel!Excel.Image:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'excel!Excel.Image#shape:member'
-    summary: |-
-      画像に関連付けられた Shape オブジェクトを返します。
-
-      \[[API セット: excelapi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: shape
-    fullName: shape
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly shape: Excel.Shape;'
-      return:
-        type:
-          - 'excel!Excel.Shape:class'
-  - uid: 'excel!Excel.Image#toJSON:member(1)'
-    summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の Excel オブジェクトは API オブジェクトであるのに対し `toJSON` て、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.ImageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.ImageData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.ImageData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.Image#format~0:complex'
-    name: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"
-    fullName: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"
-    spec.typeScript:
-      - uid: 'excel!Excel.PictureFormat:enum'
-        name: Excel.PictureFormat
-        fullName: Excel.PictureFormat
-      - name: ' | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"'
-        fullName: ' | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"'
-  - uid: 'excel!Excel.Image:class'
-    name: Excel.Image
-  - uid: 'excel!Excel.Interfaces.ImageLoadOptions:interface'
-    name: Excel.Interfaces.ImageLoadOptions
-  - uid: 'excel!Excel.Shape:class'
-    name: Excel.Shape
-  - uid: 'excel!Excel.Interfaces.ImageData:interface'
-    name: Excel.Interfaces.ImageData
+                }
+    return:
+      type: <xref uid="excel!Excel.Image:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.Image#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の Excel オブジェクトは API オブジェクトであるのに対し `toJSON` て、メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.ImageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.ImageData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.ImageData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 788325aa46b1350819dccd27474866b63b546af8
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49190696"
