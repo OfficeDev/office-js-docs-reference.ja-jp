@@ -1,241 +1,198 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.Setting:class'
-    summary: |-
-      Setting は、ドキュメントに保持される設定のキーと値のペアを表します (アドインごとのファイルごと)。 これらのカスタムキーと値のペアを使用して、コンテンツアドインまたは作業ウィンドウアドインに必要な状態またはライフサイクル情報を格納できます。 設定はドキュメント内で保持されるため、ユーザー情報やパスワードなどの機密情報や保護された情報を格納する場所ではないことに注意してください。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.Setting
-    fullName: Excel.Setting
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.Setting#context:member'
-      - 'excel!Excel.Setting#delete:member(1)'
-      - 'excel!Excel.Setting#key:member'
-      - 'excel!Excel.Setting#load:member(1)'
-      - 'excel!Excel.Setting#load:member(2)'
-      - 'excel!Excel.Setting#load:member(3)'
-      - 'excel!Excel.Setting#set:member(1)'
-      - 'excel!Excel.Setting#set:member(2)'
-      - 'excel!Excel.Setting#toJSON:member(1)'
-      - 'excel!Excel.Setting#value:member'
-  - uid: 'excel!Excel.Setting#context:member'
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.Setting#delete:member(1)'
-    summary: |-
-      設定を削除します。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: delete()
-    fullName: delete()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'delete(): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: Excel.Setting
+uid: excel!Excel.Setting:class
+package: excel!
+fullName: Excel.Setting
+summary: >-
+  Setting は、ドキュメントに保持される設定のキーと値のペアを表します (アドインごとのファイルごと)。 これらのカスタムキーと値のペアを使用して、コンテンツアドインまたは作業ウィンドウアドインに必要な状態またはライフサイクル情報を格納できます。 設定はドキュメント内で保持されるため、ユーザー情報やパスワードなどの機密情報や保護された情報を格納する場所ではないことに注意してください。
 
 
-          #### <a name="examples"></a>例
+  \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.Setting#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: key
+  uid: excel!Excel.Setting#key:member
+  package: excel!
+  fullName: key
+  summary: >-
+    設定の id を表すキー。
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/create-get-change-delete-settings.yaml
-          await Excel.run(async (context) => {
-              const settings = context.workbook.settings;
-              let needsReview = settings.getItem("NeedsReview");
-              needsReview.delete();
-              needsReview = settings.getItemOrNullObject("NeedsReview");
 
-              await context.sync();
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly key: string;'
+    return:
+      type: string
+- name: value
+  uid: excel!Excel.Setting#value:member
+  package: excel!
+  fullName: value
+  summary: >-
+    この設定に格納されている値を表します。
 
-              if (needsReview.isNullObject) {
-                  console.log("The setting has been deleted");
-              } else {
-                  console.log("The setting was not deleted");
-              }
 
-              await context.sync();
-          });
-          ```
-  - uid: 'excel!Excel.Setting#key:member'
-    summary: |-
-      設定の id を表すキー。
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'value: any;'
+    return:
+      type: any
+methods:
+- name: delete()
+  uid: excel!Excel.Setting#delete:member(1)
+  package: excel!
+  fullName: delete()
+  summary: >-
+    設定を削除します。
 
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: key
-    fullName: key
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly key: string;'
-      return:
-        type:
-          - string
-  - uid: 'excel!Excel.Setting#load:member(1)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
-      return:
-        type:
-          - 'excel!Excel.Setting:class'
-        description: ''
-      parameters:
-        - id: options
-          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
-          type:
-            - 'excel!Excel.Interfaces.SettingLoadOptions:interface'
-  - uid: 'excel!Excel.Setting#load:member(2)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.Setting;'
-      return:
-        type:
-          - 'excel!Excel.Setting:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.Setting#load:member(3)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/create-get-change-delete-settings.yaml\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
+- name: load(options)
+  uid: excel!Excel.Setting#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.SettingLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.Setting:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.Setting#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.Setting:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.Setting#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.Setting;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Excel.Setting;
-      return:
-        type:
-          - 'excel!Excel.Setting:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'excel!Excel.Setting#set:member(1)'
-    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
-    remarks: |-
-      このメソッドには、次の追加のシグネチャがあります。
+                }
+    return:
+      type: <xref uid="excel!Excel.Setting:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.Setting#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加のシグネチャがあります。
 
-      `set(properties: Excel.Setting): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
-          type:
-            - 'excel!Excel.Interfaces.SettingUpdateData:interface'
-        - id: options
-          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'excel!Excel.Setting#set:member(2)'
-    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Excel.Setting): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'excel!Excel.Setting:class'
-  - uid: 'excel!Excel.Setting#toJSON:member(1)'
-    summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の Excel 設定オブジェクトは API オブジェクトですが、この `toJSON` メソッドはプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Excel.Interfaces.SettingData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.SettingData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.SettingData:interface'
-        description: ''
-  - uid: 'excel!Excel.Setting#value:member'
-    summary: |-
-      この設定に格納されている値を表します。
 
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: value
-    fullName: value
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'value: any;'
-      return:
-        type:
-          - any
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.Setting:class'
-    name: Excel.Setting
-  - uid: 'excel!Excel.Interfaces.SettingLoadOptions:interface'
-    name: Excel.Interfaces.SettingLoadOptions
-  - uid: 'excel!Excel.Interfaces.SettingUpdateData:interface'
-    name: Interfaces.SettingUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'excel!Excel.Interfaces.SettingData:interface'
-    name: Excel.Interfaces.SettingData
+    `set(properties: Excel.Setting): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="excel!Excel.Interfaces.SettingUpdateData:interface" />
+    - id: options
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.Setting#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.Setting): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.Setting:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.Setting#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の Excel 設定オブジェクトは API オブジェクトですが、この `toJSON` メソッドはプレーンな JavaScript オブジェクト (として型指定されます) を返します。`Excel.Interfaces.SettingData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.SettingData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.SettingData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 98622d7d9f7c55063b574b02fbfbaee259f21b5d
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49202761"
