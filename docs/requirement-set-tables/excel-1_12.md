@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|グラフ軸のタイトルに対して、テキストの方向を指定する角度を指定します。|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues (dimension: Excel. ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|グラフの系列の1つの次元から値を取得します。|
-|[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|コメントのコンテンツタイプを取得します。|
-|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[コメントの詳細](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|コメントの Id とそれに関連する返信の Id が含まれているコメントの詳細配列を取得します。|
+|[コメント](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|コメントのコンテンツタイプを取得します。|
+|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[コメントの詳細](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|`CommentDetail`関連付けられている返信のコメント id と id を含む配列を取得します。|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|イベントのソースを指定します。|
 ||[type](/javascript/api/excel/excel.commentaddedeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.commentaddedeventargs#worksheetid)|イベントが発生したワークシートの Id を取得します。|
@@ -15,7 +15,7 @@
 |[CommentCollection](/javascript/api/excel/excel.commentcollection)|[onAdded](/javascript/api/excel/excel.commentcollection#onadded)|コメントが追加されるときに発生します。|
 ||[onChanged](/javascript/api/excel/excel.commentcollection#onchanged)|返信が削除されたときを含め、コメントのコレクション内のコメントまたは返信が変更されたときに発生します。|
 ||[onDeleted](/javascript/api/excel/excel.commentcollection#ondeleted)|コメントのコレクションでコメントが削除されると発生します。|
-|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[コメントの詳細](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|コメントの Id とそれに関連する返信の Id が含まれているコメントの詳細配列を取得します。|
+|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[コメントの詳細](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|`CommentDetail`関連付けられている返信のコメント id と id を含む配列を取得します。|
 ||[source](/javascript/api/excel/excel.commentdeletedeventargs#source)|イベントのソースを指定します。|
 ||[type](/javascript/api/excel/excel.commentdeletedeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.commentdeletedeventargs#worksheetid)|イベントが発生したワークシートの Id を取得します。|
@@ -47,7 +47,7 @@
 ||[condition](/javascript/api/excel/excel.pivotlabelfilter#condition)|必要なフィルター条件を定義するフィルターの条件を指定します。|
 ||[排他](/javascript/api/excel/excel.pivotlabelfilter#exclusive)|True の場合、フィルターは条件に一致するアイテムを *除外* します。|
 ||[lowerBound](/javascript/api/excel/excel.pivotlabelfilter#lowerbound)|フィルター条件間の範囲の下限。|
-||[substring](/javascript/api/excel/excel.pivotlabelfilter#substring)|`BeginsWith`、、 `EndsWith` およびフィルター条件で使用される部分文字列 `Contains` 。|
+||[副](/javascript/api/excel/excel.pivotlabelfilter#substring)|`BeginsWith`、、 `EndsWith` およびフィルター条件で使用される部分文字列 `Contains` 。|
 ||[upperBound](/javascript/api/excel/excel.pivotlabelfilter#upperbound)|フィルター条件の間の範囲の上限を指定します。|
 |[PivotManualFilter](/javascript/api/excel/excel.pivotmanualfilter)|[selectedItems](/javascript/api/excel/excel.pivotmanualfilter#selecteditems)|手動でフィルター処理するために選択されたアイテムのリスト。|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[Allow多重 Filtersperfield](/javascript/api/excel/excel.pivottable#allowmultiplefiltersperfield)|ピボットテーブルで、テーブル内の特定の PivotField に対して複数の PivotFilters を適用できるかどうかを指定します。|
@@ -76,11 +76,11 @@
 |[RangeAreasCollection](/javascript/api/excel/excel.rangeareascollection)|[getCount()](/javascript/api/excel/excel.rangeareascollection#getcount--)|このコレクション内の RangeAreas オブジェクトの数を取得します。|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.rangeareascollection#getitemat-index-)|コレクション内の位置に基づいて RangeAreas オブジェクトを返します。|
 ||[items](/javascript/api/excel/excel.rangeareascollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-|[WorkbookRangeAreas](/javascript/api/excel/excel.workbookrangeareas)|[getRangeAreasBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasbysheet-key-)|`RangeAreas`ワークシート id またはコレクション内の名前に基づいてオブジェクトを返します。|
-||[getRangeAreasOrNullObjectBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|`RangeAreas`ワークシートの名前またはコレクション内の id に基づいてオブジェクトを返します。|
+|[WorkbookRangeAreas](/javascript/api/excel/excel.workbookrangeareas)|[getRangeAreasBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasbysheet-key-)|`RangeAreas`ワークシート ID またはコレクション内の名前に基づいてオブジェクトを返します。|
+||[getRangeAreasOrNullObjectBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|`RangeAreas`ワークシートの名前またはコレクション内の ID に基づいてオブジェクトを返します。|
 ||[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|A1 形式のアドレスの配列を返します。|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|オブジェクトを返し `RangeAreasCollection` ます。|
-||[域](/javascript/api/excel/excel.workbookrangeareas#ranges)|オブジェクト内のこのオブジェクトを構成する範囲を返し `RangeCollection` ます。|
+||[域](/javascript/api/excel/excel.workbookrangeareas#ranges)|オブジェクト内のこのオブジェクトを構成する範囲を返し  `RangeCollection`   ます。|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|ワークシートレベルのカスタムプロパティのコレクションを取得します。|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|カスタム プロパティを削除します。|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|カスタム プロパティのキーを取得します。|
