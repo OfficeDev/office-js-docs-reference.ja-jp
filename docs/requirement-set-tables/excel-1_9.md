@@ -280,7 +280,7 @@
 |[RangeFill](/javascript/api/excel/excel.rangefill)|[pattern](/javascript/api/excel/excel.rangefill#pattern)|範囲のパターンを指定します。|
 ||[patternColor](/javascript/api/excel/excel.rangefill#patterncolor)|範囲パターンの色を表す HTML カラーコード ("FFA500" など)、または名前付き #RRGGBB の HTML 色 (例: 「オレンジ」) を指定します。|
 ||[patternTintAndShade](/javascript/api/excel/excel.rangefill#patterntintandshade)|範囲の塗りつぶしに対してパターンの色を明るくまたは暗くする double を指定します。値は、-1 (最も暗い) から 1 (最も明るい) までの範囲で、元の色は0になります。|
-||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|範囲の塗りつぶしの色を明るくまたは暗くする double を指定します。値は、-1 (最も暗い) から 1 (最も明るい) までの範囲で、元の色は0になります。|
+||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|範囲の塗りつぶしの色を明るくまたは暗くする倍精度浮動小数点型 (double) を指定します。|
 |[RangeFont](/javascript/api/excel/excel.rangefont)|[strikethrough](/javascript/api/excel/excel.rangefont#strikethrough)|フォントの取り消し線の状態を指定します。|
 ||[subscript](/javascript/api/excel/excel.rangefont#subscript)|フォントの下付き文字の状態を指定します。|
 ||[superscript](/javascript/api/excel/excel.rangefont#superscript)|フォントの上付き文字の状態を指定します。|
