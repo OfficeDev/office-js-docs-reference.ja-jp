@@ -1,271 +1,225 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.WorkbookRangeAreas:class'
-    summary: |-
-      複数のワークシート内の1つまたは複数の四角形の範囲のコレクションを表します。
-
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.WorkbookRangeAreas
-    fullName: Excel.WorkbookRangeAreas
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.WorkbookRangeAreas#addresses:member'
-      - 'excel!Excel.WorkbookRangeAreas#areas:member'
-      - 'excel!Excel.WorkbookRangeAreas#context:member'
-      - 'excel!Excel.WorkbookRangeAreas#getRangeAreasBySheet:member(1)'
-      - 'excel!Excel.WorkbookRangeAreas#getRangeAreasOrNullObjectBySheet:member(1)'
-      - 'excel!Excel.WorkbookRangeAreas#load:member(1)'
-      - 'excel!Excel.WorkbookRangeAreas#load:member(2)'
-      - 'excel!Excel.WorkbookRangeAreas#load:member(3)'
-      - 'excel!Excel.WorkbookRangeAreas#ranges:member'
-      - 'excel!Excel.WorkbookRangeAreas#toJSON:member(1)'
-      - 'excel!Excel.WorkbookRangeAreas#track:member(1)'
-      - 'excel!Excel.WorkbookRangeAreas#untrack:member(1)'
-  - uid: 'excel!Excel.WorkbookRangeAreas#addresses:member'
-    summary: |-
-      A1 形式のアドレスの配列を返します。 Address 値には、セルの各長方形ブロックのワークシート名が格納されます (例: "Sheet1!A1: B4、Sheet1!D1: D4 ")。 読み取り専用です。
-
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: addresses
-    fullName: addresses
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly addresses: string[];'
-      return:
-        type:
-          - 'string[]'
-  - uid: 'excel!Excel.WorkbookRangeAreas#areas:member'
-    summary: |-
-      オブジェクトを返し `RangeAreasCollection` ます。 `RangeAreas`コレクション内の各オブジェクトは、1つのワークシート内の1つまたは複数の四角形の範囲を表します。
-
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: areas
-    fullName: areas
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly areas: Excel.RangeAreasCollection;'
-      return:
-        type:
-          - 'excel!Excel.RangeAreasCollection:class'
-        description: |-
+### YamlMime:TSType
+name: Excel.WorkbookRangeAreas
+uid: excel!Excel.WorkbookRangeAreas:class
+package: excel!
+fullName: Excel.WorkbookRangeAreas
+summary: >-
+  複数のワークシート内の1つまたは複数の四角形の範囲のコレクションを表します。
 
 
-          #### <a name="examples"></a>例
+  \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: addresses
+  uid: excel!Excel.WorkbookRangeAreas#addresses:member
+  package: excel!
+  fullName: addresses
+  summary: >-
+    A1 形式のアドレスの配列を返します。 Address 値には、セルの各長方形ブロックのワークシート名が格納されます (例: "Sheet1!A1: B4、Sheet1!D1: D4 ")。 読み取り専用です。
 
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/direct-precedents.yaml
-          await Excel.run(async (context) => {
-            // Precedents are cells referenced by the formula in a cell.
-            let range = context.workbook.getActiveCell();
-            let directPrecedents = range.getDirectPrecedents();
-            range.load("address");
-            directPrecedents.areas.load("address");
-            await context.sync();
 
-            console.log(`Direct precedent cells of ${range.address}:`);
+    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly addresses: string[];'
+    return:
+      type: string[]
+- name: areas
+  uid: excel!Excel.WorkbookRangeAreas#areas:member
+  package: excel!
+  fullName: areas
+  summary: >-
+    オブジェクトを返し `RangeAreasCollection` ます。 `RangeAreas`コレクション内の各オブジェクトは、1つのワークシート内の1つまたは複数の四角形の範囲を表します。
 
-            // Use the direct precedents API to loop through precedents of the active cell. 
-            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
-              // Highlight and console the address of each precedent cell.
-              directPrecedents.areas.items[i].format.fill.color = "Yellow";
-              console.log(`  ${directPrecedents.areas.items[i].address}`);
-            }
-            await context.sync();
-          });
-          ```
-  - uid: 'excel!Excel.WorkbookRangeAreas#context:member'
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.WorkbookRangeAreas#getRangeAreasBySheet:member(1)'
-    summary: |-
-      `RangeAreas`ワークシート id またはコレクション内の名前に基づいてオブジェクトを返します。
 
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getRangeAreasBySheet(key)
-    fullName: getRangeAreasBySheet(key)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRangeAreasBySheet(key: string): Excel.RangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.RangeAreas:class'
-        description: ''
-      parameters:
-        - id: key
-          description: ワークシートの名前または id。
-          type:
-            - string
-  - uid: 'excel!Excel.WorkbookRangeAreas#getRangeAreasOrNullObjectBySheet:member(1)'
-    summary: |-
-      `RangeAreas`ワークシートの名前またはコレクション内の id に基づいてオブジェクトを返します。 ワークシートが存在しない場合は null オブジェクトを返します。
+    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly areas: Excel.RangeAreasCollection;'
+    return:
+      type: <xref uid="excel!Excel.RangeAreasCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
+- name: context
+  uid: excel!Excel.WorkbookRangeAreas#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: ranges
+  uid: excel!Excel.WorkbookRangeAreas#ranges:member
+  package: excel!
+  fullName: ranges
+  summary: >-
+    オブジェクト内のこのオブジェクトを構成する範囲を返し `RangeCollection` ます。
 
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getRangeAreasOrNullObjectBySheet(key)
-    fullName: getRangeAreasOrNullObjectBySheet(key)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRangeAreasOrNullObjectBySheet(key: string): Excel.RangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.RangeAreas:class'
-        description: ''
-      parameters:
-        - id: key
-          description: ワークシートの名前または id。
-          type:
-            - string
-  - uid: 'excel!Excel.WorkbookRangeAreas#load:member(1)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.WorkbookRangeAreasLoadOptions): Excel.WorkbookRangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.WorkbookRangeAreas:class'
-        description: ''
-      parameters:
-        - id: options
-          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
-          type:
-            - 'excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface'
-  - uid: 'excel!Excel.WorkbookRangeAreas#load:member(2)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.WorkbookRangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.WorkbookRangeAreas:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.WorkbookRangeAreas#load:member(3)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+
+    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly ranges: Excel.RangeCollection;'
+    return:
+      type: <xref uid="excel!Excel.RangeCollection:class" />
+methods:
+- name: getRangeAreasBySheet(key)
+  uid: excel!Excel.WorkbookRangeAreas#getRangeAreasBySheet:member(1)
+  package: excel!
+  fullName: getRangeAreasBySheet(key)
+  summary: >-
+    `RangeAreas`ワークシート ID またはコレクション内の名前に基づいてオブジェクトを返します。
+
+
+    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeAreasBySheet(key: string): Excel.RangeAreas;'
+    parameters:
+    - id: key
+      description: ワークシートの名前または id。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: getRangeAreasOrNullObjectBySheet(key)
+  uid: excel!Excel.WorkbookRangeAreas#getRangeAreasOrNullObjectBySheet:member(1)
+  package: excel!
+  fullName: getRangeAreasOrNullObjectBySheet(key)
+  summary: >-
+    `RangeAreas`ワークシートの名前またはコレクション内の ID に基づいてオブジェクトを返します。 ワークシートが存在しない場合は null オブジェクトを返します。
+
+
+    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeAreasOrNullObjectBySheet(key: string): Excel.RangeAreas;'
+    parameters:
+    - id: key
+      description: ワークシートの名前または id。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorkbookRangeAreasLoadOptions): Excel.WorkbookRangeAreas;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorkbookRangeAreas;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.WorkbookRangeAreas;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Excel.WorkbookRangeAreas;
-      return:
-        type:
-          - 'excel!Excel.WorkbookRangeAreas:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'excel!Excel.WorkbookRangeAreas#ranges:member'
-    summary: |-
-      オブジェクト内のこのオブジェクトを構成する範囲を返し `RangeCollection` ます。
-
-      \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: ranges
-    fullName: ranges
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly ranges: Excel.RangeCollection;'
-      return:
-        type:
-          - 'excel!Excel.RangeCollection:class'
-  - uid: 'excel!Excel.WorkbookRangeAreas#toJSON:member(1)'
-    summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の WorkbookRangeAreas オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.WorkbookRangeAreasData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.WorkbookRangeAreasData:interface'
-        description: ''
-  - uid: 'excel!Excel.WorkbookRangeAreas#track:member(1)'
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。 `context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間でこのオブジェクトを使用していて、 `.sync` "..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): Excel.WorkbookRangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.WorkbookRangeAreas:class'
-        description: ''
-  - uid: 'excel!Excel.WorkbookRangeAreas#untrack:member(1)'
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、の短縮形です。 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリリリースを有効にするには、を呼び出す必要があり `context.sync()` ます。
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): Excel.WorkbookRangeAreas;'
-      return:
-        type:
-          - 'excel!Excel.WorkbookRangeAreas:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.RangeAreasCollection:class'
-    name: Excel.RangeAreasCollection
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.RangeAreas:class'
-    name: Excel.RangeAreas
-  - uid: 'excel!Excel.WorkbookRangeAreas:class'
-    name: Excel.WorkbookRangeAreas
-  - uid: 'excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface'
-    name: Excel.Interfaces.WorkbookRangeAreasLoadOptions
-  - uid: 'excel!Excel.RangeCollection:class'
-    name: Excel.RangeCollection
-  - uid: 'excel!Excel.Interfaces.WorkbookRangeAreasData:interface'
-    name: Excel.Interfaces.WorkbookRangeAreasData
+                }
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorkbookRangeAreas#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の WorkbookRangeAreas オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorkbookRangeAreasData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasData:interface" />
+      description: ''
+- name: track()
+  uid: excel!Excel.WorkbookRangeAreas#track:member(1)
+  package: excel!
+  fullName: track()
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。 `context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間でこのオブジェクトを使用していて、 `.sync` "..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): Excel.WorkbookRangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: untrack()
+  uid: excel!Excel.WorkbookRangeAreas#untrack:member(1)
+  package: excel!
+  fullName: untrack()
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、の短縮形です。 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリリリースを有効にするには、を呼び出す必要があり `context.sync()` ます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): Excel.WorkbookRangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 6603e5d6d3ae3bbba385d444ce8d2d1ee12f8eca
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49338266"
