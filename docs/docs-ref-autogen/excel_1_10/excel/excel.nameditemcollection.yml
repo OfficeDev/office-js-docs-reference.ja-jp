@@ -1,343 +1,225 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.NamedItemCollection:class'
-    summary: |-
-      ブックまたはワークシートの一部であるすべての NamedItem オブジェクトのコレクションです。これに到達した方法によって異なります。
-
-      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.NamedItemCollection
-    fullName: Excel.NamedItemCollection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.NamedItemCollection#add:member(1)'
-      - 'excel!Excel.NamedItemCollection#addFormulaLocal:member(1)'
-      - 'excel!Excel.NamedItemCollection#context:member'
-      - 'excel!Excel.NamedItemCollection#getCount:member(1)'
-      - 'excel!Excel.NamedItemCollection#getItem:member(1)'
-      - 'excel!Excel.NamedItemCollection#getItemOrNullObject:member(1)'
-      - 'excel!Excel.NamedItemCollection#items:member'
-      - 'excel!Excel.NamedItemCollection#load:member(1)'
-      - 'excel!Excel.NamedItemCollection#load:member(2)'
-      - 'excel!Excel.NamedItemCollection#load:member(3)'
-      - 'excel!Excel.NamedItemCollection#toJSON:member(1)'
-  - uid: 'excel!Excel.NamedItemCollection#add:member(1)'
-    summary: |-
-      指定のスコープのコレクションに新しい名前を追加します。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: 'add(name, reference, comment)'
-    fullName: 'add(name, reference, comment)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'add(name: string, reference: Range | string, comment?: string): Excel.NamedItem;'
-      return:
-        type:
-          - 'excel!Excel.NamedItem:class'
-        description: |-
+### YamlMime:TSType
+name: Excel.NamedItemCollection
+uid: excel!Excel.NamedItemCollection:class
+package: excel!
+fullName: Excel.NamedItemCollection
+summary: >-
+  ブックまたはワークシートの一部であるすべての NamedItem オブジェクトのコレクションです。これに到達した方法によって異なります。
 
 
-          #### <a name="examples"></a>例
-
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/34-named-item/create-and-remove-named-item.yaml
-          await Excel.run(async (context) => {
-              const sheet = context.workbook.worksheets.getItem("Sample");
-              const headerRange = sheet.getRange("A1:D1");
-
-              sheet.names.add("ExpensesHeader", headerRange);
-              const namedItems = sheet.names.load("name, type");
-
-              await context.sync();
-          });
-          ```
-      parameters:
-        - id: name
-          description: 名前付きの項目の名前。
-          type:
-            - string
-        - id: reference
-          description: 名前が参照する数式または範囲。
-          type:
-            - 'excel!Excel.NamedItemCollection#add~0:complex'
-        - id: comment
-          description: 省略可能。 名前付きアイテムに関連付けられているコメント。
-          type:
-            - string
-  - uid: 'excel!Excel.NamedItemCollection#addFormulaLocal:member(1)'
-    summary: |-
-      ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: 'addFormulaLocal(name, formula, comment)'
-    fullName: 'addFormulaLocal(name, formula, comment)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addFormulaLocal(name: string, formula: string, comment?: string): Excel.NamedItem;'
-      return:
-        type:
-          - 'excel!Excel.NamedItem:class'
-        description: ''
-      parameters:
-        - id: name
-          description: 名前付きアイテムの "名前"。
-          type:
-            - string
-        - id: formula
-          description: 名前が参照するユーザーのロケールの数式。
-          type:
-            - string
-        - id: comment
-          description: 省略可能。 名前付きアイテムに関連付けられているコメント。
-          type:
-            - string
-  - uid: 'excel!Excel.NamedItemCollection#context:member'
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.NamedItemCollection#getCount:member(1)'
-    summary: |-
-      コレクションに含まれる名前付きアイテムの数を取得します。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getCount()
-    fullName: getCount()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getCount(): OfficeExtension.ClientResult<number>;'
-      return:
-        type:
-          - 'excel!Excel.NamedItemCollection#getCount~0:complex'
-        description: ''
-  - uid: 'excel!Excel.NamedItemCollection#getItem:member(1)'
-    summary: |-
-      名前を使用して、NamedItem オブジェクトを取得します。
-
-      \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getItem(name)
-    fullName: getItem(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItem(name: string): Excel.NamedItem;'
-      return:
-        type:
-          - 'excel!Excel.NamedItem:class'
-        description: |-
+  \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.NamedItemCollection#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.NamedItemCollection#items:member
+  package: excel!
+  fullName: items
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.NamedItem[];'
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />[]
+methods:
+- name: add(name, reference, comment)
+  uid: excel!Excel.NamedItemCollection#add:member(1)
+  package: excel!
+  fullName: add(name, reference, comment)
+  summary: >-
+    指定のスコープのコレクションに新しい名前を追加します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          Excel.run(function (ctx) { 
-              var sheetName = 'Sheet1';
-              var nameditem = ctx.workbook.names.getItem(sheetName);
-              nameditem.load('type');
-              return ctx.sync().then(function() {
-                      console.log(nameditem.type);
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: name
-          description: Nameditem 名。
-          type:
-            - string
-  - uid: 'excel!Excel.NamedItemCollection#getItemOrNullObject:member(1)'
-    summary: |-
-      名前を使用して、NamedItem オブジェクトを取得します。 nameditem オブジェクトが存在しない場合は null オブジェクトを返します。
-
-      \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getItemOrNullObject(name)
-    fullName: getItemOrNullObject(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItemOrNullObject(name: string): Excel.NamedItem;'
-      return:
-        type:
-          - 'excel!Excel.NamedItem:class'
-        description: ''
-      parameters:
-        - id: name
-          description: Nameditem 名。
-          type:
-            - string
-  - uid: 'excel!Excel.NamedItemCollection#items:member'
-    summary: このコレクション内に読み込まれた子アイテムを取得します。
-    name: items
-    fullName: items
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly items: Excel.NamedItem[];'
-      return:
-        type:
-          - 'excel!Excel.NamedItemCollection#items~0:complex'
-  - uid: 'excel!Excel.NamedItemCollection#load:member(1)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.NamedItemCollection;'
-      return:
-        type:
-          - 'excel!Excel.NamedItemCollection:class'
-        description: ''
-      parameters:
-        - id: options
-          description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
-          type:
-            - 'excel!Excel.NamedItemCollection#load~0:complex'
-  - uid: 'excel!Excel.NamedItemCollection#load:member(2)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.NamedItemCollection;'
-      return:
-        type:
-          - 'excel!Excel.NamedItemCollection:class'
-        description: |-
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name: string, reference: Range | string, comment?: string): Excel.NamedItem;'
+    parameters:
+    - id: name
+      description: 名前付きの項目の名前。
+      type: string
+    - id: reference
+      description: 名前が参照する数式または範囲。
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    - id: comment
+      description: 省略可能。 名前付きアイテムに関連付けられているコメント。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/34-named-item/create-and-remove-named-item.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const headerRange = sheet.getRange(\"A1:D1\");\n\n    sheet.names.add(\"ExpensesHeader\", headerRange);\n    const namedItems = sheet.names.load(\"name, type\");\n\n    await context.sync();\n});\n```"
+- name: addFormulaLocal(name, formula, comment)
+  uid: excel!Excel.NamedItemCollection#addFormulaLocal:member(1)
+  package: excel!
+  fullName: addFormulaLocal(name, formula, comment)
+  summary: >-
+    ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。
 
 
-          #### <a name="examples"></a>例
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFormulaLocal(name: string, formula: string, comment?: string): Excel.NamedItem;'
+    parameters:
+    - id: name
+      description: 名前付きアイテムの "名前"。
+      type: string
+    - id: formula
+      description: 名前が参照するユーザーのロケールの数式。
+      type: string
+    - id: comment
+      description: 省略可能。 名前付きアイテムに関連付けられているコメント。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: ''
+- name: getCount()
+  uid: excel!Excel.NamedItemCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    コレクションに含まれる名前付きアイテムの数を取得します。
 
-          ```javascript
-          Excel.run(function (ctx) { 
-              var nameditems = ctx.workbook.names;
-              nameditems.load('items');
-              return ctx.sync().then(function() {
-                  for (var i = 0; i < nameditems.items.length; i++)
-                  {
-                      console.log(nameditems.items[i].name);
-                      console.log(nameditems.items[i].index);
-                  }
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.NamedItemCollection#load:member(3)'
-    summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.NamedItemCollection;'
-      return:
-        type:
-          - 'excel!Excel.NamedItemCollection:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
-          type:
-            - 'office!OfficeExtension.LoadOption:interface'
-  - uid: 'excel!Excel.NamedItemCollection#toJSON:member(1)'
-    summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Excel.NamedItemCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.NamedItemCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.NamedItemCollectionData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.NamedItemCollectionData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.NamedItem:class'
-    name: Excel.NamedItem
-  - uid: 'excel!Excel.NamedItemCollection#add~0:complex'
-    name: Range | string
-    fullName: Excel.Range | string
-    spec.typeScript:
-      - uid: 'excel!Excel.Range:class'
-        name: Range
-        fullName: Excel.Range
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.NamedItemCollection#getCount~0:complex'
-    name: OfficeExtension.ClientResult<number>
-    fullName: OfficeExtension.ClientResult<number>
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <number>
-        fullName: <number>
-  - uid: 'excel!Excel.NamedItemCollection#items~0:complex'
-    name: 'Excel.NamedItem[]'
-    fullName: 'Excel.NamedItem[]'
-    spec.typeScript:
-      - uid: 'excel!Excel.NamedItem:class'
-        name: Excel.NamedItem
-        fullName: Excel.NamedItem
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'excel!Excel.NamedItemCollection:class'
-    name: Excel.NamedItemCollection
-  - uid: 'excel!Excel.NamedItemCollection#load~0:complex'
-    name: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    fullName: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    spec.typeScript:
-      - uid: 'excel!Excel.Interfaces.NamedItemCollectionLoadOptions:interface'
-        name: Excel.Interfaces.NamedItemCollectionLoadOptions
-        fullName: Excel.Interfaces.NamedItemCollectionLoadOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
-        name: Excel.Interfaces.CollectionLoadOptions
-        fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'office!OfficeExtension.LoadOption:interface'
-    name: OfficeExtension.LoadOption
-  - uid: 'excel!Excel.Interfaces.NamedItemCollectionData:interface'
-    name: Excel.Interfaces.NamedItemCollectionData
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(name)
+  uid: excel!Excel.NamedItemCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(name)
+  summary: >-
+    名前を使用して、NamedItem オブジェクトを取得します。
+
+
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(name: string): Excel.NamedItem;'
+    parameters:
+    - id: name
+      description: Nameditem 名。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = 'Sheet1';\n    var nameditem = ctx.workbook.names.getItem(sheetName);\n    nameditem.load('type');\n    return ctx.sync().then(function() {\n            console.log(nameditem.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItemOrNullObject(name)
+  uid: excel!Excel.NamedItemCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(name)
+  summary: >-
+    名前を使用して、NamedItem オブジェクトを取得します。 nameditem オブジェクトが存在しない場合は null オブジェクトを返します。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(name: string): Excel.NamedItem;'
+    parameters:
+    - id: name
+      description: Nameditem 名。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.NamedItemCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.NamedItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.NamedItemCollection;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.NamedItemCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.NamedItemCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.NamedItemCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.NamedItemCollection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.NamedItemCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var nameditems = ctx.workbook.names;\n    nameditems.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < nameditems.items.length; i++)\n        {\n            console.log(nameditems.items[i].name);\n            console.log(nameditems.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.NamedItemCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.NamedItemCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.NamedItemCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.NamedItemCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Excel.NamedItemCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.NamedItemCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.NamedItemCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.NamedItemCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 1458969765e041ce99e5724a1374793b99728f3e
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49164091"
