@@ -4,10 +4,10 @@ uid: excel!Excel.CommentCollection:class
 package: excel!
 fullName: Excel.CommentCollection
 summary: >-
-  ブックの一部である comment オブジェクトのコレクションを表します。
+  ブックの一部であるコメント オブジェクトのコレクションを表します。
 
 
-  \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.CommentCollection#context:member
   package: excel!
   fullName: context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -42,10 +42,10 @@ properties:
   package: excel!
   fullName: onAdded
   summary: >-
-    コメントが追加されるときに発生します。
+    コメントが追加された際に発生します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -53,16 +53,16 @@ properties:
     content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.CommentAddedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.CommentAddedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentAdded(event: Excel.CommentAddedEventArgs) {\n    await Excel.run(async (context) => {\n        // Retrieve the added comment using the comment ID.\n        // Note: This method assumes only a single comment is added at a time. \n        const addedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);\n\n        // Load the added comment's data.\n        addedComment.load([\"content\", \"authorName\", \"creationDate\"]);\n\n        await context.sync();\n\n        // Print out the added comment's data.\n        console.log(`A comment was added:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n        console.log(`    Comment content:${addedComment.content}`);\n        console.log(`    Comment author:${addedComment.authorName}`);\n        console.log(`    Creation date:${addedComment.creationDate}`);\n    });\n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentAdded(event: Excel.CommentAddedEventArgs) {\n    await Excel.run(async (context) => {\n        // Retrieve the added comment using the comment ID.\n        // Note: This method assumes only a single comment is added at a time. \n        const addedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);\n\n        // Load the added comment's data.\n        addedComment.load([\"content\", \"authorName\", \"creationDate\"]);\n\n        await context.sync();\n\n        // Print out the added comment's data.\n        console.log(`A comment was added:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n        console.log(`    Comment content:${addedComment.content}`);\n        console.log(`    Comment author:${addedComment.authorName}`);\n        console.log(`    Creation date:${addedComment.creationDate}`);\n    });\n}\n```"
 - name: onChanged
   uid: excel!Excel.CommentCollection#onChanged:member
   package: excel!
   fullName: onChanged
   summary: >-
-    返信が削除されたときを含め、コメントのコレクション内のコメントまたは返信が変更されたときに発生します。
+    返信が削除された場合など、コメント コレクション内のコメントまたは返信が変更された場合に発生します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -70,16 +70,16 @@ properties:
     content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.CommentChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.CommentChangedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentChanged(event: Excel.CommentChangedEventArgs) {\n    await Excel.run(async (context) => {\n        // Retrieve the changed comment using the comment ID.\n        // Note: This method assumes only a single comment is changed at a time. \n        const changedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);\n\n        // Load the changed comment's data.\n        changedComment.load([\"content\", \"authorName\", \"creationDate\"]);\n\n        await context.sync();\n\n        // Print out the changed comment's data.\n        console.log(`A comment was changed:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n        console.log(`    Updated comment content: ${changedComment.content}`);\n        console.log(`    Comment author: ${changedComment.authorName}`);\n        console.log(`    Creation date: ${changedComment.creationDate}`);\n    });\n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentChanged(event: Excel.CommentChangedEventArgs) {\n    await Excel.run(async (context) => {\n        // Retrieve the changed comment using the comment ID.\n        // Note: This method assumes only a single comment is changed at a time. \n        const changedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);\n\n        // Load the changed comment's data.\n        changedComment.load([\"content\", \"authorName\", \"creationDate\"]);\n\n        await context.sync();\n\n        // Print out the changed comment's data.\n        console.log(`A comment was changed:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n        console.log(`    Updated comment content: ${changedComment.content}`);\n        console.log(`    Comment author: ${changedComment.authorName}`);\n        console.log(`    Creation date: ${changedComment.creationDate}`);\n    });\n}\n```"
 - name: onDeleted
   uid: excel!Excel.CommentCollection#onDeleted:member
   package: excel!
   fullName: onDeleted
   summary: >-
-    コメントのコレクションでコメントが削除されると発生します。
+    コメント コレクション内のコメントが削除された場合に発生します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -87,17 +87,17 @@ properties:
     content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.CommentDeletedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.CommentDeletedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentDeleted(event: Excel.CommentDeletedEventArgs) {\n    await Excel.run(async (context) => {\n        // Print out the deleted comment's ID.\n        // Note: This method assumes only a single comment is deleted at a time. \n        console.log(`A comment was deleted:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n    });\n}\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nawait Excel.run(async (context) => {\n    const comments = context.workbook.worksheets.getActiveWorksheet().comments;\n\n    // Register the onAdded, onChanged, and onDeleted comment event handlers.\n    comments.onAdded.add(commentAdded);\n    comments.onChanged.add(commentChanged);\n    comments.onDeleted.add(commentDeleted);\n\n    await context.sync();\n\n    console.log(\"Added event handlers for when comments are added, changed, or deleted.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-comment-event-handler.yaml\nasync function commentDeleted(event: Excel.CommentDeletedEventArgs) {\n    await Excel.run(async (context) => {\n        // Print out the deleted comment's ID.\n        // Note: This method assumes only a single comment is deleted at a time. \n        console.log(`A comment was deleted:`);\n        console.log(`    ID: ${event.commentDetails[0].commentId}`);\n    });\n}\n```"
 methods:
 - name: add(cellAddress, content, contentType)
   uid: excel!Excel.CommentCollection#add:member(1)
   package: excel!
   fullName: add(cellAddress, content, contentType)
   summary: >-
-    指定したセルで、指定した内容の新しいコメントを作成します。 `InvalidArgument`指定した範囲が1つのセルより大きい場合は、エラーがスローされます。
+    指定したセルで、指定した内容の新しいコメントを作成します。 指定 `InvalidArgument` された範囲が 1 つのセルより大きい場合、エラーがスローされます。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -105,26 +105,26 @@ methods:
     content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: コメントを追加するセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列型 (string) の場合は、シート名を含む完全な住所が含まれている必要があります。 `InvalidArgument`指定した範囲が1つのセルより大きい場合は、エラーがスローされます。
+      description: コメントを追加するセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列の場合は、シート名を含む完全なアドレスを含む必要があります。 指定 `InvalidArgument` された範囲が 1 つのセルより大きい場合、エラーがスローされます。
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: content
-      description: 'コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent オブジェクト\]'
+      description: 'コメントの内容。 文字列または CommentRichContent オブジェクトを指定できます。 文字列はプレーンテキストに使用されます。 CommentRichContent オブジェクトでは、メンションなどの他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent object\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentType
-      description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。 `ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
+      description: '省略可能です。 コメントに含まれるコンテンツの種類。 既定値は列挙型です。 `ContentType.Plain`<!-- -->. \[Api set: ExcelApi 1.10 for Enum ContentType.Plain,1.11 for Enum ContentType.Mention\]'
       type: <xref uid="excel!Excel.ContentType:enum" />
     return:
       type: <xref uid="excel!Excel.Comment:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-basics.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Comments\");\n\n    // Note that an InvalidArgument error will be thrown if multiple cells passed to `comment.add`.\n    sheet.comments.add(\"A2\", \"TODO: add data.\");\n    await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/12-comment/comment-basics.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Comments\");\n\n    // Note that an InvalidArgument error will be thrown if multiple cells passed to `comment.add`.\n    sheet.comments.add(\"A2\", \"TODO: add data.\");\n    await context.sync();\n});\n```"
 - name: add(cellAddress, content, contentTypeString)
   uid: excel!Excel.CommentCollection#add:member(2)
   package: excel!
   fullName: add(cellAddress, content, contentTypeString)
   summary: >-
-    指定したセルで、指定した内容の新しいコメントを作成します。 `InvalidArgument`指定した範囲が1つのセルより大きい場合は、エラーがスローされます。
+    指定したセルで、指定した内容の新しいコメントを作成します。 指定 `InvalidArgument` された範囲が 1 つのセルより大きい場合、エラーがスローされます。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -132,13 +132,13 @@ methods:
     content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: コメントを追加するセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列型 (string) の場合は、シート名を含む完全な住所が含まれている必要があります。 `InvalidArgument`指定した範囲が1つのセルより大きい場合は、エラーがスローされます。
+      description: コメントを追加するセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列の場合は、シート名を含む完全なアドレスを含む必要があります。 指定 `InvalidArgument` された範囲が 1 つのセルより大きい場合、エラーがスローされます。
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: content
-      description: 'コメントの内容を示します。 文字列または CommentRichContent オブジェクトのいずれかを指定できます。 文字列はテキスト形式に対して使用されます。 CommentRichContent オブジェクトでは、メンションなど、他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent オブジェクト\]'
+      description: 'コメントの内容。 文字列または CommentRichContent オブジェクトを指定できます。 文字列はプレーンテキストに使用されます。 CommentRichContent オブジェクトでは、メンションなどの他のコメント機能を使用できます。 \[Api set: ExcelApi 1.10 for string, 1.11 for CommentRichContent object\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentTypeString
-      description: '省略可能。 コメント内に含まれるコンテンツの種類。 既定値は enum です。 `ContentType.Plain`<!-- -->. \[Api set: enum Api 1.10 (列挙型 ContentType の場合は 1.11)\]'
+      description: '省略可能です。 コメントに含まれるコンテンツの種類。 既定値は列挙型です。 `ContentType.Plain`<!-- -->. \[Api set: ExcelApi 1.10 for Enum ContentType.Plain, 1.11 for Enum ContentType.Mention\]'
       type: "\"Plain\" | \"Mention\""
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -151,7 +151,7 @@ methods:
     コレクションに含まれるコメントの数を取得します。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -168,7 +168,7 @@ methods:
     ID に基づいてコレクションからコメントを取得します。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -189,7 +189,7 @@ methods:
     位置に基づいてコレクションからコメントを取得します。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -210,7 +210,7 @@ methods:
     指定したセルからコメントを取得します。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -218,7 +218,7 @@ methods:
     content: 'getItemByCell(cellAddress: Range | string): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: コメントがあるセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列型 (string) の場合は、シート名を含む完全な住所が含まれている必要があります。 `InvalidArgument`指定した範囲が1つのセルより大きい場合は、エラーがスローされます。
+      description: コメントが表示されているセルを指定します。 Range オブジェクトまたは文字列を指定できます。 文字列の場合は、シート名を含む完全なアドレスを含む必要があります。 指定 `InvalidArgument` された範囲が 1 つのセルより大きい場合、エラーがスローされます。
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -231,7 +231,7 @@ methods:
     指定した返信が接続されているコメントを取得します。
 
 
-    \[[API セット: excelapi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -239,7 +239,7 @@ methods:
     content: 'getItemByReplyId(replyId: string): Excel.Comment;'
     parameters:
     - id: replyId
-      description: コメント応答の識別子。
+      description: コメント返信の識別子。
       type: string
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -256,7 +256,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentCollection;'
     parameters:
     - id: options
-      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
       type: <xref uid="excel!Excel.Interfaces.CommentCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.CommentCollection:class" />
@@ -273,7 +273,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.CommentCollection;'
     parameters:
     - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.CommentCollection:class" />
@@ -290,7 +290,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CommentCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.CommentCollection:class" />
@@ -299,7 +299,7 @@ methods:
   uid: excel!Excel.CommentCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Excel.CommentCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.CommentCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元のオブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな `Excel.CommentCollection` `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.CommentCollectionData`<!-- -->)、コレクションのアイテムから読み込まれたプロパティの浅いコピーを含む "items" 配列を格納します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -310,9 +310,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 8d4196141a915abaabd3848c0427dc3625a8db39
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: b7c9ce5b7148b95006979a383a6dabf30483daf6
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49261147"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49855772"
