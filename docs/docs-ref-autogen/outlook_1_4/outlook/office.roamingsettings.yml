@@ -4,30 +4,30 @@ uid: outlook!Office.RoamingSettings:interface
 package: outlook!
 fullName: Office.RoamingSettings
 summary: >-
-  オブジェクトのメソッドを使用して作成された設定は、 `RoamingSettings` アドインとユーザーごとに保存されます。 つまり、これらのユーザーは、それらを作成したアドインのみが利用でき、また、それらが保存されているユーザーのメールボックスからのみ利用できます。
+  オブジェクトのメソッドを使用して作成された設定は、アドインごとに、および `RoamingSettings` ユーザーごとに保存されます。 つまり、作成したアドインでのみ使用できます。また、ユーザーが保存されているユーザーのメールボックスからのみ利用できます。
 
 
-  Outlook アドイン API は、これらの設定へのアクセスを、それを作成したアドインのみに制限しますが、これらの設定はセキュリティで保護されたストレージとは見なさないようにする必要があります。 これらの設定は、Exchange Web サービスや拡張 MAPI からアクセスできます。 それらに、ユーザー資格情報やセキュリティ トークンなどの機密情報を格納しないでください。
+  Outlook アドイン API は、これらの設定へのアクセスを、その設定を作成したアドインにのみ制限しますが、これらの設定をセキュリティで保護されたストレージと見なす必要はありません。 これらの設定は、Exchange Web サービスや拡張 MAPI からアクセスできます。 それらに、ユーザー資格情報やセキュリティ トークンなどの機密情報を格納しないでください。
 
 
   設定の名前は String ですが、値は String、Number、Boolean、null、Object、Array のいずれかになります。
 
 
-  `RoamingSettings`オブジェクトには、 `roamingSettings` 名前空間のプロパティを介してアクセスでき `Office.context` ます。
+  オブジェクト `RoamingSettings` には、名前空間のプロパティ `roamingSettings` を介してアクセス `Office.context` できます。
 
 
-  **重要**:
+  **重要:**
 
 
-  - オブジェクトは、 `RoamingSettings` アドインが最初に読み込まれたときにのみ、永続化されたストレージから初期化されます。 これは、作業ウィンドウでは、作業ウィンドウが最初に開いたときにのみ初期化されることを意味します。 作業ウィンドウが別のページに移動したり、現在のページを再読み込みしたりすると、アドインで変更が保持されている場合でも、メモリ内オブジェクトは初期値にリセットされます。 保存された変更は、作業ウィンドウ (または、UI を使用しないアドインの場合はアイテム) が閉じられ、再度開かれるまでは使用できません。
+  - オブジェクト `RoamingSettings` は、アドインが最初に読み込まれたときにのみ、永続ストレージから初期化されます。 作業ウィンドウの場合は、作業ウィンドウが最初に開くとのみ初期化されます。 作業ウィンドウが別のページに移動するか、現在のページを再読み込みすると、アドインが変更を保持している場合でも、メモリ内オブジェクトは初期値にリセットされます。 永続化された変更は、作業ウィンドウ (または UI を使用しないアドインの場合はアイテム) を閉じて再度開くまで使用できません。
 
 
-  - Windows または Mac 上の Outlook を使用して設定して保存した場合、これらの設定はブラウザーの更新後に web 上の Outlook にのみ反映されます。
+  - Windows または Mac 上の Outlook を使用して設定および保存した場合、これらの設定はブラウザーの更新後にのみ Web 上の Outlook に反映されます。
 remarks: >-
-  **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
-  **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -38,10 +38,10 @@ methods:
   fullName: get(name)
   summary: 指定された設定を取得します。
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -49,7 +49,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/10-roaming-settings/roaming-settings.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
 
     var settingName = $("#settingName").val();
 
@@ -75,12 +75,12 @@ methods:
   uid: outlook!Office.RoamingSettings#remove:member(1)
   package: outlook!
   fullName: remove(name)
-  summary: 指定された設定を削除します
+  summary: 指定した設定を削除します
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
   isPreview: false
   isDeprecated: false
   syntax:
@@ -100,12 +100,12 @@ methods:
     設定を保存します。
 
 
-    アドインによって以前に保存された設定は、初期化時に読み込まれるため、セッションの有効期間中は、設定プロパティバッグのメモリ内コピーを操作するために set メソッドと get メソッドを使用するだけでかまいません。 設定を保持して、次回アドインを使用するときに使用できるようにするには、saveAsync メソッドを使用します。
+    アドインによって以前に保存された設定は、初期化時に読み込まれるので、セッションの有効期間中は、set メソッドと get メソッドを使用して、設定プロパティ バッグのメモリ内コピーを処理できます。 次回アドインを使用するときに使用できる設定を保持する場合は、saveAsync メソッドを使用します。
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -113,7 +113,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/10-roaming-settings/roaming-settings.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
 
     // Save settings in the mailbox to make it available in future sessions.
 
@@ -132,7 +132,7 @@ methods:
     content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -145,18 +145,18 @@ methods:
     指定された設定を行うかまたは作成します。
 
 
-    `set`このメソッドは、指定された名前の新しい設定を作成します (存在しない場合)。または、指定した名前の既存の設定を設定します。 値は、そのデータ型のシリアル化された JSON 表現としてドキュメントに格納されます。
+    指定した名前の新しい設定が存在しない場合は作成するか、指定した名前の既存の設定 `set` を設定します。 値は、そのデータ型のシリアル化された JSON 表現としてドキュメントに格納されます。
 
 
-    各アドインの設定では、最大32KB を使用できます。
+    各アドインの設定では、最大 32 KB を使用できます。
 
 
-    Set 関数を使用して設定に加えた変更は、関数が呼び出されるまでサーバーに保存されません `saveAsync` 。
+    set 関数を使用して設定に加えた変更は、関数が呼び出されるまでサーバー `saveAsync` に保存されません。
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -164,7 +164,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/10-roaming-settings/roaming-settings.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
 
     var settingName = $("#settingName").val();
 
@@ -190,9 +190,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: f6136a4f9143de97fa15166ec887e0ab878564c0
-  ms.sourcegitcommit: a6ecbc9abca2ab5c82af4c869e3e2d72c999a4c1
+  ms.openlocfilehash: 69b3d5f346602c741f64b0e013b6615cc0cefcbe
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/02/2020
-  ms.locfileid: "49532129"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49850095"
