@@ -4,21 +4,21 @@ uid: outlook!Office.Categories:interface
 package: outlook!
 fullName: Office.Categories
 summary: >-
-  アイテムの分類項目を表します。
+  アイテムのカテゴリを表します。
 
 
-  Outlook では、ユーザーは分類項目を使用して、メッセージや予定にタグを付けることができます。 ユーザーが自分のメールボックスの [マスターリストでカテゴリ](xref:outlook!Office.MasterCategories:interface) を定義します。 その後、アイテムに 1 つ以上のカテゴリを適用できます。
+  Outlook では、ユーザーはカテゴリを使用してメッセージや予定に色分けすることでタグを付けできます。 ユーザーは、自分 [のメールボックスのマスター リストでカテゴリ](xref:outlook!Office.MasterCategories:interface) を定義します。 その後、アイテムに 1 つ以上のカテゴリを適用できます。
 
 
-  **重要**: web 上の Outlook では、API を使用して、新規作成モードでメッセージに適用される分類項目を管理することはできません。
+  **重要**: Outlook on the web では、作成モードでメッセージに適用されるカテゴリを API を使用して管理することはできません。
 
 
-  \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -28,21 +28,21 @@ methods:
   package: outlook!
   fullName: addAsync(categories, options, callback)
   summary: >-
-    アイテムに分類項目を追加します。 各カテゴリは、そのメールボックスのカテゴリマスターリストに含まれている必要があります。また、一意の名前を持つ必要がありますが、複数のカテゴリは同じ色を使用することができます。
+    アイテムにカテゴリを追加します。 各カテゴリは、そのメールボックスのカテゴリ マスター リストに含めなければならないので、一意の名前を持つ必要がありますが、複数のカテゴリで同じ色を使用できます。
 
 
-    \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     **エラー**:
 
 
-    - `InvalidCategory`<!-- -->: 無効なカテゴリが指定されました。
+    - `InvalidCategory`<!-- -->: 無効なカテゴリが提供されています。
 
 
     #### <a name="examples"></a>例
@@ -50,7 +50,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
 
     // Note: In order for you to successfully add a category,
 
@@ -85,13 +85,13 @@ methods:
     content: 'addAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: アイテムに追加するカテゴリを指定します。
+      description: アイテムに追加するカテゴリ。
       type: string[]
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -104,25 +104,25 @@ methods:
     アイテムのカテゴリを取得します。
 
 
-    **重要**: アイテムにカテゴリがない場合、 `null` または空の配列が Outlook のバージョンに応じて返されるので、どちらの場合も処理できるようにしてください。
+    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを必ず処理 `null` してください。
 
 
-    \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリの取得に失敗すると、 `asyncResult.error` プロパティにエラーコードが格納されます。
+      description: メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -135,15 +135,15 @@ methods:
     アイテムのカテゴリを取得します。
 
 
-    **重要**: アイテムにカテゴリがない場合、 `null` または空の配列が Outlook のバージョンに応じて返されるので、どちらの場合も処理できるようにしてください。
+    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを必ず処理 `null` してください。
 
 
-    \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -151,7 +151,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
 
     Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -174,7 +174,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリの取得に失敗すると、 `asyncResult.error` プロパティにエラーコードが格納されます。
+      description: メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -187,12 +187,12 @@ methods:
     アイテムからカテゴリを削除します。
 
 
-    \[[API set: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[最低限必要なアクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[適用可能な Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -200,7 +200,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
 
     Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -230,21 +230,21 @@ methods:
     content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: アイテムから削除するカテゴリを指定します。
+      description: アイテムから削除するカテゴリ。
       type: string[]
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバックメソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターに渡された関数 `callback` が、型の1つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリの削除が失敗した場合、 `asyncResult.error` プロパティにはエラーコードが含まれます。
+      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを削除できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: a6e956c8c430b49e270354bfa0d21df9dd5595a9
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 35b5c1a9c517220cf55950a126838b46f53e3620
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49318799"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49857746"
