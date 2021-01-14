@@ -4,10 +4,10 @@ uid: excel!Excel.WorkbookRangeAreas:class
 package: excel!
 fullName: Excel.WorkbookRangeAreas
 summary: >-
-  複数のワークシート内の1つまたは複数の四角形の範囲のコレクションを表します。
+  複数のワークシート内の 1 つ以上の長方形範囲のコレクションを表します。
 
 
-  \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -18,10 +18,10 @@ properties:
   package: excel!
   fullName: addresses
   summary: >-
-    A1 形式のアドレスの配列を返します。 Address 値には、セルの各長方形ブロックのワークシート名が格納されます (例: "Sheet1!A1: B4、Sheet1!D1: D4 ")。 読み取り専用です。
+    A1 形式のアドレスの配列を返します。 アドレス値には、セルの各長方形ブロックのワークシート名が含まれる (例: "Sheet1!A1:B4、Sheet1!D1:D4")。 読み取り専用です。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -34,10 +34,10 @@ properties:
   package: excel!
   fullName: areas
   summary: >-
-    オブジェクトを返し `RangeAreasCollection` ます。 `RangeAreas`コレクション内の各オブジェクトは、1つのワークシート内の1つまたは複数の四角形の範囲を表します。
+    オブジェクトを返 `RangeAreasCollection` します。 コレクション `RangeAreas` 内の各オブジェクトは、1 つのワークシート内の 1 つ以上の四角形の範囲を表します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -45,12 +45,12 @@ properties:
     content: 'readonly areas: Excel.RangeAreasCollection;'
     return:
       type: <xref uid="excel!Excel.RangeAreasCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
 - name: context
   uid: excel!Excel.WorkbookRangeAreas#context:member
   package: excel!
   fullName: context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -63,10 +63,10 @@ properties:
   package: excel!
   fullName: ranges
   summary: >-
-    オブジェクト内のこのオブジェクトを構成する範囲を返し `RangeCollection` ます。
+    オブジェクト内でこのオブジェクトを構成する範囲を返 `RangeCollection` します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -80,10 +80,10 @@ methods:
   package: excel!
   fullName: getRangeAreasBySheet(key)
   summary: >-
-    `RangeAreas`ワークシート ID またはコレクション内の名前に基づいてオブジェクトを返します。
+    コレクション内の `RangeAreas` ワークシート ID または名前に基づいてオブジェクトを返します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -91,7 +91,7 @@ methods:
     content: 'getRangeAreasBySheet(key: string): Excel.RangeAreas;'
     parameters:
     - id: key
-      description: ワークシートの名前または id。
+      description: ワークシートの名前または ID を指定します。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -101,10 +101,10 @@ methods:
   package: excel!
   fullName: getRangeAreasOrNullObjectBySheet(key)
   summary: >-
-    `RangeAreas`ワークシートの名前またはコレクション内の ID に基づいてオブジェクトを返します。 ワークシートが存在しない場合は null オブジェクトを返します。
+    コレクション内の `RangeAreas` ワークシート名または ID に基づいてオブジェクトを返します。 ワークシートが存在しない場合は null オブジェクトを返します。
 
 
-    \[[API セット: excelapi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -112,7 +112,7 @@ methods:
     content: 'getRangeAreasOrNullObjectBySheet(key: string): Excel.RangeAreas;'
     parameters:
     - id: key
-      description: ワークシートの名前または id。
+      description: ワークシートの名前または ID を指定します。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -129,7 +129,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorkbookRangeAreasLoadOptions): Excel.WorkbookRangeAreas;'
     parameters:
     - id: options
-      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
       type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
@@ -146,7 +146,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorkbookRangeAreas;'
     parameters:
     - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
@@ -167,7 +167,7 @@ methods:
               }): Excel.WorkbookRangeAreas;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -180,7 +180,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の WorkbookRangeAreas オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.WorkbookRangeAreas オブジェクトが API オブジェクトであるのに対し、このメソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) を返します。このコピーには、元のオブジェクトから読み込まれた子プロパティの浅いコピーが含まれます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -193,7 +193,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#track:member(1)
   package: excel!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、の省略形です。 `context.trackedObjects.add(thisObject)`<!-- -->. 呼び出し間でこのオブジェクトを使用していて、 `.sync` "..." バッチの順次実行の外側で、プロパティの設定時またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトを最初に作成したときに、そのオブジェクトを追跡対象のオブジェクトコレクションに追加する必要がありました。
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、".run" バッチのシーケンシャル実行の外部で、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -206,7 +206,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、の短縮形です。 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリリリースを有効にするには、を呼び出す必要があり `context.sync()` ます。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に、呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -217,9 +217,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6603e5d6d3ae3bbba385d444ce8d2d1ee12f8eca
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: d637af879d92b432ed7fa728a8c2422c5b0ec970
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49338266"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49857146"
