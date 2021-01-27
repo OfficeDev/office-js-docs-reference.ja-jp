@@ -142,7 +142,7 @@ properties:
   package: excel!
   fullName: format
   summary: >-
-    RangeFormat オブジェクトを返します。RangeAreas オブジェクト内のすべての範囲のフォント、塗りつぶし、罫線、配置、その他のプロパティをカプセル化します。
+    RangeFormat オブジェクトを返します。RangeAreas オブジェクトのすべての範囲のフォント、塗りつぶし、罫線、配置などのプロパティをカプセル化します。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -324,7 +324,7 @@ methods:
   package: excel!
   fullName: copyFrom(sourceRange, copyType, skipBlanks, transpose)
   summary: >-
-    ソース範囲または RangeAreas から現在の RangeAreas にセル データまたは書式設定をコピーします。 コピー先の rangeAreas は、ソース範囲または RangeAreas とは異なるサイズにできます。 コピー先がソースより小さい場合、展開先は自動的に展開されます。
+    ソース範囲または RangeAreas から現在の RangeAreas にセル データまたは書式設定をコピーします。 移動先の rangeAreas は、ソース範囲または RangeAreas とは異なるサイズにできます。 コピー先がソースより小さい場合、展開先は自動的に展開されます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -439,7 +439,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    指定した範囲または RangeAreas の交差を表す RangeAreas オブジェクトを返します。 交差が見つからない場合、null オブジェクトが返されます。
+    指定した範囲または RangeAreas の交差を表す RangeAreas オブジェクトを返します。 交差が見つからない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -591,7 +591,7 @@ methods:
     content: 'getTables(fullyContained?: boolean): Excel.TableScopedCollection;'
     parameters:
     - id: fullyContained
-      description: true の場合は、範囲の範囲内に完全に含まれるテーブルのみを返します。 既定値は false です。
+      description: true の場合は、範囲内に完全に含まれるテーブルのみを返します。 既定値は false です。
       type: boolean
     return:
       type: <xref uid="excel!Excel.TableScopedCollection:class" />
@@ -622,7 +622,7 @@ methods:
   package: excel!
   fullName: getUsedRangeAreasOrNullObject(valuesOnly)
   summary: >-
-    RangeAreas オブジェクトの個別の長方形範囲の全使用済み領域を構成する使用済み RangeAreas を返します。 RangeAreas 内に使用されているセルがない場合は、null オブジェクトが返されます。
+    RangeAreas オブジェクトの個別の長方形範囲の全使用済み領域を構成する使用済み RangeAreas を返します。 RangeAreas 内に使用されているセルがない場合、この関数はプロパティが次の値に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -701,7 +701,7 @@ methods:
   uid: excel!Excel.RangeAreas#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ型の別の API オブジェクトを渡します。
+  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ型の別の API オブジェクトを渡す方法があります。
   remarks: >-
     このメソッドには、次の追加署名があります。
 
@@ -716,7 +716,7 @@ methods:
       description: メソッドが呼び出されるオブジェクトのプロパティと同型に構造化されたプロパティを持つ JavaScript オブジェクト。
       type: <xref uid="excel!Excel.Interfaces.RangeAreasUpdateData:interface" />
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティの設定を試みる場合にエラーを抑制するオプションを提供します。
+      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -759,7 +759,7 @@ methods:
   uid: excel!Excel.RangeAreas#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.RangeAreas オブジェクトが API オブジェクトであるのに対し、このメソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.RangeAreasData`<!-- -->) を返します。
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.RangeAreas オブジェクトが API オブジェクトであるのに対し、このメソッドはプレーンな `toJSON` JavaScript オブジェクトを返します ( `Excel.Interfaces.RangeAreasData`<!-- -->) を返します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -796,9 +796,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 2f0a114f19f3ff6621bbb19a92901a42ee81f722
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: d348ca04a29eb6dbbe8b815462c7384bd83172d4
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852307"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991514"

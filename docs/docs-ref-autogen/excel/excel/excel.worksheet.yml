@@ -320,6 +320,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    このワークシートで 1 つ以上の数式が変更された場合に発生します。 このイベントは、数式の計算結果のデータ値ではなく、数式自体が変更された場合に発生します。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -564,7 +580,7 @@ properties:
   package: excel!
   fullName: tabColor
   summary: >-
-    ワークシートのタブの色を指定します。 タブの色を取得するときに、ワークシートが非表示の場合、値は null になります。 ワークシートが表示されているが、タブの色が auto に設定されている場合は、空の文字列が返されます。 それ以外の場合、プロパティは "123456" の形式で色に設定されます。色を設定する場合は、空の文字列を使用して \# "自動" 色を設定するか、そうでない場合は実際の色を設定します。
+    ワークシートのタブの色を指定します。 タブの色を取得するときに、ワークシートが非表示の場合、値は null になります。 ワークシートが表示されているが、タブの色が auto に設定されている場合は、空の文字列が返されます。 それ以外の場合、プロパティは "123456" という形式の色に設定されます。色を設定する場合は、空の文字列を使用して "auto" カラーを設定し、それ以外の場合は実際の色を設定します。 \#
 
 
     \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -817,7 +833,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: >-
-        検索条件に一致する 1 つ以上の長方形範囲で構成される RangeArea オブジェクト。 一致するオブジェクトがない場合、この関数は null オブジェクトを返します。
+        検索条件に一致する 1 つ以上の長方形範囲で構成される RangeArea オブジェクト。 一致するオブジェクトがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については[ \* 、OrNullObject のメソッドとプロパティを参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
         #### <a name="examples"></a>例
@@ -884,7 +900,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -894,7 +910,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    このワークシートの後に続くワークシートを取得します。 このワークシートの後にワークシートがない場合、このメソッドは null オブジェクトを返します。
+    このワークシートの後に続くワークシートを取得します。 このワークシートの後にワークシートがない場合、このメソッドはプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -905,7 +921,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -926,7 +942,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -947,7 +963,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -957,7 +973,7 @@ methods:
   package: excel!
   fullName: getRange(address)
   summary: >-
-    アドレスまたは名前で指定された、セルの単一の四角形のブロックを表す range オブジェクトを取得します。
+    アドレスまたは名前で指定された、セルの単一の長方形ブロックを表す range オブジェクトを取得します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -968,7 +984,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: 省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、「A1:B2」とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
+      description: 省略可能。 範囲のアドレスまたは名前を表す文字列。 たとえば、「A1:B2」とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1019,7 +1035,7 @@ methods:
     content: 'getRanges(address?: string): Excel.RangeAreas;'
     parameters:
     - id: address
-      description: 省略可能です。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2, A5:B5」とします。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
+      description: 省略可能。 コンマ区切りのアドレスまたは個々の範囲の名前を含む文字列。 たとえば、「A1:B2, A5:B5」とします。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1040,7 +1056,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: '省略可能です。 true の場合、値を持つセルのみを使用したセルと見なします (書式設定は無視されます)。 \[Api セット: ExcelApi 1.2\]'
+      description: '省略可能。 true の場合、値を持つセルのみを使用したセルと見なします (書式設定は無視されます)。 \[Api セット: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1050,7 +1066,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。ワークシート全体が空白の場合、この関数は null オブジェクトを返します。
+    使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。 ワークシート全体が空白の場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1171,7 +1187,7 @@ methods:
       description: メソッドが呼び出されるオブジェクトのプロパティと同型に構造化されたプロパティを持つ JavaScript オブジェクト。
       type: <xref uid="excel!Excel.Interfaces.WorksheetUpdateData:interface" />
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティの設定を試みる場合にエラーを抑制するオプションを提供します。
+      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -1221,7 +1237,7 @@ methods:
   uid: excel!Excel.Worksheet#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.Worksheet オブジェクトは API オブジェクトであるのに対し、メソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.WorksheetData`<!-- -->) を返します。
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.Worksheet オブジェクトは API オブジェクトであるのに対し、メソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.WorksheetData`<!-- -->) を返します。このコピーには、元のオブジェクトから読み込まれた子プロパティの浅いコピーが含まれます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1232,9 +1248,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a97fdcf6e4247d09689f105aec02889963a125f9
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: b7f3b4e06e50b3a7d27b2010a07cc6b888de7506
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852209"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991675"
