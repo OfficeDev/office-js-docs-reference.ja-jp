@@ -579,7 +579,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillType)
   summary: >-
-    指定したオートフィル ロジックを使用して、現在の範囲からコピー先の範囲に範囲を埋める。 コピー先の範囲は null にするか、ソースを水平方向または垂直方向に拡張できます。 不明確な範囲はサポートされていません。
+    指定されたオートフィル ロジックを使用して、現在の範囲から出力先の範囲に範囲を埋める。 コピー先の範囲は null にするか、ソースを水平方向または垂直方向に拡張できます。 異なっている範囲はサポートされていません。
 
 
     詳しくは、「オートフィルと [フラッシュ フィルの使用」をご覧ください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -593,10 +593,10 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillType?: Excel.AutoFillType): void;'
     parameters:
     - id: destinationRange
-      description: オートフィルするコピー先の範囲を指定します。 移動先の範囲が null の場合は、周囲のセル (UI の範囲の塗りつぶしハンドルをダブルクリックした場合の動作) に基づいてデータが入力されます。
+      description: オートフィルするコピー先の範囲を指定します。 移動先の範囲が null の場合は、周囲のセルに基づいてデータが入力されます (UI の範囲の塗りつぶしハンドルをダブルクリックした場合の動作)。
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillType
-      description: オートフィルの種類を指定します。 現在の範囲の内容に基づいて、コピー先の範囲を設定する方法を指定します。 既定値は "FillDefault" です。
+      description: オートフィルの種類を指定します。 現在の範囲の内容に基づいて、指定先の範囲の塗りつぶし方法を指定します。 既定値は "FillDefault" です。
       type: <xref uid="excel!Excel.AutoFillType:enum" />
     return:
       type: void
@@ -606,7 +606,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillTypeString)
   summary: >-
-    指定したオートフィル ロジックを使用して、現在の範囲からコピー先の範囲に範囲を埋める。 コピー先の範囲は null にするか、ソースを水平方向または垂直方向に拡張できます。 不明確な範囲はサポートされていません。
+    指定されたオートフィル ロジックを使用して、現在の範囲から出力先の範囲に範囲を埋める。 コピー先の範囲は null にするか、ソースを水平方向または垂直方向に拡張できます。 異なっている範囲はサポートされていません。
 
 
     詳しくは、「オートフィルと [フラッシュ フィルの使用」をご覧ください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -859,7 +859,7 @@ methods:
   package: excel!
   fullName: findOrNullObject(text, criteria)
   summary: >-
-    指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が 1 つのセルより大きい場合、検索はその範囲に限定されます。それ以外の場合、検索はそのセルの後からシート全体をカバーします。 一致するオブジェクトがない場合、この関数は null オブジェクトを返します。
+    指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が 1 つのセルより大きい場合、検索はその範囲に制限されます。それ以外の場合、検索はそのセルの後からシート全体をカバーします。 一致するオブジェクトがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1198,7 +1198,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差部分が見つからない場合は、null オブジェクトを返します。
+    指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差が見つからない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1505,7 +1505,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellType, cellValueType)
   summary: >-
-    指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特殊なセルが見つからない場合は、null オブジェクトが返されます。
+    指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特殊なセルが見つからない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1529,7 +1529,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellTypeString, cellValueType)
   summary: >-
-    指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特殊なセルが見つからない場合は、null オブジェクトが返されます。
+    指定された型と値に一致するすべてのセルを表し、1 つまたは複数の範囲を構成する RangeAreas オブジェクトを取得します。 特殊なセルが見つからない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1570,7 +1570,7 @@ methods:
   package: excel!
   fullName: getSpillingToRangeOrNullObject()
   summary: >-
-    アンカー セルで呼び出されたとき、スピル範囲を含む範囲オブジェクトを取得します。 範囲がアンカー セルではない場合やスピル範囲が見つからない場合は、null オブジェクトが返されます。
+    アンカー セルで呼び出されたとき、スピル範囲を含む範囲オブジェクトを取得します。 範囲がアンカー セルではないか、スピル範囲が見つからない場合、この関数はプロパティが次の値に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1604,7 +1604,7 @@ methods:
   package: excel!
   fullName: getSpillParentOrNullObject()
   summary: >-
-    スピルするセルのアンカー セルを含む範囲オブジェクトを取得します。 スピル セルではない場合、またはセルが 2 回指定された場合は、null オブジェクトが返されます。
+    スピルするセルのアンカー セルを含む範囲オブジェクトを取得します。 スピル セルではない場合、または複数のセルが指定されている場合、この関数はプロパティが次の値に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1680,7 +1680,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    指定した範囲オブジェクトのうち使用されている範囲を返します。範囲内に使用済みのセルがない場合、この関数は null オブジェクトを返します。
+    指定した範囲オブジェクトのうち使用されている範囲を返します。 範囲内に使用されているセルがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1956,7 +1956,7 @@ methods:
     content: 'removeDuplicates(columns: number[], includesHeader: boolean): Excel.RemoveDuplicatesResult;'
     parameters:
     - id: columns
-      description: 範囲内で重複する可能性がある列。 少なくとも 1 つの列を指定する必要があります。 0 を起点とする番号になります。
+      description: 重複する可能性がある範囲内の列。 少なくとも 1 つの列を指定する必要があります。 0 を起点とする番号になります。
       type: number[]
     - id: includesHeader
       description: True の 場合は、入力データにヘッダーが含まれています。 既定値は false です。
@@ -2201,7 +2201,7 @@ methods:
   uid: excel!Excel.Range#track:member(1)
   package: excel!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、".run" バッチのシーケンシャル実行の外側で、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、".run" バッチのシーケンシャル実行の外部で、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2284,9 +2284,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c818bbad52319cb4bdc2c25504763ebf6f21707a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: a0f95db6649eb00a46f3d7ce692c6e895c0c3e28
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851173"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991990"

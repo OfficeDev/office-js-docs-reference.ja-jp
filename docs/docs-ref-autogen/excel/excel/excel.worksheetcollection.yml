@@ -184,6 +184,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.WorksheetCollection#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    このコレクションのワークシートで 1 つ以上の数式が変更された場合に発生します。 このイベントは、数式の計算結果のデータ値ではなく、数式自体が変更された場合に発生します。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.WorksheetCollection#onRowHiddenChanged:member
   package: excel!
@@ -237,7 +253,7 @@ properties:
   package: excel!
   fullName: onSingleClicked
   summary: >-
-    ワークシート コレクションで左クリック/タップ操作が行われるときに発生します。 このイベントは、次の場合にクリックしても発生しない: - ユーザーはマウスをドラッグして複数選択します。 - 数式の参照に対してセル引数が選択されている場合、ユーザーはモードでセルを選択します。
+    ワークシート コレクション内で左クリック/タップ操作が行われるときに発生します。 このイベントは、次の場合にクリックしても発生し得ない: - ユーザーはマウスをドラッグして複数選択を行います。 - 数式の参照に対してセルの引数が選択されている場合、ユーザーはモードでセルを選択します。
 
 
     \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -289,16 +305,16 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Required. ソース ブック ファイルを表す base64 でエンコードされた文字列。
+      description: 必須。 ソース ブック ファイルを表す base64 でエンコードされた文字列。
       type: string
     - id: sheetNamesToInsert
-      description: 省略可能です。 挿入する個々のワークシートの名前を指定します。 既定では、ソース ブックのすべてのワークシートが挿入されます。
+      description: 省略可能。 挿入する個々のワークシートの名前を指定します。 既定では、ソース ブックのすべてのワークシートが挿入されます。
       type: string[]
     - id: positionType
-      description: 省略可能です。 現在のブックのどこに新しいワークシートが挿入されます。 詳細については、Excel.WorksheetPositionType を参照してください。 既定値は "Start" です。
+      description: 省略可能。 現在のブックのどこに新しいワークシートが挿入されます。 詳細については、Excel.WorksheetPositionType を参照してください。 既定値は "Start" です。
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
-      description: 省略可能です。 positionType パラメーターで参照されている現在のブック内のワークシート。 既定値は null で、positionType に基づいて、現在のブックの開始または終了にワークシートが挿入されます。
+      description: 省略可能。 positionType パラメーターで参照されている現在のブック内のワークシート。 既定値は null で、positionType に基づいて、現在のブックの開始または終了にワークシートが挿入されます。
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -322,16 +338,16 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Required. ソース ブック ファイルを表す base64 でエンコードされた文字列。
+      description: 必須。 ソース ブック ファイルを表す base64 でエンコードされた文字列。
       type: string
     - id: sheetNamesToInsert
-      description: 省略可能です。 挿入する個々のワークシートの名前を指定します。 既定では、ソース ブックのすべてのワークシートが挿入されます。
+      description: 省略可能。 挿入する個々のワークシートの名前を指定します。 既定では、ソース ブックのすべてのワークシートが挿入されます。
       type: string[]
     - id: positionTypeString
-      description: 省略可能です。 現在のブックのどこに新しいワークシートが挿入されます。 詳細については、Excel.WorksheetPositionType を参照してください。 既定値は "Start" です。
+      description: 省略可能。 現在のブックのどこに新しいワークシートが挿入されます。 詳細については、Excel.WorksheetPositionType を参照してください。 既定値は "Start" です。
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: 省略可能です。 positionType パラメーターで参照されている現在のブック内のワークシート。 既定値は null で、positionType に基づいて、現在のブックの開始または終了にワークシートが挿入されます。
+      description: 省略可能。 positionType パラメーターで参照されている現在のブック内のワークシート。 既定値は null で、positionType に基づいて、現在のブックの開始または終了にワークシートが挿入されます。
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -369,7 +385,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -390,7 +406,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -421,7 +437,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    名前または ID を使用して、ワークシート オブジェクトを取得します。 ワークシートが存在しない場合は null オブジェクトを返します。
+    名前または ID を使用して、ワークシート オブジェクトを取得します。 ワークシートが存在しない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -453,7 +469,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -524,9 +540,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6e173b5561f5a7449831e945832092c47b89e98a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 217115c6457c6b3150849309c2eff8be4d1cfe79
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852223"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991647"
