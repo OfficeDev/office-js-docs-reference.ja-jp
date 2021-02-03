@@ -3,7 +3,7 @@ name: Office.AuthOptions
 uid: office!Office.AuthOptions:interface
 package: office!
 fullName: Office.AuthOptions
-summary: Office が AAD v からアドインへのアクセストークンを取得するときのユーザー環境のオプションを提供します。 `getAccessToken` メソッドを使用して AAD v. 2.0 からアドインに対するアクセス トークンを取得する場合用のユーザー エクスペリエンス用のオプションがあります。
+summary: AAD v からアドインOfficeトークンを取得する場合のユーザー エクスペリエンスのオプションを提供します。 `getAccessToken` メソッドを使用して AAD v. 2.0 からアドインに対するアクセス トークンを取得する場合用のユーザー エクスペリエンス用のオプションがあります。
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -13,7 +13,7 @@ properties:
   uid: office!Office.AuthOptions#allowConsentPrompt:member
   package: office!
   fullName: allowConsentPrompt
-  summary: 必要な場合に、アクセストークンをサイレントで取得するか、対話的な同意を使用してアクセストークンを取得することを Office に許可します。 既定値は `false`<!-- -->. に設定されている場合 `false`<!-- -->、Office は自動的にアクセストークンを取得しようとします。 これを実行できない場合は、Office からわかりやすいエラーが返されます。 に設定されている場合 `true`<!-- -->、Office は、サイレントモードでアクセストークンを取得できなかった場合に、対話的な同意 UI を表示します。 プロンプトでは、AAD プロファイルスコープへの同意のみが許可され、Microsoft Graph のスコープには同意しません。
+  summary: 必要Office場合は、アクセス トークンをサイレント モードまたは対話型の同意によって取得できます。 既定値は `false` です。<!-- -->. 設定する場合 `false`<!-- -->をOfficeアクセス トークンの取得をサイレント モードで試みる必要があります。 エラーが発生した場合は、Officeエラーが返されます。 設定する場合 `true`<!-- -->をOfficeアクセス トークンの取得に失敗した後、対話型の同意 UI が表示されます。 このプロンプトでは、AAD プロファイル スコープへの同意のみを許可し、Microsoft Graph のスコープには同意しません。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,7 +25,7 @@ properties:
   uid: office!Office.AuthOptions#allowSignInPrompt:member
   package: office!
   fullName: allowSignInPrompt
-  summary: アクセストークンを自動的に取得することを Office に許可します。同意が存在するか、ユーザーにサインインするための対話 UI が表示されます。 既定値は `false`<!-- -->. に設定されている場合 `false`<!-- -->、Office は自動的にアクセストークンを取得しようとします。 これを実行できない場合は、Office からわかりやすいエラーが返されます。 に設定されている場合 `true`<!-- -->、Office は、サイレントモードでアクセストークンを取得しようとして失敗した対話的なサインイン UI を表示します。
+  summary: ユーザー Office同意がある場合にアクセス トークンを取得したり、ユーザーにサインインするための対話型 UI を表示したりします。 既定値は `false` です。<!-- -->. 設定する場合 `false`<!-- -->をOfficeアクセス トークンの取得をサイレント モードで試みる必要があります。 失敗した場合は、Officeエラーが返されます。 設定する場合 `true`<!-- -->をOffice、アクセス トークンのサイレント 取得に失敗した後、対話型のサインイン UI を表示します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -37,7 +37,7 @@ properties:
   uid: office!Office.AuthOptions#asyncContext:member
   package: office!
   fullName: asyncContext
-  summary: '`asyncContext` `AsyncResult` コールバックに渡されるオブジェクトのプロパティで、変更されずに返される任意の型のユーザー定義項目。'
+  summary: コールバックに渡されるオブジェクトのプロパティで、変更されずに返される任意の型のユーザー定義 `asyncContext` `AsyncResult` アイテム。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
   uid: office!Office.AuthOptions#authChallenge:member
   package: office!
   fullName: authChallenge
-  summary: Microsoft Graph を対象としているテナントに多元的な認証が必要になる場合に、ユーザーに対して追加の要素を求めるメッセージを表示します。 文字列値は、必要な追加要素の種類を識別します。 ほとんどの場合、開発時にユーザーのテナントに追加の要素が必要かどうか、または文字列をどのようなものにする必要があるかがわかりません。 そのため、このオプションは、 `getAccessToken` Microsoft Graph が追加の要素を要求し、オプションと共に使用する文字列を含むエラーを送信した後の "second try" 呼び出しで使用され `authChallenge` ます。
+  summary: Microsoft Graph Officeテナンシーが多要素認証を必要とする場合に、ユーザーに追加要素を提供するように求めるメッセージを表示します。 文字列値は、必要な追加要素の種類を識別します。 ほとんどの場合、開発時には、ユーザーのテナントに追加の要素が必要かどうか、または文字列を必要とするかどうかはわかりません。 そのため、このオプションは、追加要素を要求し、オプションで使用する文字列を含むエラーを Microsoft Graph が送信した後の 「2 回目の試用」呼び出しで `getAccessToken` 使用 `authChallenge` されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -61,7 +61,11 @@ properties:
   uid: office!Office.AuthOptions#forceAddAccount:member
   package: office!
   fullName: forceAddAccount
-  summary: ユーザーに Office アカウントを追加するか (既に追加されている場合は、そのアカウントに切り替えるかを確認する) を求めます。 既定値は `false`<!-- -->.
+  summary: >-
+    ユーザーに自分のアカウントを追加Office (既に追加されている場合は切り替える) を求めるメッセージが表示されます。 既定値は `false` です。<!-- -->.
+
+
+    **警告**: `forceAddAccount` 廃止されました。 代 `allowSignInPrompt` わりに使用します。
   remarks: ''
   isPreview: false
   isDeprecated: true
@@ -74,7 +78,11 @@ properties:
   uid: office!Office.AuthOptions#forceConsent:member
   package: office!
   fullName: forceConsent
-  summary: Office によりアドインの同意エクスペリエンスが表示されます。 アドインの Azure アクセス許可が変更された場合や、ユーザーの同意が取り消された場合に役立ちます。 既定値は `false`<!-- -->.
+  summary: >-
+    Office によりアドインの同意エクスペリエンスが表示されます。 アドインの Azure アクセス許可が変更された場合や、ユーザーの同意が取り消された場合に役立ちます。 既定値は `false` です。<!-- -->.
+
+
+    **警告**: `forceConsent` 廃止されました。 代 `allowConsentPrompt` わりに使用します。
   remarks: ''
   isPreview: false
   isDeprecated: true
@@ -87,7 +95,7 @@ properties:
   uid: office!Office.AuthOptions#forMSGraphAccess:member
   package: office!
   fullName: forMSGraphAccess
-  summary: アドインが Microsoft Graph へのアクセスを希望していて、ユーザー/管理者がグラフの範囲に対する同意を付与していない場合に、Office が説明的なエラーを返すようにします。 既定値は `false`<!-- -->. Office では、アドインがテナント管理者によって展開されている場合にのみ、グラフスコープへの同意をサポートしています。この情報は、開発中には利用できません。 このオプションをに設定する `true` と、Graph へのアクセスが失敗した場合に、Office がアドインを事前に (説明的なエラーを返して) 通知するようになります。
+  summary: アドインOffice Microsoft Graph にアクセスする必要があるが、ユーザー/管理者が Graph スコープに同意していない場合に、説明的なエラーを返す原因になります。 既定値は `false` です。<!-- -->. Officeは、アドインがテナント管理者によって展開されている場合にのみ、Graph スコープに対する同意をサポートします。この情報は、開発中は利用できません。 このオプションを設定するとOffice Graph へのアクセスが失敗した場合に(説明的なエラーを返して)、アドインに事前に `true` 通知する必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -96,9 +104,9 @@ properties:
     return:
       type: boolean
 metadata:
-  ms.openlocfilehash: 622e5b5d59481a8d6984208677307dc21a4de56f
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: c9a42edfa3f6fe0a2873389520ac6e6bdb093ca8
+  ms.sourcegitcommit: 94ed3108858c111541f7430d7482ea329ad21dbd
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49251634"
+  ms.lasthandoff: 02/03/2021
+  ms.locfileid: "50092019"
