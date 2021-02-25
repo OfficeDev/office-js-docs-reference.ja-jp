@@ -10,9 +10,9 @@ JavaScript API リファレンスOffice リポジトリへようこそ。 最適
 
 * ドキュメントに関する質問や問題をご連絡いただく場合は、このリポジトリに[問題を送信](https://github.com/OfficeDev/office-js-docs-reference/issues)してください。 使用しているクライアントのバージョンとビルド番号を必ず入力し、必要に応じて再生成手順、コンソール出力、およびエラー メッセージを提供します。
 
-* また、このドキュメントに対する投稿も歓迎します。 投稿するには、このリポジトリをフォークし、必要に応じてファイルを更新し、提案された変更を含むプル要求を送信します。 詳細については、「[このドキュメントに投稿する](Contributing.md)」を参照してください。
+* また、このドキュメントに対する投稿も歓迎します。 投稿するには、このリポジトリをフォークし、必要に応じてファイルを更新し、提案された変更を含むプルリクエストを送信します。 詳細については、「[このドキュメントに投稿する](Contributing.md)」を参照してください。
 
-    > **重要**: このリポジトリの [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) フォルダー内のファイルは変更しない。 そのフォルダー内のすべてのファイルは自動生成されます。したがって、プル要求を使用してファイルを更新することはできません。 [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルへの変更を要求するには、このリポジトリで[問題を送信](https://github.com/OfficeDev/office-js-docs-reference/issues)してください。 このリポジトリ内のツールの詳細については、ここを参照 [してください](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)。
+    > **重要**: このリポジトリの [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) フォルダー内のファイルは変更しない。 そのフォルダー内のすべてのファイルは自動生成されます。したがって、プルリクエストを使用してファイルを更新することはできません。 [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルへの変更を要求するには、このリポジトリで[問題を送信](https://github.com/OfficeDev/office-js-docs-reference/issues)してください。 このリポジトリ内のツールの詳細については、ここを参照 [してください](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)。
 
 * プログラミングの経験と、今後のバージョン、コード サンプルなどのご希望をご連絡いただく場合は、「[Office Developer Platform UserVoice](https://officespdev.uservoice.com/)」でご提案やアイデアを入力してください。
 
