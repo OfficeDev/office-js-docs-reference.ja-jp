@@ -1,0 +1,234 @@
+### YamlMime:TSType
+name: Excel.PivotTableCollection
+uid: excel!Excel.PivotTableCollection:class
+package: excel!
+fullName: Excel.PivotTableCollection
+summary: >-
+  ブックまたはワークシートの一部として含まれている、すべてのピボットテーブルのコレクションを表します。
+
+
+  \[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.PivotTableCollection#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.PivotTableCollection#items:member
+  package: excel!
+  fullName: items
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.PivotTable[];'
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />[]
+methods:
+- name: add(name, source, destination)
+  uid: excel!Excel.PivotTableCollection#add:member(1)
+  package: excel!
+  fullName: add(name, source, destination)
+  summary: >-
+    指定されたソース データに基づいてピボットテーブルを追加し、コピー先のセルの左上のセルに挿入します。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name: string, source: Range | string | Table, destination: Range | string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: 新しいピボットテーブルの名前を指定します。
+      type: string
+    - id: source
+      description: 新しいピボットテーブルのソース データです。範囲 (またはワークシート名を含む文字列アドレス) またはテーブルを指定できます。
+      type: <xref uid="excel!Excel.Range:class" /> | string | <xref uid="excel!Excel.Table:class" />
+    - id: destination
+      description: ピボットテーブル レポートの配置先範囲 (結果のレポートを配置するワークシートの範囲) の左上端のセルを指定します。
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: >-
+        新しく挿入されたピボットテーブルを返します。
+
+
+        #### <a name="examples"></a>例
+
+
+        ```typescript
+
+        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml
+
+        await Excel.run(async (context) => {
+            const rangeToAnalyze = context.workbook.worksheets.getItem("Data").getRange("A1:E21");
+            const rangeToPlacePivot = context.workbook.worksheets.getItem("Pivot").getRange("A2");
+            context.workbook.worksheets.getItem("Pivot").pivotTables.add("Farm Sales", rangeToAnalyze, rangeToPlacePivot);
+
+            await context.sync();
+        });
+
+        ```
+- name: getCount()
+  uid: excel!Excel.PivotTableCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    コレクションに含まれるピボット テーブルの数を取得します。
+
+
+    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(name)
+  uid: excel!Excel.PivotTableCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(name)
+  summary: >-
+    名前に基づいてピボットテーブルを取得します。
+
+
+    \[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(name: string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: 取得するピボットテーブルの名前。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: getItemOrNullObject(name)
+  uid: excel!Excel.PivotTableCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(name)
+  summary: >-
+    名前を使用してピボットテーブルを取得します。 PivotTable が存在しない場合は null オブジェクトを返します。
+
+
+    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(name: string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: 取得するピボットテーブルの名前。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.PivotTableCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.PivotTableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotTableCollection;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.PivotTableCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.PivotTableCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotTableCollection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.PivotTableCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotTableCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: refreshAll()
+  uid: excel!Excel.PivotTableCollection#refreshAll:member(1)
+  package: excel!
+  fullName: refreshAll()
+  summary: >-
+    コレクション内のすべてのピボットテーブルを更新します。
+
+
+    \[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'refreshAll(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.PivotTableCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元のオブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな `Excel.PivotTableCollection` `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.PivotTableCollectionData`<!-- -->)、コレクションのアイテムから読み込まれたプロパティの浅いコピーを含む "items" 配列を格納します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.PivotTableCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.PivotTableCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: f8dcaa29dd3281dc5400fec55bcf04c0f34bf8e5
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49854659"

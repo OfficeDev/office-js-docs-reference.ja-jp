@@ -1,0 +1,199 @@
+### YamlMime:TSType
+name: Excel.TableRowCollection
+uid: excel!Excel.TableRowCollection:class
+package: excel!
+fullName: Excel.TableRowCollection
+summary: >-
+  表の一部であるすべての行のコレクションを表します。
+
+
+  範囲または列の違いで、新しい行/列が追加されている場合は調整されますが、TableRow オブジェクトは、テーブルの行の物理的な位置を表しますが、データは表示しません。 つまり、データが並べ替えられている場合、または新しい行が追加された場合、テーブル行は、作成されたインデックスを引き続きポイントします。
+
+
+  \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableRowCollection#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: count
+  uid: excel!Excel.TableRowCollection#count:member
+  package: excel!
+  fullName: count
+  summary: >-
+    テーブルの行数を返します。
+
+
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type: number
+- name: items
+  uid: excel!Excel.TableRowCollection#items:member
+  package: excel!
+  fullName: items
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.TableRow[];'
+    return:
+      type: <xref uid="excel!Excel.TableRow:class" />[]
+methods:
+- name: add(index, values)
+  uid: excel!Excel.TableRowCollection#add:member(1)
+  package: excel!
+  fullName: add(index, values)
+  summary: >-
+    テーブルに 1 つ以上の行を追加します。 戻りオブジェクトは新しく追加された行の先頭になります。
+
+
+    範囲または列の違いで、新しい行/列が追加されている場合は調整されますが、TableRow オブジェクトは、テーブルの行の物理的な位置を表しますが、データは表示しません。 つまり、データが並べ替えられている場合、または新しい行が追加された場合、テーブル行は、作成されたインデックスを引き続きポイントします。
+
+
+    \[[API set: 単一の行を追加するための ExcelApi 1.1。1.4 では、複数の行を追加できます。](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
+    parameters:
+    - id: index
+      description: 省略可能。新しい行の相対位置を指定します。null または -1 の場合、最後に追加が行われます。挿入した行の下のすべての行が下方向にシフトします。0 を起点とする番号になります。
+      type: number
+    - id: values
+      description: 省略可能。 テーブルの行の書式設定されていない値の 2 次元の配列。
+      type: Array&lt;Array&lt;boolean | string | number&gt;&gt; | boolean | string | number
+    return:
+      type: <xref uid="excel!Excel.TableRow:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var row = tables.getItem(\"Table1\").rows.add(null, values);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getCount()
+  uid: excel!Excel.TableRowCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    表の行数を取得します。
+
+
+    \[[API セット: excelapi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItemAt(index)
+  uid: excel!Excel.TableRowCollection#getItemAt:member(1)
+  package: excel!
+  fullName: getItemAt(index)
+  summary: >-
+    コレクション内の位置を基に行を取得します。
+
+
+    範囲または列の違いで、新しい行/列が追加されている場合は調整されますが、TableRow オブジェクトは、テーブルの行の物理的な位置を表しますが、データは表示しません。 つまり、データが並べ替えられている場合、または新しい行が追加された場合、テーブル行は、作成されたインデックスを引き続きポイントします。
+
+
+    \[[API セット: excelapi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): Excel.TableRow;'
+    parameters:
+    - id: index
+      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      type: number
+    return:
+      type: <xref uid="excel!Excel.TableRow:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerow = ctx.workbook.tables.getItem('Table1').rows.getItemAt(0);\n    tablerow.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablerow.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(options)
+  uid: excel!Excel.TableRowCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableRowCollection;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.TableRowCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableRowCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableRowCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableRowCollection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableRowCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerows = ctx.workbook.tables.getItem('Table1').rows;\n    tablerows.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tablerows Count: \" + tablerows.count);\n        for (var i = 0; i < tablerows.items.length; i++) {\n            console.log(tablerows.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// In the example, we'll select the top 100 rows of the table.\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItem(\"Table1\");\n    var tableRows = table.rows.load({\"select\" : \"index, values\",\"top\": 100, \"skip\": 0 })\n    return ctx.sync().then(function() {\n        for (var i = 0; i < tableRows.items.length; i++) {\n            console.log(tableRows.items[i].index);\n            console.log(tableRows.items[i].values);\n        }\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableRowCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.TableRowCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableRowCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableRowCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Excel.TableRowCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Excel.Interfaces.TableRowCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableRowCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableRowCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 8016964b0f15f0bf9dc571184ba02c1dbde82813
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49158311"

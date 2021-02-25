@@ -1,0 +1,90 @@
+### YamlMime:TSType
+name: Excel.PivotFilters
+uid: excel!Excel.PivotFilters:interface
+package: excel!
+fullName: Excel.PivotFilters
+summary: >-
+  指定された PivotField に現在適用されている、すべての PivotFilter を表すインターフェイス。
+
+
+  \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: dateFilter
+  uid: excel!Excel.PivotFilters#dateFilter:member
+  package: excel!
+  fullName: dateFilter
+  summary: >-
+    ピボットフィールドの現在適用されている日付フィルター。 何も適用しない場合は Null。
+
+
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'dateFilter?: Excel.PivotDateFilter;'
+    return:
+      type: <xref uid="excel!Excel.PivotDateFilter:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Add a date-based PivotFilter.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n  // PivotFilters can only be applied to PivotHierarchies that are being used for pivoting.\n  // If it's not already there, add \"Date Updated\" to the hierarchies.\n  let dateHierarchy = pivotTable.rowHierarchies.getItemOrNullObject(\"Date Updated\");\n  await context.sync();\n  if (dateHierarchy.isNullObject) {\n    dateHierarchy = pivotTable.rowHierarchies.add(pivotTable.hierarchies.getItem(\"Date Updated\"));\n  }\n\n  // Apply a date filter to filter out anything logged before August.\n  const filterField = dateHierarchy.fields.getItem(\"Date Updated\");\n  const dateFilter = {\n    condition: Excel.DateFilterCondition.afterOrEqualTo,\n    comparator: {\n      date: \"2020-08-01\",\n      specificity: Excel.FilterDatetimeSpecificity.month\n    }\n  };\n  filterField.applyFilter({ dateFilter: dateFilter });\n\n  await context.sync();\n});\n```"
+- name: labelFilter
+  uid: excel!Excel.PivotFilters#labelFilter:member
+  package: excel!
+  fullName: labelFilter
+  summary: >-
+    ピボットフィールドの現在適用されているラベル フィルター。 何も適用しない場合は Null。
+
+
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'labelFilter?: Excel.PivotLabelFilter;'
+    return:
+      type: <xref uid="excel!Excel.PivotLabelFilter:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Add a PivotFilter to filter based on the strings of item labels.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n  // Get the \"Type\" field.\n  const field = pivotTable.hierarchies.getItem(\"Type\").fields.getItem(\"Type\");\n\n  // Filter out any types that start with \"L\" (\"Lemons\" and \"Limes\" in this case).\n  const filter: Excel.PivotLabelFilter = {\n    condition: Excel.LabelFilterCondition.beginsWith,\n    substring: \"L\",\n    exclusive: true\n  };\n\n  // Apply the label filter to the field.\n  field.applyFilter({ labelFilter: filter });\n\n  await context.sync();\n});\n```"
+- name: manualFilter
+  uid: excel!Excel.PivotFilters#manualFilter:member
+  package: excel!
+  fullName: manualFilter
+  summary: >-
+    ピボットフィールドの現在適用されている手動フィルター。 何も適用しない場合は Null。
+
+
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'manualFilter?: Excel.PivotManualFilter;'
+    return:
+      type: <xref uid="excel!Excel.PivotManualFilter:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Add a PivotFilter to filter on manually-selected items.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n  // PivotFilters can only be applied to PivotHierarchies that are being used for pivoting.\n  // If it's not already there, add \"Classification\" to the hierarchies.\n  let classHierarchy = pivotTable.filterHierarchies.getItemOrNullObject(\"Classification\");\n  await context.sync();\n  if (classHierarchy.isNullObject) {\n    classHierarchy = pivotTable.filterHierarchies.add(pivotTable.hierarchies.getItem(\"Classification\"));\n  }\n\n  // Apply a manual filter to include only a specific PivotItem (the string \"Organic\").\n  const filterField = classHierarchy.fields.getItem(\"Classification\");\n  const manualFilter = { selectedItems: [\"Organic\"]};\n  filterField.applyFilter({ manualFilter: manualFilter });\n\n  await context.sync();\n});\n```"
+- name: valueFilter
+  uid: excel!Excel.PivotFilters#valueFilter:member
+  package: excel!
+  fullName: valueFilter
+  summary: >-
+    ピボットフィールドの現在適用されている値フィルター。 何も適用しない場合は Null。
+
+
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'valueFilter?: Excel.PivotValueFilter;'
+    return:
+      type: <xref uid="excel!Excel.PivotValueFilter:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Add a PivotFilter to filter on the values correlated with a row.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n  // Get the \"Farm\" field.\n  const field = pivotTable.hierarchies.getItem(\"Farm\").fields.getItem(\"Farm\");\n\n  // Filter to only include rows with more than 500 wholesale crates sold.\n  const filter: Excel.PivotValueFilter = {\n    condition: Excel.ValueFilterCondition.greaterThan,\n    comparator: 500,\n    value: \"Sum of Crates Sold Wholesale\"\n  };\n\n  // Apply the value filter to the field.\n  field.applyFilter({ valueFilter: filter });\n\n  await context.sync();\n});\n```"
+metadata:
+  ms.openlocfilehash: 702fc6f2ec0f8c27101826ad1531ba4a319b69f0
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49856290"

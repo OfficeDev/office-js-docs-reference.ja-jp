@@ -1,676 +1,392 @@
-### YamlMime:UniversalReference
-items:
-  - uid: office.Office.Binding
-    summary: |-
-      文書のセクションへのバインドを表します。
-
-      Binding オブジェクトは、種類に関係なくすべてのバインドが持つ機能を公開します。
-
-      Binding オブジェクトは直接呼び出されることはありません。 各種類のバインドを表すオブジェクトの抽象親クラスです: [MatrixBinding](xref:office.Office.MatrixBinding)<!-- -->、 [Office TableBinding](xref:office.Office.TableBinding)<!-- -->、または[Office TextBinding](xref:office.Office.TextBinding)<!-- -->. これらの3つのオブジェクトはすべて、バインドオブジェクトから getDataAsync メソッドと setDataAsync メソッドを継承し、バインド内のデータを操作できるようにします。 また、id および type プロパティを継承して、これらのプロパティ値をクエリすることもできます。 さらに、MatrixBinding および TableBinding オブジェクトは、行数と列数をカウントする機能など、マトリックスおよびテーブル固有の機能も公開します。
-    remarks: |-
-      **ホスト**: Excel、Word
-
-      **要件セット**:
-
-      - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
-
-      - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
-
-      - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
-    name: Office.Binding
-    fullName: Office.Binding
-    langs:
-      - typeScript
-    type: interface
-    package: office
-    children:
-      - office.Office.Binding.addHandlerAsync
-      - office.Office.Binding.addHandlerAsync_1
-      - office.Office.Binding.getDataAsync
-      - office.Office.Binding.getDataAsync_1
-      - office.Office.Binding.removeHandlerAsync
-      - office.Office.Binding.removeHandlerAsync_1
-      - office.Office.Binding.setDataAsync
-      - office.Office.Binding.setDataAsync_1
-      - office.Office.Binding.document
-      - office.Office.Binding.id
-      - office.Office.Binding.type
-  - uid: office.Office.Binding.addHandlerAsync
-    summary: '指定した事務所のオブジェクトにイベントハンドラーを追加し[ます。](xref:office.Office.EventType)<!-- -->. サポートされて`Office.EventType.BindingDataChanged`いる eventtypes および`Office.EventType.BindingSelectionChanged`<!-- -->.'
-    remarks: |-
-      **要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)
-
-      各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。
-    name: 'addHandlerAsync(eventType, handler, options, callback)'
-    fullName: 'addHandlerAsync(eventType, handler, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: イベントの種類。 バインドでは、または`Office.EventType.BindingDataChanged`の場合があります。`Office.EventType.BindingSelectionChanged`<!-- -->.
-          type:
-            - office.Office.EventType
-        - id: handler
-          description: '追加するイベントハンドラー関数。これには、 [BindingDataChangedEventArgs](xref:office.Office.BindingDataChangedEventArgs)または BindingSelectionChangedEventArgs のいずれかのパラメーターのみが含まれ[ます。](xref:office.Office.BindingSelectionChangedEventArgs)<!-- -->.'
-          type:
-            - any
-        - id: options
-          description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
-          type:
-            - office.Office.AsyncContextOptions
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: Office.AsyncResult<void>) => void'
-  - uid: office.Office.Binding.addHandlerAsync_1
-    summary: '指定した事務所のオブジェクトにイベントハンドラーを追加し[ます。](xref:office.Office.EventType)<!-- -->. サポートされて`Office.EventType.BindingDataChanged`いる eventtypes および`Office.EventType.BindingSelectionChanged`<!-- -->.'
-    remarks: |-
-      **要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)
-
-      各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      // The following code sample calls the select method of the Office object to access the binding
-      // with ID "MyBinding", and then calls the addHandlerAsync method to add a handler function 
-      // for the bindingDataChanged event of that binding.
-      function addEventHandlerToBinding() {
-          Office.select("bindings#MyBinding").addHandlerAsync(
-              Office.EventType.BindingDataChanged, onBindingDataChanged);
-      }
-
-      function onBindingDataChanged(eventArgs) {
-          write("Data has changed in binding: " + eventArgs.binding.id);
-      }
-
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-      ```javascript
-      // To add an event handler for the BindingSelectionChanged event of a binding, 
-      // use the addHandlerAsync method of the Binding object.
-      // The event handler receives an argument of type BindingSelectionChangedEventArgs.
-      function addEventHandlerToBinding() {
-          Office.select("bindings#MyBinding").addHandlerAsync(
-              Office.EventType.BindingSelectionChanged, onBindingSelectionChanged);
-      }
-
-      function onBindingSelectionChanged(eventArgs) {
-          write(eventArgs.binding.id + " has been selected.");
-      }
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-    name: 'addHandlerAsync(eventType, handler, callback)'
-    fullName: 'addHandlerAsync(eventType, handler, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: イベントの種類。 バインドでは、または`Office.EventType.BindingDataChanged`の場合があります。`Office.EventType.BindingSelectionChanged`<!-- -->.
-          type:
-            - office.Office.EventType
-        - id: handler
-          description: '追加するイベントハンドラー関数。これには、 [BindingDataChangedEventArgs](xref:office.Office.BindingDataChangedEventArgs)または BindingSelectionChangedEventArgs のいずれかのパラメーターのみが含まれ[ます。](xref:office.Office.BindingSelectionChangedEventArgs)<!-- -->.'
-          type:
-            - any
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: Office.AsyncResult<void>) => void'
-  - uid: office.Office.Binding.getDataAsync
-    summary: バインド内に含まれるデータを返します。
-    remarks: |-
-      **要件セット**:
-
-      - [Htmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)(を使用する場合`Office.CoercionType.Html`<!-- -->),
-
-      - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
-
-      - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion)(を使用する場合`Office.CoercionType.Matrix`<!-- -->)
-
-      - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion)(を使用する場合`Office.CoercionType.Ooxml`<!-- -->)
-
-      - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
-
-      - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion)(を使用する場合`Office.CoercionType.Table`<!-- -->)
-
-      - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
-
-      - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion)(を使用する場合`Office.CoercionType.Text`<!-- -->)
-
-      MatrixBinding または TableBinding から呼び出された場合、getDataAsync メソッドは、省略可能な startRow、startColumn、rowCount、および columnCount パラメーターが指定されている場合に、バインドされた値のサブセットを返します (連続した有効な範囲を指定する場合)。
-    name: 'getDataAsync(options, callback)'
-    fullName: 'getDataAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getDataAsync<T>(options?: GetBindingDataOptions, callback?: (result: AsyncResult<T>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: バインドでデータを取得する方法のオプションを提供します。
-          type:
-            - office.Office.GetBindingDataOptions
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、指定されたバインド内の値です。 `coercionType`パラメーターが指定されている場合 (呼び出しが成功した場合)、データは CoercionType 列挙のトピックで説明する形式で返されます。'
-          type:
-            - '(result: AsyncResult<T>) => void'
-      typeParameters:
-        - id: T
-  - uid: office.Office.Binding.getDataAsync_1
-    summary: バインド内に含まれるデータを返します。
-    remarks: |-
-      **要件セット**:
-
-      - [Htmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)(を使用する場合`Office.CoercionType.Html`<!-- -->)
-
-      - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
-
-      - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion)(を使用する場合`Office.CoercionType.Matrix`<!-- -->)
-
-      - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion)(を使用する場合`Office.CoercionType.Ooxml`<!-- -->)
-
-      - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
-
-      - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion)(を使用する場合`Office.CoercionType.Table`<!-- -->)
-
-      - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
-
-      - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion)(を使用する場合`Office.CoercionType.Text`<!-- -->)
-
-      MatrixBinding または TableBinding から呼び出された場合、getDataAsync メソッドは、省略可能な startRow、startColumn、rowCount、および columnCount パラメーターが指定されている場合に、バインドされた値のサブセットを返します (連続した有効な範囲を指定する場合)。
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      function showBindingData() {
-          Office.select("bindings#MyBinding").getDataAsync(function (asyncResult) {
-              write(asyncResult.value)
-          });
-      }
-
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-
-      // There is an important difference in behavior between using the "table" and "matrix" coercionType with the
-      // Binding.getDataAsync method, with respect to data formatted with header rows, as shown in the following
-      // two examples. These code examples show event handler functions for the Binding.SelectionChanged event.
-
-      // If you specify the "table" coercionType, the TableData.rows property ( result.value.rows in the following
-      // code example) returns an array that contains only the body rows of the table. So, its 0th row will be the
-      // first non-header row in the table.
-      function selectionChanged(evtArgs) { 
-          Office.select("bindings#TableTranslate").getDataAsync(
-              { coercionType: 'table', 
-                startRow: evtArgs.startRow, 
-                startCol: 0, 
-                rowCount: 1, 
-                columnCount: 1 },  
-              function (result) { 
-                  if (result.status == 'succeeded') { 
-                      write("Image to find: " + result.value.rows[0][0]); 
-                  } 
-                  else 
-                      write(result.error.message); 
-          }); 
-      }     
-      // Function that writes to a div with id='message' on the page. 
-      function write(message){ 
-          document.getElementById('message').innerText += message; 
-      }
-
-      // However, if you specify the "matrix" coercionType, result.value in the following code example returns an array
-      // that contains the table header in the 0th row. If the table header contains multiple rows, then these are all
-      // included in the result.value matrix as separate rows before the table body rows are included.
-      function selectionChanged(evtArgs) { 
-          Office.select("bindings#TableTranslate").getDataAsync(
-              { coercionType: 'matrix', 
-                startRow: evtArgs.startRow, 
-                startCol: 0, 
-                rowCount: 1, 
-                columnCount: 1 },  
-              function (result) { 
-                  if (result.status == 'succeeded') { 
-                      write("Image to find: " + result.value[1][0]); 
-                  } 
-                  else 
-                      write(result.error.message); 
-          }); 
-      }     
-      // Function that writes to a div with id='message' on the page. 
-      function write(message){ 
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-    name: getDataAsync(callback)
-    fullName: getDataAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getDataAsync<T>(callback?: (result: AsyncResult<T>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->. Result `value`のプロパティは、指定されたバインド内の値です。 `coercionType`パラメーターが指定されている場合 (呼び出しが成功した場合)、データは CoercionType 列挙のトピックで説明する形式で返されます。'
-          type:
-            - '(result: AsyncResult<T>) => void'
-      typeParameters:
-        - id: T
-  - uid: office.Office.Binding.removeHandlerAsync
-    summary: 指定されたイベントの種類のバインドから、指定されたハンドラーを削除します。
-    remarks: '**要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)'
-    name: 'removeHandlerAsync(eventType, options, callback)'
-    fullName: 'removeHandlerAsync(eventType, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: イベントの種類。 バインドでは、または`Office.EventType.BindingDataChanged`の場合があります。`Office.EventType.BindingSelectionChanged`<!-- -->.
-          type:
-            - office.Office.EventType
-        - id: options
-          description: 削除するイベントハンドラーを決めるためのオプションを提供します。
-          type:
-            - office.Office.RemoveHandlerOptions
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Binding.removeHandlerAsync_1
-    summary: 指定されたイベントの種類のバインドから、指定されたハンドラーを削除します。
-    remarks: |-
-      **要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      function removeEventHandlerFromBinding() {
-          Office.select("bindings#MyBinding").removeHandlerAsync(
-              Office.EventType.BindingDataChanged, {handler:onBindingDataChanged});
-      }
-      ```
-    name: 'removeHandlerAsync(eventType, callback)'
-    fullName: 'removeHandlerAsync(eventType, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: イベントの種類。 バインドでは、または`Office.EventType.BindingDataChanged`の場合があります。`Office.EventType.BindingSelectionChanged`<!-- -->.
-          type:
-            - office.Office.EventType
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Binding.setDataAsync
-    summary: 指定されたバインド オブジェクトで表されるドキュメントのバインド セクションにデータを書き込みます。
-    remarks: |-
-      **要件セット**:
-
-      - [Htmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)(を使用する場合`Office.CoercionType.Html`<!-- -->)
-
-      - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
-
-      - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion)(を使用する場合`Office.CoercionType.Matrix`<!-- -->)
-
-      - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion)(を使用する場合`Office.CoercionType.Ooxml`<!-- -->)
-
-      - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
-
-      - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion)(を使用する場合`Office.CoercionType.Table`<!-- -->)
-
-      - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
-
-      - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion)(を使用する場合`Office.CoercionType.Text`<!-- -->)
-
-      データに渡される値には、バインドに書き込まれるデータが含まれています。 次の表に示されるように、渡された値の種類により、書き込まれる内容が決まります。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>文字列に強制的に変換できるプレーンテキストまたは任意のものが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix")</td> <td>Tabular data without headers will be written. For example, to write data to three rows in two columns, you can pass an array like this: `[["R1C1", "R1C2"], ["R2C1", "R2C2"], ["R3C1", "R3C2"]]`<!-- -->. 3つの行からなる1つの列を記述するには、次のような配列を渡します。`[["R1C1"], ["R2C1"], ["R3C1"]]`<!-- -->.</td> </tr> <tr> <td>`TableData`オブジェクト</td> <td>ヘッダー付きのテーブルが書き込まれます。</td> </tr> </table>
-
-      また、バインドにデータを書き込むときに、次のアプリケーション固有の処理が適用されます。 Word の場合、指定されたデータは、次のようにバインドに書き込まれます。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>指定されたテキストが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix") または`TableData`オブジェクト</td> <td>HTML</td> </tr> <tr> <td>HTML</td> <td>指定された HTML が書き込まれます。 書き込む HTML に無効な HTML が含まれている場合も、エラーは発生しません。 HTML はできる限り書き込まれ、無効なデータは省略されます。</td> </tr> <tr> <td>Office Open XML ("Open XML")</td> <td>指定された XML が書き込まれます。</td> </tr> </table>
-
-      Excel では、指定された data は、次の規則に従ってバインドに書き込まれます。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>The specified text is inserted as the value of the first bound cell.You can also specify a valid formula to add that formula to the bound cell. たとえば、データをに設定`"=SUM(A1:A5)"`すると、指定した範囲内の値が集計されます。 ただし、バインドされたセルで数式を設定する場合、その後、バインドされたセルからは追加された数式 (または既存の数式) を読み取ることができません。 バインドされたセルで Binding.getDataAsync メソッドを呼び出してそのデータを読み取ると、このメソッドは、(数式の結果である) セルに表示されたデータのみを返すことができます。</td> </tr> <tr> <td>配列の配列 (「matrix」)、形状が指定されたバインドの形状と完全に一致する場合</td> <td>The set of rows and columns are written.You can also specify an array of arrays that contain valid formulas to add them to the bound cells. たとえば、データをに設定`[["=SUM(A1:A5)","=AVERAGE(A1:A5)"]]`すると、2つのセルを含むバインドにこれら2つの数式が追加されます。 1つの連結セルに数式を設定する場合と同様に、追加された数式 (または、既存の数式) を`Binding.getDataAsync`メソッドを使用してバインドから読み取ることはできません。バインドされたセルに表示されるデータのみを返します。</td> </tr> <tr> <td>`TableData`オブジェクト。テーブルの形状は、バインドされたテーブルと一致します。</td> <td>The specified set of rows and/or headers are written, if no other data in surrounding cells will be overwritten. **注**: *data*パラメーターに渡す TableData オブジェクトに数式を指定した場合、Excel の "集計列" 機能によって、列内の数式が自動的に重複するため、期待した結果が得られないことがあります。 To work around this when you want to write *data* that contains formulas to a bound table, try specifying the data as an array of arrays (instead of a TableData object), and specify the *coercionType* as Microsoft.Office.Matrix or "matrix".</td> </tr> </table>
-
-      Web 上の Excel の場合:
-
-      - このメソッドに対する単一の呼び出しで、data パラメーターに渡される値に含まれるセルの合計数が2万を超えることはできません。
-
-      - CellFormat パラメーターに渡される書式設定グループの数が100を超えることはできません。 1 つの書式設定グループは、指定のセル範囲に適用される書式設定のセットから構成されます。
-
-      上記以外の場合は、エラーが返されます。
-
-      SetDataAsync メソッドは、オプションの startRow パラメーターと startColumn パラメーターが指定されている場合は、テーブルまたはマトリックスバインドのサブセットにデータを書き込み、有効な範囲を指定します。
-
-      setDataAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して次の情報を戻せます。
-
-      <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
-    name: 'setDataAsync(data, options, callback)'
-    fullName: 'setDataAsync(data, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setDataAsync(data: TableData | any, options?: SetBindingDataOptions, callback?: (result: AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: data
-          description: |-
-            現在の選択範囲に設定するデータ。 ホスト別の使用可能なデータ型:
-
-            文字列: Excel on the web、Windows、および Word on the web および Windows のみ
-
-            配列の配列: Excel と Word のみ
-
-            [TableData](xref:office.Office.TableData)<!-- -->: Excel および Word のみ
-
-            HTML: Word on the web および Windows のみ
-
-            Office Open XML: Word のみ
-          type:
-            - TableData | any
-        - id: options
-          description: バインドのデータを設定する方法についてのオプションを提供します。
-          type:
-            - office.Office.SetBindingDataOptions
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Binding.setDataAsync_1
-    summary: 指定されたバインド オブジェクトで表されるドキュメントのバインド セクションにデータを書き込みます。
-    remarks: |-
-      **要件セット**:
-
-      - [Htmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)(を使用する場合`Office.CoercionType.Html`<!-- -->)
-
-      - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
-
-      - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion)(を使用する場合`Office.CoercionType.Matrix`<!-- -->)
-
-      - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion)(を使用する場合`Office.CoercionType.Ooxml`<!-- -->)
-
-      - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
-
-      - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion)(を使用する場合`Office.CoercionType.Table`<!-- -->)
-
-      - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
-
-      - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion)(を使用する場合`Office.CoercionType.Text`<!-- -->)
-
-      データに渡される値には、バインドに書き込まれるデータが含まれています。 次の表に示されるように、渡された値の種類により、書き込まれる内容が決まります。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>文字列に強制的に変換できるプレーンテキストまたは任意のものが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix")</td> <td>Tabular data without headers will be written. For example, to write data to three rows in two columns, you can pass an array like this: `[["R1C1", "R1C2"], ["R2C1", "R2C2"], ["R3C1", "R3C2"]]`<!-- -->. 3つの行からなる1つの列を記述するには、次のような配列を渡します。`[["R1C1"], ["R2C1"], ["R3C1"]]`<!-- -->.</td> </tr> <tr> <td>`TableData`オブジェクト</td> <td>ヘッダー付きのテーブルが書き込まれます。</td> </tr> </table>
-
-      また、バインドにデータを書き込むときに、次のアプリケーション固有の処理が適用されます。 Word の場合、指定されたデータは、次のようにバインドに書き込まれます。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>指定されたテキストが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix") または`TableData`オブジェクト</td> <td>HTML</td> </tr> <tr> <td>HTML</td> <td>指定された HTML が書き込まれます。 書き込む HTML に無効な HTML が含まれている場合も、エラーは発生しません。 HTML はできる限り書き込まれ、無効なデータは省略されます。</td> </tr> <tr> <td>Office Open XML ("Open XML")</td> <td>指定された XML が書き込まれます。</td> </tr> </table>
-
-      Excel では、指定された data は、次の規則に従ってバインドに書き込まれます。
-
-      <table> <tr> <th>`data`金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>The specified text is inserted as the value of the first bound cell.You can also specify a valid formula to add that formula to the bound cell. たとえば、データをに設定`"=SUM(A1:A5)"`すると、指定した範囲内の値が集計されます。 ただし、バインドされたセルで数式を設定する場合、その後、バインドされたセルからは追加された数式 (または既存の数式) を読み取ることができません。 バインドされたセルで Binding.getDataAsync メソッドを呼び出してそのデータを読み取ると、このメソッドは、(数式の結果である) セルに表示されたデータのみを返すことができます。</td> </tr> <tr> <td>配列の配列 (「matrix」)、形状が指定されたバインドの形状と完全に一致する場合</td> <td>The set of rows and columns are written.You can also specify an array of arrays that contain valid formulas to add them to the bound cells. たとえば、データをに設定`[["=SUM(A1:A5)","=AVERAGE(A1:A5)"]]`すると、2つのセルを含むバインドにこれら2つの数式が追加されます。 1つの連結セルに数式を設定する場合と同様に、追加された数式 (または、既存の数式) を`Binding.getDataAsync`メソッドを使用してバインドから読み取ることはできません。バインドされたセルに表示されるデータのみを返します。</td> </tr> <tr> <td>`TableData`オブジェクト。テーブルの形状は、バインドされたテーブルと一致します。</td> <td>The specified set of rows and/or headers are written, if no other data in surrounding cells will be overwritten. **注**: *data*パラメーターに渡す TableData オブジェクトに数式を指定した場合、Excel の "集計列" 機能によって、列内の数式が自動的に重複するため、期待した結果が得られないことがあります。 To work around this when you want to write *data* that contains formulas to a bound table, try specifying the data as an array of arrays (instead of a TableData object), and specify the *coercionType* as Microsoft.Office.Matrix or "matrix".</td> </tr> </table>
-
-      Web 上の Excel の場合:
-
-      - このメソッドに対する単一の呼び出しで、data パラメーターに渡される値に含まれるセルの合計数が2万を超えることはできません。
-
-      - CellFormat パラメーターに渡される書式設定グループの数が100を超えることはできません。 1 つの書式設定グループは、指定のセル範囲に適用される書式設定のセットから構成されます。
-
-      上記以外の場合は、エラーが返されます。
-
-      SetDataAsync メソッドは、オプションの startRow パラメーターと startColumn パラメーターが指定されている場合は、テーブルまたはマトリックスバインドのサブセットにデータを書き込み、有効な範囲を指定します。
-
-      setDataAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して次の情報を戻せます。
-
-      <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
-
-      #### <a name="examples"></a>例
-
-      ```javascript
-      function setBindingData() {
-          Office.select("bindings#MyBinding").setDataAsync('Hello World!', function (asyncResult) { });
-      }
-
-      // Specifying the optional coercionType parameter lets you specify the kind of data you want to write to a binding.
-      // For example, in Word if you want to write HTML to a text binding, you can specify the coercionType parameter 
-      // as "html" as shown in the following example, which uses HTML <b> tags to make "Hello" bold.
-      function writeHtmlData() {
-          Office.select("bindings#myBinding").setDataAsync(
-              "<b>Hello</b> World!", {coercionType: "html"}, function (asyncResult) {
-              if (asyncResult.status == "failed") {
-                  write('Error: ' + asyncResult.error.message);
-              }
-          });
-      }
-
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-
-      // In this example, the call to setDataAsync passes the data parameter as an array of arrays
-      // (to create a single column of three rows), and specifies the data structure with the 
-      // coercionType parameter as a "matrix".
-      function writeBoundDataMatrix() {
-          Office.select("bindings#myBinding").setDataAsync(
-              [['Berlin'],['Munich'],['Duisburg']],{ coercionType: "matrix" }, function (asyncResult) {
-              if (asyncResult.status == "failed") {
-                  write('Error: ' + asyncResult.error.message);
-              } else {
-                  write('Bound data: ' + asyncResult.value);
-              }
-          });
-      }
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-
-      // In the writeBoundDataTable function in this example, the call to setDataAsync passes the data parameter 
-      // as a TableData object (to write three columns and three rows), and specifies the data structure
-      // with the coercionType parameter as a "table".
-
-      // In the updateTableData function, the call to setDataAsync again passes the data parameter as a TableData object,
-      // but as a single column with a new header and three rows, to update the values in the last column 
-      // of the table created with the writeBoundDataTable function. The optional zero-based startColumn parameter 
-      // is specified as 2 to replace the values in the third column of the table.
-      function writeBoundDataTable() {
-          // Create a TableData object.
-          var myTable = new Office.TableData();
-          myTable.headers = ['First Name', 'Last Name', 'Grade'];
-          myTable.rows = [['Kim', 'Abercrombie', 'A'], ['Junmin','Hao', 'C'],['Toni','Poe','B']];
-
-          // Set myTable in the binding.
-          Office.select("bindings#myBinding").setDataAsync(myTable, { coercionType: "table" }, 
-              function (asyncResult) {
-                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                      write('Error: '+ asyncResult.error.message);
-              } else {
-                  write('Bound data: ' + asyncResult.value);
-              }
-          });
-      }
-
-      // Replace last column with different data.
-      function updateTableData() {
-          var newTable = new Office.TableData();
-          newTable.headers = ["Gender"];
-          newTable.rows = [["M"],["M"],["F"]];
-          Office.select("bindings#myBinding").setDataAsync(newTable, { coercionType: "table", startColumn:2 }, 
-              function (asyncResult) {
-                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                      write('Error: '+ asyncResult.error.message);
-              } else {
-                  write('Bound data: ' + asyncResult.value);
-              }     
-          });   
-      }
-
-      // In this example, the following call passes two formatting groups to cellFormat.
-      Office.select("bindings#myBinding").setDataAsync([['Berlin'],['Munich'],['Duisburg']],
-        {cellFormat:[{cells: {row: 1}, format: {fontColor: "yellow"}}, 
-            {cells: {row: 3, column: 4}, format: {borderColor: "white", fontStyle: "bold"}}]}, 
-        function (asyncResult){});
-      ```
-    name: 'setDataAsync(data, callback)'
-    fullName: 'setDataAsync(data, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setDataAsync(data: TableData | any, callback?: (result: AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: data
-          description: |-
-            現在の選択範囲に設定するデータ。 ホスト別の使用可能なデータ型:
-
-            文字列: Excel on the web、Windows、および Word on the web および Windows のみ
-
-            配列の配列: Excel と Word のみ
-
-            `TableData`<!-- -->: Excel および Word のみ
-
-            HTML: Word on the web および Windows のみ
-
-            Office Open XML: Word のみ
-          type:
-            - TableData | any
-        - id: callback
-          description: '省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office.Office.AsyncResult)である。<!-- -->.'
-          type:
-            - '(result: AsyncResult<void>) => void'
-  - uid: office.Office.Binding.document
-    summary: バインドに関連付けられた Document オブジェクトを取得します。
-    name: document
-    fullName: document
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'document: Office.Document;'
-      return:
-        type:
-          - office.Office.Document
-        description: |-
-
-
-          #### <a name="examples"></a>例
-
-          ```javascript
-          Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
-              write(asyncResult.value.document.url);
-          });
-
-          // Function that writes to a div with id='message' on the page.
-          function write(message){
-              document.getElementById('message').innerText += message; 
-          }
-          ```
-  - uid: office.Office.Binding.id
-    summary: '同じ[Office. Document](xref:office.Office.Document)オブジェクト内にあるバインドの中から、このバインドを一意に識別する文字列。'
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'id: string;'
-      return:
-        type:
-          - string
-        description: |-
-
-
-          #### <a name="examples"></a>例
-
-          ```javascript
-          Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
-              write(asyncResult.value.id);
-          });
-
-          // Function that writes to a div with id='message' on the page.
-          function write(message){
-              document.getElementById('message').innerText += message; 
-          }
-          ```
-  - uid: office.Office.Binding.type
-    summary: バインドの種類を取得します。
-    name: type
-    fullName: type
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'type: Office.BindingType;'
-      return:
-        type:
-          - office.Office.BindingType
-        description: |-
-
-
-          #### <a name="examples"></a>例
-
-          ```javascript
-          Office.context.document.bindings.getByIdAsync("MyBinding", function (asyncResult) { 
-              write(asyncResult.value.type); 
-          }) 
-
-          // Function that writes to a div with id='message' on the page. 
-          function write(message){ 
-              document.getElementById('message').innerText += message;  
-          }
-          ```
+### YamlMime:TSType
+name: Office.Binding
+uid: office!Office.Binding:interface
+package: office!
+fullName: Office.Binding
+summary: >-
+  文書のセクションへのバインドを表します。
+
+
+  Binding オブジェクトは、種類に関係なくすべてのバインドが持つ機能を公開します。
+
+
+  Binding オブジェクトは直接呼び出されることはありません。 各種類のバインドを表すオブジェクトの抽象親クラスです: [MatrixBinding](xref:office!Office.MatrixBinding:interface)<!-- -->、 [Office TableBinding](xref:office!Office.TableBinding:interface)<!-- -->、または [Office TextBinding](xref:office!Office.TextBinding:interface)<!-- -->. これらの3つのオブジェクトはすべて、バインドオブジェクトから getDataAsync メソッドと setDataAsync メソッドを継承し、バインド内のデータを操作できるようにします。 また、id および type プロパティを継承して、これらのプロパティ値をクエリすることもできます。 さらに、MatrixBinding および TableBinding オブジェクトは、行数と列数をカウントする機能など、マトリックスおよびテーブル固有の機能も公開します。
+remarks: >-
+  **ホスト**: Excel、Word
+
+
+  **要件セット**:
+
+
+  - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
+
+
+  - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
+
+
+  - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: document
+  uid: office!Office.Binding#document:member
+  package: office!
+  fullName: document
+  summary: バインドに関連付けられた Document オブジェクトを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'document: Office.Document;'
+    return:
+      type: <xref uid="office!Office.Document:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n    write(asyncResult.value.document.url);\n});\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- name: id
+  uid: office!Office.Binding#id:member
+  package: office!
+  fullName: id
+  summary: 同じ [Office.Document](xref:office!Office.Document:interface) オブジェクト内のバインド間でこのバインドを一意に識別する文字列。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'id: string;'
+    return:
+      type: string
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n    write(asyncResult.value.id);\n});\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+- name: type
+  uid: office!Office.Binding#type:member
+  package: office!
+  fullName: type
+  summary: バインドの種類を取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'type: Office.BindingType;'
+    return:
+      type: <xref uid="office!Office.BindingType:enum" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.getByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(asyncResult.value.type); \n}) \n\n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
+methods:
+- name: addHandlerAsync(eventType, handler, options, callback)
+  uid: office!Office.Binding#addHandlerAsync:member(1)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, options, callback)
+  summary: 指定した事務所のオブジェクトにイベントハンドラーを追加し [ます。](xref:office!Office.EventType:enum)<!-- -->. サポートされている EventTypes `Office.EventType.BindingDataChanged` および `Office.EventType.BindingSelectionChanged`<!-- -->.
+  remarks: >-
+    **要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)
+
+
+    各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: イベントの種類。 バインドで `Office.EventType.BindingDataChanged` は、またはの場合があります。 `Office.EventType.BindingSelectionChanged`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベントハンドラー関数。これには、 [BindingDataChangedEventArgs](xref:office!Office.BindingDataChangedEventArgs:interface) または BindingSelectionChangedEventArgs のいずれかのパラメーターのみが含まれ [ます。](xref:office!Office.BindingSelectionChangedEventArgs:interface)<!-- -->.
+      type: any
+    - id: options
+      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: office!Office.Binding#addHandlerAsync:member(2)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: 指定した事務所のオブジェクトにイベントハンドラーを追加し [ます。](xref:office!Office.EventType:enum)<!-- -->. サポートされている EventTypes `Office.EventType.BindingDataChanged` および `Office.EventType.BindingSelectionChanged`<!-- -->.
+  remarks: "**要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)\n\n各イベントハンドラー関数の名前が一意である限り、指定された eventType に対して複数のイベントハンドラーを追加できます。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following code sample calls the select method of the Office object to access the binding\n// with ID \"MyBinding\", and then calls the addHandlerAsync method to add a handler function \n// for the bindingDataChanged event of that binding.\nfunction addEventHandlerToBinding() {\n    Office.select(\"bindings#MyBinding\").addHandlerAsync(\n        Office.EventType.BindingDataChanged, onBindingDataChanged);\n}\n\nfunction onBindingDataChanged(eventArgs) {\n    write(\"Data has changed in binding: \" + eventArgs.binding.id);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// To add an event handler for the BindingSelectionChanged event of a binding, \n// use the addHandlerAsync method of the Binding object.\n// The event handler receives an argument of type BindingSelectionChangedEventArgs.\nfunction addEventHandlerToBinding() {\n    Office.select(\"bindings#MyBinding\").addHandlerAsync(\n        Office.EventType.BindingSelectionChanged, onBindingSelectionChanged);\n}\n\nfunction onBindingSelectionChanged(eventArgs) {\n    write(eventArgs.binding.id + \" has been selected.\");\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: イベントの種類。 バインドで `Office.EventType.BindingDataChanged` は、またはの場合があります。 `Office.EventType.BindingSelectionChanged`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベントハンドラー関数。これには、 [BindingDataChangedEventArgs](xref:office!Office.BindingDataChangedEventArgs:interface) または BindingSelectionChangedEventArgs のいずれかのパラメーターのみが含まれ [ます。](xref:office!Office.BindingSelectionChangedEventArgs:interface)<!-- -->.
+      type: any
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getDataAsync(options, callback)
+  uid: office!Office.Binding#getDataAsync:member(1)
+  package: office!
+  fullName: getDataAsync(options, callback)
+  summary: バインド内に含まれるデータを返します。
+  remarks: >-
+    **要件セット**:
+
+
+    - [Htmlcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (を使用する場合) `Office.CoercionType.Html`<!-- -->)
+
+
+    - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
+
+
+    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (を使用する場合) `Office.CoercionType.Matrix`<!-- -->)
+
+
+    - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (を使用する場合) `Office.CoercionType.Ooxml`<!-- -->)
+
+
+    - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
+
+
+    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (を使用する場合) `Office.CoercionType.Table`<!-- -->)
+
+
+    - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
+
+
+    - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (を使用する場合) `Office.CoercionType.Text`<!-- -->)
+
+
+    MatrixBinding または TableBinding から呼び出された場合、getDataAsync メソッドは、省略可能な startRow、startColumn、rowCount、および columnCount パラメーターが指定されている場合に、バインドされた値のサブセットを返します (連続した有効な範囲を指定する場合)。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getDataAsync<T>(options?: GetBindingDataOptions, callback?: (result: AsyncResult<T>) => void): void;'
+    parameters:
+    - id: options
+      description: バインドでデータを取得する方法のオプションを提供します。
+      type: <xref uid="office!Office.GetBindingDataOptions:interface" />
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、指定されたバインド内の値です。 パラメーターが指定されている場合 `coercionType` (呼び出しが成功した場合)、データは CoercionType 列挙のトピックで説明する形式で返されます。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;T&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getDataAsync(callback)
+  uid: office!Office.Binding#getDataAsync:member(2)
+  package: office!
+  fullName: getDataAsync(callback)
+  summary: バインド内に含まれるデータを返します。
+  remarks: "**要件セット**:\n\n- [Htmlcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (を使用する場合) `Office.CoercionType.Html`<!-- -->)\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (を使用する場合) `Office.CoercionType.Matrix`<!-- -->)\n\n- [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (を使用する場合) `Office.CoercionType.Ooxml`<!-- -->)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (を使用する場合) `Office.CoercionType.Table`<!-- -->)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n- [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (を使用する場合) `Office.CoercionType.Text`<!-- -->)\n\nMatrixBinding または TableBinding から呼び出された場合、getDataAsync メソッドは、省略可能な startRow、startColumn、rowCount、および columnCount パラメーターが指定されている場合に、バインドされた値のサブセットを返します (連続した有効な範囲を指定する場合)。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showBindingData() {\n    Office.select(\"bindings#MyBinding\").getDataAsync(function (asyncResult) {\n        write(asyncResult.value)\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// There is an important difference in behavior between using the \"table\" and \"matrix\" coercionType with the\n// Binding.getDataAsync method, with respect to data formatted with header rows, as shown in the following\n// two examples. These code examples show event handler functions for the Binding.SelectionChanged event.\n\n// If you specify the \"table\" coercionType, the TableData.rows property ( result.value.rows in the following\n// code example) returns an array that contains only the body rows of the table. So, its 0th row will be the\n// first non-header row in the table.\nfunction selectionChanged(evtArgs) { \n    Office.select(\"bindings#TableTranslate\").getDataAsync(\n        { coercionType: 'table', \n          startRow: evtArgs.startRow, \n          startCol: 0, \n          rowCount: 1, \n          columnCount: 1 },  \n        function (result) { \n            if (result.status == 'succeeded') { \n                write(\"Image to find: \" + result.value.rows[0][0]); \n            } \n            else \n                write(result.error.message); \n    }); \n}     \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message; \n}\n\n// However, if you specify the \"matrix\" coercionType, result.value in the following code example returns an array\n// that contains the table header in the 0th row. If the table header contains multiple rows, then these are all\n// included in the result.value matrix as separate rows before the table body rows are included.\nfunction selectionChanged(evtArgs) { \n    Office.select(\"bindings#TableTranslate\").getDataAsync(\n        { coercionType: 'matrix', \n          startRow: evtArgs.startRow, \n          startCol: 0, \n          rowCount: 1, \n          columnCount: 1 },  \n        function (result) { \n            if (result.status == 'succeeded') { \n                write(\"Image to find: \" + result.value[1][0]); \n            } \n            else \n                write(result.error.message); \n    }); \n}     \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getDataAsync<T>(callback?: (result: AsyncResult<T>) => void): void;'
+    parameters:
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、指定されたバインド内の値です。 パラメーターが指定されている場合 `coercionType` (呼び出しが成功した場合)、データは CoercionType 列挙のトピックで説明する形式で返されます。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;T&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, options, callback)
+  uid: office!Office.Binding#removeHandlerAsync:member(1)
+  package: office!
+  fullName: removeHandlerAsync(eventType, options, callback)
+  summary: 指定されたイベントの種類のバインドから、指定されたハンドラーを削除します。
+  remarks: '**要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: イベントの種類。 バインドで `Office.EventType.BindingDataChanged` は、またはの場合があります。 `Office.EventType.BindingSelectionChanged`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: options
+      description: 削除するイベントハンドラーを決めるためのオプションを提供します。
+      type: <xref uid="office!Office.RemoveHandlerOptions:interface" />
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: office!Office.Binding#removeHandlerAsync:member(2)
+  package: office!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: 指定されたイベントの種類のバインドから、指定されたハンドラーを削除します。
+  remarks: >-
+    **要件セット**: [bindingevents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#bindingevents)
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function removeEventHandlerFromBinding() {
+        Office.select("bindings#MyBinding").removeHandlerAsync(
+            Office.EventType.BindingDataChanged, {handler:onBindingDataChanged});
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: イベントの種類。 バインドで `Office.EventType.BindingDataChanged` は、またはの場合があります。 `Office.EventType.BindingSelectionChanged`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setDataAsync(data, options, callback)
+  uid: office!Office.Binding#setDataAsync:member(1)
+  package: office!
+  fullName: setDataAsync(data, options, callback)
+  summary: 指定されたバインド オブジェクトで表されるドキュメントのバインド セクションにデータを書き込みます。
+  remarks: >-
+    **要件セット**:
+
+
+    - [Htmlcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (を使用する場合) `Office.CoercionType.Html`<!-- -->)
+
+
+    - [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)
+
+
+    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (を使用する場合) `Office.CoercionType.Matrix`<!-- -->)
+
+
+    - [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (を使用する場合) `Office.CoercionType.Ooxml`<!-- -->)
+
+
+    - [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)
+
+
+    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (を使用する場合) `Office.CoercionType.Table`<!-- -->)
+
+
+    - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
+
+
+    - [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (を使用する場合) `Office.CoercionType.Text`<!-- -->)
+
+
+    データに渡される値には、バインドに書き込まれるデータが含まれています。 次の表に示されるように、渡された値の種類により、書き込まれる内容が決まります。
+
+
+    <table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>文字列に強制的に変換できるプレーンテキストまたは任意のものが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix")</td> <td>Tabular data without headers will be written. For example, to write data to three rows in two columns, you can pass an array like this: `[["R1C1", "R1C2"], ["R2C1", "R2C2"], ["R3C1", "R3C2"]]`<!-- -->. 3つの行からなる1つの列を記述するには、次のような配列を渡します。 `[["R1C1"], ["R2C1"], ["R3C1"]]`<!-- -->.</td> </tr> <tr> <td>`TableData`オブジェクト</td> <td>ヘッダー付きのテーブルが書き込まれます。</td> </tr> </table>
+
+
+    また、バインドにデータを書き込むときに、次のアプリケーション固有の処理が適用されます。 Word の場合、指定されたデータは、次のようにバインドに書き込まれます。
+
+
+    <table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>指定されたテキストが書き込まれます。</td> </tr> <tr> <td>配列の配列 ("matrix") または `TableData` オブジェクト</td> <td>HTML</td> </tr> <tr> <td>HTML</td> <td>指定された HTML が書き込まれます。 書き込む HTML に無効な HTML が含まれている場合も、エラーは発生しません。 HTML はできる限り書き込まれ、無効なデータは省略されます。</td> </tr> <tr> <td>Office Open XML ("Open XML")</td> <td>指定された XML が書き込まれます。</td> </tr> </table>
+
+
+    Excel では、指定された data は、次の規則に従ってバインドに書き込まれます。
+
+
+    <table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>The specified text is inserted as the value of the first bound cell.You can also specify a valid formula to add that formula to the bound cell. たとえば、データをに設定すると、指定した `"=SUM(A1:A5)"` 範囲内の値が集計されます。 ただし、バインドされたセルで数式を設定する場合、その後、バインドされたセルからは追加された数式 (または既存の数式) を読み取ることができません。 バインドされたセルで Binding.getDataAsync メソッドを呼び出してそのデータを読み取ると、このメソッドは、(数式の結果である) セルに表示されたデータのみを返すことができます。</td> </tr> <tr> <td>配列の配列 (「matrix」)、形状が指定されたバインドの形状と完全に一致する場合</td> <td>The set of rows and columns are written.You can also specify an array of arrays that contain valid formulas to add them to the bound cells. たとえば、データをに設定すると、2つの `[["=SUM(A1:A5)","=AVERAGE(A1:A5)"]]` セルを含むバインドにこれら2つの数式が追加されます。 1つの連結セルに数式を設定する場合と同様に、追加された数式 (または、既存の数式) をメソッドを使用してバインドから読み取ることはできません `Binding.getDataAsync` 。バインドされたセルに表示されるデータのみを返します。</td> </tr> <tr> <td>`TableData`オブジェクト。テーブルの形状は、バインドされたテーブルと一致します。</td> <td>The specified set of rows and/or headers are written, if no other data in surrounding cells will be overwritten. **注**: *data* パラメーターに渡す TableData オブジェクトに数式を指定した場合、Excel の "集計列" 機能によって、列内の数式が自動的に重複するため、期待した結果が得られないことがあります。 To work around this when you want to write *data* that contains formulas to a bound table, try specifying the data as an array of arrays (instead of a TableData object), and specify the *coercionType* as Microsoft.Office.Matrix or "matrix".</td> </tr> </table>
+
+
+    Web 上の Excel の場合:
+
+
+    - このメソッドに対する単一の呼び出しで、data パラメーターに渡される値に含まれるセルの合計数が2万を超えることはできません。
+
+
+    - CellFormat パラメーターに渡される書式設定グループの数が100を超えることはできません。 1 つの書式設定グループは、指定のセル範囲に適用される書式設定のセットから構成されます。
+
+
+    上記以外の場合は、エラーが返されます。
+
+
+    SetDataAsync メソッドは、オプションの startRow パラメーターと startColumn パラメーターが指定されている場合は、テーブルまたはマトリックスバインドのサブセットにデータを書き込み、有効な範囲を指定します。
+
+
+    setDataAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して次の情報を戻せます。
+
+
+    <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult. 状態</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setDataAsync(data: TableData | any, options?: SetBindingDataOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: >-
+        現在の選択範囲に設定するデータ。 ホスト別の使用可能なデータ型:
+
+
+        文字列: Excel on the web、Windows、および Word on the web および Windows のみ
+
+
+        配列の配列: Excel と Word のみ
+
+
+        [TableData](xref:office!Office.TableData:class)<!-- -->: Excel および Word のみ
+
+
+        HTML: Word on the web および Windows のみ
+
+
+        Office Open XML: Word のみ
+      type: <xref uid="office!Office.TableData:class" /> | any
+    - id: options
+      description: バインドのデータを設定する方法についてのオプションを提供します。
+      type: <xref uid="office!Office.SetBindingDataOptions:interface" />
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setDataAsync(data, callback)
+  uid: office!Office.Binding#setDataAsync:member(2)
+  package: office!
+  fullName: setDataAsync(data, callback)
+  summary: 指定されたバインド オブジェクトで表されるドキュメントのバインド セクションにデータを書き込みます。
+  remarks: "**要件セット**:\n\n- [Htmlcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (を使用する場合) `Office.CoercionType.Html`<!-- -->)\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (を使用する場合) `Office.CoercionType.Matrix`<!-- -->)\n\n- [Ooxmlcoercion 型変換](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (を使用する場合) `Office.CoercionType.Ooxml`<!-- -->)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (を使用する場合) `Office.CoercionType.Table`<!-- -->)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n- [Textcoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (を使用する場合) `Office.CoercionType.Text`<!-- -->)\n\nデータに渡される値には、バインドに書き込まれるデータが含まれています。 次の表に示されるように、渡された値の種類により、書き込まれる内容が決まります。\n\n<table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>文字列に強制的に変換できるプレーンテキストまたは任意のものが書き込まれます。</td> </tr> <tr> <td>配列の配列 (\"matrix\")</td> <td>Tabular data without headers will be written. For example, to write data to three rows in two columns, you can pass an array like this: `[[\"R1C1\", \"R1C2\"], [\"R2C1\", \"R2C2\"], [\"R3C1\", \"R3C2\"]]`<!-- -->. 3つの行からなる1つの列を記述するには、次のような配列を渡します。 `[[\"R1C1\"], [\"R2C1\"], [\"R3C1\"]]`<!-- -->.</td> </tr> <tr> <td>`TableData`オブジェクト</td> <td>ヘッダー付きのテーブルが書き込まれます。</td> </tr> </table>\n\nまた、バインドにデータを書き込むときに、次のアプリケーション固有の処理が適用されます。 Word の場合、指定されたデータは、次のようにバインドに書き込まれます。\n\n<table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>指定されたテキストが書き込まれます。</td> </tr> <tr> <td>配列の配列 (\"matrix\") または `TableData` オブジェクト</td> <td>HTML</td> </tr> <tr> <td>HTML</td> <td>指定された HTML が書き込まれます。 書き込む HTML に無効な HTML が含まれている場合も、エラーは発生しません。 HTML はできる限り書き込まれ、無効なデータは省略されます。</td> </tr> <tr> <td>Office Open XML (\"Open XML\")</td> <td>指定された XML が書き込まれます。</td> </tr> </table>\n\nExcel では、指定された data は、次の規則に従ってバインドに書き込まれます。\n\n<table> <tr> <th>`data` 金額</th> <th>書き込まれるデータ</th> </tr> <tr> <td>文字列</td> <td>The specified text is inserted as the value of the first bound cell.You can also specify a valid formula to add that formula to the bound cell. たとえば、データをに設定すると、指定した `\"=SUM(A1:A5)\"` 範囲内の値が集計されます。 ただし、バインドされたセルで数式を設定する場合、その後、バインドされたセルからは追加された数式 (または既存の数式) を読み取ることができません。 バインドされたセルで Binding.getDataAsync メソッドを呼び出してそのデータを読み取ると、このメソッドは、(数式の結果である) セルに表示されたデータのみを返すことができます。</td> </tr> <tr> <td>配列の配列 (「matrix」)、形状が指定されたバインドの形状と完全に一致する場合</td> <td>The set of rows and columns are written.You can also specify an array of arrays that contain valid formulas to add them to the bound cells. たとえば、データをに設定すると、2つの `[[\"=SUM(A1:A5)\",\"=AVERAGE(A1:A5)\"]]` セルを含むバインドにこれら2つの数式が追加されます。 1つの連結セルに数式を設定する場合と同様に、追加された数式 (または、既存の数式) をメソッドを使用してバインドから読み取ることはできません `Binding.getDataAsync` 。バインドされたセルに表示されるデータのみを返します。</td> </tr> <tr> <td>`TableData`オブジェクト。テーブルの形状は、バインドされたテーブルと一致します。</td> <td>The specified set of rows and/or headers are written, if no other data in surrounding cells will be overwritten. **注**: *data* パラメーターに渡す TableData オブジェクトに数式を指定した場合、Excel の \"集計列\" 機能によって、列内の数式が自動的に重複するため、期待した結果が得られないことがあります。 To work around this when you want to write *data* that contains formulas to a bound table, try specifying the data as an array of arrays (instead of a TableData object), and specify the *coercionType* as Microsoft.Office.Matrix or \"matrix\".</td> </tr> </table>\n\nWeb 上の Excel の場合:\n\n- このメソッドに対する単一の呼び出しで、data パラメーターに渡される値に含まれるセルの合計数が2万を超えることはできません。\n\n- CellFormat パラメーターに渡される書式設定グループの数が100を超えることはできません。 1 つの書式設定グループは、指定のセル範囲に適用される書式設定のセットから構成されます。\n\n上記以外の場合は、エラーが返されます。\n\nSetDataAsync メソッドは、オプションの startRow パラメーターと startColumn パラメーターが指定されている場合は、テーブルまたはマトリックスバインドのサブセットにデータを書き込み、有効な範囲を指定します。\n\nsetDataAsync メソッドに渡されたコールバック関数で、AsyncResult オブジェクトのプロパティを使用して次の情報を戻せます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult. 状態</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction setBindingData() {\n    Office.select(\"bindings#MyBinding\").setDataAsync('Hello World!', function (asyncResult) { });\n}\n\n// Specifying the optional coercionType parameter lets you specify the kind of data you want to write to a binding.\n// For example, in Word if you want to write HTML to a text binding, you can specify the coercionType parameter \n// as \"html\" as shown in the following example, which uses HTML <b> tags to make \"Hello\" bold.\nfunction writeHtmlData() {\n    Office.select(\"bindings#myBinding\").setDataAsync(\n        \"<b>Hello</b> World!\", {coercionType: \"html\"}, function (asyncResult) {\n        if (asyncResult.status == \"failed\") {\n            write('Error: ' + asyncResult.error.message);\n        }\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In this example, the call to setDataAsync passes the data parameter as an array of arrays\n// (to create a single column of three rows), and specifies the data structure with the \n// coercionType parameter as a \"matrix\".\nfunction writeBoundDataMatrix() {\n    Office.select(\"bindings#myBinding\").setDataAsync(\n        [['Berlin'],['Munich'],['Duisburg']],{ coercionType: \"matrix\" }, function (asyncResult) {\n        if (asyncResult.status == \"failed\") {\n            write('Error: ' + asyncResult.error.message);\n        } else {\n            write('Bound data: ' + asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In the writeBoundDataTable function in this example, the call to setDataAsync passes the data parameter \n// as a TableData object (to write three columns and three rows), and specifies the data structure\n// with the coercionType parameter as a \"table\".\n\n// In the updateTableData function, the call to setDataAsync again passes the data parameter as a TableData object,\n// but as a single column with a new header and three rows, to update the values in the last column \n// of the table created with the writeBoundDataTable function. The optional zero-based startColumn parameter \n// is specified as 2 to replace the values in the third column of the table.\nfunction writeBoundDataTable() {\n    // Create a TableData object.\n    var myTable = new Office.TableData();\n    myTable.headers = ['First Name', 'Last Name', 'Grade'];\n    myTable.rows = [['Kim', 'Abercrombie', 'A'], ['Junmin','Hao', 'C'],['Toni','Poe','B']];\n\n    // Set myTable in the binding.\n    Office.select(\"bindings#myBinding\").setDataAsync(myTable, { coercionType: \"table\" }, \n        function (asyncResult) {\n            if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n                write('Error: '+ asyncResult.error.message);\n        } else {\n            write('Bound data: ' + asyncResult.value);\n        }\n    });\n}\n\n// Replace last column with different data.\nfunction updateTableData() {\n    var newTable = new Office.TableData();\n    newTable.headers = [\"Gender\"];\n    newTable.rows = [[\"M\"],[\"M\"],[\"F\"]];\n    Office.select(\"bindings#myBinding\").setDataAsync(newTable, { coercionType: \"table\", startColumn:2 }, \n        function (asyncResult) {\n            if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n                write('Error: '+ asyncResult.error.message);\n        } else {\n            write('Bound data: ' + asyncResult.value);\n        }     \n    });   \n}\n\n// In this example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setDataAsync([['Berlin'],['Munich'],['Duisburg']],\n  {cellFormat:[{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n      {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}]}, \n  function (asyncResult){});\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setDataAsync(data: TableData | any, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: >-
+        現在の選択範囲に設定するデータ。 ホスト別の使用可能なデータ型:
+
+
+        文字列: Excel on the web、Windows、および Word on the web および Windows のみ
+
+
+        配列の配列: Excel と Word のみ
+
+
+        `TableData`<!-- -->: Excel および Word のみ
+
+
+        HTML: Word on the web および Windows のみ
+
+
+        Office Open XML: Word のみ
+      type: <xref uid="office!Office.TableData:class" /> | any
+    - id: callback
+      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 911e6146ab18fe4fbc4129b3e53d72949dbccd6f
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49151367"

@@ -1,87 +1,126 @@
-### YamlMime:UniversalReference
-items:
-  - uid: office.Office.Auth
-    summary: Office Auth 名前空間 (Office) は、Office ホストがアドインの web アプリケーションへのアクセストークンを取得できるようにするメソッドを提供します。 これにより、間接的に、サインインしたユーザーの Microsoft Graph データにアドインがアクセスできるようにもなります。ユーザーがもう一度サインインする必要はありません。
-    isPreview: true
-    name: Office.Auth
-    fullName: Office.Auth
-    langs:
-      - typeScript
-    type: interface
-    package: office
-    children:
-      - office.Office.Auth.getAccessTokenAsync
-      - office.Office.Auth.getAccessTokenAsync_1
-  - uid: office.Office.Auth.getAccessTokenAsync
-    summary: |-
-      Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.
+### YamlMime:TSType
+name: Office.Auth
+uid: office!Office.Auth:interface
+package: office!
+fullName: Office.Auth
+summary: 認証Officeの名前空間。 `Office.context.auth`<!-- -->は、アドインの Web Officeアクセス トークンを取得できるメソッドを提供します。 これにより、間接的に、サインインしたユーザーの Microsoft Graph データにアドインがアクセスできるようにもなります。ユーザーがもう一度サインインする必要はありません。
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAccessToken(options)
+  uid: office!Office.Auth#getAccessToken:member(1)
+  package: office!
+  fullName: getAccessToken(options)
+  summary: Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できます。 サーバー側のコードは、このトークンを使用して、"代理" OAuth フローを使用してアドインの Web アプリケーションの Microsoft Graph [にアクセスできます。](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->. この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Officeユーザーは、組織アカウントと Microsoft アカウントでサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
+  remarks: >-
+    **Hosts**: Excel、OneNote、Outlook、PowerPoint、Word
 
-      重要: Outlook では、アドインが Outlook.com または Gmail メールボックスに読み込まれている場合、この API はサポートされていません。
-    remarks: |-
-      **ホスト**: Excel、OneNote、Outlook、PowerPoint、Word
 
-      **要件セット**: 「id」 [api](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+    **重要**: Outlook では、アドインが Gmail メールボックスまたは Outlook.comに読み込まれる場合、この API はサポートされていません。
 
-      この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Office ユーザーは、組織アカウントと Microsoft アカウントを使用してサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
 
-      #### <a name="examples"></a>例
+    **要件セット**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAccessToken(options?: AuthOptions): Promise<string>;'
+    parameters:
+    - id: options
+      description: 省略可能。 サインオン動作 `AuthOptions` を定義するオブジェクトを受け入れる。
+      type: <xref uid="office!Office.AuthOptions:interface" />
+    return:
+      type: Promise&lt;string&gt;
+      description: アクセス トークンを約束します。
+- name: getAccessTokenAsync(options, callback)
+  uid: office!Office.Auth#getAccessTokenAsync:member(1)
+  package: office!
+  fullName: getAccessTokenAsync(options, callback)
+  summary: >-
+    Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できます。 サーバー側のコードは、このトークンを使用して、"代理" OAuth フローを使用してアドインの Web アプリケーションの Microsoft Graph [にアクセスできます。](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
 
-      ```javascript
-      Office.context.auth.getAccessTokenAsync(function(result) {
-          if (result.status === "succeeded") {
-              var token = result.value;
-              // ...
-          } else {
-              console.log("Error obtaining token", result.error);
-          }
-      });
-      ```
-    isPreview: true
-    name: 'getAccessTokenAsync(options, callback)'
-    fullName: 'getAccessTokenAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: 省略可能。 AuthOptions オブジェクトを受け入れて、サインオン動作を定義します。
-          type:
-            - office.Office.AuthOptions
-        - id: callback
-          description: 省略可能。 ユーザーの ID に対してトークンを解析するためのコールバックメソッドを受け入れるか、または "代理人" フローのトークンを使用して Microsoft Graph へのアクセスを取得します。 状態が "succeeded" の場合は、AsyncResult. 値は、生の AAD v です。 2.0 形式のアクセス トークンになります。
-          type:
-            - '(result: AsyncResult<string>) => void'
-  - uid: office.Office.Auth.getAccessTokenAsync_1
-    summary: |-
-      Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できるようにします。 サーバー側のコードは、このトークンを使用して、 [「代理人」 OAuth フロー](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)を使用してアドインの web アプリケーションの Microsoft Graph にアクセスすることができます。<!-- -->.
 
-      重要: Outlook では、アドインが Outlook.com または Gmail メールボックスに読み込まれている場合、この API はサポートされていません。
-    remarks: |-
-      **ホスト**: Excel、OneNote、Outlook、PowerPoint、Word
+    **重要**: Outlook では、アドインが Gmail メールボックスまたは Outlook.comに読み込まれる場合、この API はサポートされていません。
 
-      **要件セット**: 「id」 [api](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
-      この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Office ユーザーは、組織アカウントと Microsoft アカウントを使用してサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
-    isPreview: true
-    name: getAccessTokenAsync(callback)
-    fullName: getAccessTokenAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 省略可能。 ユーザーの ID に対してトークンを解析するためのコールバックメソッドを受け入れるか、または "代理人" フローのトークンを使用して Microsoft Graph へのアクセスを取得します。 状態が "succeeded" の場合は、AsyncResult. 値は、生の AAD v です。 2.0 形式のアクセス トークンになります。
-          type:
-            - '(result: AsyncResult<string>) => void'
+    **警告**: `getAccessTokenAsync` 廃止されました。 代 `Office.auth.getAccessToken` わりに使用します。
+  remarks: >-
+    **Hosts**: Excel、OneNote、Outlook、PowerPoint、Word
+
+
+    **要件セット**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+
+
+    この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Officeユーザーは、組織アカウントと Microsoft アカウントでサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.auth.getAccessTokenAsync(function(result) {
+        if (result.status === "succeeded") {
+            var token = result.value;
+            // ...
+        } else {
+            console.log("Error obtaining token", result.error);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: true
+  customDeprecatedMessage: Use `Office.auth.getAccessToken` instead.
+  syntax:
+    content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 省略可能。 サインオン動作 `AuthOptions` を定義するオブジェクトを受け入れる。
+      type: <xref uid="office!Office.AuthOptions:interface" />
+    - id: callback
+      description: 省略可能。 ユーザー ID 用のトークンを解析できるコールバック メソッドが許可されます。または、トークンを Microsoft Graph へのアクセスを取得するために、「代理」フローで使用します。 `AsyncResult.status`"succeeded" の場合は `AsyncResult.value` 、生の AAD v です。 2.0 形式のアクセス トークンになります。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAccessTokenAsync(callback)
+  uid: office!Office.Auth#getAccessTokenAsync:member(2)
+  package: office!
+  fullName: getAccessTokenAsync(callback)
+  summary: >-
+    Azure Active Directory V 2.0 のエンドポイントを呼び出して、アドインの Web アプリケーションへのアクセス トークンを取得します。 アドインでユーザーを識別できます。 サーバー側のコードは、このトークンを使用して、"代理" OAuth フローを使用してアドインの Web アプリケーションの Microsoft Graph [にアクセスできます。](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
+
+
+    **重要**: Outlook では、アドインがメールボックスまたは Gmail メールボックスに読み込Outlook.com、この API はサポートされていません。
+
+
+    **警告**: `getAccessTokenAsync` 廃止されました。 代 `Office.auth.getAccessToken` わりに使用します。
+  remarks: >-
+    **Hosts**: Excel、OneNote、Outlook、PowerPoint、Word
+
+
+    **要件セット**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+
+
+    この API では、アドインを Azure アプリケーションにブリッジするシングル サインオン構成が必要です。 Officeユーザーは、組織アカウントと Microsoft アカウントでサインインします。 Microsoft Azure では、Microsoft Graph のリソースにアクセスするために、両方のユーザー アカウントの種類を対象にしたトークンを返します。
+  isPreview: false
+  isDeprecated: true
+  customDeprecatedMessage: Use `Office.auth.getAccessToken` instead.
+  syntax:
+    content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: 省略可能。 ユーザー ID 用のトークンを解析できるコールバック メソッドが許可されます。または、トークンを Microsoft Graph へのアクセスを取得するために、「代理」フローで使用します。 `AsyncResult.status`"succeeded" の場合は `AsyncResult.value` 、生の AAD v です。 2.0 形式のアクセス トークンになります。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 559034659f298495ce3604e5775b30ebd8457272
+  ms.sourcegitcommit: 94ed3108858c111541f7430d7482ea329ad21dbd
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 02/03/2021
+  ms.locfileid: "50092012"

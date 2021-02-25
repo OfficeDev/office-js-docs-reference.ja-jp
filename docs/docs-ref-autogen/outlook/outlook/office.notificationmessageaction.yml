@@ -1,0 +1,126 @@
+### YamlMime:TSType
+name: Office.NotificationMessageAction
+uid: outlook!Office.NotificationMessageAction:interface
+package: outlook!
+fullName: Office.NotificationMessageAction
+summary: >-
+  通知メッセージのアクションの定義。
+
+
+  **重要**: 最新の Outlook on the web では、オブジェクト `NotificationMessageAction` は新規作成モードでのみ使用できます。
+
+
+  \[[API セット: メールボックス プレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+
+
+  #### <a name="examples"></a>例
+
+
+  ```javascript
+
+  // Define notification.
+
+  const insightMessage = {
+      type: Office.MailboxEnums.ItemNotificationMessageType.InsightMessage,
+      message: "This is an insight notification",
+      icon: "Icon.80x80",
+      actions: [{
+          actionText: "Open insight",
+          actionType: Office.MailboxEnums.ActionType.ShowTaskPane,
+          commandId: "msgComposeOpenPaneButton",
+          contextData: JSON.stringify({a: "aValue", b: "bValue"})
+      }]
+  };
+
+
+  // Show notification.
+
+  Office.context.mailbox.item.notificationMessages.replaceAsync("messageKey", insightMessage, (result) => {
+      console.log("Added notification:");
+      console.log(result);
+  });
+
+
+  // Retrieve contextData.
+
+  // IMPORTANT: At present, this only works in Outlook on Windows.
+
+  Office.context.mailbox.item.getInitializationContextAsync(function (asyncResult) {
+      console.log("Initialization context:");
+      console.log(asyncResult);
+
+      // Note: Use JSON.parse(asyncResult.value) to read the result. Example:
+      var contextData = JSON.parse(asyncResult.value);
+      console.log("a:")
+      console.log(contextData.a);
+  });
+
+  ```
+isPreview: true
+isDeprecated: false
+type: interface
+properties:
+- name: actionText
+  uid: outlook!Office.NotificationMessageAction#actionText:member
+  package: outlook!
+  fullName: actionText
+  summary: アクション リンクのテキスト。
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'actionText: string;'
+    return:
+      type: string
+- name: actionType
+  uid: outlook!Office.NotificationMessageAction#actionType:member
+  package: outlook!
+  fullName: actionType
+  summary: 実行するアクションの種類を指定します。 `ActionType.ShowTaskPane` は、サポートされている唯一のアクションです。
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'actionType: string | MailboxEnums.ActionType;'
+    return:
+      type: string | <xref uid="outlook!Office.MailboxEnums.ActionType:enum" />
+- name: commandId
+  uid: outlook!Office.NotificationMessageAction#commandId:member
+  package: outlook!
+  fullName: commandId
+  summary: アイテムの種類に基づいてマニフェストで定義されたボタン。
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'commandId: string;'
+    return:
+      type: string
+- name: contextData
+  uid: outlook!Office.NotificationMessageAction#contextData:member
+  package: outlook!
+  fullName: contextData
+  summary: >-
+    ボタンが渡す必要がある JSON データ。 このデータは、呼び出しによって取得できます。 `item.getInitializationContextAsync`<!-- -->.
+
+
+    **重要**: Outlook on the web では、取得する機能 `contextData` はまだ利用できません。
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'contextData: any;'
+    return:
+      type: any
+metadata:
+  ms.openlocfilehash: 6a2b532a355cd539ba93458717175b4f2904c3ea
+  ms.sourcegitcommit: 8eb514f1a5760c86e970fb5a4c10eac1b0c06b93
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 02/06/2021
+  ms.locfileid: "50126651"

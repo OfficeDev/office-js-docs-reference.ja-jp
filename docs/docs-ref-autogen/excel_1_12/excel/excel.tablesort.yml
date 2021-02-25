@@ -1,0 +1,244 @@
+### YamlMime:TSType
+name: Excel.TableSort
+uid: excel!Excel.TableSort:class
+package: excel!
+fullName: Excel.TableSort
+summary: >-
+  Table オブジェクトの並べ替え操作を管理します。
+
+
+  \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableSort#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: fields
+  uid: excel!Excel.TableSort#fields:member
+  package: excel!
+  fullName: fields
+  summary: >-
+    テーブルの最後の並べ替えに使用する現在の条件を指定します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly fields: Excel.SortField[];'
+    return:
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+- name: matchCase
+  uid: excel!Excel.TableSort#matchCase:member
+  package: excel!
+  fullName: matchCase
+  summary: >-
+    大文字と小文字の区別が表の最後の並べ替えに影響するかどうかを指定します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly matchCase: boolean;'
+    return:
+      type: boolean
+- name: method
+  uid: excel!Excel.TableSort#method:member
+  package: excel!
+  fullName: method
+  summary: >-
+    テーブルの並べ替えで最後に使用した中国語文字の順序付け方法を表します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly method: Excel.SortMethod | "PinYin" | "StrokeCount";'
+    return:
+      type: <xref uid="excel!Excel.SortMethod:enum" /> | "PinYin" | "StrokeCount"
+methods:
+- name: apply(fields, matchCase, method)
+  uid: excel!Excel.TableSort#apply:member(1)
+  package: excel!
+  fullName: apply(fields, matchCase, method)
+  summary: >-
+    並べ替え操作を実行します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(fields: Excel.SortField[], matchCase?: boolean, method?: Excel.SortMethod): void;'
+    parameters:
+    - id: fields
+      description: 並べ替えに使用する条件の一覧。
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+    - id: matchCase
+      description: 省略可能。 大文字小文字の区別が文字列の順序に影響を与えるかどうか。
+      type: boolean
+    - id: method
+      description: 省略可能。 中国語文字に使用される順序付けの方法です。
+      type: <xref uid="excel!Excel.SortMethod:enum" />
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.sort.apply([ \n            {\n                key: 2,\n                ascending: true\n            },\n        ], true);\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: apply(fields, matchCase, methodString)
+  uid: excel!Excel.TableSort#apply:member(2)
+  package: excel!
+  fullName: apply(fields, matchCase, methodString)
+  summary: >-
+    並べ替え操作を実行します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(fields: Excel.SortField[], matchCase?: boolean, methodString?: "PinYin" | "StrokeCount"): void;'
+    parameters:
+    - id: fields
+      description: 並べ替えに使用する条件の一覧。
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+    - id: matchCase
+      description: 省略可能。 大文字小文字の区別が文字列の順序に影響を与えるかどうか。
+      type: boolean
+    - id: methodString
+      description: 省略可能。 中国語文字に使用される順序付けの方法です。
+      type: "\"PinYin\" | \"StrokeCount\""
+    return:
+      type: void
+      description: ''
+- name: clear()
+  uid: excel!Excel.TableSort#clear:member(1)
+  package: excel!
+  fullName: clear()
+  summary: >-
+    テーブルに現在設定されている並べ替えをクリアします。これにより表の順序が変更されることはありませんが、ヘッダーのボタンの状態がクリアされます。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: ''
+- name: load(options)
+  uid: excel!Excel.TableSort#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableSortLoadOptions): Excel.TableSort;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティを指定するオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.TableSortLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableSort#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableSort;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableSort#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.TableSort;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマで区切られた文字列で、 `propertyNamesAndPaths.expand` 読み込むナビゲーションプロパティを指定するコンマで区切られた文字列です。'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: reapply()
+  uid: excel!Excel.TableSort#reapply:member(1)
+  package: excel!
+  fullName: reapply()
+  summary: >-
+    テーブルに、現在の並べ替えパラメーターを再適用します。
+
+
+    \[[API セット: excelapi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'reapply(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableSort#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の Excel のオブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.TableSortData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableSortData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableSortData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 10b1d98f1d6c6a7d4f19345b2a177a3ca33fd88c
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49148399"

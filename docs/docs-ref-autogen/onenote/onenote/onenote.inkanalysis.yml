@@ -1,240 +1,209 @@
-### YamlMime:UniversalReference
-items:
-  - uid: onenote.OneNote.InkAnalysis
-    summary: |-
-      指定されたインク ストロークのセットに関するインクの解析データを表します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.InkAnalysis
-    fullName: OneNote.InkAnalysis
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'OfficeExtension.ClientObject '
-    package: onenote
-    children:
-      - onenote.OneNote.InkAnalysis.context
-      - onenote.OneNote.InkAnalysis.id
-      - onenote.OneNote.InkAnalysis.load
-      - onenote.OneNote.InkAnalysis.load_1
-      - onenote.OneNote.InkAnalysis.load_2
-      - onenote.OneNote.InkAnalysis.page
-      - onenote.OneNote.InkAnalysis.set
-      - onenote.OneNote.InkAnalysis.set_1
-      - onenote.OneNote.InkAnalysis.toJSON
-      - onenote.OneNote.InkAnalysis.track
-      - onenote.OneNote.InkAnalysis.untrack
-  - uid: onenote.OneNote.InkAnalysis.context
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - onenote.OneNote.RequestContext
-  - uid: onenote.OneNote.InkAnalysis.id
-    summary: |-
-      InkAnalysis オブジェクトの ID を取得します。 読み取り専用です。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.InkAnalysis.load
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): OneNote.InkAnalysis`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysis`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysis`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.InkAnalysisLoadOptions): OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - onenote.OneNote.Interfaces.InkAnalysisLoadOptions
-  - uid: onenote.OneNote.InkAnalysis.load_1
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-        description: |-
+### YamlMime:TSType
+name: OneNote.InkAnalysis
+uid: onenote!OneNote.InkAnalysis:class
+package: onenote!
+fullName: OneNote.InkAnalysis
+summary: >-
+  指定されたインク ストロークのセットに関するインクの解析データを表します。
 
 
-          #### <a name="examples"></a>例
+  \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: onenote!OneNote.InkAnalysis#context:member
+  package: onenote!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.InkAnalysis#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    InkAnalysis オブジェクトの ID を取得します。 読み取り専用です。
 
-          ```javascript
-          OneNote.run(function (ctx) {        
-              var app = ctx.application;
-              
-              // Gets the active page.
-              var page = app.getActivePage();
-              
-              // Load ink paragraphs.
-              page.load('inkAnalysisOrNull/paragraphs');
-              
-              return ctx.sync()
-                  .then(function() {
-                      console.log(page.inkAnalysisOrNull.paragraphs.items.length);
-                  })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          }); 
-          ```
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: onenote.OneNote.InkAnalysis.load_2
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: onenote.OneNote.InkAnalysis.page
-    summary: |-
-      親ページ オブジェクトを取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: page
-    fullName: page
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly page: OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-  - uid: onenote.OneNote.InkAnalysis.set
-    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
-    remarks: |-
-      このメソッドには、次の追加のシグネチャがあります。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: page
+  uid: onenote!OneNote.InkAnalysis#page:member
+  package: onenote!
+  fullName: page
+  summary: >-
+    親ページ オブジェクトを取得します。 読み取り専用です。
 
-      `set(properties: OneNote.InkAnalysis): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.InkAnalysisUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
-          type:
-            - Interfaces.InkAnalysisUpdateData
-        - id: options
-          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
-          type:
-            - OfficeExtension.UpdateOptions
-  - uid: onenote.OneNote.InkAnalysis.set_1
-    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: OneNote.InkAnalysis): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - onenote.OneNote.InkAnalysis
-  - uid: onenote.OneNote.InkAnalysis.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。オリジナルの OneNote の分析オブジェクトは API オブジェクトですが、メソッドは`toJSON`プレーンな JavaScript オブジェクト (として型指定されます) を返します。`OneNote.Interfaces.InkAnalysisData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.InkAnalysisData;'
-      return:
-        type:
-          - onenote.OneNote.Interfaces.InkAnalysisData
-        description: ''
-  - uid: onenote.OneNote.InkAnalysis.track
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-        description: ''
-  - uid: onenote.OneNote.InkAnalysis.untrack
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-        description: ''
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly page: OneNote.Page;'
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+methods:
+- name: load(option)
+  uid: onenote!OneNote.InkAnalysis#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): OneNote.InkAnalysis` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysis` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysis` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.InkAnalysisLoadOptions): OneNote.InkAnalysis;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.InkAnalysisLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.InkAnalysis#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.InkAnalysis;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Load ink paragraphs.\n    page.load('inkAnalysisOrNull/paragraphs');\n    \n    return ctx.sync()\n        .then(function() {\n            console.log(page.inkAnalysisOrNull.paragraphs.items.length);\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.InkAnalysis#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.InkAnalysis;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+      description: ''
+- name: set(properties, options)
+  uid: onenote!OneNote.InkAnalysis#set:member(1)
+  package: onenote!
+  fullName: set(properties, options)
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加のシグネチャがあります。
+
+
+    `set(properties: OneNote.InkAnalysis): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.InkAnalysisUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="onenote!OneNote.Interfaces.InkAnalysisUpdateData:interface" />
+    - id: options
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: onenote!OneNote.InkAnalysis#set:member(2)
+  package: onenote!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: OneNote.InkAnalysis): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.InkAnalysis#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。オリジナルの OneNote の分析オブジェクトは API オブジェクトですが、メソッドは `toJSON` プレーンな JavaScript オブジェクト (として型指定されます) を返します。`OneNote.Interfaces.InkAnalysisData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.InkAnalysisData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.InkAnalysisData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.InkAnalysis#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.InkAnalysis;'
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.InkAnalysis#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.InkAnalysis;'
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: d4d72a90b89aff1dc38077e38b7d0f0f09e7aa79
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49183049"

@@ -1,0 +1,79 @@
+### YamlMime:TSType
+name: Office.From
+uid: outlook!Office.From:interface
+package: outlook!
+fullName: Office.From
+summary: >-
+  Outlook アドインでメッセージの from 値を取得するメソッドを提供します。
+
+
+  \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAsync(options, callback)
+  uid: outlook!Office.From#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    メッセージの from 値を取得します。
+
+
+    この `getAsync` メソッドは、Exchange サーバーへの非同期呼び出しを開始して、メッセージの差出人の値を取得します。
+
+
+    アイテムの from 値は、プロパティの [EmailAddressDetails として](xref:outlook!Office.EmailAddressDetails:interface) 提供 `asyncResult.value` されます。
+
+
+    \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-from-message-compose.yaml
+
+    Office.context.mailbox.item.from.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgFrom = asyncResult.value;
+        console.log("Message from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<EmailAddressDetails>) => void): void;'
+    parameters:
+    - id: options
+      description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が 1 つの `callback` パラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクトです `Office.AsyncResult` 。 結果 `value` のプロパティは、オブジェクトとしてのアイテムの from 値 `EmailAddressDetails` です。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 1c64c25eafd24f001f3627200fcf5cea92d8343e
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49856101"

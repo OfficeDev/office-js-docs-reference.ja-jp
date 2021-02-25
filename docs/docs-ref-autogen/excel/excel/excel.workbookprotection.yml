@@ -1,216 +1,166 @@
-### YamlMime:UniversalReference
-items:
-  - uid: excel.Excel.WorkbookProtection
-    summary: |-
-      ブックオブジェクトの保護を表します。
-
-      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.WorkbookProtection
-    fullName: Excel.WorkbookProtection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'OfficeExtension.ClientObject '
-    package: excel
-    children:
-      - excel.Excel.WorkbookProtection.context
-      - excel.Excel.WorkbookProtection.load
-      - excel.Excel.WorkbookProtection.load_1
-      - excel.Excel.WorkbookProtection.load_2
-      - excel.Excel.WorkbookProtection.protect
-      - excel.Excel.WorkbookProtection.protected
-      - excel.Excel.WorkbookProtection.toJSON
-      - excel.Excel.WorkbookProtection.unprotect
-  - uid: excel.Excel.WorkbookProtection.context
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - excel.Excel.RequestContext
-  - uid: excel.Excel.WorkbookProtection.load
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): Excel.WorkbookProtection`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): Excel.WorkbookProtection`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorkbookProtection`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: Excel.Interfaces.WorkbookProtectionLoadOptions): Excel.WorkbookProtection;'
-      return:
-        type:
-          - excel.Excel.WorkbookProtection
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - excel.Excel.Interfaces.WorkbookProtectionLoadOptions
-  - uid: excel.Excel.WorkbookProtection.load_1
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.WorkbookProtection;'
-      return:
-        type:
-          - excel.Excel.WorkbookProtection
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: excel.Excel.WorkbookProtection.load_2
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.WorkbookProtection;'
-      return:
-        type:
-          - excel.Excel.WorkbookProtection
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: excel.Excel.WorkbookProtection.protect
-    summary: |-
-      ブックを保護します。 ブックが保護されている場合は失敗します。
-
-      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: protect(password)
-    fullName: protect(password)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'protect(password?: string): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: Excel.WorkbookProtection
+uid: excel!Excel.WorkbookProtection:class
+package: excel!
+fullName: Excel.WorkbookProtection
+summary: >-
+  ブック オブジェクトの保護を表します。
 
 
-          #### <a name="examples"></a>例
-
-          ```typescript
-          await Excel.run(async (context) => {
-              let workbook = context.workbook;
-              workbook.load("protection/protected");
-
-              await context.sync();
-
-              if (!workbook.protection.protected) {
-                  workbook.protection.protect();
-              }
-          });
-          ```
-          ```typescript
-          let password = await passwordHandler();
-          passwordHelper(password);
-          await Excel.run(async (context) => {
-              let workbook = context.workbook;
-              workbook.load("protection/protected");
-
-              await context.sync();
-
-              if (!workbook.protection.protected) {
-                  workbook.protection.protect(password);
-              }
-          });
-          ```
-      parameters:
-        - id: password
-          description: ブックの保護パスワード。
-          type:
-            - string
-  - uid: excel.Excel.WorkbookProtection.protected
-    summary: |-
-      ブックが保護されているかどうかを示します。 読み取り専用です。
-
-      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: protected
-    fullName: protected
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly protected: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: excel.Excel.WorkbookProtection.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の WorkbookProtection オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドはプレーンな JavaScript オブジェクトを返します (型は`Excel.Interfaces.WorkbookProtectionData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.WorkbookProtectionData;'
-      return:
-        type:
-          - excel.Excel.Interfaces.WorkbookProtectionData
-        description: ''
-  - uid: excel.Excel.WorkbookProtection.unprotect
-    summary: |-
-      ブックの保護を解除します。
-
-      \[[API セット: excelapi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: unprotect(password)
-    fullName: unprotect(password)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'unprotect(password?: string): void;'
-      return:
-        type:
-          - void
-        description: |-
+  \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.WorkbookProtection#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: protected
+  uid: excel!Excel.WorkbookProtection#protected:member
+  package: excel!
+  fullName: protected
+  summary: >-
+    ブックが保護される場合に指定します。
 
 
-          #### <a name="examples"></a>例
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly protected: boolean;'
+    return:
+      type: boolean
+methods:
+- name: load(options)
+  uid: excel!Excel.WorkbookProtection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorkbookProtectionLoadOptions): Excel.WorkbookProtection;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.WorkbookProtectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorkbookProtection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorkbookProtection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorkbookProtection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorkbookProtection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorkbookProtection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.WorkbookProtection;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.WorkbookProtection:class" />
+      description: ''
+- name: protect(password)
+  uid: excel!Excel.WorkbookProtection#protect:member(1)
+  package: excel!
+  fullName: protect(password)
+  summary: >-
+    ブックを保護します。 ブックが保護されている場合は失敗します。
 
-          ```typescript
-          await Excel.run(async (context) => {
-              let workbook = context.workbook;
-              workbook.protection.unprotect();
-          });
-          ```
-          ```typescript
-          let password = await passwordHandler();
-          passwordHelper(password);
-          await Excel.run(async (context) => {
-              let workbook = context.workbook;
-              workbook.protection.unprotect(password);
-          });
-          ```
-      parameters:
-        - id: password
-          description: ブックの保護パスワード。
-          type:
-            - string
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'protect(password?: string): void;'
+    parameters:
+    - id: password
+      description: ブック保護パスワード。
+      type: string
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let workbook = context.workbook;\n    workbook.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!workbook.protection.protected) {\n        workbook.protection.protect();\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let workbook = context.workbook;\n    workbook.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!workbook.protection.protected) {\n        workbook.protection.protect(password);\n    }\n});\n```"
+- name: toJSON()
+  uid: excel!Excel.WorkbookProtection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.WorkbookProtection オブジェクトが API オブジェクトであるのに対し、このメソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.WorkbookProtectionData`<!-- -->) を返します。このコピーには、元のオブジェクトから読み込まれた子プロパティの浅いコピーが含まれます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorkbookProtectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorkbookProtectionData:interface" />
+      description: ''
+- name: unprotect(password)
+  uid: excel!Excel.WorkbookProtection#unprotect:member(1)
+  package: excel!
+  fullName: unprotect(password)
+  summary: >-
+    ブックの保護を解除します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'unprotect(password?: string): void;'
+    parameters:
+    - id: password
+      description: ブック保護パスワード。
+      type: string
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let workbook = context.workbook;\n    workbook.protection.unprotect();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let workbook = context.workbook;\n    workbook.protection.unprotect(password);\n});\n```"
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 8dc212ee6b6942eb956dd473977909457bf12cce
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49852489"

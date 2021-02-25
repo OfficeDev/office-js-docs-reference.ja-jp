@@ -1,0 +1,186 @@
+### YamlMime:TSType
+name: Visio.ShapeDataItemCollection
+uid: visio!Visio.ShapeDataItemCollection:class
+package: visio!
+fullName: Visio.ShapeDataItemCollection
+summary: >-
+  特定の図形の ShapeDataItemCollection を表します。
+
+
+  \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: visio!Visio.ShapeDataItemCollection#context:member
+  package: visio!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="visio!Visio.RequestContext:class" />
+- name: items
+  uid: visio!Visio.ShapeDataItemCollection#items:member
+  package: visio!
+  fullName: items
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Visio.ShapeDataItem[];'
+    return:
+      type: <xref uid="visio!Visio.ShapeDataItem:class" />[]
+methods:
+- name: getCount()
+  uid: visio!Visio.ShapeDataItemCollection#getCount:member(1)
+  package: visio!
+  fullName: getCount()
+  summary: >-
+    図形データ項目の数を取得します。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: visio!Visio.ShapeDataItemCollection#getItem:member(1)
+  package: visio!
+  fullName: getItem(key)
+  summary: >-
+    名前を使用して ShapeDataItem を取得します。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Visio.ShapeDataItem;'
+    parameters:
+    - id: key
+      description: キーは、取得する ShapeDataItem の名前です。
+      type: string
+    return:
+      type: <xref uid="visio!Visio.ShapeDataItem:class" />
+      description: ''
+- name: load(option)
+  uid: visio!Visio.ShapeDataItemCollection#load:member(1)
+  package: visio!
+  fullName: load(option)
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): Visio.ShapeDataItemCollection` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): Visio.ShapeDataItemCollection` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeDataItemCollection` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shape = activePage.shapes.getItem(0);
+        var shapeDataItems = shape.shapeDataItems;
+        shapeDataItems.load(["label", "value"]);
+        return ctx.sync().then(function() {
+            for (var i = 0; i < shapeDataItems.items.length; i++) {
+                console.log(shapeDataItems.items[i].label);
+                console.log(shapeDataItems.items[i].value);
+            }
+        });
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: Visio.Interfaces.ShapeDataItemCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.ShapeDataItemCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="visio!Visio.Interfaces.ShapeDataItemCollectionLoadOptions:interface" /> & <xref uid="visio!Visio.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="visio!Visio.ShapeDataItemCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: visio!Visio.ShapeDataItemCollection#load:member(2)
+  package: visio!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.ShapeDataItemCollection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="visio!Visio.ShapeDataItemCollection:class" />
+      description: ''
+- name: load(option)
+  uid: visio!Visio.ShapeDataItemCollection#load:member(3)
+  package: visio!
+  fullName: load(option)
+  summary: ''
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Visio.ShapeDataItemCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="visio!Visio.ShapeDataItemCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: visio!Visio.ShapeDataItemCollection#toJSON:member(1)
+  package: visio!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の `Visio.ShapeDataItemCollection` オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`Visio.Interfaces.ShapeDataItemCollectionData`<!-- -->) を使用して、コレクションのアイテムから読み込まれたプロパティの浅いコピーを持つ "items" 配列を含みます。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.ShapeDataItemCollectionData;'
+    return:
+      type: <xref uid="visio!Visio.Interfaces.ShapeDataItemCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: f2bedcd6de146c9b5791e9dfb60f0ef3214a1812
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49193030"

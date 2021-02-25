@@ -1,745 +1,510 @@
-### YamlMime:UniversalReference
-items:
-  - uid: onenote.OneNote.Page
-    summary: |-
-      OneNote のページを表します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.Page
-    fullName: OneNote.Page
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'OfficeExtension.ClientObject '
-    package: onenote
-    children:
-      - onenote.OneNote.Page.addOutline
-      - onenote.OneNote.Page.analyzePage
-      - onenote.OneNote.Page.applyTranslation
-      - onenote.OneNote.Page.classNotebookPageSource
-      - onenote.OneNote.Page.clientUrl
-      - onenote.OneNote.Page.contents
-      - onenote.OneNote.Page.context
-      - onenote.OneNote.Page.copyToSection
-      - onenote.OneNote.Page.copyToSectionAndSetClassNotebookPageSource
-      - onenote.OneNote.Page.getRestApiId
-      - onenote.OneNote.Page.hasTitleContent
-      - onenote.OneNote.Page.id
-      - onenote.OneNote.Page.inkAnalysisOrNull
-      - onenote.OneNote.Page.insertPageAsSibling
-      - onenote.OneNote.Page.insertPageAsSibling_1
-      - onenote.OneNote.Page.load
-      - onenote.OneNote.Page.load_1
-      - onenote.OneNote.Page.load_2
-      - onenote.OneNote.Page.pageLevel
-      - onenote.OneNote.Page.parentSection
-      - onenote.OneNote.Page.set
-      - onenote.OneNote.Page.set_1
-      - onenote.OneNote.Page.title
-      - onenote.OneNote.Page.toJSON
-      - onenote.OneNote.Page.track
-      - onenote.OneNote.Page.untrack
-      - onenote.OneNote.Page.webUrl
-  - uid: onenote.OneNote.Page.addOutline
-    summary: |-
-      Outline をページの指定した位置に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'addOutline(left, top, html)'
-    fullName: 'addOutline(left, top, html)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addOutline(left: number, top: number, html: string): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: |-
+### YamlMime:TSType
+name: OneNote.Page
+uid: onenote!OneNote.Page:class
+package: onenote!
+fullName: OneNote.Page
+summary: >-
+  OneNote のページを表します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Gets the active page.
-              var page = context.application.getActivePage();
-
-              // Queue a command to add an outline with given html. 
-              var outline = page.addOutline(200, 200,
-          "<p>Images and a table below:</p> \
-           <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==\"> \
-           <img src=\"http://imagenes.es.sftcdn.net/es/scrn/6653000/6653659/microsoft-onenote-2013-01-535x535.png\"> \
-           <table> \
-             <tr> \
-               <td>Jill</td> \
-               <td>Smith</td> \
-               <td>50</td> \
-             </tr> \
-             <tr> \
-               <td>Eve</td> \
-               <td>Jackson</td> \
-               <td>94</td> \
-             </tr> \
-           </table>"     
-                  );
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .catch(function(error) {
-                      console.log("Error: " + error);
-                      if (error instanceof OfficeExtension.Error) {
-                          console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                      }
-                  });
-          });
-          ```
-      parameters:
-        - id: left
-          description: Outline の左上隅の左の位置です。
-          type:
-            - number
-        - id: top
-          description: Outline の左上隅の上の位置です。
-          type:
-            - number
-        - id: html
-          description: 'Outline の視覚表示を記述する HTML 文字列です。 OneNote アドインの JavaScript API については、「[サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。'
-          type:
-            - string
-  - uid: onenote.OneNote.Page.analyzePage
-    summary: |-
-      ノード id とコンテンツを html 形式で示す json 文字列を返します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: analyzePage()
-    fullName: analyzePage()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'analyzePage(): OfficeExtension.ClientResult<string>;'
-      return:
-        type:
-          - OfficeExtension.ClientResult<string>
-        description: ''
-  - uid: onenote.OneNote.Page.applyTranslation
-    summary: |-
-      翻訳されたコンテンツを含む新しいページを挿入します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: applyTranslation(translatedContent)
-    fullName: applyTranslation(translatedContent)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'applyTranslation(translatedContent: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: translatedContent
-          description: ページの翻訳されたコンテンツ
-          type:
-            - string
-  - uid: onenote.OneNote.Page.classNotebookPageSource
-    summary: |-
-      ページへの ClassNotebookPageSource を取得します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: classNotebookPageSource
-    fullName: classNotebookPageSource
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly classNotebookPageSource: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.Page.clientUrl
-    summary: |-
-      ページのクライアント URL。 読み取りのみ
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: clientUrl
-    fullName: clientUrl
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly clientUrl: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.Page.contents
-    summary: |-
-      ページの PageContent オブジェクトのコレクション。 読み取りのみ
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: contents
-    fullName: contents
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly contents: OneNote.PageContentCollection;'
-      return:
-        type:
-          - onenote.OneNote.PageContentCollection
-  - uid: onenote.OneNote.Page.context
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - onenote.OneNote.RequestContext
-  - uid: onenote.OneNote.Page.copyToSection
-    summary: |-
-      このページを指定したセクションにコピーします。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: copyToSection(destinationSection)
-    fullName: copyToSection(destinationSection)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'copyToSection(destinationSection: OneNote.Section): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: |-
+  \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: classNotebookPageSource
+  uid: onenote!OneNote.Page#classNotebookPageSource:member
+  package: onenote!
+  fullName: classNotebookPageSource
+  summary: >-
+    ページへの ClassNotebookPageSource を取得します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              
-              // Gets the active notebook.
-              var notebook = app.getActiveNotebook();
-              
-              // Gets the active page.
-              var page = app.getActivePage();
-              
-              // Queue a command to load sections under the notebook.
-              notebook.load('sections');
-              
-              var newPage;
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync()
-                  .then(function() {
-                      var section = notebook.sections.items[0];
-                      
-                      // copy page to the section.
-                      newPage = page.copyToSection(section);
-                      newPage.load('id');
-                      return ctx.sync();
-                  })
-                  .then(function() {
-                      console.log(newPage.id);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: destinationSection
-          description: このページのコピー先のセクション。
-          type:
-            - onenote.OneNote.Section
-  - uid: onenote.OneNote.Page.copyToSectionAndSetClassNotebookPageSource
-    summary: |-
-      このページを指定されたセクションにコピーし、ClassNotebookPageSource を設定します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: copyToSectionAndSetClassNotebookPageSource(destinationSection)
-    fullName: copyToSectionAndSetClassNotebookPageSource(destinationSection)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'copyToSectionAndSetClassNotebookPageSource(destinationSection: OneNote.Section): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-      parameters:
-        - id: destinationSection
-          description: ''
-          type:
-            - onenote.OneNote.Section
-  - uid: onenote.OneNote.Page.getRestApiId
-    summary: |-
-      REST API ID を取得します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getRestApiId()
-    fullName: getRestApiId()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
-      return:
-        type:
-          - OfficeExtension.ClientResult<string>
-        description: |-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly classNotebookPageSource: string;'
+    return:
+      type: string
+- name: clientUrl
+  uid: onenote!OneNote.Page#clientUrl:member
+  package: onenote!
+  fullName: clientUrl
+  summary: >-
+    ページのクライアント URL。 読み取りのみ
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function(ctx){
-              // Get the current page.         
-              var page = ctx.application.getActivePage();
-              var restApiId = page.getRestApiId();
-
-              return ctx.sync().
-                  then(function(){
-                      console.log("The REST API ID is " + restApiId.value);
-                      // Note that the REST API ID isn't all you need to interact with the OneNote REST API.
-                      // This is only required for SharePoint notebooks. baseUrl will be null for OneDrive notebooks.
-                      // For SharePoint notebooks, the notebook baseUrl should be used to talk to the OneNote REST API
-                      // according to the OneNote Development Blog.
-                      // https://blogs.msdn.microsoft.com/onenotedev/2015/06/11/and-sharepoint-makes-three/
-                  });
-          });
-          ```
-  - uid: onenote.OneNote.Page.hasTitleContent
-    summary: |-
-      ページにはコンテンツのタイトルがあります。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: hasTitleContent()
-    fullName: hasTitleContent()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'hasTitleContent(): OfficeExtension.ClientResult<boolean>;'
-      return:
-        type:
-          - OfficeExtension.ClientResult<boolean>
-        description: ''
-  - uid: onenote.OneNote.Page.id
-    summary: |-
-      ページの ID を取得します。 読み取り専用です。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.Page.inkAnalysisOrNull
-    summary: |-
-      ページ上のインクのテキスト解釈。 インクの解析情報がない場合は null を返します。 読み取り専用です。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: inkAnalysisOrNull
-    fullName: inkAnalysisOrNull
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly inkAnalysisOrNull: OneNote.InkAnalysis;'
-      return:
-        type:
-          - onenote.OneNote.InkAnalysis
-  - uid: onenote.OneNote.Page.insertPageAsSibling
-    summary: |-
-      現在のページの前か後に、新しいページを挿入します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'insertPageAsSibling(location, title)'
-    fullName: 'insertPageAsSibling(location, title)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'insertPageAsSibling(location: OneNote.InsertLocation, title: string): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-      parameters:
-        - id: location
-          description: 現在のページを基準にした新しいページの位置を指定します。
-          type:
-            - onenote.OneNote.InsertLocation
-        - id: title
-          description: 新しいページのタイトルです。
-          type:
-            - string
-  - uid: onenote.OneNote.Page.insertPageAsSibling_1
-    summary: |-
-      現在のページの前か後に、新しいページを挿入します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'insertPageAsSibling(locationString, title)'
-    fullName: 'insertPageAsSibling(locationString, title)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'insertPageAsSibling(locationString: "Before" | "After", title: string): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: |-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly clientUrl: string;'
+    return:
+      type: string
+- name: contents
+  uid: onenote!OneNote.Page#contents:member
+  package: onenote!
+  fullName: contents
+  summary: >-
+    ページの PageContent オブジェクトのコレクション。 読み取りのみ
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Gets the active page.
-              var activePage = context.application.getActivePage();
-
-              // Queue a command to add a new page after the active page. 
-              var newPage = activePage.insertPageAsSibling("After", "Next Page");
-
-              // Queue a command to load the newPage to access its data.
-              context.load(newPage);
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      console.log("page is created with title: " + newPage.title);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: locationString
-          description: 現在のページを基準にした新しいページの位置を指定します。
-          type:
-            - '"Before" | "After"'
-        - id: title
-          description: 新しいページのタイトルです。
-          type:
-            - string
-  - uid: onenote.OneNote.Page.load
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): OneNote.Page`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.Page`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Page`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.PageLoadOptions): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - onenote.OneNote.Interfaces.PageLoadOptions
-  - uid: onenote.OneNote.Page.load_1
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: |-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly contents: OneNote.PageContentCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.PageContentCollection:class" />
+- name: context
+  uid: onenote!OneNote.Page#context:member
+  package: onenote!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.Page#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    ページの ID を取得します。 読み取り専用です。
 
 
-          #### <a name="examples"></a>例
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: inkAnalysisOrNull
+  uid: onenote!OneNote.Page#inkAnalysisOrNull:member
+  package: onenote!
+  fullName: inkAnalysisOrNull
+  summary: >-
+    ページ上のインクのテキスト解釈。 インクの解析情報がない場合は null を返します。 読み取り専用です。
 
-          ```javascript
-          OneNote.run(function (context) {
 
-              // Gets the active page.
-              var activePage = context.application.getActivePage();
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly inkAnalysisOrNull: OneNote.InkAnalysis;'
+    return:
+      type: <xref uid="onenote!OneNote.InkAnalysis:class" />
+- name: pageLevel
+  uid: onenote!OneNote.Page#pageLevel:member
+  package: onenote!
+  fullName: pageLevel
+  summary: >-
+    ページのインデント レベルを取得するか設定します。
 
-              // Queue a command to add a new page after the active page. 
-              var pageContents = activePage.contents;
 
-              // Queue a command to load the pageContents to access its data.
-              context.load(pageContents);
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'pageLevel: number;'
+    return:
+      type: number
+- name: parentSection
+  uid: onenote!OneNote.Page#parentSection:member
+  package: onenote!
+  fullName: parentSection
+  summary: >-
+    ページを含むセクションを取得します。 読み取り専用です。
 
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      for(var i=0; i < pageContents.items.length; i++)
-                      {
-                          var pageContent = pageContents.items[i];
-                          if (pageContent.type == "Outline")
-                          {
-                              console.log("Found an outline");
-                          }
-                          else if (pageContent.type == "Image")
-                          {
-                              console.log("Found an image");
-                          }
-                          else if (pageContent.type == "Other")
-                          {
-                              console.log("Found a type not supported yet.");
-                          }
-                      }
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function (context) {
 
-              var app = context.application;
-              
-              // Gets the active page.
-              var page = app.getActivePage();
-              
-              // Queue a command to load the webUrl of the page.
-              page.load("webUrl");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      console.log(page.webUrl);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function (ctx) {        
-              var app = ctx.application;
-              
-              // Gets the active page.
-              var page = app.getActivePage();
-              
-              // Load ink words
-              page.load('inkAnalysisOrNull/paragraphs/lines/words');
-              
-              return ctx.sync()
-                  .then(function() {
-                      if (!page.inkAnalysisOrNull.isNull)
-                          console.log(page.inkAnalysisOrNull.paragraphs.length);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: onenote.OneNote.Page.load_2
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: onenote.OneNote.Page.pageLevel
-    summary: |-
-      ページのインデント レベルを取得するか設定します。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly parentSection: OneNote.Section;'
+    return:
+      type: <xref uid="onenote!OneNote.Section:class" />
+- name: title
+  uid: onenote!OneNote.Page#title:member
+  package: onenote!
+  fullName: title
+  summary: >-
+    ページのタイトルを取得するか設定します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: pageLevel
-    fullName: pageLevel
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'pageLevel: number;'
-      return:
-        type:
-          - number
-  - uid: onenote.OneNote.Page.parentSection
-    summary: |-
-      ページを含むセクションを取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: parentSection
-    fullName: parentSection
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly parentSection: OneNote.Section;'
-      return:
-        type:
-          - onenote.OneNote.Section
-  - uid: onenote.OneNote.Page.set
-    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
-    remarks: |-
-      このメソッドには、次の追加のシグネチャがあります。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'title: string;'
+    return:
+      type: string
+- name: webUrl
+  uid: onenote!OneNote.Page#webUrl:member
+  package: onenote!
+  fullName: webUrl
+  summary: >-
+    ページの Web URL。 読み取りのみ
 
-      `set(properties: OneNote.Page): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.PageUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
-          type:
-            - Interfaces.PageUpdateData
-        - id: options
-          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
-          type:
-            - OfficeExtension.UpdateOptions
-  - uid: onenote.OneNote.Page.set_1
-    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: OneNote.Page): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - onenote.OneNote.Page
-  - uid: onenote.OneNote.Page.title
-    summary: |-
-      ページのタイトルを取得するか設定します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: title
-    fullName: title
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'title: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.Page.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の OneNote の Page オブジェクトは API オブジェクトですが、メソッド`toJSON`はプレーンな JavaScript オブジェクト (として型指定されます) を返します。`OneNote.Interfaces.PageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.PageData;'
-      return:
-        type:
-          - onenote.OneNote.Interfaces.PageData
-        description: ''
-  - uid: onenote.OneNote.Page.track
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-  - uid: onenote.OneNote.Page.untrack
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.Page;'
-      return:
-        type:
-          - onenote.OneNote.Page
-        description: ''
-  - uid: onenote.OneNote.Page.webUrl
-    summary: |-
-      ページの Web URL。 読み取りのみ
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly webUrl: string;'
+    return:
+      type: string
+methods:
+- name: addOutline(left, top, html)
+  uid: onenote!OneNote.Page#addOutline:member(1)
+  package: onenote!
+  fullName: addOutline(left, top, html)
+  summary: >-
+    Outline をページの指定した位置に追加します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: webUrl
-    fullName: webUrl
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly webUrl: string;'
-      return:
-        type:
-          - string
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addOutline(left: number, top: number, html: string): OneNote.Outline;'
+    parameters:
+    - id: left
+      description: Outline の左上隅の左の位置です。
+      type: number
+    - id: top
+      description: Outline の左上隅の上の位置です。
+      type: number
+    - id: html
+      description: Outline の視覚表示を記述する HTML 文字列です。 OneNote アドインの JavaScript API については、「 [サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var page = context.application.getActivePage();\n\n    // Queue a command to add an outline with given html. \n    var outline = page.addOutline(200, 200,\n\"<p>Images and a table below:</p> \\\n <img src=\\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==\\\"> \\\n <img src=\\\"http://imagenes.es.sftcdn.net/es/scrn/6653000/6653659/microsoft-onenote-2013-01-535x535.png\\\"> \\\n <table> \\\n   <tr> \\\n     <td>Jill</td> \\\n     <td>Smith</td> \\\n     <td>50</td> \\\n   </tr> \\\n   <tr> \\\n     <td>Eve</td> \\\n     <td>Jackson</td> \\\n     <td>94</td> \\\n   </tr> \\\n </table>\"     \n        );\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .catch(function(error) {\n            console.log(\"Error: \" + error);\n            if (error instanceof OfficeExtension.Error) {\n                console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n            }\n        });\n});\n```"
+- name: analyzePage()
+  uid: onenote!OneNote.Page#analyzePage:member(1)
+  package: onenote!
+  fullName: analyzePage()
+  summary: >-
+    ノード id とコンテンツを html 形式で示す json 文字列を返します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'analyzePage(): OfficeExtension.ClientResult<string>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
+      description: ''
+- name: applyTranslation(translatedContent)
+  uid: onenote!OneNote.Page#applyTranslation:member(1)
+  package: onenote!
+  fullName: applyTranslation(translatedContent)
+  summary: >-
+    翻訳されたコンテンツを含む新しいページを挿入します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'applyTranslation(translatedContent: string): void;'
+    parameters:
+    - id: translatedContent
+      description: ページの翻訳されたコンテンツ
+      type: string
+    return:
+      type: void
+      description: ''
+- name: copyToSection(destinationSection)
+  uid: onenote!OneNote.Page#copyToSection:member(1)
+  package: onenote!
+  fullName: copyToSection(destinationSection)
+  summary: >-
+    このページを指定したセクションにコピーします。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'copyToSection(destinationSection: OneNote.Section): OneNote.Page;'
+    parameters:
+    - id: destinationSection
+      description: このページのコピー先のセクション。
+      type: <xref uid="onenote!OneNote.Section:class" />
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    \n    // Gets the active notebook.\n    var notebook = app.getActiveNotebook();\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Queue a command to load sections under the notebook.\n    notebook.load('sections');\n    \n    var newPage;\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync()\n        .then(function() {\n            var section = notebook.sections.items[0];\n            \n            // copy page to the section.\n            newPage = page.copyToSection(section);\n            newPage.load('id');\n            return ctx.sync();\n        })\n        .then(function() {\n            console.log(newPage.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: copyToSectionAndSetClassNotebookPageSource(destinationSection)
+  uid: onenote!OneNote.Page#copyToSectionAndSetClassNotebookPageSource:member(1)
+  package: onenote!
+  fullName: copyToSectionAndSetClassNotebookPageSource(destinationSection)
+  summary: >-
+    このページを指定されたセクションにコピーし、ClassNotebookPageSource を設定します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'copyToSectionAndSetClassNotebookPageSource(destinationSection: OneNote.Section): OneNote.Page;'
+    parameters:
+    - id: destinationSection
+      description: ''
+      type: <xref uid="onenote!OneNote.Section:class" />
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+- name: getRestApiId()
+  uid: onenote!OneNote.Page#getRestApiId:member(1)
+  package: onenote!
+  fullName: getRestApiId()
+  summary: >-
+    REST API ID を取得します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx){\n    // Get the current page.         \n    var page = ctx.application.getActivePage();\n    var restApiId = page.getRestApiId();\n\n    return ctx.sync().\n        then(function(){\n            console.log(\"The REST API ID is \" + restApiId.value);\n            // Note that the REST API ID isn't all you need to interact with the OneNote REST API.\n            // This is only required for SharePoint notebooks. baseUrl will be null for OneDrive notebooks.\n            // For SharePoint notebooks, the notebook baseUrl should be used to talk to the OneNote REST API\n            // according to the OneNote Development Blog.\n            // https://blogs.msdn.microsoft.com/onenotedev/2015/06/11/and-sharepoint-makes-three/\n        });\n});\n```"
+- name: hasTitleContent()
+  uid: onenote!OneNote.Page#hasTitleContent:member(1)
+  package: onenote!
+  fullName: hasTitleContent()
+  summary: >-
+    ページにはコンテンツのタイトルがあります。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'hasTitleContent(): OfficeExtension.ClientResult<boolean>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
+      description: ''
+- name: insertPageAsSibling(location, title)
+  uid: onenote!OneNote.Page#insertPageAsSibling:member(1)
+  package: onenote!
+  fullName: insertPageAsSibling(location, title)
+  summary: >-
+    現在のページの前か後に、新しいページを挿入します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertPageAsSibling(location: OneNote.InsertLocation, title: string): OneNote.Page;'
+    parameters:
+    - id: location
+      description: 現在のページを基準にした新しいページの位置を指定します。
+      type: <xref uid="onenote!OneNote.InsertLocation:enum" />
+    - id: title
+      description: 新しいページのタイトルです。
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+- name: insertPageAsSibling(locationString, title)
+  uid: onenote!OneNote.Page#insertPageAsSibling:member(2)
+  package: onenote!
+  fullName: insertPageAsSibling(locationString, title)
+  summary: >-
+    現在のページの前か後に、新しいページを挿入します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertPageAsSibling(locationString: "Before" | "After", title: string): OneNote.Page;'
+    parameters:
+    - id: locationString
+      description: 現在のページを基準にした新しいページの位置を指定します。
+      type: "\"Before\" | \"After\""
+    - id: title
+      description: 新しいページのタイトルです。
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Queue a command to add a new page after the active page. \n    var newPage = activePage.insertPageAsSibling(\"After\", \"Next Page\");\n\n    // Queue a command to load the newPage to access its data.\n    context.load(newPage);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            console.log(\"page is created with title: \" + newPage.title);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(option)
+  uid: onenote!OneNote.Page#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): OneNote.Page` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.Page` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Page` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.PageLoadOptions): OneNote.Page;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.PageLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.Page#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Page;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Queue a command to add a new page after the active page. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            for(var i=0; i < pageContents.items.length; i++)\n            {\n                var pageContent = pageContents.items[i];\n                if (pageContent.type == \"Outline\")\n                {\n                    console.log(\"Found an outline\");\n                }\n                else if (pageContent.type == \"Image\")\n                {\n                    console.log(\"Found an image\");\n                }\n                else if (pageContent.type == \"Other\")\n                {\n                    console.log(\"Found a type not supported yet.\");\n                }\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    var app = context.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Queue a command to load the webUrl of the page.\n    page.load(\"webUrl\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            console.log(page.webUrl);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Load ink words\n    page.load('inkAnalysisOrNull/paragraphs/lines/words');\n    \n    return ctx.sync()\n        .then(function() {\n            if (!page.inkAnalysisOrNull.isNull)\n                console.log(page.inkAnalysisOrNull.paragraphs.length);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.Page#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Page;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+- name: set(properties, options)
+  uid: onenote!OneNote.Page#set:member(1)
+  package: onenote!
+  fullName: set(properties, options)
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加のシグネチャがあります。
+
+
+    `set(properties: OneNote.Page): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.PageUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="onenote!OneNote.Interfaces.PageUpdateData:interface" />
+    - id: options
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: onenote!OneNote.Page#set:member(2)
+  package: onenote!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: OneNote.Page): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="onenote!OneNote.Page:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.Page#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の OneNote の Page オブジェクトは API オブジェクトですが、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として型指定されます) を返します。`OneNote.Interfaces.PageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.PageData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.PageData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.Page#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.Page;'
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.Page#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.Page;'
+    return:
+      type: <xref uid="onenote!OneNote.Page:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 09599daf0f23c55c03dec55a3d93cc9a9acb79f5
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49172066"

@@ -1,382 +1,297 @@
-### YamlMime:UniversalReference
-items:
-  - uid: onenote.OneNote.Outline
-    summary: |-
-      Paragraph オブジェクトのコンテナーを表します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.Outline
-    fullName: OneNote.Outline
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'OfficeExtension.ClientObject '
-    package: onenote
-    children:
-      - onenote.OneNote.Outline.appendHtml
-      - onenote.OneNote.Outline.appendImage
-      - onenote.OneNote.Outline.appendRichText
-      - onenote.OneNote.Outline.appendTable
-      - onenote.OneNote.Outline.context
-      - onenote.OneNote.Outline.id
-      - onenote.OneNote.Outline.isTitle
-      - onenote.OneNote.Outline.load
-      - onenote.OneNote.Outline.load_1
-      - onenote.OneNote.Outline.load_2
-      - onenote.OneNote.Outline.pageContent
-      - onenote.OneNote.Outline.paragraphs
-      - onenote.OneNote.Outline.toJSON
-      - onenote.OneNote.Outline.track
-      - onenote.OneNote.Outline.untrack
-  - uid: onenote.OneNote.Outline.appendHtml
-    summary: |-
-      指定された HTML を Outline の一番下に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: appendHtml(html)
-    fullName: appendHtml(html)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendHtml(html: string): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: OneNote.Outline
+uid: onenote!OneNote.Outline:class
+package: onenote!
+fullName: OneNote.Outline
+summary: >-
+  Paragraph オブジェクトのコンテナーを表します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Gets the active page.
-              var activePage = context.application.getActivePage();
-
-              // Get pageContents of the activePage. 
-              var pageContents = activePage.contents;
-
-              // Queue a command to load the pageContents to access its data.
-              context.load(pageContents);
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      if (pageContents.items.length != 0 && pageContents.items[0].type == "Outline")
-                      {
-                          // First item is an outline.
-                          outline = pageContents.items[0].outline;
-
-                          // Queue a command to append a paragraph to the outline.
-                          outline.appendHtml("<p>new paragraph</p>");
-
-                          // Run the queued commands.
-                          return context.sync();
-                      }
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: html
-          description: '追加する HTML 文字列です。 OneNote アドインの JavaScript API については、「[サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。'
-          type:
-            - string
-  - uid: onenote.OneNote.Outline.appendImage
-    summary: |-
-      指定されたイメージを Outline の一番下に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'appendImage(base64EncodedImage, width, height)'
-    fullName: 'appendImage(base64EncodedImage, width, height)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendImage(base64EncodedImage: string, width: number, height: number): OneNote.Image;'
-      return:
-        type:
-          - onenote.OneNote.Image
-        description: ''
-      parameters:
-        - id: base64EncodedImage
-          description: 追加する HTML 文字列です。
-          type:
-            - string
-        - id: width
-          description: 省略可能。 ポイント単位の幅。 既定値は null で、イメージの幅が使用されます。
-          type:
-            - number
-        - id: height
-          description: 省略可能。 ポイント単位の高さ。 既定値は null で、イメージの高さが使用されます。
-          type:
-            - number
-  - uid: onenote.OneNote.Outline.appendRichText
-    summary: |-
-      指定されたテキストを Outline の一番下に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: appendRichText(paragraphText)
-    fullName: appendRichText(paragraphText)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendRichText(paragraphText: string): OneNote.RichText;'
-      return:
-        type:
-          - onenote.OneNote.RichText
-        description: ''
-      parameters:
-        - id: paragraphText
-          description: 追加する HTML 文字列です。
-          type:
-            - string
-  - uid: onenote.OneNote.Outline.appendTable
-    summary: |-
-      指定された数の行と列を含むテーブルを Outline の一番下に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'appendTable(rowCount, columnCount, values)'
-    fullName: 'appendTable(rowCount, columnCount, values)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendTable(rowCount: number, columnCount: number, values?: string[][]): OneNote.Table;'
-      return:
-        type:
-          - onenote.OneNote.Table
-        description: |-
+  \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: onenote!OneNote.Outline#context:member
+  package: onenote!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.Outline#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    Outline オブジェクトの ID を取得します。 読み取り専用です。
 
 
-          #### <a name="examples"></a>例
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: pageContent
+  uid: onenote!OneNote.Outline#pageContent:member
+  package: onenote!
+  fullName: pageContent
+  summary: >-
+    Outline を含む PageContent オブジェクトを取得します。 このオブジェクトは、ページ上の Outline の位置を定義します。 読み取り専用です。
 
-          ```javascript
-          OneNote.run(function (context) {
 
-              // Gets the active page.
-              var activePage = context.application.getActivePage();
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly pageContent: OneNote.PageContent;'
+    return:
+      type: <xref uid="onenote!OneNote.PageContent:class" />
+- name: paragraphs
+  uid: onenote!OneNote.Outline#paragraphs:member
+  package: onenote!
+  fullName: paragraphs
+  summary: >-
+    Outline に含まれる Paragraph オブジェクトのコレクションを取得します。 読み取り専用です。
 
-              // Get pageContents of the activePage. 
-              var pageContents = activePage.contents;
 
-              // Queue a command to load the pageContents to access its data.
-              context.load(pageContents);
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly paragraphs: OneNote.ParagraphCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.ParagraphCollection:class" />
+methods:
+- name: appendHtml(html)
+  uid: onenote!OneNote.Outline#appendHtml:member(1)
+  package: onenote!
+  fullName: appendHtml(html)
+  summary: >-
+    指定された HTML を Outline の一番下に追加します。
 
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      if (pageContents.items.length != 0 && pageContents.items[0].type == "Outline") {
-                          // First item is an outline.
-                          var outline = pageContents.items[0].outline;
 
-                          // Queue a command to append a paragraph to the outline.
-                          outline.appendTable(2, 2, [[1, 2],[3, 4]]);
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendHtml(html: string): void;'
+    parameters:
+    - id: html
+      description: 追加する HTML 文字列です。 OneNote アドインの JavaScript API については、「 [サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。
+      type: string
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Get pageContents of the activePage. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            if (pageContents.items.length != 0 && pageContents.items[0].type == \"Outline\")\n            {\n                // First item is an outline.\n                outline = pageContents.items[0].outline;\n\n                // Queue a command to append a paragraph to the outline.\n                outline.appendHtml(\"<p>new paragraph</p>\");\n\n                // Run the queued commands.\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: appendImage(base64EncodedImage, width, height)
+  uid: onenote!OneNote.Outline#appendImage:member(1)
+  package: onenote!
+  fullName: appendImage(base64EncodedImage, width, height)
+  summary: >-
+    指定されたイメージを Outline の一番下に追加します。
 
-                          // Run the queued commands.
-                          return context.sync();
-                      }
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: rowCount
-          description: 必須です。 表の行数。
-          type:
-            - number
-        - id: columnCount
-          description: 必須。 表の列数。
-          type:
-            - number
-        - id: values
-          description: 省略可能な 2 次元配列。 対応する文字列が配列で指定されている場合、セルに設定されます。
-          type:
-            - 'string[][]'
-  - uid: onenote.OneNote.Outline.context
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - onenote.OneNote.RequestContext
-  - uid: onenote.OneNote.Outline.id
-    summary: |-
-      Outline オブジェクトの ID を取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.Outline.isTitle
-    summary: |-
-      アウトラインがタイトルのアウトラインであるかどうかを確認します。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendImage(base64EncodedImage: string, width: number, height: number): OneNote.Image;'
+    parameters:
+    - id: base64EncodedImage
+      description: 追加する HTML 文字列です。
+      type: string
+    - id: width
+      description: 省略可能。 ポイント単位の幅。 既定値は null で、イメージの幅が使用されます。
+      type: number
+    - id: height
+      description: 省略可能。 ポイント単位の高さ。 既定値は null で、イメージの高さが使用されます。
+      type: number
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+- name: appendRichText(paragraphText)
+  uid: onenote!OneNote.Outline#appendRichText:member(1)
+  package: onenote!
+  fullName: appendRichText(paragraphText)
+  summary: >-
+    指定されたテキストを Outline の一番下に追加します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: isTitle()
-    fullName: isTitle()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'isTitle(): OfficeExtension.ClientResult<boolean>;'
-      return:
-        type:
-          - OfficeExtension.ClientResult<boolean>
-        description: ''
-  - uid: onenote.OneNote.Outline.load
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
 
-      `load(option?: string | string[]): OneNote.Outline`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendRichText(paragraphText: string): OneNote.RichText;'
+    parameters:
+    - id: paragraphText
+      description: 追加する HTML 文字列です。
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.RichText:class" />
+      description: ''
+- name: appendTable(rowCount, columnCount, values)
+  uid: onenote!OneNote.Outline#appendTable:member(1)
+  package: onenote!
+  fullName: appendTable(rowCount, columnCount, values)
+  summary: >-
+    指定された数の行と列を含むテーブルを Outline の一番下に追加します。
 
-      `load(option?: { select?: string; expand?: string; }): OneNote.Outline`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
 
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Outline`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.OutlineLoadOptions): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - onenote.OneNote.Interfaces.OutlineLoadOptions
-  - uid: onenote.OneNote.Outline.load_1
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: onenote.OneNote.Outline.load_2
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: onenote.OneNote.Outline.pageContent
-    summary: |-
-      Outline を含む PageContent オブジェクトを取得します。 このオブジェクトは、ページ上の Outline の位置を定義します。 読み取り専用です。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendTable(rowCount: number, columnCount: number, values?: string[][]): OneNote.Table;'
+    parameters:
+    - id: rowCount
+      description: 必須。 表の行数。
+      type: number
+    - id: columnCount
+      description: 必須。 表の列数。
+      type: number
+    - id: values
+      description: 省略可能な 2 次元配列。 対応する文字列が配列で指定されている場合、セルに設定されます。
+      type: string[][]
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Get pageContents of the activePage. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            if (pageContents.items.length != 0 && pageContents.items[0].type == \"Outline\") {\n                // First item is an outline.\n                var outline = pageContents.items[0].outline;\n\n                // Queue a command to append a paragraph to the outline.\n                outline.appendTable(2, 2, [[1, 2],[3, 4]]);\n\n                // Run the queued commands.\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: isTitle()
+  uid: onenote!OneNote.Outline#isTitle:member(1)
+  package: onenote!
+  fullName: isTitle()
+  summary: >-
+    アウトラインがタイトルのアウトラインであるかどうかを確認します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: pageContent
-    fullName: pageContent
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly pageContent: OneNote.PageContent;'
-      return:
-        type:
-          - onenote.OneNote.PageContent
-  - uid: onenote.OneNote.Outline.paragraphs
-    summary: |-
-      Outline に含まれる Paragraph オブジェクトのコレクションを取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: paragraphs
-    fullName: paragraphs
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly paragraphs: OneNote.ParagraphCollection;'
-      return:
-        type:
-          - onenote.OneNote.ParagraphCollection
-  - uid: onenote.OneNote.Outline.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の OneNote の外枠オブジェクトは API オブジェクトであり、メソッド`toJSON`はプレーンな JavaScript オブジェクト (として入力されます) を返します。`OneNote.Interfaces.OutlineData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.OutlineData;'
-      return:
-        type:
-          - onenote.OneNote.Interfaces.OutlineData
-        description: ''
-  - uid: onenote.OneNote.Outline.track
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: ''
-  - uid: onenote.OneNote.Outline.untrack
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.Outline;'
-      return:
-        type:
-          - onenote.OneNote.Outline
-        description: ''
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'isTitle(): OfficeExtension.ClientResult<boolean>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
+      description: ''
+- name: load(option)
+  uid: onenote!OneNote.Outline#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): OneNote.Outline` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.Outline` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Outline` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.OutlineLoadOptions): OneNote.Outline;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.OutlineLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.Outline#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Outline;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.Outline#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Outline;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.Outline#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の OneNote の外枠オブジェクトは API オブジェクトであり、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`OneNote.Interfaces.OutlineData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.OutlineData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.OutlineData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.Outline#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.Outline;'
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.Outline#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.Outline;'
+    return:
+      type: <xref uid="onenote!OneNote.Outline:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 3ba2e7143c1abe123c3fe05432a4d41472f66720
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49319156"

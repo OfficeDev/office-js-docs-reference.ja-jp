@@ -1,556 +1,386 @@
-### YamlMime:UniversalReference
-items:
-  - uid: onenote.OneNote.TableCell
-    summary: |-
-      OneNote テーブル内のセルを表します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.TableCell
-    fullName: OneNote.TableCell
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'OfficeExtension.ClientObject '
-    package: onenote
-    children:
-      - onenote.OneNote.TableCell.appendHtml
-      - onenote.OneNote.TableCell.appendImage
-      - onenote.OneNote.TableCell.appendRichText
-      - onenote.OneNote.TableCell.appendTable
-      - onenote.OneNote.TableCell.cellIndex
-      - onenote.OneNote.TableCell.clear
-      - onenote.OneNote.TableCell.context
-      - onenote.OneNote.TableCell.id
-      - onenote.OneNote.TableCell.load
-      - onenote.OneNote.TableCell.load_1
-      - onenote.OneNote.TableCell.load_2
-      - onenote.OneNote.TableCell.paragraphs
-      - onenote.OneNote.TableCell.parentRow
-      - onenote.OneNote.TableCell.rowIndex
-      - onenote.OneNote.TableCell.set
-      - onenote.OneNote.TableCell.set_1
-      - onenote.OneNote.TableCell.shadingColor
-      - onenote.OneNote.TableCell.toJSON
-      - onenote.OneNote.TableCell.track
-      - onenote.OneNote.TableCell.untrack
-  - uid: onenote.OneNote.TableCell.appendHtml
-    summary: |-
-      指定された HTML を TableCell の一番下に追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: appendHtml(html)
-    fullName: appendHtml(html)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendHtml(html: string): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: OneNote.TableCell
+uid: onenote!OneNote.TableCell:class
+package: onenote!
+fullName: OneNote.TableCell
+summary: >-
+  OneNote テーブル内のセルを表します。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, get a table cell at row one and column two and add "Hello".
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);
-                          cell.appendHtml("<p>Hello</p>");
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: html
-          description: '追加する HTML 文字列です。 OneNote アドインの JavaScript API については、「[サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。'
-          type:
-            - string
-  - uid: onenote.OneNote.TableCell.appendImage
-    summary: |-
-      指定した Image をテーブル セルに追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'appendImage(base64EncodedImage, width, height)'
-    fullName: 'appendImage(base64EncodedImage, width, height)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendImage(base64EncodedImage: string, width: number, height: number): OneNote.Image;'
-      return:
-        type:
-          - onenote.OneNote.Image
-        description: ''
-      parameters:
-        - id: base64EncodedImage
-          description: 追加する HTML 文字列です。
-          type:
-            - string
-        - id: width
-          description: 省略可能。 ポイント単位の幅。 既定値は null で、イメージの幅が使用されます。
-          type:
-            - number
-        - id: height
-          description: 省略可能。 ポイント単位の高さ。 既定値は null で、イメージの高さが使用されます。
-          type:
-            - number
-  - uid: onenote.OneNote.TableCell.appendRichText
-    summary: |-
-      指定したテキストをテーブル セルに追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: appendRichText(paragraphText)
-    fullName: appendRichText(paragraphText)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendRichText(paragraphText: string): OneNote.RichText;'
-      return:
-        type:
-          - onenote.OneNote.RichText
-        description: |-
+  \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: cellIndex
+  uid: onenote!OneNote.TableCell#cellIndex:member
+  package: onenote!
+  fullName: cellIndex
+  summary: >-
+    その行のセルのインデックスを取得します。 読み取り専用です。
 
 
-          #### <a name="examples"></a>例
-
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              var appendedRichText = null;
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, get a table cell at row one and column two and add "Hello".
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);
-                          appendedRichText = cell.appendRichText("Hello");
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: paragraphText
-          description: 追加する HTML 文字列です。
-          type:
-            - string
-  - uid: onenote.OneNote.TableCell.appendTable
-    summary: |-
-      指定された数の行と列を含むテーブルをテーブル セルに追加します。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: 'appendTable(rowCount, columnCount, values)'
-    fullName: 'appendTable(rowCount, columnCount, values)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'appendTable(rowCount: number, columnCount: number, values?: string[][]): OneNote.Table;'
-      return:
-        type:
-          - onenote.OneNote.Table
-        description: ''
-      parameters:
-        - id: rowCount
-          description: 必須です。 表の行数。
-          type:
-            - number
-        - id: columnCount
-          description: 必須。 表の列数。
-          type:
-            - number
-        - id: values
-          description: 省略可能な 2 次元配列。 対応する文字列が配列で指定されている場合、セルに設定されます。
-          type:
-            - 'string[][]'
-  - uid: onenote.OneNote.TableCell.cellIndex
-    summary: |-
-      その行のセルのインデックスを取得します。 読み取り専用です。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: cellIndex
-    fullName: cellIndex
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly cellIndex: number;'
-      return:
-        type:
-          - number
-  - uid: onenote.OneNote.TableCell.clear
-    summary: |-
-      セルの内容をクリアします。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: clear()
-    fullName: clear()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'clear(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: onenote.OneNote.TableCell.context
-    summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - onenote.OneNote.RequestContext
-  - uid: onenote.OneNote.TableCell.id
-    summary: |-
-      セルの ID を取得します。 読み取り専用です。
-
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.TableCell.load
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-    remarks: |-
-      このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
-
-      `load(option?: string | string[]): OneNote.TableCell`-Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.TableCell`-Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.TableCell`-コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.TableCellLoadOptions): OneNote.TableCell;'
-      return:
-        type:
-          - onenote.OneNote.TableCell
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - onenote.OneNote.Interfaces.TableCellLoadOptions
-  - uid: onenote.OneNote.TableCell.load_1
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.TableCell;'
-      return:
-        type:
-          - onenote.OneNote.TableCell
-        description: |-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly cellIndex: number;'
+    return:
+      type: number
+- name: context
+  uid: onenote!OneNote.TableCell#context:member
+  package: onenote!
+  fullName: context
+  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.TableCell#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    セルの ID を取得します。 読み取り専用です。
 
 
-          #### <a name="examples"></a>例
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: paragraphs
+  uid: onenote!OneNote.TableCell#paragraphs:member
+  package: onenote!
+  fullName: paragraphs
+  summary: >-
+    TableCell に含まれる Paragraph オブジェクトのコレクションを取得します。 読み取り専用です。
 
-          ```javascript
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, get a table cell at row one and column two.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);
-                          
-                          // Queue a command to load the table cell.
-                          ctx.load(cell);
-                          ctx.sync().then(function() {
-                              console.log("Cell Id: " + cell.id);
-                              console.log("Cell Index: " + cell.cellIndex);
-                              console.log("Cell's Row Index: " + cell.rowIndex);
-                          });
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          ParentTable, ParentRow, Paragraphs
-          OneNote.run(function(ctx) {
-              var app = ctx.application;
-              var outline = app.getActiveOutline();
-              
-              // Queue a command to load outline.paragraphs and their types.
-              ctx.load(outline, "paragraphs, paragraphs/type");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return ctx.sync().then(function () {
-                  var paragraphs = outline.paragraphs;
-                  
-                  // for each table, get a table cell at row one and column two.
-                  for (var i = 0; i < paragraphs.items.length; i++) {
-                      var paragraph = paragraphs.items[i];
-                      if (paragraph.type == "Table") {
-                          var table = paragraph.table;
-                          var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);
-                          
-                          // Queue a command to load parentTable, parentRow and paragraphs of the table cell.
-                          ctx.load(cell, "parentTable, parentRow, paragraphs");
-                          
-                          ctx.sync().then(function() {
-                              console.log("Parent Table Id: " + cell.parentTable.id);
-                              console.log("Parent Row Id: " + cell.parentRow.id);
-                              var paragraphs = cell.paragraphs;
-                              
-                              for (var i = 0; i < paragraphs.items.length; i++) {
-                                  console.log("Paragraph Id: " + paragraphs.items[i].id);
-                              }
-                          });
-                      }
-                  }
-                  return ctx.sync();
-              })
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
-          type:
-            - 'string | string[]'
-  - uid: onenote.OneNote.TableCell.load_2
-    summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る`context.sync()`前に、を呼び出す必要があります。
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.TableCell;'
-      return:
-        type:
-          - onenote.OneNote.TableCell
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: onenote.OneNote.TableCell.paragraphs
-    summary: |-
-      TableCell に含まれる Paragraph オブジェクトのコレクションを取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: paragraphs
-    fullName: paragraphs
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly paragraphs: OneNote.ParagraphCollection;'
-      return:
-        type:
-          - onenote.OneNote.ParagraphCollection
-  - uid: onenote.OneNote.TableCell.parentRow
-    summary: |-
-      セルの親行を取得します。 読み取り専用です。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly paragraphs: OneNote.ParagraphCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.ParagraphCollection:class" />
+- name: parentRow
+  uid: onenote!OneNote.TableCell#parentRow:member
+  package: onenote!
+  fullName: parentRow
+  summary: >-
+    セルの親行を取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: parentRow
-    fullName: parentRow
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly parentRow: OneNote.TableRow;'
-      return:
-        type:
-          - onenote.OneNote.TableRow
-  - uid: onenote.OneNote.TableCell.rowIndex
-    summary: |-
-      テーブルのセル行のインデックスを取得します。 読み取り専用です。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: rowIndex
-    fullName: rowIndex
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly rowIndex: number;'
-      return:
-        type:
-          - number
-  - uid: onenote.OneNote.TableCell.set
-    summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
-    remarks: |-
-      このメソッドには、次の追加のシグネチャがあります。
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly parentRow: OneNote.TableRow;'
+    return:
+      type: <xref uid="onenote!OneNote.TableRow:class" />
+- name: rowIndex
+  uid: onenote!OneNote.TableCell#rowIndex:member
+  package: onenote!
+  fullName: rowIndex
+  summary: >-
+    テーブルのセル行のインデックスを取得します。 読み取り専用です。
 
-      `set(properties: OneNote.TableCell): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.TableCellUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
-          type:
-            - Interfaces.TableCellUpdateData
-        - id: options
-          description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
-          type:
-            - OfficeExtension.UpdateOptions
-  - uid: onenote.OneNote.TableCell.set_1
-    summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: OneNote.TableCell): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - onenote.OneNote.TableCell
-  - uid: onenote.OneNote.TableCell.shadingColor
-    summary: |-
-      セルの網かけの色を取得および設定します。
 
-      \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: shadingColor
-    fullName: shadingColor
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'shadingColor: string;'
-      return:
-        type:
-          - string
-  - uid: onenote.OneNote.TableCell.toJSON
-    summary: API オブジェクトが`toJSON()`渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->その後、渡された`toJSON`オブジェクトのメソッドを呼び出します。元の TableCell オブジェクトは API オブジェクトであるのに対し、 `toJSON`メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`OneNote.Interfaces.TableCellData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.TableCellData;'
-      return:
-        type:
-          - onenote.OneNote.Interfaces.TableCellData
-        description: ''
-  - uid: onenote.OneNote.TableCell.track
-    summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.TableCell;'
-      return:
-        type:
-          - onenote.OneNote.TableCell
-        description: ''
-  - uid: onenote.OneNote.TableCell.untrack
-    summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.TableCell;'
-      return:
-        type:
-          - onenote.OneNote.TableCell
-        description: ''
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly rowIndex: number;'
+    return:
+      type: number
+- name: shadingColor
+  uid: onenote!OneNote.TableCell#shadingColor:member
+  package: onenote!
+  fullName: shadingColor
+  summary: >-
+    セルの網かけの色を取得および設定します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'shadingColor: string;'
+    return:
+      type: string
+methods:
+- name: appendHtml(html)
+  uid: onenote!OneNote.TableCell#appendHtml:member(1)
+  package: onenote!
+  fullName: appendHtml(html)
+  summary: >-
+    指定された HTML を TableCell の一番下に追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendHtml(html: string): void;'
+    parameters:
+    - id: html
+      description: 追加する HTML 文字列です。 OneNote アドインの JavaScript API については、「 [サポートされている HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) 」を参照してください。
+      type: string
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get a table cell at row one and column two and add \"Hello\".\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);\n                cell.appendHtml(\"<p>Hello</p>\");\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: appendImage(base64EncodedImage, width, height)
+  uid: onenote!OneNote.TableCell#appendImage:member(1)
+  package: onenote!
+  fullName: appendImage(base64EncodedImage, width, height)
+  summary: >-
+    指定した Image をテーブル セルに追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendImage(base64EncodedImage: string, width: number, height: number): OneNote.Image;'
+    parameters:
+    - id: base64EncodedImage
+      description: 追加する HTML 文字列です。
+      type: string
+    - id: width
+      description: 省略可能。 ポイント単位の幅。 既定値は null で、イメージの幅が使用されます。
+      type: number
+    - id: height
+      description: 省略可能。 ポイント単位の高さ。 既定値は null で、イメージの高さが使用されます。
+      type: number
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+- name: appendRichText(paragraphText)
+  uid: onenote!OneNote.TableCell#appendRichText:member(1)
+  package: onenote!
+  fullName: appendRichText(paragraphText)
+  summary: >-
+    指定したテキストをテーブル セルに追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendRichText(paragraphText: string): OneNote.RichText;'
+    parameters:
+    - id: paragraphText
+      description: 追加する HTML 文字列です。
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.RichText:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    var appendedRichText = null;\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get a table cell at row one and column two and add \"Hello\".\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);\n                appendedRichText = cell.appendRichText(\"Hello\");\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: appendTable(rowCount, columnCount, values)
+  uid: onenote!OneNote.TableCell#appendTable:member(1)
+  package: onenote!
+  fullName: appendTable(rowCount, columnCount, values)
+  summary: >-
+    指定された数の行と列を含むテーブルをテーブル セルに追加します。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendTable(rowCount: number, columnCount: number, values?: string[][]): OneNote.Table;'
+    parameters:
+    - id: rowCount
+      description: 必須。 表の行数。
+      type: number
+    - id: columnCount
+      description: 必須。 表の列数。
+      type: number
+    - id: values
+      description: 省略可能な 2 次元配列。 対応する文字列が配列で指定されている場合、セルに設定されます。
+      type: string[][]
+    return:
+      type: <xref uid="onenote!OneNote.Table:class" />
+      description: ''
+- name: clear()
+  uid: onenote!OneNote.TableCell#clear:member(1)
+  package: onenote!
+  fullName: clear()
+  summary: >-
+    セルの内容をクリアします。
+
+
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: ''
+- name: load(option)
+  uid: onenote!OneNote.TableCell#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
+  remarks: >-
+    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+
+
+    `load(option?: string | string[]): OneNote.TableCell` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.TableCell` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.TableCell` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.TableCellLoadOptions): OneNote.TableCell;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.TableCellLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.TableCell#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.TableCell;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get a table cell at row one and column two.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);\n                \n                // Queue a command to load the table cell.\n                ctx.load(cell);\n                ctx.sync().then(function() {\n                    console.log(\"Cell Id: \" + cell.id);\n                    console.log(\"Cell Index: \" + cell.cellIndex);\n                    console.log(\"Cell's Row Index: \" + cell.rowIndex);\n                });\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nParentTable, ParentRow, Paragraphs\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, get a table cell at row one and column two.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var cell = table.getCell(1 /*Row Index*/, 2 /*Column Index*/);\n                \n                // Queue a command to load parentTable, parentRow and paragraphs of the table cell.\n                ctx.load(cell, \"parentTable, parentRow, paragraphs\");\n                \n                ctx.sync().then(function() {\n                    console.log(\"Parent Table Id: \" + cell.parentTable.id);\n                    console.log(\"Parent Row Id: \" + cell.parentRow.id);\n                    var paragraphs = cell.paragraphs;\n                    \n                    for (var i = 0; i < paragraphs.items.length; i++) {\n                        console.log(\"Paragraph Id: \" + paragraphs.items[i].id);\n                    }\n                });\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.TableCell#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.TableCell;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: ''
+- name: set(properties, options)
+  uid: onenote!OneNote.TableCell#set:member(1)
+  package: onenote!
+  fullName: set(properties, options)
+  summary: 一度に1つのオブジェクトの複数のプロパティを設定します。 適切なプロパティを持つプレーンオブジェクト、または同じ種類の別の API オブジェクトのいずれかを渡すことができます。
+  remarks: >-
+    このメソッドには、次の追加のシグネチャがあります。
+
+
+    `set(properties: OneNote.TableCell): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.TableCellUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティに構造化 isomorphically されているプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="onenote!OneNote.Interfaces.TableCellUpdateData:interface" />
+    - id: options
+      description: プロパティオブジェクトが読み取り専用プロパティを設定しようとした場合にエラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: onenote!OneNote.TableCell#set:member(2)
+  package: onenote!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトに複数のプロパティを設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: OneNote.TableCell): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.TableCell#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の TableCell オブジェクトは API オブジェクトであるのに対し、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (として入力されます) を返します。`OneNote.Interfaces.TableCellData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.TableCellData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.TableCellData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.TableCell#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.TableCell;'
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.TableCell#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.TableCell;'
+    return:
+      type: <xref uid="onenote!OneNote.TableCell:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 2fb7be218adec5a46b414ec33fc3cf792620d687
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49136520"
