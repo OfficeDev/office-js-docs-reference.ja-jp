@@ -3,8 +3,8 @@ name: Office.Dialog
 uid: office!Office.Dialog:interface
 package: office!
 fullName: Office.Dialog
-summary: が呼び出されたときに返されるオブジェクト `UI.displayDialogAsync` 。 イベントハンドラーを登録してダイアログを閉じるためのメソッドを公開します。
-remarks: '**要件セット**: [/](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets) /'
+summary: 呼び出された場合に返 `UI.displayDialogAsync` されるオブジェクト。 イベント ハンドラーを登録し、ダイアログを閉じるメソッドを公開します。
+remarks: '**要件セット**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -31,7 +31,7 @@ methods:
       description: DialogMessageReceived または DialogEventReceived のいずれかである必要があります。
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Eventtype が DialogMessageReceived の場合はプロパティを指定し、オブジェクトを指定する場合は、eventType が渡された場合は、プロパティを持つオブジェクトを受け取り `message` `error` ます。
+      description: eventType が DialogMessageReceived の場合はプロパティを持つオブジェクトを受け入れる関数 `message` 、eventType が DialogEventReceived の場合はプロパティを持つオブジェクトを受け入れる関数 `error` 。
       type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
     return:
       type: void
@@ -40,7 +40,11 @@ methods:
   uid: office!Office.Dialog#close:member(1)
   package: office!
   fullName: close()
-  summary: 対応するダイアログ ボックスを閉じるために親ページから呼び出されます。
+  summary: >-
+    対応するダイアログ ボックスを閉じるために親ページから呼び出されます。
+
+
+    このメソッドは非同期です。 コールバック パラメーターは受け取らないし、Promise オブジェクトを返すので、キーワードまたは関数で待 `await` つ `then` 必要はありません。 詳細については、次のベスト プラクティスを参照してください。 1 つを閉じる [とすぐに別のダイアログを開く](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-best-practices#opening-another-dialog-immediately-after-closing-one)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -53,7 +57,7 @@ methods:
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
   fullName: messageChild(message)
-  summary: 作業ウィンドウなどのホストページから、またはページから開かれたダイアログに対して、UI を持たない関数ファイルへのメッセージを配信します。
+  summary: 作業ウィンドウや UI レス関数ファイルなどのホスト ページから、ページから開いたダイアログにメッセージを配信します。
   remarks: >-
     **ホスト**: Excel、Outlook (最小要件セット: メールボックス 1.9)、PowerPoint、Word
 
@@ -61,7 +65,7 @@ methods:
     **要件セット**:
 
 
-    - [Offapi 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+    - [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
@@ -71,7 +75,7 @@ methods:
     content: 'messageChild(message: string): void;'
     parameters:
     - id: message
-      description: ダイアログに配信するために、ホストページからのメッセージを受け入れます。 JSON や XML を含む、文字列にシリアル化できるすべてのものを送信できます。
+      description: ホスト ページからダイアログに配信するメッセージを受け入れる。 JSON や XML を含む文字列にシリアル化できる情報は、何でも送信できます。
       type: string
     return:
       type: void
@@ -80,7 +84,7 @@ methods:
   uid: office!Office.Dialog#sendMessage:member(1)
   package: office!
   fullName: sendMessage(name)
-  summary: 内部使用のみ。 コードでは呼び出さないでください。
+  summary: 内部使用のみ。 コードを呼び出す必要はありません。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -94,9 +98,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: f328302115888d80b8d95f5b7d97d4331e0cc2b1
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49183365"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463386"
