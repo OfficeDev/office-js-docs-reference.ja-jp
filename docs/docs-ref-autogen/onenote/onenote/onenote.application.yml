@@ -17,7 +17,7 @@ properties:
   uid: onenote!OneNote.Application#context:member
   package: onenote!
   fullName: context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスが Office ホストアプリケーションのプロセスに接続されます。
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,7 +30,7 @@ properties:
   package: onenote!
   fullName: notebooks
   summary: >-
-    OneNote アプリケーション インスタンスで開いているノートブックのコレクションを取得します。 Web 上の OneNote では、一度に1つのノートブックのみがアプリケーションインスタンスで開かれます。 読み取り専用です。
+    OneNote アプリケーション インスタンスで開いているノートブックのコレクションを取得します。 Web 上の OneNote では、アプリケーション インスタンスで開いているノートブックは一度に 1 つのみです。 読み取り専用です。
 
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
@@ -149,7 +149,7 @@ methods:
   package: onenote!
   fullName: getActiveParagraph()
   summary: >-
-    アクティブな段落がある場合、アクティブな段落を取得します。段落がない場合は、ItemNotFound をスローします。
+    存在する場合は、アクティブな段落を取得します。段落がアクティブではない場合は、ItemNotFound をスローします。
 
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
@@ -166,7 +166,7 @@ methods:
   package: onenote!
   fullName: getActiveParagraphOrNull()
   summary: >-
-    アクティブな段落を取得します (存在する場合)。それ以外の場合は、null を返します。
+    存在する場合はアクティブな段落を取得し、それ以外の場合は null を返します。
 
 
     \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
@@ -261,16 +261,16 @@ methods:
   fullName: load(option)
   summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
   remarks: >-
-    このシグネチャに加えて、このメソッドのシグネチャは次のとおりです。
+    このシグネチャに加えて、このメソッドには次のシグネチャがあります。
 
 
-    `load(option?: string | string[]): OneNote.Application` -Where オプションは、読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列です。
+    `load(option?: string | string[]): OneNote.Application` - where option は、コンマで区切られた文字列、または読み込むプロパティを指定する文字列の配列です。
 
 
-    `load(option?: { select?: string; expand?: string; }): OneNote.Application` -Where オプションを指定します。 select は、読み込むプロパティを指定するコンマで区切られた文字列で、オプション expand は読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
+    `load(option?: { select?: string; expand?: string; }): OneNote.Application` - option.select は読み込むプロパティを指定するコンマ区切りの文字列で、options.expand は読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Application` -コレクション型でのみ使用できます。 これは、前述の署名に似ています。 Top は、結果に含めることができるコレクション項目の最大数を指定します。 省略すると、スキップされ、結果に含まれないアイテムの数を指定します。 Option を指定すると、指定した数のアイテムをスキップした後に結果セットが開始されます。
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Application` - コレクションの種類でのみ使用できます。 これは、前の署名に似ています。 Option.top は、結果に含めるコレクション アイテムの最大数を指定します。 Option.skip は、結果に含まれていないスキップするアイテムの数を指定します。 option.top を指定すると、指定した数のアイテムをスキップした後、結果セットが開始されます。
   isPreview: false
   isDeprecated: false
   syntax:
@@ -294,25 +294,33 @@ methods:
     content: 'load(propertyNames?: string | string[]): OneNote.Application;'
     parameters:
     - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
       type: string | string[]
     return:
       type: <xref uid="onenote!OneNote.Application:class" />
       description: ''
-- name: load(propertyNamesAndPaths)
+- name: load(option)
   uid: onenote!OneNote.Application#load:member(3)
   package: onenote!
-  fullName: load(propertyNamesAndPaths)
-  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  fullName: load(option)
+  summary: ''
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Application;'
+    content: >-
+      load(option?: {
+                  select?: string;
+                  expand?: string;
+              }): OneNote.Application;
     parameters:
-    - id: propertyNamesAndPaths
-      description: ここで、は、読み込むプロパティを指定するコンマで区切られた文字列を指定します。 expand は、読み込むナビゲーションプロパティを指定するコンマ区切りの文字列です。
-      type: '{ select?: string; expand?: string; }'
+    - id: option
+      description: ''
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
     return:
       type: <xref uid="onenote!OneNote.Application:class" />
       description: ''
@@ -362,7 +370,7 @@ methods:
   uid: onenote!OneNote.Application#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: '`toJSON()`API オブジェクトが渡されるときに、より有用な出力を提供するために、JavaScript メソッドをオーバーライドします。`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->`toJSON`その後、渡されたオブジェクトのメソッドを呼び出します。元の OneNote の Application オブジェクトは API オブジェクトであり、 `toJSON` メソッドはプレーンな JavaScript オブジェクトを返します (型は`OneNote.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを格納します。'
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の OneNote.Application オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `OneNote.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -373,9 +381,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 82caaf93ae1162bc79ab11bde88a836d1327950a
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 3d9b1bbc84b9eff7743316b64599f253b7afca1a
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49183084"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538122"
