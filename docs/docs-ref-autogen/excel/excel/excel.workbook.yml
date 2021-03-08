@@ -4,7 +4,7 @@ uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
 summary: >-
-  ブックは、ワークシート、テーブル、範囲などの関連するブック オブジェクトを含むトップ レベル のオブジェクトです。ブック オブジェクト モデルの詳細については[、「Excel JavaScript API](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)を使用してブックを使用する」を参照してください。<!-- -->.
+  Workbook は、ワークシート、テーブル、範囲などの関連するブック オブジェクトを含む、トップ レベルのオブジェクトです。 ブック オブジェクト モデルの詳細については [、「Excel JavaScript API を使用してブックを使用する」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
 
 
   \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -82,7 +82,7 @@ properties:
   package: excel!
   fullName: chartDataPointTrack
   summary: >-
-    関連付けられている実際のデータ ポイントをブックの全グラフが追跡している場合、true となります。 False グラフは、データ ポイントのインデックスを追跡する場合です。
+    関連付けられている実際のデータ ポイントをブックの全グラフが追跡している場合、true となります。 False の場合は、グラフがデータ ポイントのインデックスを追跡します。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -98,7 +98,7 @@ properties:
   package: excel!
   fullName: comments
   summary: >-
-    ブックに関連付けられているコメントの集まりを表します。
+    ブックに関連付けられたコメントのコレクションを表します。
 
 
     \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -113,7 +113,7 @@ properties:
   uid: excel!Excel.Workbook#context:member
   package: excel!
   fullName: context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -174,7 +174,7 @@ properties:
   package: excel!
   fullName: isDirty
   summary: >-
-    ブックが最後に保存された後に変更が行われたか指定します。 変更されたブックを保存したり、保存するように求めるメッセージを表示したりせずに閉じる場合は、このプロパティを true に設定できます。
+    ブックが最後に保存された後に変更が行われた場合に指定します。 変更したブックを保存せずに閉じるか、保存するように求めるメッセージが表示される場合は、このプロパティ `true` を設定できます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: names
   summary: >-
-    ブック スコープの名前付き項目 (名前付き範囲と名前付き定数) のコレクションを表します。
+    ブックスコープの名前付きアイテム (名前付き範囲と定数) のコレクションを表します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -233,12 +233,28 @@ properties:
     content: 'readonly names: Excel.NamedItemCollection;'
     return:
       type: <xref uid="excel!Excel.NamedItemCollection:class" />
+- name: onActivated
+  uid: excel!Excel.Workbook#onActivated:member
+  package: excel!
+  fullName: onActivated
+  summary: >-
+    ブックがアクティブ化されると発生します。 注: ブックを開いた場合、このイベントは発生しない。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorkbookActivatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorkbookActivatedEventArgs:interface" />&gt;
 - name: onAutoSaveSettingChanged
   uid: excel!Excel.Workbook#onAutoSaveSettingChanged:member
   package: excel!
   fullName: onAutoSaveSettingChanged
   summary: >-
-    ブックで autoSave の設定が変更されると発生します。
+    ブックで AutoSave 設定が変更された場合に発生します。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -303,7 +319,7 @@ properties:
   package: excel!
   fullName: previouslySaved
   summary: >-
-    ブックがローカルまたはオンラインで保存されたのか指定します。
+    ブックがローカルまたはオンラインで保存された場合に指定します。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -352,7 +368,7 @@ properties:
   package: excel!
   fullName: readOnly
   summary: >-
-    true の場合、ブックが読み取り専用モードで開かれます。
+    ブックが `true` 読み取り専用モードで開いている場合に返します。
 
 
     \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -368,7 +384,7 @@ properties:
   package: excel!
   fullName: settings
   summary: >-
-    ブックに関連付けられている Setting のコレクションを表します。
+    ブックに関連付けられている設定のコレクションを表します。
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -384,7 +400,7 @@ properties:
   package: excel!
   fullName: showPivotFieldList
   summary: >-
-    ピボットテーブルのフィールド リスト ウィンドウをブック レベルで表示するかどうかを指定します。
+    ピボットテーブルのフィールド 一覧ウィンドウをブック レベルで表示するかどうかを指定します。
 
 
     \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -400,7 +416,7 @@ properties:
   package: excel!
   fullName: slicers
   summary: >-
-    ブックに関連付けられているスライサーの集まりを表します。
+    ブックに関連付けられたスライサーのコレクションを表します。
 
 
     \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -489,9 +505,9 @@ properties:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'readonly tasks: Excel.TaskCollection;'
+    content: 'readonly tasks: Excel.DocumentTaskCollection;'
     return:
-      type: <xref uid="excel!Excel.TaskCollection:class" />
+      type: <xref uid="excel!Excel.DocumentTaskCollection:class" />
 - name: timelineStyles
   uid: excel!Excel.Workbook#timelineStyles:member
   package: excel!
@@ -529,7 +545,7 @@ properties:
   package: excel!
   fullName: usePrecisionAsDisplayed
   summary: >-
-    ブックを表示桁数でのみ計算する場合、true となります。 このプロパティを false から true に切り替える場合、データは完全に精度を失います。
+    ブックを表示桁数でのみ計算する場合、true となります。 このプロパティをからからに切り替える場合、データは完全に精度を失 `false` います `true`<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -621,7 +637,7 @@ methods:
   package: excel!
   fullName: getActiveChart()
   summary: >-
-    ブックで現在アクティブになっているグラフを取得します。 アクティブなグラフがない場合は `ItemNotFound` 、例外がスローされます。
+    ブックで現在アクティブになっているグラフを取得します。 アクティブなグラフがない場合は、 `ItemNotFound` 例外がスローされます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -638,7 +654,7 @@ methods:
   package: excel!
   fullName: getActiveChartOrNullObject()
   summary: >-
-    ブックで現在アクティブになっているグラフを取得します。 アクティブなグラフがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    ブックで現在アクティブになっているグラフを取得します。 アクティブなグラフがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -655,7 +671,7 @@ methods:
   package: excel!
   fullName: getActiveSlicer()
   summary: >-
-    ブックで現在アクティブになっているスライサーを取得します。 アクティブなスライサーがない場合は `ItemNotFound` 、例外がスローされます。
+    ブックで現在アクティブになっているスライサーを取得します。 アクティブなスライサーがない場合は、 `ItemNotFound` 例外がスローされます。
 
 
     \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -672,7 +688,7 @@ methods:
   package: excel!
   fullName: getActiveSlicerOrNullObject()
   summary: >-
-    ブックで現在アクティブになっているスライサーを取得します。 アクティブなスライサーがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject のメソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    ブックで現在アクティブになっているスライサーを取得します。 アクティブなスライサーがない場合、この関数はプロパティを次に設定した `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -689,7 +705,7 @@ methods:
   package: excel!
   fullName: getIsActiveCollabSession()
   summary: >-
-    ブックが複数のユーザーによって編集されている場合 (共同編集)、true となります。 ブックの状態が変わるときから、メソッドの結果に変更が反映されるまでには、ある程度の遅延が生じ得る点に注意してください。
+    ブックが `true` 複数のユーザーによって編集されている場合 (共同編集による) 場合に返します。 ブックの状態が変更される時間と、変更がメソッドの結果に反映される時間の間に、いくつかの遅延が発生する可能性があります。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -706,7 +722,7 @@ methods:
   package: excel!
   fullName: getSelectedRange()
   summary: >-
-    ブックから現在選択されている単一の範囲を取得します。 複数の範囲が選択されている場合、このメソッドはエラーをスローします。
+    ブックから現在選択されている 1 つの範囲を取得します。 複数の範囲が選択されている場合、このメソッドはエラーをスローします。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -723,7 +739,7 @@ methods:
   package: excel!
   fullName: getSelectedRanges()
   summary: >-
-    ブックから現在選択されている 1 つまたは複数の範囲を取得します。 getSelectedRange() の場合と同様に、このメソッドは、選択されているすべての範囲を表す RangeAreas オブジェクトを返します。
+    ブックから現在選択されている 1 つまたは複数の範囲を取得します。 異なり `getSelectedRange()`<!-- -->を指定すると、選択した `RangeAreas` 範囲を表すオブジェクトが返されます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -735,6 +751,33 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-areas.yaml\nawait Excel.run(async (context) => {\n\n    const selectedRanges = context.workbook.getSelectedRanges();\n    selectedRanges.format.fill.color = \"lightblue\";\n\n    await context.sync();\n})\n```"
+- name: insertWorksheetsFromBase64(base64File, options)
+  uid: excel!Excel.Workbook#insertWorksheetsFromBase64:member(1)
+  package: excel!
+  fullName: insertWorksheetsFromBase64(base64File, options)
+  summary: >-
+    指定したワークシートをソース ブックから現在のブックに挿入します。
+
+
+    *Note**: この API は現在、Windows、Mac、およびオンラインのOfficeでのみサポートされています。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions): OfficeExtension.ClientResult<string[]>;'
+    parameters:
+    - id: base64File
+      description: 必須です。 ソース ブック ファイルを表す base64 でエンコードされた文字列。
+      type: string
+    - id: options
+      description: 省略可能。 挿入するワークシートとブック内の新しいワークシートの挿入場所を定義するオプション。 既定では、ソース ブックのすべてのワークシートが現在のブックの末尾に挿入されます。
+      type: <xref uid="excel!Excel.InsertWorksheetOptions:interface" />
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: 新しく挿入された各ワークシートに対応する ID の配列。
 - name: load(options)
   uid: excel!Excel.Workbook#load:member(1)
   package: excel!
@@ -764,7 +807,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Workbook;'
     parameters:
     - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Workbook:class" />
@@ -785,7 +828,7 @@ methods:
               }): Excel.Workbook;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -840,9 +883,9 @@ methods:
   uid: excel!Excel.Workbook#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ型の別の API オブジェクトを渡します。
+  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
   remarks: >-
-    このメソッドには、次の追加署名があります。
+    このメソッドには、次の追加の署名があります。
 
 
     `set(properties: Excel.Workbook): void`
@@ -852,10 +895,10 @@ methods:
     content: 'set(properties: Interfaces.WorkbookUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: メソッドが呼び出されるオブジェクトのプロパティと同型に構造化されたプロパティを持つ JavaScript オブジェクト。
+      description: メソッドが呼び出されるオブジェクトのプロパティと同型的に構造化されたプロパティを持つ JavaScript オブジェクト。
       type: <xref uid="excel!Excel.Interfaces.WorkbookUpdateData:interface" />
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティの設定を試みる場合にエラーを抑制するオプションを提供します。
+      description: properties オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -864,7 +907,7 @@ methods:
   uid: excel!Excel.Workbook#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトの複数のプロパティを同時に設定します。
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクト上の複数のプロパティを同時に設定します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -881,7 +924,7 @@ methods:
   uid: excel!Excel.Workbook#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.Workbook オブジェクトは API オブジェクトであるのに対し、このメソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.WorkbookData`<!-- -->) を返します。このコピーには、元のオブジェクトから読み込まれた子プロパティの浅いコピーが含まれます。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.Workbook オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.WorkbookData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -892,9 +935,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 290ffa4398d248dd68ea5b12e851158b09235a76
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: f1bff832afa7ed5cafd48a50c93539767475c5d3
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991983"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50540530"

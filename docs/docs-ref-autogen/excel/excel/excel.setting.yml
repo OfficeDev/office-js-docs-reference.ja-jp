@@ -4,7 +4,7 @@ uid: excel!Excel.Setting:class
 package: excel!
 fullName: Excel.Setting
 summary: >-
-  設定は、(アドインごとにファイルごとに) ドキュメントに保持される設定のキーと値のペアを表します。 これらのカスタム キーと値のペアを使用して、コンテンツ アドインまたは作業ウィンドウ アドインで必要な状態またはライフサイクル情報を格納できます。 設定はドキュメント内に保持されます。したがって、ユーザー情報やパスワードなどの機密情報や保護された情報を保存する場所ではありません。
+  設定は、ドキュメントに保存されている設定のキーと値のペアを表します (ファイルごとに、アドインごとに)。 これらのカスタム キーと値のペアを使用して、コンテンツ アドインまたは作業ウィンドウ アドインに必要な状態またはライフサイクル情報を格納できます。 設定はドキュメントに保存され、ユーザー情報やパスワードなどの機密情報や保護された情報を保存する場所ではなに注意してください。
 
 
   \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.Setting#context:member
   package: excel!
   fullName: context
-  summary: オブジェクトに関連付けられている要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -104,7 +104,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Setting;'
     parameters:
     - id: propertyNames
-      description: 読み込むプロパティを指定する、コンマ区切りの文字列または文字列の配列。
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Setting:class" />
@@ -125,7 +125,7 @@ methods:
               }): Excel.Setting;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -138,9 +138,9 @@ methods:
   uid: excel!Excel.Setting#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ型の別の API オブジェクトを渡します。
+  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
   remarks: >-
-    このメソッドには、次の追加署名があります。
+    このメソッドには、次の追加の署名があります。
 
 
     `set(properties: Excel.Setting): void`
@@ -150,10 +150,10 @@ methods:
     content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: メソッドが呼び出されるオブジェクトのプロパティと同型に構造化されたプロパティを持つ JavaScript オブジェクト。
+      description: メソッドが呼び出されるオブジェクトのプロパティと同型的に構造化されたプロパティを持つ JavaScript オブジェクト。
       type: <xref uid="excel!Excel.Interfaces.SettingUpdateData:interface" />
     - id: options
-      description: プロパティ オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
+      description: properties オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -162,7 +162,7 @@ methods:
   uid: excel!Excel.Setting#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクトの複数のプロパティを同時に設定します。
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクト上の複数のプロパティを同時に設定します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -179,7 +179,7 @@ methods:
   uid: excel!Excel.Setting#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトが渡された場合に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->に渡されるオブジェクトのメソッドを呼び `toJSON` 出します)。元の Excel.Setting オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな `toJSON` JavaScript オブジェクト (次のように入力) を返します。 `Excel.Interfaces.SettingData`<!-- -->) を返します。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.Setting オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.SettingData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -190,9 +190,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 022c46b71118a8b53112bb1ba48f2db0b76bf0c2
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 0142828396766087e5cdf0c12f5fa9785af414d9
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852278"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50541573"
