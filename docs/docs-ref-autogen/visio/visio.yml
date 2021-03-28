@@ -87,7 +87,7 @@ functions:
 - name: Visio.run(batch)
   uid: visio!Visio.run:function(1)
   package: visio!
-  summary: 新しい要求コンテキストを使用して、Visio オブジェクトモデルでアクションを実行するバッチスクリプトを実行します。 Promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトはすべて解放されます。
+  summary: 新しい要求コンテキストを使用して、Visio オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -95,7 +95,7 @@ functions:
     content: 'export function run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: (通常は "context. sync ()" という結果のみを取得して、promise を取得する関数)。 Context パラメーターは、Visio アプリケーションへの要求を容易にします。 Office アドインと Visio アプリケーションは2つの異なるプロセスで実行されるため、要求コンテキストは、アドインから Visio オブジェクトモデルへのアクセスを取得するために必要になります。
+      description: Visio.RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Visio アプリケーションへの要求を容易にします。 Officeと Visio アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Visio オブジェクト モデルにアクセスするには、要求コンテキストが必要です。
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -103,7 +103,7 @@ functions:
 - name: Visio.run(object, batch)
   uid: visio!Visio.run:function(2)
   package: visio!
-  summary: 以前に作成した API オブジェクトの要求コンテキストを使用して、Visio オブジェクトモデルに対してアクションを実行するバッチスクリプトを実行します。
+  summary: 以前に作成した API オブジェクトの要求コンテキストを使用して、Visio オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -111,10 +111,10 @@ functions:
     content: 'export function run<T>(object: OfficeExtension.ClientObject | OfficeExtension.EmbeddedSession, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: object
-      description: 以前に作成した API オブジェクト。 バッチは、渡されたオブジェクトと同じ要求コンテキストを使用します。つまり、オブジェクトに適用されたすべての変更は、"context. sync ()" によって取得されます。
+      description: 以前に作成された API オブジェクト。 バッチは、渡されたオブジェクトと同じ要求コンテキストを使用します。つまり、オブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" /> | <xref uid="office!OfficeExtension.EmbeddedSession:class" />
     - id: batch
-      description: (通常は "context. sync ()" という結果のみを取得して、promise を取得する関数)。 Promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトはすべて解放されます。
+      description: Visio.RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -122,7 +122,7 @@ functions:
 - name: Visio.run(objects, batch)
   uid: visio!Visio.run:function(3)
   package: visio!
-  summary: 以前に作成した API オブジェクトの要求コンテキストを使用して、Visio オブジェクトモデルに対してアクションを実行するバッチスクリプトを実行します。
+  summary: 以前に作成した API オブジェクトの要求コンテキストを使用して、Visio オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -130,10 +130,10 @@ functions:
     content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: objects
-      description: 以前に作成した API オブジェクトの配列。 この配列は、すべてのオブジェクトが同じコンテキストを共有することを確認するために検証されます。 この共有要求コンテキストがバッチで使用されます。つまり、これらのオブジェクトに適用されるすべての変更は、"context. sync ()" によって取得されます。
+      description: 以前に作成された API オブジェクトの配列。 配列が検証され、すべてのオブジェクトが同じコンテキストを共有します。 バッチは、この共有要求コンテキストを使用します。つまり、これらのオブジェクトに適用される変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: (通常は "context. sync ()" という結果のみを取得して、promise を取得する関数)。 Promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトはすべて解放されます。
+      description: Visio.RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -141,9 +141,9 @@ functions:
 - name: Visio.run(contextObject, batch)
   uid: visio!Visio.run:function(4)
   package: visio!
-  summary: 以前に作成したオブジェクトの RequestContext を使用して、Visio オブジェクトモデルに対してアクションを実行するバッチスクリプトを実行します。 Promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトはすべて解放されます。
+  summary: 以前に作成したオブジェクトの RequestContext を使用して、Visio オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: >-
-    このシグネチャに加えて、メソッドには次のシグネチャもあります。
+    このシグネチャに加えて、メソッドには次の署名も含まれます。
 
 
     `run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;`
@@ -159,18 +159,18 @@ functions:
     content: 'export function run<T>(contextObject: OfficeExtension.ClientRequestContext, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: contextObject
-      description: 以前に作成した。 このコンテキストは、新しいコンテキストを作成するのではなく、バッチ関数によって再利用されます。 これは、既存の API オブジェクトに加えられた変更が、そのオブジェクトがこの同じコンテキストから派生したものである場合に、そのオブジェクトに対して行われた変更をバッチで取得できることを意味します。
+      description: 以前に作成された Visio.RequestContext。 このコンテキストは、(新しいコンテキストを作成する代わりに) バッチ関数によって再使用されます。 つまり、これらのオブジェクトが同じコンテキストから派生した場合、バッチは既存の API オブジェクトに加えた変更を取得できます。
       type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
     - id: batch
-      description: RequestContext を受け取り、promise (通常は、"context. sync ()" の結果のみ) を返す関数。 Context パラメーターは、Visio アプリケーションへの要求を容易にします。 Office アドインと Visio アプリケーションは、2つの異なるプロセスで実行されるため、アドインから Visio オブジェクトモデルへのアクセスを取得するには、RequestContext が必要になります。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Visio アプリケーションへの要求を容易にします。 このアドインOffice Visio アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Visio オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 628e9290512b94ba1e9d8aefd6a1fa556297a078
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 160a87f9afd1fc59da3c920487e71135a46c79a0
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49142827"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51277366"
