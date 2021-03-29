@@ -14,7 +14,7 @@ methods:
   package: office!
   fullName: addAsync(xml, options, callback)
   summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
-  remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+  remarks: '**要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -24,10 +24,10 @@ methods:
       description: 新しく作成するカスタム XML パーツに追加する XML。
       type: string
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、新しく作成された CustomXmlPart オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、新しく作成された CustomXmlPart オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -38,7 +38,7 @@ methods:
   fullName: addAsync(xml, callback)
   summary: 新しいカスタム XML パーツをファイルに非同期に追加します。
   remarks: >-
-    **要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+    **要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
 
 
     #### <a name="examples"></a>例
@@ -81,7 +81,7 @@ methods:
       description: 新しく作成するカスタム XML パーツに追加する XML。
       type: string
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、新しく作成された CustomXmlPart オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、新しく作成された CustomXmlPart オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -90,8 +90,8 @@ methods:
   uid: office!Office.CustomXmlParts#getByIdAsync:member(1)
   package: office!
   fullName: getByIdAsync(id, options, callback)
-  summary: 指定されたカスタム XML パーツを id で非同期的に取得します。
-  remarks: "**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartInnerXML() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getXmlAsync({}, function (eventArgs) {\n            write(eventArgs.value);\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: 指定したカスタム XML パーツを ID で非同期的に取得します。
+  remarks: "**要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartInnerXML() {\n    Office.context.document.customXmlParts.getByIdAsync(\n        \"{3BC85265-09D6-4205-B665-8EB239A8B9A1}\", function (result) {\n        var xmlPart = result.value;\n        xmlPart.getXmlAsync({}, function (eventArgs) {\n            write(eventArgs.value);\n        });\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -101,10 +101,10 @@ methods:
       description: カスタム XML パーツの GUID (左かっこと右かっこを含む)。
       type: string
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、指定されたカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した id を持つカスタム XML パーツがない場合、このメソッドは null を返します。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定したカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した ID を持つカスタム XML パーツがない場合、メソッドは null を返します。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -113,8 +113,8 @@ methods:
   uid: office!Office.CustomXmlParts#getByIdAsync:member(2)
   package: office!
   fullName: getByIdAsync(id, callback)
-  summary: 指定されたカスタム XML パーツを id で非同期的に取得します。
-  remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+  summary: 指定したカスタム XML パーツを ID で非同期的に取得します。
+  remarks: '**要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -124,7 +124,7 @@ methods:
       description: カスタム XML パーツの GUID (左かっこと右かっこを含む)。
       type: string
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、指定されたカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した id を持つカスタム XML パーツがない場合、このメソッドは null を返します。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定したカスタム XML パーツを表す CustomXmlPart オブジェクトです。 指定した ID を持つカスタム XML パーツがない場合、メソッドは null を返します。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -133,8 +133,8 @@ methods:
   uid: office!Office.CustomXmlParts#getByNamespaceAsync:member(1)
   package: office!
   fullName: getByNamespaceAsync(ns, options, callback)
-  summary: 名前空間によって指定されたカスタム XML 部分を非同期的に取得します。
-  remarks: '**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+  summary: 指定したカスタム XML パーツを名前空間によって非同期的に取得します。
+  remarks: '**要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -144,10 +144,10 @@ methods:
       description: 名前空間 URI。
       type: string
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、指定された名前空間に一致する CustomXmlPart オブジェクトの配列です。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定した名前空間に一致する CustomXmlPart オブジェクトの配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -156,8 +156,8 @@ methods:
   uid: office!Office.CustomXmlParts#getByNamespaceAsync:member(2)
   package: office!
   fullName: getByNamespaceAsync(ns, callback)
-  summary: 名前空間によって指定されたカスタム XML 部分を非同期的に取得します。
-  remarks: "**要件セット**: [customxmlparts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartsInNamespace() {\n    Office.context.document.customXmlParts.getByNamespaceAsync(\n        \"http://tempuri.org\", \n        function (eventArgs) {\n            write(\"Found \" + eventArgs.value.length + \" parts with this namespace\");\n    }); \n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: 指定したカスタム XML パーツを名前空間によって非同期的に取得します。
+  remarks: "**要件セット**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showXMLPartsInNamespace() {\n    Office.context.document.customXmlParts.getByNamespaceAsync(\n        \"http://tempuri.org\", \n        function (eventArgs) {\n            write(\"Found \" + eventArgs.value.length + \" parts with this namespace\");\n    }); \n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -167,15 +167,15 @@ methods:
       description: 名前空間 URI。
       type: string
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、指定された名前空間に一致する CustomXmlPart オブジェクトの配列です。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定した名前空間に一致する CustomXmlPart オブジェクトの配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CustomXmlPart:interface" />[]&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 580252ea0f809b37d2d875efc5bcf7d091c911fb
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 4cdeff4dc0dc11beec63d10b817b7491476d5f9d
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49329580"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51320469"
