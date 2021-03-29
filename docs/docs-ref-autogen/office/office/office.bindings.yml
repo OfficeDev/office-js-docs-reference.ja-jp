@@ -13,7 +13,7 @@ properties:
   uid: office!Office.Bindings#document:member
   package: office!
   fullName: document
-  summary: このバインドのセットに関連付けられているドキュメントを表す [Office.Document](xref:office!Office.Document:interface) オブジェクトを取得します。
+  summary: この一連Office.Doc関連付けられているドキュメントを表す [ ument](xref:office!Office.Document:interface) オブジェクトを取得します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -26,24 +26,24 @@ methods:
   uid: office!Office.Bindings#addFromNamedItemAsync:member(1)
   package: office!
   fullName: addFromNamedItemAsync(itemName, bindingType, options, callback)
-  summary: ドキュメント内の指定されたオブジェクトに対してバインドを作成します。
-  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nExcel の場合、itemName パラメーターは、名前付き範囲またはテーブルを参照できます。\n\n既定では、Excel のテーブルを追加すると、最初に追加したテーブルには \"Table1\"、次に追加したテーブルには \"Table2\" という名前が割り当てられます。 Excel UI で、テーブルにわかりやすい名前を割り当てるには、リボンの [表ツールのデザイン] タブの [テーブル名] プロパティを使用し \\| ます。\n\n**注**: Excel では、名前付きアイテムとしてテーブルを指定するときに、テーブルの名前にワークシート名を含めるように名前を完全修飾する必要があります。 \"Sheet1!表\n\nWord の場合、itemName パラメーターは、リッチテキストコンテンツコントロールの Title プロパティを参照します。 (リッチテキストコンテンツコントロール以外のコンテンツコントロールにバインドすることはできません)。\n\n既定では、コンテンツコントロールにはタイトルの値が割り当てられていません。 Word UI で意味のあるテーブル名を割り当てるには、リボンの [ 開発者] タブの [ コントロール] グループから [ リッチ テキスト] コンテンツ コントロールを挿入した後、[ コントロール] グループの [ プロパティ] コマンドを使用して [ コンテンツ コントロールのプロパティ] ダイアログ ボックスを表示します。 次に、コンテンツ コントロールの [ タイトル] プロパティに、コードから参照する名前を設定します。\n\n**注**: Word で、同じタイトルプロパティ値 (名前) を持つ複数のリッチテキストコンテンツコントロールがある場合に、このメソッドを使用してこれらのコンテンツコントロールの1つにバインドしようとすると (名前を itemName パラメーターとして指定した場合)、この操作は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: ドキュメント内の名前付きオブジェクトに対するバインドを作成します。
+  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\nExcel の場合、itemName パラメーターは名前付き範囲またはテーブルを参照できます。\n\n既定では、Excel のテーブルを追加すると、最初に追加したテーブルには \"Table1\"、次に追加したテーブルには \"Table2\" という名前が割り当てられます。 Excel UI でテーブルにわかりやすい名前を割り当てるには、リボンの [テーブル ツールのデザイン] タブの [テーブル名 \\| ] プロパティを使用します。\n\n**メモ**: Excel では、テーブルを名前付きアイテムとして指定する場合、ワークシート名をこの形式のテーブルの名前に含めるには、名前を完全に修飾する必要があります。\"Sheet1!Table1\"\n\nWord の場合、itemName パラメーターはリッチ テキスト コンテンツ コントロールの Title プロパティを参照します。 (リッチ テキスト コンテンツ コントロール以外のコンテンツ コントロールにはバインドできない)。\n\n既定では、コンテンツ コントロールには Title 値が割り当てられていない。 Word UI で意味のあるテーブル名を割り当てるには、リボンの [ 開発者] タブの [ コントロール] グループから [ リッチ テキスト] コンテンツ コントロールを挿入した後、[ コントロール] グループの [ プロパティ] コマンドを使用して [ コンテンツ コントロールのプロパティ] ダイアログ ボックスを表示します。 次に、コンテンツ コントロールの [ タイトル] プロパティに、コードから参照する名前を設定します。\n\n**注**: Word では、同じ Title プロパティ値 (name) を持つリッチ テキスト コンテンツ コントロールが複数ある場合、このメソッドを使用してこれらのコンテンツ コントロールにバインドしようとして (itemName パラメーターとして名前を指定することで)、操作は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, options?: AddBindingFromNamedItemOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: itemName
-      description: ドキュメント内のバインド可能なオブジェクトの名前。 たとえば、Excel の ' MyExpenses ' テーブルがあります。 "
+      description: ドキュメント内のバインド可能なオブジェクトの名前。 たとえば、Excel の 'MyExpenses' テーブルです。
       type: string
     - id: bindingType
-      description: データの [BindingType](xref:office!Office.BindingType:enum) 。 選択したオブジェクトを指定した型に強制的に変換できない場合、このメソッドは null を返します。
+      description: データ[Office.BindingType。](xref:office!Office.BindingType:enum) 選択したオブジェクトを指定した型に適用できない場合、メソッドは null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: options
-      description: 作成されたバインドを構成するためのオプションを提供します。
+      description: 作成されるバインドを構成するためのオプションを提供します。
       type: <xref uid="office!Office.AddBindingFromNamedItemOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、指定された名前付きアイテムを表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定した名前付きアイテムを表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -52,40 +52,40 @@ methods:
   uid: office!Office.Bindings#addFromNamedItemAsync:member(2)
   package: office!
   fullName: addFromNamedItemAsync(itemName, bindingType, callback)
-  summary: ドキュメント内の指定されたオブジェクトに対してバインドを作成します。
+  summary: ドキュメント内の名前付きオブジェクトに対するバインドを作成します。
   remarks: >-
-    [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)<!-- -->、 [Tablebindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)<!-- -->、 [Textbindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
+    [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)<!-- -->[、TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)<!-- -->[、TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
 
 
-    Excel の場合、itemName パラメーターは、名前付き範囲またはテーブルを参照できます。
+    Excel の場合、itemName パラメーターは名前付き範囲またはテーブルを参照できます。
 
 
-    既定では、Excel のテーブルを追加すると、最初に追加したテーブルには "Table1"、次に追加したテーブルには "Table2" という名前が割り当てられます。 Excel UI で、テーブルにわかりやすい名前を割り当てるには、リボンの [表ツールのデザイン] タブの [テーブル名] プロパティを使用し \| ます。
+    既定では、Excel のテーブルを追加すると、最初に追加したテーブルには "Table1"、次に追加したテーブルには "Table2" という名前が割り当てられます。 Excel UI でテーブルにわかりやすい名前を割り当てるには、リボンの [テーブル ツールのデザイン] タブの [テーブル名 \| ] プロパティを使用します。
 
 
-    **注**: Excel では、名前付きアイテムとしてテーブルを指定するときに、テーブルの名前にワークシート名を含めるように名前を完全修飾する必要があります。 "Sheet1!表
+    **メモ**: Excel では、テーブルを名前付きアイテムとして指定する場合、ワークシート名をこの形式のテーブルの名前に含めるには、名前を完全に修飾する必要があります。"Sheet1!Table1"
 
 
-    Word の場合、itemName パラメーターは、リッチテキストコンテンツコントロールの Title プロパティを参照します。 (リッチテキストコンテンツコントロール以外のコンテンツコントロールにバインドすることはできません)。
+    Word の場合、itemName パラメーターはリッチ テキスト コンテンツ コントロールの Title プロパティを参照します。 (リッチ テキスト コンテンツ コントロール以外のコンテンツ コントロールにはバインドできない)。
 
 
-    既定では、コンテンツコントロールにはタイトルの値が割り当てられていません。 Word UI で意味のあるテーブル名を割り当てるには、リボンの [ 開発者] タブの [ コントロール] グループから [ リッチ テキスト] コンテンツ コントロールを挿入した後、[ コントロール] グループの [ プロパティ] コマンドを使用して [ コンテンツ コントロールのプロパティ] ダイアログ ボックスを表示します。 次に、コンテンツ コントロールの [ タイトル] プロパティに、コードから参照する名前を設定します。
+    既定では、コンテンツ コントロールには Title 値が割り当てられていない。 Word UI で意味のあるテーブル名を割り当てるには、リボンの [ 開発者] タブの [ コントロール] グループから [ リッチ テキスト] コンテンツ コントロールを挿入した後、[ コントロール] グループの [ プロパティ] コマンドを使用して [ コンテンツ コントロールのプロパティ] ダイアログ ボックスを表示します。 次に、コンテンツ コントロールの [ タイトル] プロパティに、コードから参照する名前を設定します。
 
 
-    **注**: Word で、同じタイトルプロパティ値 (名前) を持つ複数のリッチテキストコンテンツコントロールがある場合に、このメソッドを使用してこれらのコンテンツコントロールの1つにバインドしようとすると (名前を itemName パラメーターとして指定した場合)、この操作は失敗します。
+    **注**: Word では、同じ Title プロパティ値 (name) を持つリッチ テキスト コンテンツ コントロールが複数ある場合、このメソッドを使用してこれらのコンテンツ コントロールにバインドしようとして (itemName パラメーターとして名前を指定することで)、操作は失敗します。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: itemName
-      description: ドキュメント内のバインド可能なオブジェクトの名前。 たとえば、Excel の ' MyExpenses ' テーブルがあります。 "
+      description: ドキュメント内のバインド可能なオブジェクトの名前。 たとえば、Excel の 'MyExpenses' テーブルです。
       type: string
     - id: bindingType
-      description: データの [BindingType](xref:office!Office.BindingType:enum) 。 選択したオブジェクトを指定した型に強制的に変換できない場合、このメソッドは null を返します。
+      description: データ[Office.BindingType。](xref:office!Office.BindingType:enum) 選択したオブジェクトを指定した型に適用できない場合、メソッドは null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、指定された名前付きアイテムを表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、指定した名前付きアイテムを表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -94,21 +94,21 @@ methods:
   uid: office!Office.Bindings#addFromPromptAsync:member(1)
   package: office!
   fullName: addFromPromptAsync(bindingType, options, callback)
-  summary: ドキュメントでの選択をユーザーに求めるダイアログを表示してバインドを作成します。
-  remarks: "**要件セット**: [セットに含まれない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\n指定された型のバインド オブジェクトを Bindings コレクションに追加します。このバインド オブジェクトは、提供される id で識別できるようになります。指定された選択範囲をバインドできない場合、メソッドは失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromPrompt() {\n    Office.context.document.bindings.addFromPromptAsync(\n        Office.BindingType.Text, \n        { id: 'MyBinding', promptText: 'Select text to bind to.' },\n        function (asyncResult) {\n            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: ドキュメントで選択を行うメッセージをユーザーに表示して、バインドを作成します。
+  remarks: "**要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\n指定された型のバインド オブジェクトを Bindings コレクションに追加します。このバインド オブジェクトは、提供される id で識別できるようになります。指定された選択範囲をバインドできない場合、メソッドは失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromPrompt() {\n    Office.context.document.bindings.addFromPromptAsync(\n        Office.BindingType.Text, \n        { id: 'MyBinding', promptText: 'Select text to bind to.' },\n        function (asyncResult) {\n            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addFromPromptAsync(bindingType: BindingType, options?: AddBindingFromPromptOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: bindingType
-      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に強制的に変換できない場合は、null を返します。
+      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に適用できない場合は null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: options
-      description: プロンプトを構成し、作成されたバインドを識別するためのオプションを提供します。
+      description: プロンプトを構成し、作成されるバインドを識別するためのオプションを提供します。
       type: <xref uid="office!Office.AddBindingFromPromptOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、ユーザーによって指定された選択範囲を表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、ユーザーが指定した選択範囲を表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -117,9 +117,9 @@ methods:
   uid: office!Office.Bindings#addFromPromptAsync:member(2)
   package: office!
   fullName: addFromPromptAsync(bindingType, callback)
-  summary: ドキュメントでの選択をユーザーに求めるダイアログを表示してバインドを作成します。
+  summary: ドキュメントで選択を行うメッセージをユーザーに表示して、バインドを作成します。
   remarks: >-
-    **要件セット**: [セットに含まれない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
     指定された型のバインド オブジェクトを Bindings コレクションに追加します。このバインド オブジェクトは、提供される id で識別できるようになります。指定された選択範囲をバインドできない場合、メソッドは失敗します。
@@ -129,10 +129,10 @@ methods:
     content: 'addFromPromptAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: bindingType
-      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に強制的に変換できない場合は、null を返します。
+      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に適用できない場合は null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、ユーザーによって指定された選択範囲を表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、ユーザーが指定した選択範囲を表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -141,21 +141,21 @@ methods:
   uid: office!Office.Bindings#addFromSelectionAsync:member(1)
   package: office!
   fullName: addFromSelectionAsync(bindingType, options, callback)
-  summary: ユーザーの現在の選択範囲に基づいてバインドを作成します。
-  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定した種類のバインドオブジェクトを Bindings コレクションに追加します。このコレクションは、指定された id で識別されます。\n\nメモ Excel では、既存のバインドの Binding.id で渡された addFromSelectionAsync メソッドを呼び出すと、そのバインドの種類が使用され、bindingType パラメーターに別の値を指定してその型を変更することはできません。 既存の id を使用して bindingType を変更する必要がある場合は、最初に Bindings.releaseByIdAsync メソッドを呼び出してバインドを解放し、次に addFromSelectionAsync メソッドを呼び出してバインドを新しい種類で再確立します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromSelection() {\n    Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, \n        function (asyncResult) {\n        write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n        }\n    );\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: ユーザーの現在の選択内容に基づいてバインドを作成します。
+  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定した種類のバインド オブジェクトを Bindings コレクションに追加します。これは、指定された ID で識別されます。\n\nメモ Excel では、既存のバインドの Binding.id を渡す addFromSelectionAsync メソッドを呼び出した場合、そのバインドの Binding.type が使用され、bindingType パラメーターに別の値を指定してその型を変更することはできません。 既存の id を使用して bindingType を変更する必要がある場合は、最初に Bindings.releaseByIdAsync メソッドを呼び出してバインドを解放し、次に addFromSelectionAsync メソッドを呼び出してバインドを新しい種類で再確立します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addBindingFromSelection() {\n    Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, \n        function (asyncResult) {\n        write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n        }\n    );\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addFromSelectionAsync(bindingType: BindingType, options?: AddBindingFromSelectionOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: bindingType
-      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に強制的に変換できない場合は、null を返します。
+      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に適用できない場合は null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: options
-      description: 作成されたバインドを識別するためのオプションを提供します。
+      description: 作成されるバインドを識別するためのオプションを提供します。
       type: <xref uid="office!Office.AddBindingFromSelectionOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、ユーザーによって指定された選択範囲を表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、ユーザーが指定した選択範囲を表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -164,7 +164,7 @@ methods:
   uid: office!Office.Bindings#addFromSelectionAsync:member(2)
   package: office!
   fullName: addFromSelectionAsync(bindingType, callback)
-  summary: ユーザーの現在の選択範囲に基づいてバインドを作成します。
+  summary: ユーザーの現在の選択内容に基づいてバインドを作成します。
   remarks: >-
     **要件セット**:
 
@@ -178,20 +178,20 @@ methods:
     - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
 
 
-    指定した種類のバインドオブジェクトを Bindings コレクションに追加します。このコレクションは、指定された id で識別されます。
+    指定した種類のバインド オブジェクトを Bindings コレクションに追加します。これは、指定された ID で識別されます。
 
 
-    メモ Excel では、既存のバインドの Binding.id で渡された addFromSelectionAsync メソッドを呼び出すと、そのバインドの種類が使用され、bindingType パラメーターに別の値を指定してその型を変更することはできません。 既存の id を使用して bindingType を変更する必要がある場合は、最初に Bindings.releaseByIdAsync メソッドを呼び出してバインドを解放し、次に addFromSelectionAsync メソッドを呼び出してバインドを新しい種類で再確立します。
+    メモ Excel では、既存のバインドの Binding.id を渡す addFromSelectionAsync メソッドを呼び出した場合、そのバインドの Binding.type が使用され、bindingType パラメーターに別の値を指定してその型を変更することはできません。 既存の id を使用して bindingType を変更する必要がある場合は、最初に Bindings.releaseByIdAsync メソッドを呼び出してバインドを解放し、次に addFromSelectionAsync メソッドを呼び出してバインドを新しい種類で再確立します。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addFromSelectionAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: bindingType
-      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に強制的に変換できない場合は、null を返します。
+      description: 作成するバインド オブジェクトの種類を指定します。 必須です。 選択したオブジェクトを指定した型に適用できない場合は null を返します。
       type: <xref uid="office!Office.BindingType:enum" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、ユーザーによって指定された選択範囲を表す Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、ユーザーが指定した選択範囲を表す Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -218,10 +218,10 @@ methods:
     content: 'getAllAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding[]>) => void): void;'
     parameters:
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、参照される Bindings オブジェクトに対して作成された各バインディングを格納する配列です。
+      description: コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、参照される Bindings オブジェクト用に作成された各バインドを含む配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -238,7 +238,7 @@ methods:
     content: 'getAllAsync(callback?: (result: AsyncResult<Binding[]>) => void): void;'
     parameters:
     - id: callback
-      description: コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`結果のプロパティは、参照される Bindings オブジェクトに対して作成された各バインディングを格納する配列です。
+      description: コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、参照される Bindings オブジェクト用に作成された各バインドを含む配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -247,7 +247,7 @@ methods:
   uid: office!Office.Bindings#getByIdAsync:member(1)
   package: office!
   fullName: getByIdAsync(id, options, callback)
-  summary: 名前に基づいてバインドを取得します。
+  summary: Name に基づいてバインドを取得します。
   remarks: >-
     **要件セット**:
 
@@ -261,20 +261,20 @@ methods:
     - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
 
 
-    指定された id が存在しない場合は失敗します。
+    指定した ID が存在しない場合は失敗します。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: id
-      description: Binding オブジェクトの一意の名前を指定します。 必須です。
+      description: バインド オブジェクトの一意の名前を指定します。 必須です。
       type: string
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、呼び出しの id で指定されている Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、呼び出しの id で指定された Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -283,18 +283,18 @@ methods:
   uid: office!Office.Bindings#getByIdAsync:member(2)
   package: office!
   fullName: getByIdAsync(id, callback)
-  summary: 名前に基づいてバインドを取得します。
-  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定された id が存在しない場合は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction displayBindingType() {\n    Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {\n        write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: Name に基づいてバインドを取得します。
+  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定した ID が存在しない場合は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction displayBindingType() {\n    Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {\n        write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<Binding>) => void): void;'
     parameters:
     - id: id
-      description: Binding オブジェクトの一意の名前を指定します。 必須です。
+      description: バインド オブジェクトの一意の名前を指定します。 必須です。
       type: string
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、呼び出しの id で指定されている Binding オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、呼び出しの id で指定された Binding オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Binding:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -303,7 +303,7 @@ methods:
   uid: office!Office.Bindings#releaseByIdAsync:member(1)
   package: office!
   fullName: releaseByIdAsync(id, options, callback)
-  summary: 文書からバインドを削除します。
+  summary: ドキュメントからバインドを削除します。
   remarks: >-
     **要件セット**:
 
@@ -317,7 +317,7 @@ methods:
     - [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)
 
 
-    指定された id が存在しない場合は失敗します。
+    指定した ID が存在しない場合は失敗します。
   isPreview: false
   isDeprecated: false
   syntax:
@@ -327,10 +327,10 @@ methods:
       description: バインド オブジェクトの一意の識別名を指定します。 必須です。
       type: string
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -339,8 +339,8 @@ methods:
   uid: office!Office.Bindings#releaseByIdAsync:member(2)
   package: office!
   fullName: releaseByIdAsync(id, callback)
-  summary: 文書からバインドを削除します。
-  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定された id が存在しない場合は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.releaseByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(\"Released MyBinding!\"); \n}); \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
+  summary: ドキュメントからバインドを削除します。
+  remarks: "**要件セット**:\n\n- [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)\n\n- [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)\n\n- [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)\n\n指定した ID が存在しない場合は失敗します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOffice.context.document.bindings.releaseByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(\"Released MyBinding!\"); \n}); \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -350,15 +350,15 @@ methods:
       description: バインド オブジェクトの一意の識別名を指定します。 必須です。
       type: string
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: a69cd855cb78868d9bdd65af4356123a2fc43010
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 61c0d43ef26b369fcf535acbd3bb55c8f1ad8d3b
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49251641"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51320504"

@@ -3,9 +3,9 @@ name: OfficeExtension.LoadOption
 uid: office!OfficeExtension.LoadOption:interface
 package: office!
 fullName: OfficeExtension.LoadOption
-summary: 読み込む必要のあるオブジェクトのプロパティを指定します。 この負荷は sync () メソッドが実行されたときに発生します。 これにより、Office オブジェクトと、それに対応する JavaScript プロキシオブジェクトとの間で状態が同期されます。
+summary: 読み込むオブジェクトのプロパティを指定します。 この読み込みは、sync() メソッドが実行されると発生します。 これにより、オブジェクトと対応する JavaScript プロキシ Office間の状態が同期されます。
 remarks: >-
-  Word では、プロパティとページング情報を指定する方法として、文字列リテラルを使用することをお勧めします。 最初の 2 つの例は、段落コレクションの段落のテキストおよびフォント サイズのプロパティを要求するための推奨される方法を示しています。
+  Word の場合、プロパティとページング情報を指定する優先メソッドは、文字列リテラルを使用します。 最初の 2 つの例は、段落コレクションの段落のテキストおよびフォント サイズのプロパティを要求するための推奨される方法を示しています。
 
 
   `context.load(paragraphs, 'text, font/size');`
@@ -70,7 +70,7 @@ properties:
   uid: office!OfficeExtension.LoadOption#expand:member
   package: office!
   fullName: expand
-  summary: 読み込むナビゲーションプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+  summary: 読み込むナビゲーション プロパティを指定する、コンマで区切られた文字列、または文字列の配列。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -82,7 +82,7 @@ properties:
   uid: office!OfficeExtension.LoadOption#select:member
   package: office!
   fullName: select
-  summary: 読み込むプロパティを指定する、コンマで区切られた文字列または文字列の配列。
+  summary: 読み込むプロパティを指定する、コンマで区切られた文字列、または文字列の配列。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -94,7 +94,7 @@ properties:
   uid: office!OfficeExtension.LoadOption#skip:member
   package: office!
   fullName: skip
-  summary: コレクション型でのみ使用できます。 コレクション内でスキップされ、結果に含まれていないアイテムの数を指定します。 Top が指定されている場合、指定された数のアイテムをスキップした後、結果セットが開始されます。
+  summary: コレクションの種類でのみ使用できます。 結果に含まれていないスキップするコレクション内のアイテムの数を指定します。 top を指定すると、指定した数のアイテムをスキップした後、結果セットが開始されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -106,7 +106,7 @@ properties:
   uid: office!OfficeExtension.LoadOption#top:member
   package: office!
   fullName: top
-  summary: コレクション型でのみ使用できます。 結果に含めることができるコレクション項目の最大数を指定します。
+  summary: コレクションの種類でのみ使用できます。 結果に含めることができるコレクション項目の最大数を指定します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -116,9 +116,9 @@ properties:
       type: number
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// This OneNote example shows how to get the page title and indentation level\n// of the top five pages in the current section.\nOneNote.run(function (context) {\n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n\n    // Queue a command to load the pages.           \n    pages.load({ \"select\":\"title,pageLevel\", \"top\":5, \"skip\":0 });\n    return context.sync()\n        .then(function() {\n            // Iterate through the collection of pages.    \n            $.each(pages.items, function(index, page) {\n                // Show some properties.\n                console.log(\"Page title: \" + page.title);\n                console.log(\"Indentation level: \" + page.pageLevel);\n            });\n        }).catch(function(error) {\n            console.log(\"Error: \" + error);\n            if (error instanceof OfficeExtension.Error) {\n                console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n            }\n        })\n    });\n```"
 metadata:
-  ms.openlocfilehash: 293c68d45ae2d6fb3d4e8d8e2bdb9db0641b769e
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: e56a6f497ec6d1ed4b5d9efa8c60e8eef91bb6dd
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49136821"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51320399"
