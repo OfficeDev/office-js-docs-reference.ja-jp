@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 12/01/2020
-ms.openlocfilehash: 6f3b8b51283953cf2e8174085e814e76c666ed8d
-ms.sourcegitcommit: ea1cebaadbb80867d3532be384e412fd13868190
+ms.date: 03/17/2021
+ms.openlocfilehash: 63d2efa4d4b9406208f3227ec96df467ea0d8877
+ms.sourcegitcommit: a5c179dc927ce89d1ada071d388d582191d3fa1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/13/2021
-ms.locfileid: "49840140"
+ms.lasthandoff: 03/24/2021
+ms.locfileid: "51183541"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Office アドインの JavaScript API リファレンス
 
@@ -99,6 +99,22 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
     <li>
         <div class="cardImageOuter">
             <div class="cardImage">
+                <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-powerpoint.svg" alt="PowerPoint add-ins" height="140" />
+            </div>
+        </div>
+        <div class="cardText">
+            <h3>PowerPoint API</h3>
+            <ul>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi プレビュー</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">共通 API</a></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div class="cardImageOuter">
+            <div class="cardImage">
                 <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-onenote.svg" alt="OneNote add-ins" height="140" />
             </div>
         </div>
@@ -120,22 +136,6 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
             <h3>Visio API</h3>
             <ul>
                 <li><a style="font-size: 1rem;" href="/javascript/api/visio?view=visio-js-1.1">VisioApi 1.1</a></li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <div class="cardImageOuter">
-            <div class="cardImage">
-                <img src="https://docs.microsoft.com/javascript/api/overview/images/logo-powerpoint.svg" alt="PowerPoint add-ins" height="140" />
-            </div>
-        </div>
-        <div class="cardText">
-            <h3>PowerPoint API</h3>
-            <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi プレビュー</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">共通 API</a></li>
             </ul>
         </div>
     </li>
