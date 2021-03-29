@@ -12,7 +12,7 @@ remarks: >-
   **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -22,14 +22,14 @@ properties:
   package: outlook!
   fullName: actions
   summary: >-
-    メッセージのアクションを指定します。 制限: 1 アクション。 この制限では、既定で含まれる "Dismiss" アクションはカウントされません。 種類が次の場合にのみ適用されます。 `InsightMessage`<!-- -->. サポートされていない型に対してこのプロパティを指定するか、多すぎるアクションを含めた場合、エラーがスローされます。
+    メッセージのアクションを指定します。 制限: 1 アクション。 この制限では、既定で含まれている "Dismiss" アクションはカウントされません。 型が次の場合にのみ適用されます。 `InsightMessage`<!-- -->. サポートされていない型に対してこのプロパティを指定するか、アクションを多く含めすぎるとエラーが発生します。
 
 
-    **重要**: 最新の Outlook on the web では、この `actions` プロパティは新規作成モードでのみ使用できます。
+    **重要**: 最新の Outlook on the web では、この `actions` プロパティは作成モードでのみ使用できます。
 
 
     \[[API セット: メールボックス プレビュー](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: '**[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り'
+  remarks: '**[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -41,10 +41,10 @@ properties:
   package: outlook!
   fullName: icon
   summary: >-
-    `Resources`セクションのマニフェストで定義されているアイコンへの参照。 情報バー領域に表示されます。 種類が次の場合にのみ適用されます。 `InformationalMessage`<!-- -->. サポートされていない型にこのパラメーターを指定すると例外が生じます。
+    `Resources`セクションのマニフェストで定義されているアイコンへの参照。 情報バー領域に表示されます。 これは、型が次の場合にのみ適用されます。 `InformationalMessage`<!-- -->. サポートされていない型にこのパラメーターを指定すると例外が生じます。
 
 
-    **注**: 現時点では、カスタム アイコンは Windows 上の Outlook にのみ表示され、他のクライアント (Mac、Web ブラウザーなど) には表示されません。
+    **注**: 現時点では、カスタム アイコンは Outlook on Windows でのみ表示され、他のクライアント (Mac、Web ブラウザーなど) には表示されません。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -80,7 +80,7 @@ properties:
   uid: outlook!Office.NotificationMessageDetails#persistent:member
   package: outlook!
   fullName: persistent
-  summary: メッセージを永続的に使用する必要がある場合に指定します。 型が次の場合にのみ適用されます。 `InformationalMessage`<!-- -->. true の場合、メッセージは、このアドインによって削除されるまで、またはユーザーが閉じるまで残ります。 false の場合、ユーザーが別のアイテムに移動すると削除されます。 エラーの通知の場合、メッセージはユーザーが 1 回表示するまで残されます。 このパラメーターをサポートされない型に指定すると、例外がスローされます。
+  summary: メッセージを永続的に設定する必要がある場合に指定します。 型が次の場合にのみ適用されます。 `InformationalMessage`<!-- -->. true の場合、メッセージは、このアドインによって削除されるまで、またはユーザーによって却下されるまで残ります。 false の場合、ユーザーが別のアイテムに移動すると削除されます。 エラーの通知の場合、メッセージはユーザーが 1 回表示するまで残されます。 このパラメーターをサポートされない型に指定すると、例外がスローされます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -93,13 +93,13 @@ properties:
   package: outlook!
   fullName: type
   summary: >-
-    メッセージのメッセージ `ItemNotificationMessageType` を指定します。
+    メッセージの数 `ItemNotificationMessageType` を指定します。
 
 
-    型が次の `ProgressIndicator` 場合 `ErrorMessage`<!-- -->、アイコンが自動的に指定され、メッセージは永続的ではありません。 したがって、icon プロパティと persistent プロパティは、これらの型のメッセージでは無効になります。 それらを含めた場合、次の結果が返されます。 `ArgumentException`<!-- -->.
+    type が `ProgressIndicator` または `ErrorMessage`<!-- -->を指定すると、アイコンが自動的に指定され、メッセージは永続的ではありません。 したがって、icon プロパティと persistent プロパティは、これらの型のメッセージでは無効になります。 それらを含めた場合は、 `ArgumentException`<!-- -->.
 
 
-    型が次の場合 `ProgressIndicator`<!-- -->をクリックすると、開発者はアクションが完了したら進行状況インジケーターを削除または置換する必要があります。
+    型が `ProgressIndicator`<!-- -->、開発者は、アクションが完了したら進行状況インジケーターを削除または置換する必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -108,9 +108,9 @@ properties:
     return:
       type: <xref uid="outlook!Office.MailboxEnums.ItemNotificationMessageType:enum" /> | string
 metadata:
-  ms.openlocfilehash: c154e5b6a9a4be70bec6fd805121617648296bae
-  ms.sourcegitcommit: 6702d1aafaf1d8114bcf5e5eeb5d7833c108d56a
+  ms.openlocfilehash: ea7b8ca2281854efcc35aba5d44fa153a8c4a12b
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/10/2020
-  ms.locfileid: "49623294"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51319965"
