@@ -7,7 +7,7 @@ summary: >-
   要求が失敗した場合の状態やエラー情報など、非同期要求の結果をカプセル化するオブジェクト。
 
 
-  `callback`"Async" メソッドのパラメーターに渡す関数が実行されると、AsyncResult オブジェクトを受け取ります。このオブジェクトには、 `callback` 関数の唯一のパラメーターからアクセスできます。
+  "Async" メソッドのパラメーターに渡す関数が実行すると、関数の唯一のパラメーターからアクセスできる `callback` AsyncResult オブジェクト `callback` を受け取ります。
 remarks: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === Office.AsyncResultStatus.Succeeded) {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: office!Office.AsyncResult#asyncContext:member
   package: office!
   fullName: asyncContext
-  summary: 呼び出されたメソッドの省略可能なパラメーターに渡されたユーザー定義アイテムを、 `asyncContext` 渡されたときと同じ状態で取得します。 これにより、ユーザー定義のアイテムが返されます。これは、呼び出されたメソッドの省略可能なパラメーターに渡される任意の種類の JavaScript の型 (String、Number、Boolean、Object、Array、Null、または Undefined) を返します。 `asyncContext` asyncContext パラメーターに値を渡していない場合は、 Undefined が戻されます。
+  summary: 呼び出されたメソッドの省略可能なパラメーターに渡されたユーザー定義のアイテムを、渡されたのと同じ状態 `asyncContext` で取得します。 これにより、呼び出されたメソッドの省略可能なパラメーターに渡されるユーザー定義アイテム (任意の JavaScript 型の文字列、Number、Boolean、Object、Array、Null、または未定義) が返されます。 `asyncContext` asyncContext パラメーターに値を渡していない場合は、 Undefined が戻されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,18 +30,18 @@ properties:
   uid: office!Office.AsyncResult#diagnostics:member
   package: office!
   fullName: diagnostics
-  summary: '[エラー](xref:office!Office.Error:interface)が発生した場合に追加情報を提供する可能性があるオブジェクトを取得します。'
+  summary: エラーが発生した場合に追加情報を提供する可能性があるオブジェクト [を取得](xref:office!Office.Error:interface) します。
   remarks: >-
-    これらのサポートされている Api で次のエラーが発生した場合、このプロパティは追加情報を返します。
+    このプロパティは、これらのサポートされている API で次のエラーが発生した場合に追加情報を返します。
 
 
-    *サポートされる Api*
+    *サポートされている API*
 
 
     `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
 
 
-    *サポートされるエラー* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>返される診断オブジェクトの説明 </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。 </td><td>JSON オブジェクトの HTTP エラーコード例: `{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。</td><td>JSON オブジェクト内の Exchange サーバーからのエラーメッセージ例: `{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
+    *サポートされているエラー* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>返される診断オブジェクトの説明 </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。 </td><td>JSON オブジェクトの HTTP エラー コード (例: `{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>Exchange サーバーがエラーを返しました。 詳細については、diagnostics オブジェクトを参照してください。</td><td>JSON オブジェクト内の Exchange サーバーからのエラー メッセージ (例: `{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -52,7 +52,7 @@ properties:
   uid: office!Office.AsyncResult#error:member
   package: office!
   fullName: error
-  summary: エラーが発生した場合は、エラーの説明を提供する [Office の error](xref:office!Office.Error:interface) オブジェクトを取得します。
+  summary: エラーが [発生Officeの](xref:office!Office.Error:interface) 説明を提供する Office.Error オブジェクトを取得します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -65,7 +65,7 @@ properties:
   uid: office!Office.AsyncResult#status:member
   package: office!
   fullName: status
-  summary: 非同期操作の [AsyncResultStatus](xref:office!Office.AsyncResultStatus:enum) を取得します。
+  summary: 非同期操作 [Office.AsyncResultStatus を](xref:office!Office.AsyncResultStatus:enum) 取得します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -79,7 +79,7 @@ properties:
   package: office!
   fullName: value
   summary: この非同期操作のペイロードまたはコンテンツを取得します (ある場合)。
-  remarks: "\"Async\" メソッドの callback パラメーターに引数として渡される関数で、AsyncResult オブジェクトにアクセスします。たとえば、 `getSelectedDataAsync` `setSelectedDataAsync` [Document](xref:office!Office.Document:interface) オブジェクトのメソッドやメソッドなどです。\n\n**注**: 特定の \"Async\" メソッドに対して value プロパティが返す内容は、そのメソッドの目的とコンテキストによって異なります。 To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: "引数として引数として渡された関数の AsyncResult オブジェクトにアクセスすると、Document オブジェクトのメソッドやメソッドなど、\"Async\" メソッドのコールバック パラメーターに `getSelectedDataAsync` `setSelectedDataAsync` [アクセス](xref:office!Office.Document:interface) できます。\n\n**注**: 特定の \"Async\" メソッドに対して value プロパティが返す内容は、そのメソッドの目的とコンテキストによって異なります。 To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -87,9 +87,9 @@ properties:
     return:
       type: T
 metadata:
-  ms.openlocfilehash: 61b33f43f91124b85b395617cbb540fc0a7d63f8
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 2351284547de7b421126d566639d4b076ae7c78d
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49265900"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51329492"

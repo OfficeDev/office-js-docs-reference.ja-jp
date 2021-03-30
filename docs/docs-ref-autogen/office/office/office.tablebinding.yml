@@ -5,10 +5,10 @@ package: office!
 fullName: Office.TableBinding
 summary: バインドを行と列の 2 次元で、必要に応じてヘッダーと共に表します。
 remarks: >-
-  TableBinding オブジェクトは、 `id` プロパティ、 `type` プロパティ、メソッド、 `getDataAsync` およびメソッドを Office の `setDataAsync` [Binding](xref:office!Office.Binding:interface) オブジェクトから継承します。
+  TableBinding オブジェクトは、プロパティ、プロパティ、メソッド、およびメソッドを `id` `type` `getDataAsync` `setDataAsync` [Office.Binding オブジェクトから継承](xref:office!Office.Binding:interface) します。
 
 
-  Excel の場合は、テーブルバインドを確立した後、ユーザーがテーブルに追加する新しい各行ごとに、自動的にバインドに追加され、行数が増加することに注意してください。
+  Excel の場合、テーブル バインドを確立すると、ユーザーがテーブルに追加する新しい各行が自動的にバインドに含まれて、rowCount が増加します。
 isPreview: false
 isDeprecated: false
 type: interface
@@ -17,7 +17,7 @@ properties:
   uid: office!Office.TableBinding#columnCount:member
   package: office!
   fullName: columnCount
-  summary: TableBinding 内の列数を表す整数値を取得します。
+  summary: TableBinding 内の列数を整数値として取得します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,7 +30,7 @@ properties:
   uid: office!Office.TableBinding#hasHeaders:member
   package: office!
   fullName: hasHeaders
-  summary: テーブルにヘッダーがある場合は True。それ以外の場合は false。
+  summary: True の場合、テーブルにヘッダーが含まれています。それ以外の場合は false。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,8 +43,8 @@ properties:
   uid: office!Office.TableBinding#rowCount:member
   package: office!
   fullName: rowCount
-  summary: TableBinding 内の行の数を表す整数値を取得します。
-  remarks: "Excel 2013 と Excel on the web で1行を選択することによって空のテーブルを挿入すると ([挿入] タブの表を使用して)、両方の Office ホストアプリケーションは、ヘッダーの1行を作成し、その後に1行の空白行を作成します。 ただし、アドインのスクリプトによって、新しく挿入されたテーブルのバインドが作成される場合 (たとえば、 [Office.](xref:office!Office.Bindings:interface)<!-- -->. addFromSelectionAsync メソッド) を選択し、rowCount プロパティの値をチェックします。返される値は、スプレッドシートが Excel 2013 または Excel on the web で開いているかどうかによって異なります。\n\n- デスクトップ上の Excel では、rowCount は0を返します (ヘッダーに続く空の行は計算されません)。\n\n- Web 上の Excel では、rowCount は1を返します (ヘッダーに続く空の行はカウントされます)。\n\nスクリプトでこの違いを回避するには、rowCount == 1 かどうかを確認し、これが真の場合、行に含まれている文字列がすべて空であるかどうかを確認します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: TableBinding 内の行数を整数値として取得します。
+  remarks: "Excel 2013 および Web 上の Excel で 1 行を選択して空のテーブルを挿入すると ([挿入] タブの [テーブル] を使用)、両方の Office ホスト アプリケーションは 1 行のヘッダーを作成し、その後に 1 行の空白行を作成します。 ただし、アドインのスクリプトが新しく挿入されたテーブルのバインドを作成する場合 (たとえば[、Office.Bindings を使用して](xref:office!Office.Bindings:interface))<!-- -->.addFromSelectionAsync メソッド) をクリックし、rowCount プロパティの値をチェックすると、返される値は、スプレッドシートが Excel 2013 で開いているか、Web 上の Excel で開いているかによって異なります。\n\n- デスクトップ上の Excel では、rowCount は 0 を返します (ヘッダーの後の空白行はカウントされません)。\n\n- Web 上の Excel では、rowCount は 1 を返します (ヘッダーの後の空白行がカウントされます)。\n\nスクリプトでこの違いを回避するには、rowCount == 1 かどうかを確認し、これが真の場合、行に含まれている文字列がすべて空であるかどうかを確認します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction showBindingRowCount() {\n    Office.context.document.bindings.getByIdAsync(\"myBinding\", function (asyncResult) {\n        write(\"Rows: \" + asyncResult.value.rowCount);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -56,24 +56,24 @@ methods:
   uid: office!Office.TableBinding#addColumnsAsync:member(1)
   package: office!
   fullName: addColumnsAsync(tableData, options, callback)
-  summary: 指定されたデータを、追加の列としてテーブルに追加します。
+  summary: 指定したデータを追加の列としてテーブルに追加します。
   remarks: >-
-    データおよびヘッダーの値を指定する1つ以上の列を追加するには、TableData オブジェクトを data パラメーターとして渡します。 データのみを指定する 1 つ以上の列を追加するには、配列の配列 ("matrix") を data パラメーターとして渡します。
+    データとヘッダーの値を指定する 1 つ以上の列を追加するには、Data パラメーターとして TableData オブジェクトを渡します。 データのみを指定する 1 つ以上の列を追加するには、配列の配列 ("matrix") を data パラメーターとして渡します。
 
 
-    Addcolumns Async 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
+    addColumnsAsync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
 
 
-    - Data 引数として渡す配列の各行には、更新するテーブルと同じ行数を指定する必要があります。 そうでないと、操作全体が失敗します。
+    - data 引数として渡す配列の各行には、更新するテーブルと同じ行数が必要です。 そうでないと、操作全体が失敗します。
 
 
     - 配列内の各行とセルは、その行またはセルをテーブル内の新しく追加される列に正常に追加する必要があります。何らかの理由によって、行またはセルを設定できなかった場合は、操作全体が失敗します。
 
 
-    - TableData オブジェクトを data 引数として渡す場合は、ヘッダー行の数が更新するテーブルの行数と一致している必要があります。
+    - TableData オブジェクトを data 引数として渡す場合、ヘッダー行の数は更新されるテーブルのヘッダー行数と一致する必要があります。
 
 
-    Web 上の Excel に関するその他のコメント: data パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドへの1回の呼び出しでは2万を超えることはできません。
+    Web 上の Excel の追加の備考: data パラメーターに渡される TableData オブジェクト内のセルの総数は、このメソッドの 1 回の呼び出しで 20,000 を超えすることはできません。
 
 
     #### <a name="examples"></a>例
@@ -125,13 +125,13 @@ methods:
     content: 'addColumnsAsync(tableData: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: tableData
-      description: テーブルに追加する1つ以上のデータ列を含む配列 ("matrix") または TableData オブジェクト。 必須です。
+      description: 配列の配列 ("matrix") またはテーブルに追加する 1 つ以上のデータ列を含む TableData オブジェクト。 必須です。
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -140,34 +140,34 @@ methods:
   uid: office!Office.TableBinding#addColumnsAsync:member(2)
   package: office!
   fullName: addColumnsAsync(tableData, callback)
-  summary: 指定されたデータを、追加の列としてテーブルに追加します。
+  summary: 指定したデータを追加の列としてテーブルに追加します。
   remarks: >-
-    データおよびヘッダーの値を指定する1つ以上の列を追加するには、TableData オブジェクトを data パラメーターとして渡します。 データのみを指定する 1 つ以上の列を追加するには、配列の配列 ("matrix") を data パラメーターとして渡します。
+    データとヘッダーの値を指定する 1 つ以上の列を追加するには、Data パラメーターとして TableData オブジェクトを渡します。 データのみを指定する 1 つ以上の列を追加するには、配列の配列 ("matrix") を data パラメーターとして渡します。
 
 
-    Addcolumns Async 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
+    addColumnsAsync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
 
 
-    - Data 引数として渡す配列の各行には、更新するテーブルと同じ行数を指定する必要があります。 そうでないと、操作全体が失敗します。
+    - data 引数として渡す配列の各行には、更新するテーブルと同じ行数が必要です。 そうでないと、操作全体が失敗します。
 
 
     - 配列内の各行とセルは、その行またはセルをテーブル内の新しく追加される列に正常に追加する必要があります。何らかの理由によって、行またはセルを設定できなかった場合は、操作全体が失敗します。
 
 
-    - TableData オブジェクトを data 引数として渡す場合は、ヘッダー行の数が更新するテーブルの行数と一致している必要があります。
+    - TableData オブジェクトを data 引数として渡す場合、ヘッダー行の数は更新されるテーブルのヘッダー行数と一致する必要があります。
 
 
-    Web 上の Excel に関するその他のコメント: data パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドへの1回の呼び出しでは2万を超えることはできません。
+    Web 上の Excel の追加の備考: data パラメーターに渡される TableData オブジェクト内のセルの総数は、このメソッドの 1 回の呼び出しで 20,000 を超えすることはできません。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addColumnsAsync(tableData: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: tableData
-      description: テーブルに追加する1つ以上のデータ列を含む配列 ("matrix") または TableData オブジェクト。 必須です。
+      description: 配列の配列 ("matrix") またはテーブルに追加する 1 つ以上のデータ列を含む TableData オブジェクト。 必須です。
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -176,21 +176,21 @@ methods:
   uid: office!Office.TableBinding#addRowsAsync:member(1)
   package: office!
   fullName: addRowsAsync(rows, options, callback)
-  summary: 指定されたデータを、追加の行としてテーブルに追加します。
+  summary: 指定したデータをテーブルに追加の行として追加します。
   remarks: >-
-    Tablebinding.addrowsasync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
+    addRowsAsync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
 
 
-    - Data 引数として渡す配列の各行には、更新するテーブルと同じ列数を指定する必要があります。 そうでないと、操作全体が失敗します。
+    - data 引数として渡す配列の各行には、更新するテーブルと同じ列数が必要です。 そうでないと、操作全体が失敗します。
 
 
-    - 配列内の各列とセルは、新しく追加された行のテーブルに、その列またはセルを正常に追加する必要があります。 何らかの理由で任意の列またはセルが設定されていない場合、操作全体が失敗します。
+    - 配列内の各列とセルは、新しく追加された行の表に、その列またはセルを正常に追加する必要があります。 何らかの理由で列またはセルを設定できない場合、操作全体が失敗します。
 
 
-    - TableData オブジェクトを data 引数として渡す場合は、ヘッダー行の数が更新するテーブルの行数と一致している必要があります。
+    - TableData オブジェクトを data 引数として渡す場合、ヘッダー行の数は更新されるテーブルのヘッダー行数と一致する必要があります。
 
 
-    Web 上の Excel に関するその他のコメント: data パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドへの1回の呼び出しでは2万を超えることはできません。
+    Web 上の Excel の追加の備考: data パラメーターに渡される TableData オブジェクト内のセルの総数は、このメソッドの 1 回の呼び出しで 20,000 を超えすることはできません。
 
 
     #### <a name="examples"></a>例
@@ -212,13 +212,13 @@ methods:
     content: 'addRowsAsync(rows: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: rows
-      description: 配列の配列 ("matrix")、またはテーブルに追加する1つまたは複数の行を含む TableData オブジェクト。 必須です。
+      description: 配列の配列 ("matrix") またはテーブルに追加する 1 つ以上のデータ行を含む TableData オブジェクト。 必須です。
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -227,31 +227,31 @@ methods:
   uid: office!Office.TableBinding#addRowsAsync:member(2)
   package: office!
   fullName: addRowsAsync(rows, callback)
-  summary: 指定されたデータを、追加の行としてテーブルに追加します。
+  summary: 指定したデータをテーブルに追加の行として追加します。
   remarks: >-
-    Tablebinding.addrowsasync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
+    addRowsAsync 操作の成功または失敗はアトミックです。 つまり、列を追加する操作はその全体が成功する必要があり、1 つでもエラーが発生すると、操作全体がロールバックされます (コールバックに返される AsyncResult.status プロパティもエラーを報告します)。
 
 
-    - Data 引数として渡す配列の各行には、更新するテーブルと同じ列数を指定する必要があります。 そうでないと、操作全体が失敗します。
+    - data 引数として渡す配列の各行には、更新するテーブルと同じ列数が必要です。 そうでないと、操作全体が失敗します。
 
 
-    - 配列内の各列とセルは、新しく追加された行のテーブルに、その列またはセルを正常に追加する必要があります。 何らかの理由で任意の列またはセルが設定されていない場合、操作全体が失敗します。
+    - 配列内の各列とセルは、新しく追加された行の表に、その列またはセルを正常に追加する必要があります。 何らかの理由で列またはセルを設定できない場合、操作全体が失敗します。
 
 
-    - TableData オブジェクトを data 引数として渡す場合は、ヘッダー行の数が更新するテーブルの行数と一致している必要があります。
+    - TableData オブジェクトを data 引数として渡す場合、ヘッダー行の数は更新されるテーブルのヘッダー行数と一致する必要があります。
 
 
-    Web 上の Excel に関するその他のコメント: data パラメーターに渡される TableData オブジェクト内のセルの合計数は、このメソッドへの1回の呼び出しでは2万を超えることはできません。
+    Web 上の Excel の追加の備考: data パラメーターに渡される TableData オブジェクト内のセルの総数は、このメソッドの 1 回の呼び出しで 20,000 を超えすることはできません。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'addRowsAsync(rows: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: rows
-      description: 配列の配列 ("matrix")、またはテーブルに追加する1つまたは複数の行を含む TableData オブジェクト。 必須です。
+      description: 配列の配列 ("matrix") またはテーブルに追加する 1 つ以上のデータ行を含む TableData オブジェクト。 必須です。
       type: <xref uid="office!Office.TableData:class" /> | any[][]
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -262,7 +262,7 @@ methods:
   fullName: clearFormatsAsync(options, callback)
   summary: バインド テーブルの書式設定をクリアします。
   remarks: >-
-    詳細については、「 [Excel 用アドインのテーブルの書式設定](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) 」を参照してください。
+    詳細 [については、「Excel 用アドインのテーブルの書式設定」](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) を参照してください。
 
 
     #### <a name="examples"></a>例
@@ -281,10 +281,10 @@ methods:
     content: 'clearFormatsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -294,14 +294,14 @@ methods:
   package: office!
   fullName: clearFormatsAsync(callback)
   summary: バインド テーブルの書式設定をクリアします。
-  remarks: 詳細については、「 [Excel 用アドインのテーブルの書式設定](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) 」を参照してください。
+  remarks: 詳細 [については、「Excel 用アドインのテーブルの書式設定」](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) を参照してください。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'clearFormatsAsync(callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -334,10 +334,10 @@ methods:
     content: 'deleteAllDataValuesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -354,7 +354,7 @@ methods:
     content: 'deleteAllDataValuesAsync(callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -363,40 +363,40 @@ methods:
   uid: office!Office.TableBinding#getFormatsAsync:member(1)
   package: office!
   fullName: getFormatsAsync(cellReference, formats, options, callback)
-  summary: 表内の指定された項目の書式設定を取得します。
+  summary: テーブル内の指定した項目の書式を取得します。
   remarks: >-
     **返される形式構造**
 
 
-    戻り値の配列内の各 JavaScript オブジェクトの形式は次のとおりです。 `{cells:{ cell_range }, format:{ format_definition }}`
+    戻り値配列の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    この `cells:` プロパティは、次のいずれかの値を使用して書式設定する範囲を指定します。
+    プロパティ `cells:` は、次のいずれかの値を使用して書式を設定する範囲を指定します。
 
 
     **cells プロパティでサポートされている範囲**
 
 
-    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの0から始まる n 番目の行の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの0から始まる n 番目の列である範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>I 行とテーブルの j 番目列である単一のセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
+    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの 0 から n 行目の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの 0 から n 番目の列の範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>表の ith 行と j 番目の列である 1 つのセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
 
 
-    この `format:` プロパティは、Excel の [セルの書式設定] ダイアログボックスで使用可能な設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホームの書式設定セル] を右クリックし &gt; &gt; &gt; ます)。
+    プロパティは、Excel の [セルの書式設定] ダイアログ ボックスで使用できる設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホーム書式セル] を右クリック `format:` &gt; &gt; &gt; します)。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getFormatsAsync(cellReference?: any, formats?: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
     parameters:
     - id: cellReference
-      description: 書式設定を取得するセルの範囲を指定する名前と値のペアを含むオブジェクトリテラル。
+      description: 書式を取得するセルの範囲を指定する名前と値のペアを含むオブジェクト リテラル。
       type: any
     - id: formats
       description: 取得する書式プロパティを指定する配列。
       type: any[]
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、対応するセルの書式設定を指定する1つまたは複数の JavaScript オブジェクトを含む配列です。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果のプロパティは、対応するセルの書式設定を指定する 1 つ以上の JavaScript オブジェクトを含む `value` 配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt; ({ cells: any, format: any})[]&gt;) =&gt; void'
     return:
       type: void
@@ -405,37 +405,37 @@ methods:
   uid: office!Office.TableBinding#getFormatsAsync:member(2)
   package: office!
   fullName: getFormatsAsync(cellReference, formats, callback)
-  summary: 表内の指定された項目の書式設定を取得します。
+  summary: テーブル内の指定した項目の書式を取得します。
   remarks: >-
     **返される形式構造**
 
 
-    戻り値の配列内の各 JavaScript オブジェクトの形式は次のとおりです。 `{cells:{ cell_range }, format:{ format_definition }}`
+    戻り値配列の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    この `cells:` プロパティは、次のいずれかの値を使用して書式設定する範囲を指定します。
+    プロパティ `cells:` は、次のいずれかの値を使用して書式を設定する範囲を指定します。
 
 
     **cells プロパティでサポートされている範囲**
 
 
-    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの0から始まる n 番目の行の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの0から始まる n 番目の列である範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>I 行とテーブルの j 番目列である単一のセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
+    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの 0 から n 行目の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの 0 から n 番目の列の範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>表の ith 行と j 番目の列である 1 つのセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
 
 
-    この `format:` プロパティは、Excel の [セルの書式設定] ダイアログボックスで使用可能な設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホームの書式設定セル] を右クリックし &gt; &gt; &gt; ます)。
+    プロパティは、Excel の [セルの書式設定] ダイアログ ボックスで使用できる設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホーム書式セル] を右クリック `format:` &gt; &gt; &gt; します)。
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getFormatsAsync(cellReference?: any, formats?: any[], callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
     parameters:
     - id: cellReference
-      description: 書式設定を取得するセルの範囲を指定する名前と値のペアを含むオブジェクトリテラル。
+      description: 書式を取得するセルの範囲を指定する名前と値のペアを含むオブジェクト リテラル。
       type: any
     - id: formats
       description: 取得する書式プロパティを指定する配列。
       type: any[]
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->. `value`Result のプロパティは、対応するセルの書式設定を指定する1つまたは複数の JavaScript オブジェクトを含む配列です。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果のプロパティは、対応するセルの書式設定を指定する 1 つ以上の JavaScript オブジェクトを含む `value` 配列です。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt; ({ cells: any, format: any})[]&gt;) =&gt; void'
     return:
       type: void
@@ -444,8 +444,8 @@ methods:
   uid: office!Office.TableBinding#setFormatsAsync:member(1)
   package: office!
   fullName: setFormatsAsync(cellFormat, options, callback)
-  summary: 表内の指定されたアイテムおよびデータに書式を設定します。
-  remarks: "**cellFormat パラメーターを指定する**\n\nセルの書式設定値 (幅、高さ、フォント、背景、配置など) を設定または変更するには、cellFormat パラメーターを使用します。 CellFormat パラメーターとして渡す値は、対象となるセルを指定する1つまたは複数の JavaScript オブジェクトのリストを含む配列です (`cells:`<!-- -->) と形式 (`format:`<!-- -->) を設定します。\n\nCellFormat 配列内の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`\n\nこの `cells:` プロパティは、次のいずれかの値を使用して書式設定する範囲を指定します。\n\n**cells プロパティでサポートされている範囲**\n\n<table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの0から始まる n 番目の行の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの0から始まる n 番目の列である範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>I 行とテーブルの j 番目列である単一のセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>\n\nこの `format:` プロパティは、Excel の [セルの書式設定] ダイアログボックスで使用可能な設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホームの書式設定セル] を右クリックし &gt; &gt; &gt; ます)。\n\nプロパティの値は、 `format:` JavaScript オブジェクトリテラルの1つ以上のプロパティの名前と値のペアのリストとして指定します。 The property name specifies the name of the formatting property to set, and value specifies the property value. You can specify multiple values for a given format, such as both a font's color and size.\n\nHere's three `format:` property value examples:\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\n数値の書式を指定するには、プロパティで \"code\" 文字列の表示形式を指定し `numberFormat:` ます。 この文字列に指定できる数値の形式は、Excel の [ セルの書式設定] ダイアログ ボックスの [ 表示形式] タブの [ ユーザー定義] 分類項目で設定できる形式に対応しています。 次の例は、数値を小数点以下 2 桁を含むパーセントとして表示する方法を示しています。\n\n`format: {numberFormat:\"0.00%\"}`\n\n詳細については、「[ユーザー設定の番号書式を作成](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)する方法」を参照してください。<!-- -->.\n\nデータを書き込むときにテーブルの書式設定を行うには、引数 tableOptions および cellFormat を使用し `Document.setSelectedDataAsync` ます。またはメソッドを使用 `TableBinding.setDataAsync` します。\n\nおよびメソッドのオプションのパラメーターを使用して書式設定 `Document.setSelectedDataAsync` `TableBinding.setDataAsync` を行うと、初めてデータを書き込むときにのみ書式設定が行われます。 データの書き込み後に書式設定を変更するには、次のメソッドを使用します。\n\n- フォントの色やスタイルなどのセルの書式を更新するには、 `TableBinding.setFormatsAsync` メソッド (このメソッド) を使用します。\n\n- 縞模様 (行) やフィルターボタンなどのテーブルオプションを更新するには、メソッドを使用し `TableBinding.setTableOptions` ます。\n\n- 書式設定をクリアするには、メソッドを使用し `TableBinding.clearFormats` ます。\n\n詳細および例については、「 [Excel 用アドインでテーブルの書式を設定する方法](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)」を参照してください。<!-- -->.\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
+  summary: テーブル内の指定したアイテムとデータの書式設定を設定します。
+  remarks: "**cellFormat パラメーターを指定する**\n\ncellFormat パラメーターを使用して、幅、高さ、フォント、背景、配置などのセル書式の値を設定または変更します。 cellFormat パラメーターとして渡す値は、ターゲットとするセルを指定する 1 つ以上の JavaScript オブジェクトのリストを含む配列です (`cells:`<!-- -->) と形式 (`format:`<!-- -->) をクリックして、そのユーザーに適用します。\n\ncellFormat 配列内の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`\n\nプロパティ `cells:` は、次のいずれかの値を使用して書式を設定する範囲を指定します。\n\n**cells プロパティでサポートされている範囲**\n\n<table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの 0 から n 行目の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの 0 から n 番目の列の範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>表の ith 行と j 番目の列である 1 つのセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>\n\nプロパティは、Excel の [セルの書式設定] ダイアログ ボックスで使用できる設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホーム書式セル] を右クリック `format:` &gt; &gt; &gt; します)。\n\nプロパティの値は、JavaScript オブジェクト リテラルの 1 つ以上のプロパティ名と値のペアのリスト `format:` として指定します。 The property name specifies the name of the formatting property to set, and value specifies the property value. You can specify multiple values for a given format, such as both a font's color and size.\n\nHere's three `format:` property value examples:\n\n`//Set cells: font color to green and size to 15 points.`\n\n`format: {fontColor : \"green\", fontSize : 15}`\n\n`//Set cells: border to dotted blue.`\n\n`format: {borderStyle: \"dotted\", borderColor: \"blue\"}`\n\n`//Set cells: background to red and alignment to centered.`\n\n`format: {backgroundColor: \"red\", alignHorizontal: \"center\"}`\n\nプロパティで数値書式 \"code\" 文字列を指定することで、数値の形式を指定 `numberFormat:` できます。 この文字列に指定できる数値の形式は、Excel の [ セルの書式設定] ダイアログ ボックスの [ 表示形式] タブの [ ユーザー定義] 分類項目で設定できる形式に対応しています。 次の例は、数値を小数点以下 2 桁を含むパーセントとして表示する方法を示しています。\n\n`format: {numberFormat:\"0.00%\"}`\n\n詳細については、「カスタム番号形式を作成 [する方法」を参照してください。](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.\n\nデータを書き込むときにテーブルの書式を設定するには、またはメソッドの tableOptions および cellFormat オプション のパラメーター `Document.setSelectedDataAsync` を `TableBinding.setDataAsync` 使用します。\n\nand メソッドの省略可能なパラメーターを使用して書式設定を設定すると、最初にデータを書き込むときに書式設定 `Document.setSelectedDataAsync` `TableBinding.setDataAsync` を設定する場合にのみ機能します。 データの書き込み後に書式設定を変更するには、次のメソッドを使用します。\n\n- フォントの色やスタイルなどのセルの書式設定を更新するには、メソッド `TableBinding.setFormatsAsync` (このメソッド) を使用します。\n\n- バンド行やフィルター ボタンなどのテーブル オプションを更新するには、メソッドを使用 `TableBinding.setTableOptions` します。\n\n- 書式設定をクリアするには、メソッドを `TableBinding.clearFormats` 使用します。\n\n詳細と例については、「Excel 用アドインでテーブルを書式設定する方法 [」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Specifying a single target\n// The following example shows a cellFormat value that sets the font color of the header row to red.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: Office.Table.Headers, format: {fontColor: \"red\"}}], \n    function (asyncResult){});\n\n// Specifying multiple targets\n// The setFormatsAsync method can support formatting multiple targets within the bound table in a \n// single function call. To do that, you pass a list of objects in the cellFormat array \n// for each target that you want to format.\n// For example, the following line of code will set the font color of the first row yellow, \n// and the fourth cell in the third row to have a white border and bold text.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n\n// Additional remarks for Excel Online\n// The number of formatting groups passed to the cellFormat parameter can't exceed 100. \n// A single formatting group consists of a set of formatting applied to a specified range of cells. \n// For example, the following call passes two formatting groups to cellFormat.\nOffice.select(\"bindings#myBinding\").setFormatsAsync(\n    [{cells: {row: 1}, format: {fontColor: \"yellow\"}}, \n        {cells: {row: 3, column: 4}, format: {borderColor: \"white\", fontStyle: \"bold\"}}], \n    function (asyncResult){});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -455,10 +455,10 @@ methods:
       description: ターゲットとなるセルと、対象セルに適用する書式設定を指定した 1 つ以上の JavaScript オブジェクトが含まれる配列。
       type: any[]
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -467,30 +467,30 @@ methods:
   uid: office!Office.TableBinding#setFormatsAsync:member(2)
   package: office!
   fullName: setFormatsAsync(cellFormat, callback)
-  summary: 表内の指定されたアイテムおよびデータに書式を設定します。
+  summary: テーブル内の指定したアイテムとデータの書式設定を設定します。
   remarks: >-
     **cellFormat パラメーターを指定する**
 
 
-    セルの書式設定値 (幅、高さ、フォント、背景、配置など) を設定または変更するには、cellFormat パラメーターを使用します。 CellFormat パラメーターとして渡す値は、対象となるセルを指定する1つまたは複数の JavaScript オブジェクトのリストを含む配列です (`cells:`<!-- -->) と形式 (`format:`<!-- -->) を設定します。
+    cellFormat パラメーターを使用して、幅、高さ、フォント、背景、配置などのセル書式の値を設定または変更します。 cellFormat パラメーターとして渡す値は、ターゲットとするセルを指定する 1 つ以上の JavaScript オブジェクトのリストを含む配列です (`cells:`<!-- -->) と形式 (`format:`<!-- -->) をクリックして、そのユーザーに適用します。
 
 
-    CellFormat 配列内の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`
+    cellFormat 配列内の各 JavaScript オブジェクトには、次の形式があります。 `{cells:{ cell_range }, format:{ format_definition }}`
 
 
-    この `cells:` プロパティは、次のいずれかの値を使用して書式設定する範囲を指定します。
+    プロパティ `cells:` は、次のいずれかの値を使用して書式を設定する範囲を指定します。
 
 
     **cells プロパティでサポートされている範囲**
 
 
-    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの0から始まる n 番目の行の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの0から始まる n 番目の列である範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>I 行とテーブルの j 番目列である単一のセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
+    <table> <tr> <th>cells の範囲の設定</th> <th>説明</th> </tr> <tr> <td>`{row: n}`</td> <td>テーブル内のデータの 0 から n 行目の範囲を指定します。</td> </tr> <tr> <td>`{column: n}`</td> <td>テーブル内のデータの 0 から n 番目の列の範囲を指定します。</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>表の ith 行と j 番目の列である 1 つのセルを指定します。</td> </tr> <tr> <td>`Office.Table.All`</td> <td>列見出し、データ、集計 (もしあれば) を含むテーブル全体を指定します。</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>テーブル内のデータのみ (見出しと集計を含まない) を指定します。</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>見出し行のみを指定します。</td> </tr> </table>
 
 
-    この `format:` プロパティは、Excel の [セルの書式設定] ダイアログボックスで使用可能な設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホームの書式設定セル] を右クリックし &gt; &gt; &gt; ます)。
+    プロパティは、Excel の [セルの書式設定] ダイアログ ボックスで使用できる設定のサブセットに対応する値を指定します ([セルの書式設定] または [ホーム書式セル] を右クリック `format:` &gt; &gt; &gt; します)。
 
 
-    プロパティの値は、 `format:` JavaScript オブジェクトリテラルの1つ以上のプロパティの名前と値のペアのリストとして指定します。 The property name specifies the name of the formatting property to set, and value specifies the property value. You can specify multiple values for a given format, such as both a font's color and size.
+    プロパティの値は、JavaScript オブジェクト リテラルの 1 つ以上のプロパティ名と値のペアのリスト `format:` として指定します。 The property name specifies the name of the formatting property to set, and value specifies the property value. You can specify multiple values for a given format, such as both a font's color and size.
 
 
     Here's three `format:` property value examples:
@@ -514,31 +514,31 @@ methods:
     `format: {backgroundColor: "red", alignHorizontal: "center"}`
 
 
-    数値の書式を指定するには、プロパティで "code" 文字列の表示形式を指定し `numberFormat:` ます。 この文字列に指定できる数値の形式は、Excel の [ セルの書式設定] ダイアログ ボックスの [ 表示形式] タブの [ ユーザー定義] 分類項目で設定できる形式に対応しています。 次の例は、数値を小数点以下 2 桁を含むパーセントとして表示する方法を示しています。
+    プロパティで数値書式 "code" 文字列を指定することで、数値の形式を指定 `numberFormat:` できます。 この文字列に指定できる数値の形式は、Excel の [ セルの書式設定] ダイアログ ボックスの [ 表示形式] タブの [ ユーザー定義] 分類項目で設定できる形式に対応しています。 次の例は、数値を小数点以下 2 桁を含むパーセントとして表示する方法を示しています。
 
 
     `format: {numberFormat:"0.00%"}`
 
 
-    詳細については、「[ユーザー設定の番号書式を作成](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)する方法」を参照してください。<!-- -->.
+    詳細については、「カスタム番号形式を作成 [する方法」を参照してください。](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.
 
 
-    データを書き込むときにテーブルの書式設定を行うには、引数 tableOptions および cellFormat を使用し `Document.setSelectedDataAsync` ます。またはメソッドを使用 `TableBinding.setDataAsync` します。
+    データを書き込むときにテーブルの書式を設定するには、またはメソッドの tableOptions および cellFormat オプション のパラメーター `Document.setSelectedDataAsync` を `TableBinding.setDataAsync` 使用します。
 
 
-    およびメソッドのオプションのパラメーターを使用して書式設定 `Document.setSelectedDataAsync` `TableBinding.setDataAsync` を行うと、初めてデータを書き込むときにのみ書式設定が行われます。 データの書き込み後に書式設定を変更するには、次のメソッドを使用します。
+    and メソッドの省略可能なパラメーターを使用して書式設定を設定すると、最初にデータを書き込むときに書式設定 `Document.setSelectedDataAsync` `TableBinding.setDataAsync` を設定する場合にのみ機能します。 データの書き込み後に書式設定を変更するには、次のメソッドを使用します。
 
 
-    - フォントの色やスタイルなどのセルの書式を更新するには、 `TableBinding.setFormatsAsync` メソッド (このメソッド) を使用します。
+    - フォントの色やスタイルなどのセルの書式設定を更新するには、メソッド `TableBinding.setFormatsAsync` (このメソッド) を使用します。
 
 
-    - 縞模様 (行) やフィルターボタンなどのテーブルオプションを更新するには、メソッドを使用し `TableBinding.setTableOptions` ます。
+    - バンド行やフィルター ボタンなどのテーブル オプションを更新するには、メソッドを使用 `TableBinding.setTableOptions` します。
 
 
-    - 書式設定をクリアするには、メソッドを使用し `TableBinding.clearFormats` ます。
+    - 書式設定をクリアするには、メソッドを `TableBinding.clearFormats` 使用します。
 
 
-    詳細および例については、「 [Excel 用アドインでテーブルの書式を設定する方法](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)」を参照してください。<!-- -->.
+    詳細と例については、「Excel 用アドインでテーブルを書式設定する方法 [」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -548,7 +548,7 @@ methods:
       description: ターゲットとなるセルと、対象セルに適用する書式設定を指定した 1 つ以上の JavaScript オブジェクトが含まれる配列。
       type: any[]
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -558,7 +558,7 @@ methods:
   package: office!
   fullName: setTableOptionsAsync(tableOptions, options, callback)
   summary: バインド テーブルにおけるテーブル書式設定オプションを更新します。
-  remarks: "**要件セット**: [セットに含まれない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\ngoToByIdAsync メソッドに渡されるコールバック関数で、AsyncResult オブジェクトのプロパティを使用して、次の情報を返すことができます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>書式を設定するときに取得するデータまたはオブジェクトがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult. 状態</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
+  remarks: "**要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\ngoToByIdAsync メソッドに渡されるコールバック関数で、AsyncResult オブジェクトのプロパティを使用して、次の情報を返すことができます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>書式を設定するときに取得するデータやオブジェクトが存在しないので、常に未定義を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example shows how to:\n// 1. Create an object literal that specifies the table formatting options to update on the bound table.\n// 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object\n//    with formatting setting as the tableOptions parameter.\nfunction updateTableFormatting(){\n    var tableOptions = {bandedRows: true, filterButton: false, style: \"TableStyleMedium3\"}; \n\n    Office.select(\"bindings#myBinding\").setTableOptionsAsync(tableOptions, function(asyncResult){});\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -568,10 +568,10 @@ methods:
       description: オブジェクト リテラルは、適用するテーブル オプションを定義するプロパティ名と値のペアのリストです。
       type: any
     - id: options
-      description: コールバックで使用するために、変更されていない任意の型のコンテキストデータを保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -582,13 +582,13 @@ methods:
   fullName: setTableOptionsAsync(tableOptions, callback)
   summary: バインド テーブルにおけるテーブル書式設定オプションを更新します。
   remarks: >-
-    **要件セット**: [セットに含まれない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
     goToByIdAsync メソッドに渡されるコールバック関数で、AsyncResult オブジェクトのプロパティを使用して、次の情報を返すことができます。
 
 
-    <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>書式を設定するときに取得するデータまたはオブジェクトがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult. 状態</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
+    <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>書式を設定するときに取得するデータやオブジェクトが存在しないので、常に未定義を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -598,16 +598,16 @@ methods:
       description: オブジェクト リテラルは、適用するテーブル オプションを定義するプロパティ名と値のペアのリストです。
       type: any
     - id: callback
-      description: 省略可能。 コールバックが戻るときに呼び出される関数で、唯一のパラメーターの型が[Office AsyncResult](xref:office!Office.AsyncResult:interface)である。<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 extends: <xref uid="office!Office.Binding:interface" />
 metadata:
-  ms.openlocfilehash: 765e05bdfad630e48da061b7ceb80ad7135fe5ce
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: eba42decba936cb9ed58e860528e54426a18d879
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49329454"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51329380"
