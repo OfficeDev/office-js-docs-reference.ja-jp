@@ -7,7 +7,7 @@ summary: >-
   [Office.context.mailbox.item の予定出席者モード](xref:outlook!Office.Item:interface)<!-- -->.
 
 
-  **重要**: これは内部の Outlook オブジェクトであり、既存のインターフェイスを通じて直接公開されるのではありません。 これは次のモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクト モデル」](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.2/office.context.mailbox.item) ページを参照してください。
+  **重要**: これは内部 Outlook オブジェクトであり、既存のインターフェイスでは直接公開されません。 これをモードとして扱う必要があります。 `Office.context.mailbox.item`<!-- -->. 詳細については、「 [オブジェクト モデル」](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.2/office.context.mailbox.item) ページを参照してください。
 
 
   親インターフェイス:
@@ -34,7 +34,7 @@ properties:
     **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 予定の出席者
 
 
-    **注**: 一部の種類のファイルは、潜在的なセキュリティの問題のために Outlook によってブロックされるため、返されません。 詳細については [、「Outlook のブロックされた添付ファイル」を参照してください。](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
+    **注**: 一部の種類のファイルは、潜在的なセキュリティの問題のために Outlook によってブロックされるため、返されません。 詳細については [、「Outlook の添付ファイルのブロック」を参照してください。](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
 
 
     #### <a name="examples"></a>例
@@ -163,7 +163,7 @@ properties:
     アイテムが最後に変更された日時を取得します。
 
 
-    **注**: このメンバーは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメンバーは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -195,7 +195,7 @@ properties:
     予定が終了する日時を取得します。
 
 
-    この `end` プロパティは `Date` 、世界協定時刻 (UTC) の日付と時刻の値で表されるオブジェクトです。 このメソッドを使用 `convertToLocalClientTime` して、プロパティ値をクライアントのローカル日付と時刻 `end` に変換できます。
+    この `end` プロパティは、協定世界時 (UTC) の日付と時刻の値で `Date` 表されるオブジェクトです。 このメソッドを使用 `convertToLocalClientTime` して、プロパティ値をクライアントのローカル日付と時刻 `end` に変換できます。
 
 
     `Time.setAsync` メソッドを使用して終了時刻を設定する場合、`convertToUtcClientTime` メソッドを使用して、クライアント上のローカルの時刻をサーバーの UTC に変換する必要があります。
@@ -230,7 +230,7 @@ properties:
     選択されたアイテムの Exchange Web サービスのアイテム クラスを取得します。
 
 
-    カスタム の予定メッセージ クラスなど、既定のメッセージ クラスを拡張するカスタム メッセージ クラスを作成できます。 `IPM.Appointment.Contoso`<!-- -->.
+    既定のメッセージ クラス (カスタム予定メッセージ クラスなど) を拡張するカスタム メッセージ クラスを作成できます。 `IPM.Appointment.Contoso`<!-- -->.
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -241,7 +241,7 @@ properties:
     `itemClass` プロパティには、選択したアイテムのメッセージ クラスを指定します。次に、メッセージまたは予定アイテムの既定のメッセージ クラスを示します。
 
 
-    <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらはアイテム クラス IPM の予定表アイテムです。予定または IPM。Appointment.Occurrence.</td> <td>IPM。Appointment,IPM.Appointment.Occurrence</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージ クラス IPM を持つ電子メール メッセージが含まれます。IPM を使用する会議出席依頼、応答、取り消しに注意してください。基本メッセージ クラスとしての Schedule.Meeting。</td> <td>IPM。注:IPM。Schedule.Meeting.Request,IPM.Schedule.Meeting.Neg,IPM.Schedule.Meeting.Pos,IPM.Schedule.Meeting.Tent,IPM.Schedule.Meeting.Canceled</td> </tr> </table>
+    <table> <tr> <th>型</th> <th>説明</th> <th>Item クラス</th> </tr> <tr> <td>予定アイテム</td> <td>これらは、アイテム クラス IPM の予定表アイテムです。予定または IPM。Appointment.Occurrence。</td> <td>IPM。予定、IPM。Appointment.Occurrence</td> </tr> <tr> <td>メッセージ アイテム</td> <td>これには、既定のメッセージ クラス IPM を持つ電子メール メッセージが含まれます。IPM を使用する会議出席依頼、応答、および取り消しに注意してください。Schedule.Meeting を基本メッセージ クラスとして指定します。</td> <td>IPM。注、IPM。Schedule.Meeting.Request,IPM.Schedule.Meeting.Neg,IPM.Schedule.Meeting.Pos,IPM.Schedule.Meeting.Tent,IPM.Schedule.Meeting.Canceled</td> </tr> </table>
 
 
     #### <a name="examples"></a>例
@@ -265,13 +265,13 @@ properties:
   package: outlook!
   fullName: itemId
   summary: >-
-    現在の [アイテムの Exchange Web サービスアイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange) を取得します。
+    現在の [アイテムの Exchange Web Services アイテム識別子](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange) を取得します。
 
 
-    この `itemId` プロパティは新規作成モードでは使用できません。 アイテム識別子が必要な場合、メソッドを使用してアイテムをストアに保存し、コールバック関数のパラメーターでアイテム識別子 `saveAsync` `asyncResult.value` を返します。
+    この `itemId` プロパティは、作成モードでは使用できません。 アイテム識別子が必要な場合、メソッドを使用してアイテムをストアに保存し、コールバック関数のパラメーター内のアイテム `saveAsync` 識別子 `asyncResult.value` を返します。
 
 
-    **メモ**: プロパティによって返される識別子 `itemId` は、Exchange Web サービスのアイテム識別子 [と同じです](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. `itemId` プロパティは、Outlook Entry ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API 呼び出しを行う前に、次の値を使用して変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については [、「Outlook アドインからの Outlook REST API の使用」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id)<!-- -->.
+    **注**: プロパティによって返される識別子 `itemId` は、Exchange Web Services アイテム識別子 [と同じです。](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. `itemId` プロパティは、Outlook Entry ID または Outlook REST API で使用される ID と同一ではありません。 この値を使用して REST API 呼び出しを行う前に、次の値を使用して変換する必要があります。 `Office.context.mailbox.convertToRestId`<!-- -->. 詳細については [、「Outlook アドインから Outlook REST API を使用する」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id)<!-- -->.
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -319,7 +319,7 @@ properties:
     インスタンスが表しているアイテムの種類を取得します。
 
 
-    このプロパティは、アイテム オブジェクトインスタンスがメッセージか予定かを示す列挙値 `itemType` `ItemType` の 1 つを返します。
+    プロパティは、アイテム オブジェクト インスタンスがメッセージか予定かを示す列挙値のいずれかを `itemType` `ItemType` 返します。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -388,10 +388,10 @@ properties:
   package: outlook!
   fullName: normalizedSubject
   summary: >-
-    アイテムの件名を取得し、すべてのプレフィックス (RE: と FWD: を含む) を削除します。
+    アイテムの件名を取得し、すべてのプレフィックス (RE: と FWD:を含む) を削除します。
 
 
-    この `normalizedSubject` プロパティは、アイテムの件名を取得し、標準プレフィックス (RE: や FW: など) を付けます。電子メール プログラムによって追加されます。 これらのプレフィックスが付いたままの状態でアイテムの件名を取得するには、`subject` プロパティを使用します。
+    プロパティ `normalizedSubject` は、アイテムの件名を取得し、標準プレフィックス (RE: や FW:) を使用します。電子メール プログラムによって追加されます。 これらのプレフィックスが付いたままの状態でアイテムの件名を取得するには、`subject` プロパティを使用します。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -420,10 +420,10 @@ properties:
   package: outlook!
   fullName: optionalAttendees
   summary: >-
-    イベントの任意出席者へのアクセスを提供します。 オブジェクトの種類とアクセス レベルは、現在のアイテムのモードによって異なります。
+    イベントの任意出席者へのアクセスを提供します。 オブジェクトの種類とアクセスレベルは、現在のアイテムのモードによって異なります。
 
 
-    この `optionalAttendees` プロパティは、会議の任意出席者ごとに [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む配列を返します。 コレクション サイズの制限:
+    プロパティ `optionalAttendees` は、会議への各オプションの出席者の [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む配列を返します。 コレクション サイズの制限:
 
 
     - Windows: 500 メンバー
@@ -503,10 +503,10 @@ properties:
   package: outlook!
   fullName: requiredAttendees
   summary: >-
-    イベントの必須出席者へのアクセスを提供します。 オブジェクトの種類とアクセス レベルは、現在のアイテムのモードによって異なります。
+    イベントの必須出席者へのアクセスを提供します。 オブジェクトの種類とアクセスレベルは、現在のアイテムのモードによって異なります。
 
 
-    この `requiredAttendees` プロパティは、会議の必須出席者ごとに [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む配列を返します。 コレクション サイズの制限:
+    この `requiredAttendees` プロパティは、会議に必要な出席者ごとに [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む配列を返します。 コレクション サイズの制限:
 
 
     - Windows: 500 メンバー
@@ -556,10 +556,10 @@ properties:
   package: outlook!
   fullName: start
   summary: >-
-    予定を開始する日時を取得します。
+    予定が開始される日時を取得します。
 
 
-    この `start` プロパティは `Date` 、世界協定時刻 (UTC) の日付と時刻の値で表されるオブジェクトです。 このメソッドを `convertToLocalClientTime` 使用して、値をクライアントのローカル日付と時刻に変換できます。
+    この `start` プロパティは、協定世界時 (UTC) の日付と時刻の値で `Date` 表されるオブジェクトです。 このメソッドを使用 `convertToLocalClientTime` して、値をクライアントのローカル日付と時刻に変換できます。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -594,7 +594,7 @@ properties:
     `subject` プロパティは、電子メール サーバーによって送信されたアイテムの件名全体を取得または設定します。
 
 
-    `subject` プロパティは文字列を返します。 RE: や FW: などの先頭のプレフィックスを除いた件名を取得するには、このプロパティ `normalizedSubject` を使用します。
+    `subject` プロパティは文字列を返します。 プロパティを `normalizedSubject` 使用して、件名から RE: や FW:などの先頭プレフィックスを差し引いた値を取得します。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -624,19 +624,19 @@ methods:
   package: outlook!
   fullName: displayReplyAllForm(formData)
   summary: >-
-    選択したメッセージの送信者とすべての受信者、または選択した予定の開催者とすべての出席者を含む返信フォームが表示されます。
+    選択したメッセージの送信者とすべての受信者、または選択した予定のすべての出席者を含む返信フォームを表示します。
 
 
-    Outlook on the web では、返信フォームは 3 列表示のポップアウト フォーム、2 列または 1 列表示のポップアップ フォームとして表示されます。
+    Outlook on the web では、返信フォームが 3 列ビューにポップアップ フォーム、2 列ビューまたは 1 列ビューにポップアップ フォームとして表示されます。
 
 
     文字列パラメーターのいずれかが制限値を超えると、`displayReplyAllForm` は例外をスローします。
 
 
-    パラメーターに添付ファイルが指定されている場合、Outlook は、すべての添付ファイルをダウンロードして返信 `formData.attachments` フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+    パラメーターに添付ファイルを指定すると、Outlook は、すべての添付ファイルをダウンロードして返信 `formData.attachments` フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -746,7 +746,7 @@ methods:
     content: 'displayReplyAllForm(formData: string | ReplyFormData): void;'
     parameters:
     - id: formData
-      description: 回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は、本文または添付ファイルのデータとコールバック関数を含む 32 KB または [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) オブジェクトに制限されています。
+      description: 回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は、本文または添付ファイルのデータとコールバック関数を含む 32 KB または [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) オブジェクトに制限されます。
       type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     return:
       type: void
@@ -759,16 +759,16 @@ methods:
     選択したメッセージの送信者のみ、または選択した予定の開催者のみを含む回答フォームが表示されます。
 
 
-    Outlook on the web では、返信フォームは 3 列表示のポップアウト フォーム、2 列または 1 列表示のポップアップ フォームとして表示されます。
+    Outlook on the web では、返信フォームが 3 列ビューにポップアップ フォーム、2 列ビューまたは 1 列ビューにポップアップ フォームとして表示されます。
 
 
     文字列パラメーターのいずれかが制限値を超えると、`displayReplyForm` は例外をスローします。
 
 
-    パラメーターに添付ファイルが指定されている場合、Outlook は、すべての添付ファイルをダウンロードして返信 `formData.attachments` フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
+    パラメーターに添付ファイルを指定すると、Outlook は、すべての添付ファイルをダウンロードして返信 `formData.attachments` フォームに添付します。 添付ファイルの追加に失敗すると、フォーム UI でエラーが表示されます。 表示できない場合、エラー メッセージはスローされません。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -896,7 +896,7 @@ methods:
     content: 'displayReplyForm(formData: string | ReplyFormData): void;'
     parameters:
     - id: formData
-      description: 回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は、本文または添付ファイルのデータとコールバック関数を含む 32 KB または [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) オブジェクトに制限されています。
+      description: 回答フォームの本文を表すテキストと HTML が含まれる文字列。 文字列は、本文または添付ファイルのデータとコールバック関数を含む 32 KB または [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) オブジェクトに制限されます。
       type: string | <xref uid="outlook!Office.ReplyFormData:interface" />
     return:
       type: void
@@ -909,7 +909,7 @@ methods:
     選択したアイテムの本文にあるエンティティを取得します。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -992,7 +992,7 @@ methods:
     選択したアイテムの本文内で検出された指定のエンティティ型のすべてのエンティティを含む配列を取得します。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
@@ -1020,7 +1020,7 @@ methods:
         列挙値 `EntityType` の 1 つ。
 
 
-        このメソッドを使用する最小アクセス許可レベルは次の値です。 `Restricted`<!-- -->エンティティの種類によっては、次 `ReadItem` の表で指定されているアクセスが必要な場合があります。
+        このメソッドを使用する最小アクセス許可レベルは次の値です。 `Restricted`<!-- -->、一部のエンティティの種類 `ReadItem` は、次の表で指定されているアクセスを必要とします。
 
 
         <table> <tr> <th>entityType の値</th> <th>返される配列内のオブジェクトの型</th> <th>必要なアクセス許可のレベル</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
@@ -1036,10 +1036,10 @@ methods:
     マニフェスト XML ファイルで定義された名前付きフィルターを通過する、選択したアイテム内の既知のエンティティを返します。
 
 
-    このメソッドは、指定された要素値を持つマニフェスト XML ファイルの rule 要素で定義された正規表現に一致するエンティティ `getFilteredEntitiesByName` `ItemHasKnownEntity` を `FilterName` 返します。
+    このメソッドは、マニフェスト XML ファイルの rule 要素で定義されている正規表現と指定した要素値を一致するエンティティ `getFilteredEntitiesByName` `ItemHasKnownEntity` を `FilterName` 返します。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -1069,7 +1069,7 @@ methods:
       type: string
     return:
       type: (string | <xref uid="outlook!Office.Contact:interface" /> | <xref uid="outlook!Office.MeetingSuggestion:interface" /> | <xref uid="outlook!Office.PhoneNumber:interface" /> | <xref uid="outlook!Office.TaskSuggestion:interface" />)[]
-      description: パラメーターに一致する要素値を持つ要素がマニフェスト内にない場合、メソッド `ItemHasKnownEntity` `FilterName` `name` は `null`<!-- -->. パラメーターがマニフェスト内の要素と一致するが、現在のアイテムに一致するエンティティがない場合、メソッドは空の `name` `ItemHasKnownEntity` 配列を返します。
+      description: パラメーターに一致する要素値を持つ要素がマニフェストに含めらない場合、メソッド `ItemHasKnownEntity` `FilterName` `name` は返します。 `null`<!-- -->. パラメーターがマニフェスト内の要素と一致するが、現在のアイテムに一致するエンティティがない場合、メソッドは `name` `ItemHasKnownEntity` 空の配列を返します。
 - name: getRegExMatches()
   uid: outlook!Office.AppointmentRead#getRegExMatches:member(1)
   package: outlook!
@@ -1081,10 +1081,10 @@ methods:
     `getRegExMatches` メソッドは、マニフェスト XML ファイル内の、各 `ItemHasRegularExpressionMatch` または `ItemHasKnownEntity` ルール要素で定義された正規表現に一致する文字列を返します。`ItemHasRegularExpressionMatch` ルールの場合、そのルールで指定されたアイテムのプロパティに一致する文字列が発生する必要があります。`PropertyName` 単純型は、サポートされるプロパティを定義します。
 
 
-    アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 .* などの正規表現を使用してアイテムの本文全体を取得しても、期待される結果が返されない場合があります。 この場合、代わりに `Body.getAsync` メソッドを使用して本文全体を取得します。
+    アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 .* などの正規表現を使用してアイテムの本文全体を取得しても、必ずしも期待される結果が返されるとは限らない。 この場合、代わりに `Body.getAsync` メソッドを使用して本文全体を取得します。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -1154,7 +1154,7 @@ methods:
     content: 'getRegExMatches(): any;'
     return:
       type: any
-      description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。 各配列の名前は、一致するルールの RegExName 属性または一致ルールの属性の対応する `ItemHasRegularExpressionMatch` `FilterName` 値と等 `ItemHasKnownEntity` しくなります。
+      description: マニフェスト XML ファイルで定義された正規表現に一致する文字列の配列が格納されたオブジェクト。 各配列の名前は、一致するルールの RegExName 属性または一致するルールの属性の対応する `ItemHasRegularExpressionMatch` `FilterName` 値と等 `ItemHasKnownEntity` しくなります。
 - name: getRegExMatchesByName(name)
   uid: outlook!Office.AppointmentRead#getRegExMatchesByName:member(1)
   package: outlook!
@@ -1166,10 +1166,10 @@ methods:
     `getRegExMatchesByName` メソッドは、`ItemHasRegularExpressionMatch` ルール要素で定義された正規表現に一致する文字列を返します。このルール要素は、指定された `RegExName` 要素値を持つマニフェスト XML ファイル内にあります。
 
 
-    アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 .* などの正規表現を使用してアイテムの本文全体を取得しても、期待される結果が返されない場合があります。
+    アイテムの body プロパティに `ItemHasRegularExpressionMatch` ルールを指定する場合、正規表現でさらに本文をフィルター処理し、アイテムの本文全体を返さないようにします。 .* などの正規表現を使用してアイテムの本文全体を取得しても、必ずしも期待される結果が返されるとは限らない。
 
 
-    **注**: このメソッドは、iOS または Android 上の Outlook ではサポートされていません。
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -1255,19 +1255,19 @@ methods:
     content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
     parameters:
     - id: callback
-      description: メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CustomProperties:interface" />&gt;) =&gt; void'
     - id: userContext
-      description: 省略可能です。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
+      description: 省略可能。 開発者は、コールバック関数でアクセスする任意のオブジェクトを指定できます。 このオブジェクトには、コールバック関数の `asyncResult.asyncContext` プロパティによってアクセスすることができます。
       type: any
     return:
       type: void
       description: ''
 extends: <xref uid="outlook!Office.Appointment:interface" />
 metadata:
-  ms.openlocfilehash: 07fdfefdef4b85ed8aa93538c8e0a0fe2843b128
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: bc29bdc983a641e89198482e6ba603e9cd8bbe8b
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49855548"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51328957"
