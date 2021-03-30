@@ -7,10 +7,10 @@ summary: >-
   アイテムのカテゴリを表します。
 
 
-  Outlook では、ユーザーはカテゴリを使用してメッセージや予定にタグを付け、色分けすることができます。 ユーザーは、自分 [のメールボックスのマスター リストでカテゴリ](xref:outlook!Office.MasterCategories:interface) を定義します。 その後、アイテムに 1 つ以上のカテゴリを適用できます。
+  Outlook では、ユーザーはカテゴリを使用してメッセージと予定にタグを付け、それらを色分けできます。 ユーザーは、自分 [のメールボックスのマスター リスト内の](xref:outlook!Office.MasterCategories:interface) カテゴリを定義します。 その後、アイテムに 1 つ以上のカテゴリを適用できます。
 
 
-  **重要**: Outlook on the web では、作成モードでメッセージに適用されるカテゴリを API を使用して管理することはできません。
+  **重要**: Outlook on the web では、メッセージに適用されるカテゴリを作成モードで管理するために API を使用することはできません。
 
 
   \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -18,7 +18,7 @@ remarks: >-
   **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -28,7 +28,7 @@ methods:
   package: outlook!
   fullName: addAsync(categories, options, callback)
   summary: >-
-    アイテムにカテゴリを追加します。 各カテゴリは、そのメールボックスのカテゴリ マスター リストに含めなければならないので、一意の名前を持つ必要がありますが、複数のカテゴリで同じ色を使用できます。
+    アイテムにカテゴリを追加します。 各カテゴリは、そのメールボックスのカテゴリ マスター リストに含めなければならないので、一意の名前が必要ですが、複数のカテゴリで同じ色を使用できます。
 
 
     \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -36,13 +36,13 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     **エラー**:
 
 
-    - `InvalidCategory`<!-- -->: 無効なカテゴリが提供されています。
+    - `InvalidCategory`<!-- -->: 無効なカテゴリが指定されています。
 
 
     #### <a name="examples"></a>例
@@ -88,10 +88,10 @@ methods:
       description: アイテムに追加するカテゴリ。
       type: string[]
     - id: options
-      description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -104,7 +104,7 @@ methods:
     アイテムのカテゴリを取得します。
 
 
-    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを必ず処理 `null` してください。
+    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを処理してください `null` 。
 
 
     \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -112,17 +112,17 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
+      description: メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -135,7 +135,7 @@ methods:
     アイテムのカテゴリを取得します。
 
 
-    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを必ず処理 `null` してください。
+    **重要**: アイテムにカテゴリがない場合、または Outlook のバージョンに応じて空の配列が返される場合は、両方のケースを処理してください `null` 。
 
 
     \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -143,7 +143,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -174,7 +174,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
+      description: メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを取得できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -192,7 +192,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -233,18 +233,18 @@ methods:
       description: アイテムから削除するカテゴリ。
       type: string[]
     - id: options
-      description: '省略可能です。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、アクセスする任意のオブジェクトをコールバック メソッドで提供できます。'
+      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリを削除できない場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. カテゴリの削除に失敗した場合、 `asyncResult.error` プロパティにはエラー コードが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 35b5c1a9c517220cf55950a126838b46f53e3620
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: cf31f8ac89ce5467a17678c84d268bfacbd371f8
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49849997"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51339110"

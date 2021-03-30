@@ -7,12 +7,12 @@ summary: >-
   `CustomProperties` オブジェクトが表すカスタム プロパティは、特定のアイテムに固有であり、Outlook 用のメール アドインに固有です。 たとえば、メール アドインは、アドインをアクティブ化する現在のメール メッセージに固有のいくつかのデータを保存する必要があります。 ユーザーが、将来同じメッセージを再び取り上げ、もう一度メール アドインをアクティブ化する場合、アドインは、カスタム プロパティとして保存されていたデータを取得することができます。 **重要**: JSON オブジェクトの最大長 `CustomProperties` は 2500 文字です。
 
 
-  Outlook on Mac はカスタム プロパティをキャッシュしないので、ユーザーのネットワークがダウンすると、メール アドインはカスタム プロパティにアクセスできません。
+  Outlook on Mac はカスタム プロパティをキャッシュしないので、ユーザーのネットワークがダウンした場合、メール アドインはカスタム プロパティにアクセスできません。
 remarks: >-
   **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -26,7 +26,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -70,7 +70,7 @@ methods:
     `var dictionary = customProps.getAll(); dictionary["name"]`
 
 
-    ディクショナリ オブジェクトを反復処理して、すべての辞書を検出 `names` し、 `values`<!-- -->.
+    ディクショナリ オブジェクトを反復処理して、すべてのオブジェクトを検出し `names` 、 `values`<!-- -->.
 
 
     \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -78,7 +78,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
   isPreview: false
   isDeprecated: false
   syntax:
@@ -94,12 +94,12 @@ methods:
     カスタム プロパティ コレクションから指定のプロパティを削除します。
 
 
-    プロパティを永続的に削除するには、オブジェクトのメソッドを呼び `saveAsync` 出す必要 `CustomProperties` があります。
+    プロパティを永続的に削除するには、オブジェクトのメソッド `saveAsync` を呼び出す必要 `CustomProperties` があります。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -138,12 +138,12 @@ methods:
     メソッドまたはオブジェクトのメソッドで行われた変更を保持するには、 `saveAsync` `set` メソッド `remove` を呼び出す必要 `CustomProperties` があります。 保存操作は非同期です。
 
 
-    コールバック関数でエラーのチェックと処理を行うのが良い方法です。 `saveAsync`<!-- -->. 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態でアドインが `saveAsync` を呼び出す場合、`saveAsync` はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
+    コールバック関数のチェックを行い、エラーを処理する方法をお試しください。 `saveAsync`<!-- -->. 特に、ユーザーが表示フォームの接続状態時に、読み取り用のアドインがアクティブ化され、その後ユーザーが切断されます。 切断状態でアドインが `saveAsync` を呼び出す場合、`saveAsync` はエラーを返します。 コールバック メソッドは、このエラーを適切に処理する必要があります。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -206,10 +206,10 @@ methods:
     content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
     parameters:
     - id: callback
-      description: 省略可能です。 メソッドが完了すると、パラメーターで渡された関数が、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     - id: asyncContext
-      description: 省略可能です。 コールバック メソッドに渡される状態データです。
+      description: 省略可能。 コールバック メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -230,7 +230,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 新規作成または読み取り
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 
 
     #### <a name="examples"></a>例
@@ -264,9 +264,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 255ca2476a12220bc0d8667597b278ae5e14f210
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 5f7fe07d471029d2f2c2551a96dc0fe2ff443fa3
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850648"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51338809"
