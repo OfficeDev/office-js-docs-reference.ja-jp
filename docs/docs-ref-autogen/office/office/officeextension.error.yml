@@ -3,7 +3,7 @@ name: OfficeExtension.Error
 uid: office!OfficeExtension.Error:class
 package: office!
 fullName: OfficeExtension.Error
-summary: で返される error オブジェクト `context.sync()`<!-- -->要求の処理中にエラーが発生したため、promise が拒否された場合。
+summary: によって返される error オブジェクト `context.sync()`<!-- -->、要求の処理中にエラーが発生して約束が拒否された場合。
 remarks: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to insert text in to the beginning of the body.\n    // This will cause an OfficeExtension.Error.\n    body.insertText(0);\n\n    // Synchronize the document state by executing the queued-up commands,\n    // and return a promise to indicate task completion.\n    return context.sync();\n})\n.catch(function (error) {\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Error code and message: ' + error.toString());\n    }\n});\n```"
 isPreview: false
 isDeprecated: false
@@ -13,7 +13,7 @@ properties:
   uid: office!OfficeExtension.Error#code:member
   package: office!
   fullName: code
-  summary: エラーコード文字列 ("InvalidArgument" など)。
+  summary: "\"InvalidArgument\" などのエラー コード文字列。"
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,7 +25,7 @@ properties:
   uid: office!OfficeExtension.Error#debugInfo:member
   package: office!
   fullName: debugInfo
-  summary: デバッグ情報 (エラーの詳細なログ記録に役立ちます。つまり、から) `JSON.stringify(...)`<!-- -->).
+  summary: デバッグ情報 (エラーの詳細なログ記録に役立ちます。つまり、 `JSON.stringify(...)`<!-- -->).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
   uid: office!OfficeExtension.Error#message:member
   package: office!
   fullName: message
-  summary: ホスト Office アプリケーションから渡されたエラーメッセージ。
+  summary: ホスト アプリケーションから渡されたエラー メッセージOfficeします。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -61,7 +61,7 @@ properties:
   uid: office!OfficeExtension.Error#name:member
   package: office!
   fullName: name
-  summary: 'エラー名: "Officeextension.error"。'
+  summary: 'エラー名: "OfficeExtension.Error"'
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -73,7 +73,7 @@ properties:
   uid: office!OfficeExtension.Error#stack:member
   package: office!
   fullName: stack
-  summary: スタックトレース (該当する場合)。
+  summary: スタック トレース (該当する場合)。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -85,7 +85,7 @@ properties:
   uid: office!OfficeExtension.Error#traceMessages:member
   package: office!
   fullName: traceMessages
-  summary: 呼び出し前に呼び出しによって追加されたメッセージをトレースする (存在する場合) `context.trace()``context.sync()`<!-- -->. エラーが発生した場合は、エラーが発生する前に実行されたすべてのトレースメッセージがこれに含まれます。 これらのメッセージは、プログラムの実行シーケンスを監視し、エラーのケースを検出するのに役立ちます。
+  summary: 呼び出し前に呼び出しを介して追加されたトレース メッセージ (メッセージがある `context.trace()` 場合) `context.sync()`<!-- -->. エラーが発生した場合、エラーが発生する前に実行されたすべてのトレース メッセージが含まれます。 これらのメッセージは、プログラムの実行シーケンスを監視し、エラーのケースを検出するのに役立ちます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -95,9 +95,9 @@ properties:
       type: string[]
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example shows how you can instrument a batch of commands\n// to determine where an error occurred. The first batch successfully\n// inserts the first two paragraphs into the document and cause no errors.\n// The second batch successfully inserts the third and fourth paragraphs\n// but fails in the call to insert the fifth paragraph. All other commands\n// after the failed command in the batch are not executed, including the\n// command that adds the fifth trace message. In this case, the error\n// occurred after the fourth paragraph was inserted, and before adding the\n// fifth trace message.\n\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to insert the paragraph at the end of the document body.\n    // Start a batch of commands.\n    body.insertParagraph('1st paragraph', Word.InsertLocation.end);\n    // Queue a command for instrumenting this part of the batch.\n    context.trace('1st paragraph successful');\n\n    body.insertParagraph('2nd paragraph', Word.InsertLocation.end);\n    context.trace('2nd paragraph successful');\n\n    // Synchronize the document state by executing the queued-up commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        // Queue a command to insert the paragraph at the end of the document body.\n        // Start a new batch of commands.\n        body.insertParagraph('3rd paragraph', Word.InsertLocation.end);\n        context.trace('3rd paragraph successful');\n\n        body.insertParagraph('4th paragraph', Word.InsertLocation.end);\n        context.trace('4th paragraph successful');\n\n        // This command will cause an error. The trace messages in the queue up to\n        // this point will be available via Error.traceMessages.\n        body.insertParagraph(0, '5th paragraph', Word.InsertLocation.end);\n        // Queue a command for instrumenting this part of the batch.\n        // This trace message will not be set on Error.traceMessages.\n        context.trace('5th paragraph successful');\n    }).then(context.sync);\n})\n.catch(function (error) {\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Trace messages: ' + error.traceMessages);\n    }\n});\n\n// Output: \"Trace messages: 3rd paragraph successful,4th paragraph successful\"\n```"
 metadata:
-  ms.openlocfilehash: 75eba0056de300845bd306b205c01dc601eeff85
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 831280d0f81efd0294d556842036ed1e439657dd
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49151220"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51358684"
