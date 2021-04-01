@@ -16,15 +16,15 @@
 * 記事に小さな変更を加える方法については、「[GitHub を使用して投稿する](#contribute-using-github)」を参照してください。
 * 大きな変更やコードが関係する変更を加える方法については、「[Git を使用して投稿する](#contribute-using-git)」を参照してください。
 * GitHub の [問題] を使用してドキュメントの不具合を報告します。
-* 「[Office Developer Platform UserVoice](http://officespdev.uservoice.com)」サイトで新しいドキュメントを要求します。
+* Microsoft [365 on Q&で新しいドキュメントを要求](https://docs.microsoft.com/answers/products/m365) します。
 
 ## <a name="contribute-using-github"></a>GitHub を使用して投稿する
 
-> **重要**: このリポジトリの参照コンテンツは自動的に生成されます。 ファイルを編集する前に、[ドキュメントツールのメモ](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)を参照してください。
+> **重要**: このリポジトリの参照コンテンツは自動生成されます。 ファイルを編集する [前に、ドキュメント ツールの注意事項](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md) をお読みください。
 
 リポジトリをデスクトップに複製せずにこのドキュメントに投稿するには、GitHub を使用します。これは、このリポジトリでプル リクエストを作成する最も簡単な方法です。コードの変更に関係しない小さな変更を加えるには、この方法を使用します。
 
-このメソッドを使用すると、一度に1つの記事に投稿できます。
+このメソッドを使用すると、一度に 1 つの記事に投稿できます。
 
 ### <a name="to-contribute-using-github"></a>GitHub を使用して投稿するには
 
