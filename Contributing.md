@@ -15,8 +15,8 @@
 
 * 記事に小さな変更を加える方法については、「[GitHub を使用して投稿する](#contribute-using-github)」を参照してください。
 * 大きな変更やコードが関係する変更を加える方法については、「[Git を使用して投稿する](#contribute-using-git)」を参照してください。
-* GitHub の [問題] を使用してドキュメントの不具合を報告します。
-* Microsoft [365 on Q&で新しいドキュメントを要求](https://docs.microsoft.com/answers/products/m365) します。
+* ドキュメントのバグを報告するには、影響を受ける記事の下部にある [フィードバック] セクションに移動し、[このページ] を選択して GitHub の問題を作成します。 使用できない場合は、GitHub で直接新しい問題 [を作成します](https://github.com/OfficeDev/office-js-docs-reference/issues)。
+* GitHub の問題を [使用して新しいドキュメントを要求します](https://github.com/OfficeDev/office-js-docs-reference/issues)。
 
 ## <a name="contribute-using-github"></a>GitHub を使用して投稿する
 

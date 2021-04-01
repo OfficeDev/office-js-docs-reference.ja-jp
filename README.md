@@ -14,7 +14,7 @@ JavaScript API リファレンスOfficeリポジトリへようこそ。 最適�
 
     > **重要**: このリポジトリの [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) フォルダー内のファイルは変更しない。 そのフォルダー内のすべてのファイルが自動生成され、プル要求を使用して更新することはできません。 [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルの変更を要求するには、このリポジトリに[問題](https://github.com/OfficeDev/office-js-docs-reference/issues)を提出してください。 このリポジトリのツールの詳細については、こちらを参照 [してください](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)。
 
-* プログラミングエクスペリエンス、将来のバージョン、コード サンプルなどでお知らせするために、Q&A の [Microsoft 365 で提案とアイデアを入力](https://docs.microsoft.com/answers/products/m365)してください。
+* プログラミング エクスペリエンス、将来のバージョン、コード サンプルなどで表示する機能についてお知らせするために、Q&A の [Microsoft 365](https://docs.microsoft.com/answers/products/m365)の下に提案とアイデアを入力してください。
 
 ## <a name="join-the-microsoft-365-developer-program"></a>Microsoft 365 開発者プログラムに参加する
 
