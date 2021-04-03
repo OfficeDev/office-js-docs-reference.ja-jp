@@ -96,7 +96,7 @@ properties:
   package: excel!
   fullName: draftMode
   summary: >-
-    ワークシートの下書きモード オプション。 true の場合、グラフィックスなしでシートが印刷されます。
+    ワークシートの下書きモード オプション。 もし `true`<!-- -->を選択すると、シートはグラフィックスなしで印刷されます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -112,7 +112,7 @@ properties:
   package: excel!
   fullName: firstPageNumber
   summary: >-
-    印刷するワークシートの最初のページ番号。 null 値は "自動" ページ番号を表します。
+    印刷するワークシートの最初のページ番号。 値 `null` は、"auto" ページ番号を表します。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -355,7 +355,7 @@ methods:
   package: excel!
   fullName: getPrintArea()
   summary: >-
-    ワークシートの印刷範囲を表し、1 つまたは複数の長方形範囲で構成される RangeAreas オブジェクトを取得します。 印刷範囲がない場合、ItemNotFound エラーがスローされます。
+    ワークシートの印刷領域を表す 1 つ以上の四角形の範囲を含む `RangeAreas` オブジェクトを取得します。 印刷領域がない場合は、エラー `ItemNotFound` がスローされます。
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -372,7 +372,7 @@ methods:
   package: excel!
   fullName: getPrintAreaOrNullObject()
   summary: >-
-    ワークシートの印刷範囲を表し、1 つまたは複数の長方形範囲で構成される RangeAreas オブジェクトを取得します。 印刷範囲がない場合、null オブジェクトが返されます。
+    ワークシートの印刷領域を表す 1 つ以上の四角形の範囲を含む `RangeAreas` オブジェクトを取得します。 印刷領域がない場合、この関数はプロパティが設定されている `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -406,7 +406,7 @@ methods:
   package: excel!
   fullName: getPrintTitleColumnsOrNullObject()
   summary: >-
-    タイトル列を表す範囲オブジェクトを取得します。 設定されていない場合、null オブジェクトが返されます。
+    タイトル列を表す範囲オブジェクトを取得します。 設定しない場合、この関数はプロパティが設定されている `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -440,7 +440,7 @@ methods:
   package: excel!
   fullName: getPrintTitleRowsOrNullObject()
   summary: >-
-    タイトル行を表す範囲オブジェクトを取得します。 設定されていない場合、null オブジェクトが返されます。
+    タイトル行を表す範囲オブジェクトを取得します。 設定しない場合、この関数はプロパティが設定されている `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -568,7 +568,7 @@ methods:
     content: 'setPrintArea(printArea: Range | RangeAreas | string): void;'
     parameters:
     - id: printArea
-      description: 印刷するコンテンツの範囲、または RangeAreas。
+      description: 印刷するコンテンツの範囲または範囲。
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     return:
       type: void
@@ -592,7 +592,7 @@ methods:
       description: 指定された余白の測定単位。
       type: <xref uid="excel!Excel.PrintMarginUnit:enum" />
     - id: marginOptions
-      description: 設定する余白の値、指定されていない余白は変更されません。
+      description: 設定する余白の値。 指定されていない余白は変更されません。
       type: <xref uid="excel!Excel.PageLayoutMarginOptions:interface" />
     return:
       type: void
@@ -616,7 +616,7 @@ methods:
       description: 指定された余白の測定単位。
       type: "\"Points\" | \"Inches\" | \"Centimeters\""
     - id: marginOptions
-      description: 設定する余白の値、指定されていない余白は変更されません。
+      description: 設定する余白の値。 指定されていない余白は変更されません。
       type: <xref uid="excel!Excel.PageLayoutMarginOptions:interface" />
     return:
       type: void
@@ -637,7 +637,7 @@ methods:
     content: 'setPrintTitleColumns(printTitleColumns: Range | string): void;'
     parameters:
     - id: printTitleColumns
-      description: 各ページの左側に繰り返される列は、範囲が有効な列全体にまたがっている必要があります。
+      description: 各ページの左側に繰り返される列。 有効な範囲は、列全体にまたがる必要があります。
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: void
@@ -658,7 +658,7 @@ methods:
     content: 'setPrintTitleRows(printTitleRows: Range | string): void;'
     parameters:
     - id: printTitleRows
-      description: 各ページの上部で繰り返される行の範囲は、有効な行全体にまたがる必要があります。
+      description: 各ページの上部で繰り返される行。 有効な範囲は、行全体にまたがる必要があります。
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: void
@@ -678,9 +678,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 343e9441690c58247c5ab9f374f98be9da0eae44
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: eac569d1e3d23abf517547076d9f8dd944f6c81d
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51254841"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51522155"
