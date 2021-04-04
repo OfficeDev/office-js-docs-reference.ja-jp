@@ -233,7 +233,7 @@ methods:
   package: excel!
   fullName: getCell(row, column)
   summary: >-
-    行と列の番号に基づいて、1 つのセルを含んだ範囲オブジェクトを取得します。 セルは、ワークシート グリッド内にある限り、親範囲の境界外に配置できます。
+    行番号 `Range` と列番号に基づいて 1 つのセルを含むオブジェクトを取得します。 セルは、ワークシート グリッド内にある限り、親範囲の境界外に配置できます。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -268,7 +268,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -278,7 +278,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    このワークシートに続くワークシートを取得します。 この後にワークシートがない場合、このメソッドは null オブジェクトを返します。
+    このワークシートに続くワークシートを取得します。 このワークシートの後にワークシートがない場合、このメソッドはプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -289,7 +289,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -310,7 +310,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -320,7 +320,7 @@ methods:
   package: excel!
   fullName: getPreviousOrNullObject(visibleOnly)
   summary: >-
-    このワークシートの前のワークシートを取得します。 以前のワークシートがない場合、このメソッドは null の objet を返します。
+    このワークシートの前のワークシートを取得します。 以前のワークシートがない場合、このメソッドはプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -331,7 +331,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能。 true の場合は、非表示のワークシートをスキップして、表示されているワークシートのみを考慮します。
+      description: 省略可能。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -341,7 +341,7 @@ methods:
   package: excel!
   fullName: getRange(address)
   summary: >-
-    アドレスまたは名前で指定されたセルの 1 つの四角形のブロックを表す range オブジェクトを取得します。
+    アドレスまたは名前で指定された 1 つの四角形のセル ブロックを表す `Range` オブジェクトを取得します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -373,7 +373,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: '省略可能。 true の場合、値が使用されているセルのみを使用セルと見なします (書式設定を無視します)。 \[Api セット: ExcelApi 1.2\]'
+      description: '省略可能。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -383,7 +383,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。ワークシート全体が空白の場合、この関数は null オブジェクトを返します。
+    使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。 ワークシート全体が空白の場合、この関数はプロパティを次に設定した `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -514,9 +514,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 06d2f5841d09f58609e3fda1bb5f4233e7a6bc42
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 31061698bdad183ecfca4f14c0da8b0bf77a5b1d
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51362422"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51555020"
