@@ -34,7 +34,7 @@ properties:
   package: excel!
   fullName: addressLocal
   summary: >-
-    ユーザーの言語で指定した範囲の範囲参照を指定します。
+    ユーザーの言語で指定した範囲の範囲参照を表します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -288,7 +288,7 @@ properties:
   package: excel!
   fullName: text
   summary: >-
-    指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 \#Excel UI で行う符号の置換は、API によって返されるテキスト値には影響しません。
+    指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 Excel UI で発生する数値記号 ( ) の置換は、API によって返されるテキスト \# 値には影響しません。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -304,7 +304,7 @@ properties:
   package: excel!
   fullName: values
   summary: >-
-    指定した範囲の Raw 値を表します。 返されるデータの型は、文字列、数値、ブール値のいずれかになります。 エラーが含まれているセルは、エラー文字列を返します。
+    指定した範囲の Raw 値を表します。 返されるデータには、文字列、数値、またはブール値を指定できます。 エラーが含まれているセルは、エラー文字列を返します。 戻り値がプラス ("+")、マイナス ("-")、または等号 ("=") で始まる場合、Excel は、この値を数式として解釈します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -364,7 +364,7 @@ methods:
     content: 'clear(applyTo?: Excel.ClearApplyTo): void;'
     parameters:
     - id: applyTo
-      description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel.ClearApplyTo」を参照してください。
+      description: 省略可能。 クリア操作の種類を決定します。 詳細は「`Excel.ClearApplyTo`」をご覧ください。
       type: <xref uid="excel!Excel.ClearApplyTo:enum" />
     return:
       type: void
@@ -385,7 +385,7 @@ methods:
     content: 'clear(applyToString?: "All" | "Formats" | "Contents" | "Hyperlinks" | "RemoveHyperlinks"): void;'
     parameters:
     - id: applyToString
-      description: 省略可能。 クリア操作の種類を決定します。 詳細については、「Excel.ClearApplyTo」を参照してください。
+      description: 省略可能。 クリア操作の種類を決定します。 詳細は「`Excel.ClearApplyTo`」をご覧ください。
       type: "\"All\" | \"Formats\" | \"Contents\" | \"Hyperlinks\" | \"RemoveHyperlinks\""
     return:
       type: void
@@ -406,7 +406,7 @@ methods:
     content: 'delete(shift: Excel.DeleteShiftDirection): void;'
     parameters:
     - id: shift
-      description: セルをシフトする方向を指定します。 詳細については、「Excel.DeleteShiftDirection」を参照してください。
+      description: セルをシフトする方向を指定します。 詳細は「`Excel.DeleteShiftDirection`」をご覧ください。
       type: <xref uid="excel!Excel.DeleteShiftDirection:enum" />
     return:
       type: void
@@ -427,7 +427,7 @@ methods:
     content: 'delete(shiftString: "Up" | "Left"): void;'
     parameters:
     - id: shiftString
-      description: セルをシフトする方向を指定します。 詳細については、「Excel.DeleteShiftDirection」を参照してください。
+      description: セルをシフトする方向を指定します。 詳細は「`Excel.DeleteShiftDirection`」をご覧ください。
       type: "\"Up\" | \"Left\""
     return:
       type: void
@@ -437,7 +437,7 @@ methods:
   package: excel!
   fullName: getBoundingRect(anotherRange)
   summary: >-
-    指定した範囲を包含する、最小の Range オブジェクトを取得します。 たとえば、"B2:C5" と "D10:E15" の GetBoundingRect は、"B2:E15" になります。
+    指定した範囲を包含する、最小の Range オブジェクトを取得します。 たとえば `GetBoundingRect` 、"B2:C5" と "D10:E15" の値は "B2:E15" です。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -448,7 +448,7 @@ methods:
     content: 'getBoundingRect(anotherRange: Range | string): Excel.Range;'
     parameters:
     - id: anotherRange
-      description: Range オブジェクト、アドレスまたは範囲名。
+      description: range オブジェクト、アドレス、または範囲の名前。
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -503,7 +503,7 @@ methods:
   package: excel!
   fullName: getColumnsAfter(count)
   summary: >-
-    現在の Range オブジェクトの右にある特定の列数を取得します。
+    現在のオブジェクトの右側にある特定の数の列を取得 `Range` します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -524,7 +524,7 @@ methods:
   package: excel!
   fullName: getColumnsBefore(count)
   summary: >-
-    現在の Range オブジェクトの左にある特定の列数を取得します。
+    現在のオブジェクトの左側にある特定の数の列を取得 `Range` します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -600,7 +600,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差部分が見つからない場合は、null オブジェクトを返します。
+    指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差が見つからない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -696,7 +696,7 @@ methods:
   package: excel!
   fullName: getResizedRange(deltaRows, deltaColumns)
   summary: >-
-    現在の Range オブジェクトに似た (ただし、右下隅がいくつかの行と列で拡張 (または縮小) されている) Range オブジェクトを取得します。
+    現在のオブジェクトに似たオブジェクトを取得しますが、右下隅がいくつかの行と列で展開 (または契約 `Range` `Range` ) されます。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -741,7 +741,7 @@ methods:
   package: excel!
   fullName: getRowsAbove(count)
   summary: >-
-    現在の Range オブジェクトの上にある特定の行数を取得します。
+    現在のオブジェクトの上にある特定の数の行を取得 `Range` します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -762,7 +762,7 @@ methods:
   package: excel!
   fullName: getRowsBelow(count)
   summary: >-
-    現在の Range オブジェクトの下にある特定の行数を取得します。
+    現在のオブジェクトの下の行の特定の数を取得 `Range` します。
 
 
     \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -783,7 +783,7 @@ methods:
   package: excel!
   fullName: getUsedRange(valuesOnly)
   summary: >-
-    指定した範囲オブジェクトのうち使用されている範囲を返します。範囲内に使用済みのセルがない場合、この関数は ItemNotFound エラーをスローします。
+    指定した範囲オブジェクトのうち使用されている範囲を返します。 範囲内に使用されているセルがない場合、この関数はエラーをスロー `ItemNotFound` します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -804,7 +804,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    指定した範囲オブジェクトのうち使用されている範囲を返します。範囲内に使用済みのセルがない場合、この関数は null オブジェクトを返します。
+    指定した範囲オブジェクトのうち使用されている範囲を返します。 範囲内に使用されているセルがない場合、この関数はプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -842,7 +842,7 @@ methods:
   package: excel!
   fullName: insert(shift)
   summary: >-
-    この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。この時点で空き領域に位置する、新しい Range オブジェクトが返されます。
+    この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域 `Range` に新しいオブジェクトを返します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -853,7 +853,7 @@ methods:
     content: 'insert(shift: Excel.InsertShiftDirection): Excel.Range;'
     parameters:
     - id: shift
-      description: セルをシフトする方向を指定します。 詳細については、「Excel.InsertShiftDirection」を参照してください。
+      description: セルをシフトする方向を指定します。 詳細は「`Excel.InsertShiftDirection`」をご覧ください。
       type: <xref uid="excel!Excel.InsertShiftDirection:enum" />
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -863,7 +863,7 @@ methods:
   package: excel!
   fullName: insert(shiftString)
   summary: >-
-    この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。この時点で空き領域に位置する、新しい Range オブジェクトが返されます。
+    この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域 `Range` に新しいオブジェクトを返します。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -874,7 +874,7 @@ methods:
     content: 'insert(shiftString: "Down" | "Right"): Excel.Range;'
     parameters:
     - id: shiftString
-      description: セルをシフトする方向を指定します。 詳細については、「Excel.InsertShiftDirection」を参照してください。
+      description: セルをシフトする方向を指定します。 詳細は「`Excel.InsertShiftDirection`」をご覧ください。
       type: "\"Down\" | \"Right\""
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -954,7 +954,7 @@ methods:
     content: 'merge(across?: boolean): void;'
     parameters:
     - id: across
-      description: 省略可能。 指定した範囲のセルを行ごとに結合して、行ごとに別のセルを作成する場合は True に設定します。 既定値は False です。
+      description: 省略可能。 指定 `true` した範囲の各行のセルを個別の結合セルとして結合します。 既定値は次の値です。 `false`<!-- -->.
       type: boolean
     return:
       type: void
@@ -1071,9 +1071,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: db9e7fde956aceccd6a9115443904b3a671fe6d4
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 17ea418ab57a31280c6cd8439278576a3dd58dc9
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51229886"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51567140"
