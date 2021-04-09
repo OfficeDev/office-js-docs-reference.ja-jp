@@ -96,14 +96,72 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: recipients
       description: 受信者リストに追加する受信者。
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(recipients, callback)
+  uid: outlook!Office.Recipients#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(recipients, callback)
+  summary: >-
+    予定やメッセージの既存の受信者に、受信者のリストを追加します。
+
+
+    recipients パラメーターには、次のいずれかの配列を指定できます。
+
+
+    - SMTP 電子メールアドレスを含む文字列
+
+
+    - [EmailUser](xref:outlook!Office.EmailUser:interface) オブジェクト
+
+
+    - [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクト
+
+
+    追加できる最大数:
+
+
+    - Windows: 100 受信者。 **注**: API を繰り返し呼び出す場合がありますが、アイテムのターゲット フィールドの受信者の最大数は 500 人です。
+
+
+    - Mac、Web ブラウザー: 100 人の受信者
+
+
+    - その他: 制限なし
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+
+
+    **エラー**:
+
+
+    - `NumberOfRecipientsExceeded`<!-- -->: 受信者の数が 100 エントリを超えました。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: 受信者リストに追加する受信者。
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 受信者の追加に失敗すると、`asyncResult.error` プロパティにエラー コードが格納されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -534,9 +592,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 6c556fbfaee8862a8db41b08606f9b82ffdf9a86
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4603e7c31afe0a9a0ca208068e379a64fb5af4b0
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51252601"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51658883"

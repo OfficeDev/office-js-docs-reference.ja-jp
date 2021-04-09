@@ -312,7 +312,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: ハンドラーを呼び出す必要のあるイベント。
@@ -321,8 +321,42 @@ methods:
       description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、渡された `eventType` パラメーターと一致します。 `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: 省略可能。 コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.Mailbox#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    サポートされているイベントのイベント ハンドラーを追加します。 **注**: イベントは作業ウィンドウでのみ使用できます。
+
+
+    サポートされるイベントについては、「Mailbox オブジェクト モデル [イベント」](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) セクションを参照してください。
+
+
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: ハンドラーを呼び出す必要のあるイベント。
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーターの type プロパティは、渡された `eventType` パラメーターと一致します。 `addHandlerAsync`<!-- -->.
+      type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -606,14 +640,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayAppointmentFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayAppointmentFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: 既存の予定の Exchange Web サービス (EWS) 識別子。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayAppointmentFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayAppointmentFormAsync(itemId, callback)
+  summary: >-
+    既存の予定を表示します。
+
+
+    `displayAppointmentFormAsync` メソッドは、デスクトップ上の新しいウィンドウやモバイル デバイス上のダイアログ ボックスに既存の予定を開きます。
+
+
+    Outlook on Mac では、このメソッドを使用して、定期的なシリーズの一部ではない単一の予定、または定期的なシリーズのマスター予定を表示できます。 ただし、定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないので、系列のインスタンスを表示できない。
+
+
+    Outlook on the web では、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+
+
+    指定したアイテム識別子が既存の予定を識別しない場合、クライアント コンピューターまたはデバイスで空白のウィンドウが開き、エラー メッセージは返されません。
+
+
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
+
+
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayAppointmentFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: 既存の予定の Exchange Web サービス (EWS) 識別子。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -724,14 +801,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayMessageFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayMessageFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: 既存のメッセージの Exchange Web サービス (EWS) 識別子。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayMessageFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayMessageFormAsync(itemId, callback)
+  summary: >-
+    既存のメッセージを表示します。
+
+
+    `displayMessageFormAsync` メソッドは、デスクトップ上の新しいウィンドウやモバイル デバイス上のダイアログ ボックスに既存のメッセージを開きます。
+
+
+    Outlook on the web では、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+
+
+    指定されたアイテム識別子が既存のメッセージを識別しない場合、クライアント コンピューターにメッセージは表示されません。エラー メッセージは返されません。
+
+
+    予定を表 `displayMessageForm` す `displayMessageFormAsync` itemId と一緒に or メソッドを使用しない。 or メソッドを使用して、既存の予定を表示したり、フォームを表示して新しい予定 `displayAppointmentForm` `displayAppointmentFormAsync` `displayNewAppointmentForm` `displayNewAppointmentFormAsync` を作成したりします。
+
+
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
+
+
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayMessageFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: 既存のメッセージの Exchange Web サービス (EWS) 識別子。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -872,14 +992,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: 新 `AppointmentForm` しい予定を説明します。 すべてのプロパティはオプションです。
       type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewAppointmentFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewAppointmentFormAsync(parameters, callback)
+  summary: >-
+    新しい予定を作成するためのフォームを表示します。
+
+
+    `displayNewAppointmentFormAsync` メソッドを使用すると、ユーザーが新しい予定または会議を作成できるフォームが開きます。パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
+
+
+    Outlook on the web では、このメソッドは常に出席者フィールドを持つフォームを表示します。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
+
+
+    Outlook リッチ クライアントと Outlook RT で、出席者またはリソースを指定する場合は、 `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->、または `resources` パラメーターの場合、このメソッドは [送信] ボタンを使用して会議フォーム **を表示** します。 受信者を指定しない場合、このメソッドは [閉じる保存] ボタンを使用して予定フォーム **を &amp; 表示** します。
+
+
+    パラメーターのいずれかが指定のサイズ制限を超える場合、または不明なパラメーター名が指定されている場合は、例外がスローされます。
+
+
+    **注**: このメソッドは、Outlook on iOS または Android ではサポートされていません。
+
+
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: 新 `AppointmentForm` しい予定を説明します。 すべてのプロパティはオプションです。
+      type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1033,7 +1196,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewMessageFormAsync(parameters: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewMessageFormAsync(parameters: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: >-
@@ -1073,8 +1236,76 @@ methods:
         `attachments.itemId`<!-- -->: type が item に設定されている場合にのみ使用されます。 新しいメッセージに添付する、既存の電子メールの EWS 項目の id です。 最大の長さが 100 文字の文字列です。
       type: any
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewMessageFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewMessageFormAsync(parameters, callback)
+  summary: >-
+    新しいメッセージを作成するためのフォームを表示します。
+
+
+    The `displayNewMessageFormAsync` method opens a form that enables the user to create a new message. If parameters are specified, the message form fields are automatically populated with the contents of the parameters.
+
+
+    パラメータのいずれかが指定されたサイズ制限を超えた場合、または不明なパラメータ名が指定された場合には、例外がスローされます。
+
+
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewMessageFormAsync(parameters: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: >-
+        新しいフォームでユーザーに入力するすべての値を含む辞書。 すべてのパラメーターは省略可能です。
+
+
+        `toRecipients`<!-- -->: 宛先行の各受信者のメール アドレスまたは [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む配列を含む文字列 **の配列** 。 配列の上限は 100 エントリです。
+
+
+        `ccRecipients`<!-- -->: 電子メール アドレスを含む文字列の配列、または Cc 行の各受信者の [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) オブジェクトを含む **配列** 。 配列の上限は 100 エントリです。
+
+
+        `bccRecipients`<!-- -->: 電子メール アドレスを含む文字列の配列、または **Bcc** 行の各受信者の [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)オブジェクトを含む配列。 配列の上限は 100 エントリです。
+
+
+        `subject`<!-- -->: メッセージの件名を含む文字列。 文字列は最大 255 文字に制限されます。
+
+
+        `htmlBody`<!-- -->: メッセージの HTML 本文。 本文の内容は、最大サイズが 32 KB に制限されます。
+
+
+        `attachments`<!-- -->: ファイルまたはアイテムの添付ファイルである JSON オブジェクトの配列。
+
+
+        `attachments.type`<!-- -->: 添付ファイルの種類を示します。 アイテム添付ファイルのファイルまたはアイテムの添付ファイルである必要があります。
+
+
+        `attachments.name`<!-- -->: 添付ファイルの名前を含む文字列で、最大 255 文字の長さ。
+
+
+        `attachments.url`<!-- -->: type が file に設定されている場合にのみ使用されます。 ファイルの場所の URI。
+
+
+        `attachments.isInline`<!-- -->: type が file に設定されている場合にのみ使用されます。 true の場合は、添付ファイルがメッセージ本文にインラインで表示され、添付ファイルの一覧には表示されません。
+
+
+        `attachments.itemId`<!-- -->: type が item に設定されている場合にのみ使用されます。 新しいメッセージに添付する、既存の電子メールの EWS 項目の id です。 最大の長さが 100 文字の文字列です。
+      type: any
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1490,13 +1721,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: ハンドラーを取り消すイベント。
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: 省略可能。 コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
@@ -1504,10 +1735,41 @@ methods:
     return:
       type: void
       description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.Mailbox#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    サポートされているイベントの種類のイベント ハンドラーを削除します。 **注**: イベントは作業ウィンドウでのみ使用できます。
+
+
+    サポートされるイベントについては、「Mailbox オブジェクト モデル [イベント」](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) セクションを参照してください。
+
+
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: ハンドラーを取り消すイベント。
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: d4233db73fe9226e389c6aa49f1888e714018ee8
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: e0cc9dbbf79a84b1df777156a9544d5790aec8c2
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51338795"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660527"

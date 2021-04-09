@@ -191,13 +191,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(dateTime: Date, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(dateTime: Date, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: dateTime
       description: 協定世界時 (UTC) の日時オブジェクト。
       type: Date
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
@@ -205,10 +205,53 @@ methods:
     return:
       type: void
       description: ''
+- name: setAsync(dateTime, callback)
+  uid: outlook!Office.Time#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(dateTime, callback)
+  summary: >-
+    予定の開始または終了の時刻を設定します。
+
+
+    メソッドが start プロパティで呼び出された場合、プロパティは以前に設定した予定の期間を `setAsync` `end` 維持するために調整されます。 プロパティで `setAsync` メソッドが呼び出された場合、予定の期間は新しい終了 `end` 時刻まで延長されます。
+
+
+    この時刻は UTC でなければなりません。`convertToUtcClientTime` メソッドを使用して、正確な UTC 時刻を取得できます。
+
+
+    **重要**: Windows クライアントでは、この関数を使用して定期的な開始または終了を更新することはできません。
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+
+
+    **エラー**:
+
+
+    - `InvalidEndTime`<!-- -->: 予定の終了時刻は、予定の開始時刻より前です。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(dateTime: Date, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: dateTime
+      description: 協定世界時 (UTC) の日時オブジェクト。
+      type: Date
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 日付と時刻の設定が失敗した場合、`asyncResult.error` プロパティにはエラー コードが格納されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 5a3d71ca79bd9357f073d4175430343eadc697d1
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5e283e8dabe220dacaeebb63e68fe9ecc627f27a
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51252937"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51658553"
