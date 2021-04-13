@@ -539,7 +539,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: uri
       description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
@@ -548,8 +548,60 @@ methods:
       description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: true の場合は、添付ファイルがメッセージ本文にインラインで表示され、添付ファイルの一覧には表示されません。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `isInline`<!-- -->: true の場合は、添付ファイルがメッセージ本文にインラインで表示され、添付ファイルの一覧には表示されません。'
       type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentAsync(uri, attachmentName, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addFileAttachmentAsync(uri, attachmentName, callback)
+  summary: >-
+    ファイルを添付ファイルとしてメッセージまたは予定に追加します。
+
+
+    `addFileAttachmentAsync` メソッドは、指定した URI にあるファイルをアップロードし、新規作成フォーム内のアイテムに添付します。
+
+
+    その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+
+
+    **重要**: Windows 上の Outlook の最近のビルドでは、このアクションにヘッダーが誤って追加されるバグが発生しました (この API または Outlook UI を使用するかどうか `Authorization: Bearer` )。 この問題を回避するには、要件セット `addFileAttachmentFromBase64` 1.8 で導入された API を使用してみてください。
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `AttachmentSizeExceeded`<!-- -->: 添付ファイルが許可されているよりも大きい。
+
+
+    - `FileTypeNotSupported`<!-- -->: 添付ファイルには、使用できない拡張子があります。
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定の添付ファイルが多すぎます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: uri
+      description: メッセージまたは予定に添付するファイルの場所を示す URI。 最大長は 2048 文字です。
+      type: string
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルのアップロードに失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
@@ -632,7 +684,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: itemId
       description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
@@ -641,8 +693,54 @@ methods:
       description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addItemAttachmentAsync(itemId, attachmentName, callback)
+  uid: outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addItemAttachmentAsync(itemId, attachmentName, callback)
+  summary: >-
+    メッセージなどの Exchange アイテムを添付ファイルとして、メッセージまたは予定に追加します。
+
+
+    メソッド `addItemAttachmentAsync` は、指定した Exchange 識別子を持つアイテムを、作成フォーム内のアイテムに添付します。 コールバック メソッドを指定すると、メソッドは 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->は、添付ファイル識別子またはアイテムの添付中に発生したエラーを示すコードを含む。 options パラメーターを使用すると、必要に応じて状態情報をコールバック メソッドに渡します。
+
+
+    その後、`removeAttachmentAsync` メソッドで識別子を使用して同じセッションの添付ファイルを削除できます。
+
+
+    Office アドインを Outlook on the web で実行している場合、編集中のアイテム以外のアイテムに `addItemAttachmentAsync` メソッドでアイテムを添付できます。ただし、これはサポートされていないため、お勧めできません。
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: メッセージまたは予定の添付ファイルが多すぎます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: itemId
+      description: 添付するアイテムの Exchange 識別子。 最大長は 100 文字です。
+      type: any
+    - id: attachmentName
+      description: 添付ファイルのアップロード時に表示される添付ファイルの名前。 最大長は 255 文字です。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 成功すると、添付ファイルの識別子が `asyncResult.value` プロパティに設定されます。 添付ファイルの追加に失敗した場合、`asyncResult` オブジェクトには、エラーの説明を提供する `Error` オブジェクトが含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
@@ -895,14 +993,51 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: attachmentId
       description: 削除する添付ファイルの識別子。 Outlook on the web および Windows の最大文字列長は `attachmentId` 200 文字です。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAttachmentAsync(attachmentId, callback)
+  uid: outlook!Office.MessageCompose#removeAttachmentAsync:member(2)
+  package: outlook!
+  fullName: removeAttachmentAsync(attachmentId, callback)
+  summary: >-
+    メッセージまたは予定から添付ファイルを削除します。
+
+
+    `removeAttachmentAsync` メソッドは、指定した識別子の添付ファイルをアイテムから削除します。 ベスト プラクティスとして、同じメール アプリが同じセッションで添付ファイルを追加した場合にのみ、その添付ファイルの識別子を使用して添付ファイルを削除することをお勧めします。 Outlook on the web とモバイル デバイスでは、添付ファイル識別子は同じセッション内でのみ有効です。 ユーザーがアプリを閉じるとセッションが終了するか、ユーザーがインライン フォームの作成を開始すると、その後フォームがポップアップ表示され、別のウィンドウで続行されます。
+
+
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: 削除する添付ファイルの識別子。 Outlook on the web および Windows の最大文字列長は `attachmentId` 200 文字です。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 添付ファイルの削除に失敗すると、`asyncResult.error` プロパティにはエラー コードとエラーの理由が含まれます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1076,14 +1211,51 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
       description: 挿入されるデータ。データの最大の長さは 1,000,000 文字です。1,000,000 文字を超えるデータが渡されると、`ArgumentOutOfRange` 例外がスローされます。
       type: string
     - id: options
-      description: '省略可能。 次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: テキストの場合、現在のスタイルは Outlook on the web クライアントとデスクトップ クライアントに適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でもテキスト データのみが挿入されます。 HTML とフィールドが HTML をサポートしている場合 (件名がサポートしない場合)、現在のスタイルは Outlook on the web に適用され、既定のスタイルは Outlook on desktop クライアントに適用されます。 フィールドがテキスト フィールドの場合、`InvalidDataFormat` エラーが返されます。 `coercionType` が設定されていない場合、結果はフィールドによって変わります。フィールドが HTML の場合は HTML が使用されます。フィールドがテキストの場合はプレーン テキストが使用されます。'
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: テキストの場合、現在のスタイルは Outlook on the web クライアントとデスクトップ クライアントに適用されます。 フィールドが HTML エディターの場合、データが HTML の場合でもテキスト データのみが挿入されます。 HTML とフィールドが HTML をサポートしている場合 (件名がサポートしない場合)、現在のスタイルは Outlook on the web に適用され、既定のスタイルは Outlook on desktop クライアントに適用されます。 フィールドがテキスト フィールドの場合、`InvalidDataFormat` エラーが返されます。 `coercionType` が設定されていない場合、結果はフィールドによって変わります。フィールドが HTML の場合は HTML が使用されます。フィールドがテキストの場合はプレーン テキストが使用されます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.MessageCompose#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    メッセージの本文または件名に非同期的にデータを挿入します。
+
+
+    `setSelectedDataAsync` メソッドは、指定された文字列をアイテムのサブジェクトまたは本文のカーソル位置に挿入します。または、エディターでテキストが選択されている場合は、選択されたテキストを置き換えます。本文または件名フィールド内にカーソルがない場合は、エラーが返されます。挿入後、カーソルは挿入されたコンテンツの末尾に置かれます。
+
+
+    \[[API セット: メールボックス 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: メッセージの作成
+
+
+    **エラー**:
+
+
+    - `InvalidAttachmentId`<!-- -->: 添付ファイル識別子が存在しません。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 挿入されるデータ。データの最大の長さは 1,000,000 文字です。1,000,000 文字を超えるデータが渡されると、`ArgumentOutOfRange` 例外がスローされます。
+      type: string
     - id: callback
       description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1092,9 +1264,9 @@ methods:
       description: ''
 extends: <xref uid="outlook!Office.Message:interface" />
 metadata:
-  ms.openlocfilehash: d7d5ba72beb2e590c1d17f03e967f3bf261f1ec8
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4b2496621a53b71362d687f86da0d6d7ec03b9f9
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51234457"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660065"
