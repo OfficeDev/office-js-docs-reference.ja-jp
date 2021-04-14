@@ -203,213 +203,6 @@ properties:
     content: 'readonly names: Excel.NamedItemCollection;'
     return:
       type: <xref uid="excel!Excel.NamedItemCollection:class" />
-- name: onActivated
-  uid: excel!Excel.Worksheet#onActivated:member
-  package: excel!
-  fullName: onActivated
-  summary: >-
-    ワークシートがアクティブ化されると発生します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetActivatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onActivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The activated worksheet ID is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
-- name: onCalculated
-  uid: excel!Excel.Worksheet#onCalculated:member
-  package: excel!
-  fullName: onCalculated
-  summary: >-
-    ワークシートの計算時に発生します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onCalculated: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetCalculatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onCalculated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The worksheet has recalculated.\");\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
-- name: onChanged
-  uid: excel!Excel.Worksheet#onChanged:member
-  package: excel!
-  fullName: onChanged
-  summary: >-
-    特定のワークシートでデータが変更された場合に発生します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetChangedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-worksheet.yaml\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onChanged.add(onChange);\n    await context.sync();\n\n    console.log(\"Added a worksheet-level data-changed event handler.\");\n});\n```"
-- name: onColumnSorted
-  uid: excel!Excel.Worksheet#onColumnSorted:member
-  package: excel!
-  fullName: onColumnSorted
-  summary: >-
-    1 つ以上の列を並べ替えたときに発生します。 これは、左から右の並べ替え操作の結果として発生します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onColumnSorted: OfficeExtension.EventHandlers<Excel.WorksheetColumnSortedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetColumnSortedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-column-and-row-sort.yaml\nawait Excel.run(async (context) => {\n    console.log(\"Adding column handler\");\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n    // This will fire whenever a column has been moved as the result of a sort action.\n    sheet.onColumnSorted.add((event) => {\n        return Excel.run((context) => {\n            console.log(\"Column sorted: \" + event.address);\n            const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n            // Clear formatting for section, then highlight the sorted area.\n            sheet.getRange(\"A1:E5\").format.fill.clear();\n            if (event.address !== \"\") {\n                sheet.getRanges(event.address).format.fill.color = \"yellow\";\n            }\n\n            return context.sync();\n        });\n    });\n});\n```"
-- name: onDeactivated
-  uid: excel!Excel.Worksheet#onDeactivated:member
-  package: excel!
-  fullName: onDeactivated
-  summary: >-
-    ワークシートが非アクティブ化された場合に発生します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetDeactivatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onDeactivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The deactivated worksheet is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
-- name: onFiltered
-  uid: excel!Excel.Worksheet#onFiltered:member
-  package: excel!
-  fullName: onFiltered
-  summary: >-
-    特定のワークシートにフィルターが適用されると発生します。
-
-
-    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFilteredEventArgs:interface" />&gt;
-- name: onFormatChanged
-  uid: excel!Excel.Worksheet#onFormatChanged:member
-  package: excel!
-  fullName: onFormatChanged
-  summary: >-
-    フォーマットが特定のワークシートで変更されたときに発生します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
-- name: onFormulaChanged
-  uid: excel!Excel.Worksheet#onFormulaChanged:member
-  package: excel!
-  fullName: onFormulaChanged
-  summary: >-
-    このワークシートで 1 つ以上の数式が変更された場合に発生します。 このイベントは、数式自体が変更された場合のイベントで、数式の計算に起因するデータ値ではありません。
-
-
-    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
-- name: onRowHiddenChanged
-  uid: excel!Excel.Worksheet#onRowHiddenChanged:member
-  package: excel!
-  fullName: onRowHiddenChanged
-  summary: >-
-    特定のワークシートで 1 つ以上の行の非表示状態が変更された場合に発生します。
-
-
-    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetRowHiddenChangedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onRowHiddenChanged.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(`Row ${event.address} is now ${event.changeType}`);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
-- name: onRowSorted
-  uid: excel!Excel.Worksheet#onRowSorted:member
-  package: excel!
-  fullName: onRowSorted
-  summary: >-
-    1 つ以上の行を並べ替えたときに発生します。 これは、上から下に並べ替えを実行したときに発生します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onRowSorted: OfficeExtension.EventHandlers<Excel.WorksheetRowSortedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetRowSortedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-column-and-row-sort.yaml\nawait Excel.run(async (context) => {\n    console.log(\"Adding row handler\");\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n    // This will fire whenever a row has been moved as the result of a sort action.\n    sheet.onRowSorted.add((event) => {\n        return Excel.run((context) => {\n            console.log(\"Row sorted: \" + event.address);\n            const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n            // Clear formatting for section, then highlight the sorted area.\n            sheet.getRange(\"A1:E5\").format.fill.clear();\n            if (event.address !== \"\") {\n                sheet.getRanges(event.address).format.fill.color = \"yellow\";\n            }\n\n            return context.sync();\n        });\n    });\n});\n```"
-- name: onSelectionChanged
-  uid: excel!Excel.Worksheet#onSelectionChanged:member
-  package: excel!
-  fullName: onSelectionChanged
-  summary: >-
-    特定のワークシートで選択範囲が変更された場合に発生します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSelectionChangedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onSelectionChanged.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The selected range has changed to: \" + event.address);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
-- name: onSingleClicked
-  uid: excel!Excel.Worksheet#onSingleClicked:member
-  package: excel!
-  fullName: onSingleClicked
-  summary: >-
-    ワークシートで左クリック/タップ操作が行われると発生します。 このイベントは、次の場合にクリックしても発生しない。
-
-
-    - ユーザーはマウスをドラッグして複数選択します。
-
-
-    - 数式参照のセル引数が選択されている場合、ユーザーはモード内のセルを選択します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
-    return:
-      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSingleClickedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-worksheet-single-click.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onSingleClicked.add((event) => {\n        return Excel.run((context) => {\n            console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);\n            return context.sync();\n        });\n    });\n\n    console.log(\"The worksheet click handler is registered.\");\n\n    await context.sync();\n});\n```"
 - name: pageLayout
   uid: excel!Excel.Worksheet#pageLayout:member
   package: excel!
@@ -1262,11 +1055,219 @@ methods:
     return:
       type: <xref uid="excel!Excel.Interfaces.WorksheetData:interface" />
       description: ''
+events:
+- name: onActivated
+  uid: excel!Excel.Worksheet#onActivated:member
+  package: excel!
+  fullName: onActivated
+  summary: >-
+    ワークシートがアクティブ化されると発生します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetActivatedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onActivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The activated worksheet ID is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- name: onCalculated
+  uid: excel!Excel.Worksheet#onCalculated:member
+  package: excel!
+  fullName: onCalculated
+  summary: >-
+    ワークシートの計算時に発生します。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onCalculated: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetCalculatedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onCalculated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The worksheet has recalculated.\");\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- name: onChanged
+  uid: excel!Excel.Worksheet#onChanged:member
+  package: excel!
+  fullName: onChanged
+  summary: >-
+    特定のワークシートでデータが変更された場合に発生します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-worksheet.yaml\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onChanged.add(onChange);\n    await context.sync();\n\n    console.log(\"Added a worksheet-level data-changed event handler.\");\n});\n```"
+- name: onColumnSorted
+  uid: excel!Excel.Worksheet#onColumnSorted:member
+  package: excel!
+  fullName: onColumnSorted
+  summary: >-
+    1 つ以上の列を並べ替えたときに発生します。 これは、左から右の並べ替え操作の結果として発生します。
+
+
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onColumnSorted: OfficeExtension.EventHandlers<Excel.WorksheetColumnSortedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetColumnSortedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-column-and-row-sort.yaml\nawait Excel.run(async (context) => {\n    console.log(\"Adding column handler\");\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n    // This will fire whenever a column has been moved as the result of a sort action.\n    sheet.onColumnSorted.add((event) => {\n        return Excel.run((context) => {\n            console.log(\"Column sorted: \" + event.address);\n            const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n            // Clear formatting for section, then highlight the sorted area.\n            sheet.getRange(\"A1:E5\").format.fill.clear();\n            if (event.address !== \"\") {\n                sheet.getRanges(event.address).format.fill.color = \"yellow\";\n            }\n\n            return context.sync();\n        });\n    });\n});\n```"
+- name: onDeactivated
+  uid: excel!Excel.Worksheet#onDeactivated:member
+  package: excel!
+  fullName: onDeactivated
+  summary: >-
+    ワークシートが非アクティブ化された場合に発生します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetDeactivatedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onDeactivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The deactivated worksheet is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- name: onFiltered
+  uid: excel!Excel.Worksheet#onFiltered:member
+  package: excel!
+  fullName: onFiltered
+  summary: >-
+    特定のワークシートにフィルターが適用されると発生します。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFilteredEventArgs:interface" />&gt;
+- name: onFormatChanged
+  uid: excel!Excel.Worksheet#onFormatChanged:member
+  package: excel!
+  fullName: onFormatChanged
+  summary: >-
+    フォーマットが特定のワークシートで変更されたときに発生します。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    このワークシートで 1 つ以上の数式が変更された場合に発生します。 このイベントは、数式自体が変更された場合のイベントで、数式の計算に起因するデータ値ではありません。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
+- name: onRowHiddenChanged
+  uid: excel!Excel.Worksheet#onRowHiddenChanged:member
+  package: excel!
+  fullName: onRowHiddenChanged
+  summary: >-
+    特定のワークシートで 1 つ以上の行の非表示状態が変更された場合に発生します。
+
+
+    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetRowHiddenChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onRowHiddenChanged.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(`Row ${event.address} is now ${event.changeType}`);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- name: onRowSorted
+  uid: excel!Excel.Worksheet#onRowSorted:member
+  package: excel!
+  fullName: onRowSorted
+  summary: >-
+    1 つ以上の行を並べ替えたときに発生します。 これは、上から下に並べ替えを実行したときに発生します。
+
+
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onRowSorted: OfficeExtension.EventHandlers<Excel.WorksheetRowSortedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetRowSortedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-column-and-row-sort.yaml\nawait Excel.run(async (context) => {\n    console.log(\"Adding row handler\");\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n    // This will fire whenever a row has been moved as the result of a sort action.\n    sheet.onRowSorted.add((event) => {\n        return Excel.run((context) => {\n            console.log(\"Row sorted: \" + event.address);\n            const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n            // Clear formatting for section, then highlight the sorted area.\n            sheet.getRange(\"A1:E5\").format.fill.clear();\n            if (event.address !== \"\") {\n                sheet.getRanges(event.address).format.fill.color = \"yellow\";\n            }\n\n            return context.sync();\n        });\n    });\n});\n```"
+- name: onSelectionChanged
+  uid: excel!Excel.Worksheet#onSelectionChanged:member
+  package: excel!
+  fullName: onSelectionChanged
+  summary: >-
+    特定のワークシートで選択範囲が変更された場合に発生します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSelectionChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onSelectionChanged.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The selected range has changed to: \" + event.address);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- name: onSingleClicked
+  uid: excel!Excel.Worksheet#onSingleClicked:member
+  package: excel!
+  fullName: onSingleClicked
+  summary: >-
+    ワークシートで左クリック/タップ操作が行われると発生します。 このイベントは、次の場合にクリックしても発生しない。
+
+
+    - ユーザーはマウスをドラッグして複数選択します。
+
+
+    - 数式参照のセル引数が選択されている場合、ユーザーはモード内のセルを選択します。
+
+
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSingleClickedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-worksheet-single-click.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onSingleClicked.add((event) => {\n        return Excel.run((context) => {\n            console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);\n            return context.sync();\n        });\n    });\n\n    console.log(\"The worksheet click handler is registered.\");\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 73004732d2d4d7fd7053466888770f426c616b74
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: bbc041b91f38f713252bf156ceedd9f74813521b
+  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51512523"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "51754082"
