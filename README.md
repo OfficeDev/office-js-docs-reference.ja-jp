@@ -14,7 +14,7 @@ JavaScript API リファレンスOfficeリポジトリへようこそ。 最適�
 
     > **重要**: このリポジトリの [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) フォルダー内のファイルは変更しない。 そのフォルダー内のすべてのファイルが自動生成され、プル要求を使用して更新することはできません。 [/docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen)フォルダー内のファイルの変更を要求するには、このリポジトリに[問題](https://github.com/OfficeDev/office-js-docs-reference/issues)を提出してください。 このリポジトリのツールの詳細については、こちらを参照 [してください](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)。
 
-* プログラミング エクスペリエンス、将来のバージョン、コード サンプルなどで表示する機能についてお知らせするために、Q&A の [Microsoft 365](https://docs.microsoft.com/answers/products/m365)の下に提案とアイデアを入力してください。
+* Office.js API またはプラットフォームの機能要求を送信するには、アイデアを [Microsoft 365 Developer Platform Tech Community](https://techcommunity.microsoft.com/t5/microsoft-365-developer-platform/idb-p/Microsoft365DeveloperPlatform)に投稿するか、機能要求が既に存在する場合は、そのアプリに投票を追加します。
 
 ## <a name="join-the-microsoft-365-developer-program"></a>Microsoft 365 開発者プログラムに参加する
 
@@ -24,7 +24,6 @@ Microsoft 365 プラットフォームのソリューションを構築するた
 * [サンプル データ パック](https://developer.microsoft.com/microsoft-365/dev-program#Sample) ソリューションの構築に役立つユーザー データとコンテンツをインストールしてサンドボックスを自動的に構成します。
 * [エキスパートへのアクセス](https://developer.microsoft.com/microsoft-365/dev-program#Experts) コミュニティ イベントにアクセスして、Microsoft 365 の専門家から学ぶ。
 * [カスタマイズされた推奨事項](https://developer.microsoft.com/microsoft-365/dev-program#Recommendations) カスタマイズされたダッシュボードから開発者リソースをすばやく見つける。
-
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft Open Source Code of Conduct
 
