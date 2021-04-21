@@ -55,7 +55,11 @@
 ||[clear()](/javascript/api/excel/excel.identitycollection#clear--)|コレクションからすべてのユーザー ID を削除します。|
 ||[getCount()](/javascript/api/excel/excel.identitycollection#getcount--)|コレクション内のアイテムの数を取得します。|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.identitycollection#getitemat-index-)|コレクション内のインデックスを使用してドキュメント ユーザー ID を取得します。|
+||[items](/javascript/api/excel/excel.identitycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 ||[remove(assignee: Identity)](/javascript/api/excel/excel.identitycollection#remove-assignee-)|コレクションからユーザー ID を削除します。|
+|[IdentityEntity](/javascript/api/excel/excel.identityentity)|[displayName](/javascript/api/excel/excel.identityentity#displayname)|ユーザーの表示名を表します。|
+||[email](/javascript/api/excel/excel.identityentity#email)|ユーザーの電子メール アドレスを表します。|
+||[id](/javascript/api/excel/excel.identityentity#id)|ユーザーの一意の ID を表します。|
 |[InsertWorksheetOptions](/javascript/api/excel/excel.insertworksheetoptions)|[positionType](/javascript/api/excel/excel.insertworksheetoptions#positiontype)|新しいワークシートの現在のブック内の挿入位置。|
 ||[relativeTo](/javascript/api/excel/excel.insertworksheetoptions#relativeto)|パラメーターに対して参照されている現在のブック内の `WorksheetPositionType` ワークシート。|
 ||[sheetNamesToInsert](/javascript/api/excel/excel.insertworksheetoptions#sheetnamestoinsert)|挿入する個々のワークシートの名前。|
@@ -129,6 +133,7 @@
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|このワークシートで 1 つ以上の数式が変更された場合に発生します。|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Open ファイルの XML で読み取り可能なこのワークシートを表すOfficeします。|
 ||[タスク](/javascript/api/excel/excel.worksheet#tasks)|ワークシートに存在するタスクのコレクションを返します。|
+|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|イベントのトリガー ソースを表します。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|あるブックの指定されたワークシートを現在のブックに挿入します。|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|ブック内でワークシートのフィルターが適用されたときに発生します。|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|このコレクションのワークシートで 1 つ以上の数式が変更された場合に発生します。|
