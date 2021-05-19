@@ -3,9 +3,10 @@
 |[AddSlideOptions](/javascript/api/powerpoint/powerpoint.addslideoptions)|[layoutId](/javascript/api/powerpoint/powerpoint.addslideoptions#layoutid)|新しいスライドに使用するスライド レイアウトの ID を指定します。|
 ||[slideMasterId](/javascript/api/powerpoint/powerpoint.addslideoptions#slidemasterid)|新しいスライドに使用するスライド マスターの ID を指定します。|
 |[Presentation](/javascript/api/powerpoint/powerpoint.presentation)|[slideMasters](/javascript/api/powerpoint/powerpoint.presentation#slidemasters)|プレゼンテーション内のオブジェクト `SlideMaster` のコレクションを返します。|
-||[タグ](/javascript/api/powerpoint/powerpoint.presentation#tags)|プレゼンテーションに添付されているタグのコレクションを返します。|
-|[図形](/javascript/api/powerpoint/powerpoint.shape)|[id](/javascript/api/powerpoint/powerpoint.shape#id)|図形の一意の ID を取得します。|
-||[タグ](/javascript/api/powerpoint/powerpoint.shape#tags)|図形内のタグのコレクションを返します。|
+||[tags](/javascript/api/powerpoint/powerpoint.presentation#tags)|プレゼンテーションに添付されているタグのコレクションを返します。|
+|[図形](/javascript/api/powerpoint/powerpoint.shape)|[delete()](/javascript/api/powerpoint/powerpoint.shape#delete--)|図形コレクションから図形を削除します。|
+||[id](/javascript/api/powerpoint/powerpoint.shape#id)|図形の一意の ID を取得します。|
+||[tags](/javascript/api/powerpoint/powerpoint.shape#tags)|図形内のタグのコレクションを返します。|
 |[ShapeCollection](/javascript/api/powerpoint/powerpoint.shapecollection)|[getCount()](/javascript/api/powerpoint/powerpoint.shapecollection#getcount--)|コレクション内の図形の数を取得します。|
 ||[getItem(key: string)](/javascript/api/powerpoint/powerpoint.shapecollection#getitem-key-)|一意の ID を使用して図形を取得します。|
 ||[getItemAt(index: number)](/javascript/api/powerpoint/powerpoint.shapecollection#getitemat-index-)|コレクション内の 0 から始るインデックスを使用して図形を取得します。|
@@ -14,7 +15,7 @@
 |[Slide](/javascript/api/powerpoint/powerpoint.slide)|[レイアウト](/javascript/api/powerpoint/powerpoint.slide#layout)|スライドのレイアウトを取得します。|
 ||[shapes](/javascript/api/powerpoint/powerpoint.slide#shapes)|スライド内の図形のコレクションを返します。|
 ||[slideMaster](/javascript/api/powerpoint/powerpoint.slide#slidemaster)|スライドの `SlideMaster` 既定のコンテンツを表すオブジェクトを取得します。|
-||[タグ](/javascript/api/powerpoint/powerpoint.slide#tags)|スライド内のタグのコレクションを返します。|
+||[tags](/javascript/api/powerpoint/powerpoint.slide#tags)|スライド内のタグのコレクションを返します。|
 |[SlideCollection](/javascript/api/powerpoint/powerpoint.slidecollection)|[add(options?: PowerPoint.AddSlideOptions)](/javascript/api/powerpoint/powerpoint.slidecollection#add-options-)|コレクションの最後に新しいスライドを追加します。|
 |[SlideLayout](/javascript/api/powerpoint/powerpoint.slidelayout)|[id](/javascript/api/powerpoint/powerpoint.slidelayout#id)|スライド レイアウトの一意の ID を取得します。|
 ||[name](/javascript/api/powerpoint/powerpoint.slidelayout#name)|スライド レイアウトの名前を取得します。|
