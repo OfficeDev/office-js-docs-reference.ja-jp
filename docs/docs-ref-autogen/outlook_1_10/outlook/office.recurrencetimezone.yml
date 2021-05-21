@@ -1,0 +1,90 @@
+### YamlMime:TSType
+name: Office.RecurrenceTimeZone
+uid: outlook!Office.RecurrenceTimeZone:interface
+package: outlook!
+fullName: Office.RecurrenceTimeZone
+summary: >-
+  定期的なタイム ゾーンを表します。
+
+
+  \[[API セット: メールボックス 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+
+
+  #### <a name="examples"></a>例
+
+
+  ```javascript
+
+  // This example gets the Recurrence object of an appointment item.
+
+  Office.context.mailbox.item.recurrence.getAsync(callback);
+
+
+  function callback(asyncResult) {
+      var context = asyncResult.context;
+      var recurrence = asyncResult.value;
+      if (!recurrence) {
+      //if (recurrence == null) {
+          console.log("One-time appointment or meeting");
+      } else {
+          console.log(JSON.stringify(recurrence));
+      }
+  }
+
+
+  // The following example shows the results of the getAsync call that retrieves the recurrence for a series.
+
+  // NOTE: In this example, seriesTimeObject is a placeholder for the JSON representing the
+
+  // recurrence.seriesTime property. You should use the SeriesTime object's methods to get the
+
+  // recurrence date and time properties.
+
+  Recurrence = {
+      "recurrenceType": "weekly",
+      "recurrenceProperties": {"interval": 2, "days": ["mon","thu","fri"], "firstDayOfWeek": "sun"},
+      "seriesTime": {seriesTimeObject},
+      "recurrenceTimeZone": {"name": "Pacific Standard Time", "offset": -480}
+  }
+
+  ```
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: name
+  uid: outlook!Office.RecurrenceTimeZone#name:member
+  package: outlook!
+  fullName: name
+  summary: 定期的なタイム ゾーンの名前を表します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: MailboxEnums.RecurrenceTimeZone | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.RecurrenceTimeZone:enum" /> | string
+- name: offset
+  uid: outlook!Office.RecurrenceTimeZone#offset:member
+  package: outlook!
+  fullName: offset
+  summary: 会議の系列が開始された日付のローカル タイム ゾーンと UTC の間の分の差を表す整数値。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'offset?: number;'
+    return:
+      type: number
+metadata:
+  ms.openlocfilehash: 0fec1174b080fe0ff17f4226cb64f39dfbe97765
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52590014"
