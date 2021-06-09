@@ -131,15 +131,21 @@
 |[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|イベントの種類を取得します。|
 |[ワークシート](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|特定のワークシートにフィルターが適用されると発生します。|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|このワークシートで 1 つ以上の数式が変更された場合に発生します。|
+||[onProtectionChanged](/javascript/api/excel/excel.worksheet#onprotectionchanged)|ワークシートの保護状態が変更された場合に発生します。|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Open ファイルの XML で読み取り可能なこのワークシートを表すOfficeします。|
 ||[タスク](/javascript/api/excel/excel.worksheet#tasks)|ワークシートに存在するタスクのコレクションを返します。|
 |[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|イベントのトリガー ソースを表します。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|あるブックの指定されたワークシートを現在のブックに挿入します。|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|ブック内でワークシートのフィルターが適用されたときに発生します。|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|このコレクションのワークシートで 1 つ以上の数式が変更された場合に発生します。|
+||[onProtectionChanged](/javascript/api/excel/excel.worksheetcollection#onprotectionchanged)|ワークシートの保護状態が変更された場合に発生します。|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetid)|フィルターが適用されるワークシートの ID を取得します。|
 |[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formuladetails)|変更された数式 `FormulaChangedEventDetail` の詳細を含むオブジェクトの配列を取得します。|
 ||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|イベントのソース。|
 ||[type](/javascript/api/excel/excel.worksheetformulachangedeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.worksheetformulachangedeventargs#worksheetid)|数式が変更されたワークシートの ID を取得します。|
+|[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[isProtected](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#isprotected)|ワークシートの現在の保護状態を取得します。|
+||[source](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#source)|イベントのソース。|
+||[type](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#type)|イベントの種類を取得します。|
+||[worksheetId](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#worksheetid)|保護状態が変更されたワークシートの ID を取得します。|
