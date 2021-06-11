@@ -9,10 +9,16 @@ summary: >-
 
   \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
+  **HTML テーブルの罫線の色に関する既知の問題**
+
+
+  OutlookオンWindows: 作成モードで HTML テーブルでさまざまなセルの罫線を異なる色に設定している場合、セルの罫線に期待される色が反映されない場合があります。 既知の動作については [、「OfficeDev/office-js issue \# 1818」を参照してください。](https://github.com/OfficeDev/office-js/issues/1818)<!-- -->.
+
+
   **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
 isPreview: false
 isDeprecated: false
 type: interface
@@ -30,7 +36,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
 
 
     #### <a name="examples"></a>例
@@ -56,7 +62,7 @@ methods:
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
     return:
       type: void
@@ -74,14 +80,14 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
     parameters:
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
     return:
       type: void
@@ -108,7 +114,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
 
 
     **エラー**:
@@ -137,13 +143,13 @@ methods:
     content: 'prependAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: 本文の先頭に挿入する文字列。 文字列の最大長は 1,000,000 文字です。
+      description: 本文の先頭に挿入する文字列。文字列の最大長は 1,000,000 文字です。
       type: string
     - id: options
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -170,7 +176,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
 
 
     **エラー**:
@@ -183,10 +189,10 @@ methods:
     content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: 本文の先頭に挿入する文字列。 文字列の最大長は 1,000,000 文字です。
+      description: 本文の先頭に挿入する文字列。文字列の最大長は 1,000,000 文字です。
       type: string
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -210,7 +216,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
 
 
     **エラー**:
@@ -242,13 +248,13 @@ methods:
     content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: 既存の本文を置換する文字列。 文字列の長さは 1,000,000 文字までに制限されています。
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
       type: string
     - id: options
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -272,7 +278,7 @@ methods:
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
 
 
-    **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
 
 
     **エラー**:
@@ -288,18 +294,18 @@ methods:
     content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: 既存の本文を置換する文字列。 文字列の長さは 1,000,000 文字までに制限されています。
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
       type: string
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: feea67a5311a68917c8c124613f033fb6f556f86
-  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
+  ms.openlocfilehash: a82a75995682b9cbffd2e93025614d4ef934bbe1
+  ms.sourcegitcommit: 1e0143ae4add09dbe22b0080d22fb25101757fba
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/09/2021
-  ms.locfileid: "51658659"
+  ms.lasthandoff: 06/11/2021
+  ms.locfileid: "52894840"
