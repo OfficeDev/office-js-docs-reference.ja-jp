@@ -40,10 +40,10 @@ properties:
     - `hostName` (string): ホスト アプリケーションの名前を表す文字列。 次のいずれかの値を指定する必要があります。 `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->、または `OutlookAndroid`<!-- -->. **注**: デスクトップ クライアント (Outlook Mac など) の Outlookの "Windows" 値が返されます。
 
 
-    - `hostVersion`(string): ホスト アプリケーションまたは Exchange Server ("15.0.468.0" など) のバージョンを表す文字列。 メール アドインがデスクトップまたはモバイル クライアントOutlookで実行されている場合、このプロパティはホスト アプリケーションのバージョンを返します `hostVersion` 。Outlook。 Web Outlookでは、プロパティはバージョンのバージョンを返Exchange Server。
+    - `hostVersion`(string): ホスト アプリケーションまたは Exchange Server ("15.0.468.0" など) のバージョンを表す文字列。 メール アドインがデスクトップまたはモバイル クライアントOutlookで実行されている場合、このプロパティはホスト アプリケーションのバージョンを返します `hostVersion` 。Outlook。 このOutlook on the webプロパティは、バージョンのバージョンを返Exchange Server。
 
 
-    - `OWAView`( または string): Web 上のオブジェクトの現在のビューを表す列挙型 `MailboxEnums.OWAView` (またはOutlookリテラル)。 ホスト アプリケーションが web 上Outlookされていない場合、このプロパティにアクセスすると未定義になります。 Outlookには、画面の幅とウィンドウの幅と表示できる列数に対応する 3 つのビュー (画面が狭い場合は表示、画面が広い場合は表示、画面が広い場合は表示) があります。 `OneColumn` `TwoColumns` `ThreeColumns`
+    - `OWAView`( または string): オブジェクトの現在のビューを表す列挙型 (または文字列リテラル `MailboxEnums.OWAView` ) Outlook on the web。 ホスト アプリケーションがサポートされていない場合Outlook on the webこのプロパティにアクセスすると、未定義になります。 Outlook on the webには、画面の幅とウィンドウの幅、および表示できる列数に対応する 3 つのビュー (画面が狭い場合は表示、画面が広い場合は表示、画面が広い場合は表示) があります。 `OneColumn` `TwoColumns` `ThreeColumns`
 
 
     詳細については、次の[Office。診断](xref:outlook!Office.Diagnostics:interface)<!-- -->.
@@ -231,7 +231,7 @@ properties:
     In compose mode you must call the `saveAsync` method before you can use the `restUrl` member. アプリには、メソッドを `ReadWriteItem` 呼び出すアクセス許可が必要 `saveAsync` です。
 
 
-    ただし、代理人または共有のシナリオでは、オブジェクトのプロパティを使用する必要があります (要件セット `targetRestUrl` `SharedProperties` 1.8 で導入)。 詳細については、「代理人アクセス」 [の記事を参照](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) してください。
+    ただし、委任シナリオまたは共有シナリオでは `targetRestUrl` [、SharedProperties](https://docs.microsoft.com/javascript/api/outlook/office.sharedproperties?view=outlook-js-1.8) オブジェクトのプロパティを使用する必要があります (要件セット 1.8 で導入)。 詳細については、「代理人アクセス」 [の記事を参照](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) してください。
 
 
     \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -324,7 +324,7 @@ methods:
       description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -358,7 +358,7 @@ methods:
       description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーター `type` のプロパティは、渡された `eventType` パラメーターと一致します。 `addHandlerAsync`<!-- -->.
       type: any
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -433,10 +433,10 @@ methods:
     クライアントのローカル時間で時間情報が含まれている辞書を取得します。
 
 
-    Web またはデスクトップ クライアント上のメール アプリOutlook使用する日付と時刻は、異なるタイム ゾーンを使用できます。 Outlookコンピューターのタイム ゾーンを使用します。Outlookは、管理センター (EAC) で設定Exchangeタイム ゾーンを使用します。 ユーザー インターフェイスに表示する値が、ユーザーが期待するタイム ゾーンと常に一致するために、日付と時刻の値を処理する必要があります。
+    メール アプリで使用される日付と時刻は、Outlook on the webデスクトップ クライアントで異なるタイム ゾーンを使用できます。 Outlookコンピューターのタイム ゾーンを使用します。Outlook on the web管理センター (EAC) のタイム ゾーン Exchangeを使用します。 ユーザー インターフェイスに表示する値が、ユーザーが期待するタイム ゾーンと常に一致するために、日付と時刻の値を処理する必要があります。
 
 
-    メール アプリがデスクトップ クライアントOutlookで実行されている場合、クライアント コンピューターのタイム ゾーンに設定された値を持つディクショナリ `convertToLocalClientTime` オブジェクトが返されます。 メール アプリが web 上の Outlook で実行されている場合、EAC で指定されたタイム ゾーンに設定された値を持つディクショナリ オブジェクトが `convertToLocalClientTime` 返されます。
+    メール アプリがデスクトップ クライアントOutlookで実行されている場合、クライアント コンピューターのタイム ゾーンに設定された値を持つディクショナリ `convertToLocalClientTime` オブジェクトが返されます。 メール アプリが Outlook on the web で実行されている場合、このメソッドは EAC で指定されたタイム ゾーンに設定された値を持つ辞書オブジェクト `convertToLocalClientTime` を返します。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
@@ -550,7 +550,7 @@ methods:
     Mac Outlookでは、このメソッドを使用して、定期的なシリーズの一部ではない単一の予定、または定期的なシリーズのマスター予定を表示できます。 ただし、定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないので、系列のインスタンスを表示できない。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定したアイテム識別子が既存の予定を識別しない場合、クライアント コンピューターまたはデバイスで空白のウィンドウが開き、エラー メッセージは返されません。
@@ -601,7 +601,7 @@ methods:
     Mac Outlookでは、このメソッドを使用して、定期的なシリーズの一部ではない単一の予定、または定期的なシリーズのマスター予定を表示できます。 ただし、定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないので、系列のインスタンスを表示できない。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定したアイテム識別子が既存の予定を識別しない場合、クライアント コンピューターまたはデバイスで空白のウィンドウが開き、エラー メッセージは返されません。
@@ -649,7 +649,7 @@ methods:
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -668,7 +668,7 @@ methods:
     Mac Outlookでは、このメソッドを使用して、定期的なシリーズの一部ではない単一の予定、または定期的なシリーズのマスター予定を表示できます。 ただし、定期的な系列のインスタンスのプロパティ (アイテム ID を含む) にアクセスできないので、系列のインスタンスを表示できない。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定したアイテム識別子が既存の予定を識別しない場合、クライアント コンピューターまたはデバイスで空白のウィンドウが開き、エラー メッセージは返されません。
@@ -692,7 +692,7 @@ methods:
       description: 既存の予定の Exchange Web サービス (EWS) 識別子。
       type: string
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -708,7 +708,7 @@ methods:
     `displayMessageForm` メソッドは、デスクトップ上の新しいウィンドウやモバイル デバイス上のダイアログ ボックスに既存のメッセージを開きます。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定されたアイテム識別子が既存のメッセージを識別しない場合、クライアント コンピューターにメッセージは表示されません。エラー メッセージは返されません。
@@ -759,7 +759,7 @@ methods:
     `displayMessageFormAsync` メソッドは、デスクトップ上の新しいウィンドウやモバイル デバイス上のダイアログ ボックスに既存のメッセージを開きます。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定されたアイテム識別子が既存のメッセージを識別しない場合、クライアント コンピューターにメッセージは表示されません。エラー メッセージは返されません。
@@ -810,7 +810,7 @@ methods:
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -826,7 +826,7 @@ methods:
     `displayMessageFormAsync` メソッドは、デスクトップ上の新しいウィンドウやモバイル デバイス上のダイアログ ボックスに既存のメッセージを開きます。
 
 
-    Web Outlookでは、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
+    このOutlook on the web、このメソッドは、フォームの本文が 32K 文字以下の場合にのみ、指定されたフォームを開きます。
 
 
     指定されたアイテム識別子が既存のメッセージを識別しない場合、クライアント コンピューターにメッセージは表示されません。エラー メッセージは返されません。
@@ -853,7 +853,7 @@ methods:
       description: 既存のメッセージの Exchange Web サービス (EWS) 識別子。
       type: string
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -869,7 +869,7 @@ methods:
     `displayNewAppointmentForm` メソッドを使用すると、ユーザーが新しい予定または会議を作成できるフォームが開きます。パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
 
 
-    Web Outlookでは、このメソッドは常に出席者フィールドを持つフォームを表示します。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
+    このOutlook on the web、常に出席者フィールドを持つフォームが表示されます。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
 
 
     リッチ クライアントと Outlook RT でOutlook出席者またはリソースを指定する場合は、`requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->、または `resources` パラメーターの場合、このメソッドは [送信] ボタンを使用して会議フォーム **を表示** します。 受信者を指定しない場合、このメソッドは [閉じる保存] ボタンを使用して予定フォーム **を &amp; 表示** します。
@@ -934,7 +934,7 @@ methods:
     `displayNewAppointmentFormAsync` メソッドを使用すると、ユーザーが新しい予定または会議を作成できるフォームが開きます。パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
 
 
-    Web Outlookでは、このメソッドは常に出席者フィールドを持つフォームを表示します。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
+    このOutlook on the web、常に出席者フィールドを持つフォームが表示されます。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
 
 
     リッチ クライアントと Outlook RT でOutlook出席者またはリソースを指定する場合は、`requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->、または `resources` パラメーターの場合、このメソッドは [送信] ボタンを使用して会議フォーム **を表示** します。 受信者を指定しない場合、このメソッドは [閉じる保存] ボタンを使用して予定フォーム **を &amp; 表示** します。
@@ -1001,7 +1001,7 @@ methods:
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1017,7 +1017,7 @@ methods:
     `displayNewAppointmentFormAsync` メソッドを使用すると、ユーザーが新しい予定または会議を作成できるフォームが開きます。パラメーターを指定すると、予定のフォーム フィールドにパラメーターの内容が自動的に設定されます。
 
 
-    Web Outlookでは、このメソッドは常に出席者フィールドを持つフォームを表示します。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
+    このOutlook on the web、常に出席者フィールドを持つフォームが表示されます。 入力引数として出席者を指定しないと、このメソッドにより **[保存]** ボタンのあるフォームが表示されます。 出席者を指定した場合には、フォームにその出席者と **[送信]** ボタンが表示されます。
 
 
     リッチ クライアントと Outlook RT でOutlook出席者またはリソースを指定する場合は、`requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->、または `resources` パラメーターの場合、このメソッドは [送信] ボタンを使用して会議フォーム **を表示** します。 受信者を指定しない場合、このメソッドは [閉じる保存] ボタンを使用して予定フォーム **を &amp; 表示** します。
@@ -1044,7 +1044,7 @@ methods:
       description: 新 `AppointmentForm` しい予定を説明します。 すべてのプロパティはオプションです。
       type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1239,7 +1239,7 @@ methods:
       description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1307,7 +1307,7 @@ methods:
         `attachments.itemId`<!-- -->: type が item に設定されている場合にのみ使用されます。 新しいメッセージに添付する、既存の電子メールの EWS 項目の id です。 最大の長さが 100 文字の文字列です。
       type: any
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡された関数が `callback` 1 つのパラメーターで呼び出されます。 `asyncResult`<!-- -->オブジェクト `Office.AsyncResult` です。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1461,7 +1461,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. トークンは、プロパティ内の文字列として返 `asyncResult.value` されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: オプション。 非同期メソッドに渡される状態データです。
+      description: 省略可能。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -1522,7 +1522,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. トークンは、プロパティ内の文字列として返 `asyncResult.value` されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: オプション。 非同期メソッドに渡される状態データです。
+      description: 省略可能。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -1574,7 +1574,7 @@ methods:
     `<?xml version="1.0" encoding="iso-8859-1"?>`
 
 
-    Outlook on the web でメール アプリを実行している場合は、エンコード値を設定する必要はありません。 このプロパティを使用して、メール アプリが web Outlookまたは Outlookで実行されているかどうかを判断 `mailbox.diagnostics.hostName` できます。 プロパティを使用して、Outlookのバージョンを確認 `mailbox.diagnostics.hostVersion` できます。
+    Outlook on the web でメール アプリを実行している場合は、エンコード値を設定する必要はありません。 このプロパティを使用して、メール アプリが OutlookまたはOutlook on the webを判断 `mailbox.diagnostics.hostName` できます。 プロパティを使用して、Outlookのバージョンを確認 `mailbox.diagnostics.hostVersion` できます。
   remarks: >-
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteMailbox`
 
@@ -1696,7 +1696,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 結果 `value` のプロパティは、文字列として提供される EWS 要求の XML です。 結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: オプション。 非同期メソッドに渡される状態データです。
+      description: 省略可能。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -1730,7 +1730,7 @@ methods:
       description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1761,15 +1761,15 @@ methods:
       description: ハンドラーを取り消すイベント。
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: callback
-      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 3b1e871fddff51050cfe73f5fd9039b5b6f68d34
-  ms.sourcegitcommit: 1e0143ae4add09dbe22b0080d22fb25101757fba
+  ms.openlocfilehash: 6856c0d082ee12a9227035e3205346017e6ae17b
+  ms.sourcegitcommit: 319b8cca7d91e51669407633dacc02ea6e4f4338
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 06/11/2021
-  ms.locfileid: "52895407"
+  ms.lasthandoff: 06/18/2021
+  ms.locfileid: "53009996"
