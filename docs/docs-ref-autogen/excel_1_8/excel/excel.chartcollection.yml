@@ -130,7 +130,7 @@ methods:
   package: excel!
   fullName: getItem(name)
   summary: >-
-    グラフ名を使用してグラフを取得します。 同じ名前の複数のグラフがある場合は、最初の 1 つが返されます。
+    名前に基づいてグラフを取得します。同じ名前の複数のグラフがある場合は、最初の 1 つが返されます。
 
 
     \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -162,7 +162,7 @@ methods:
     content: 'getItemAt(index: number): Excel.Chart;'
     parameters:
     - id: index
-      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
       type: number
     return:
       type: <xref uid="excel!Excel.Chart:class" />
@@ -269,7 +269,7 @@ events:
     content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.ChartActivatedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.ChartActivatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context){\n    context.workbook.worksheets.getActiveWorksheet()\n        .charts.onActivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The ID of the active chart is: \" + event.chartId)\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nawait Excel.run(async (context) => {\n\n    const pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n\n    // Register the onActivated and onDeactivated event handlers.\n    pieChart.onActivated.add(chartActivated);\n    pieChart.onDeactivated.add(chartDeactivated);\n\n    await context.sync();\n\n    console.log(\"Added handlers for Chart onActivated and onDeactivated events.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nasync function chartActivated(event) {\n    await Excel.run(async (context) => {\n        // Retrieve the worksheet.\n        const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n        // Retrieve the activated chart by ID and load the name of the chart. \n        const activatedChart = sheet.charts.getItem(event.chartId);\n        activatedChart.load([\"name\"]);\n        await context.sync();\n\n        // Print out the activated chart's data.\n        console.log(`A chart was activated. ID: ${event.chartId}. Chart name: ${activatedChart.name}.`);\n    });\n}\n```"
 - name: onAdded
   uid: excel!Excel.ChartCollection#onAdded:member
   package: excel!
@@ -303,7 +303,7 @@ events:
     content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.ChartDeactivatedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.ChartDeactivatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context){\n    context.workbook.worksheets.getActiveWorksheet()\n        .charts.onDeactivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The chart with this ID was deactivated: \" + event.chartId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nawait Excel.run(async (context) => {\n\n    const pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n\n    // Register the onActivated and onDeactivated event handlers.\n    pieChart.onActivated.add(chartActivated);\n    pieChart.onDeactivated.add(chartDeactivated);\n\n    await context.sync();\n\n    console.log(\"Added handlers for Chart onActivated and onDeactivated events.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nasync function chartDeactivated(event) {\n    await Excel.run(async (context) => {\n        // Callback function for when the chart is deactivated.\n        console.log(\"The pie chart is NOT active.\");\n    });\n}\n```"
 - name: onDeleted
   uid: excel!Excel.ChartCollection#onDeleted:member
   package: excel!
@@ -323,9 +323,9 @@ events:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (context){\n    context.workbook.worksheets.getActiveWorksheet()\n        .charts.onDeleted.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The chart with this ID was deleted: \" + event.chartId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0c0f7723b80bf0c9b2319e819a4f0051f78103b6
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: 38d533b996c484133be95130548af52db590db3d
+  ms.sourcegitcommit: 254c121bb627b0cf1f6bfa4cfd0a1b38e5de6ed9
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51754152"
+  ms.lasthandoff: 06/23/2021
+  ms.locfileid: "53077454"
