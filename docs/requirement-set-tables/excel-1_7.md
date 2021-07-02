@@ -1,10 +1,10 @@
 | クラス | フィールド | 説明 |
 |:---|:---|:---|
-|[グラフ](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|グラフの種類を指定します。|
+|[Chart](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|グラフの種類を指定します。|
 ||[id](/javascript/api/excel/excel.chart#id)|グラフの一意の ID。|
-||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|PivotChart のすべてのフィールド ボタンを表示するかどうかを指定します。|
+||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|すべてのフィールド ボタンを 1 つのウィンドウに表示するかどうかをピボットグラフ。|
 |[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[border](/javascript/api/excel/excel.chartareaformat#border)|色、線のスタイル、太さなど、グラフ領域の罫線の形式を表します。|
-|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem(type: Excel.ChartAxisType, group?: Excel.ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|種類とグループで識別された特定の軸を返します。|
+|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem(type: Excel.ChartAxisType、group?: Excel。ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|種類とグループで識別された特定の軸を返します。|
 |[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#basetimeunit)|指定したカテゴリ軸の基本単位を指定します。|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categorytype)|カテゴリ軸の種類を指定します。|
 ||[displayUnit](/javascript/api/excel/excel.chartaxis#displayunit)|軸の表示単位を表します。|
@@ -20,7 +20,7 @@
 ||[top](/javascript/api/excel/excel.chartaxis#top)|軸の上端からグラフ領域の上端までの距離をポイントで指定します。|
 ||[type](/javascript/api/excel/excel.chartaxis#type)|軸の種類を指定します。|
 ||[width](/javascript/api/excel/excel.chartaxis#width)|グラフ軸の幅をポイント単位で指定します。|
-||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Excel が最後から最初のデータ ポイントをプロットする場合に指定します。|
+||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|最後から最初Excelデータ ポイントをプロットする方法を指定します。|
 ||[scaleType](/javascript/api/excel/excel.chartaxis#scaletype)|値軸のスケールの種類を指定します。|
 ||[setCategoryNames(sourceData: Range)](/javascript/api/excel/excel.chartaxis#setcategorynames-sourcedata-)|指定した軸のすべてのカテゴリ名を設定します。|
 ||[setCustomDisplayUnit(value: number)](/javascript/api/excel/excel.chartaxis#setcustomdisplayunit-value-)|軸の表示単位をカスタム値に設定します。|
@@ -133,7 +133,7 @@
 ||[getImage()](/javascript/api/excel/excel.range#getimage--)|範囲を base64 エンコードされた png イメージとしてレンダリングします。|
 ||[getSurroundingRegion()](/javascript/api/excel/excel.range#getsurroundingregion--)|この範囲の `Range` 左上のセルの周囲の領域を表すオブジェクトを返します。|
 ||[hyperlink](/javascript/api/excel/excel.range#hyperlink)|現在の範囲のハイパーリンクを表します。|
-||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|ユーザーの言語設定に基づいて、指定した範囲の Excel の数値形式コードを表します。|
+||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|ユーザー Excelの言語設定に基づいて、指定した範囲の数値書式コードを表します。|
 ||[isEntireColumn](/javascript/api/excel/excel.range#isentirecolumn)|現在の範囲が列全体であるかどうかを表します。|
 ||[isEntireRow](/javascript/api/excel/excel.range#isentirerow)|現在の範囲が行全体であるかどうかを表します。|
 ||[showCard()](/javascript/api/excel/excel.range#showcard--)|アクティブ セルに多数の値が含まれる場合、そのセルのカードを表示します。|
@@ -166,11 +166,11 @@
 ||[name](/javascript/api/excel/excel.style#name)|スタイルの名前。|
 ||[shrinkToFit](/javascript/api/excel/excel.style#shrinktofit)|使用可能な列の幅に収まるテキストを自動的に縮小する場合に指定します。|
 ||[verticalAlignment](/javascript/api/excel/excel.style#verticalalignment)|スタイルの垂直方向の配置を指定します。|
-||[wrapText](/javascript/api/excel/excel.style#wraptext)|Excel がオブジェクト内のテキストを折り返す場合に指定します。|
+||[wrapText](/javascript/api/excel/excel.style#wraptext)|オブジェクト内のExcelを折り返す値を指定します。|
 |[StyleCollection](/javascript/api/excel/excel.stylecollection)|[add(name: string)](/javascript/api/excel/excel.stylecollection#add-name-)|コレクションに新しいスタイルを追加します。|
 ||[getItem(name: string)](/javascript/api/excel/excel.stylecollection#getitem-name-)|名前で `Style` 取得します。|
 ||[items](/javascript/api/excel/excel.stylecollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-|[表](/javascript/api/excel/excel.table)|[onChanged](/javascript/api/excel/excel.table#onchanged)|セル内のデータが特定のテーブルで変更された場合に発生します。|
+|[Table](/javascript/api/excel/excel.table)|[onChanged](/javascript/api/excel/excel.table#onchanged)|セル内のデータが特定のテーブルで変更された場合に発生します。|
 ||[onSelectionChanged](/javascript/api/excel/excel.table#onselectionchanged)|特定のテーブルで選択範囲が変更された場合に発生します。|
 |[TableChangedEventArgs](/javascript/api/excel/excel.tablechangedeventargs)|[address](/javascript/api/excel/excel.tablechangedeventargs#address)|特定のワークシート上のテーブル内で変更されたエリアを表すアドレスを取得します。|
 ||[changeType](/javascript/api/excel/excel.tablechangedeventargs#changetype)|変更されたイベントのトリガー方法を表す変更の種類を取得します。|
@@ -184,7 +184,7 @@
 ||[tableId](/javascript/api/excel/excel.tableselectionchangedeventargs#tableid)|選択範囲が変更されたテーブルの ID を取得します。|
 ||[type](/javascript/api/excel/excel.tableselectionchangedeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.tableselectionchangedeventargs#worksheetid)|選択範囲が変更されたワークシートの ID を取得します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getactivecell--)|ブックで現在アクティブなセルを取得します。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getactivecell--)|ブックで現在アクティブなセルを取得します。|
 ||[dataConnections](/javascript/api/excel/excel.workbook#dataconnections)|ブック内のすべてのデータ接続を表します。|
 ||[name](/javascript/api/excel/excel.workbook#name)|ブックの名前を取得します。|
 ||[プロパティ](/javascript/api/excel/excel.workbook#properties)|ブックのプロパティを取得します。|
@@ -193,7 +193,7 @@
 |[WorkbookProtection](/javascript/api/excel/excel.workbookprotection)|[protect(password?: string)](/javascript/api/excel/excel.workbookprotection#protect-password-)|ブックを保護します。|
 ||[保護](/javascript/api/excel/excel.workbookprotection#protected)|ブックが保護される場合に指定します。|
 ||[unprotect(password?: string)](/javascript/api/excel/excel.workbookprotection#unprotect-password-)|ブックの保護を解除します。|
-|[ワークシート](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|ワークシートをコピーし、指定した位置に配置します。|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel.WorksheetPositionType、 relativeTo?: Excel。ワークシート)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|ワークシートをコピーし、指定した位置に配置します。|
 ||[getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number)](/javascript/api/excel/excel.worksheet#getrangebyindexes-startrow--startcolumn--rowcount--columncount-)|特定の行インデックスと列インデックスから始まり、特定の数の行と列にまたがるオブジェクト `Range` を取得します。|
 ||[freezePanes](/javascript/api/excel/excel.worksheet#freezepanes)|ワークシートの固定されたウィンドウを操作するために使用できるオブジェクトを取得します。|
 ||[onActivated](/javascript/api/excel/excel.worksheet#onactivated)|ワークシートがアクティブ化されると発生します。|

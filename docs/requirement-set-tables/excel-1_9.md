@@ -91,10 +91,10 @@
 |[ChartMapOptions](/javascript/api/excel/excel.chartmapoptions)|[labelStrategy](/javascript/api/excel/excel.chartmapoptions#labelstrategy)|地域マップ グラフの系列マップ ラベル戦略を指定します。|
 ||[level](/javascript/api/excel/excel.chartmapoptions#level)|地域マップ グラフの系列マッピング レベルを指定します。|
 ||[projectionType](/javascript/api/excel/excel.chartmapoptions#projectiontype)|地域マップ グラフの系列投影の種類を指定します。|
-|[ChartPivotOptions](/javascript/api/excel/excel.chartpivotoptions)|[showAxisFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showaxisfieldbuttons)|ピボットグラフに軸フィールド ボタンを表示するかどうかを指定します。|
-||[showLegendFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showlegendfieldbuttons)|ピボットグラフに凡例フィールド ボタンを表示するかどうかを指定します。|
-||[showReportFilterFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showreportfilterfieldbuttons)|ピボットグラフにレポート フィルター フィールド ボタンを表示するかどうかを指定します。|
-||[showValueFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showvaluefieldbuttons)|ピボットグラフに値フィールドの表示ボタンを表示するかどうかを指定します。|
+|[ChartPivotOptions](/javascript/api/excel/excel.chartpivotoptions)|[showAxisFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showaxisfieldbuttons)|軸フィールド ボタンをウィンドウに表示するかどうかを指定ピボットグラフ。|
+||[showLegendFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showlegendfieldbuttons)|凡例フィールド ボタンを凡例フィールド ボタンで表示するかどうかを指定ピボットグラフ。|
+||[showReportFilterFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showreportfilterfieldbuttons)|レポート にレポート フィルター フィールド ボタンを表示するかどうかを指定ピボットグラフ。|
+||[showValueFieldButtons](/javascript/api/excel/excel.chartpivotoptions#showvaluefieldbuttons)|フィールドの [値の表示] ボタンを表示するかどうかを指定ピボットグラフ。|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[bubbleScale](/javascript/api/excel/excel.chartseries#bubblescale)|既定のサイズのパーセンテージを表す 0 (ゼロ) から 300 までの整数値とすることができます。|
 ||[gradientMaximumColor](/javascript/api/excel/excel.chartseries#gradientmaximumcolor)|地域マップ グラフ系列の最大値の色を指定します。|
 ||[gradientMaximumType](/javascript/api/excel/excel.chartseries#gradientmaximumtype)|地域マップ グラフ系列の最大値の種類を指定します。|
@@ -147,8 +147,8 @@
 ||[id](/javascript/api/excel/excel.image#id)|イメージ オブジェクトの図形識別子を指定します。|
 ||[shape](/javascript/api/excel/excel.image#shape)|イメージに関連 `Shape` 付けられているオブジェクトを返します。|
 |[IterativeCalculation](/javascript/api/excel/excel.iterativecalculation)|[enabled](/javascript/api/excel/excel.iterativecalculation#enabled)|Excel で反復計算を使用して循環参照を解決する場合、true となります。|
-||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|Excel が循環参照を解決する場合、各反復間の最大変更量を指定します。|
-||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|循環参照の解決に Excel で使用できる反復回数の最大数を指定します。|
+||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|循環参照を解決するために、各反復間のExcelを指定します。|
+||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|循環参照の解決に使用Excel繰り返しの最大数を指定します。|
 |[Line](/javascript/api/excel/excel.line)|[beginArrowheadLength](/javascript/api/excel/excel.line#beginarrowheadlength)|指定された線の始点の矢印の長さを表します。|
 ||[beginArrowheadStyle](/javascript/api/excel/excel.line#beginarrowheadstyle)|指定された線の始点の矢印のスタイルを表します。|
 ||[beginArrowheadWidth](/javascript/api/excel/excel.line#beginarrowheadwidth)|指定された線の始点の矢印の幅を表します。|
@@ -304,8 +304,8 @@
 ||[style](/javascript/api/excel/excel.settablecellproperties#style)|`style` プロパティを表します。|
 |[SettableColumnProperties](/javascript/api/excel/excel.settablecolumnproperties)|[columnHidden](/javascript/api/excel/excel.settablecolumnproperties#columnhidden)|`columnHidden` プロパティを表します。|
 ||[columnWidth](/javascript/api/excel/excel.settablecolumnproperties#columnwidth)||
-||[format: Excel.CellPropertiesFormat & { columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|`format` プロパティを表します。|
-|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format: Excel.CellPropertiesFormat & { rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|`format` プロパティを表します。|
+||[format: Excel。CellPropertiesFormat & { columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|`format` プロパティを表します。|
+|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format: Excel。CellPropertiesFormat & { rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|`format` プロパティを表します。|
 ||[rowHeight](/javascript/api/excel/excel.settablerowproperties#rowheight)||
 ||[rowHidden](/javascript/api/excel/excel.settablerowproperties#rowhidden)|`rowHidden` プロパティを表します。|
 |[Shape](/javascript/api/excel/excel.shape)|[altTextDescription](/javascript/api/excel/excel.shape#alttextdescription)|オブジェクトの代替説明テキストを指定 `Shape` します。|
@@ -427,7 +427,7 @@
 ||[previouslySaved](/javascript/api/excel/excel.workbook#previouslysaved)|ブックがローカルまたはオンラインで保存された場合に指定します。|
 ||[usePrecisionAsDisplayed](/javascript/api/excel/excel.workbook#useprecisionasdisplayed)|ブックを表示桁数でのみ計算する場合、true となります。|
 |[WorkbookAutoSaveSettingChangedEventArgs](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs)|[type](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs#type)|イベントの種類を取得します。|
-|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|必要に応じて Excel でワークシートを再計算する必要があるかどうかを決定します。|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|必要に応Excelワークシートを再計算する必要があるかどうかを決定します。|
 ||[findAll(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findall-text--criteria-)|指定された条件に基づいて、指定された文字列のすべての出現を検索し、1 つ以上の四角形の範囲で構成されるオブジェクト `RangeAreas` として返します。|
 ||[findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findallornullobject-text--criteria-)|指定された条件に基づいて、指定された文字列のすべての出現を検索し、1 つ以上の四角形の範囲で構成されるオブジェクト `RangeAreas` として返します。|
 ||[getRanges(address?: string)](/javascript/api/excel/excel.worksheet#getranges-address-)|アドレスまたは名前で指定された、四角形の範囲の 1 つ以上のブロックを表す `RangeAreas` オブジェクトを取得します。|

@@ -3,10 +3,10 @@
 |[BasicDataValidation](/javascript/api/excel/excel.basicdatavalidation)|[formula1](/javascript/api/excel/excel.basicdatavalidation#formula1)|演算子プロパティが GreaterThan などのバイナリ演算子に設定されている場合に、右側のオペランドを指定します (左側のオペランドは、ユーザーがセルに入力しようとする値です)。|
 ||[formula2](/javascript/api/excel/excel.basicdatavalidation#formula2)|3 項演算子 Between と NotBetween を使用して、上限オペランドを指定します。|
 ||[operator](/javascript/api/excel/excel.basicdatavalidation#operator)|データの検証に使用する演算子。|
-|[グラフ](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categorylabellevel)|ソース カテゴリ ラベルのレベルを参照して、グラフ カテゴリ ラベル レベル列挙定数を指定します。|
+|[Chart](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categorylabellevel)|ソース カテゴリ ラベルのレベルを参照して、グラフ カテゴリ ラベル レベル列挙定数を指定します。|
 ||[displayBlanksAs](/javascript/api/excel/excel.chart#displayblanksas)|空白のセルをグラフにプロットする方法を指定します。|
 ||[plotBy](/javascript/api/excel/excel.chart#plotby)|列や行がグラフのデータ系列として使用される方法を指定します。|
-||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|true の場合、可視セルだけがプロットされます。false の場合、可視セルと非表示セルの両方がプロットされます。|
+||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|true の場合、可視セルだけがプロットされます。|
 ||[onActivated](/javascript/api/excel/excel.chart#onactivated)|グラフがアクティブ化されると発生します。|
 ||[onDeactivated](/javascript/api/excel/excel.chart#ondeactivated)|グラフが非アクティブ化された場合に発生します。|
 ||[plotArea](/javascript/api/excel/excel.chart#plotarea)|グラフのプロット領域を表します。|
@@ -84,12 +84,12 @@
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[axisGroup](/javascript/api/excel/excel.chartseries#axisgroup)|指定した系列のグループを指定します。|
 ||[爆発](/javascript/api/excel/excel.chartseries#explosion)|円グラフまたはドーナツ グラフのスライスの展開値を指定します。|
 ||[firstSliceAngle](/javascript/api/excel/excel.chartseries#firstsliceangle)|最初の円グラフまたはドーナツ グラフのスライスの角度を度 (垂直方向から時計回り) で指定します。|
-||[invertIfNegative](/javascript/api/excel/excel.chartseries#invertifnegative)|True の場合は、負の数に対応するアイテムのパターンを反転します。|
+||[invertIfNegative](/javascript/api/excel/excel.chartseries#invertifnegative)|True の場合Excelに対応する場合は、アイテム内のパターンを反転します。|
 ||[オーバーラップ](/javascript/api/excel/excel.chartseries#overlap)|横棒と縦棒の配置方法を指定します。|
 ||[dataLabels](/javascript/api/excel/excel.chartseries#datalabels)|系列内のすべてのデータ ラベルのコレクションを表します。|
 ||[secondPlotSize](/javascript/api/excel/excel.chartseries#secondplotsize)|円グラフまたは円グラフの 2 番目のセクションのサイズを、プライマリ 円グラフのサイズに対する割合で指定します。|
 ||[splitType](/javascript/api/excel/excel.chartseries#splittype)|円グラフまたは円グラフの 2 つのセクションを分割する方法を指定します。|
-||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True の場合、Excel は、各データ マーカーに異なる色またはパターンを割り当てる。|
+||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True の場合Excelデータ マーカーに異なる色またはパターンを割り当てる必要があります。|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[backwardPeriod](/javascript/api/excel/excel.charttrendline#backwardperiod)|近似曲線を後方へ拡張するときの区間数を表します。|
 ||[forwardPeriod](/javascript/api/excel/excel.charttrendline#forwardperiod)|近似曲線を前方へ拡張するときの区間数を表します。|
 ||[label](/javascript/api/excel/excel.charttrendline#label)|グラフの近似曲線のラベルを表します。|
@@ -132,17 +132,17 @@
 ||[type](/javascript/api/excel/excel.datavalidation#type)|データ検証の種類については、「詳細 `Excel.DataValidationType` 」を参照してください。|
 ||[有効](/javascript/api/excel/excel.datavalidation#valid)|すべてのセルの値がデータの入力規則に従っているかどうかを表します。|
 ||[ルール](/javascript/api/excel/excel.datavalidation#rule)|さまざまな種類のデータ検証条件を含むデータ検証ルール。|
-|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[メッセージ](/javascript/api/excel/excel.datavalidationerroralert#message)|エラー通知メッセージを表します。|
+|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[message](/javascript/api/excel/excel.datavalidationerroralert#message)|エラー通知メッセージを表します。|
 ||[showAlert](/javascript/api/excel/excel.datavalidationerroralert#showalert)|ユーザーが無効なデータを入力した場合にエラー通知ダイアログを表示するかどうかを指定します。|
 ||[style](/javascript/api/excel/excel.datavalidationerroralert#style)|データ検証アラートの種類については、「詳細」 `Excel.DataValidationAlertStyle` を参照してください。|
 ||[title](/javascript/api/excel/excel.datavalidationerroralert#title)|エラー通知ダイアログのタイトルを表します。|
-|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[メッセージ](/javascript/api/excel/excel.datavalidationprompt#message)|プロンプトのメッセージを指定します。|
+|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[message](/javascript/api/excel/excel.datavalidationprompt#message)|プロンプトのメッセージを指定します。|
 ||[showPrompt](/javascript/api/excel/excel.datavalidationprompt#showprompt)|ユーザーがデータ検証を使用してセルを選択するときにプロンプトを表示する場合に指定します。|
 ||[title](/javascript/api/excel/excel.datavalidationprompt#title)|プロンプトのタイトルを指定します。|
 |[DataValidationRule](/javascript/api/excel/excel.datavalidationrule)|[カスタム](/javascript/api/excel/excel.datavalidationrule#custom)|データ検証条件のカスタム数式。|
 ||[date](/javascript/api/excel/excel.datavalidationrule#date)|日付のデータ検証条件。|
 ||[decimal](/javascript/api/excel/excel.datavalidationrule#decimal)|10 進数のデータ検証条件。|
-||[list](/javascript/api/excel/excel.datavalidationrule#list)|リストのデータ検証条件。|
+||[リスト](/javascript/api/excel/excel.datavalidationrule#list)|リストのデータ検証条件。|
 ||[textLength](/javascript/api/excel/excel.datavalidationrule#textlength)|テキストの長さデータの検証条件。|
 ||[time](/javascript/api/excel/excel.datavalidationrule#time)|時刻のデータ検証条件。|
 ||[wholeNumber](/javascript/api/excel/excel.datavalidationrule#wholenumber)|数値データの検証条件。|
@@ -217,7 +217,7 @@
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getitemornullobject-name-)|名前に基づいて RowColumnPivotHierarchy を取得します。|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 ||[remove(rowColumnPivotHierarchy: Excel.RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove-rowcolumnpivothierarchy-)|現在の軸からピボット階層を削除します。|
-|[Runtime](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableevents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
+|[ランタイム](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableevents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#basefield)|PivotField を使用して、型に応じて計算を基に計算を行います (該当する場合 `ShowAs` `ShowAsCalculation` は、それ以外 `null` の場合)。|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseitem)|型に応じて該当する場合は、計算の基に設定するアイテム `ShowAs` `ShowAsCalculation` 。それ以外の場合 `null` 。|
 ||[計算](/javascript/api/excel/excel.showasrule#calculation)|`ShowAs`PivotField に使用する計算。|
@@ -235,11 +235,11 @@
 ||[sum](/javascript/api/excel/excel.subtotals#sum)||
 ||[差異](/javascript/api/excel/excel.subtotals#variance)||
 ||[varianceP](/javascript/api/excel/excel.subtotals#variancep)||
-|[表](/javascript/api/excel/excel.table)|[legacyId](/javascript/api/excel/excel.table#legacyid)|数値 ID を返します。|
+|[Table](/javascript/api/excel/excel.table)|[legacyId](/javascript/api/excel/excel.table#legacyid)|数値 ID を返します。|
 |[TableChangedEventArgs](/javascript/api/excel/excel.tablechangedeventargs)|[getRange(ctx: Excel.RequestContext)](/javascript/api/excel/excel.tablechangedeventargs#getrange-ctx-)|特定のワークシートのテーブルの変更された領域を表す範囲を取得します。|
 ||[getRangeOrNullObject(ctx: Excel.RequestContext)](/javascript/api/excel/excel.tablechangedeventargs#getrangeornullobject-ctx-)|特定のワークシートのテーブルの変更された領域を表す範囲を取得します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[readOnly](/javascript/api/excel/excel.workbook#readonly)|ブックが `true` 読み取り専用モードで開いている場合に返します。|
-|[WorkbookCreated](/javascript/api/excel/excel.workbookcreated)||[ワークシート](/javascript/api/excel/excel.worksheet)|[onCalculated](/javascript/api/excel/excel.worksheet#oncalculated)|ワークシートの計算時に発生します。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[readOnly](/javascript/api/excel/excel.workbook#readonly)|ブックが `true` 読み取り専用モードで開いている場合に返します。|
+|[WorkbookCreated](/javascript/api/excel/excel.workbookcreated)||[Worksheet](/javascript/api/excel/excel.worksheet)|[onCalculated](/javascript/api/excel/excel.worksheet#oncalculated)|ワークシートの計算時に発生します。|
 ||[showGridlines](/javascript/api/excel/excel.worksheet#showgridlines)|グリッド線がユーザーに表示される場合に指定します。|
 ||[showHeadings](/javascript/api/excel/excel.worksheet#showheadings)|ユーザーに見出しを表示する場合に指定します。|
 |[WorksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs)|[type](/javascript/api/excel/excel.worksheetcalculatedeventargs#type)|イベントの種類を取得します。|
