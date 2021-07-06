@@ -1,0 +1,357 @@
+### YamlMime:TSType
+name: Excel.Application
+uid: excel!Excel.Application:class
+package: excel!
+fullName: Excel.Application
+summary: >-
+  ブックを管理する Excel アプリケーションを表します。
+
+
+  \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: calculationEngineVersion
+  uid: excel!Excel.Application#calculationEngineVersion:member
+  package: excel!
+  fullName: calculationEngineVersion
+  summary: >-
+    最後の完全な再計算に使用した Excel 計算エンジンのバージョンを返します。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly calculationEngineVersion: number;'
+    return:
+      type: number
+- name: calculationMode
+  uid: excel!Excel.Application#calculationMode:member
+  package: excel!
+  fullName: calculationMode
+  summary: >-
+    ブック内の定数で定義されている計算モードを返します。 `Excel.CalculationMode`<!-- -->. 指定できる値は次のとおりです。 `Automatic`<!-- -->、ここで、Excel再計算を制御します。`AutomaticExceptTables`<!-- -->で、Excel再計算を制御しますが、テーブルの変更は無視されます。`Manual`<!-- -->で、ユーザーが要求した場合に計算が行われます。
+
+
+    \[[API セット: ExcelApi 1.1 for get、 1.8 for set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
+    return:
+      type: <xref uid="excel!Excel.CalculationMode:enum" /> | "Automatic" | "AutomaticExceptTables" | "Manual"
+- name: calculationState
+  uid: excel!Excel.Application#calculationState:member
+  package: excel!
+  fullName: calculationState
+  summary: >-
+    アプリケーションの計算の状態を返します。 詳細は「`Excel.CalculationState`」をご覧ください。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly calculationState: Excel.CalculationState | "Done" | "Calculating" | "Pending";'
+    return:
+      type: <xref uid="excel!Excel.CalculationState:enum" /> | "Done" | "Calculating" | "Pending"
+- name: context
+  uid: excel!Excel.Application#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: cultureInfo
+  uid: excel!Excel.Application#cultureInfo:member
+  package: excel!
+  fullName: cultureInfo
+  summary: >-
+    現在のシステム カルチャ設定に基づく情報を提供します。 これには、カルチャ名、数値の書式設定、その他の文化的に依存する設定が含まれます。
+
+
+    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly cultureInfo: Excel.CultureInfo;'
+    return:
+      type: <xref uid="excel!Excel.CultureInfo:class" />
+- name: decimalSeparator
+  uid: excel!Excel.Application#decimalSeparator:member
+  package: excel!
+  fullName: decimalSeparator
+  summary: >-
+    数値の小数点として使用される文字列を取得します。 これは、ローカル の設定に基Excelです。
+
+
+    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly decimalSeparator: string;'
+    return:
+      type: string
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/culture-info.yaml\nawait Excel.run(async (context) => {\n  context.application.load(\"decimalSeparator,thousandsSeparator\");\n  context.application.cultureInfo.numberFormat.load(\"numberDecimalSeparator,numberGroupSeparator\");\n  await context.sync();\n\n  // Local settings are set under the \"Options > Advanced\" menu.\n  const localDecimalSeparator = context.application.decimalSeparator;\n  const localThousandsSeparator = context.application.thousandsSeparator;\n\n  const systemDecimalSeparator = context.application.cultureInfo.numberFormat.numberDecimalSeparator;\n  const systemThousandsSeparator = context.application.cultureInfo.numberFormat.numberGroupSeparator;\n\n  console.log(\"Local character settings: \");\n  console.log(`  Local decimal separator: ${localDecimalSeparator}`);\n  console.log(`  Local thousands separator: ${localThousandsSeparator}`);\n\n  console.log(\"System culture settings: \");\n  console.log(`  System decimal separator: ${systemDecimalSeparator}`);\n  console.log(`  System thousands separator: ${systemThousandsSeparator}`);\n  console.log(`  `);\n\n  await context.sync();\n});\n```"
+- name: iterativeCalculation
+  uid: excel!Excel.Application#iterativeCalculation:member
+  package: excel!
+  fullName: iterativeCalculation
+  summary: >-
+    反復計算の設定を返します。 [Excel Mac Windowsでは、設定はアプリケーションアプリケーションにExcelされます。 このExcel on the webプラットフォームでは、設定はアクティブなブックに適用されます。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly iterativeCalculation: Excel.IterativeCalculation;'
+    return:
+      type: <xref uid="excel!Excel.IterativeCalculation:class" />
+- name: thousandsSeparator
+  uid: excel!Excel.Application#thousandsSeparator:member
+  package: excel!
+  fullName: thousandsSeparator
+  summary: >-
+    数値の 10 進数の左側に数字のグループを区切る文字列を取得します。 これは、ローカル の設定に基Excelです。
+
+
+    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly thousandsSeparator: string;'
+    return:
+      type: string
+- name: useSystemSeparators
+  uid: excel!Excel.Application#useSystemSeparators:member
+  package: excel!
+  fullName: useSystemSeparators
+  summary: >-
+    ユーザーのシステム区切り記号が有効Excel指定します。 システムの区切り記号には、小数点と桁区切り記号が含まれます。
+
+
+    \[[API セット: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly useSystemSeparators: boolean;'
+    return:
+      type: boolean
+methods:
+- name: calculate(calculationType)
+  uid: excel!Excel.Application#calculate:member(1)
+  package: excel!
+  fullName: calculate(calculationType)
+  summary: >-
+    Excel で現在開いているすべてのブックを再計算します。
+
+
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'calculate(calculationType: Excel.CalculationType): void;'
+    parameters:
+    - id: calculationType
+      description: 使用する計算の種類を指定します。 詳細は「`Excel.CalculationType`」をご覧ください。
+      type: <xref uid="excel!Excel.CalculationType:enum" />
+    return:
+      type: void
+      description: ''
+- name: calculate(calculationTypeString)
+  uid: excel!Excel.Application#calculate:member(2)
+  package: excel!
+  fullName: calculate(calculationTypeString)
+  summary: >-
+    Excel で現在開いているすべてのブックを再計算します。
+
+
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
+    parameters:
+    - id: calculationTypeString
+      description: 使用する計算の種類を指定します。 詳細は「`Excel.CalculationType`」をご覧ください。
+      type: "\"Recalculate\" | \"Full\" | \"FullRebuild\""
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(options)
+  uid: excel!Excel.Application#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.ApplicationLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.Application:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.Application#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Application;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.Application:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.Application#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.Application;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.Application:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.Application#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Excel.Application): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティと同型的に構造化されたプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="excel!Excel.Interfaces.ApplicationUpdateData:interface" />
+    - id: options
+      description: properties オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.Application#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクト上の複数のプロパティを同時に設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.Application): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.Application:class" />
+    return:
+      type: void
+      description: ''
+- name: suspendApiCalculationUntilNextSync()
+  uid: excel!Excel.Application#suspendApiCalculationUntilNextSync:member(1)
+  package: excel!
+  fullName: suspendApiCalculationUntilNextSync()
+  summary: >-
+    次の値が呼び出されるまで `context.sync()` 計算を中断します。 設定されると、依存関係が確実に伝達されるようにブックを再計算するのは開発者の責任です。
+
+
+    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'suspendApiCalculationUntilNextSync(): void;'
+    return:
+      type: void
+      description: ''
+- name: suspendScreenUpdatingUntilNextSync()
+  uid: excel!Excel.Application#suspendScreenUpdatingUntilNextSync:member(1)
+  package: excel!
+  fullName: suspendScreenUpdatingUntilNextSync()
+  summary: >-
+    次の呼び出しが呼び出されるまで、画面の `context.sync()` 更新を中断します。
+
+
+    *Note**: 繰り返し `suspendScreenUpdatingUntilNextSync` 呼び出さない (ループ内など)。 繰り返し呼び出しを行Excelウィンドウがちらつきます。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'suspendScreenUpdatingUntilNextSync(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/90-scenarios/performance-optimization.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const rowCount = 500;\n    const columnCount = 20;\n\n    const startTime = Date.now();\n    console.log(\"Starting...\");\n\n    if (pauseScreenPainting) {\n        // Note: Don't call `suspendScreenUpdatingUntilNextSync` repeatedly (such as in a loop).\n        // Repeated calls will cause the Excel window to flicker. \n        context.application.suspendScreenUpdatingUntilNextSync();\n    }\n\n    for (let i = 0; i < rowCount; i++) {\n        for (let j = 0; j < columnCount; j++) {\n            let cell = sheet.getCell(i, j);\n            cell.values = [[i * j * Math.random()]];\n            if (untrack) {\n                cell.untrack();\n            }\n        }\n    }\n\n    await context.sync();\n\n    console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);\n});\n```"
+- name: toJSON()
+  uid: excel!Excel.Application#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。Application オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.ApplicationData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.ApplicationData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 0696d25d2a44db65ea03b419be0b20d80d2c2b5a
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53264160"

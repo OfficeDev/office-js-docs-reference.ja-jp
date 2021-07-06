@@ -709,7 +709,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -730,7 +730,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -751,7 +751,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -772,7 +772,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -793,7 +793,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: オプション。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
+      description: 省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -844,7 +844,7 @@ methods:
     content: 'getRanges(address?: string): Excel.RangeAreas;'
     parameters:
     - id: address
-      description: オプション。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
+      description: 省略可能です。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -865,7 +865,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'オプション。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
+      description: '省略可能です。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1181,9 +1181,9 @@ events:
     このワークシートで 1 つ以上の数式が変更された場合に発生します。 このイベントは、数式自体が変更された場合のイベントで、数式の計算に起因するデータ値ではありません。
 
 
-    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.13](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
@@ -1282,9 +1282,9 @@ events:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-worksheet-single-click.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onSingleClicked.add((event) => {\n        return Excel.run((context) => {\n            console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);\n            return context.sync();\n        });\n    });\n\n    console.log(\"The worksheet click handler is registered.\");\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 09fceeb0c67014ca01fa4f71da709bc20a3220c1
-  ms.sourcegitcommit: c9b22faea92300a0c7600a7054be68285697c6af
+  ms.openlocfilehash: 8e10ce1e785d94179d47f614f2db893328d0a468
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 06/09/2021
-  ms.locfileid: "52852527"
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53260968"
