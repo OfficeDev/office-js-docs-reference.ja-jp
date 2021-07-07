@@ -1,0 +1,299 @@
+### YamlMime:TSType
+name: Excel.DataValidation
+uid: excel!Excel.DataValidation:class
+package: excel!
+fullName: Excel.DataValidation
+summary: >-
+  現在の範囲に適用されるデータ検証を表します。 データ検証オブジェクト モデルの詳細については、「データ検証をデータ範囲に追加[する」をExcelしてください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-data-validation)<!-- -->.
+
+
+  \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.DataValidation#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: errorAlert
+  uid: excel!Excel.DataValidation#errorAlert:member
+  package: excel!
+  fullName: errorAlert
+  summary: >-
+    無効なデータが入力された場合のエラー警告。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'errorAlert: Excel.DataValidationErrorAlert;'
+    return:
+      type: <xref uid="excel!Excel.DataValidationErrorAlert:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
+- name: ignoreBlanks
+  uid: excel!Excel.DataValidation#ignoreBlanks:member
+  package: excel!
+  fullName: ignoreBlanks
+  summary: >-
+    空白のセルに対してデータ検証を実行する場合に指定します。 既定値は `true` です<!-- -->.
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'ignoreBlanks: boolean;'
+    return:
+      type: boolean
+- name: prompt
+  uid: excel!Excel.DataValidation#prompt:member
+  package: excel!
+  fullName: prompt
+  summary: >-
+    ユーザーがセルを選択するときにプロンプトを表示します。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prompt: Excel.DataValidationPrompt;'
+    return:
+      type: <xref uid="excel!Excel.DataValidationPrompt:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const rankingRange = sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Ranking\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    rankingRange.dataValidation.clear();\n\n    let greaterThanZeroRule = {\n        wholeNumber: {\n            formula1: 0,\n            operator: Excel.DataValidationOperator.greaterThan\n        }\n    };\n    rankingRange.dataValidation.rule = greaterThanZeroRule;\n\n    rankingRange.dataValidation.prompt = {\n        message: \"Please enter a positive number.\",\n        showPrompt: true,\n        title: \"Positive numbers only.\"\n    };\n\n    rankingRange.dataValidation.errorAlert = {\n        message: \"Sorry, only positive numbers are allowed\",\n        showAlert: true,\n        style: \"Stop\",\n        title: \"Negative Number Entered\"\n    };\n\n    await context.sync();\n});\n```"
+- name: rule
+  uid: excel!Excel.DataValidation#rule:member
+  package: excel!
+  fullName: rule
+  summary: >-
+    さまざまな種類のデータ検証条件を含むデータ検証ルール。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'rule: Excel.DataValidationRule;'
+    return:
+      type: <xref uid="excel!Excel.DataValidationRule:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const nameRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Baby Name\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    nameRange.dataValidation.clear();\n\n    const nameSourceRange = context.workbook.worksheets.getItem(\"Names\").getRange(\"A1:A3\");\n\n    let approvedListRule = {\n        list: {\n            inCellDropDown: true,\n            source: nameSourceRange\n        }\n    };\n    nameRange.dataValidation.rule = approvedListRule;\n\n    await context.sync();\n});\n```"
+- name: type
+  uid: excel!Excel.DataValidation#type:member
+  package: excel!
+  fullName: type
+  summary: >-
+    データ検証の種類については、「詳細 `Excel.DataValidationType` 」を参照してください。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly type: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria";'
+    return:
+      type: <xref uid="excel!Excel.DataValidationType:enum" /> | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
+- name: valid
+  uid: excel!Excel.DataValidation#valid:member
+  package: excel!
+  fullName: valid
+  summary: >-
+    すべてのセルの値がデータの入力規則に従っているかどうかを表します。 すべてのセル `true` 値が有効な場合、またはすべてのセル `false` 値が無効な場合に返します。 範囲内に `null` 有効なセル値と無効なセル値の両方がある場合に返します。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly valid: boolean;'
+    return:
+      type: boolean
+methods:
+- name: clear()
+  uid: excel!Excel.DataValidation#clear:member(1)
+  package: excel!
+  fullName: clear()
+  summary: >-
+    現在の範囲からデータの入力規則をクリアします。
+
+
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: ''
+- name: getInvalidCells()
+  uid: excel!Excel.DataValidation#getInvalidCells:member(1)
+  package: excel!
+  fullName: getInvalidCells()
+  summary: >-
+    無効なセル値を持つ 1 つ以上の四角形の範囲を含む `RangeAreas` オブジェクトを返します。 すべてのセル値が有効な場合、この関数はエラーをスロー `ItemNotFound` します。
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getInvalidCells(): Excel.RangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: getInvalidCellsOrNullObject()
+  uid: excel!Excel.DataValidation#getInvalidCellsOrNullObject:member(1)
+  package: excel!
+  fullName: getInvalidCellsOrNullObject()
+  summary: >-
+    無効なセル値を持つ 1 つ以上の四角形の範囲を含む `RangeAreas` オブジェクトを返します。 すべてのセル値が有効な場合、この関数は `null`<!-- -->.
+
+
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.DataValidation#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.DataValidationLoadOptions): Excel.DataValidation;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.DataValidationLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.DataValidation:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.DataValidation#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.DataValidation;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.DataValidation:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.DataValidation#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.DataValidation;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.DataValidation:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.DataValidation#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Excel.DataValidation): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.DataValidationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: メソッドが呼び出されるオブジェクトのプロパティと同型的に構造化されたプロパティを持つ JavaScript オブジェクト。
+      type: <xref uid="excel!Excel.Interfaces.DataValidationUpdateData:interface" />
+    - id: options
+      description: properties オブジェクトが読み取り専用プロパティを設定しようとすると、エラーを抑制するオプションを提供します。
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.DataValidation#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: 既存の読み込まれたオブジェクトに基づいて、オブジェクト上の複数のプロパティを同時に設定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.DataValidation): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.DataValidation:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.DataValidation#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。DataValidation オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`Excel.Interfaces.DataValidationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.DataValidationData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.DataValidationData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 43ef3f661fab1e5bf42b00a2f9b17b65c7a39dda
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53272948"
