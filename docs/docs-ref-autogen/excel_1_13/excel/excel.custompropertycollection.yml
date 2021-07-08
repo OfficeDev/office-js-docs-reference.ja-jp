@@ -1,0 +1,212 @@
+### YamlMime:TSType
+name: Excel.CustomPropertyCollection
+uid: excel!Excel.CustomPropertyCollection:class
+package: excel!
+fullName: Excel.CustomPropertyCollection
+summary: >-
+  カスタム プロパティのコレクションを格納します。
+
+
+  \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.CustomPropertyCollection#context:member
+  package: excel!
+  fullName: context
+  summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.CustomPropertyCollection#items:member
+  package: excel!
+  fullName: items
+  summary: このコレクション内に読み込まれた子アイテムを取得します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.CustomProperty[];'
+    return:
+      type: <xref uid="excel!Excel.CustomProperty:class" />[]
+methods:
+- name: add(key, value)
+  uid: excel!Excel.CustomPropertyCollection#add:member(1)
+  package: excel!
+  fullName: add(key, value)
+  summary: >-
+    新しいカスタム プロパティを作成、または既存のカスタム プロパティを設定します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(key: string, value: any): Excel.CustomProperty;'
+    parameters:
+    - id: key
+      description: 必須です。 大文字と小文字を区別しないカスタム プロパティのキー。 キーは 255 文字に制限されています (Excel on the webキーは他のプラットフォームでは自動的に 255 文字にトリミングされます)。
+      type: string
+    - id: value
+      description: 必須です。 カスタム プロパティの値。 この値は、Excel on the web 以外の 255 文字に制限されます (大きい値は、他のプラットフォームでは自動的に 255 文字にトリミングされます)。
+      type: any
+    return:
+      type: <xref uid="excel!Excel.CustomProperty:class" />
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/26-document/custom-properties.yaml\nawait Excel.run(async (context) => {\n  // Get the key/value pair from the task pane.\n  const userKey = $(\"#key\").text();\n  const userValue = $(\"#value\").text();\n\n  // Add the custom property.\n  const customDocProperties = context.workbook.properties.custom;\n  customDocProperties.add(userKey, userValue);\n\n  await context.sync();\n\n  console.log(`Successfully set custom document property ${userKey}:${userValue}.`);\n});\n```"
+- name: deleteAll()
+  uid: excel!Excel.CustomPropertyCollection#deleteAll:member(1)
+  package: excel!
+  fullName: deleteAll()
+  summary: >-
+    このコレクション内のすべてのカスタム プロパティを削除します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'deleteAll(): void;'
+    return:
+      type: void
+      description: ''
+- name: getCount()
+  uid: excel!Excel.CustomPropertyCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    カスタム プロパティの数を取得します。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: excel!Excel.CustomPropertyCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合は、エラーをスローします。
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.CustomProperty;'
+    parameters:
+    - id: key
+      description: カスタム プロパティ オブジェクトを識別するキー。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.CustomProperty:class" />
+      description: ''
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.CustomPropertyCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.CustomProperty;'
+    parameters:
+    - id: key
+      description: 必須です。 カスタム プロパティ オブジェクトを識別するキー。
+      type: string
+    return:
+      type: <xref uid="excel!Excel.CustomProperty:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.CustomPropertyCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.CustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomPropertyCollection;'
+    parameters:
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
+      type: <xref uid="excel!Excel.Interfaces.CustomPropertyCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.CustomPropertyCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.CustomPropertyCollection;'
+    parameters:
+    - id: propertyNames
+      description: 読み込むプロパティを指定するコンマ区切り文字列または文字列の配列。
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.CustomPropertyCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CustomPropertyCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.CustomPropertyCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元のオブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `Excel.CustomPropertyCollection` `toJSON` を返します。 `Excel.Interfaces.CustomPropertyCollectionData`<!-- -->) コレクションのアイテムから読み込まれたプロパティのコピーが浅い "items" 配列を含む。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.CustomPropertyCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.CustomPropertyCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 910d52fb02869069b70719f95be1becc2dae39ce
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53272540"
