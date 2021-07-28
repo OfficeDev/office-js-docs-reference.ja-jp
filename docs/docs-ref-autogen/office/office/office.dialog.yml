@@ -25,14 +25,14 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
+    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string, origin: string | undefined} | {error: number}) => void): void;'
     parameters:
     - id: eventType
       description: DialogMessageReceived または DialogEventReceived のいずれかである必要があります。
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: eventType が DialogMessageReceived の場合はプロパティを持つオブジェクトを受け入れる関数 `message` 、eventType が DialogEventReceived の場合はプロパティを持つオブジェクトを受け入れる関数 `error` 。
-      type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
+      description: プロパティを持つオブジェクトを受け入れる関数 `message` `origin` (if `eventType` is) `DialogMessageReceived`<!-- -->、またはプロパティを持つ `error` オブジェクト (if `eventType` is `DialogEventReceived`<!-- -->. このプロパティは `origin` `undefined` [、DialogOrigin 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets)をサポートしないクライアント上にあります。<!-- -->.
+      type: '(args: {message: string, origin: string | undefined} | {error: number}) =&gt; void'
     return:
       type: void
       description: ''
@@ -53,10 +53,10 @@ methods:
     return:
       type: void
       description: ''
-- name: messageChild(message)
+- name: messageChild(message, messageOptions)
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
-  fullName: messageChild(message)
+  fullName: messageChild(message, messageOptions)
   summary: 作業ウィンドウや UI レス関数ファイルなどのホスト ページから、ページから開いたダイアログにメッセージを配信します。
   remarks: >-
     **ホスト**: Excel、Outlook (最小要件セット: メールボックス 1.9)、PowerPoint、Word
@@ -69,14 +69,20 @@ methods:
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    - パラメーターを `messageOptions` 使用する場合は [、DialogOrigin 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets) も必要です。
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'messageChild(message: string): void;'
+    content: 'messageChild(message: string, messageOptions?: DialogMessageOptions): void;'
     parameters:
     - id: message
       description: ホスト ページからダイアログに配信するメッセージを受け入れる。 JSON や XML を含む文字列にシリアル化できる情報は、何でも送信できます。
       type: string
+    - id: messageOptions
+      description: 省略可能。 メッセージを送信する方法のオプションを提供します。
+      type: <xref uid="office!Office.DialogMessageOptions:interface" />
     return:
       type: void
       description: ''
@@ -98,9 +104,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 52178447972fb3aa4048c0a8f2c72b3d8b17f779
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 283d8bf0325236380c4797756901aaba80b4141a
+  ms.sourcegitcommit: 299ab01d75899a5547557dd4a40728b385dc16f1
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51320483"
+  ms.lasthandoff: 07/22/2021
+  ms.locfileid: "53532747"
