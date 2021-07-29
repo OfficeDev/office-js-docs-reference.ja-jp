@@ -62,7 +62,7 @@ methods:
   package: excel!
   fullName: add(index, values)
   summary: >-
-    テーブルに 1 つ以上の行を追加します。 戻りオブジェクトは新しく追加された行の先頭になります。
+    テーブルに 1 つ以上の行を追加します。戻りオブジェクトは新しく追加された行の先頭になります。
 
 
     範囲や列とは異なり、新しい行または列が追加される場合は調整されますが、オブジェクトはテーブル行の物理的な場所を表しますが、データは `TableRow` 表しません。 つまり、データを並べ替えた場合、または新しい行が追加された場合、テーブル行は作成されたインデックスを引き続きポイントします。
@@ -84,6 +84,51 @@ methods:
     return:
       type: <xref uid="excel!Excel.TableRow:class" />
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var row = tables.getItem(\"Table1\").rows.add(null, values);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: deleteRows(rows)
+  uid: excel!Excel.TableRowCollection#deleteRows:member(1)
+  package: excel!
+  fullName: deleteRows(rows)
+  summary: >-
+    テーブルから複数の行を削除します。 これらの行はシーケンシャルである必要があります。 選択した行が既に削除されている場合、または存在しない場合、このメソッドは `InvalidArgument` エラーをスローします。 メソッドが呼び出されたテーブルにフィルターが適用されている場合、このメソッドは `InsertDeleteConflict` エラーをスローします。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'deleteRows(rows: number[] | TableRow[]): void;'
+    parameters:
+    - id: rows
+      description: テーブルから削除する行インデックス番号または行オブジェクトの配列。
+      type: number[] | <xref uid="excel!Excel.TableRow:class" />[]
+    return:
+      type: void
+      description: ''
+- name: deleteRowsAt(index, count)
+  uid: excel!Excel.TableRowCollection#deleteRowsAt:member(1)
+  package: excel!
+  fullName: deleteRowsAt(index, count)
+  summary: >-
+    指定したインデックスから、指定した数の行をテーブルから削除します。 メソッドが呼び出されたテーブルにフィルターが適用されている場合、このメソッドは `InsertDeleteConflict` エラーをスローします。
+
+
+    \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'deleteRowsAt(index: number, count?: number): void;'
+    parameters:
+    - id: index
+      description: '削除する行のインデックス値。 注: 行インデックスは、各削除操作の後、テーブル内の先行行が削除される度に更新されます。 削除する行のインデックスが、値を決定した時刻と操作を実行した時刻の間で変更されていないか確認します。'
+      type: number
+    - id: count
+      description: 削除する行の数。 既定では、1 行が削除されます。
+      type: number
+    return:
+      type: void
+      description: ''
 - name: getCount()
   uid: excel!Excel.TableRowCollection#getCount:member(1)
   package: excel!
@@ -120,7 +165,7 @@ methods:
     content: 'getItemAt(index: number): Excel.TableRow;'
     parameters:
     - id: index
-      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
       type: number
     return:
       type: <xref uid="excel!Excel.TableRow:class" />
@@ -191,9 +236,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0ae9246ea76ea7d4af5c4d74bad3973a3aa6ed67
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 56cce7257d77368ea95c7e7a504981be5eb458de
+  ms.sourcegitcommit: c68a3517b8b502139d818d1effefc3e09464dbf1
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51271283"
+  ms.lasthandoff: 07/29/2021
+  ms.locfileid: "53639353"

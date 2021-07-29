@@ -1,9 +1,19 @@
 | クラス | フィールド | 説明 |
 |:---|:---|:---|
-|[AutoFilter](/javascript/api/excel/excel.autofilter)|[clearColumnCriteria(columnIndex: number)](/javascript/api/excel/excel.autofilter#clearcolumncriteria-columnindex-)|オートフィルターのフィルター条件がクリアされます。|
 |[ChangeDirectionState](/javascript/api/excel/excel.changedirectionstate)|[deleteShiftDirection](/javascript/api/excel/excel.changedirectionstate#deleteshiftdirection)|セルまたはセルが削除された場合に残りのセルが移動する方向 (上または左など) を表します。|
 ||[insertShiftDirection](/javascript/api/excel/excel.changedirectionstate#insertshiftdirection)|新しいセルまたはセルを挿入するときに既存のセルが移動する方向 (下方向や右方向など) を表します。|
-|[Comment](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#assigntask-assignee-)|コメントに添付されたタスクを、割り当て先として指定されたユーザーに割り当てる。|
+|[グラフ](/javascript/api/excel/excel.chart)|[getDataTable()](/javascript/api/excel/excel.chart#getdatatable--)|グラフのデータ テーブルを取得します。|
+||[getDataTableOrNullObject()](/javascript/api/excel/excel.chart#getdatatableornullobject--)|グラフのデータ テーブルを取得します。|
+|[ChartDataTable](/javascript/api/excel/excel.chartdatatable)|[format](/javascript/api/excel/excel.chartdatatable#format)|塗りつぶし、フォント、罫線の形式を含むグラフ データ テーブルの形式を表します。|
+||[showHorizontalBorder](/javascript/api/excel/excel.chartdatatable#showhorizontalborder)|データ テーブルの水平方向の罫線を表示するかどうかを指定します。|
+||[showLegendKey](/javascript/api/excel/excel.chartdatatable#showlegendkey)|データ テーブルの凡例キーを表示するかどうかを指定します。|
+||[showOutlineBorder](/javascript/api/excel/excel.chartdatatable#showoutlineborder)|データ テーブルの輪郭線を表示するかどうかを指定します。|
+||[showVerticalBorder](/javascript/api/excel/excel.chartdatatable#showverticalborder)|データ テーブルの垂直罫線を表示するかどうかを指定します。|
+||[visible](/javascript/api/excel/excel.chartdatatable#visible)|グラフのデータ テーブルを表示するかどうかを指定します。|
+|[ChartDataTableFormat](/javascript/api/excel/excel.chartdatatableformat)|[border](/javascript/api/excel/excel.chartdatatableformat#border)|グラフ データ テーブルの罫線の形式 (色、線のスタイル、太さ) を表します。|
+||[fill](/javascript/api/excel/excel.chartdatatableformat#fill)|背景の書式設定情報を含む、オブジェクトの塗りつぶしの書式を表します。|
+||[font](/javascript/api/excel/excel.chartdatatableformat#font)|現在のオブジェクトのフォント属性 (フォント名、フォント サイズ、色など) を表します。|
+|[コメント](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#assigntask-assignee-)|コメントに添付されたタスクを、割り当て先として指定されたユーザーに割り当てる。|
 ||[getTask()](/javascript/api/excel/excel.comment#gettask--)|このコメントに関連付けられているタスクを取得します。|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.comment#gettaskornullobject--)|このコメントに関連付けられているタスクを取得します。|
 |[CommentCollection](/javascript/api/excel/excel.commentcollection)|[getItemOrNullObject(commentId: string)](/javascript/api/excel/excel.commentcollection#getitemornullobject-commentid-)|ID に基づいてコレクションからコメントを取得します。|
@@ -92,6 +102,15 @@
 ||[pivotStyle](/javascript/api/excel/excel.pivotlayout#pivotstyle)|ピボットテーブルに適用されるスタイル。|
 ||[setStyle(style: string \| PivotTableStyle \| BuiltInPivotTableStyle)](/javascript/api/excel/excel.pivotlayout#setstyle-style-)|ピボットテーブルに適用されるスタイルを設定します。|
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getfirstornullobject--)|コレクション内の最初のピボットテーブルを取得します。|
+|[Query](/javascript/api/excel/excel.query)|[error](/javascript/api/excel/excel.query#error)|クエリが最後に更新された場合のクエリ エラー メッセージを取得します。|
+||[loadedTo](/javascript/api/excel/excel.query#loadedto)|オブジェクトの種類を '読み込まれた' クエリを取得します。|
+||[loadedToDataModel](/javascript/api/excel/excel.query#loadedtodatamodel)|データ モデルに読み込まれたクエリを指定します。|
+||[name](/javascript/api/excel/excel.query#name)|クエリの名前を取得します。|
+||[refreshDate](/javascript/api/excel/excel.query#refreshdate)|クエリが最後に更新された日時を取得します。|
+||[rowsLoadedCount](/javascript/api/excel/excel.query#rowsloadedcount)|クエリが最後に更新されたときに読み込まれた行の数を取得します。|
+|[QueryCollection](/javascript/api/excel/excel.querycollection)|[getCount()](/javascript/api/excel/excel.querycollection#getcount--)|ブック内のクエリの数を取得します。|
+||[getItem(key: string)](/javascript/api/excel/excel.querycollection#getitem-key-)|コレクションの名前に基づいてクエリを取得します。|
+||[items](/javascript/api/excel/excel.querycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getdependents--)|同じワークシートまたは複数のワークシート内のセルのすべての従属セルを含む範囲を表すオブジェクト `WorkbookRangeAreas` を返します。|
 ||[getPrecedents()](/javascript/api/excel/excel.range#getprecedents--)|同じワークシートまたは複数のワークシート内のセルのすべての前例を含む範囲を表すオブジェクト `WorkbookRangeAreas` を返します。|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshmode)|リンクされたデータ型の更新モード。|
@@ -103,6 +122,7 @@
 ||[source](/javascript/api/excel/excel.refreshrequestcompletedeventargs#source)|イベントのソースを取得します。|
 ||[type](/javascript/api/excel/excel.refreshrequestcompletedeventargs#type)|イベントの種類を取得します。|
 ||[警告](/javascript/api/excel/excel.refreshrequestcompletedeventargs#warnings)|更新要求から生成された警告を含む配列。|
+|[図形](/javascript/api/excel/excel.shape)|[displayName](/javascript/api/excel/excel.shape#displayname)|図形の表示名を取得します。|
 |[ShapeCollection](/javascript/api/excel/excel.shapecollection)|[addSvg(xml: string)](/javascript/api/excel/excel.shapecollection#addsvg-xml-)|XML 文字列からスケーラブルなベクター グラフィックス (SVG) を作成し、それをワークシートに追加します。|
 ||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.shapecollection#getitemornullobject-key-)|名前または ID を使用して図形を取得します。|
 |[Slicer](/javascript/api/excel/excel.slicer)|[nameInFormula](/javascript/api/excel/excel.slicer#nameinformula)|数式で使用するスライサーの名前を表します。|
@@ -117,9 +137,12 @@
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableid)|フィルターが適用されるテーブルの ID を取得します。|
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#worksheetid)|テーブルを含むワークシートの ID を取得します。|
+|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[deleteRows(rows: number[] \| TableRow[])](/javascript/api/excel/excel.tablerowcollection#deleterows-rows-)|テーブルから複数の行を削除します。|
+||[deleteRowsAt(index: number, count?: number)](/javascript/api/excel/excel.tablerowcollection#deleterowsat-index--count-)|指定したインデックスから、指定した数の行をテーブルから削除します。|
 |[TableScopedCollection](/javascript/api/excel/excel.tablescopedcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablescopedcollection#getitemornullobject-key-)|名前または ID でテーブルを取得します。|
-|[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
+|[ブック](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
 ||[linkedWorkbooks](/javascript/api/excel/excel.workbook#linkedworkbooks)|リンクされたブックのコレクションを返します。|
+||[クエリ](/javascript/api/excel/excel.workbook#queries)|ブックの一部である Power Query クエリのコレクションを返します。|
 ||[タスク](/javascript/api/excel/excel.workbook#tasks)|ブックに存在するタスクのコレクションを返します。|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showpivotfieldlist)|ピボットテーブルのフィールド 一覧ウィンドウをブック レベルで表示するかどうかを指定します。|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904datesystem)|ブックの日付を 1904 年から計算する場合、true となります。|
