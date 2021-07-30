@@ -1,43 +1,43 @@
 | クラス | フィールド | 説明 |
 |:---|:---|:---|
-|[BindingCollection](/javascript/api/excel/excel.bindingcollection)|[getCount()](/javascript/api/excel/excel.bindingcollection#getcount--)|コレクションに含まれるバインドの数を取得します。|
-||[getItemOrNullObject(id: string)](/javascript/api/excel/excel.bindingcollection#getitemornullobject-id-)|ID を使用してバインド オブジェクトを取得します。|
-|[ChartCollection](/javascript/api/excel/excel.chartcollection)|[getCount()](/javascript/api/excel/excel.chartcollection#getcount--)|ワークシート上のグラフの数を返します。|
-||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.chartcollection#getitemornullobject-name-)|グラフ名を使用してグラフを取得します。|
-|[ChartPointsCollection](/javascript/api/excel/excel.chartpointscollection)|[getCount()](/javascript/api/excel/excel.chartpointscollection#getcount--)|系列に含まれるグラフのポイントの数を返します。|
-|[ChartSeriesCollection](/javascript/api/excel/excel.chartseriescollection)|[getCount()](/javascript/api/excel/excel.chartseriescollection#getcount--)|コレクションに含まれるデータ系列の数を返します。|
+|[BindingCollection](/javascript/api/excel/excel.bindingcollection)|[getCount()](/javascript/api/excel/excel.bindingcollection#getCount__)|コレクションに含まれるバインドの数を取得します。|
+||[getItemOrNullObject(id: string)](/javascript/api/excel/excel.bindingcollection#getItemOrNullObject_id_)|ID を使用してバインド オブジェクトを取得します。|
+|[ChartCollection](/javascript/api/excel/excel.chartcollection)|[getCount()](/javascript/api/excel/excel.chartcollection#getCount__)|ワークシート上のグラフの数を返します。|
+||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.chartcollection#getItemOrNullObject_name_)|グラフ名を使用してグラフを取得します。|
+|[ChartPointsCollection](/javascript/api/excel/excel.chartpointscollection)|[getCount()](/javascript/api/excel/excel.chartpointscollection#getCount__)|系列に含まれるグラフのポイントの数を返します。|
+|[ChartSeriesCollection](/javascript/api/excel/excel.chartseriescollection)|[getCount()](/javascript/api/excel/excel.chartseriescollection#getCount__)|コレクションに含まれるデータ系列の数を返します。|
 |[NamedItem](/javascript/api/excel/excel.nameditem)|[comment](/javascript/api/excel/excel.nameditem#comment)|この名前に関連付けられたコメントを指定します。|
-||[delete()](/javascript/api/excel/excel.nameditem#delete--)|指定された名前を削除します。|
-||[getRangeOrNullObject()](/javascript/api/excel/excel.nameditem#getrangeornullobject--)|名前に関連付けられている範囲オブジェクトを返します。|
+||[delete()](/javascript/api/excel/excel.nameditem#delete__)|指定された名前を削除します。|
+||[getRangeOrNullObject()](/javascript/api/excel/excel.nameditem#getRangeOrNullObject__)|名前に関連付けられている範囲オブジェクトを返します。|
 ||[scope](/javascript/api/excel/excel.nameditem#scope)|名前をブックまたは特定のワークシートの範囲に設定する場合に指定します。|
 ||[worksheet](/javascript/api/excel/excel.nameditem#worksheet)|名前付きのアイテムの対象になるワークシートを返します。|
-||[worksheetOrNullObject](/javascript/api/excel/excel.nameditem#worksheetornullobject)|名前付きアイテムのスコープを設定するワークシートを返します。|
-|[NamedItemCollection](/javascript/api/excel/excel.nameditemcollection)|[add(name: string, reference: Range \| string, comment?: string)](/javascript/api/excel/excel.nameditemcollection#add-name--reference--comment-)|指定のスコープのコレクションに新しい名前を追加します。|
-||[addFormulaLocal(name: string, formula: string, comment?: string)](/javascript/api/excel/excel.nameditemcollection#addformulalocal-name--formula--comment-)|ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。|
-||[getCount()](/javascript/api/excel/excel.nameditemcollection#getcount--)|コレクションに含まれる名前付きアイテムの数を取得します。|
-||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.nameditemcollection#getitemornullobject-name-)|その名前を `NamedItem` 使用してオブジェクトを取得します。|
-|[PivotTableCollection](/javascript/api/excel/excel.pivottablecollection)|[getCount()](/javascript/api/excel/excel.pivottablecollection#getcount--)|コレクションに含まれるピボット テーブルの数を取得します。|
-||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.pivottablecollection#getitemornullobject-name-)|名前に基づいてピボットテーブルを取得します。|
-|[Range](/javascript/api/excel/excel.range)|[getIntersectionOrNullObject(anotherRange: Range \| string)](/javascript/api/excel/excel.range#getintersectionornullobject-anotherrange-)|指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。|
-||[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.range#getusedrangeornullobject-valuesonly-)|指定した範囲オブジェクトのうち使用されている範囲を返します。|
-|[RangeViewCollection](/javascript/api/excel/excel.rangeviewcollection)|[getCount()](/javascript/api/excel/excel.rangeviewcollection#getcount--)|コレクション内のオブジェクト `RangeView` の数を取得します。|
-|[設定](/javascript/api/excel/excel.setting)|[delete()](/javascript/api/excel/excel.setting#delete--)|設定を削除します。|
+||[worksheetOrNullObject](/javascript/api/excel/excel.nameditem#worksheetOrNullObject)|名前付きアイテムのスコープを設定するワークシートを返します。|
+|[NamedItemCollection](/javascript/api/excel/excel.nameditemcollection)|[add(name: string, reference: Range \| string, comment?: string)](/javascript/api/excel/excel.nameditemcollection#add_name__reference__comment_)|指定のスコープのコレクションに新しい名前を追加します。|
+||[addFormulaLocal(name: string, formula: string, comment?: string)](/javascript/api/excel/excel.nameditemcollection#addFormulaLocal_name__formula__comment_)|ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。|
+||[getCount()](/javascript/api/excel/excel.nameditemcollection#getCount__)|コレクションに含まれる名前付きアイテムの数を取得します。|
+||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.nameditemcollection#getItemOrNullObject_name_)|その名前を `NamedItem` 使用してオブジェクトを取得します。|
+|[PivotTableCollection](/javascript/api/excel/excel.pivottablecollection)|[getCount()](/javascript/api/excel/excel.pivottablecollection#getCount__)|コレクションに含まれるピボット テーブルの数を取得します。|
+||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.pivottablecollection#getItemOrNullObject_name_)|名前に基づいてピボットテーブルを取得します。|
+|[Range](/javascript/api/excel/excel.range)|[getIntersectionOrNullObject(anotherRange: Range \| string)](/javascript/api/excel/excel.range#getIntersectionOrNullObject_anotherRange_)|指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。|
+||[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.range#getUsedRangeOrNullObject_valuesOnly_)|指定した範囲オブジェクトのうち使用されている範囲を返します。|
+|[RangeViewCollection](/javascript/api/excel/excel.rangeviewcollection)|[getCount()](/javascript/api/excel/excel.rangeviewcollection#getCount__)|コレクション内のオブジェクト `RangeView` の数を取得します。|
+|[設定](/javascript/api/excel/excel.setting)|[delete()](/javascript/api/excel/excel.setting#delete__)|設定を削除します。|
 ||[key](/javascript/api/excel/excel.setting#key)|設定の ID を表すキー。|
 ||[value](/javascript/api/excel/excel.setting#value)|この設定に格納されている値を表します。|
-|[SettingCollection](/javascript/api/excel/excel.settingcollection)|[add(key: string, value: string \| number boolean Date Array \| \| \| <any> \| any)](/javascript/api/excel/excel.settingcollection#add-key--value-)|指定した設定をブックに設定または追加します。|
-||[getCount()](/javascript/api/excel/excel.settingcollection#getcount--)|コレクション内の設定の数を取得します。|
-||[getItem(key: string)](/javascript/api/excel/excel.settingcollection#getitem-key-)|キーを使用して設定エントリを取得します。|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.settingcollection#getitemornullobject-key-)|キーを使用して設定エントリを取得します。|
+|[SettingCollection](/javascript/api/excel/excel.settingcollection)|[add(key: string, value: string \| number boolean Date Array \| \| \| <any> \| any)](/javascript/api/excel/excel.settingcollection#add_key__value_)|指定した設定をブックに設定または追加します。|
+||[getCount()](/javascript/api/excel/excel.settingcollection#getCount__)|コレクション内の設定の数を取得します。|
+||[getItem(key: string)](/javascript/api/excel/excel.settingcollection#getItem_key_)|キーを使用して設定エントリを取得します。|
+||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.settingcollection#getItemOrNullObject_key_)|キーを使用して設定エントリを取得します。|
 ||[items](/javascript/api/excel/excel.settingcollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-||[onSettingsChanged](/javascript/api/excel/excel.settingcollection#onsettingschanged)|ドキュメントの設定が変更された場合に発生します。|
+||[onSettingsChanged](/javascript/api/excel/excel.settingcollection#onSettingsChanged)|ドキュメントの設定が変更された場合に発生します。|
 |[SettingsChangedEventArgs](/javascript/api/excel/excel.settingschangedeventargs)|[settings](/javascript/api/excel/excel.settingschangedeventargs#settings)|設定変更 `Setting` イベントを発生したバインドを表すオブジェクトを取得します。|
-|[TableCollection](/javascript/api/excel/excel.tablecollection)|[getCount()](/javascript/api/excel/excel.tablecollection#getcount--)|コレクションに含まれるテーブルの数を取得します。|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablecollection#getitemornullobject-key-)|名前または ID でテーブルを取得します。|
-|[TableColumnCollection](/javascript/api/excel/excel.tablecolumncollection)|[getCount()](/javascript/api/excel/excel.tablecolumncollection#getcount--)|表の列数を取得します。|
-||[getItemOrNullObject(key: number \| string)](/javascript/api/excel/excel.tablecolumncollection#getitemornullobject-key-)|名前または ID によって、列オブジェクトを取得します。|
-|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[getCount()](/javascript/api/excel/excel.tablerowcollection#getcount--)|表の行数を取得します。|
+|[TableCollection](/javascript/api/excel/excel.tablecollection)|[getCount()](/javascript/api/excel/excel.tablecollection#getCount__)|コレクションに含まれるテーブルの数を取得します。|
+||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablecollection#getItemOrNullObject_key_)|名前または ID でテーブルを取得します。|
+|[TableColumnCollection](/javascript/api/excel/excel.tablecolumncollection)|[getCount()](/javascript/api/excel/excel.tablecolumncollection#getCount__)|表の列数を取得します。|
+||[getItemOrNullObject(key: number \| string)](/javascript/api/excel/excel.tablecolumncollection#getItemOrNullObject_key_)|名前または ID によって、列オブジェクトを取得します。|
+|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[getCount()](/javascript/api/excel/excel.tablerowcollection#getCount__)|表の行数を取得します。|
 |[ブック](/javascript/api/excel/excel.workbook)|[settings](/javascript/api/excel/excel.workbook#settings)|ブックに関連付けられている設定のコレクションを表します。|
-|[ワークシート](/javascript/api/excel/excel.worksheet)|[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.worksheet#getusedrangeornullobject-valuesonly-)|使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。|
-||[names](/javascript/api/excel/excel.worksheet#names)|現在のワークシートにスコープされている名前のコレクション。|
-|[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[getCount(visibleOnly?: boolean)](/javascript/api/excel/excel.worksheetcollection#getcount-visibleonly-)|コレクションに含まれるワークシートの数を取得します。|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.worksheetcollection#getitemornullobject-key-)|名前または ID を使用して、ワークシート オブジェクトを取得します。|
+|[ワークシート](/javascript/api/excel/excel.worksheet)|[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.worksheet#getUsedRangeOrNullObject_valuesOnly_)|使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。|
+||[名前](/javascript/api/excel/excel.worksheet#names)|現在のワークシートにスコープされている名前のコレクション。|
+|[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[getCount(visibleOnly?: boolean)](/javascript/api/excel/excel.worksheetcollection#getCount_visibleOnly_)|コレクションに含まれるワークシートの数を取得します。|
+||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.worksheetcollection#getItemOrNullObject_key_)|名前または ID を使用して、ワークシート オブジェクトを取得します。|
