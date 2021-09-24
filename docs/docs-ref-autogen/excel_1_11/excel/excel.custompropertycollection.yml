@@ -3,12 +3,8 @@ name: Excel.CustomPropertyCollection
 uid: excel!Excel.CustomPropertyCollection:class
 package: excel!
 fullName: Excel.CustomPropertyCollection
-summary: >-
-  カスタム プロパティのコレクションを格納します。
-
-
-  \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: カスタム プロパティのコレクションを格納します。
+remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,36 +38,53 @@ methods:
   uid: excel!Excel.CustomPropertyCollection#add:member(1)
   package: excel!
   fullName: add(key, value)
-  summary: >-
-    新しいカスタム プロパティを作成、または既存のカスタム プロパティを設定します。
+  summary: 新しいカスタム プロパティを作成、または既存のカスタム プロパティを設定します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/26-document/custom-properties.yaml
+
+    await Excel.run(async (context) => {
+      // Get the key/value pair from the task pane.
+      const userKey = $("#key").text();
+      const userValue = $("#value").text();
+
+      // Add the custom property.
+      const customDocProperties = context.workbook.properties.custom;
+      customDocProperties.add(userKey, userValue);
+
+      await context.sync();
+
+      console.log(`Successfully set custom document property ${userKey}:${userValue}.`);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'add(key: string, value: any): Excel.CustomProperty;'
     parameters:
     - id: key
-      description: 必須です。 大文字と小文字を区別しないカスタム プロパティのキー。 キーは、Web 上の Excel 以外では 255 文字に制限されています (大きいキーは、他のプラットフォームでは自動的に 255 文字にトリミングされます)。
+      description: 必須。 大文字と小文字を区別しないカスタム プロパティのキー。 キーは 255 文字に制限されています (Excel on the webキーは他のプラットフォームでは自動的に 255 文字にトリミングされます)。
       type: string
     - id: value
-      description: 必須です。 カスタム プロパティの値。 この値は、Web 上の Excel 以外では 255 文字に制限されています (大きい値は、他のプラットフォームでは自動的に 255 文字にトリミングされます)。
+      description: 必須。 カスタム プロパティの値。 この値は、Excel on the web 以外の 255 文字に制限されます (大きい値は、他のプラットフォームでは自動的に 255 文字にトリミングされます)。
       type: any
     return:
       type: <xref uid="excel!Excel.CustomProperty:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/26-document/custom-properties.yaml\nawait Excel.run(async (context) => {\n  // Get the key/value pair from the task pane.\n  const userKey = $(\"#key\").text();\n  const userValue = $(\"#value\").text();\n\n  // Add the custom property.\n  const customDocProperties = context.workbook.properties.custom;\n  customDocProperties.add(userKey, userValue);\n\n  await context.sync();\n\n  console.log(`Successfully set custom document property ${userKey}:${userValue}.`);\n});\n```"
+      description: ''
 - name: deleteAll()
   uid: excel!Excel.CustomPropertyCollection#deleteAll:member(1)
   package: excel!
   fullName: deleteAll()
-  summary: >-
-    このコレクション内のすべてのカスタム プロパティを削除します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: このコレクション内のすべてのカスタム プロパティを削除します。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -83,12 +96,8 @@ methods:
   uid: excel!Excel.CustomPropertyCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    カスタム プロパティの数を取得します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: カスタム プロパティの数を取得します。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -100,12 +109,8 @@ methods:
   uid: excel!Excel.CustomPropertyCollection#getItem:member(1)
   package: excel!
   fullName: getItem(key)
-  summary: >-
-    キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合は、エラーをスローします。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合は、エラーをスローします。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -121,19 +126,15 @@ methods:
   uid: excel!Excel.CustomPropertyCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(key)
-  summary: >-
-    キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: キーを使用してカスタム プロパティ オブジェクトを取得します。大文字と小文字は区別されません。 カスタム プロパティが存在しない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemOrNullObject(key: string): Excel.CustomProperty;'
     parameters:
     - id: key
-      description: 必須です。 カスタム プロパティ オブジェクトを識別するキー。
+      description: 必須。 カスタム プロパティ オブジェクトを識別するキー。
       type: string
     return:
       type: <xref uid="excel!Excel.CustomProperty:class" />
@@ -204,9 +205,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 910d52fb02869069b70719f95be1becc2dae39ce
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 8a577feebb4a2acdbf5c6335c51e04a6611c4f0d
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51562484"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59653015"
