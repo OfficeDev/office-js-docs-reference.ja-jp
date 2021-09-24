@@ -5,7 +5,7 @@
 ||[iterativeCalculation](/javascript/api/excel/excel.application#iterativeCalculation)|反復計算の設定を返します。|
 ||[suspendScreenUpdatingUntilNextSync()](/javascript/api/excel/excel.application#suspendScreenUpdatingUntilNextSync__)|次の呼び出しが呼び出されるまで、画面の `context.sync()` 更新を中断します。|
 |[AutoFilter](/javascript/api/excel/excel.autofilter)|[apply(range: Range \| string, columnIndex?: number, criteria?: Excel.FilterCriteria)](/javascript/api/excel/excel.autofilter#apply_range__columnIndex__criteria_)|範囲にオートフィルターを適用します。|
-||[clearCriteria()](/javascript/api/excel/excel.autofilter#clearCriteria__)|オートフィルターのフィルター条件がクリアされます。|
+||[clearCriteria()](/javascript/api/excel/excel.autofilter#clearCriteria__)|オートフィルターのフィルター条件と並べ替え状態をクリアします。|
 ||[getRange()](/javascript/api/excel/excel.autofilter#getRange__)|`Range`オートフィルターを適用する範囲を表すオブジェクトを返します。|
 ||[getRangeOrNullObject()](/javascript/api/excel/excel.autofilter#getRangeOrNullObject__)|`Range`オートフィルターを適用する範囲を表すオブジェクトを返します。|
 ||[criteria](/javascript/api/excel/excel.autofilter#criteria)|オートフィルターが適用された範囲のすべてのフィルター条件を保持する配列です。|
