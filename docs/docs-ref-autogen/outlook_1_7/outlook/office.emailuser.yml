@@ -3,12 +3,12 @@ name: Office.EmailUser
 uid: outlook!Office.EmailUser:interface
 package: outlook!
 fullName: Office.EmailUser
-summary: Exchange Server 上の電子メール アカウントを表します。
-remarks: >-
-  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+summary: >-
+  Exchange Server 上の電子メール アカウントを表します。
 
 
-  **[該当する Outlook モード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 読み取り
+  `EmailUser`オブジェクトは、主に、アイテムから抽出された[MeetingSuggestion](xref:outlook!Office.MeetingSuggestion:interface)エンティティと[TaskSuggestion](xref:outlook!Office.TaskSuggestion:interface)エンティティOutlookされます。 このシナリオの詳細については、「アイテムからエンティティ文字列を抽出[する」をOutlookしてください。](https://docs.microsoft.com/office/dev/add-ins/outlook/extract-entity-strings-from-an-item)<!-- -->.
+remarks: "**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 読み取り\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The following example is an excerpt from a larger sample.\n// For the full sample, visit https://docs.microsoft.com/office/dev/add-ins/outlook/extract-entity-strings-from-an-item.\n\n// Gets instances of the task suggestion entity on the item.\nfunction myGetTaskSuggestions()\n{\n    var htmlText = \"\";\n\n    // Gets an array of TaskSuggestion objects, each array element \n    // containing an instance of a task suggestion entity from \n    // the current item.\n    var tasksArray = _MyEntities.taskSuggestions;\n\n    // Iterates through each instance of a task suggestion.\n    for (var i = 0; i < tasksArray.length; i++)\n    {\n        // Gets the string that was identified as a task suggestion.\n        htmlText += \"TaskString : <span>\" + \n        tasksArray[i].taskString + \"</span><br/>\";\n\n        // Gets an array of assignees for that instance of a task \n        // suggestion. Each assignee is represented by an \n        // EmailUser object.\n        var assigneesArray = tasksArray[i].assignees;\n        for (var j = 0; j < assigneesArray.length; j++)\n        {\n            htmlText += \"Assignee : ( \";\n            // Gets the displayName property of the assignee.\n            htmlText += \"displayName = <span>\" + assigneesArray[j].displayName + \n            \"</span> , \";\n\n            // Gets the emailAddress property of each assignee.\n            // This is the SMTP address of the assignee.\n            htmlText += \"emailAddress = <span>\" + assigneesArray[j].emailAddress + \n                \"</span>\";\n\n            htmlText += \" )<br/>\";\n        }\n\n        htmlText += \"<hr/>\";\n    }\n\n    document.getElementById(\"entities_box\").innerHTML = htmlText;\n}\n```"
 isPreview: false
 isDeprecated: false
 type: interface
@@ -38,9 +38,9 @@ properties:
     return:
       type: string
 metadata:
-  ms.openlocfilehash: 24af0198a4a7e4e1a80fd9c79fb89f01b2593e68
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: d8f66d12d3f93d89f6e964aa06f0f01a56717eef
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51277695"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59635910"
