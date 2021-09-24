@@ -3,12 +3,8 @@ name: Excel.PivotLayout
 uid: excel!Excel.PivotLayout:class
 package: excel!
 fullName: Excel.PivotLayout
-summary: >-
-  ピボットテーブルの視覚的なレイアウトを表します。
-
-
-  \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ピボットテーブルの視覚的なレイアウトを表します。
+remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,12 +13,8 @@ properties:
   uid: excel!Excel.PivotLayout#autoFormat:member
   package: excel!
   fullName: autoFormat
-  summary: >-
-    書式設定が更新時またはフィールドの移動時に自動的に書式設定される場合を指定します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 書式設定が更新時またはフィールドの移動時に自動的に書式設定される場合を指定します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,12 +37,8 @@ properties:
   uid: excel!Excel.PivotLayout#enableFieldList:member
   package: excel!
   fullName: enableFieldList
-  summary: >-
-    フィールド リストを UI に表示できる場合に指定します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: フィールド リストを UI に表示できる場合に指定します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,80 +49,172 @@ properties:
   uid: excel!Excel.PivotLayout#layoutType:member
   package: excel!
   fullName: layoutType
-  summary: >-
-    このプロパティは、ピボットテーブルのすべてのフィールドの PivotLayoutType を示します。 フィールドによって状態が異なる場合は null 値になります。
+  summary: このプロパティは、ピボットテーブルのすべてのフィールドの PivotLayoutType を示します。 フィールドによって状態が異なる場合は null 値になります。
+  remarks: >-
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml
+
+    await Excel.run(async (context) => {
+      // Change the PivotLayout.type to a new type.
+      const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+      pivotTable.layout.load("layoutType");
+      await context.sync();
+
+      // Cycle between the three layout types.
+      if (pivotTable.layout.layoutType === "Compact") {
+        pivotTable.layout.layoutType = "Outline";
+      } else if (pivotTable.layout.layoutType === "Outline") {
+        pivotTable.layout.layoutType = "Tabular";
+      } else {
+        pivotTable.layout.layoutType = "Compact";
+      }
+
+      await context.sync();
+      console.log("Pivot layout is now " + pivotTable.layout.layoutType);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'layoutType: Excel.PivotLayoutType | "Compact" | "Tabular" | "Outline";'
     return:
       type: <xref uid="excel!Excel.PivotLayoutType:enum" /> | "Compact" | "Tabular" | "Outline"
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml\nawait Excel.run(async (context) => {\n  // Change the PivotLayout.type to a new type.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n  pivotTable.layout.load(\"layoutType\");\n  await context.sync();\n\n  // Cycle between the three layout types.\n  if (pivotTable.layout.layoutType === \"Compact\") {\n    pivotTable.layout.layoutType = \"Outline\";\n  } else if (pivotTable.layout.layoutType === \"Outline\") {\n    pivotTable.layout.layoutType = \"Tabular\";\n  } else {\n    pivotTable.layout.layoutType = \"Compact\";\n  }\n\n  await context.sync();\n  console.log(\"Pivot layout is now \" + pivotTable.layout.layoutType);\n});\n```"
 - name: preserveFormatting
   uid: excel!Excel.PivotLayout#preserveFormatting:member
   package: excel!
   fullName: preserveFormatting
-  summary: >-
-    ピボット、並べ替え、ページ フィールド項目の変更などの操作によってレポートが更新または再計算される場合に書式設定を保持する場合に指定します。
+  summary: ピボット、並べ替え、ページ フィールド項目の変更などの操作によってレポートが更新または再計算される場合に書式設定を保持する場合に指定します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml
+
+    await Excel.run(async (context) => {
+      // Set whether the PivotTable keeps the established format after it is refreshed and recalculated.
+      const pivotTable = context.workbook.pivotTables.getItem("Farm Sales");
+      const pivotLayout = pivotTable.layout;
+
+      pivotLayout.load("preserveFormatting");
+      await context.sync();
+
+      let preserveFormattingToSet = !pivotLayout.preserveFormatting;
+      console.log(`Preserve the formatting PivotTable after a refresh? - ${preserveFormattingToSet}`);
+
+      pivotLayout.preserveFormatting = preserveFormattingToSet;
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'preserveFormatting: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml\nawait Excel.run(async (context) => {\n  // Set whether the PivotTable keeps the established format after it is refreshed and recalculated.\n  const pivotTable = context.workbook.pivotTables.getItem(\"Farm Sales\");\n  const pivotLayout = pivotTable.layout;\n\n  pivotLayout.load(\"preserveFormatting\");\n  await context.sync();\n\n  let preserveFormattingToSet = !pivotLayout.preserveFormatting;\n  console.log(`Preserve the formatting PivotTable after a refresh? - ${preserveFormattingToSet}`);\n\n  pivotLayout.preserveFormatting = preserveFormattingToSet;\n  await context.sync();\n});\n```"
 - name: showColumnGrandTotals
   uid: excel!Excel.PivotLayout#showColumnGrandTotals:member
   package: excel!
   fullName: showColumnGrandTotals
-  summary: >-
-    ピボットテーブル レポートに列の総計が表示される場合に指定します。
+  summary: ピボットテーブル レポートに列の総計が表示される場合に指定します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml
+
+    await Excel.run(async (context) => {
+      // Turn the grand totals on and off for the rows and columns.
+      const pivotTable = context.workbook.pivotTables.getItem("Farm Sales");
+      const pivotLayout = pivotTable.layout;
+
+      pivotLayout.load(["showRowGrandTotals", "showColumnGrandTotals"]);
+      await context.sync();
+
+      let showColumnTotals = !pivotLayout.showColumnGrandTotals;
+      let showRowTotals = !pivotLayout.showRowGrandTotals;
+      console.log(`Show column grand totals? - ${showColumnTotals}`);
+      console.log(`Show row grand totals? - ${showRowTotals}`);
+
+      pivotLayout.showColumnGrandTotals = showColumnTotals;
+      pivotLayout.showRowGrandTotals = showRowTotals;
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'showColumnGrandTotals: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml\nawait Excel.run(async (context) => {\n  // Turn the grand totals on and off for the rows and columns.\n  const pivotTable = context.workbook.pivotTables.getItem(\"Farm Sales\");\n  const pivotLayout = pivotTable.layout;\n\n  pivotLayout.load([\"showRowGrandTotals\", \"showColumnGrandTotals\"]);\n  await context.sync();\n\n  let showColumnTotals = !pivotLayout.showColumnGrandTotals;\n  let showRowTotals = !pivotLayout.showRowGrandTotals;\n  console.log(`Show column grand totals? - ${showColumnTotals}`);\n  console.log(`Show row grand totals? - ${showRowTotals}`);\n\n  pivotLayout.showColumnGrandTotals = showColumnTotals;\n  pivotLayout.showRowGrandTotals = showRowTotals;\n\n  await context.sync();\n});\n```"
 - name: showRowGrandTotals
   uid: excel!Excel.PivotLayout#showRowGrandTotals:member
   package: excel!
   fullName: showRowGrandTotals
-  summary: >-
-    ピボットテーブル レポートに行の総計が表示される場合に指定します。
+  summary: ピボットテーブル レポートに行の総計が表示される場合に指定します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml
+
+    await Excel.run(async (context) => {
+      // Turn the grand totals on and off for the rows and columns.
+      const pivotTable = context.workbook.pivotTables.getItem("Farm Sales");
+      const pivotLayout = pivotTable.layout;
+
+      pivotLayout.load(["showRowGrandTotals", "showColumnGrandTotals"]);
+      await context.sync();
+
+      let showColumnTotals = !pivotLayout.showColumnGrandTotals;
+      let showRowTotals = !pivotLayout.showRowGrandTotals;
+      console.log(`Show column grand totals? - ${showColumnTotals}`);
+      console.log(`Show row grand totals? - ${showRowTotals}`);
+
+      pivotLayout.showColumnGrandTotals = showColumnTotals;
+      pivotLayout.showRowGrandTotals = showRowTotals;
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'showRowGrandTotals: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotlayout.yaml\nawait Excel.run(async (context) => {\n  // Turn the grand totals on and off for the rows and columns.\n  const pivotTable = context.workbook.pivotTables.getItem(\"Farm Sales\");\n  const pivotLayout = pivotTable.layout;\n\n  pivotLayout.load([\"showRowGrandTotals\", \"showColumnGrandTotals\"]);\n  await context.sync();\n\n  let showColumnTotals = !pivotLayout.showColumnGrandTotals;\n  let showRowTotals = !pivotLayout.showRowGrandTotals;\n  console.log(`Show column grand totals? - ${showColumnTotals}`);\n  console.log(`Show row grand totals? - ${showRowTotals}`);\n\n  pivotLayout.showColumnGrandTotals = showColumnTotals;\n  pivotLayout.showRowGrandTotals = showRowTotals;\n\n  await context.sync();\n});\n```"
 - name: subtotalLocation
   uid: excel!Excel.PivotLayout#subtotalLocation:member
   package: excel!
   fullName: subtotalLocation
-  summary: >-
-    このプロパティは、ピボット `SubtotalLocationType` テーブルのすべてのフィールドを示します。 フィールドの状態が異なる場合は、次の値になります。 `null`<!-- -->.
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: このプロパティは、ピボット `SubtotalLocationType` テーブルのすべてのフィールドを示します。 フィールドの状態が異なる場合は、次の値になります。 `null`<!-- -->.
+  remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -146,12 +226,8 @@ methods:
   uid: excel!Excel.PivotLayout#getColumnLabelRange:member(1)
   package: excel!
   fullName: getColumnLabelRange()
-  summary: >-
-    ピボットテーブルの列ラベルが存在する範囲を返します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ピボットテーブルの列ラベルが存在する範囲を返します。
+  remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -163,29 +239,21 @@ methods:
   uid: excel!Excel.PivotLayout#getDataBodyRange:member(1)
   package: excel!
   fullName: getDataBodyRange()
-  summary: >-
-    ピボットテーブルのデータ値が存在する範囲を返します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ピボットテーブルのデータ値が存在する範囲を返します。
+  remarks: "\\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-filters-and-summaries.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-filters-and-summaries.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getDataBodyRange(): Excel.Range;'
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-filters-and-summaries.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-filters-and-summaries.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n\n    // the layout controls the ranges used by the PivotTable\n    const range = pivotTable.layout.getDataBodyRange();\n\n    // get all the data hierarchy totals\n    const grandTotalRange = range.getLastRow();\n    grandTotalRange.load(\"address\");\n    await context.sync();\n    \n    // use the wholesale and farm sale totals to make a final sum\n    const masterTotalRange = context.workbook.worksheets.getActiveWorksheet().getRange(\"B27:C27\");\n    masterTotalRange.formulas = [[\"All Crates\", \"=SUM(\" + grandTotalRange.address + \")\"]];\n    await context.sync();\n});\n```"
+      description: ''
 - name: getDataHierarchy(cell)
   uid: excel!Excel.PivotLayout#getDataHierarchy:member(1)
   package: excel!
   fullName: getDataHierarchy(cell)
-  summary: >-
-    PivotTable 内で指定された範囲の値を計算するために使用される DataHierarchy を取得します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: PivotTable 内で指定された範囲の値を計算するために使用される DataHierarchy を取得します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -201,12 +269,8 @@ methods:
   uid: excel!Excel.PivotLayout#getFilterAxisRange:member(1)
   package: excel!
   fullName: getFilterAxisRange()
-  summary: >-
-    ピボットテーブルのフィルター エリアの範囲を返します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ピボットテーブルのフィルター エリアの範囲を返します。
+  remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -218,12 +282,8 @@ methods:
   uid: excel!Excel.PivotLayout#getPivotItems:member(1)
   package: excel!
   fullName: getPivotItems(axis, cell)
-  summary: >-
-    PivotTable 内で指定された範囲の値を構成する PivotItems を軸から取得します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: PivotTable 内で指定された範囲の値を構成する PivotItems を軸から取得します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -242,12 +302,8 @@ methods:
   uid: excel!Excel.PivotLayout#getPivotItems:member(2)
   package: excel!
   fullName: getPivotItems(axisString, cell)
-  summary: >-
-    PivotTable 内で指定された範囲の値を構成する PivotItems を軸から取得します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: PivotTable 内で指定された範囲の値を構成する PivotItems を軸から取得します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -266,12 +322,8 @@ methods:
   uid: excel!Excel.PivotLayout#getRange:member(1)
   package: excel!
   fullName: getRange()
-  summary: >-
-    フィルター エリアを除く、ピボットテーブルが存在する範囲を返します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: フィルター エリアを除く、ピボットテーブルが存在する範囲を返します。
+  remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -283,12 +335,8 @@ methods:
   uid: excel!Excel.PivotLayout#getRowLabelRange:member(1)
   package: excel!
   fullName: getRowLabelRange()
-  summary: >-
-    ピボットテーブルの行ラベルが存在する範囲を返します。
-
-
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ピボットテーブルの行ラベルが存在する範囲を返します。
+  remarks: '\[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -360,11 +408,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.PivotLayout): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -400,12 +444,8 @@ methods:
   uid: excel!Excel.PivotLayout#setAutoSortOnCell:member(1)
   package: excel!
   fullName: setAutoSortOnCell(cell, sortBy)
-  summary: >-
-    必要なすべての条件とコンテキストを自動的に選択するため、指定したセルを使用して自動的に並べ替えを実行するようピボットテーブルを設定します。 これは、UI から自動並べ替えを適用するのと同じ動作です。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 必要なすべての条件とコンテキストを自動的に選択するため、指定したセルを使用して自動的に並べ替えを実行するようピボットテーブルを設定します。 これは、UI から自動並べ替えを適用するのと同じ動作です。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -424,12 +464,8 @@ methods:
   uid: excel!Excel.PivotLayout#setAutoSortOnCell:member(2)
   package: excel!
   fullName: setAutoSortOnCell(cell, sortByString)
-  summary: >-
-    必要なすべての条件とコンテキストを自動的に選択するため、指定したセルを使用して自動的に並べ替えを実行するようピボットテーブルを設定します。 これは、UI から自動並べ替えを適用するのと同じ動作です。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 必要なすべての条件とコンテキストを自動的に選択するため、指定したセルを使用して自動的に並べ替えを実行するようピボットテーブルを設定します。 これは、UI から自動並べ替えを適用するのと同じ動作です。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -459,9 +495,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 65b8d3baeffba0ec7ea483dccae804f8947465be
-  ms.sourcegitcommit: 418408d346cc899183d6d6a74161ba2ad58bd39d
+  ms.openlocfilehash: c13ffd37493b8e7ff8c76ece8967598eb47222bc
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 07/02/2021
-  ms.locfileid: "53278091"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59656482"
