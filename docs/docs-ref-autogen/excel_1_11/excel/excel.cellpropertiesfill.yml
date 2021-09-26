@@ -3,12 +3,8 @@ name: Excel.CellPropertiesFill
 uid: excel!Excel.CellPropertiesFill:interface
 package: excel!
 fullName: Excel.CellPropertiesFill
-summary: >-
-  のプロパティ `format.fill` を表します。 `getCellProperties`<!-- -->, `getRowProperties`<!-- -->、 `getColumnProperties` またはの `format.fill` 入力パラメーター `setCellProperties`<!-- -->, `setRowProperties`<!-- -->そして `setColumnProperties`<!-- -->.
-
-
-  \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: のプロパティ `format.fill` を表します。 `getCellProperties`<!-- -->, `getRowProperties`<!-- -->、 `getColumnProperties` またはの `format.fill` 入力パラメーター `setCellProperties`<!-- -->, `setRowProperties`<!-- -->そして `setColumnProperties`<!-- -->.
+remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -17,29 +13,103 @@ properties:
   uid: excel!Excel.CellPropertiesFill#color:member
   package: excel!
   fullName: color
-  summary: >-
-    `format.fill.color` プロパティを表します。
+  summary: '`format.fill.color` プロパティを表します。'
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/cell-properties.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+        // Creating the SettableCellProperties objects to use for the range.
+        // In your add-in, these should be created once, outside the function.
+        const topHeaderProps: Excel.SettableCellProperties = {
+            // The style property takes a string matching the name of an Excel style.
+            // Built-in style names are listed in the `BuiltInStyle` enum.
+            // Note that a style will overwrite any formatting,
+            // so do not use the format property with the style property.
+            style: "Heading1"
+        };
+
+        const headerProps: Excel.SettableCellProperties = {
+            // Any subproperties of format that are not set will not be changed when these cell properties are set.
+            format: {
+                fill: {
+                    color: "Blue"
+                },
+                font: {
+                    color: "White",
+                    bold: true
+                }
+            }
+        };
+
+        const nonApplicableProps: Excel.SettableCellProperties = {
+            format: {
+                fill: {
+                    pattern: Excel.FillPattern.gray25
+                },
+                font: {
+                    color: "Gray",
+                    italic: true
+                }
+            }
+        };
+
+        const matchupScoreProps: Excel.SettableCellProperties = {
+            format: {
+                borders: {
+                    bottom: {
+                        style: Excel.BorderLineStyle.continuous
+                    },
+                    left: {
+                        style: Excel.BorderLineStyle.continuous
+                    },
+                    right: {
+                        style: Excel.BorderLineStyle.continuous
+                    },
+                    top: {
+                        style: Excel.BorderLineStyle.continuous
+                    }
+                }
+            }
+        };
+
+        const range = sheet.getRange("A1:E5");
+
+        // You can use empty JSON objects to avoid changing a cell's properties.
+        range.setCellProperties([
+            [topHeaderProps, {}, {}, {}, {}],
+            [{}, {}, headerProps, headerProps, headerProps],
+            [{}, headerProps, nonApplicableProps, matchupScoreProps, matchupScoreProps],
+            [{}, headerProps, matchupScoreProps, nonApplicableProps, matchupScoreProps],
+            [{}, headerProps, matchupScoreProps, matchupScoreProps, nonApplicableProps]
+        ]);
+
+        sheet.getUsedRange().format.autofitColumns();
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'color?: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/cell-properties.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n    // Creating the SettableCellProperties objects to use for the range.\n    // In your add-in, these should be created once, outside the function.\n    const topHeaderProps: Excel.SettableCellProperties = {\n        // The style property takes a string matching the name of an Excel style.\n        // Built-in style names are listed in the `BuiltInStyle` enum.\n        // Note that a style will overwrite any formatting,\n        // so do not use the format property with the style property.\n        style: \"Heading1\"\n    };\n\n    const headerProps: Excel.SettableCellProperties = {\n        // Any subproperties of format that are not set will not be changed when these cell properties are set.\n        format: {\n            fill: {\n                color: \"Blue\"\n            },\n            font: {\n                color: \"White\",\n                bold: true\n            }\n        }\n    };\n\n    const nonApplicableProps: Excel.SettableCellProperties = {\n        format: {\n            fill: {\n                pattern: Excel.FillPattern.gray25\n            },\n            font: {\n                color: \"Gray\",\n                italic: true\n            }\n        }\n    };\n\n    const matchupScoreProps: Excel.SettableCellProperties = {\n        format: {\n            borders: {\n                bottom: {\n                    style: Excel.BorderLineStyle.continuous\n                },\n                left: {\n                    style: Excel.BorderLineStyle.continuous\n                },\n                right: {\n                    style: Excel.BorderLineStyle.continuous\n                },\n                top: {\n                    style: Excel.BorderLineStyle.continuous\n                }\n            }\n        }\n    };\n\n    const range = sheet.getRange(\"A1:E5\");\n\n    // You can use empty JSON objects to avoid changing a cell's properties.\n    range.setCellProperties([\n        [topHeaderProps, {}, {}, {}, {}],\n        [{}, {}, headerProps, headerProps, headerProps],\n        [{}, headerProps, nonApplicableProps, matchupScoreProps, matchupScoreProps],\n        [{}, headerProps, matchupScoreProps, nonApplicableProps, matchupScoreProps],\n        [{}, headerProps, matchupScoreProps, matchupScoreProps, nonApplicableProps]\n    ]);\n\n    sheet.getUsedRange().format.autofitColumns();\n    await context.sync();\n});\n```"
 - name: pattern
   uid: excel!Excel.CellPropertiesFill#pattern:member
   package: excel!
   fullName: pattern
-  summary: >-
-    `format.fill.pattern` プロパティを表します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: '`format.fill.pattern` プロパティを表します。'
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -50,12 +120,8 @@ properties:
   uid: excel!Excel.CellPropertiesFill#patternColor:member
   package: excel!
   fullName: patternColor
-  summary: >-
-    `format.fill.patternColor` プロパティを表します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: '`format.fill.patternColor` プロパティを表します。'
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -66,12 +132,8 @@ properties:
   uid: excel!Excel.CellPropertiesFill#patternTintAndShade:member
   package: excel!
   fullName: patternTintAndShade
-  summary: >-
-    `format.fill.patternTintAndShade` プロパティを表します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: '`format.fill.patternTintAndShade` プロパティを表します。'
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -82,12 +144,8 @@ properties:
   uid: excel!Excel.CellPropertiesFill#tintAndShade:member
   package: excel!
   fullName: tintAndShade
-  summary: >-
-    `format.fill.tintAndShade` プロパティを表します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: '`format.fill.tintAndShade` プロパティを表します。'
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -95,9 +153,9 @@ properties:
     return:
       type: number
 metadata:
-  ms.openlocfilehash: 55b359e97ac920c60c083174437d8ddf6c590c8c
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 8dbaa31689ee678f48463df4457a34ba067c9fc8
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51265620"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59689867"
