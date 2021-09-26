@@ -3,12 +3,8 @@ name: Excel.NamedItemCollection
 uid: excel!Excel.NamedItemCollection:class
 package: excel!
 fullName: Excel.NamedItemCollection
-summary: >-
-  ブックまたはワークシートの一部であるすべてのオブジェクトのコレクション 。到達方法 `NamedItem` に応じて。
-
-
-  \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ブックまたはワークシートの一部であるすべてのオブジェクトのコレクション 。到達方法 `NamedItem` に応じて。
+remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,12 +38,29 @@ methods:
   uid: excel!Excel.NamedItemCollection#add:member(1)
   package: excel!
   fullName: add(name, reference, comment)
-  summary: >-
-    指定のスコープのコレクションに新しい名前を追加します。
+  summary: 指定のスコープのコレクションに新しい名前を追加します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/34-named-item/create-and-remove-named-item.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const headerRange = sheet.getRange("A1:D1");
+
+        sheet.names.add("ExpensesHeader", headerRange);
+        const namedItems = sheet.names.load("name, type");
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -60,21 +73,17 @@ methods:
       description: 名前が参照する数式または範囲。
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: comment
-      description: 省略可能。 名前付きアイテムに関連付けられたコメント。
+      description: オプション。 名前付きアイテムに関連付けられたコメント。
       type: string
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/34-named-item/create-and-remove-named-item.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const headerRange = sheet.getRange(\"A1:D1\");\n\n    sheet.names.add(\"ExpensesHeader\", headerRange);\n    const namedItems = sheet.names.load(\"name, type\");\n\n    await context.sync();\n});\n```"
+      description: ''
 - name: addFormulaLocal(name, formula, comment)
   uid: excel!Excel.NamedItemCollection#addFormulaLocal:member(1)
   package: excel!
   fullName: addFormulaLocal(name, formula, comment)
-  summary: >-
-    ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ユーザーのロケールを数式に使用して、指定のスコープのコレクションに新しい名前を追加します。
+  remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -87,7 +96,7 @@ methods:
       description: 名前が参照するユーザーのロケールの数式。
       type: string
     - id: comment
-      description: 省略可能。 名前付きアイテムに関連付けられたコメント。
+      description: オプション。 名前付きアイテムに関連付けられたコメント。
       type: string
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
@@ -96,12 +105,8 @@ methods:
   uid: excel!Excel.NamedItemCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    コレクションに含まれる名前付きアイテムの数を取得します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクションに含まれる名前付きアイテムの数を取得します。
+  remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -113,12 +118,8 @@ methods:
   uid: excel!Excel.NamedItemCollection#getItem:member(1)
   package: excel!
   fullName: getItem(name)
-  summary: >-
-    その名前を `NamedItem` 使用してオブジェクトを取得します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: その名前を `NamedItem` 使用してオブジェクトを取得します。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = 'Sheet1';\n    var nameditem = ctx.workbook.names.getItem(sheetName);\n    nameditem.load('type');\n    return ctx.sync().then(function() {\n            console.log(nameditem.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -129,17 +130,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = 'Sheet1';\n    var nameditem = ctx.workbook.names.getItem(sheetName);\n    nameditem.load('type');\n    return ctx.sync().then(function() {\n            console.log(nameditem.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: getItemOrNullObject(name)
   uid: excel!Excel.NamedItemCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(name)
-  summary: >-
-    その名前を `NamedItem` 使用してオブジェクトを取得します。 オブジェクトが存在しない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: その名前を `NamedItem` 使用してオブジェクトを取得します。 オブジェクトが存在しない場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -217,9 +214,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7c1d37ac87b1e55f9cf8cd64d41fb77403b45c7f
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 08abc44d7b79f265848727ead94cad938d06872a
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51515421"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59734160"

@@ -3,12 +3,8 @@ name: Excel.Runtime
 uid: excel!Excel.Runtime:class
 package: excel!
 fullName: Excel.Runtime
-summary: >-
-  Excel ランタイム クラスを表します。
-
-
-  \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ランタイム クラスExcelを表します。
+remarks: '\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,19 +25,41 @@ properties:
   uid: excel!Excel.Runtime#enableEvents:member
   package: excel!
   fullName: enableEvents
-  summary: >-
-    現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。
+  summary: 現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。
+  remarks: >-
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-disable-events.yaml
+
+    await Excel.run(async (context) => {
+        context.runtime.load("enableEvents");
+        await context.sync();
+
+        // check if events are enabled and toggle accordingly
+        const eventBoolean = !context.runtime.enableEvents
+        context.runtime.enableEvents = eventBoolean;
+        if (eventBoolean) {
+            console.log("Events are currently on.");
+        } else {
+            console.log("Events are currently off.");
+        }
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'enableEvents: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-disable-events.yaml\nawait Excel.run(async (context) => {\n    context.runtime.load(\"enableEvents\");\n    await context.sync();\n\n    // check if events are enabled and toggle accordingly\n    const eventBoolean = !context.runtime.enableEvents\n    context.runtime.enableEvents = eventBoolean;\n    if (eventBoolean) {\n        console.log(\"Events are currently on.\");\n    } else {\n        console.log(\"Events are currently off.\");\n    }\n\n    await context.sync();\n});\n```"
 methods:
 - name: load(options)
   uid: excel!Excel.Runtime#load:member(1)
@@ -107,11 +125,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.Runtime): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -147,7 +161,7 @@ methods:
   uid: excel!Excel.Runtime#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.Runtime オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.RuntimeData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。ランタイム オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.RuntimeData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -158,9 +172,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 577f51ce7343668f5178405484a62a2ef21c8833
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 742a7497368edea4e130c26e39979a86a12da033
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51232231"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59693591"

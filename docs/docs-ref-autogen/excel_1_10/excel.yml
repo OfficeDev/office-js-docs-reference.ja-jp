@@ -611,6 +611,9 @@ interfaces:
 - excel!Excel.Interfaces.LineData:interface
 - excel!Excel.Interfaces.LineLoadOptions:interface
 - excel!Excel.Interfaces.LineUpdateData:interface
+- excel!Excel.Interfaces.LinkedWorkbookCollectionData:interface
+- excel!Excel.Interfaces.LinkedWorkbookCollectionUpdateData:interface
+- excel!Excel.Interfaces.LinkedWorkbookData:interface
 - excel!Excel.Interfaces.NamedItemArrayValuesData:interface
 - excel!Excel.Interfaces.NamedItemArrayValuesLoadOptions:interface
 - excel!Excel.Interfaces.NamedItemCollectionData:interface
@@ -883,7 +886,7 @@ functions:
     新しいブックを作成し、開きます。 任意で、base64 でエンコードした .xlsx ファイルでブックにデータを事前入力できます。
 
 
-    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API セット: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -934,7 +937,7 @@ functions:
 - name: Excel.run(batch)
   uid: excel!Excel.run:function(1)
   package: excel!
-  summary: 新しい RequestContext を使用して、Excel オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  summary: 新しい RequestContext を使用して、オブジェクト モデルに対してアクションExcel実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -942,7 +945,7 @@ functions:
     content: 'export function run<T>(batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Excel アプリケーションへの要求を容易にします。 アドインとOffice Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求を容易Excelします。 Office と Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -950,7 +953,7 @@ functions:
 - name: Excel.run(object, batch)
   uid: excel!Excel.run:function(2)
   package: excel!
-  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -961,7 +964,7 @@ functions:
       description: 以前に作成された API オブジェクト。 バッチは、渡されたオブジェクトと同じ RequestContext を使用します。つまり、オブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Excel アプリケーションへの要求を容易にします。 アドインとOffice Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求を容易Excelします。 Office と Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -969,7 +972,7 @@ functions:
 - name: Excel.run(objects, batch)
   uid: excel!Excel.run:function(3)
   package: excel!
-  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。
+  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -980,7 +983,7 @@ functions:
       description: 以前に作成された API オブジェクトの配列。 配列が検証され、すべてのオブジェクトが同じコンテキストを共有します。 バッチは、この共有 RequestContext を使用します。つまり、これらのオブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Excel アプリケーションへの要求を容易にします。 アドインとOffice Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求を容易Excelします。 Office と Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -988,7 +991,7 @@ functions:
 - name: Excel.run(options, batch)
   uid: excel!Excel.run:function(4)
   package: excel!
-  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  summary: 以前に作成した API オブジェクトの RequestContext を使用して、Excel オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -996,10 +999,10 @@ functions:
     content: 'export function run<T>(options: Excel.RunOptions, batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: options
-      description: セルの編集、セッション情報などの要求を遅延するかどうか、以前のオブジェクトを指定するこの Excel.run の追加オプション。
+      description: この Excel.run の追加オプションは、セルの編集、セッション情報などの要求を遅延するかどうか、以前のオブジェクトを指定します。
       type: <xref uid="excel!Excel.RunOptions:interface" />
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Excel アプリケーションへの要求を容易にします。 アドインとOffice Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求を容易Excelします。 Office と Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -1007,7 +1010,7 @@ functions:
 - name: Excel.run(context, batch)
   uid: excel!Excel.run:function(5)
   package: excel!
-  summary: 以前に作成したオブジェクトの RequestContext を使用して、Excel オブジェクト モデルでアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  summary: 以前に作成したオブジェクトの RequestContext を使用して、Excel オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1018,15 +1021,15 @@ functions:
       description: 以前に作成されたオブジェクト。 バッチは、渡されたオブジェクトと同じ RequestContext を使用します。つまり、オブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Excel アプリケーションへの要求を容易にします。 アドインとOffice Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求を容易Excelします。 Office と Excel アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Excel オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 264dd01fee7b6bf58472786cabea2547b929906e
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: e83903cb459b22d91f24db71cf553b9ed716f799
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51530687"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59680363"

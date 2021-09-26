@@ -3,12 +3,8 @@ name: Excel.ShapeCollection
 uid: excel!Excel.ShapeCollection:class
 package: excel!
 fullName: Excel.ShapeCollection
-summary: >-
-  ワークシート内のすべての図形のコレクションを表します。
-
-
-  \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ワークシート内のすべての図形のコレクションを表します。
+remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,12 +38,29 @@ methods:
   uid: excel!Excel.ShapeCollection#addGeometricShape:member(1)
   package: excel!
   fullName: addGeometricShape(geometricShapeType)
-  summary: >-
-    幾何学的図形をワークシートに追加します。 新しい図形 `Shape` を表すオブジェクトを返します。
+  summary: 幾何学的図形をワークシートに追加します。 新しい図形 `Shape` を表すオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-create-and-delete.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Shapes");
+        const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.hexagon);
+        shape.left = 5;
+        shape.top = 5;
+        shape.height = 175;
+        shape.width = 200;
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,17 +71,13 @@ methods:
       type: <xref uid="excel!Excel.GeometricShapeType:enum" />
     return:
       type: <xref uid="excel!Excel.Shape:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-create-and-delete.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.hexagon);\n    shape.left = 5;\n    shape.top = 5;\n    shape.height = 175;\n    shape.width = 200;\n    await context.sync();\n});\n```"
+      description: ''
 - name: addGeometricShape(geometricShapeTypeString)
   uid: excel!Excel.ShapeCollection#addGeometricShape:member(2)
   package: excel!
   fullName: addGeometricShape(geometricShapeTypeString)
-  summary: >-
-    幾何学的図形をワークシートに追加します。 新しい図形 `Shape` を表すオブジェクトを返します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 幾何学的図形をワークシートに追加します。 新しい図形 `Shape` を表すオブジェクトを返します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -84,12 +93,32 @@ methods:
   uid: excel!Excel.ShapeCollection#addGroup:member(1)
   package: excel!
   fullName: addGroup(values)
-  summary: >-
-    このコレクションのワークシート内の図形のサブセットをグループ化します。 図形の新 `Shape` しいグループを表すオブジェクトを返します。
+  summary: このコレクションのワークシート内の図形のサブセットをグループ化します。 図形の新 `Shape` しいグループを表すオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-groups.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Shapes");
+        const square = sheet.shapes.getItem("Square");
+        const pentagon = sheet.shapes.getItem("Pentagon");
+        const octagon = sheet.shapes.getItem("Octagon");
+
+        const shapeGroup = sheet.shapes.addGroup([square, pentagon, octagon]);
+        shapeGroup.name = "Group";
+        console.log("Shapes grouped");
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -100,17 +129,45 @@ methods:
       type: Array&lt;string | <xref uid="excel!Excel.Shape:class" />&gt;
     return:
       type: <xref uid="excel!Excel.Shape:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-groups.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const square = sheet.shapes.getItem(\"Square\");\n    const pentagon = sheet.shapes.getItem(\"Pentagon\");\n    const octagon = sheet.shapes.getItem(\"Octagon\");\n\n    const shapeGroup = sheet.shapes.addGroup([square, pentagon, octagon]);\n    shapeGroup.name = \"Group\";\n    console.log(\"Shapes grouped\");\n\n    await context.sync();\n});\n```"
+      description: ''
 - name: addImage(base64ImageString)
   uid: excel!Excel.ShapeCollection#addImage:member(1)
   package: excel!
   fullName: addImage(base64ImageString)
-  summary: >-
-    base64 エンコード文字列から画像を作成し、それをワークシートに追加します。 新しいイメージ `Shape` を表すオブジェクトを返します。
+  summary: base64 エンコード文字列から画像を作成し、それをワークシートに追加します。 新しいイメージ `Shape` を表すオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-images.yaml
+
+    const myFile = <HTMLInputElement>document.getElementById("selectedFile");
+
+    const reader = new FileReader();
+
+
+    reader.onload = (event) => {
+        Excel.run((context) => {
+            const startIndex = reader.result.toString().indexOf("base64,");
+            const mybase64 = reader.result.toString().substr(startIndex + 7);
+            const sheet = context.workbook.worksheets.getItem("Shapes");
+            const image = sheet.shapes.addImage(mybase64);
+            image.name = "Image";
+            return context.sync();
+        });
+    };
+
+
+    // Read in the image file as a data URL.
+
+    reader.readAsDataURL(myFile.files[0]);
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -121,17 +178,31 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.Shape:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-images.yaml\nconst myFile = <HTMLInputElement>document.getElementById(\"selectedFile\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        const startIndex = reader.result.toString().indexOf(\"base64,\");\n        const mybase64 = reader.result.toString().substr(startIndex + 7);\n        const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n        const image = sheet.shapes.addImage(mybase64);\n        image.name = \"Image\";\n        return context.sync();\n    });\n};\n\n// Read in the image file as a data URL.\nreader.readAsDataURL(myFile.files[0]);\n```"
+      description: ''
 - name: addLine(startLeft, startTop, endLeft, endTop, connectorType)
   uid: excel!Excel.ShapeCollection#addLine:member(1)
   package: excel!
   fullName: addLine(startLeft, startTop, endLeft, endTop, connectorType)
-  summary: >-
-    ワークシートに行を追加します。 新しい行 `Shape` を表すオブジェクトを返します。
+  summary: ワークシートに行を追加します。 新しい行 `Shape` を表すオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-lines.yaml
+
+    await Excel.run(async (context) => {
+        const shapes = context.workbook.worksheets.getItem("Shapes").shapes;
+        const line = shapes.addLine(200, 50, 300, 150, Excel.ConnectorType.straight);
+        line.name = "StraightLine";
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -154,17 +225,13 @@ methods:
       type: <xref uid="excel!Excel.ConnectorType:enum" />
     return:
       type: <xref uid="excel!Excel.Shape:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-lines.yaml\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const line = shapes.addLine(200, 50, 300, 150, Excel.ConnectorType.straight);\n    line.name = \"StraightLine\";\n    await context.sync();\n});\n```"
+      description: ''
 - name: addLine(startLeft, startTop, endLeft, endTop, connectorTypeString)
   uid: excel!Excel.ShapeCollection#addLine:member(2)
   package: excel!
   fullName: addLine(startLeft, startTop, endLeft, endTop, connectorTypeString)
-  summary: >-
-    ワークシートに行を追加します。 新しい行 `Shape` を表すオブジェクトを返します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ワークシートに行を追加します。 新しい行 `Shape` を表すオブジェクトを返します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -192,12 +259,30 @@ methods:
   uid: excel!Excel.ShapeCollection#addTextBox:member(1)
   package: excel!
   fullName: addTextBox(text)
-  summary: >-
-    指定されたテキストを含むテキスト ボックスをワークシートに追加します。 新しいテキスト `Shape` ボックスを表すオブジェクトを返します。
+  summary: 指定されたテキストを含むテキスト ボックスをワークシートに追加します。 新しいテキスト `Shape` ボックスを表すオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-textboxes.yaml
+
+    await Excel.run(async (context) => {
+        const shapes = context.workbook.worksheets.getItem("Shapes").shapes;
+        const textbox = shapes.addTextBox("A box with text");
+        textbox.left = 100;
+        textbox.top = 100;
+        textbox.height = 20;
+        textbox.width = 175;
+        textbox.name = "Textbox";
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -208,17 +293,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.Shape:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/44-shape/shape-textboxes.yaml\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const textbox = shapes.addTextBox(\"A box with text\");\n    textbox.left = 100;\n    textbox.top = 100;\n    textbox.height = 20;\n    textbox.width = 175;\n    textbox.name = \"Textbox\";\n    await context.sync();\n});\n```"
+      description: ''
 - name: getCount()
   uid: excel!Excel.ShapeCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    ワークシートの図形数を返します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ワークシートの図形数を返します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -230,12 +311,8 @@ methods:
   uid: excel!Excel.ShapeCollection#getItem:member(1)
   package: excel!
   fullName: getItem(key)
-  summary: >-
-    名前または ID を使用して図形を取得します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 名前または ID を使用して図形を取得します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -251,12 +328,8 @@ methods:
   uid: excel!Excel.ShapeCollection#getItemAt:member(1)
   package: excel!
   fullName: getItemAt(index)
-  summary: >-
-    コレクション内の位置を使用して図形を取得します。
-
-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内の位置を使用して図形を取得します。
+  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -334,9 +407,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: cb4c8e81f260075ce47b7ce185be81bdcd405374
-  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.openlocfilehash: 490a2c21fa27f6b8aa27a5b8864d0751f024256e
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 07/02/2021
-  ms.locfileid: "53271695"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59678609"

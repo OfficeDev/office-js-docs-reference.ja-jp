@@ -3,7 +3,7 @@
 |[BasicDataValidation](/javascript/api/excel/excel.basicdatavalidation)|[formula1](/javascript/api/excel/excel.basicdatavalidation#formula1)|演算子プロパティが GreaterThan などのバイナリ演算子に設定されている場合に、右側のオペランドを指定します (左側のオペランドは、ユーザーがセルに入力しようとする値です)。|
 ||[formula2](/javascript/api/excel/excel.basicdatavalidation#formula2)|3 項演算子 Between と NotBetween を使用して、上限オペランドを指定します。|
 ||[operator](/javascript/api/excel/excel.basicdatavalidation#operator)|データの検証に使用する演算子。|
-|[グラフ](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categoryLabelLevel)|ソース カテゴリ ラベルのレベルを参照して、グラフ カテゴリ ラベル レベル列挙定数を指定します。|
+|[Chart](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categoryLabelLevel)|ソース カテゴリ ラベルのレベルを参照して、グラフ カテゴリ ラベル レベル列挙定数を指定します。|
 ||[displayBlanksAs](/javascript/api/excel/excel.chart#displayBlanksAs)|空白のセルをグラフにプロットする方法を指定します。|
 ||[plotBy](/javascript/api/excel/excel.chart#plotBy)|列や行がグラフのデータ系列として使用される方法を指定します。|
 ||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotVisibleOnly)|true の場合、可視セルだけがプロットされます。|
@@ -31,7 +31,7 @@
 ||[textOrientation](/javascript/api/excel/excel.chartaxis#textOrientation)|グラフ軸目盛ラベルのテキストの向きを指定します。|
 |[ChartAxisFormat](/javascript/api/excel/excel.chartaxisformat)|[fill](/javascript/api/excel/excel.chartaxisformat#fill)|グラフの塗りつぶしの書式設定を指定します。|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[setFormula(formula: string)](/javascript/api/excel/excel.chartaxistitle#setFormula_formula_)|A1 スタイルの表記法を使用するグラフの軸タイトルの数式を表す文字列値。|
-|[ChartAxisTitleFormat](/javascript/api/excel/excel.chartaxistitleformat)|[border](/javascript/api/excel/excel.chartaxistitleformat#border)|色、線のスタイル、太さなど、グラフ軸のタイトルの罫線の形式を指定します。|
+|[ChartAxisTitleFormat](/javascript/api/excel/excel.chartaxistitleformat)|[罫線](/javascript/api/excel/excel.chartaxistitleformat#border)|色、線のスタイル、太さなど、グラフ軸のタイトルの罫線の形式を指定します。|
 ||[fill](/javascript/api/excel/excel.chartaxistitleformat#fill)|グラフ軸のタイトルの塗りつぶしの書式設定を指定します。|
 |[ChartBorder](/javascript/api/excel/excel.chartborder)|[clear()](/javascript/api/excel/excel.chartborder#clear__)|グラフ要素の罫線の書式設定をクリアします。|
 |[ChartCollection](/javascript/api/excel/excel.chartcollection)|[onActivated](/javascript/api/excel/excel.chartcollection#onActivated)|グラフがアクティブ化されると発生します。|
@@ -50,7 +50,7 @@
 ||[textOrientation](/javascript/api/excel/excel.chartdatalabel#textOrientation)|グラフ データ ラベルのテキストの向きを示す角度を表します。|
 ||[top](/javascript/api/excel/excel.chartdatalabel#top)|グラフのデータ ラベルの上端からグラフ エリアの上端までの距離 (ポイント数) を表します。|
 ||[verticalAlignment](/javascript/api/excel/excel.chartdatalabel#verticalAlignment)|グラフのデータ ラベルの垂直方向の配置を表します。|
-|[ChartDataLabelFormat](/javascript/api/excel/excel.chartdatalabelformat)|[border](/javascript/api/excel/excel.chartdatalabelformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
+|[ChartDataLabelFormat](/javascript/api/excel/excel.chartdatalabelformat)|[罫線](/javascript/api/excel/excel.chartdatalabelformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
 |[ChartDataLabels](/javascript/api/excel/excel.chartdatalabels)|[autoText](/javascript/api/excel/excel.chartdatalabels#autoText)|データ ラベルがコンテキストに基づいて適切なテキストを自動的に生成する場合に指定します。|
 ||[horizontalAlignment](/javascript/api/excel/excel.chartdatalabels#horizontalAlignment)|グラフ データ ラベルの水平方向の配置を指定します。|
 ||[numberFormat](/javascript/api/excel/excel.chartdatalabels#numberFormat)|データ ラベルの形式コードを指定します。|
@@ -68,7 +68,7 @@
 ||[left](/javascript/api/excel/excel.chartlegendentry#left)|グラフの凡例エントリの左の値を指定します。|
 ||[top](/javascript/api/excel/excel.chartlegendentry#top)|グラフ凡例エントリの上部を指定します。|
 ||[width](/javascript/api/excel/excel.chartlegendentry#width)|グラフ Legend の凡例エントリの幅を表します。|
-|[ChartLegendFormat](/javascript/api/excel/excel.chartlegendformat)|[border](/javascript/api/excel/excel.chartlegendformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
+|[ChartLegendFormat](/javascript/api/excel/excel.chartlegendformat)|[罫線](/javascript/api/excel/excel.chartlegendformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
 |[ChartPlotArea](/javascript/api/excel/excel.chartplotarea)|[height](/javascript/api/excel/excel.chartplotarea#height)|プロット領域の高さの値を指定します。|
 ||[insideHeight](/javascript/api/excel/excel.chartplotarea#insideHeight)|プロット領域の内側の高さの値を指定します。|
 ||[insideLeft](/javascript/api/excel/excel.chartplotarea#insideLeft)|プロット領域の内側の左の値を指定します。|
@@ -79,7 +79,7 @@
 ||[format](/javascript/api/excel/excel.chartplotarea#format)|グラフプロット領域の書式を指定します。|
 ||[top](/javascript/api/excel/excel.chartplotarea#top)|プロット領域の上の値を指定します。|
 ||[width](/javascript/api/excel/excel.chartplotarea#width)|プロット領域の幅の値を指定します。|
-|[ChartPlotAreaFormat](/javascript/api/excel/excel.chartplotareaformat)|[border](/javascript/api/excel/excel.chartplotareaformat#border)|グラフプロット領域の罫線属性を指定します。|
+|[ChartPlotAreaFormat](/javascript/api/excel/excel.chartplotareaformat)|[罫線](/javascript/api/excel/excel.chartplotareaformat#border)|グラフプロット領域の罫線属性を指定します。|
 ||[fill](/javascript/api/excel/excel.chartplotareaformat#fill)|背景の書式設定情報を含むオブジェクトの塗りつぶしの形式を指定します。|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[axisGroup](/javascript/api/excel/excel.chartseries#axisGroup)|指定した系列のグループを指定します。|
 ||[爆発](/javascript/api/excel/excel.chartseries#explosion)|円グラフまたはドーナツ グラフのスライスの展開値を指定します。|
@@ -107,7 +107,7 @@
 ||[textOrientation](/javascript/api/excel/excel.charttrendlinelabel#textOrientation)|グラフの傾向線ラベルのテキストの向きを示す角度を表します。|
 ||[top](/javascript/api/excel/excel.charttrendlinelabel#top)|グラフのトレンドライン ラベルの上端からグラフ領域の上端までの距離をポイントで表します。|
 ||[verticalAlignment](/javascript/api/excel/excel.charttrendlinelabel#verticalAlignment)|グラフの傾向線ラベルの垂直方向の配置を表します。|
-|[ChartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|[border](/javascript/api/excel/excel.charttrendlinelabelformat#border)|色、線のスタイル、太さなど、罫線の形式を指定します。|
+|[ChartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|[罫線](/javascript/api/excel/excel.charttrendlinelabelformat#border)|色、線のスタイル、太さなど、罫線の形式を指定します。|
 ||[fill](/javascript/api/excel/excel.charttrendlinelabelformat#fill)|現在のグラフの傾向線ラベルの塗りつぶしの形式を指定します。|
 ||[font](/javascript/api/excel/excel.charttrendlinelabelformat#font)|グラフの傾向線ラベルのフォント属性 (フォント名、フォント サイズ、色など) を指定します。|
 |[CustomDataValidation](/javascript/api/excel/excel.customdatavalidation)|[formula](/javascript/api/excel/excel.customdatavalidation#formula)|ユーザーの入力規則のカスタム数式。|
@@ -165,7 +165,7 @@
 ||[source](/javascript/api/excel/excel.listdatavalidation#source)|データの入力規則のリストのソース。|
 |[PivotField](/javascript/api/excel/excel.pivotfield)|[name](/javascript/api/excel/excel.pivotfield#name)|PivotField の名前。|
 ||[id](/javascript/api/excel/excel.pivotfield#id)|PivotField の ID。|
-||[items](/javascript/api/excel/excel.pivotfield#items)|PivotField に関連付けられているピボット フィールドを返します。|
+||[アイテム](/javascript/api/excel/excel.pivotfield#items)|PivotField に関連付けられた PivotItems を返します。|
 ||[showAllItems](/javascript/api/excel/excel.pivotfield#showAllItems)|PivotField のすべての項目を表示するかどうかを指定します。|
 ||[sortByLabels(sortBy: SortBy)](/javascript/api/excel/excel.pivotfield#sortByLabels_sortBy_)|PivotField を並べ替えます。|
 ||[subtotals](/javascript/api/excel/excel.pivotfield#subtotals)|PivotField の小計。|
@@ -217,7 +217,7 @@
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getItemOrNullObject_name_)|名前に基づいて RowColumnPivotHierarchy を取得します。|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 ||[remove(rowColumnPivotHierarchy: Excel.RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove_rowColumnPivotHierarchy_)|現在の軸からピボット階層を削除します。|
-|[Runtime](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
+|[ランタイム](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#baseField)|PivotField を使用して、型に応じて計算を基に計算を行います (該当する場合 `ShowAs` `ShowAsCalculation` は、それ以外 `null` の場合)。|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseItem)|型に応じて該当する場合は、計算の基に設定するアイテム `ShowAs` `ShowAsCalculation` 。それ以外の場合 `null` 。|
 ||[計算](/javascript/api/excel/excel.showasrule#calculation)|`ShowAs`PivotField に使用する計算。|
@@ -235,11 +235,11 @@
 ||[sum](/javascript/api/excel/excel.subtotals#sum)||
 ||[差異](/javascript/api/excel/excel.subtotals#variance)||
 ||[varianceP](/javascript/api/excel/excel.subtotals#varianceP)||
-|[表](/javascript/api/excel/excel.table)|[legacyId](/javascript/api/excel/excel.table#legacyId)|数値 ID を返します。|
+|[Table](/javascript/api/excel/excel.table)|[legacyId](/javascript/api/excel/excel.table#legacyId)|数値 ID を返します。|
 |[TableChangedEventArgs](/javascript/api/excel/excel.tablechangedeventargs)|[getRange(ctx: Excel.RequestContext)](/javascript/api/excel/excel.tablechangedeventargs#getRange_ctx_)|特定のワークシートのテーブルの変更された領域を表す範囲を取得します。|
 ||[getRangeOrNullObject(ctx: Excel.RequestContext)](/javascript/api/excel/excel.tablechangedeventargs#getRangeOrNullObject_ctx_)|特定のワークシートのテーブルの変更された領域を表す範囲を取得します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[readOnly](/javascript/api/excel/excel.workbook#readOnly)|ブックが `true` 読み取り専用モードで開いている場合に返します。|
-|[WorkbookCreated](/javascript/api/excel/excel.workbookcreated)||[ワークシート](/javascript/api/excel/excel.worksheet)|[onCalculated](/javascript/api/excel/excel.worksheet#onCalculated)|ワークシートの計算時に発生します。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[readOnly](/javascript/api/excel/excel.workbook#readOnly)|ブックが `true` 読み取り専用モードで開いている場合に返します。|
+|[WorkbookCreated](/javascript/api/excel/excel.workbookcreated)||[Worksheet](/javascript/api/excel/excel.worksheet)|[onCalculated](/javascript/api/excel/excel.worksheet#onCalculated)|ワークシートの計算時に発生します。|
 ||[showGridlines](/javascript/api/excel/excel.worksheet#showGridlines)|グリッド線がユーザーに表示される場合に指定します。|
 ||[showHeadings](/javascript/api/excel/excel.worksheet#showHeadings)|ユーザーに見出しを表示する場合に指定します。|
 |[WorksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs)|[type](/javascript/api/excel/excel.worksheetcalculatedeventargs#type)|イベントの種類を取得します。|
