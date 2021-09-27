@@ -3,12 +3,8 @@ name: Excel.CommentReply
 uid: excel!Excel.CommentReply:class
 package: excel!
 fullName: Excel.CommentReply
-summary: >-
-  ブック内のコメント返信を表します。
-
-
-  \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ブック内のコメント返信を表します。
+remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,12 +13,8 @@ properties:
   uid: excel!Excel.CommentReply#authorEmail:member
   package: excel!
   fullName: authorEmail
-  summary: >-
-    コメント返信作成者のメール アドレスを取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コメント返信作成者のメール アドレスを取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -33,12 +25,8 @@ properties:
   uid: excel!Excel.CommentReply#authorName:member
   package: excel!
   fullName: authorName
-  summary: >-
-    コメント返信作成者の名前を取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コメント返信作成者の名前を取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -49,19 +37,38 @@ properties:
   uid: excel!Excel.CommentReply#content:member
   package: excel!
   fullName: content
-  summary: >-
-    コメント返信のコンテンツ。 文字列はプレーン テキストです。
+  summary: コメント返信のコンテンツ。 文字列はプレーン テキストです。
+  remarks: >-
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/12-comment/comment-replies.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Comments");
+        const comment = sheet.comments.getItemAt(0);
+        const reply = comment.replies.getItemAt(0);
+        reply.load("content");
+        // Sync to load the content of the comment reply.
+        await context.sync();
+
+        // Append "Please!" to the end of the comment reply.
+        reply.content += " Please!";
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'content: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/12-comment/comment-replies.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Comments\");\n    const comment = sheet.comments.getItemAt(0);\n    const reply = comment.replies.getItemAt(0);\n    reply.load(\"content\");\n    // Sync to load the content of the comment reply.\n    await context.sync();\n\n    // Append \"Please!\" to the end of the comment reply.\n    reply.content += \" Please!\";\n    await context.sync();\n});\n```"
 - name: context
   uid: excel!Excel.CommentReply#context:member
   package: excel!
@@ -78,12 +85,8 @@ properties:
   uid: excel!Excel.CommentReply#creationDate:member
   package: excel!
   fullName: creationDate
-  summary: >-
-    コメント返信の作成日時を取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コメント返信の作成日時を取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -94,12 +97,8 @@ properties:
   uid: excel!Excel.CommentReply#id:member
   package: excel!
   fullName: id
-  summary: >-
-    コメント返信識別子を指定します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コメント返信識別子を指定します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -111,29 +110,40 @@ methods:
   uid: excel!Excel.CommentReply#delete:member(1)
   package: excel!
   fullName: delete()
-  summary: >-
-    コメント返信を削除します。
+  summary: コメント返信を削除します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/12-comment/comment-replies.yaml
+
+    await Excel.run(async (context) => {
+        // Remove the first comment reply from this worksheet's first comment.
+        const sheet = context.workbook.worksheets.getItem("Comments");
+        const comment = sheet.comments.getItemAt(0);
+        comment.replies.getItemAt(0).delete();
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'delete(): void;'
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/12-comment/comment-replies.yaml\nawait Excel.run(async (context) => {\n    // Remove the first comment reply from this worksheet's first comment.\n    const sheet = context.workbook.worksheets.getItem(\"Comments\");\n    const comment = sheet.comments.getItemAt(0);\n    comment.replies.getItemAt(0).delete();\n    await context.sync();\n});\n```"
+      description: ''
 - name: getLocation()
   uid: excel!Excel.CommentReply#getLocation:member(1)
   package: excel!
   fullName: getLocation()
-  summary: >-
-    このコメント返信があるセルを取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: このコメント返信があるセルを取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -145,12 +155,8 @@ methods:
   uid: excel!Excel.CommentReply#getParentComment:member(1)
   package: excel!
   fullName: getParentComment()
-  summary: >-
-    この返信の親コメントを取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: この返信の親コメントを取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -222,11 +228,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.CommentReply): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -262,7 +264,7 @@ methods:
   uid: excel!Excel.CommentReply#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.CommentReply オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.CommentReplyData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。CommentReply オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`Excel.Interfaces.CommentReplyData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -273,9 +275,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 357a63ec42ab8243c32deeac8852c7b082c69214
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: fbef9213bd7f4f7364b3eceaaf4e64ce5fb5e485
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51287509"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59659108"
