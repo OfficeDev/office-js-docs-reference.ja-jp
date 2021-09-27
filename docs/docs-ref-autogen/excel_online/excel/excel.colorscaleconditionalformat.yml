@@ -3,12 +3,8 @@ name: Excel.ColorScaleConditionalFormat
 uid: excel!Excel.ColorScaleConditionalFormat:class
 package: excel!
 fullName: Excel.ColorScaleConditionalFormat
-summary: >-
-  条件付き書式の色スケール条件を表します。
-
-
-  \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: 条件付き書式の色スケール条件を表します。
+remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,29 +25,46 @@ properties:
   uid: excel!Excel.ColorScaleConditionalFormat#criteria:member
   package: excel!
   fullName: criteria
-  summary: >-
-    カラー スケールの条件。 2 つのポイント カラー スケールを使用する場合、中間点は省略可能です。
+  summary: カラー スケールの条件。2 ポイントのカラー スケールを使用する場合、中間値はオプションです。
+  remarks: >-
+    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const range = sheet.getRange("B2:M5");
+        const conditionalFormat = range.conditionalFormats
+            .add(Excel.ConditionalFormatType.colorScale);
+        const criteria = {
+            minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: "blue" },
+            midpoint: { formula: "50", type: Excel.ConditionalFormatColorCriterionType.percent, color: "yellow" },
+            maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: "red" }
+        };
+        conditionalFormat.colorScale.criteria = criteria;
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'criteria: Excel.ConditionalColorScaleCriteria;'
     return:
       type: <xref uid="excel!Excel.ConditionalColorScaleCriteria:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
 - name: threeColorScale
   uid: excel!Excel.ColorScaleConditionalFormat#threeColorScale:member
   package: excel!
   fullName: threeColorScale
-  summary: >-
-    もし `true`<!-- -->を指定すると、カラー スケールには 3 つのポイント (最小、中点、最大値) が設定されます。それ以外の場合は、2 つ (最小、最大値) になります。
-
-
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: もし `true`<!-- -->を指定すると、カラー スケールには 3 つのポイント (最小、中点、最大値) が設定されます。それ以外の場合は、2 つ (最小、最大値) になります。
+  remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -123,11 +136,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.ColorScaleConditionalFormat): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -163,7 +172,7 @@ methods:
   uid: excel!Excel.ColorScaleConditionalFormat#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.ColorScaleConditionalFormat オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.ColorScaleConditionalFormatData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。ColorScaleConditionalFormat オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`Excel.Interfaces.ColorScaleConditionalFormatData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -174,9 +183,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 17b5b11b772b51a81ffde02ac1e7954ada45701b
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: a727ed9e9aecac824ffc848b204c23b8c364b7d4
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51552339"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59755163"
