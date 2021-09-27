@@ -3,12 +3,8 @@ name: Excel.TableChangedEventArgs
 uid: excel!Excel.TableChangedEventArgs:interface
 package: excel!
 fullName: Excel.TableChangedEventArgs
-summary: >-
-  変更されたイベントを発生したテーブルに関する情報を提供します。
-
-
-  \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: 変更されたイベントを発生したテーブルに関する情報を提供します。
+remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -17,12 +13,8 @@ properties:
   uid: excel!Excel.TableChangedEventArgs#address:member
   package: excel!
   fullName: address
-  summary: >-
-    特定のワークシート上のテーブル内で変更されたエリアを表すアドレスを取得します。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 特定のワークシート上のテーブル内で変更されたエリアを表すアドレスを取得します。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -33,12 +25,8 @@ properties:
   uid: excel!Excel.TableChangedEventArgs#changeType:member
   package: excel!
   fullName: changeType
-  summary: >-
-    変更されたイベントのトリガー方法を表す変更の種類を取得します。 詳細は「`Excel.DataChangeType`」をご覧ください。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 変更されたイベントのトリガー方法を表す変更の種類を取得します。 詳細は「`Excel.DataChangeType`」をご覧ください。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -49,12 +37,8 @@ properties:
   uid: excel!Excel.TableChangedEventArgs#source:member
   package: excel!
   fullName: source
-  summary: >-
-    イベントのソースを取得します。 詳細は「`Excel.EventSource`」をご覧ください。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: イベントのソースを取得します。 詳細は「`Excel.EventSource`」をご覧ください。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -65,29 +49,45 @@ properties:
   uid: excel!Excel.TableChangedEventArgs#tableId:member
   package: excel!
   fullName: tableId
-  summary: >-
-    データが変更されたテーブルの ID を取得します。
+  summary: データが変更されたテーブルの ID を取得します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml
+
+    async function onChange(event) {
+        await Excel.run(async (context) => {
+            let table = context.workbook.tables.getItem(event.tableId);
+            let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+            worksheet.load("name");
+
+            await context.sync();
+
+            console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+            console.log("Table Id : " + event.tableId);
+            console.log("Worksheet Id : " + worksheet.name);
+        });
+    }
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'tableId: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml\nasync function onChange(event) {\n    await Excel.run(async (context) => {\n        let table = context.workbook.tables.getItem(event.tableId);\n        let worksheet = context.workbook.worksheets.getItem(event.worksheetId);\n        worksheet.load(\"name\");\n\n        await context.sync();\n\n        console.log(\"Handler for table collection onChanged event has been triggered. Data changed address: \" + event.address);\n        console.log(\"Table Id : \" + event.tableId);\n        console.log(\"Worksheet Id : \" + worksheet.name);\n    });\n}\n```"
 - name: type
   uid: excel!Excel.TableChangedEventArgs#type:member
   package: excel!
   fullName: type
-  summary: >-
-    イベントの種類を取得します。 詳細は「`Excel.EventType`」をご覧ください。
-
-
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: イベントの種類を取得します。 詳細は「`Excel.EventType`」をご覧ください。
+  remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -98,23 +98,43 @@ properties:
   uid: excel!Excel.TableChangedEventArgs#worksheetId:member
   package: excel!
   fullName: worksheetId
-  summary: >-
-    データが変更されたワークシートの ID を取得します。
+  summary: データが変更されたワークシートの ID を取得します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml
+
+    async function onChange(event) {
+        await Excel.run(async (context) => {
+            let table = context.workbook.tables.getItem(event.tableId);
+            let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+            worksheet.load("name");
+
+            await context.sync();
+
+            console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+            console.log("Table Id : " + event.tableId);
+            console.log("Worksheet Id : " + worksheet.name);
+        });
+    }
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'worksheetId: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml\nasync function onChange(event) {\n    await Excel.run(async (context) => {\n        let table = context.workbook.tables.getItem(event.tableId);\n        let worksheet = context.workbook.worksheets.getItem(event.worksheetId);\n        worksheet.load(\"name\");\n\n        await context.sync();\n\n        console.log(\"Handler for table collection onChanged event has been triggered. Data changed address: \" + event.address);\n        console.log(\"Table Id : \" + event.tableId);\n        console.log(\"Worksheet Id : \" + worksheet.name);\n    });\n}\n```"
 metadata:
-  ms.openlocfilehash: d9c813d2f97c24713e3af339ca02f2c0fdc84eb3
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: de612fdfd9d1bd0ffdfb72a394df8aa70ddeaf70
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51514931"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59712616"
