@@ -3,12 +3,8 @@ name: Excel.SlicerCollection
 uid: excel!Excel.SlicerCollection:class
 package: excel!
 fullName: Excel.SlicerCollection
-summary: >-
-  ブックまたはワークシート内のすべてのスライサー オブジェクトのコレクションを表します。
-
-
-  \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ブックまたはワークシート内のすべてのスライサー オブジェクトのコレクションを表します。
+remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,12 +38,29 @@ methods:
   uid: excel!Excel.SlicerCollection#add:member(1)
   package: excel!
   fullName: add(slicerSource, sourceField, slicerDestination)
-  summary: >-
-    ブックに新しいスライサーを追加します。
+  summary: ブックに新しいスライサーを追加します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Pivot");
+        const slicer = sheet.slicers.add(
+            "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+            "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+        );
+        slicer.name = "Fruit Slicer";
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -60,42 +73,17 @@ methods:
       description: フィルター処理するデータ ソースのフィールド。 オブジェクト、オブジェクト、A の ID、または a の名前または `PivotField` `TableColumn` ID `PivotField` を指定できます。 `TableColumn`<!-- -->.
       type: string | <xref uid="excel!Excel.PivotField:class" /> | number | <xref uid="excel!Excel.TableColumn:class" />
     - id: slicerDestination
-      description: 省略可能。 新しいスライサーが作成されるワークシート。 オブジェクトまたはワークシート `Worksheet` の名前または ID を指定できます。 スライサー コレクションがワークシートから取得される場合は、このパラメーターを省略できます。
+      description: オプション。 新しいスライサーが作成されるワークシート。 オブジェクトまたはワークシート `Worksheet` の名前または ID を指定できます。 スライサー コレクションがワークシートから取得される場合は、このパラメーターを省略できます。
       type: string | <xref uid="excel!Excel.Worksheet:class" />
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
-      description: >-
-        新しいスライサー。
-
-
-        #### <a name="examples"></a>例
-
-
-        ```typescript
-
-        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml
-
-        await Excel.run(async (context) => {
-            const sheet = context.workbook.worksheets.getItem("Pivot");
-            const slicer = sheet.slicers.add(
-                "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
-                "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
-            );
-            slicer.name = "Fruit Slicer";
-            await context.sync();
-        });
-
-        ```
+      description: 新しいスライサー。
 - name: getCount()
   uid: excel!Excel.SlicerCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    コレクションに含まれるスライサーの数を返します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクションに含まれるスライサーの数を返します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -107,12 +95,29 @@ methods:
   uid: excel!Excel.SlicerCollection#getItem:member(1)
   package: excel!
   fullName: getItem(key)
-  summary: >-
-    名前または ID を使用してスライサー オブジェクトを取得します。
+  summary: 名前または ID を使用してスライサー オブジェクトを取得します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml
+
+    await Excel.run(async (context) => {
+        const slicer = context.workbook.slicers.getItem("Fruit Slicer");
+        slicer.caption = "Fruit Types";
+        slicer.left = 395;
+        slicer.top = 15;
+        slicer.height = 135;
+        slicer.width = 150;
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -123,24 +128,20 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml\nawait Excel.run(async (context) => {\n    const slicer = context.workbook.slicers.getItem(\"Fruit Slicer\");\n    slicer.caption = \"Fruit Types\";\n    slicer.left = 395;\n    slicer.top = 15;\n    slicer.height = 135;\n    slicer.width = 150;\n    await context.sync();\n});\n```"
+      description: ''
 - name: getItemAt(index)
   uid: excel!Excel.SlicerCollection#getItemAt:member(1)
   package: excel!
   fullName: getItemAt(index)
-  summary: >-
-    コレクション内の位置に基づいてスライサーを取得します。
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内の位置に基づいてスライサーを取得します。
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemAt(index: number): Excel.Slicer;'
     parameters:
     - id: index
-      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
       type: number
     return:
       type: <xref uid="excel!Excel.Slicer:class" />
@@ -149,12 +150,8 @@ methods:
   uid: excel!Excel.SlicerCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(key)
-  summary: >-
-    名前または ID を使用してスライサーを取得します。 スライサーが存在しない場合、この関数はプロパティを次に設定した `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 名前または ID を使用してスライサーを取得します。 スライサーが存在しない場合、この関数はプロパティを次に設定した `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[API セット: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -232,9 +229,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 1227f20e294aca20796d3adb3cc0a66fe202d3ee
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: f548ab8aa2c27b4f8329f1db4d5f2a1f8e9505f7
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51563573"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59715325"
