@@ -149,10 +149,7 @@ properties:
 
 
     ただし、委任シナリオまたは共有シナリオでは `targetRestUrl` [、SharedProperties](https://docs.microsoft.com/javascript/api/outlook/office.sharedproperties?view=outlook-js-1.8) オブジェクトのプロパティを使用する必要があります (要件セット 1.8 で導入)。 詳細については、「代理人アクセス」 [の記事を参照](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) してください。
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\n`restUrl` 値は、ユーザーのメールボックスに [REST API](https://docs.microsoft.com/outlook/rest/) 呼び出しを行うために使用できます。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
+  remarks: "\\[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \\]\n\n**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\n`restUrl` 値は、ユーザーのメールボックスに [REST API](https://docs.microsoft.com/outlook/rest/) 呼び出しを行うために使用できます。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -185,10 +182,10 @@ methods:
 
 
     サポートされているイベントについては、「Mailbox オブジェクト モデル イベント」セクションを [参照してください。](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events)<!-- -->.
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -241,7 +238,7 @@ methods:
       description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -255,10 +252,10 @@ methods:
 
 
     サポートされているイベントについては、「Mailbox オブジェクト モデル イベント」セクションを [参照してください。](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events)<!-- -->.
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -275,7 +272,7 @@ methods:
       description: イベントを処理する関数。 関数は、オブジェクト リテラルである単一パラメーターを受け入れる必要があります。 パラメーター `type` のプロパティは、渡された `eventType` パラメーターと一致します。 `addHandlerAsync`<!-- -->.
       type: any
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -292,10 +289,10 @@ methods:
 
 
     **注**: このメソッドは、iOS Outlook Android ではサポートされていません。
-
-
-    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`
 
 
@@ -379,10 +376,7 @@ methods:
 
 
     **注**: このメソッドは、iOS Outlook Android ではサポートされていません。
-
-
-    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\nEWS またはプロパティを使用して取得されるアイテムの ID は、REST API で使用される形式とは異なる形式 (Outlook Mail API や Microsoft クライアントなど) を `itemId` [使用Graph](https://graph.microsoft.io/) [](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)<!-- -->. メソッドは、EWS 形式の ID を REST 用の適切な形式に変換します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
+  remarks: "\\[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \\]\n\n**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`Restricted`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\nEWS またはプロパティを使用して取得されるアイテムの ID は、REST API で使用される形式とは異なる形式 (Outlook Mail API や Microsoft クライアントなど) を `itemId` [使用Graph](https://graph.microsoft.io/) [](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations)<!-- -->. メソッドは、EWS 形式の ID を REST 用の適切な形式に変換します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -632,10 +626,10 @@ methods:
 
 
     パラメータのいずれかが指定されたサイズ制限を超えた場合、または不明なパラメータ名が指定された場合には、例外がスローされます。
-
-
-    \[[API セット: メールボックス 1.6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -770,10 +764,7 @@ methods:
 
 
     **注**: アドインは、可能な限り Web サービスを使用する代わりに REST API Exchange使用をお勧めします。
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\n**エラー**:\n\n- `HTTPRequestFailure`<!-- -->: 要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。\n\n- `InternalServerError`<!-- -->: サーバー Exchangeエラーが返されました。 詳細については、diagnostics オブジェクトを参照してください。\n\n- `NetworkError`<!-- -->: ユーザーがネットワークに接続されなくなりました。 ネットワーク接続を確認し、やり直してください。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```"
+  remarks: "\\[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \\]\n\n**[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`\n\n**[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り\n\n**エラー**:\n\n- `HTTPRequestFailure`<!-- -->: 要求が失敗しました。 HTTP エラーコードの diagnostics オブジェクトを参照してください。\n\n- `InternalServerError`<!-- -->: サーバー Exchangeエラーが返されました。 詳細については、diagnostics オブジェクトを参照してください。\n\n- `NetworkError`<!-- -->: ユーザーがネットワークに接続されなくなりました。 ネットワーク接続を確認し、やり直してください。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -812,10 +803,10 @@ methods:
 
 
     **重要**: 代理人または共有シナリオのガイダンスについては、代理人アクセスに関する [記事を参照](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) してください。
-
-
-    \[[API セット: すべてのサポート読み取りモード。メールボックス 1.3 で作成モードのサポートが導入されました](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: すべてのサポート読み取りモード。メールボックス 1.3 で作成モードのサポートが導入されました](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -859,7 +850,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. トークンは、プロパティ内の文字列として返 `asyncResult.value` されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: 省略可能。 非同期メソッドに渡される状態データです。
+      description: オプション。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -920,7 +911,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. トークンは、プロパティ内の文字列として返 `asyncResult.value` されます。 エラーが発生した場合、 `asyncResult.error` および `asyncResult.diagnostics` のプロパティで追加情報が提供される場合があります。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: 省略可能。 非同期メソッドに渡される状態データです。
+      description: オプション。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -1094,7 +1085,7 @@ methods:
       description: メソッドが完了すると、callback パラメーターで渡された関数が、型の 1 つのパラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 結果 `value` のプロパティは、文字列として提供される EWS 要求の XML です。 結果のサイズが 1 MB を超える場合、代わりにエラー メッセージが返されます。
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: 省略可能。 非同期メソッドに渡される状態データです。
+      description: オプション。 非同期メソッドに渡される状態データです。
       type: any
     return:
       type: void
@@ -1108,10 +1099,10 @@ methods:
 
 
     サポートされているイベントについては、「Mailbox オブジェクト モデル イベント」セクションを [参照してください。](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events)<!-- -->.
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -1128,7 +1119,7 @@ methods:
       description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1142,10 +1133,10 @@ methods:
 
 
     サポートされているイベントについては、「Mailbox オブジェクト モデル イベント」セクションを [参照してください。](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox#events)<!-- -->.
-
-
-    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
+    \[[API セット: メールボックス 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
     **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
 
 
@@ -1159,15 +1150,15 @@ methods:
       description: ハンドラーを取り消すイベント。
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: callback
-      description: 省略可能。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 33b42f6268cb3a3b45f766350c70d8d327bb6927
-  ms.sourcegitcommit: 319b8cca7d91e51669407633dacc02ea6e4f4338
+  ms.openlocfilehash: 9c701398fc468edb0700714d2cefb7c2189ec6f8
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 06/18/2021
-  ms.locfileid: "53009870"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59711223"
