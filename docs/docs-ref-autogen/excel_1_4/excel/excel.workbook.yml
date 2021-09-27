@@ -3,12 +3,8 @@ name: Excel.Workbook
 uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
-summary: >-
-  Workbook は、ワークシート、テーブル、範囲などの関連するブック オブジェクトを含む、トップ レベルのオブジェクトです。 ブック オブジェクト モデルの詳細については [、「Excel JavaScript API を使用してブックを使用する」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
-
-
-  \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Workbook は、ワークシート、テーブル、範囲などの関連するブック オブジェクトを含む、トップ レベルのオブジェクトです。 ブック オブジェクト モデルの詳細については、「JavaScript API を使用してブックを使用して作業する」[をExcelしてください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
+remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,12 +13,8 @@ properties:
   uid: excel!Excel.Workbook#application:member
   package: excel!
   fullName: application
-  summary: >-
-    このブックを含む Excel アプリケーション インスタンスを表します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: このブックをExcelアプリケーション インスタンスを表します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -33,12 +25,8 @@ properties:
   uid: excel!Excel.Workbook#bindings:member
   package: excel!
   fullName: bindings
-  summary: >-
-    ブックの一部であるバインドのコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックの一部であるバインドのコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,12 +49,8 @@ properties:
   uid: excel!Excel.Workbook#functions:member
   package: excel!
   fullName: functions
-  summary: >-
-    計算に使用できるワークシート関数のコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 計算に使用できるワークシート関数のコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -77,12 +61,8 @@ properties:
   uid: excel!Excel.Workbook#names:member
   package: excel!
   fullName: names
-  summary: >-
-    ブックスコープの名前付きアイテム (名前付き範囲と定数) のコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックスコープの名前付きアイテム (名前付き範囲と定数) のコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -93,29 +73,44 @@ properties:
   uid: excel!Excel.Workbook#pivotTables:member
   package: excel!
   fullName: pivotTables
-  summary: >-
-    ブックに関連付けられているピボットテーブルのコレクションを表します。
+  summary: ブックに関連付けられているピボットテーブルのコレクションを表します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-get-pivottables.yaml
+
+    await Excel.run(async (context) => {
+      // Get the names of all the PivotTables in the workbook.
+      const pivotTables = context.workbook.pivotTables;
+      pivotTables.load("name");
+      await context.sync();
+
+      // Display the names in the console.
+      console.log("PivotTables in the workbook:")
+      pivotTables.items.forEach((pivotTable) => {
+        console.log(`\t${pivotTable.name}`);
+      });
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'readonly pivotTables: Excel.PivotTableCollection;'
     return:
       type: <xref uid="excel!Excel.PivotTableCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-get-pivottables.yaml\nawait Excel.run(async (context) => {\n  // Get the names of all the PivotTables in the workbook.\n  const pivotTables = context.workbook.pivotTables;\n  pivotTables.load(\"name\");\n  await context.sync();\n\n  // Display the names in the console.\n  console.log(\"PivotTables in the workbook:\")\n  pivotTables.items.forEach((pivotTable) => {\n    console.log(`\\t${pivotTable.name}`);\n  });\n});\n```"
 - name: settings
   uid: excel!Excel.Workbook#settings:member
   package: excel!
   fullName: settings
-  summary: >-
-    ブックに関連付けられている設定のコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックに関連付けられている設定のコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -126,12 +121,8 @@ properties:
   uid: excel!Excel.Workbook#tables:member
   package: excel!
   fullName: tables
-  summary: >-
-    ブックに関連付けられているテーブルのコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックに関連付けられているテーブルのコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -142,12 +133,8 @@ properties:
   uid: excel!Excel.Workbook#worksheets:member
   package: excel!
   fullName: worksheets
-  summary: >-
-    ブックに関連付けられているワークシートのコレクションを表します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックに関連付けられているワークシートのコレクションを表します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -159,19 +146,15 @@ methods:
   uid: excel!Excel.Workbook#getSelectedRange:member(1)
   package: excel!
   fullName: getSelectedRange()
-  summary: >-
-    ブックから現在選択されている 1 つの範囲を取得します。 複数の範囲が選択されている場合、このメソッドはエラーをスローします。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックから現在選択されている 1 つの範囲を取得します。 複数の範囲が選択されている場合、このメソッドはエラーをスローします。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var selectedRange = ctx.workbook.getSelectedRange();\n    selectedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(selectedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getSelectedRange(): Excel.Range;'
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var selectedRange = ctx.workbook.getSelectedRange();\n    selectedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(selectedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: load(options)
   uid: excel!Excel.Workbook#load:member(1)
   package: excel!
@@ -236,11 +219,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.Workbook): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -276,7 +255,7 @@ methods:
   uid: excel!Excel.Workbook#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.Workbook オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.WorkbookData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。Workbook オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.WorkbookData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -290,12 +269,8 @@ events:
   uid: excel!Excel.Workbook#onSelectionChanged:member
   package: excel!
   fullName: onSelectionChanged
-  summary: >-
-    ドキュメント内で選択が変更されるときに発生します。
-
-
-    \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ドキュメント内で選択が変更されるときに発生します。
+  remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -304,9 +279,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.SelectionChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 2b5d2b0ee32c4bb4dbb45a8a8fd906bdd070e85b
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: 36b5262c898c606aff90c2231a2cfb1757d641fb
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51754418"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59709060"
