@@ -3,12 +3,8 @@ name: Excel.CustomConditionalFormat
 uid: excel!Excel.CustomConditionalFormat:class
 package: excel!
 fullName: Excel.CustomConditionalFormat
-summary: >-
-  ユーザー設定の条件付き書式の種類を表します。
-
-
-  \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ユーザー設定の条件付き書式の種類を表します。
+remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,36 +25,74 @@ properties:
   uid: excel!Excel.CustomConditionalFormat#format:member
   package: excel!
   fullName: format
-  summary: >-
-    条件付き書式のフォント、塗りつぶし、罫線、その他のプロパティをカプセル化する format オブジェクトを返します。
+  summary: 条件付き書式のフォント、塗りつぶし、罫線、その他のプロパティをカプセル化する format オブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const range = sheet.getRange("B8:E13");
+        const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);
+        conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT("RC[-1]",0),TRUE)';
+        conditionalFormat.custom.format.font.color = "green";
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'readonly format: Excel.ConditionalRangeFormat;'
     return:
       type: <xref uid="excel!Excel.ConditionalRangeFormat:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT(\"RC[-1]\",0),TRUE)';\n    conditionalFormat.custom.format.font.color = \"green\";\n\n    await context.sync();\n});\n```"
 - name: rule
   uid: excel!Excel.CustomConditionalFormat#rule:member
   package: excel!
   fullName: rule
-  summary: >-
-    この条件付き `Rule` 形式のオブジェクトを指定します。
+  summary: この条件付き `Rule` 形式のオブジェクトを指定します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Excel.run(function (ctx) {
+        var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+        var range = sheet.getRange("A1:A5");
+        range.values = [[1], [20], [""], [5], ["test"]];
+        var cf = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);
+        var cfCustom = cf.customOrNullObject;
+        cfCustom.rule.formula = "=ISBLANK(A1)";
+        cfCustom.format.fill.color = "#00FF00";
+        return ctx.sync().then(function () {
+            console.log("Added new custom conditional format highlighting all blank cells.");
+        });
+    }).catch(function (error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'readonly rule: Excel.ConditionalFormatRule;'
     return:
       type: <xref uid="excel!Excel.ConditionalFormatRule:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var sheet = ctx.workbook.worksheets.getActiveWorksheet();\n    var range = sheet.getRange(\"A1:A5\");\n    range.values = [[1], [20], [\"\"], [5], [\"test\"]];\n    var cf = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    var cfCustom = cf.customOrNullObject;\n    cfCustom.rule.formula = \"=ISBLANK(A1)\";\n    cfCustom.format.fill.color = \"#00FF00\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new custom conditional format highlighting all blank cells.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 methods:
 - name: load(options)
   uid: excel!Excel.CustomConditionalFormat#load:member(1)
@@ -124,11 +158,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Excel.CustomConditionalFormat): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -175,9 +205,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d6189a1ac0a20a1fdaa78b13205760acbc397609
-  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.openlocfilehash: df07016383e0a03de9fc1ef208d2a0281f40c3b5
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 07/02/2021
-  ms.locfileid: "53272576"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59686282"

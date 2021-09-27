@@ -3,12 +3,8 @@ name: Excel.CustomXmlPartCollection
 uid: excel!Excel.CustomXmlPartCollection:class
 package: excel!
 fullName: Excel.CustomXmlPartCollection
-summary: >-
-  カスタム XML パーツのコレクション。
-
-
-  \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: カスタム XML パーツのコレクション。
+remarks: '\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,12 +38,8 @@ methods:
   uid: excel!Excel.CustomXmlPartCollection#add:member(1)
   package: excel!
   fullName: add(xml)
-  summary: >-
-    ブックに新しいカスタム XML パーツを追加します。
-
-
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ブックに新しいカスタム XML パーツを追加します。
+  remarks: "\\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/create-set-get-and-delete-custom-xml-parts.yaml\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,17 +50,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.CustomXmlPart:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/create-set-get-and-delete-custom-xml-parts.yaml\nawait Excel.run(async (context) => {\n    // You must have the xmlns attribute to populate the \n    // CustomXml.namespaceUri property.\n    const originalXml = \"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>Juan</Reviewer><Reviewer>Hong</Reviewer><Reviewer>Sally</Reviewer></Reviewers>\";\n    const customXmlPart = context.workbook.customXmlParts.add(originalXml);\n    customXmlPart.load(\"id\");\n    const xmlBlob = customXmlPart.getXml();\n\n    await context.sync();\n\n    const readableXml = addLineBreaksToXML(xmlBlob.value);\n    $(\"#display-xml\").text(readableXml);\n\n    // Store the XML part's ID in a setting.\n    const settings = context.workbook.settings;\n    settings.add(\"ContosoReviewXmlPartId\", customXmlPart.id);\n\n    await context.sync();\n});\n```"
+      description: ''
 - name: getByNamespace(namespaceUri)
   uid: excel!Excel.CustomXmlPartCollection#getByNamespace:member(1)
   package: excel!
   fullName: getByNamespace(namespaceUri)
-  summary: >-
-    名前空間が指定した名前空間に一致する、カスタム XML パーツの新しい範囲のコレクションを取得します。
-
-
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 名前空間が指定した名前空間に一致する、カスタム XML パーツの新しい範囲のコレクションを取得します。
+  remarks: "\\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/test-xml-for-unique-namespace.yaml\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -79,17 +67,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.CustomXmlPartScopedCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/test-xml-for-unique-namespace.yaml\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        console.log(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}. There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
+      description: ''
 - name: getCount()
   uid: excel!Excel.CustomXmlPartCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    コレクション内のカスタム XML パーツの数を取得します。
-
-
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内のカスタム XML パーツの数を取得します。
+  remarks: '\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -101,12 +85,8 @@ methods:
   uid: excel!Excel.CustomXmlPartCollection#getItem:member(1)
   package: excel!
   fullName: getItem(id)
-  summary: >-
-    ID に基づいて、カスタム XML パーツを取得します。
-
-
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ID に基づいて、カスタム XML パーツを取得します。
+  remarks: "\\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/create-set-get-and-delete-custom-xml-parts.yaml\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        const customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n\n        // The setXml method does a whole-for-whole replacement \n        // of the entire XML.\n        customXmlPart.setXml(\"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>John</Reviewer><Reviewer>Hitomi</Reviewer></Reviewers>\");\n        const xmlBlob = customXmlPart.getXml();\n        await context.sync();\n\n        const readableXml = addLineBreaksToXML(xmlBlob.value);\n        $(\"#display-xml\").text(readableXml);\n        await context.sync();\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -117,17 +97,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.CustomXmlPart:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/18-custom-xml-parts/create-set-get-and-delete-custom-xml-parts.yaml\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    const xmlPartIDSetting = settings.getItemOrNullObject(\"ContosoReviewXmlPartId\").load(\"value\");\n    await context.sync();\n\n    if (xmlPartIDSetting.value) {   \n        const customXmlPart = context.workbook.customXmlParts.getItem(xmlPartIDSetting.value);\n\n        // The setXml method does a whole-for-whole replacement \n        // of the entire XML.\n        customXmlPart.setXml(\"<Reviewers xmlns='http://schemas.contoso.com/review/1.0'><Reviewer>John</Reviewer><Reviewer>Hitomi</Reviewer></Reviewers>\");\n        const xmlBlob = customXmlPart.getXml();\n        await context.sync();\n\n        const readableXml = addLineBreaksToXML(xmlBlob.value);\n        $(\"#display-xml\").text(readableXml);\n        await context.sync();\n    }\n});\n```"
+      description: ''
 - name: getItemOrNullObject(id)
   uid: excel!Excel.CustomXmlPartCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(id)
-  summary: >-
-    ID に基づいて、カスタム XML パーツを取得します。 存在しない `CustomXmlPart` 場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ID に基づいて、カスタム XML パーツを取得します。 存在しない `CustomXmlPart` 場合、この関数はプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[API セット: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -205,9 +181,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7cc878bb11f6fec923382b54f310f801c515b8a1
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 7e27271589c7a16513e9c7b9166506804c3504a4
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51520608"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59737124"
