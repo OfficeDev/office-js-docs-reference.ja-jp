@@ -3,16 +3,36 @@ name: Excel.WorksheetProtection
 uid: excel!Excel.WorksheetProtection:class
 package: excel!
 fullName: Excel.WorksheetProtection
-summary: >-
-  シート オブジェクトの保護を表します。
-
-
-  \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: シート オブジェクトの保護を表します。
+remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
 properties:
+- name: allowEditRanges
+  uid: excel!Excel.WorksheetProtection#allowEditRanges:member
+  package: excel!
+  fullName: allowEditRanges
+  summary: このワークシートで `AllowEditRangeCollection` 見つかったファイルを指定します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly allowEditRanges: Excel.AllowEditRangeCollection;'
+    return:
+      type: <xref uid="excel!Excel.AllowEditRangeCollection:class" />
+- name: canPauseProtection
+  uid: excel!Excel.WorksheetProtection#canPauseProtection:member
+  package: excel!
+  fullName: canPauseProtection
+  summary: このワークシートの保護を一時停止できる場合に指定します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly canPauseProtection: boolean;'
+    return:
+      type: boolean
 - name: context
   uid: excel!Excel.WorksheetProtection#context:member
   package: excel!
@@ -25,16 +45,36 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="excel!Excel.RequestContext:class" />
+- name: isPasswordProtected
+  uid: excel!Excel.WorksheetProtection#isPasswordProtected:member
+  package: excel!
+  fullName: isPasswordProtected
+  summary: シートがパスワードで保護される場合に指定します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly isPasswordProtected: boolean;'
+    return:
+      type: boolean
+- name: isPaused
+  uid: excel!Excel.WorksheetProtection#isPaused:member
+  package: excel!
+  fullName: isPaused
+  summary: ワークシートの保護を一時停止する場合に指定します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly isPaused: boolean;'
+    return:
+      type: boolean
 - name: options
   uid: excel!Excel.WorksheetProtection#options:member
   package: excel!
   fullName: options
-  summary: >-
-    ワークシートの保護オプションを指定します。
-
-
-    \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ワークシートの保護オプションを指定します。
+  remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,12 +85,8 @@ properties:
   uid: excel!Excel.WorksheetProtection#protected:member
   package: excel!
   fullName: protected
-  summary: >-
-    ワークシートが保護される場合に指定します。
-
-
-    \[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ワークシートが保護される場合に指定します。
+  remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,6 +94,23 @@ properties:
     return:
       type: boolean
 methods:
+- name: checkPassword(password)
+  uid: excel!Excel.WorksheetProtection#checkPassword:member(1)
+  package: excel!
+  fullName: checkPassword(password)
+  summary: ワークシート保護のロック解除にパスワードを使用できる場合に指定します。 このメソッドでは、ワークシートの保護状態は変更されません。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'checkPassword(password?: string): OfficeExtension.ClientResult<boolean>;'
+    parameters:
+    - id: password
+      description: 保護されたワークシートに関連付けられているパスワード。
+      type: string
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
+      description: パスワードを `true` 使用してワークシート保護のロックを解除できる場合に返します。 それ以外の場合は、戻り値 `false`<!-- -->.
 - name: load(options)
   uid: excel!Excel.WorksheetProtection#load:member(1)
   package: excel!
@@ -117,35 +170,121 @@ methods:
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
       description: ''
+- name: pauseProtection(password)
+  uid: excel!Excel.WorksheetProtection#pauseProtection:member(1)
+  package: excel!
+  fullName: pauseProtection(password)
+  summary: 特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。 パスワードが正しくない場合、このメソッドはエラーをスロー `UnsupportedOperation` し、保護の一時停止に失敗します。 ワークシートの保護が有効になっていないか、既に一時停止されている場合、このメソッドは保護状態を変更しません。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'pauseProtection(password?: string): void;'
+    parameters:
+    - id: password
+      description: 保護されたワークシートに関連付けられているパスワード。
+      type: string
+    return:
+      type: void
+      description: ''
 - name: protect(options, password)
   uid: excel!Excel.WorksheetProtection#protect:member(1)
   package: excel!
   fullName: protect(options, password)
-  summary: >-
-    ワークシートを保護します。 ワークシートが既に保護されている場合は失敗します。
+  summary: ワークシートを保護します。 ワークシートが既に保護されている場合は失敗します。
+  remarks: >-
+    \[[API セット: オプションの ExcelApi 1.2、パスワードの場合は 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: オプションの ExcelApi 1.2、パスワードの場合は 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.load("protection/protected");
+
+        await context.sync();
+
+        if (!activeSheet.protection.protected) {
+            activeSheet.protection.protect();
+        }
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    let password = await passwordHandler();
+
+    passwordHelper(password);
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.load("protection/protected");
+
+        await context.sync();
+
+        if (!activeSheet.protection.protected) {
+            activeSheet.protection.protect(null, password);
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'protect(options?: Excel.WorksheetProtectionOptions, password?: string): void;'
     parameters:
     - id: options
-      description: 省略可能。 シートの保護のオプション。
+      description: オプション。 シートの保護のオプション。
       type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
     - id: password
-      description: 省略可能。 シート保護パスワード。
+      description: オプション。 シート保護パスワード。
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect();\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect(null, password);\n    }\n});\n```"
+      description: ''
+- name: resumeProtection()
+  uid: excel!Excel.WorksheetProtection#resumeProtection:member(1)
+  package: excel!
+  fullName: resumeProtection()
+  summary: 特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を再開します。 このメソッドを動作するには、ワークシートの保護を一時停止する必要があります。 ワークシートの保護が一時停止されていない場合、このメソッドはワークシートの保護状態を変更します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'resumeProtection(): void;'
+    return:
+      type: void
+      description: ''
+- name: setPassword(password)
+  uid: excel!Excel.WorksheetProtection#setPassword:member(1)
+  package: excel!
+  fullName: setPassword(password)
+  summary: オブジェクトに関連付けられているパスワードを変更 `WorksheetProtection` します。 パスワードを空の文字列 ("") として設定するか、オブジェクトから `null` パスワード保護を削除 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を有効にし、一時停止する必要があります。 ワークシートの保護が無効になっている場合、このメソッドはエラーをスロー `InvalidOperation` し、パスワードの変更に失敗します。 ワークシート保護が有効で一時停止されていない場合、このメソッドはエラーをスロー `AccessDenied` し、パスワードの変更に失敗します。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'setPassword(password?: string): void;'
+    parameters:
+    - id: password
+      description: オブジェクトに関連付けられている `WorksheetProtection` パスワード。
+      type: string
+    return:
+      type: void
+      description: ''
 - name: toJSON()
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Excel.WorksheetProtection オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Excel.Interfaces.WorksheetProtectionData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。WorksheetProtection オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`Excel.Interfaces.WorksheetProtectionData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -158,12 +297,39 @@ methods:
   uid: excel!Excel.WorksheetProtection#unprotect:member(1)
   package: excel!
   fullName: unprotect(password)
-  summary: >-
-    ワークシートの保護を解除します。
+  summary: ワークシートの保護を解除します。
+  remarks: >-
+    \[[API セット: パスワードの ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API セット: パスワードの ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.protection.unprotect();
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    let password = await passwordHandler();
+
+    passwordHelper(password);
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.protection.unprotect(password);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -174,12 +340,29 @@ methods:
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect(password);\n});\n```"
+      description: ''
+- name: updateOptions(options)
+  uid: excel!Excel.WorksheetProtection#updateOptions:member(1)
+  package: excel!
+  fullName: updateOptions(options)
+  summary: オブジェクトに関連付けられているワークシート保護オプションを変更 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を無効または一時停止する必要があります。 ワークシートの保護が有効で一時停止されていない場合、このメソッドはエラーをスローし、ワークシートの保護オプション `AccessDenied` を変更できません。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'updateOptions(options: Excel.WorksheetProtectionOptions): void;'
+    parameters:
+    - id: options
+      description: オブジェクトに関連付けられたオプション `WorksheetProtection` インターフェイス。
+      type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
+    return:
+      type: void
+      description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d234df00a1865d0c7b13169a418c1bc1838efc36
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 284faf27e43366b395cd5a0e76a430575b3656cf
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51247414"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59701704"

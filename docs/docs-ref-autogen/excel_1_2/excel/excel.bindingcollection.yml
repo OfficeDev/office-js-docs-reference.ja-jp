@@ -3,12 +3,8 @@ name: Excel.BindingCollection
 uid: excel!Excel.BindingCollection:class
 package: excel!
 fullName: Excel.BindingCollection
-summary: >-
-  ブックの一部であるすべてのバインド オブジェクトのコレクションを表します。
-
-
-  \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: ブックの一部であるすべてのバインド オブジェクトのコレクションを表します。
+remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,12 +25,8 @@ properties:
   uid: excel!Excel.BindingCollection#count:member
   package: excel!
   fullName: count
-  summary: >-
-    コレクション内にあるバインドの数を取得します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内にあるバインドの数を取得します。
+  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,12 +50,8 @@ methods:
   uid: excel!Excel.BindingCollection#getItem:member(1)
   package: excel!
   fullName: getItem(id)
-  summary: >-
-    ID を使用してバインド オブジェクトを取得します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ID を使用してバインド オブジェクトを取得します。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Create a table binding to monitor data changes in the table. \n// When data is changed, the background color of the table will be changed to orange.\nfunction addEventHandler() {\n    // Create Table1\n    Excel.run(function (ctx) { \n        ctx.workbook.tables.add(\"Sheet1!A1:C4\", true);\n        return ctx.sync().then(function() {\n                console.log(\"My Diet Data Inserted!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n    //Create a new table binding for Table1\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", Office.CoercionType.Table, { id: \"myBinding\" }, function (asyncResult) {\n        if (asyncResult.status == \"failed\") {\n            console.log(\"Action failed with error: \" + asyncResult.error.message);\n        }\n        else {\n            // If succeeded, then add event handler to the table binding.\n            Office.select(\"bindings#myBinding\").addHandlerAsync(\n                Office.EventType.BindingDataChanged, onBindingDataChanged);\n        }\n    });\n}\n    \n// when data in the table is changed, this event will be triggered.\nfunction onBindingDataChanged(eventArgs) {\n    Excel.run(function (ctx) { \n        // highlight the table in orange to indicate data has been changed.\n        ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = \"Orange\";\n        return ctx.sync().then(function() {\n                console.log(\"The value in this table got changed!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -74,28 +62,24 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.Binding:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Create a table binding to monitor data changes in the table. \n// When data is changed, the background color of the table will be changed to orange.\nfunction addEventHandler() {\n    // Create Table1\n    Excel.run(function (ctx) { \n        ctx.workbook.tables.add(\"Sheet1!A1:C4\", true);\n        return ctx.sync().then(function() {\n                console.log(\"My Diet Data Inserted!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n    //Create a new table binding for Table1\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", Office.CoercionType.Table, { id: \"myBinding\" }, function (asyncResult) {\n        if (asyncResult.status == \"failed\") {\n            console.log(\"Action failed with error: \" + asyncResult.error.message);\n        }\n        else {\n            // If succeeded, then add event handler to the table binding.\n            Office.select(\"bindings#myBinding\").addHandlerAsync(\n                Office.EventType.BindingDataChanged, onBindingDataChanged);\n        }\n    });\n}\n    \n// when data in the table is changed, this event will be triggered.\nfunction onBindingDataChanged(eventArgs) {\n    Excel.run(function (ctx) { \n        // highlight the table in orange to indicate data has been changed.\n        ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = \"Orange\";\n        return ctx.sync().then(function() {\n                console.log(\"The value in this table got changed!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n}\n```"
+      description: ''
 - name: getItemAt(index)
   uid: excel!Excel.BindingCollection#getItemAt:member(1)
   package: excel!
   fullName: getItemAt(index)
-  summary: >-
-    項目の配列内の位置に基づいて、バインド オブジェクトを取得します。
-
-
-    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 項目の配列内の位置に基づいて、バインド オブジェクトを取得します。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var lastPosition = ctx.workbook.bindings.count - 1;\n    var binding = ctx.workbook.bindings.getItemAt(lastPosition);\n    binding.load('type')\n    return ctx.sync().then(function() {\n            console.log(binding.type); \n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemAt(index: number): Excel.Binding;'
     parameters:
     - id: index
-      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
       type: number
     return:
       type: <xref uid="excel!Excel.Binding:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var lastPosition = ctx.workbook.bindings.count - 1;\n    var binding = ctx.workbook.bindings.getItemAt(lastPosition);\n    binding.load('type')\n    return ctx.sync().then(function() {\n            console.log(binding.type); \n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: load(options)
   uid: excel!Excel.BindingCollection#load:member(1)
   package: excel!
@@ -162,9 +146,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 3b4eb97fd9b391b66a3c9bc5fd7c0495b20bfd6e
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: acc890761df6947173160f8afb23812aaf7bb96a
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51564372"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59682614"
