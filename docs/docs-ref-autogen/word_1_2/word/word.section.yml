@@ -3,12 +3,8 @@ name: Word.Section
 uid: word!Word.Section:class
 package: word!
 fullName: Word.Section
-summary: >-
-  Word 文書内のセクションを表します。
-
-
-  \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-remarks: ''
+summary: Word 文書内のセクションを表します。
+remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,12 +13,8 @@ properties:
   uid: word!Word.Section#body:member
   package: word!
   fullName: body
-  summary: >-
-    セクションの body オブジェクトを取得します。 これには、ヘッダー/フッター、その他のセクション メタデータは含めされません。 読み取り専用。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: セクションの body オブジェクトを取得します。 これには、ヘッダー/フッター、その他のセクション メタデータは含めされません。 読み取り専用。
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -46,12 +38,26 @@ methods:
   uid: word!Word.Section#getFooter:member(1)
   package: word!
   fullName: getFooter(type)
-  summary: >-
-    セクションのフッターの 1 つを取得します。
+  summary: セクションのフッターの 1 つを取得します。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-header-and-footer.yaml
+
+    await Word.run(async (context) => {
+      context.document.sections.getFirst().getFooter("Primary")
+        .insertParagraph("This is a footer", "End");
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -62,17 +68,13 @@ methods:
       type: <xref uid="word!Word.HeaderFooterType:enum" />
     return:
       type: <xref uid="word!Word.Body:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-header-and-footer.yaml\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getFooter(\"Primary\")\n    .insertParagraph(\"This is a footer\", \"End\");\n\n  await context.sync();\n});\n```"
+      description: ''
 - name: getFooter(typeString)
   uid: word!Word.Section#getFooter:member(2)
   package: word!
   fullName: getFooter(typeString)
-  summary: >-
-    セクションのフッターの 1 つを取得します。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: セクションのフッターの 1 つを取得します。
+  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary footer of the first section. \n        // Note that the footer is a body object.\n        var myFooter = mySections.items[0].getFooter(\"primary\");\n        \n        // Queue a command to insert text at the end of the footer.\n        myFooter.insertText(\"This is a footer.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myFooter.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a footer to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -83,17 +85,31 @@ methods:
       type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
     return:
       type: <xref uid="word!Word.Body:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary footer of the first section. \n        // Note that the footer is a body object.\n        var myFooter = mySections.items[0].getFooter(\"primary\");\n        \n        // Queue a command to insert text at the end of the footer.\n        myFooter.insertText(\"This is a footer.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myFooter.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a footer to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: getHeader(type)
   uid: word!Word.Section#getHeader:member(1)
   package: word!
   fullName: getHeader(type)
-  summary: >-
-    セクションのヘッダーの 1 つを取得します。
+  summary: セクションのヘッダーの 1 つを取得します。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-header-and-footer.yaml
+
+    await Word.run(async (context) => {
+      context.document.sections.getFirst().getHeader("Primary")
+        .insertParagraph("This is a header", "End");
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -104,17 +120,13 @@ methods:
       type: <xref uid="word!Word.HeaderFooterType:enum" />
     return:
       type: <xref uid="word!Word.Body:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-header-and-footer.yaml\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getHeader(\"Primary\")\n    .insertParagraph(\"This is a header\", \"End\");\n\n  await context.sync();\n});\n```"
+      description: ''
 - name: getHeader(typeString)
   uid: word!Word.Section#getHeader:member(2)
   package: word!
   fullName: getHeader(typeString)
-  summary: >-
-    セクションのヘッダーの 1 つを取得します。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: セクションのヘッダーの 1 つを取得します。
+  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary header of the first section. \n        // Note that the header is a body object.\n        var myHeader = mySections.items[0].getHeader(\"primary\");\n        \n        // Queue a command to insert text at the end of the header.\n        myHeader.insertText(\"This is a header.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myHeader.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a header to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -125,7 +137,7 @@ methods:
       type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
     return:
       type: <xref uid="word!Word.Body:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary header of the first section. \n        // Note that the header is a body object.\n        var myHeader = mySections.items[0].getHeader(\"primary\");\n        \n        // Queue a command to insert text at the end of the header.\n        myHeader.insertText(\"This is a header.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myHeader.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a header to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: load(options)
   uid: word!Word.Section#load:member(1)
   package: word!
@@ -190,11 +202,7 @@ methods:
   package: word!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Word.Section): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -267,9 +275,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 52a330bc4c6a3d8dee7adaba8d6fcdc908297a59
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5f8950a103e3210060cc7a6ad0aabc76e075ef73
+  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51357333"
+  ms.lasthandoff: 10/01/2021
+  ms.locfileid: "60071715"

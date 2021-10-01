@@ -3,12 +3,8 @@ name: Word.Font
 uid: word!Word.Font:class
 package: word!
 fullName: Word.Font
-summary: >-
-  フォントを表します。
-
-
-  \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-remarks: ''
+summary: フォントを表します。
+remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,36 +13,96 @@ properties:
   uid: word!Word.Font#bold:member
   package: word!
   fullName: bold
-  summary: >-
-    フォントが太字かどうかを示す値を取得または設定します。 フォントの書式設定が太字の場合は true、それ以外の場合は false です。
+  summary: フォントが太字かどうかを示す値を取得または設定します。フォントの書式設定が太字の場合は true、それ以外の場合は false です。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Bold format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to make the current selection bold.
+        selection.font.bold = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection is now bold.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'bold: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Bold format text\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to make the current selection bold.\n    selection.font.bold = true;\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The selection is now bold.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: color
   uid: word!Word.Font#color:member
   package: word!
   fullName: color
-  summary: >-
-    指定されたフォントの色を取得または設定します。 値は \# 'RRGGBB' 形式または色名で指定できます。
+  summary: 指定されたフォントの色を取得または設定します。 値は \# 'RRGGBB' 形式または色名で指定できます。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Change the font color
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to change the font color of the current selection.
+        selection.font.color = 'blue';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font color of the selection has been changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'color: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Change the font color\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to change the font color of the current selection.\n    selection.font.color = 'blue';\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The font color of the selection has been changed.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: context
   uid: word!Word.Font#context:member
   package: word!
@@ -63,12 +119,8 @@ properties:
   uid: word!Word.Font#doubleStrikeThrough:member
   package: word!
   fullName: doubleStrikeThrough
-  summary: >-
-    フォントに二重取り消し線が設定されているかどうかを示す値を取得または設定します。 フォントの書式が二重取り消し線付きのテキストである場合は true、それ以外の場合は false です。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: フォントに二重取り消し線が設定されているかどうかを示す値を取得または設定します。 フォントの書式が二重取り消し線付きのテキストである場合は true、それ以外の場合は false です。
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -79,29 +131,55 @@ properties:
   uid: word!Word.Font#highlightColor:member
   package: word!
   fullName: highlightColor
-  summary: >-
-    強調表示の色を取得または設定します。 設定するには \# 、'RRGGBB' 形式または色名のどちらかの値を使用します。 強調表示の色を削除するには、null に設定します。 返される強調表示の色は、 ' RRGGBB' 形式、混合強調表示色の空の文字列、または強調表示色がない場合は \# null になります。 *Note**: Windows Desktop では、既定の強調表示色Office使用できます。 これらは、"Yellow"、"Lime"、"ターコイズ"、"ピンク"、"青"、"Red"、"DarkBlue"、"Teal"、"Green"、"Purple"、"DarkRed"、"Olive"、"Gray"、"LightGray"、"Black"です。 アドインが Windows Desktop Officeで実行されると、フォントに適用すると、その他の色が最も近い色に変換されます。
+  summary: "強調表示の色を取得または設定します。 設定するには \\# 、'RRGGBB' 形式または色名のどちらかの値を使用します。 強調表示の色を削除するには、null に設定します。 返される強調表示の色は、 ' RRGGBB' 形式、混合強調表示色の空の文字列、または強調表示色がない場合は \\# null になります。 *Note**: デスクトップで使用できるのは、既定の強調表示OfficeのみWindowsです。 これらは、\"Yellow\"、\"Lime\"、\"ターコイズ\"、\"ピンク\"、\"青\"、\"Red\"、\"DarkBlue\"、\"Teal\"、\"Green\"、\"Purple\"、\"DarkRed\"、\"Olive\"、\"Gray\"、\"LightGray\"、\"Black\"です。 アドインがデスクトップデスクトップのOfficeでWindows場合、フォントに適用すると、他の色は最も近い色に変換されます。"
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Highlight selected text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to highlight the current selection.
+        selection.font.highlightColor = '#FFFF00'; // Yellow
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection has been highlighted.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'highlightColor: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Highlight selected text\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to highlight the current selection.\n    selection.font.highlightColor = '#FFFF00'; // Yellow\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The selection has been highlighted.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: italic
   uid: word!Word.Font#italic:member
   package: word!
   fullName: italic
-  summary: >-
-    フォントが斜体かどうかを示す値を取得または設定します。 フォントが斜体の場合は true、それ以外の場合は false です。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: フォントが斜体かどうかを示す値を取得または設定します。フォントが斜体の場合は true、それ以外の場合は false です。
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -112,63 +190,149 @@ properties:
   uid: word!Word.Font#name:member
   package: word!
   fullName: name
-  summary: >-
-    フォント名を表す値を取得または設定します。
+  summary: フォント名を表す値を取得または設定します。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Change the font name
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to change the current selection's font name.
+        selection.font.name = 'Arial';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font name has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'name: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Change the font name\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to change the current selection's font name.\n    selection.font.name = 'Arial';\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The font name has changed.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: size
   uid: word!Word.Font#size:member
   package: word!
   fullName: size
-  summary: >-
-    フォント サイズをポイント単位で表す値を取得または設定します。
+  summary: フォント サイズをポイント単位で表す値を取得または設定します。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Change the font size
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to change the current selection's font size.
+        selection.font.size = 20;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font size has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'size: number;'
     return:
       type: number
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Change the font size\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to change the current selection's font size.\n    selection.font.size = 20;\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The font size has changed.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: strikeThrough
   uid: word!Word.Font#strikeThrough:member
   package: word!
   fullName: strikeThrough
-  summary: >-
-    フォントに取り消し線が設定されているかどうかを示す値を取得または設定します。 フォントの書式が取り消し線付きのテキストである場合は true、それ以外の場合は false です。
+  summary: フォントに取り消し線が設定されているかどうかを示す値を取得または設定します。 フォントの書式が取り消し線付きのテキストである場合は true、それ以外の場合は false です。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Strike format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to strikethrough the font of the current selection.
+        selection.font.strikeThrough = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has a strikethrough.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'strikeThrough: boolean;'
     return:
       type: boolean
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Strike format text\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to strikethrough the font of the current selection.\n    selection.font.strikeThrough = true;\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The selection now has a strikethrough.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - name: subscript
   uid: word!Word.Font#subscript:member
   package: word!
   fullName: subscript
-  summary: >-
-    フォントが下付き文字かどうかを示す値を取得または設定します。 フォントの書式が下付き文字である場合は true、それ以外の場合は false です。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: フォントが下付き文字かどうかを示す値を取得または設定します。フォントの書式が下付き文字である場合は true、それ以外の場合は false です。
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -179,12 +343,8 @@ properties:
   uid: word!Word.Font#superscript:member
   package: word!
   fullName: superscript
-  summary: >-
-    フォントが上付き文字かどうかを示す値を取得または設定します。 フォントの書式が上付き文字である場合は true、それ以外の場合は false です。
-
-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+  summary: フォントが上付き文字かどうかを示す値を取得または設定します。フォントの書式が上付き文字である場合は true、それ以外の場合は false です。
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -195,19 +355,49 @@ properties:
   uid: word!Word.Font#underline:member
   package: word!
   fullName: underline
-  summary: >-
-    フォントの下線の種類を示す値を取得または設定します。 フォントに下線が付かされていない場合は、"なし" を指定します。
+  summary: フォントの下線の種類を示す値を取得または設定します。 フォントに下線が付かされていない場合は、"なし" を指定します。
+  remarks: >-
+    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
 
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Underline format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a command to underline the current selection.
+        selection.font.underline = Word.UnderlineType.single;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has an underline style.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'underline: Word.UnderlineType | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble";'
     return:
       type: <xref uid="word!Word.UnderlineType:enum" /> | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble"
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Underline format text\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a range proxy object for the current selection.\n    var selection = context.document.getSelection();\n\n    // Queue a command to underline the current selection.\n    selection.font.underline = Word.UnderlineType.single;\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('The selection now has an underline style.');\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 methods:
 - name: load(options)
   uid: word!Word.Font#load:member(1)
@@ -273,11 +463,7 @@ methods:
   package: word!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: >-
-    このメソッドには、次の追加の署名があります。
-
-
-    `set(properties: Word.Font): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -350,9 +536,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 66833d350f7e5acef2382beb3cd2bacd606be120
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 9b0694a810fcf61b16c45412d0c89bad99142b34
+  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51223908"
+  ms.lasthandoff: 10/01/2021
+  ms.locfileid: "60059412"
