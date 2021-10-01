@@ -67,13 +67,13 @@
 ||[getByTitle(title: string)](/javascript/api/word/word.contentcontrolcollection#getByTitle_title_)|指定されたタイトルを含むコンテンツ コントロールを取得します。|
 ||[getItem(index: number)](/javascript/api/word/word.contentcontrolcollection#getItem_index_)|コレクション内のインデックスによってコンテンツ コントロールを取得します。|
 ||[items](/javascript/api/word/word.contentcontrolcollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-|[Document](/javascript/api/word/word.document)|[getSelection()](/javascript/api/word/word.document#getSelection__)|ドキュメントの現在の選択範囲を取得します。|
-||[body](/javascript/api/word/word.document#body)|ドキュメントの body オブジェクトを取得します。|
+|[ドキュメント](/javascript/api/word/word.document)|[getSelection()](/javascript/api/word/word.document#getSelection__)|ドキュメントの現在の選択範囲を取得します。|
+||[body](/javascript/api/word/word.document#body)|メイン ドキュメントの body オブジェクトを取得します。|
 ||[contentControls](/javascript/api/word/word.document#contentControls)|ドキュメント内のコンテンツ コントロール オブジェクトのコレクションを取得します。|
 ||[保存済み](/javascript/api/word/word.document#saved)|ドキュメント内の変更が保存されているかどうかを示します。|
 ||[sections](/javascript/api/word/word.document#sections)|ドキュメント内のセクション オブジェクトのコレクションを取得します。|
 ||[save()](/javascript/api/word/word.document#save__)|ドキュメントを保存します。|
-|[Font](/javascript/api/word/word.font)|[bold](/javascript/api/word/word.font#bold)|フォントが太字かどうかを示す値を取得または設定します。|
+|[フォント](/javascript/api/word/word.font)|[bold](/javascript/api/word/word.font#bold)|フォントが太字かどうかを示す値を取得または設定します。|
 ||[color](/javascript/api/word/word.font#color)|指定されたフォントの色を取得または設定します。|
 ||[doubleStrikeThrough](/javascript/api/word/word.font#doubleStrikeThrough)|フォントに二重取り消し線が設定されているかどうかを示す値を取得または設定します。|
 ||[highlightColor](/javascript/api/word/word.font#highlightColor)|強調表示の色を取得または設定します。|
