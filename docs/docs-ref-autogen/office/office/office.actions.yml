@@ -3,7 +3,7 @@ name: Office.Actions
 uid: office!Office.Actions:interface
 package: office!
 fullName: Office.Actions
-summary: アクション名を関数に関連付けるために使用します。
+summary: アクションとキーボード ショートカットを管理します。
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -13,18 +13,66 @@ properties:
   uid: office!Office.Actions#associate:member
   package: office!
   fullName: associate
-  summary: 関数を使用して、名前を action 関数に関連付けます。
+  summary: アクションの ID を関数に関連付ける。
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'associate: (actionName: string, action: (arg?: any) => void) => void;'
+    content: 'associate: (actionId: string, actionFunction: (arg?: any) => void) => void;'
     return:
-      type: '(actionName: string, action: (arg?: any) =&gt; void) =&gt; void'
+      type: '(actionId: string, actionFunction: (arg?: any) =&gt; void) =&gt; void'
+methods:
+- name: areShortcutsInUse(shortcuts)
+  uid: office!Office.Actions#areShortcutsInUse:member(1)
+  package: office!
+  fullName: areShortcutsInUse(shortcuts)
+  summary: 別のアドインまたはホスト アプリケーションによって定義されているショートカットの組み合わせが現在ユーザーに使用Officeします。
+  remarks: '**要件セット**: KeyboardShortcuts 1.1'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'areShortcutsInUse(shortcuts: string[]): Promise<{shortcut:string, inUse:boolean}[]>;'
+    parameters:
+    - id: shortcuts
+      description: ショートカットの組み合わせの配列。 たとえば、`["Ctrl+1", "Ctrl+2"]` のように指定します。<!-- -->.
+      type: string[]
+    return:
+      type: Promise&lt;{<xref uid="shortcut:string" />, <xref uid="inUse:boolean" />}[]&gt;
+      description: オブジェクトの配列に解決する約束。 各オブジェクトは、ショートカットの組み合わせとブール値で構成されます。 値は、ショートカットの組み合わせが別のアドインのショートカットと競合する場合、またはアプリケーションのショートカットと競合する場合 `true` Office、それ以外の場合は、`false`<!-- -->. たとえば、`[{shortcut:"Ctrl+1", inUse:true},{shortcut:"Ctrl+2", inUse:false}]` のように指定します。<!-- -->.
+- name: getShortcuts()
+  uid: office!Office.Actions#getShortcuts:member(1)
+  package: office!
+  fullName: getShortcuts()
+  summary: アドインの既存のショートカットを取得します。 このセットには、常に (1) アドインの拡張マニフェストでキーボード ショートカット用に定義されたショートカット、(2) 現在のユーザーのカスタム ショートカット (存在する場合) が含まれます。 ショートカットは、別のアドインのショートカットと競合する場合や、別のアドインアプリケーションと競合 `null` する場合Officeがあります。 具体的には、使用するショートカットを選択するように求めるメッセージが表示されたら、ユーザーが現在のアドインのアクション `null` を選択しなかった場合です。 ショートカットとの競合の詳細については、「他のアドインで使用されているキーの組み合わせを回避する [」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts#avoid-key-combinations-in-use-by-other-add-ins)<!-- -->.
+  remarks: '**要件セット**: KeyboardShortcuts 1.1'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getShortcuts(): Promise<{[actionId:string]:string|null}>;'
+    return:
+      type: Promise&lt;{[<xref uid="actionId:string" />]:string|null}&gt;
+      description: 'ショートカットのオブジェクトに解決され、キーはアクションの (拡張マニフェストで定義されている) の ID であり、値はショートカットの組み合わせになります。 たとえば、`{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2", "SetUnderline": null}` のように指定します。<!-- -->.'
+- name: replaceShortcuts(shortcuts)
+  uid: office!Office.Actions#replaceShortcuts:member(1)
+  package: office!
+  fullName: replaceShortcuts(shortcuts)
+  summary: 既存のアドイン ショートカットをユーザーのカスタム ショートカットに置き換える。
+  remarks: '**要件セット**: KeyboardShortcuts 1.1'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'replaceShortcuts(shortcuts: {[actionId:string]:string}): Promise<void>;'
+    parameters:
+    - id: shortcuts
+      description: 'キーがアクション (拡張マニフェストで定義されている) の ID であり、値がショートカットの組み合わせであるカスタム ショートカットのオブジェクト。 たとえば、`{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2"}` のように指定します。<!-- -->. 有効なアクション ID とキーの組み合わせを指定する方法については、「Add custom keyboard shortcuts to your Office[アドイン」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts)<!-- -->. (キーの組み合わせは次の場合があります。 `null`<!-- -->この場合、アクションは JSON ファイルで指定されたキーの組み合わせを保持します)。'
+      type: '{[<xref uid="actionId:string" />]:string}'
+    return:
+      type: Promise&lt;void&gt;
+      description: すべてのカスタム ショートカットの割り当てが登録されているときに解決 `shortcuts` する約束。 既存のショートカットと競合している場合でも、カスタマイズされたショートカットが登録されます。 それ以外の場合、promise はエラー コードとエラー メッセージで拒否されます。 "InvalidOperation" エラー コードは、アクション ID が存在しない場合、またはショートカットの組み合わせが無効 `shortcuts` な場合に返されます。
 metadata:
-  ms.openlocfilehash: ac2b33fe9eec530a604ba1fca34dfe001bc9521b
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: a70f75b5183b377a0958b88597942ddbb85445a7
+  ms.sourcegitcommit: caeb77dfdc8cf9a424d802da7a2f65820554490b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49143569"
+  ms.lasthandoff: 10/06/2021
+  ms.locfileid: "60138801"
