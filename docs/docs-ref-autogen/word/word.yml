@@ -23,6 +23,7 @@ enums:
 - word!Word.ListLevelType:enum
 - word!Word.ListNumbering:enum
 - word!Word.LocationRelation:enum
+- word!Word.NoteItemType:enum
 - word!Word.RangeLocation:enum
 - word!Word.SelectionMode:enum
 - word!Word.Style:enum
@@ -32,6 +33,10 @@ enums:
 classes:
 - word!Word.Application:class
 - word!Word.Body:class
+- word!Word.Comment:class
+- word!Word.CommentCollection:class
+- word!Word.CommentReply:class
+- word!Word.CommentReplyCollection:class
 - word!Word.ContentControl:class
 - word!Word.ContentControlCollection:class
 - word!Word.CustomProperty:class
@@ -48,6 +53,8 @@ classes:
 - word!Word.List:class
 - word!Word.ListCollection:class
 - word!Word.ListItem:class
+- word!Word.NoteItem:class
+- word!Word.NoteItemCollection:class
 - word!Word.Paragraph:class
 - word!Word.ParagraphCollection:class
 - word!Word.Range:class
@@ -71,6 +78,18 @@ interfaces:
 - word!Word.Interfaces.BodyLoadOptions:interface
 - word!Word.Interfaces.BodyUpdateData:interface
 - word!Word.Interfaces.CollectionLoadOptions:interface
+- word!Word.Interfaces.CommentCollectionData:interface
+- word!Word.Interfaces.CommentCollectionLoadOptions:interface
+- word!Word.Interfaces.CommentCollectionUpdateData:interface
+- word!Word.Interfaces.CommentData:interface
+- word!Word.Interfaces.CommentLoadOptions:interface
+- word!Word.Interfaces.CommentReplyCollectionData:interface
+- word!Word.Interfaces.CommentReplyCollectionLoadOptions:interface
+- word!Word.Interfaces.CommentReplyCollectionUpdateData:interface
+- word!Word.Interfaces.CommentReplyData:interface
+- word!Word.Interfaces.CommentReplyLoadOptions:interface
+- word!Word.Interfaces.CommentReplyUpdateData:interface
+- word!Word.Interfaces.CommentUpdateData:interface
 - word!Word.Interfaces.ContentControlCollectionData:interface
 - word!Word.Interfaces.ContentControlCollectionLoadOptions:interface
 - word!Word.Interfaces.ContentControlCollectionUpdateData:interface
@@ -117,6 +136,12 @@ interfaces:
 - word!Word.Interfaces.ListItemLoadOptions:interface
 - word!Word.Interfaces.ListItemUpdateData:interface
 - word!Word.Interfaces.ListLoadOptions:interface
+- word!Word.Interfaces.NoteItemCollectionData:interface
+- word!Word.Interfaces.NoteItemCollectionLoadOptions:interface
+- word!Word.Interfaces.NoteItemCollectionUpdateData:interface
+- word!Word.Interfaces.NoteItemData:interface
+- word!Word.Interfaces.NoteItemLoadOptions:interface
+- word!Word.Interfaces.NoteItemUpdateData:interface
 - word!Word.Interfaces.ParagraphCollectionData:interface
 - word!Word.Interfaces.ParagraphCollectionLoadOptions:interface
 - word!Word.Interfaces.ParagraphCollectionUpdateData:interface
@@ -180,7 +205,7 @@ functions:
       description: 以前に作成した API オブジェクトの配列。 配列が検証され、すべてのオブジェクトが同じコンテキストを共有します。 バッチは、この共有 RequestContext を使用します。つまり、これらのオブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 このアドインOffice Word アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 アドインと Officeアプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="word!Word.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -199,7 +224,7 @@ functions:
       description: 以前に作成した API オブジェクト。 バッチは、渡されたオブジェクトと同じ RequestContext を使用します。つまり、オブジェクトに適用された変更は "context.sync()" によって取得されます。
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 このアドインOffice Word アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 アドインと Officeアプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="word!Word.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -222,15 +247,15 @@ functions:
     content: 'export function run<T>(batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 このアドインOffice Word アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、Word アプリケーションへの要求を容易にします。 アドインと Officeアプリケーションは 2 つの異なるプロセスで実行されますので、アドインから Word オブジェクト モデルにアクセスするには RequestContext が必要です。
       type: '(context: <xref uid="word!Word.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 433c0f786bae396513eed4b525589a2b668b2a02
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 0f10377e90648c2025db04d270c96f60d6029687
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51224258"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60315550"

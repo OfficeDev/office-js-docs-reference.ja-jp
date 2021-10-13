@@ -410,6 +410,18 @@ properties:
     content: 'tabColor: string;'
     return:
       type: string
+- name: tabId
+  uid: excel!Excel.Worksheet#tabId:member
+  package: excel!
+  fullName: tabId
+  summary: Open ファイルの XML で読み取り可能なこのワークシートを表すOfficeします。 これは整数値で、(グローバルに一意の識別子を返す) と異なる値 `worksheet.id` `worksheet.name` です ("Sheet1" などの値を返します)。
+  remarks: '\[[API セット: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly tabId: number;'
+    return:
+      type: number
 - name: tables
   uid: excel!Excel.Worksheet#tables:member
   package: excel!
@@ -690,7 +702,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -707,7 +719,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -756,7 +768,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -773,7 +785,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -790,7 +802,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: オプション。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
+      description: 省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -853,7 +865,7 @@ methods:
     content: 'getRanges(address?: string): Excel.RangeAreas;'
     parameters:
     - id: address
-      description: オプション。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
+      description: 省略可能です。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -870,7 +882,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'オプション。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
+      description: '省略可能です。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1273,6 +1285,30 @@ events:
     content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
+- name: onNameChanged
+  uid: excel!Excel.Worksheet#onNameChanged:member
+  package: excel!
+  fullName: onNameChanged
+  summary: ワークシート名が変更された場合に発生します。
+  remarks: '\[[API セット: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onNameChanged: OfficeExtension.EventHandlers<Excel.WorksheetNameChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetNameChangedEventArgs:interface" />&gt;
+- name: onProtectionChanged
+  uid: excel!Excel.Worksheet#onProtectionChanged:member
+  package: excel!
+  fullName: onProtectionChanged
+  summary: ワークシートの保護状態が変更された場合に発生します。
+  remarks: '\[[API セット: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onProtectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetProtectionChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetProtectionChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -1425,11 +1461,23 @@ events:
     content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSingleClickedEventArgs:interface" />&gt;
+- name: onVisibilityChanged
+  uid: excel!Excel.Worksheet#onVisibilityChanged:member
+  package: excel!
+  fullName: onVisibilityChanged
+  summary: ワークシートの表示設定が変更された場合に発生します。
+  remarks: '\[[API セット: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onVisibilityChanged: OfficeExtension.EventHandlers<Excel.WorksheetVisibilityChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetVisibilityChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0106492c0f288bf2ababedfb0d193c4be2885a7a
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: c542ec621d147e90cebdf4018f3b4c3256384602
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59735717"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60316047"

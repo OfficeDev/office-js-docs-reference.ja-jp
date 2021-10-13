@@ -13,7 +13,7 @@ properties:
   uid: word!Word.Range#contentControls:member
   package: word!
   fullName: contentControls
-  summary: 範囲内のコンテンツ コントロール オブジェクトのコレクションを取得します。 読み取り専用。
+  summary: 範囲内のコンテンツ コントロール オブジェクトのコレクションを取得します。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -33,6 +33,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.Range#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: Range の文末脚注のコレクションを取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: font
   uid: word!Word.Range#font:member
   package: word!
@@ -45,6 +57,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.Range#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: Range の脚注のコレクションを取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: hyperlink
   uid: word!Word.Range#hyperlink:member
   package: word!
@@ -97,7 +121,7 @@ properties:
   uid: word!Word.Range#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: 範囲内の段落オブジェクトのコレクションを取得します。 読み取り専用。
+  summary: 範囲内の段落オブジェクトのコレクションを取得します。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -121,7 +145,7 @@ properties:
   uid: word!Word.Range#parentContentControl:member
   package: word!
   fullName: parentContentControl
-  summary: 範囲を格納するコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用。
+  summary: 範囲を格納するコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -133,7 +157,7 @@ properties:
   uid: word!Word.Range#parentContentControlOrNullObject:member
   package: word!
   fullName: parentContentControlOrNullObject
-  summary: 範囲を格納するコンテンツ コントロールを取得します。 親コンテンツ コントロールがない場合は、null オブジェクトを返します。 読み取り専用。
+  summary: 範囲を格納するコンテンツ コントロールを取得します。 親コンテンツ コントロールがない場合は、null オブジェクトを返します。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -145,7 +169,7 @@ properties:
   uid: word!Word.Range#parentTable:member
   package: word!
   fullName: parentTable
-  summary: 範囲を含むテーブルを取得します。 テーブルに含めされていない場合は、エラーをスローします。 読み取り専用。
+  summary: 範囲を含むテーブルを取得します。 テーブルに含めされていない場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -157,7 +181,7 @@ properties:
   uid: word!Word.Range#parentTableCell:member
   package: word!
   fullName: parentTableCell
-  summary: 範囲を含むテーブルのセルを取得します。 テーブル セルに含めされていない場合は、エラーをスローします。 読み取り専用。
+  summary: 範囲を含むテーブルのセルを取得します。 テーブル セルに含めされていない場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -395,13 +419,26 @@ methods:
     content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: includeHidden
-      description: 省略可能。 非表示のブックマークを含めるかどうかを示します。 既定値は false で、非表示のブックマークが除外されます。
+      description: 省略可能です。 非表示のブックマークを含めるかどうかを示します。 既定値は false で、非表示のブックマークが除外されます。
       type: boolean
     - id: includeAdjacent
-      description: 省略可能。 範囲に隣接するブックマークを含めるかどうかを示します。 既定値は false で、隣接するブックマークが除外されます。
+      description: 省略可能です。 範囲に隣接するブックマークを含めるかどうかを示します。 既定値は false で、隣接するブックマークが除外されます。
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: ''
+- name: getComments()
+  uid: word!Word.Range#getComments:member(1)
+  package: word!
+  fullName: getComments()
+  summary: 範囲に関連付けられたコメントを取得します。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getComments(): Word.CommentCollection;'
+    return:
+      type: <xref uid="word!Word.CommentCollection:class" />
       description: ''
 - name: getHtml()
   uid: word!Word.Range#getHtml:member(1)
@@ -478,7 +515,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
+      description: 省略可能です。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -498,7 +535,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
+      description: 省略可能です。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -562,7 +599,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -579,7 +616,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -636,7 +673,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -732,6 +769,23 @@ methods:
     return:
       type: void
       description: ''
+- name: insertComment(commentText)
+  uid: word!Word.Range#insertComment:member(1)
+  package: word!
+  fullName: insertComment(commentText)
+  summary: 範囲にコメントを挿入します。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertComment(commentText: string): Word.Comment;'
+    parameters:
+    - id: commentText
+      description: 必須です。 コメントのテキスト。
+      type: string
+    return:
+      type: <xref uid="word!Word.Comment:class" />
+      description: comment オブジェクト
 - name: insertContentControl()
   uid: word!Word.Range#insertContentControl:member(1)
   package: word!
@@ -744,6 +798,23 @@ methods:
     content: 'insertContentControl(): Word.ContentControl;'
     return:
       type: <xref uid="word!Word.ContentControl:class" />
+      description: ''
+- name: insertEndnote(insertText)
+  uid: word!Word.Range#insertEndnote:member(1)
+  package: word!
+  fullName: insertEndnote(insertText)
+  summary: 文末脚注を挿入します。 文末脚注参照は、範囲の後に配置されます。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertEndnote(insertText?: string): Word.NoteItem;'
+    parameters:
+    - id: insertText
+      description: ''
+      type: string
+    return:
+      type: <xref uid="word!Word.NoteItem:class" />
       description: ''
 - name: insertFileFromBase64(base64File, insertLocation)
   uid: word!Word.Range#insertFileFromBase64:member(1)
@@ -819,6 +890,23 @@ methods:
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: <xref uid="word!Word.Range:class" />
+      description: ''
+- name: insertFootnote(insertText)
+  uid: word!Word.Range#insertFootnote:member(1)
+  package: word!
+  fullName: insertFootnote(insertText)
+  summary: 脚注を挿入します。 脚注参照は、範囲の後に配置されます。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertFootnote(insertText?: string): Word.NoteItem;'
+    parameters:
+    - id: insertText
+      description: ''
+      type: string
+    return:
+      type: <xref uid="word!Word.NoteItem:class" />
       description: ''
 - name: insertHtml(html, insertLocation)
   uid: word!Word.Range#insertHtml:member(1)
@@ -1467,13 +1555,13 @@ methods:
       description: 必須です。 文字列の配列としての区切り記号。
       type: string[]
     - id: multiParagraphs
-      description: 省略可能。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
+      description: 省略可能です。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
       type: boolean
     - id: trimDelimiters
-      description: 省略可能。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
+      description: 省略可能です。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
       type: boolean
     - id: trimSpacing
-      description: 省略可能。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1519,9 +1607,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d6de34ab115eb3d295bea4cfb9844b6adeb32547
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 158962c3e5eaee50c2690944bbd3bc8843e69a92
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60050252"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60316481"

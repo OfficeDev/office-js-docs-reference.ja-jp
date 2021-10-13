@@ -33,6 +33,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.Body#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: 本文の文末脚注のコレクションを取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: font
   uid: word!Word.Body#font:member
   package: word!
@@ -87,6 +99,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.Body#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: 本文の脚注のコレクションを取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: inlinePictures
   uid: word!Word.Body#inlinePictures:member
   package: word!
@@ -183,7 +207,7 @@ properties:
   uid: word!Word.Body#parentBody:member
   package: word!
   fullName: parentBody
-  summary: 本文の親の本文を取得します。 たとえば、テーブル セル本文の親本文にはヘッダーを指定できます。 親本文が含めなかった場合は、エラーをスローします。 読み取り専用。
+  summary: 本文の親の本文を取得します。 たとえば、テーブル セル本文の親本文にはヘッダーを指定できます。 親本文が含めなかった場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -207,7 +231,7 @@ properties:
   uid: word!Word.Body#parentContentControl:member
   package: word!
   fullName: parentContentControl
-  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用。
+  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -231,7 +255,7 @@ properties:
   uid: word!Word.Body#parentSection:member
   package: word!
   fullName: parentSection
-  summary: 本文の親セクションを取得します。 親セクションが含めなかった場合は、エラーをスローします。 読み取り専用。
+  summary: 本文の親セクションを取得します。 親セクションが含めなかった場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -343,9 +367,9 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'readonly type: Word.BodyType | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell";'
+    content: 'readonly type: Word.BodyType | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem";'
     return:
-      type: <xref uid="word!Word.BodyType:enum" /> | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell"
+      type: <xref uid="word!Word.BodyType:enum" /> | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem"
 methods:
 - name: clear()
   uid: word!Word.Body#clear:member(1)
@@ -359,6 +383,19 @@ methods:
     content: 'clear(): void;'
     return:
       type: void
+      description: ''
+- name: getComments()
+  uid: word!Word.Body#getComments:member(1)
+  package: word!
+  fullName: getComments()
+  summary: 本文に関連付けられたコメントを取得します。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getComments(): Word.CommentCollection;'
+    return:
+      type: <xref uid="word!Word.CommentCollection:class" />
       description: ''
 - name: getHtml()
   uid: word!Word.Body#getHtml:member(1)
@@ -464,7 +501,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -481,7 +518,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -1445,9 +1482,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c99f2a20a2aee2952076b957a7ba64bc129314cc
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: beb9fe0287152a6347505ca1ce8cf93841d80e72
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60074226"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60316152"

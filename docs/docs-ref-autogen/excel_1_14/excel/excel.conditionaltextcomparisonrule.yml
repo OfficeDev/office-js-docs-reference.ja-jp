@@ -1,0 +1,64 @@
+### YamlMime:TSType
+name: Excel.ConditionalTextComparisonRule
+uid: excel!Excel.ConditionalTextComparisonRule:interface
+package: excel!
+fullName: Excel.ConditionalTextComparisonRule
+summary: セル値の条件付き書式ルールを表します。
+remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: operator
+  uid: excel!Excel.ConditionalTextComparisonRule#operator:member
+  package: excel!
+  fullName: operator
+  summary: テキストの条件付き書式の演算子。
+  remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'operator: Excel.ConditionalTextOperator | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith";'
+    return:
+      type: <xref uid="excel!Excel.ConditionalTextOperator:enum" /> | "Invalid" | "Contains" | "NotContains" | "BeginsWith" | "EndsWith"
+- name: text
+  uid: excel!Excel.ConditionalTextComparisonRule#text:member
+  package: excel!
+  fullName: text
+  summary: 条件付き書式のテキスト値。
+  remarks: >-
+    \[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const range = sheet.getRange("B16:D18");
+        const conditionalFormat = range.conditionalFormats
+            .add(Excel.ConditionalFormatType.containsText);
+        conditionalFormat.textComparison.format.font.color = "red";
+        conditionalFormat.textComparison.rule = { operator: Excel.ConditionalTextOperator.contains, text: "Delayed" };
+
+        await context.sync();
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'text: string;'
+    return:
+      type: string
+metadata:
+  ms.openlocfilehash: 322beca1712859e9fa120eb09bdd2e6fcc45edce
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60329857"
