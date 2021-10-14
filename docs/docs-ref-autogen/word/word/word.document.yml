@@ -25,7 +25,7 @@ properties:
   uid: word!Word.Document#contentControls:member
   package: word!
   fullName: contentControls
-  summary: ドキュメント内のコンテンツ コントロール オブジェクトのコレクションを取得します。 これには、ドキュメントの本文のコンテンツ コントロール、ヘッダー、フッター、テキスト ボックスなどが含まれます。 読み取り専用。
+  summary: ドキュメント内のコンテンツ コントロール オブジェクトのコレクションを取得します。 これには、ドキュメントの本文のコンテンツ コントロール、ヘッダー、フッター、テキスト ボックスなどが含まれます。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
   uid: word!Word.Document#customXmlParts:member
   package: word!
   fullName: customXmlParts
-  summary: ドキュメント内のカスタム XML パーツを取得します。 読み取り専用。
+  summary: ドキュメント内のカスタム XML パーツを取得します。 読み取り専用です。
   remarks: '\[[API セット: WordApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -61,7 +61,7 @@ properties:
   uid: word!Word.Document#properties:member
   package: word!
   fullName: properties
-  summary: ドキュメントのプロパティを取得します。 読み取り専用。
+  summary: ドキュメントのプロパティを取得します。 読み取り専用です。
   remarks: >-
     \[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -104,7 +104,7 @@ properties:
   uid: word!Word.Document#sections:member
   package: word!
   fullName: sections
-  summary: ドキュメント内のセクション オブジェクトのコレクションを取得します。 読み取り専用。
+  summary: ドキュメント内のセクション オブジェクトのコレクションを取得します。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -116,7 +116,7 @@ properties:
   uid: word!Word.Document#settings:member
   package: word!
   fullName: settings
-  summary: ドキュメント内のアドインの設定を取得します。 読み取り専用。
+  summary: ドキュメント内のアドインの設定を取得します。 読み取り専用です。
   remarks: '\[[API セット: WordApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -175,6 +175,32 @@ methods:
       type: string
     return:
       type: <xref uid="word!Word.Range:class" />
+      description: ''
+- name: getEndnoteBody()
+  uid: word!Word.Document#getEndnoteBody:member(1)
+  package: word!
+  fullName: getEndnoteBody()
+  summary: ドキュメントの文末脚注の本文を取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getEndnoteBody(): Word.Body;'
+    return:
+      type: <xref uid="word!Word.Body:class" />
+      description: ''
+- name: getFootnoteBody()
+  uid: word!Word.Document#getFootnoteBody:member(1)
+  package: word!
+  fullName: getFootnoteBody()
+  summary: ドキュメントの脚注の本文を取得します。 読み取り専用
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getFootnoteBody(): Word.Body;'
+    return:
+      type: <xref uid="word!Word.Body:class" />
       description: ''
 - name: getSelection()
   uid: word!Word.Document#getSelection:member(1)
@@ -260,6 +286,44 @@ methods:
     content: 'save(): void;'
     return:
       type: void
+      description: ''
+- name: search(searchText, searchOptions)
+  uid: word!Word.Document#search:member(1)
+  package: word!
+  fullName: search(searchText, searchOptions)
+  summary: 文書全体の範囲で指定された SearchOptions を使用して検索を実行します。 検索結果は、範囲オブジェクトのコレクションです。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: >-
+      search(searchText: string, searchOptions?: Word.SearchOptions | {
+                  ignorePunct?: boolean;
+                  ignoreSpace?: boolean;
+                  matchCase?: boolean;
+                  matchPrefix?: boolean;
+                  matchSuffix?: boolean;
+                  matchWholeWord?: boolean;
+                  matchWildcards?: boolean;
+              }): Word.RangeCollection;
+    parameters:
+    - id: searchText
+      description: ''
+      type: string
+    - id: searchOptions
+      description: ''
+      type: >-
+        <xref uid="word!Word.SearchOptions:class" /> | {
+                    ignorePunct?: boolean;
+                    ignoreSpace?: boolean;
+                    matchCase?: boolean;
+                    matchPrefix?: boolean;
+                    matchSuffix?: boolean;
+                    matchWholeWord?: boolean;
+                    matchWildcards?: boolean;
+                }
+    return:
+      type: <xref uid="word!Word.RangeCollection:class" />
       description: ''
 - name: set(properties, options)
   uid: word!Word.Document#set:member(1)
@@ -352,9 +416,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="word!Word.ContentControlEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a1491fefba3dd79f316ec413a85e96a762caec88
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 4f128046b6106b3dd8ce4d4c4081fc083fb24eda
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60074219"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60315620"
