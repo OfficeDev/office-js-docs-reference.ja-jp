@@ -12,5 +12,5 @@
 ||[insertText(text: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.inlinepicture#insertText_text__insertLocation_)|指定した位置にテキストを挿入します。|
 ||[段落](/javascript/api/word/word.inlinepicture#paragraph)|インライン イメージを含む親段落を取得します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.inlinepicture#select_selectionMode_)|インライン画像を選択します。|
-|[Range](/javascript/api/word/word.range)|[insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.range#insertInlinePictureFromBase64_base64EncodedImage__insertLocation_)|指定された位置に画像を挿入します。|
-||[inlinePictures](/javascript/api/word/word.range#inlinePictures)|範囲に含まれるインライン画像オブジェクトのコレクションを取得します。|
+|[Range](/javascript/api/word/word.range)|[inlinePictures](/javascript/api/word/word.range#inlinePictures)|範囲に含まれるインライン画像オブジェクトのコレクションを取得します。|
+||[insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.range#insertInlinePictureFromBase64_base64EncodedImage__insertLocation_)|指定された位置に画像を挿入します。|

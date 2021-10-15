@@ -5,11 +5,11 @@
 ||[operator](/javascript/api/excel/excel.basicdatavalidation#operator)|データの検証に使用する演算子。|
 |[Chart](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categoryLabelLevel)|ソース カテゴリ ラベルのレベルを参照して、グラフ カテゴリ ラベル レベル列挙定数を指定します。|
 ||[displayBlanksAs](/javascript/api/excel/excel.chart#displayBlanksAs)|空白のセルをグラフにプロットする方法を指定します。|
-||[plotBy](/javascript/api/excel/excel.chart#plotBy)|列や行がグラフのデータ系列として使用される方法を指定します。|
-||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotVisibleOnly)|true の場合、可視セルだけがプロットされます。|
 ||[onActivated](/javascript/api/excel/excel.chart#onActivated)|グラフがアクティブ化されると発生します。|
 ||[onDeactivated](/javascript/api/excel/excel.chart#onDeactivated)|グラフが非アクティブ化された場合に発生します。|
 ||[plotArea](/javascript/api/excel/excel.chart#plotArea)|グラフのプロット領域を表します。|
+||[plotBy](/javascript/api/excel/excel.chart#plotBy)|列や行がグラフのデータ系列として使用される方法を指定します。|
+||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotVisibleOnly)|true の場合、可視セルだけがプロットされます。|
 ||[seriesNameLevel](/javascript/api/excel/excel.chart#seriesNameLevel)|ソース 系列名のレベルを参照して、グラフ系列名レベルの列挙定数を指定します。|
 ||[showDataLabelsOverMaximum](/javascript/api/excel/excel.chart#showDataLabelsOverMaximum)|値が値軸の最大値より大きい場合にデータ ラベルを表示するかどうかを指定します。|
 ||[style](/javascript/api/excel/excel.chart#style)|グラフのグラフ スタイルを指定します。|
@@ -39,17 +39,17 @@
 ||[onDeactivated](/javascript/api/excel/excel.chartcollection#onDeactivated)|グラフが非アクティブ化された場合に発生します。|
 ||[onDeleted](/javascript/api/excel/excel.chartcollection#onDeleted)|グラフが削除された場合に発生します。|
 |[ChartDataLabel](/javascript/api/excel/excel.chartdatalabel)|[autoText](/javascript/api/excel/excel.chartdatalabel#autoText)|データ ラベルがコンテキストに基づいて適切なテキストを自動的に生成する場合に指定します。|
+||[format](/javascript/api/excel/excel.chartdatalabel#format)|グラフのデータ ラベルの書式設定を表します。|
 ||[formula](/javascript/api/excel/excel.chartdatalabel#formula)|A1 スタイルの表記法を使用するグラフのデータ ラベルの数式を表す文字列値。|
+||[height](/javascript/api/excel/excel.chartdatalabel#height)|グラフのデータ ラベルの高さ (ポイント数) を返します。|
 ||[horizontalAlignment](/javascript/api/excel/excel.chartdatalabel#horizontalAlignment)|グラフのデータ ラベルの水平方向の配置を表します。|
 ||[left](/javascript/api/excel/excel.chartdatalabel#left)|グラフのデータ ラベルの左端からグラフ エリアの左端までの距離 (ポイント数) を表します。|
 ||[numberFormat](/javascript/api/excel/excel.chartdatalabel#numberFormat)|データ ラベルの書式コードを表す文字列値。|
-||[format](/javascript/api/excel/excel.chartdatalabel#format)|グラフのデータ ラベルの書式設定を表します。|
-||[height](/javascript/api/excel/excel.chartdatalabel#height)|グラフのデータ ラベルの高さ (ポイント数) を返します。|
-||[width](/javascript/api/excel/excel.chartdatalabel#width)|グラフのデータ ラベルの幅 (ポイント数) を返します。|
 ||[text](/javascript/api/excel/excel.chartdatalabel#text)|グラフのデータ ラベルのテキストを表す文字列。|
 ||[textOrientation](/javascript/api/excel/excel.chartdatalabel#textOrientation)|グラフ データ ラベルのテキストの向きを示す角度を表します。|
 ||[top](/javascript/api/excel/excel.chartdatalabel#top)|グラフのデータ ラベルの上端からグラフ エリアの上端までの距離 (ポイント数) を表します。|
 ||[verticalAlignment](/javascript/api/excel/excel.chartdatalabel#verticalAlignment)|グラフのデータ ラベルの垂直方向の配置を表します。|
+||[width](/javascript/api/excel/excel.chartdatalabel#width)|グラフのデータ ラベルの幅 (ポイント数) を返します。|
 |[ChartDataLabelFormat](/javascript/api/excel/excel.chartdatalabelformat)|[罫線](/javascript/api/excel/excel.chartdatalabelformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
 |[ChartDataLabels](/javascript/api/excel/excel.chartdatalabels)|[autoText](/javascript/api/excel/excel.chartdatalabels#autoText)|データ ラベルがコンテキストに基づいて適切なテキストを自動的に生成する場合に指定します。|
 ||[horizontalAlignment](/javascript/api/excel/excel.chartdatalabels#horizontalAlignment)|グラフ データ ラベルの水平方向の配置を指定します。|
@@ -69,24 +69,24 @@
 ||[top](/javascript/api/excel/excel.chartlegendentry#top)|グラフ凡例エントリの上部を指定します。|
 ||[width](/javascript/api/excel/excel.chartlegendentry#width)|グラフ Legend の凡例エントリの幅を表します。|
 |[ChartLegendFormat](/javascript/api/excel/excel.chartlegendformat)|[罫線](/javascript/api/excel/excel.chartlegendformat#border)|グラフの罫線の書式設定 (色、線のスタイル、線の太さなど) を表します。|
-|[ChartPlotArea](/javascript/api/excel/excel.chartplotarea)|[height](/javascript/api/excel/excel.chartplotarea#height)|プロット領域の高さの値を指定します。|
+|[ChartPlotArea](/javascript/api/excel/excel.chartplotarea)|[format](/javascript/api/excel/excel.chartplotarea#format)|グラフプロット領域の書式を指定します。|
+||[height](/javascript/api/excel/excel.chartplotarea#height)|プロット領域の高さの値を指定します。|
 ||[insideHeight](/javascript/api/excel/excel.chartplotarea#insideHeight)|プロット領域の内側の高さの値を指定します。|
 ||[insideLeft](/javascript/api/excel/excel.chartplotarea#insideLeft)|プロット領域の内側の左の値を指定します。|
 ||[insideTop](/javascript/api/excel/excel.chartplotarea#insideTop)|プロット領域の内側の上の値を指定します。|
 ||[insideWidth](/javascript/api/excel/excel.chartplotarea#insideWidth)|プロット領域の内側の幅の値を指定します。|
 ||[left](/javascript/api/excel/excel.chartplotarea#left)|プロット領域の左の値を指定します。|
 ||[position](/javascript/api/excel/excel.chartplotarea#position)|プロット領域の位置を指定します。|
-||[format](/javascript/api/excel/excel.chartplotarea#format)|グラフプロット領域の書式を指定します。|
 ||[top](/javascript/api/excel/excel.chartplotarea#top)|プロット領域の上の値を指定します。|
 ||[width](/javascript/api/excel/excel.chartplotarea#width)|プロット領域の幅の値を指定します。|
 |[ChartPlotAreaFormat](/javascript/api/excel/excel.chartplotareaformat)|[罫線](/javascript/api/excel/excel.chartplotareaformat#border)|グラフプロット領域の罫線属性を指定します。|
 ||[fill](/javascript/api/excel/excel.chartplotareaformat#fill)|背景の書式設定情報を含むオブジェクトの塗りつぶしの形式を指定します。|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[axisGroup](/javascript/api/excel/excel.chartseries#axisGroup)|指定した系列のグループを指定します。|
+||[dataLabels](/javascript/api/excel/excel.chartseries#dataLabels)|系列内のすべてのデータ ラベルのコレクションを表します。|
 ||[爆発](/javascript/api/excel/excel.chartseries#explosion)|円グラフまたはドーナツ グラフのスライスの展開値を指定します。|
 ||[firstSliceAngle](/javascript/api/excel/excel.chartseries#firstSliceAngle)|最初の円グラフまたはドーナツ グラフのスライスの角度を度 (垂直方向から時計回り) で指定します。|
 ||[invertIfNegative](/javascript/api/excel/excel.chartseries#invertIfNegative)|True の場合Excelに対応する場合は、アイテム内のパターンを反転します。|
 ||[オーバーラップ](/javascript/api/excel/excel.chartseries#overlap)|横棒と縦棒の配置方法を指定します。|
-||[dataLabels](/javascript/api/excel/excel.chartseries#dataLabels)|系列内のすべてのデータ ラベルのコレクションを表します。|
 ||[secondPlotSize](/javascript/api/excel/excel.chartseries#secondPlotSize)|円グラフまたは円グラフの 2 番目のセクションのサイズを、プライマリ 円グラフのサイズに対する割合で指定します。|
 ||[splitType](/javascript/api/excel/excel.chartseries#splitType)|円グラフまたは円グラフの 2 つのセクションを分割する方法を指定します。|
 ||[varyByCategories](/javascript/api/excel/excel.chartseries#varyByCategories)|True の場合Excelデータ マーカーに異なる色またはパターンを割り当てる必要があります。|
@@ -96,26 +96,26 @@
 ||[showEquation](/javascript/api/excel/excel.charttrendline#showEquation)|true の場合、グラフに近似曲線の数式が表示されます。|
 ||[showRSquared](/javascript/api/excel/excel.charttrendline#showRSquared)|True の場合、トレンドラインの r-2 乗値がグラフに表示されます。|
 |[ChartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|[autoText](/javascript/api/excel/excel.charttrendlinelabel#autoText)|傾向線ラベルがコンテキストに基づいて適切なテキストを自動的に生成する場合に指定します。|
+||[format](/javascript/api/excel/excel.charttrendlinelabel#format)|グラフの傾向線ラベルの形式。|
 ||[formula](/javascript/api/excel/excel.charttrendlinelabel#formula)|A1 スタイル表記を使用してグラフの傾向線ラベルの数式を表す文字列値。|
+||[height](/javascript/api/excel/excel.charttrendlinelabel#height)|グラフの近似曲線ラベルの高さ (ポイント数) を返します。|
 ||[horizontalAlignment](/javascript/api/excel/excel.charttrendlinelabel#horizontalAlignment)|グラフの傾向線ラベルの水平方向の配置を表します。|
 ||[left](/javascript/api/excel/excel.charttrendlinelabel#left)|グラフのトレンドライン ラベルの左端からグラフ領域の左端までの距離をポイントで表します。|
 ||[numberFormat](/javascript/api/excel/excel.charttrendlinelabel#numberFormat)|傾向線ラベルの書式コードを表す文字列値。|
-||[format](/javascript/api/excel/excel.charttrendlinelabel#format)|グラフの傾向線ラベルの形式。|
-||[height](/javascript/api/excel/excel.charttrendlinelabel#height)|グラフの近似曲線ラベルの高さ (ポイント数) を返します。|
-||[width](/javascript/api/excel/excel.charttrendlinelabel#width)|グラフの近似曲線ラベルの幅 (ポイント数) を返します。|
 ||[text](/javascript/api/excel/excel.charttrendlinelabel#text)|グラフの近似曲線ラベルのテキストを表す文字列。|
 ||[textOrientation](/javascript/api/excel/excel.charttrendlinelabel#textOrientation)|グラフの傾向線ラベルのテキストの向きを示す角度を表します。|
 ||[top](/javascript/api/excel/excel.charttrendlinelabel#top)|グラフのトレンドライン ラベルの上端からグラフ領域の上端までの距離をポイントで表します。|
 ||[verticalAlignment](/javascript/api/excel/excel.charttrendlinelabel#verticalAlignment)|グラフの傾向線ラベルの垂直方向の配置を表します。|
+||[width](/javascript/api/excel/excel.charttrendlinelabel#width)|グラフの近似曲線ラベルの幅 (ポイント数) を返します。|
 |[ChartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|[罫線](/javascript/api/excel/excel.charttrendlinelabelformat#border)|色、線のスタイル、太さなど、罫線の形式を指定します。|
 ||[fill](/javascript/api/excel/excel.charttrendlinelabelformat#fill)|現在のグラフの傾向線ラベルの塗りつぶしの形式を指定します。|
 ||[font](/javascript/api/excel/excel.charttrendlinelabelformat#font)|グラフの傾向線ラベルのフォント属性 (フォント名、フォント サイズ、色など) を指定します。|
 |[CustomDataValidation](/javascript/api/excel/excel.customdatavalidation)|[formula](/javascript/api/excel/excel.customdatavalidation#formula)|ユーザーの入力規則のカスタム数式。|
-|[DataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|[name](/javascript/api/excel/excel.datapivothierarchy#name)|DataPivotHierarchy の名前。|
+|[DataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|[field](/javascript/api/excel/excel.datapivothierarchy#field)|DataPivotHierarchy に関連付けられているピボット フィールドを返します。|
+||[id](/javascript/api/excel/excel.datapivothierarchy#id)|DataPivotHierarchy の ID。|
+||[name](/javascript/api/excel/excel.datapivothierarchy#name)|DataPivotHierarchy の名前。|
 ||[numberFormat](/javascript/api/excel/excel.datapivothierarchy#numberFormat)|DataPivotHierarchy の数値形式。|
 ||[position](/javascript/api/excel/excel.datapivothierarchy#position)|DataPivotHierarchy の位置。|
-||[field](/javascript/api/excel/excel.datapivothierarchy#field)|DataPivotHierarchy に関連付けられているピボット フィールドを返します。|
-||[id](/javascript/api/excel/excel.datapivothierarchy#id)|DataPivotHierarchy の ID。|
 ||[setToDefault()](/javascript/api/excel/excel.datapivothierarchy#setToDefault__)|DataPivotHierarchy を既定値にリセットします。|
 ||[showAs](/javascript/api/excel/excel.datapivothierarchy#showAs)|データを特定の集計計算として表示する必要がある場合に指定します。|
 ||[summarizeBy](/javascript/api/excel/excel.datapivothierarchy#summarizeBy)|DataPivotHierarchy のすべての項目を表示する場合に指定します。|
@@ -129,14 +129,14 @@
 ||[errorAlert](/javascript/api/excel/excel.datavalidation#errorAlert)|無効なデータが入力された場合のエラー警告。|
 ||[ignoreBlanks](/javascript/api/excel/excel.datavalidation#ignoreBlanks)|空白のセルに対してデータ検証を実行する場合に指定します。|
 ||[Prompt](/javascript/api/excel/excel.datavalidation#prompt)|ユーザーがセルを選択するときにプロンプトを表示します。|
+||[ルール](/javascript/api/excel/excel.datavalidation#rule)|さまざまな種類のデータ検証条件を含むデータ検証ルール。|
 ||[type](/javascript/api/excel/excel.datavalidation#type)|データ検証の種類については、「詳細 `Excel.DataValidationType` 」を参照してください。|
 ||[有効](/javascript/api/excel/excel.datavalidation#valid)|すべてのセルの値がデータの入力規則に従っているかどうかを表します。|
-||[ルール](/javascript/api/excel/excel.datavalidation#rule)|さまざまな種類のデータ検証条件を含むデータ検証ルール。|
-|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[message](/javascript/api/excel/excel.datavalidationerroralert#message)|エラー通知メッセージを表します。|
+|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[メッセージ](/javascript/api/excel/excel.datavalidationerroralert#message)|エラー通知メッセージを表します。|
 ||[showAlert](/javascript/api/excel/excel.datavalidationerroralert#showAlert)|ユーザーが無効なデータを入力した場合にエラー通知ダイアログを表示するかどうかを指定します。|
 ||[style](/javascript/api/excel/excel.datavalidationerroralert#style)|データ検証アラートの種類については、「詳細」 `Excel.DataValidationAlertStyle` を参照してください。|
 ||[title](/javascript/api/excel/excel.datavalidationerroralert#title)|エラー通知ダイアログのタイトルを表します。|
-|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[message](/javascript/api/excel/excel.datavalidationprompt#message)|プロンプトのメッセージを指定します。|
+|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[メッセージ](/javascript/api/excel/excel.datavalidationprompt#message)|プロンプトのメッセージを指定します。|
 ||[showPrompt](/javascript/api/excel/excel.datavalidationprompt#showPrompt)|ユーザーがデータ検証を使用してセルを選択するときにプロンプトを表示する場合に指定します。|
 ||[title](/javascript/api/excel/excel.datavalidationprompt#title)|プロンプトのタイトルを指定します。|
 |[DataValidationRule](/javascript/api/excel/excel.datavalidationrule)|[カスタム](/javascript/api/excel/excel.datavalidationrule#custom)|データ検証条件のカスタム数式。|
@@ -150,10 +150,10 @@
 ||[formula2](/javascript/api/excel/excel.datetimedatavalidation#formula2)|3 項演算子 Between と NotBetween を使用して、上限オペランドを指定します。|
 ||[operator](/javascript/api/excel/excel.datetimedatavalidation#operator)|データの検証に使用する演算子。|
 |[FilterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|[enableMultipleFilterItems](/javascript/api/excel/excel.filterpivothierarchy#enableMultipleFilterItems)|複数のフィルター項目を許可するかどうかを指定します。|
-||[name](/javascript/api/excel/excel.filterpivothierarchy#name)|FilterPivotHierarchy の名前。|
-||[position](/javascript/api/excel/excel.filterpivothierarchy#position)|FilterPivotHierarchy の位置。|
 ||[fields](/javascript/api/excel/excel.filterpivothierarchy#fields)|FilterPivotHierarchy に関連付けられているピボット フィールドを返します。|
 ||[id](/javascript/api/excel/excel.filterpivothierarchy#id)|FilterPivotHierarchy の ID。|
+||[name](/javascript/api/excel/excel.filterpivothierarchy#name)|FilterPivotHierarchy の名前。|
+||[position](/javascript/api/excel/excel.filterpivothierarchy#position)|FilterPivotHierarchy の位置。|
 ||[setToDefault()](/javascript/api/excel/excel.filterpivothierarchy#setToDefault__)|FilterPivotHierarchy を既定値にリセットします。|
 |[FilterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#add_pivotHierarchy_)|現在の軸にピボット階層を追加します。|
 ||[getCount()](/javascript/api/excel/excel.filterpivothierarchycollection#getCount__)|コレクションに含まれるピボット階層の数を取得します。|
@@ -163,9 +163,9 @@
 ||[remove(filterPivotHierarchy: Excel.FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#remove_filterPivotHierarchy_)|現在の軸からピボット階層を削除します。|
 |[ListDataValidation](/javascript/api/excel/excel.listdatavalidation)|[inCellDropDown](/javascript/api/excel/excel.listdatavalidation#inCellDropDown)|セル ドロップダウンにリストを表示するかどうかを指定します。|
 ||[source](/javascript/api/excel/excel.listdatavalidation#source)|データの入力規則のリストのソース。|
-|[PivotField](/javascript/api/excel/excel.pivotfield)|[name](/javascript/api/excel/excel.pivotfield#name)|PivotField の名前。|
-||[id](/javascript/api/excel/excel.pivotfield#id)|PivotField の ID。|
-||[アイテム](/javascript/api/excel/excel.pivotfield#items)|PivotField に関連付けられた PivotItems を返します。|
+|[PivotField](/javascript/api/excel/excel.pivotfield)|[id](/javascript/api/excel/excel.pivotfield#id)|PivotField の ID。|
+||[items](/javascript/api/excel/excel.pivotfield#items)|PivotField に関連付けられた PivotItems を返します。|
+||[name](/javascript/api/excel/excel.pivotfield#name)|PivotField の名前。|
 ||[showAllItems](/javascript/api/excel/excel.pivotfield#showAllItems)|PivotField のすべての項目を表示するかどうかを指定します。|
 ||[sortByLabels(sortBy: SortBy)](/javascript/api/excel/excel.pivotfield#sortByLabels_sortBy_)|PivotField を並べ替えます。|
 ||[subtotals](/javascript/api/excel/excel.pivotfield#subtotals)|PivotField の小計。|
@@ -173,16 +173,16 @@
 ||[getItem(name: string)](/javascript/api/excel/excel.pivotfieldcollection#getItem_name_)|名前または ID で PivotField を取得します。|
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.pivotfieldcollection#getItemOrNullObject_name_)|名前でピボットフィールドを取得します。|
 ||[items](/javascript/api/excel/excel.pivotfieldcollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-|[PivotHierarchy](/javascript/api/excel/excel.pivothierarchy)|[name](/javascript/api/excel/excel.pivothierarchy#name)|PivotHierarchy の名前。|
-||[fields](/javascript/api/excel/excel.pivothierarchy#fields)|PivotHierarchy に関連付けられているピボット フィールドを返します。|
+|[PivotHierarchy](/javascript/api/excel/excel.pivothierarchy)|[fields](/javascript/api/excel/excel.pivothierarchy#fields)|PivotHierarchy に関連付けられているピボット フィールドを返します。|
 ||[id](/javascript/api/excel/excel.pivothierarchy#id)|PivotHierarchy の ID。|
+||[name](/javascript/api/excel/excel.pivothierarchy#name)|PivotHierarchy の名前。|
 |[PivotHierarchyCollection](/javascript/api/excel/excel.pivothierarchycollection)|[getCount()](/javascript/api/excel/excel.pivothierarchycollection#getCount__)|コレクションに含まれるピボット階層の数を取得します。|
 ||[getItem(name: string)](/javascript/api/excel/excel.pivothierarchycollection#getItem_name_)|名前または ID で PivotHierarchy を取得します。|
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.pivothierarchycollection#getItemOrNullObject_name_)|名前に基づいて PivotHierarchy を取得します。|
 ||[items](/javascript/api/excel/excel.pivothierarchycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
-|[PivotItem](/javascript/api/excel/excel.pivotitem)|[isExpanded](/javascript/api/excel/excel.pivotitem#isExpanded)|項目を展開して子項目を表示するか、または項目を折りたたんで子項目を非表示にするかを指定します。|
+|[PivotItem](/javascript/api/excel/excel.pivotitem)|[id](/javascript/api/excel/excel.pivotitem#id)|PivotItem の ID。|
+||[isExpanded](/javascript/api/excel/excel.pivotitem#isExpanded)|項目を展開して子項目を表示するか、または項目を折りたたんで子項目を非表示にするかを指定します。|
 ||[name](/javascript/api/excel/excel.pivotitem#name)|PivotItem の名前。|
-||[id](/javascript/api/excel/excel.pivotitem#id)|PivotItem の ID。|
 ||[visible](/javascript/api/excel/excel.pivotitem#visible)|PivotItem が表示される場合に指定します。|
 |[PivotItemCollection](/javascript/api/excel/excel.pivotitemcollection)|[getCount()](/javascript/api/excel/excel.pivotitemcollection#getCount__)|コレクション内の PivotItems の数を取得します。|
 ||[getItem(name: string)](/javascript/api/excel/excel.pivotitemcollection#getItem_name_)|名前または ID で PivotItem を取得します。|
@@ -197,19 +197,19 @@
 ||[showColumnGrandTotals](/javascript/api/excel/excel.pivotlayout#showColumnGrandTotals)|ピボットテーブル レポートに列の総計が表示される場合に指定します。|
 ||[showRowGrandTotals](/javascript/api/excel/excel.pivotlayout#showRowGrandTotals)|ピボットテーブル レポートに行の総計が表示される場合に指定します。|
 ||[subtotalLocation](/javascript/api/excel/excel.pivotlayout#subtotalLocation)|このプロパティは、ピボット `SubtotalLocationType` テーブルのすべてのフィールドを示します。|
-|[PivotTable](/javascript/api/excel/excel.pivottable)|[delete()](/javascript/api/excel/excel.pivottable#delete__)|ピボットテーブルを削除します。|
-||[columnHierarchies](/javascript/api/excel/excel.pivottable#columnHierarchies)|ピボットテーブルの列ピボット階層。|
+|[PivotTable](/javascript/api/excel/excel.pivottable)|[columnHierarchies](/javascript/api/excel/excel.pivottable#columnHierarchies)|ピボットテーブルの列ピボット階層。|
 ||[dataHierarchies](/javascript/api/excel/excel.pivottable#dataHierarchies)|ピボットテーブルのデータ ピボット階層。|
+||[delete()](/javascript/api/excel/excel.pivottable#delete__)|ピボットテーブルを削除します。|
 ||[filterHierarchies](/javascript/api/excel/excel.pivottable#filterHierarchies)|ピボットテーブルのフィルター ピボット階層。|
 ||[階層](/javascript/api/excel/excel.pivottable#hierarchies)|ピボットテーブルのピボット階層。|
 ||[レイアウト](/javascript/api/excel/excel.pivottable#layout)|ピボットテーブルのレイアウトとビジュアル構造を記述する PivotLayout。|
 ||[rowHierarchies](/javascript/api/excel/excel.pivottable#rowHierarchies)|ピボットテーブルの行ピボット階層。|
 |[PivotTableCollection](/javascript/api/excel/excel.pivottablecollection)|[add(name: string, source: \| \| Range string Table, destination: Range \| string)](/javascript/api/excel/excel.pivottablecollection#add_name__source__destination_)|指定したソース データに基づいてピボットテーブルを追加し、移動先範囲の左上のセルに挿入します。|
 |[Range](/javascript/api/excel/excel.range)|[dataValidation](/javascript/api/excel/excel.range#dataValidation)|dataValidation オブジェクトを返します。|
-|[RowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|[name](/javascript/api/excel/excel.rowcolumnpivothierarchy#name)|RowColumnPivotHierarchy の名前。|
-||[position](/javascript/api/excel/excel.rowcolumnpivothierarchy#position)|RowColumnPivotHierarchy の位置。|
-||[fields](/javascript/api/excel/excel.rowcolumnpivothierarchy#fields)|RowColumnPivotHierarchy に関連付けられているピボット フィールドを返します。|
+|[RowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|[fields](/javascript/api/excel/excel.rowcolumnpivothierarchy#fields)|RowColumnPivotHierarchy に関連付けられているピボット フィールドを返します。|
 ||[id](/javascript/api/excel/excel.rowcolumnpivothierarchy#id)|RowColumnPivotHierarchy の ID。|
+||[name](/javascript/api/excel/excel.rowcolumnpivothierarchy#name)|RowColumnPivotHierarchy の名前。|
+||[position](/javascript/api/excel/excel.rowcolumnpivothierarchy#position)|RowColumnPivotHierarchy の位置。|
 ||[setToDefault()](/javascript/api/excel/excel.rowcolumnpivothierarchy#setToDefault__)|RowColumnPivotHierarchy を既定値にリセットします。|
 |[RowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#add_pivotHierarchy_)|現在の軸にピボット階層を追加します。|
 ||[getCount()](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getCount__)|コレクションに含まれるピボット階層の数を取得します。|
@@ -217,7 +217,7 @@
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getItemOrNullObject_name_)|名前に基づいて RowColumnPivotHierarchy を取得します。|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 ||[remove(rowColumnPivotHierarchy: Excel.RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove_rowColumnPivotHierarchy_)|現在の軸からピボット階層を削除します。|
-|[ランタイム](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
+|[Runtime](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|現在の作業ウィンドウまたはコンテンツ アドインの JavaScript イベントを切り替えます。|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#baseField)|PivotField を使用して、型に応じて計算を基に計算を行います (該当する場合 `ShowAs` `ShowAsCalculation` は、それ以外 `null` の場合)。|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseItem)|型に応じて該当する場合は、計算の基に設定するアイテム `ShowAs` `ShowAsCalculation` 。それ以外の場合 `null` 。|
 ||[計算](/javascript/api/excel/excel.showasrule#calculation)|`ShowAs`PivotField に使用する計算。|

@@ -5,8 +5,8 @@
 ||[ThousandsSeparator](/javascript/api/excel/excel.application#thousandsSeparator)|数値の 10 進数の左側に数字のグループを区切る文字列を取得します。|
 ||[useSystemSeparators](/javascript/api/excel/excel.application#useSystemSeparators)|ユーザーのシステム区切り記号が有効Excel指定します。|
 |[コメント](/javascript/api/excel/excel.comment)|[mentions](/javascript/api/excel/excel.comment#mentions)|コメントに記載されているエンティティ (人など) を取得します。|
-||[richContent](/javascript/api/excel/excel.comment#richContent)|リッチ コメント コンテンツ (コメントのメンションなど) を取得します。|
 ||[解決済み](/javascript/api/excel/excel.comment#resolved)|コメント スレッドの状態。|
+||[richContent](/javascript/api/excel/excel.comment#richContent)|リッチ コメント コンテンツ (コメントのメンションなど) を取得します。|
 ||[updateMentions(contentWithMentions: Excel.CommentRichContent)](/javascript/api/excel/excel.comment#updateMentions_contentWithMentions_)|特別に書式設定された文字列とメンションの一覧を使用してコメント コンテンツを更新します。|
 |[CommentCollection](/javascript/api/excel/excel.commentcollection)|[add(cellAddress: Range \| string, content: CommentRichContent \| string, contentType?: Excel.ContentType)](/javascript/api/excel/excel.commentcollection#add_cellAddress__content__contentType_)|指定したセルで、指定した内容の新しいコメントを作成します。|
 |[CommentMention](/javascript/api/excel/excel.commentmention)|[email](/javascript/api/excel/excel.commentmention#email)|コメントに記載されているエンティティの電子メール アドレス。|
@@ -25,9 +25,9 @@
 ||[numberGroupSeparator](/javascript/api/excel/excel.numberformatinfo#numberGroupSeparator)|数値の 10 進数の左側に数字のグループを区切る文字列を取得します。|
 |[Range](/javascript/api/excel/excel.range)|[moveTo(destinationRange: Range \| string)](/javascript/api/excel/excel.range#moveTo_destinationRange_)|セルの値、書式設定、および数式を現在の範囲から移動先の範囲に移動し、それらのセルの古い情報を置き換える。|
 |[範囲の形式](/javascript/api/excel/excel.rangeformat)|[adjustIndent(amount: number)](/javascript/api/excel/excel.rangeformat#adjustIndent_amount_)|範囲の書式設定のインデントを調整します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[close(closeBehavior?: Excel.CloseBehavior)](/javascript/api/excel/excel.workbook#close_closeBehavior_)|現在のブックを閉じます。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[close(closeBehavior?: Excel.CloseBehavior)](/javascript/api/excel/excel.workbook#close_closeBehavior_)|現在のブックを閉じます。|
 ||[save(saveBehavior?: Excel.SaveBehavior)](/javascript/api/excel/excel.workbook#save_saveBehavior_)|現在のブックを保存します。|
-|[ワークシート](/javascript/api/excel/excel.worksheet)|[onRowHiddenChanged](/javascript/api/excel/excel.worksheet#onRowHiddenChanged)|特定のワークシートで 1 つ以上の行の非表示状態が変更された場合に発生します。|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[onRowHiddenChanged](/javascript/api/excel/excel.worksheet#onRowHiddenChanged)|特定のワークシートで 1 つ以上の行の非表示状態が変更された場合に発生します。|
 |[WorksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs)|[address](/javascript/api/excel/excel.worksheetcalculatedeventargs#address)|計算が完了した範囲のアドレス。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[onRowHiddenChanged](/javascript/api/excel/excel.worksheetcollection#onRowHiddenChanged)|特定のワークシートで 1 つ以上の行の非表示状態が変更された場合に発生します。|
 |[WorksheetRowHiddenChangedEventArgs](/javascript/api/excel/excel.worksheetrowhiddenchangedeventargs)|[address](/javascript/api/excel/excel.worksheetrowhiddenchangedeventargs#address)|特定のワークシートで変更されたエリアを表す範囲のアドレスを取得します。|

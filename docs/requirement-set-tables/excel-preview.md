@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[AllowEditRange](/javascript/api/excel/excel.alloweditrange)|[address](/javascript/api/excel/excel.alloweditrange#address)|オブジェクトに関連付けられている範囲を指定します。|
 ||[delete()](/javascript/api/excel/excel.alloweditrange#delete__)|からこのオブジェクトを削除します `AllowEditRangeCollection` 。|
-||[pauseProtection(password?: string)](/javascript/api/excel/excel.alloweditrange#pauseProtection_password_)|特定のセッションのユーザーの特定 `AllowEditRange` のオブジェクトに対するワークシートの保護を一時停止します。|
 ||[isPasswordProtected](/javascript/api/excel/excel.alloweditrange#isPasswordProtected)|is is password `AllowEditRange` protected を指定します。|
+||[pauseProtection(password?: string)](/javascript/api/excel/excel.alloweditrange#pauseProtection_password_)|特定のセッションのユーザーの特定 `AllowEditRange` のオブジェクトに対するワークシートの保護を一時停止します。|
 ||[setPassword(password?: string)](/javascript/api/excel/excel.alloweditrange#setPassword_password_)|に関連付けられているパスワードを変更 `AllowEditRange` します。|
 ||[title](/javascript/api/excel/excel.alloweditrange#title)|オブジェクトのタイトルを指定します。|
 |[AllowEditRangeCollection](/javascript/api/excel/excel.alloweditrangecollection)|[add(title: string, rangeAddress: string, options?: Excel.AllowEditRangeOptions)](/javascript/api/excel/excel.alloweditrangecollection#add_title__rangeAddress__options_)|コレクションに `AllowEditRange` オブジェクトを追加します。|
@@ -11,8 +11,8 @@
 ||[getItem(key: string)](/javascript/api/excel/excel.alloweditrangecollection#getItem_key_)|タイトルによって `AllowEditRange` オブジェクトを取得します。|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.alloweditrangecollection#getItemAt_index_)|コレクション内の `AllowEditRange` インデックスによってオブジェクトを返します。|
 ||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.alloweditrangecollection#getItemOrNullObject_key_)|タイトルによって `AllowEditRange` オブジェクトを取得します。|
-||[pauseProtection(password: string)](/javascript/api/excel/excel.alloweditrangecollection#pauseProtection_password_)|特定のセッションでユーザーに対して指定されたパスワードを持つコレクション内のすべてのオブジェクトに対するワークシート保護 `AllowEditRange` を一時停止します。|
 ||[items](/javascript/api/excel/excel.alloweditrangecollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
+||[pauseProtection(password: string)](/javascript/api/excel/excel.alloweditrangecollection#pauseProtection_password_)|特定のセッションでユーザーに対して指定されたパスワードを持つコレクション内のすべてのオブジェクトに対するワークシート保護 `AllowEditRange` を一時停止します。|
 |[AllowEditRangeOptions](/javascript/api/excel/excel.alloweditrangeoptions)|[password](/javascript/api/excel/excel.alloweditrangeoptions#password)|に関連付けられている `AllowEditRange` パスワード。|
 |[BlockedErrorCellValue](/javascript/api/excel/excel.blockederrorcellvalue)|[errorSubType](/javascript/api/excel/excel.blockederrorcellvalue#errorSubType)|の種類を表します `BlockedErrorCellValue` 。|
 ||[errorType](/javascript/api/excel/excel.blockederrorcellvalue#errorType)|の種類を表します `ErrorCellValue` 。|
@@ -54,9 +54,7 @@
 ||[プリミティブ](/javascript/api/excel/excel.div0errorcellvalue#primitive)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[プリミティブ型](/javascript/api/excel/excel.div0errorcellvalue#primitiveType)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[type](/javascript/api/excel/excel.div0errorcellvalue#type)|このセル値の種類を表します。|
-|[DocumentTask](/javascript/api/excel/excel.documenttask)|[percentComplete](/javascript/api/excel/excel.documenttask#percentComplete)|タスクの完了率を指定します。|
-||[優先度](/javascript/api/excel/excel.documenttask#priority)|タスクの優先度を指定します。|
-||[assignees](/javascript/api/excel/excel.documenttask#assignees)|タスクの割り当て人のコレクションを返します。|
+|[DocumentTask](/javascript/api/excel/excel.documenttask)|[assignees](/javascript/api/excel/excel.documenttask#assignees)|タスクの割り当て人のコレクションを返します。|
 ||[変更点](/javascript/api/excel/excel.documenttask#changes)|タスクの変更レコードを取得します。|
 ||[comment](/javascript/api/excel/excel.documenttask#comment)|タスクに関連付けられたコメントを取得します。|
 ||[completedBy](/javascript/api/excel/excel.documenttask#completedBy)|タスクを完了した最新のユーザーを取得します。|
@@ -64,6 +62,8 @@
 ||[createdBy](/javascript/api/excel/excel.documenttask#createdBy)|タスクを作成したユーザーを取得します。|
 ||[createdDateTime](/javascript/api/excel/excel.documenttask#createdDateTime)|タスクが作成された日時を取得します。|
 ||[id](/javascript/api/excel/excel.documenttask#id)|タスクの ID を取得します。|
+||[percentComplete](/javascript/api/excel/excel.documenttask#percentComplete)|タスクの完了率を指定します。|
+||[優先度](/javascript/api/excel/excel.documenttask#priority)|タスクの優先度を指定します。|
 ||[setStartAndDueDateTime(startDateTime: Date, dueDateTime: Date)](/javascript/api/excel/excel.documenttask#setStartAndDueDateTime_startDateTime__dueDateTime_)|タスクの開始日と期日を変更します。|
 ||[startAndDueDateTime](/javascript/api/excel/excel.documenttask#startAndDueDateTime)|タスクを開始する日付と時刻を取得または設定します。期限が設定されます。|
 ||[title](/javascript/api/excel/excel.documenttask#title)|タスクのタイトルを指定します。|
@@ -125,10 +125,10 @@
 ||[name](/javascript/api/excel/excel.linkeddatatype#name)|リンクされたデータ型の名前。|
 ||[periodicRefreshInterval](/javascript/api/excel/excel.linkeddatatype#periodicRefreshInterval)|リンクされたデータ型が "定期的" に設定されている場合に更新される頻度 (秒 `refreshMode` )。|
 ||[refreshMode](/javascript/api/excel/excel.linkeddatatype#refreshMode)|リンクされたデータ型のデータを取得するメカニズム。|
-||[serviceId](/javascript/api/excel/excel.linkeddatatype#serviceId)|リンクされたデータ型の一意の ID。|
-||[supportedRefreshModes](/javascript/api/excel/excel.linkeddatatype#supportedRefreshModes)|リンクされたデータ型でサポートされているすべての更新モードを持つ配列を返します。|
 ||[requestRefresh()](/javascript/api/excel/excel.linkeddatatype#requestRefresh__)|リンクされたデータ型を更新する要求を行います。|
 ||[requestSetRefreshMode(refreshMode: Excel.LinkedDataTypeRefreshMode)](/javascript/api/excel/excel.linkeddatatype#requestSetRefreshMode_refreshMode_)|このリンクされたデータ型の更新モードを変更する要求を行います。|
+||[serviceId](/javascript/api/excel/excel.linkeddatatype#serviceId)|リンクされたデータ型の一意の ID。|
+||[supportedRefreshModes](/javascript/api/excel/excel.linkeddatatype#supportedRefreshModes)|リンクされたデータ型でサポートされているすべての更新モードを持つ配列を返します。|
 |[LinkedDataTypeAddedEventArgs](/javascript/api/excel/excel.linkeddatatypeaddedeventargs)|[serviceId](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#serviceId)|新しいリンクされたデータ型の一意の ID。|
 ||[source](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|イベントのソースを取得します。|
 ||[type](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#type)|イベントの種類を取得します。|
@@ -179,8 +179,8 @@
 |[Shape](/javascript/api/excel/excel.shape)|[displayName](/javascript/api/excel/excel.shape#displayName)|図形の表示名を取得します。|
 |[ShapeCollection](/javascript/api/excel/excel.shapecollection)|[addSvg(xml: string)](/javascript/api/excel/excel.shapecollection#addSvg_xml_)|XML 文字列からスケーラブルなベクター グラフィックス (SVG) を作成し、それをワークシートに追加します。|
 |[Slicer](/javascript/api/excel/excel.slicer)|[nameInFormula](/javascript/api/excel/excel.slicer#nameInFormula)|数式で使用するスライサーの名前を表します。|
-||[slicerStyle](/javascript/api/excel/excel.slicer#slicerStyle)|スライサーに適用されるスタイル。|
 ||[setStyle(style: string \| SlicerStyle \| BuiltInSlicerStyle)](/javascript/api/excel/excel.slicer#setStyle_style_)|スライサーに適用されるスタイルを設定します。|
+||[slicerStyle](/javascript/api/excel/excel.slicer#slicerStyle)|スライサーに適用されるスタイル。|
 |[SpillErrorCellValue](/javascript/api/excel/excel.spillerrorcellvalue)|[errorSubType](/javascript/api/excel/excel.spillerrorcellvalue#errorSubType)|の種類を表します `SpillErrorCellValue` 。|
 ||[errorType](/javascript/api/excel/excel.spillerrorcellvalue#errorType)|の種類を表します `ErrorCellValue` 。|
 ||[プリミティブ](/javascript/api/excel/excel.spillerrorcellvalue#primitive)|この値を持つセルに対して返 `Range.values` される値を表します。|
@@ -193,8 +193,8 @@
 ||[type](/javascript/api/excel/excel.stringcellvalue#type)|このセル値の種類を表します。|
 |[Table](/javascript/api/excel/excel.table)|[clearStyle()](/javascript/api/excel/excel.table#clearStyle__)|既定のテーブル スタイルを使用するようにテーブルを変更します。|
 ||[onFiltered](/javascript/api/excel/excel.table#onFiltered)|特定のテーブルにフィルターが適用されると発生します。|
-||[tableStyle](/javascript/api/excel/excel.table#tableStyle)|テーブルに適用されるスタイル。|
 ||[setStyle(style: string \| TableStyle \| BuiltInTableStyle)](/javascript/api/excel/excel.table#setStyle_style_)|テーブルに適用されるスタイルを設定します。|
+||[tableStyle](/javascript/api/excel/excel.table#tableStyle)|テーブルに適用されるスタイル。|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onFiltered](/javascript/api/excel/excel.tablecollection#onFiltered)|ブックまたはワークシート内の任意のテーブルにフィルターが適用されると発生します。|
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableId)|フィルターが適用されるテーブルの ID を取得します。|
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|イベントの種類を取得します。|
@@ -216,8 +216,8 @@
 ||[relatedImagesAddress](/javascript/api/excel/excel.webimagecellvalue#relatedImagesAddress)|このページに関連すると見なされる画像を含む Web ページの URL を表します `WebImageCellValue` 。|
 ||[type](/javascript/api/excel/excel.webimagecellvalue#type)|このセル値の種類を表します。|
 |[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
-||[タスク](/javascript/api/excel/excel.workbook#tasks)|ブックに存在するタスクのコレクションを返します。|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showPivotFieldList)|ピボットテーブルのフィールド 一覧ウィンドウをブック レベルで表示するかどうかを指定します。|
+||[タスク](/javascript/api/excel/excel.workbook#tasks)|ブックに存在するタスクのコレクションを返します。|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904DateSystem)|ブックの日付を 1904 年から計算する場合、true となります。|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onFiltered)|特定のワークシートにフィルターが適用されると発生します。|
 ||[タスク](/javascript/api/excel/excel.worksheet#tasks)|ワークシートに存在するタスクのコレクションを返します。|
@@ -225,12 +225,12 @@
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onFiltered)|ブック内でワークシートのフィルターが適用されたときに発生します。|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetId)|フィルターが適用されるワークシートの ID を取得します。|
-|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[checkPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#checkPassword_password_)|ワークシート保護のロック解除にパスワードを使用できる場合に指定します。|
-||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#pauseProtection_password_)|特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。|
-||[allowEditRanges](/javascript/api/excel/excel.worksheetprotection#allowEditRanges)|このワークシートで `AllowEditRangeCollection` 見つかったファイルを指定します。|
+|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[allowEditRanges](/javascript/api/excel/excel.worksheetprotection#allowEditRanges)|このワークシートで `AllowEditRangeCollection` 見つかったファイルを指定します。|
 ||[canPauseProtection](/javascript/api/excel/excel.worksheetprotection#canPauseProtection)|このワークシートの保護を一時停止できる場合に指定します。|
+||[checkPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#checkPassword_password_)|ワークシート保護のロック解除にパスワードを使用できる場合に指定します。|
 ||[isPasswordProtected](/javascript/api/excel/excel.worksheetprotection#isPasswordProtected)|シートがパスワードで保護される場合に指定します。|
 ||[isPaused](/javascript/api/excel/excel.worksheetprotection#isPaused)|ワークシートの保護を一時停止する場合に指定します。|
+||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#pauseProtection_password_)|特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。|
 ||[resumeProtection()](/javascript/api/excel/excel.worksheetprotection#resumeProtection__)|特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を再開します。|
 ||[setPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#setPassword_password_)|オブジェクトに関連付けられているパスワードを変更 `WorksheetProtection` します。|
 ||[updateOptions(options: Excel.WorksheetProtectionOptions)](/javascript/api/excel/excel.worksheetprotection#updateOptions_options_)|オブジェクトに関連付けられているワークシート保護オプションを変更 `WorksheetProtection` します。|
