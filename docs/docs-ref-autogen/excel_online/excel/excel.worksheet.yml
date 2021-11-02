@@ -14,27 +14,7 @@ properties:
   package: excel!
   fullName: autoFilter
   summary: ワークシートの `AutoFilter` オブジェクトを表します。
-  remarks: >-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>例
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml
-
-    await Excel.run(async (context) => {
-        const sheet = context.workbook.worksheets.getActiveWorksheet();
-        const farmData = sheet.getUsedRange();
-
-        // This filter will only show the rows with the top 25% of values in column 3.
-        sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
-        await context.sync();
-    });
-
-    ```
+  remarks: "\\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    // This method adds a percentage AutoFilter to the active worksheet \n    // and applies the filter to a column of the used range.\n\n    // Retrieve the active worksheet and the used range on that worksheet.\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // Add a filter that will only show the rows with the top 50% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, {\n        criterion1: \"50\",\n        filterOn: Excel.FilterOn.topPercent\n    });\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -702,7 +682,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -719,7 +699,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -768,7 +748,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -785,7 +765,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: 省略可能です。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
+      description: オプション。 もし `true`<!-- -->、表示されているワークシートのみを考慮し、非表示のワークシートをスキップします。
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -802,7 +782,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: 省略可能です。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
+      description: オプション。 範囲のアドレスまたは名前を表す文字列。 たとえば、"A1:B2" とします。 指定されていない場合は、ワークシート全体の範囲が返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -865,7 +845,7 @@ methods:
     content: 'getRanges(address?: string): Excel.RangeAreas;'
     parameters:
     - id: address
-      description: 省略可能です。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
+      description: オプション。 個々の範囲のコンマ区切りアドレスまたは名前を含む文字列。 たとえば、「A1:B2、A5:B5」などです。 指定しない場合は、ワークシート全体の RangeArea オブジェクトが返されます。
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -882,7 +862,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: '省略可能です。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
+      description: 'オプション。 もし `true`<!-- -->は、値が使用されているセル (書式設定を無視する) を持つセルのみを考慮します。 \[Api セット: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1302,7 +1282,50 @@ events:
   package: excel!
   fullName: onProtectionChanged
   summary: ワークシートの保護状態が変更された場合に発生します。
-  remarks: '\[[API セット: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-worksheet-protection.yaml
+
+    await Excel.run(async (context) => {
+        // This method registers an event handler for the onProtectionChanged event of a worksheet.
+
+        // Set "Sample" as the active worksheet.
+        context.workbook.worksheets.getItemOrNullObject("Sample").delete();
+        const sheet = context.workbook.worksheets.add("Sample");
+        sheet.activate();
+
+        // Register the onProtectionChanged event handler.
+        sheet.onProtectionChanged.add(checkProtection);
+        await context.sync();
+        console.log("Added a worksheet protection change event handler.");
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-worksheet-protection.yaml
+
+    async function checkProtection(event: Excel.WorksheetProtectionChangedEventArgs) {
+        await Excel.run(async (context) => {
+            // This method is an event handler that returns the protection status of a worksheet and information about the changed worksheet.
+            const protectionStatus = event.isProtected;
+            const worksheetId = event.worksheetId;
+            const source = event.source;
+            console.log("Protection status changed. Protection status is now: " + protectionStatus + ".");
+            console.log("    ID of changed worksheet: " + worksheetId + ".");
+            console.log("    Source of change event: " + source + ".");
+        });
+    }
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1475,9 +1498,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetVisibilityChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c542ec621d147e90cebdf4018f3b4c3256384602
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 54765e87a54846b4cf6a59181b64e0fea7e49253
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60316047"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60659417"

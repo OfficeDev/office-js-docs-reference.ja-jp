@@ -1,5 +1,6 @@
 | クラス | フィールド | 説明 |
 |:---|:---|:---|
+|[AutoFilter](/javascript/api/excel/excel.autofilter)|[clearColumnCriteria(columnIndex: number)](/javascript/api/excel/excel.autofilter#clearColumnCriteria_columnIndex_)|オートフィルターの列フィルター条件をクリアします。|
 |[ChangeDirectionState](/javascript/api/excel/excel.changedirectionstate)|[deleteShiftDirection](/javascript/api/excel/excel.changedirectionstate#deleteShiftDirection)|セルまたはセルが削除された場合に残りのセルが移動する方向 (上または左など) を表します。|
 ||[insertShiftDirection](/javascript/api/excel/excel.changedirectionstate#insertShiftDirection)|新しいセルまたはセルを挿入するときに既存のセルが移動する方向 (下方向や右方向など) を表します。|
 |[Chart](/javascript/api/excel/excel.chart)|[getDataTable()](/javascript/api/excel/excel.chart#getDataTable__)|グラフのデータ テーブルを取得します。|

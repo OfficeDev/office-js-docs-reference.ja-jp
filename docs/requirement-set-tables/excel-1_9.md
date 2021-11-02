@@ -304,8 +304,8 @@
 ||[style](/javascript/api/excel/excel.settablecellproperties#style)|`style` プロパティを表します。|
 |[SettableColumnProperties](/javascript/api/excel/excel.settablecolumnproperties)|[columnHidden](/javascript/api/excel/excel.settablecolumnproperties#columnHidden)|`columnHidden` プロパティを表します。|
 ||[columnWidth](/javascript/api/excel/excel.settablecolumnproperties#columnWidth)||
-||[format: Excel。CellPropertiesFormat & { columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|`format` プロパティを表します。|
-|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format: Excel。CellPropertiesFormat & { rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|`format` プロパティを表します。|
+||[format: Excel。CellPropertiesFormat & { columnWidth](/javascript/api/excel/excel.settablecolumnproperties#format)|`format` プロパティを表します。|
+|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[format: Excel。CellPropertiesFormat & { rowHeight](/javascript/api/excel/excel.settablerowproperties#format)|`format` プロパティを表します。|
 ||[rowHeight](/javascript/api/excel/excel.settablerowproperties#rowHeight)||
 ||[rowHidden](/javascript/api/excel/excel.settablerowproperties#rowHidden)|`rowHidden` プロパティを表します。|
 |[Shape](/javascript/api/excel/excel.shape)|[altTextDescription](/javascript/api/excel/excel.shape#altTextDescription)|オブジェクトの代替説明テキストを指定 `Shape` します。|

@@ -51,7 +51,7 @@
 ||[matchSuffix](/javascript/api/word/word.contentcontrol#matchSuffix)||
 ||[matchWholeWord](/javascript/api/word/word.contentcontrol#matchWholeWord)||
 ||[matchWildcards](/javascript/api/word/word.contentcontrol#matchWildcards)||
-||[paragraphs](/javascript/api/word/word.contentcontrol#paragraphs)|コンテンツ コントロールにある Paragraph オブジェクトのコレクションを取得します。|
+||[paragraphs](/javascript/api/word/word.contentcontrol#paragraphs)|コンテンツ コントロール内の段落オブジェクトのコレクションを取得します。|
 ||[parentContentControl](/javascript/api/word/word.contentcontrol#parentContentControl)|コンテンツ コントロールを含むコンテンツ コントロールを取得します。|
 ||[placeholderText](/javascript/api/word/word.contentcontrol#placeholderText)|コンテンツ コントロールのプレースホルダー テキストを取得または設定します。|
 ||[removeWhenEdited](/javascript/api/word/word.contentcontrol#removeWhenEdited)|コンテンツ コントロールを編集後に削除できるかどうかを示す値を取得または設定します。|

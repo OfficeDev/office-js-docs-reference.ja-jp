@@ -3,8 +3,8 @@ name: OfficeRuntime.AuthOptions
 uid: office-runtime!OfficeRuntime.AuthOptions:interface
 package: office-runtime!
 fullName: OfficeRuntime.AuthOptions
-summary: AAD v からアドインOfficeアクセス トークンを取得するときに、ユーザー エクスペリエンスのオプションを提供します。 `getAccessToken` メソッドを使用して AAD v. 2.0 からアドインに対するアクセス トークンを取得する場合用のユーザー エクスペリエンス用のオプションがあります。
-remarks: ''
+summary: Office v からアドインへのアクセス トークンを取得するときに、ユーザー エクスペリエンスのAADします。 `getAccessToken` メソッドを使用して AAD v. 2.0 からアドインに対するアクセス トークンを取得する場合用のユーザー エクスペリエンス用のオプションがあります。
+remarks: このインターフェイスのメソッドは、インターフェイス内のメソッドと同 `Office.AuthOptions` じです。 将来新しい認証の種類が追加された場合、その認証の種類はインターフェイスにのみ追加 `Office.AuthOptions` されます。 わかりやすくするために、ドキュメントの使用全体のコード例 `Office.AuthOptions`<!-- -->.
 isPreview: false
 isDeprecated: false
 type: interface
@@ -13,7 +13,7 @@ properties:
   uid: office-runtime!OfficeRuntime.AuthOptions#allowConsentPrompt:member
   package: office-runtime!
   fullName: allowConsentPrompt
-  summary: ユーザー Officeアクセス トークンが必要な場合は、サイレントまたは対話型の同意を通じて取得できます。 既定値は `false` です。<!-- -->. に設定されている場合 `false`<!-- -->、Officeアクセス トークンの取得をサイレント モードで試みる必要があります。 エラーが発生した場合、Officeエラーが返されます。 に設定されている場合 `true`<!-- -->をOfficeアクセス トークンをサイレント モードで取得できない場合、対話型の同意 UI が表示されます。 このプロンプトでは、AAD プロファイル スコープへの同意のみを許可します。Microsoft Graph スコープには同意しません。
+  summary: 必要Officeアクセス トークンをサイレントモードまたは対話型の同意によって取得できます。 既定値は `false` です。<!-- -->. に設定されている場合 `false`<!-- -->、Officeアクセス トークンの取得をサイレント モードで試みる必要があります。 この操作に失敗した場合、Officeエラーが返されます。 に設定されている場合 `true`<!-- -->をOfficeアクセス トークンをサイレント モードで取得できない場合、対話型の同意 UI が表示されます。 このプロンプトでは、Microsoft のスコープではなく、AADスコープに対する同意Graphされます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,7 +25,7 @@ properties:
   uid: office-runtime!OfficeRuntime.AuthOptions#allowSignInPrompt:member
   package: office-runtime!
   fullName: allowSignInPrompt
-  summary: ユーザー Officeサインインするための対話型 UI を表示したり、同意がある場合にアクセス トークンをサイレント モードで取得したりできます。 既定値は `false` です。<!-- -->. に設定されている場合 `false`<!-- -->、Officeアクセス トークンの取得をサイレント モードで試みる必要があります。 エラーが発生した場合、Officeエラーが返されます。 に設定されている場合 `true`<!-- -->をOfficeアクセス トークンをサイレント モードで取得できない場合、対話型サインイン UI が表示されます。
+  summary: ユーザー Officeサインインするための対話型 UI を表示したり、同意がある場合にアクセス トークンをサイレント モードで取得したりできます。 既定値は `false` です。<!-- -->. に設定されている場合 `false`<!-- -->、Officeアクセス トークンの取得をサイレント モードで試みる必要があります。 この操作に失敗した場合、Officeエラーが返されます。 に設定されている場合 `true`<!-- -->をOfficeアクセス トークンをサイレント モードで取得できない場合、対話型サインイン UI が表示されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
   uid: office-runtime!OfficeRuntime.AuthOptions#authChallenge:member
   package: office-runtime!
   fullName: authChallenge
-  summary: Microsoft Graph Office対象となるテナントが多要素認証を必要とする場合に、ユーザーに追加の要素を提供するように求めるメッセージが表示されます。 文字列値は、必要な追加要因の種類を識別します。 ほとんどの場合、ユーザーのテナントに追加の要素が必要かどうか、または文字列が必要かどうかは開発時にはわかりません。 したがって、このオプションは、Microsoft Graph が追加要素を要求し、オプションで使用する文字列を含むエラーを送信した後の "2 回目の試み" 呼び出しで `getAccessToken` 使用 `authChallenge` されます。
+  summary: Microsoft Officeを対象とするテナントが多要素認証を必要とする場合に、ユーザーに追加のGraphを求めるメッセージが表示されます。 文字列値は、必要な追加要因の種類を識別します。 ほとんどの場合、ユーザーのテナントに追加の要素が必要かどうか、または文字列が必要かどうかは開発時にはわかりません。 したがって、このオプションは、Microsoft Graph が追加要素を要求し、オプションで使用する文字列を含むエラーを送信した後の "2 回目の試み" 呼び出しで使用 `getAccessToken` `authChallenge` されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -61,7 +61,7 @@ properties:
   uid: office-runtime!OfficeRuntime.AuthOptions#forceAddAccount:member
   package: office-runtime!
   fullName: forceAddAccount
-  summary: ユーザーにアカウントを追加Office (既に追加されている場合は、アカウントに切り替える) を求めるプロンプトを表示します。 既定値は `false` です。<!-- -->.
+  summary: ユーザーに自分のアカウントを追加Office (既に追加されている場合は、アカウントに切り替える) を求めるメッセージが表示されます。 既定値は `false` です。<!-- -->.
   remarks: ''
   isPreview: false
   isDeprecated: true
@@ -87,7 +87,7 @@ properties:
   uid: office-runtime!OfficeRuntime.AuthOptions#forMSGraphAccess:member
   package: office-runtime!
   fullName: forMSGraphAccess
-  summary: アドインOffice Microsoft Graph にアクセスする際に、ユーザー/管理者が Graph スコープに同意していない場合に、説明的なエラーが返される原因になります。 既定値は `false` です。<!-- -->. Officeテナント管理者によってアドインが展開されている場合にのみ、Graph スコープへの同意がサポートされます。この情報は開発中は利用できません。 このオプションを設定すると、Officeアクセスが失敗した場合に、(説明的なエラーを返して) アドインに事前に通知 `true` する必要があります。
+  summary: アドインOffice Microsoft Graph にアクセスする必要がある場合に、ユーザー/管理者がスコープに対する同意を与えGraphします。 既定値は `false` です。<!-- -->. Officeは、テナント管理者Graph展開されている場合にのみ、スコープに対する同意をサポートします。この情報は開発中は利用できません。 このオプションを設定すると、Officeアクセスが失敗した場合に、(説明的なエラーを返して) アドインに事前に通知Graph `true` 表示されます。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -96,9 +96,9 @@ properties:
     return:
       type: boolean
 metadata:
-  ms.openlocfilehash: 960356950ecabc4815edc5d5c628c77a1535baeb
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: a22e7d1bdc3f1f5180d1647b505748e80c07802c
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51225378"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60658679"

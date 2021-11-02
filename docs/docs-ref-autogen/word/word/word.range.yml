@@ -133,7 +133,11 @@ properties:
   uid: word!Word.Range#parentBody:member
   package: word!
   fullName: parentBody
-  summary: 範囲の親の本文を取得します。読み取り専用。
+  summary: >-
+    範囲の親の本文を取得します。読み取り専用。
+
+
+    **重要**: 要件セット 1.1 および 1.2 では、この範囲内に完全に含まれるテーブル内の段落は返されません。 要件セット 1.3 から、そのような表の段落も返されます。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -419,10 +423,10 @@ methods:
     content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: includeHidden
-      description: 省略可能です。 非表示のブックマークを含めるかどうかを示します。 既定値は false で、非表示のブックマークが除外されます。
+      description: オプション。 非表示のブックマークを含めるかどうかを示します。 既定値は false で、非表示のブックマークが除外されます。
       type: boolean
     - id: includeAdjacent
-      description: 省略可能です。 範囲に隣接するブックマークを含めるかどうかを示します。 既定値は false で、隣接するブックマークが除外されます。
+      description: オプション。 範囲に隣接するブックマークを含めるかどうかを示します。 既定値は false で、隣接するブックマークが除外されます。
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -515,7 +519,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能です。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
+      description: オプション。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -535,7 +539,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能です。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
+      description: オプション。 返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -599,7 +603,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -616,7 +620,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: 省略可能です。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -673,7 +677,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1555,13 +1559,13 @@ methods:
       description: 必須です。 文字列の配列としての区切り記号。
       type: string[]
     - id: multiParagraphs
-      description: 省略可能です。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
+      description: オプション。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
       type: boolean
     - id: trimDelimiters
-      description: 省略可能です。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
+      description: オプション。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
       type: boolean
     - id: trimSpacing
-      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1607,9 +1611,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 158962c3e5eaee50c2690944bbd3bc8843e69a92
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 036d143bfb32af80bdf4a841af82035ed71df017
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60316481"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60659236"

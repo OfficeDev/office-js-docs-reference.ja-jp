@@ -24,7 +24,7 @@
 |[設定](/javascript/api/excel/excel.setting)|[delete()](/javascript/api/excel/excel.setting#delete__)|設定を削除します。|
 ||[key](/javascript/api/excel/excel.setting#key)|設定の ID を表すキー。|
 ||[value](/javascript/api/excel/excel.setting#value)|この設定に格納されている値を表します。|
-|[SettingCollection](/javascript/api/excel/excel.settingcollection)|[add(key: string, value: string \| number boolean Date Array \| \| \| <any> \| any)](/javascript/api/excel/excel.settingcollection#add_key__value_)|指定した設定をブックに設定または追加します。|
+|[SettingCollection](/javascript/api/excel/excel.settingcollection)|[add(key: string, value: string \| number boolean Date Array \| \| \| \| any)](/javascript/api/excel/excel.settingcollection#add_key__value_)|指定した設定をブックに設定または追加します。|
 ||[getCount()](/javascript/api/excel/excel.settingcollection#getCount__)|コレクション内の設定の数を取得します。|
 ||[getItem(key: string)](/javascript/api/excel/excel.settingcollection#getItem_key_)|キーを使用して設定エントリを取得します。|
 ||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.settingcollection#getItemOrNullObject_key_)|キーを使用して設定エントリを取得します。|
@@ -36,8 +36,8 @@
 |[TableColumnCollection](/javascript/api/excel/excel.tablecolumncollection)|[getCount()](/javascript/api/excel/excel.tablecolumncollection#getCount__)|表の列数を取得します。|
 ||[getItemOrNullObject(key: number \| string)](/javascript/api/excel/excel.tablecolumncollection#getItemOrNullObject_key_)|名前または ID によって、列オブジェクトを取得します。|
 |[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[getCount()](/javascript/api/excel/excel.tablerowcollection#getCount__)|表の行数を取得します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[settings](/javascript/api/excel/excel.workbook#settings)|ブックに関連付けられている設定のコレクションを表します。|
-|[ワークシート](/javascript/api/excel/excel.worksheet)|[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.worksheet#getUsedRangeOrNullObject_valuesOnly_)|使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[settings](/javascript/api/excel/excel.workbook#settings)|ブックに関連付けられている設定のコレクションを表します。|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[getUsedRangeOrNullObject(valuesOnly?: boolean)](/javascript/api/excel/excel.worksheet#getUsedRangeOrNullObject_valuesOnly_)|使用範囲とは、値または書式設定が割り当たっているすべてのセルを包含する最小の範囲です。|
 ||[名前](/javascript/api/excel/excel.worksheet#names)|現在のワークシートにスコープされている名前のコレクション。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[getCount(visibleOnly?: boolean)](/javascript/api/excel/excel.worksheetcollection#getCount_visibleOnly_)|コレクションに含まれるワークシートの数を取得します。|
 ||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.worksheetcollection#getItemOrNullObject_key_)|名前または ID を使用して、ワークシート オブジェクトを取得します。|

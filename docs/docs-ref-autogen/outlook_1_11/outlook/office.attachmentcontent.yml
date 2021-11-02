@@ -1,0 +1,63 @@
+### YamlMime:TSType
+name: Office.AttachmentContent
+uid: outlook!Office.AttachmentContent:interface
+package: outlook!
+fullName: Office.AttachmentContent
+summary: メッセージまたは予定アイテムの添付ファイルの内容を表します。
+remarks: >-
+  \[[API セット: メールボックス 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: content
+  uid: outlook!Office.AttachmentContent#content:member
+  package: outlook!
+  fullName: content
+  summary: 添付ファイルの内容を文字列として指定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'content: string;'
+    return:
+      type: string
+- name: format
+  uid: outlook!Office.AttachmentContent#format:member
+  package: outlook!
+  fullName: format
+  summary: >-
+    添付ファイルのコンテンツに使用する文字列形式。
+
+
+    添付ファイルの場合、書式は base64 でエンコードされた文字列です。
+
+
+    メッセージを表し、ドラッグ アンド ドロップまたは "アイテムの添付" によって添付されたアイテムの添付ファイルの場合、書式設定は .eml 形式のファイルを表す文字列です。 **重要**: メッセージ アイテムがドラッグ アンド ドロップで添付された場合は、Outlook on the webを `getAttachmentContentAsync` スローします。
+
+
+    予定表アイテムを表し、ドラッグ アンド ドロップまたは "アイテムの添付" で添付されたアイテムの添付ファイルの場合、書式設定は .icalendar ファイルを表す文字列です。 **重要**: 予定表アイテムがドラッグ アンド ドロップで添付されている場合は、Outlook on the webを `getAttachmentContentAsync` スローします。
+
+
+    クラウド添付ファイルの場合、書式設定は URL 文字列です。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'format: MailboxEnums.AttachmentContentFormat | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.AttachmentContentFormat:enum" /> | string
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar options = {asyncContext: {currentItem: item}};\nitem.getAttachmentsAsync(options, callback);\n\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            result.asyncContext.currentItem.getAttachmentContentAsync(result.value[i].id, handleAttachmentsCallback);\n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.\n    switch (result.value.format) {\n        case Office.MailboxEnums.AttachmentContentFormat.Base64:\n            // Handle file attachment.\n            break;\n        case Office.MailboxEnums.AttachmentContentFormat.Eml:\n            // Handle email item attachment.\n            break;\n        case Office.MailboxEnums.AttachmentContentFormat.ICalendar:\n            // Handle .icalender attachment.\n            break;\n        case Office.MailboxEnums.AttachmentContentFormat.Url:\n            // Handle cloud attachment.\n            break;\n        default:\n            // Handle attachment formats that are not supported.\n    }\n}\n```"
+metadata:
+  ms.openlocfilehash: 1a60625f8025decbf8c7874539501ff706782270
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60658886"

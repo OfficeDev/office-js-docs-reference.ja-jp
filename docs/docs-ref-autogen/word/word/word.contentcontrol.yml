@@ -157,7 +157,11 @@ properties:
   uid: word!Word.ContentControl#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: コンテンツ コントロールにある Paragraph オブジェクトのコレクションを取得します。読み取り専用です。
+  summary: >-
+    コンテンツ コントロール内の段落オブジェクトのコレクションを取得します。 読み取り専用です。
+
+
+    **重要**: 要件セット 1.1 および 1.2 では、このコンテンツ コントロール内に完全に含まれるテーブル内の段落は返されません。 要件セット 1.3 から、そのような表の段落も返されます。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -488,7 +492,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: 省略可能です。 範囲の場所には、'Whole'、'Before'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Before'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -505,7 +509,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: 省略可能です。 範囲の場所には、'Whole'、'Before'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Before'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -525,7 +529,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1045,13 +1049,13 @@ methods:
       description: 必須です。 文字列の配列としての区切り記号。
       type: string[]
     - id: multiParagraphs
-      description: 省略可能です。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
+      description: オプション。 返される子範囲が複数の段落をカバーできるかどうかを示します。 既定値は false で、段落の境界も区切り記号として使用されます。
       type: boolean
     - id: trimDelimiters
-      description: 省略可能です。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
+      description: オプション。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
       type: boolean
     - id: trimSpacing
-      description: 省略可能です。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1134,9 +1138,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="word!Word.ContentControlEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9827d399b8bdb9bd6ab41f6a375a14ddd825a118
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 293b7ef4bf0d310ec55d15ebb35da840aff35ec2
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60310874"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60647051"
