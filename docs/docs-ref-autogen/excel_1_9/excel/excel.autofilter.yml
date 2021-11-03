@@ -63,27 +63,7 @@ methods:
   package: excel!
   fullName: apply(range, columnIndex, criteria)
   summary: 範囲にオートフィルターを適用します。 列インデックスやフィルター条件が指定されている場合、列にフィルターを適用します。
-  remarks: >-
-    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>例
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml
-
-    await Excel.run(async (context) => {
-        const sheet = context.workbook.worksheets.getActiveWorksheet();
-        const farmData = sheet.getUsedRange();
-
-        // This filter will only show the rows with the top 25% of values in column 3.
-        sheet.autoFilter.apply(farmData, 3, { criterion1: "25", filterOn: Excel.FilterOn.topPercent });
-        await context.sync();
-    });
-
-    ```
+  remarks: "\\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    // This method adds a percentage AutoFilter to the active worksheet \n    // and applies the filter to a column of the used range.\n\n    // Retrieve the active worksheet and the used range on that worksheet.\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // Add a filter that will only show the rows with the top 50% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, {\n        criterion1: \"50\",\n        filterOn: Excel.FilterOn.topPercent\n    });\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -204,7 +184,29 @@ methods:
   package: excel!
   fullName: reapply()
   summary: その範囲で現在指定されている Autofilter オブジェクトを適用します。
-  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml
+
+    await Excel.run(async (context) => {
+        // This method refreshes the AutoFilter to ensure that changes are captured.
+
+        // Retrieve the active worksheet.
+        const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+        // Reapply the filter to capture changes.
+        sheet.autoFilter.reapply();
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -217,7 +219,29 @@ methods:
   package: excel!
   fullName: remove()
   summary: 範囲の AutoFilter を削除します。
-  remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml
+
+    await Excel.run(async (context) => {
+        // This method removes all AutoFilters from the active worksheet.
+
+        // Retrieve the active worksheet.
+        const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+        // Remove all filters.
+        sheet.autoFilter.remove();
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -240,9 +264,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6802c6eb30a7c68e9e083aa8c158fddafe6429b6
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: 3132741bbb8caa02a3e430a2e00fefec7f6bad86
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59694683"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60663065"

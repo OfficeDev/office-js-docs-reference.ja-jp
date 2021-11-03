@@ -26,7 +26,38 @@ properties:
   package: excel!
   fullName: areas
   summary: オブジェクトを返 `RangeAreasCollection` します。 コレクション `RangeAreas` 内の各範囲は、1 つのワークシート内の 1 つ以上の四角形の範囲を表します。
-  remarks: "\\[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
+  remarks: >-
+    \[[API セット: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/precedents.yaml
+
+    await Excel.run(async (context) => {
+      // Precedents are cells referenced by the formula in a cell.
+      // A "direct precedent" is a cell directly referenced by the selected formula.
+      let range = context.workbook.getActiveCell();
+      let directPrecedents = range.getDirectPrecedents();
+      range.load("address");
+      directPrecedents.areas.load("address");
+      await context.sync();
+
+      console.log(`Direct precedent cells of ${range.address}:`);
+
+      // Use the direct precedents API to loop through precedents of the active cell.
+      for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+        // Highlight and console the address of each precedent cell.
+        directPrecedents.areas.items[i].format.fill.color = "Yellow";
+        console.log(`  ${directPrecedents.areas.items[i].address}`);
+      }
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -192,9 +223,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 063698769a066601687d0b5d3c32fe1011c41b44
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 2dfbd37effef803feb93a6abb51b4b7ef4cc8f4b
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60327878"
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60665185"

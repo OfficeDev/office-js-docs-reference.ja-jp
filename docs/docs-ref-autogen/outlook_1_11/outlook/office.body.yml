@@ -1,0 +1,794 @@
+### YamlMime:TSType
+name: Office.Body
+uid: outlook!Office.Body:interface
+package: outlook!
+fullName: Office.Body
+summary: body オブジェクトは、メッセージまたは予定のコンテンツを追加および更新するためのメソッドを提供します。 選択したアイテムの body プロパティに返されます。
+remarks: >-
+  \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+  **HTML テーブルの罫線の色に関する既知の問題**
+
+
+  OutlookオンWindows: 作成モードで HTML テーブルでさまざまなセルの罫線を異なる色に設定している場合、セルの罫線に期待される色が反映されない場合があります。 既知の動作については [、「OfficeDev/office-js issue \# 1818」を参照してください。](https://github.com/OfficeDev/office-js/issues/1818)<!-- -->.
+
+
+  **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+  **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: appendOnSendAsync(data, options, callback)
+  uid: outlook!Office.Body#appendOnSendAsync:member(1)
+  package: outlook!
+  fullName: appendOnSendAsync(data, options, callback)
+  summary: >-
+    署名の後に、指定したコンテンツをアイテム本文の末尾に追加します。
+
+
+    ユーザーがマニフェストで ItemSend を使用して送信時機能を実装する [ \` アドイン \` を実行している場合](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->、送信時の追加は、送信時の機能の前に実行されます。
+
+
+    **重要**: アドインがオン送信機能と呼び出しをハンドラーに実装している場合、このシナリオはサポートされていないので、呼び出しは `appendOnSendAsync` `ItemSend` `appendOnSendAsync` エラーを返します。
+
+
+    **重要**: 使用するには `appendOnSendAsync`<!-- -->を選択 `ExtendedPermissions` すると、マニフェスト ノードに拡張アクセス `AppendOnSend` 許可が含まれる必要があります。
+
+
+    **注**: 以前の呼び出しからデータをクリアするには、パラメーターを次に設定 `appendOnSendAsync` して再度 `data` 呼び出します。 `null`<!-- -->.
+  remarks: >-
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 5,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` はに設定されますが `Office.CoercionType.Html` 、メッセージ本文はテキスト形式です。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.body.appendOnSendAsync(
+        "P.S. This text was appended on send.",
+        {coercionType: Office.CoercionType.Html},
+        function (asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+        }
+    );
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendOnSendAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 本文の末尾に追加する文字列。 文字列は 5,000 文字に制限されます。
+      type: string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 追加するデータの目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: appendOnSendAsync(data, callback)
+  uid: outlook!Office.Body#appendOnSendAsync:member(2)
+  package: outlook!
+  fullName: appendOnSendAsync(data, callback)
+  summary: >-
+    署名の後に、指定したコンテンツをアイテム本文の末尾に追加します。
+
+
+    ユーザーがマニフェストで ItemSend を使用して送信時機能を実装する [ \` アドイン \` を実行している場合](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->、送信時の追加は、送信時の機能の前に実行されます。
+
+
+    **重要**: アドインがオン送信機能と呼び出しをハンドラーに実装している場合、このシナリオはサポートされていないので、呼び出しは `appendOnSendAsync` `ItemSend` `appendOnSendAsync` エラーを返します。
+
+
+    **重要**: 使用するには `appendOnSendAsync`<!-- -->を選択 `ExtendedPermissions` すると、マニフェスト ノードに拡張アクセス `AppendOnSend` 許可が含まれる必要があります。
+
+
+    **注**: 以前の呼び出しからデータをクリアするには、パラメーターを次に設定 `appendOnSendAsync` して再度 `data` 呼び出します。 `null`<!-- -->.
+  remarks: >-
+    \[[API セット: メールボックス 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 5,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` はに設定されますが `Office.CoercionType.Html` 、メッセージ本文はテキスト形式です。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendOnSendAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 本文の末尾に追加する文字列。 文字列は 5,000 文字に制限されます。
+      type: string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(coercionType, options, callback)
+  uid: outlook!Office.Body#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(coercionType, options, callback)
+  summary: >-
+    現在の本文を指定された形式で返します。
+
+
+    このメソッドは、指定された形式で現在の本文全体を返します。 `coercionType`<!-- -->.
+
+
+    HTML 形式のボディを操作する場合、and メソッドはべき等ではない点に `Body.getAsync` `Body.setAsync` 注意することが重要です。 メソッドから返される値は、必ずしも以前にメソッドで渡された値とまったく `getAsync` 同じ `setAsync` とは限りません。 クライアントは、レンダリング エンジンで効率的にレンダリングするために渡される `setAsync` 値を変更できます。
+  remarks: >-
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // This example gets the body of the item as plain text.
+
+    Office.context.mailbox.item.body.getAsync(
+        "text",
+        { asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Do something with the result.
+        });
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value": "TEXT of whole body (including threads below)",
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: 返される本文の形式です。
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: options
+      description: '次の 1 つ以上のプロパティを含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡された関数は、パラメーター型の 1 つのパラメーター `callback` Office。AsyncResult。 本文は、プロパティで要求された形式で提供 `asyncResult.value` されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(coercionType, callback)
+  uid: outlook!Office.Body#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(coercionType, callback)
+  summary: >-
+    現在の本文を指定された形式で返します。
+
+
+    このメソッドは、指定された形式で現在の本文全体を返します。 `coercionType`<!-- -->.
+
+
+    HTML 形式のボディを操作する場合、and メソッドはべき等ではない点に `Body.getAsync` `Body.setAsync` 注意することが重要です。 メソッドから返される値は、必ずしも以前にメソッドで渡された値とまったく `getAsync` 同じ `setAsync` とは限りません。 クライアントは、レンダリング エンジンで効率的にレンダリングするために渡される `setAsync` 値を変更できます。
+  remarks: >-
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: 作成または読み取り
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(coercionType: Office.CoercionType | string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: 返される本文の形式です。
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡された関数は、パラメーター型の 1 つのパラメーター `callback` Office。AsyncResult。 本文は、プロパティで要求された形式で提供 `asyncResult.value` されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getTypeAsync(options, callback)
+  uid: outlook!Office.Body#getTypeAsync:member(1)
+  package: outlook!
+  fullName: getTypeAsync(options, callback)
+  summary: コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    Office.context.mailbox.item.body.getTypeAsync(function (asyncResult) {
+        if (asyncResult.status === "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        } else {
+            console.log("Body type: " + asyncResult.value);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTypeAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    parameters:
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getTypeAsync(callback)
+  uid: outlook!Office.Body#getTypeAsync:member(2)
+  package: outlook!
+  fullName: getTypeAsync(callback)
+  summary: コンテンツの形式が HTML とテキストのどちらであるかを示す値を取得します。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    parameters:
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. コンテンツ タイプは、プロパティの値の `CoercionType` 1 つとして返 `asyncResult.value` されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: prependAsync(data, options, callback)
+  uid: outlook!Office.Body#prependAsync:member(1)
+  package: outlook!
+  fullName: prependAsync(data, options, callback)
+  summary: >-
+    アイテム本文の先頭に指定の内容を追加します。
+
+
+    メソッド `prependAsync` は、指定した文字列をアイテム本文の先頭に挿入します。 挿入後、カーソルは挿入されたコンテンツを基準に元の場所に返されます。
+
+
+    HTML 形式のボディを操作する場合は、クライアントがレンダリング エンジンで効率的にレンダリングするために渡される値を変更する場合があります `prependAsync` 。 つまり、(Mailbox 1.3 で導入された) メソッドへの後続の呼び出しから返される値には、必ずしも以前にメソッドで渡された値が正確に含まれているとは `Body.getAsync` `prependAsync` 限りません。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに属性を設定することで、オンライン `id` リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: data パラメーターが 1,000,000 文字を超える。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.prependAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prependAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 本文の先頭に挿入する文字列。文字列の最大長は 1,000,000 文字です。
+      type: string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: prependAsync(data, callback)
+  uid: outlook!Office.Body#prependAsync:member(2)
+  package: outlook!
+  fullName: prependAsync(data, callback)
+  summary: >-
+    アイテム本文の先頭に指定の内容を追加します。
+
+
+    メソッド `prependAsync` は、指定した文字列をアイテム本文の先頭に挿入します。 挿入後、カーソルは挿入されたコンテンツを基準に元の場所に返されます。
+
+
+    HTML 形式のボディを操作する場合は、クライアントがレンダリング エンジンで効率的にレンダリングするために渡される値を変更する場合があります `prependAsync` 。 つまり、(Mailbox 1.3 で導入された) メソッドへの後続の呼び出しから返される値には、必ずしも以前にメソッドで渡された値が正確に含まれているとは `Body.getAsync` `prependAsync` 限りません。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに属性を設定することで、オンライン `id` リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: data パラメーターが 1,000,000 文字を超える。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 本文の先頭に挿入する文字列。文字列の最大長は 1,000,000 文字です。
+      type: string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(data, options, callback)
+  uid: outlook!Office.Body#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(data, options, callback)
+  summary: >-
+    本文全体を指定されたテキストに置換します。
+
+
+    HTML 形式のボディを操作する場合、and メソッドはべき等ではない点に `Body.getAsync` `Body.setAsync` 注意することが重要です。 メソッドから返される値は、必ずしも以前にメソッドで渡された値とまったく `getAsync` 同じ `setAsync` とは限りません。 クライアントは、レンダリング エンジンで効率的にレンダリングするために渡される `setAsync` 値を変更できます。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに属性を設定することで、オンライン `id` リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: data パラメーターが 1,000,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.setAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    Office.context.mailbox.item.body.setAsync(
+        "<b>(replaces all body, including threads you are replying to that may be on the bottom)</b>",
+        { coercionType: "html", asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Process the result.
+    });
+
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value":null,
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
+      type: string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡された関数は、パラメーター型の 1 つのパラメーター `callback` Office。AsyncResult。 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(data, callback)
+  uid: outlook!Office.Body#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(data, callback)
+  summary: >-
+    本文全体を指定されたテキストに置換します。
+
+
+    HTML 形式のボディを操作する場合、and メソッドはべき等ではない点に `Body.getAsync` `Body.setAsync` 注意することが重要です。 メソッドから返される値は、必ずしも以前にメソッドで渡された値とまったく `getAsync` 同じ `setAsync` とは限りません。 クライアントは、レンダリング エンジンで効率的にレンダリングするために渡される `setAsync` 値を変更できます。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに属性を設定することで、オンライン `id` リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: data パラメーターが 1,000,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
+      type: string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡された関数は、パラメーター型の 1 つのパラメーター `callback` Office。AsyncResult。 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, options, callback)
+  uid: outlook!Office.Body#setSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, options, callback)
+  summary: >-
+    本文の選択部分を、指定のテキストに置き換えます。
+
+
+    このメソッドは、指定した文字列をアイテムの本文のカーソル位置に挿入するか、エディターでテキストが選択されている場合は、選択したテキストを `setSelectedDataAsync` 置き換える。 カーソルがアイテムの本文に含めたことがない場合、またはアイテムの本文が UI でフォーカスを失った場合、文字列は本文コンテンツの上部に挿入されます。 挿入後、カーソルは挿入されたコンテンツの末尾に配置されます。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに id 属性を設定することで、オンライン リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 1,000,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.setSelectedDataAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
+      type: string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 本文の目的の形式です。 パラメーター内の文字列は、この形式に変換されます。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.Body#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    本文の選択部分を、指定のテキストに置き換えます。
+
+
+    このメソッドは、指定した文字列をアイテムの本文のカーソル位置に挿入するか、エディターでテキストが選択されている場合は、選択したテキストを `setSelectedDataAsync` 置き換える。 カーソルがアイテムの本文に含めたことがない場合、またはアイテムの本文が UI でフォーカスを失った場合、文字列は本文コンテンツの上部に挿入されます。 挿入後、カーソルは挿入されたコンテンツの末尾に配置されます。
+
+
+    HTML マークアップにリンクを含めた場合は、アンカーに id 属性を設定することで、オンライン リンク のプレビューを無効にできます (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) を "LPNoLP" に設定します (サンプルについては **、Examples** セクションを参照してください)。
+  remarks: >-
+    \[[API セット: メールボックス 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 1,000,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: 既存の本文を置換する文字列。文字列の長さは 1,000,000 文字までに制限されています。
+      type: string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->. 検出されたすべてのエラーは `asyncResult.error` プロパティに表示されます。
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSignatureAsync(data, options, callback)
+  uid: outlook!Office.Body#setSignatureAsync:member(1)
+  package: outlook!
+  fullName: setSignatureAsync(data, options, callback)
+  summary: >-
+    アイテム本文の署名を追加または置換します。
+
+
+    **重要**: このOutlook on the webメッセージ `setSignatureAsync` でのみ動作します。
+
+
+    **重要**: マニフェストで LaunchEvent を使用してアドインがイベント ベースのアクティブ化機能 [ \` を実装 \` している場合](https://docs.microsoft.com/office/dev/add-ins/outlook/autolaunch)<!-- -->、およびイベント `setSignatureAsync` ハンドラー内の呼び出しでは、次の動作が適用されます。
+
+
+    - ユーザーが新しいアイテム (返信または転送を含む) を作成すると、署名は設定されますが、フォームは変更ありません。 つまり、ユーザーが他の編集を行わずにフォームを閉じると、変更の保存を求めるメッセージは表示されません。
+  remarks: >-
+    \[[API セット: メールボックス 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 30,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Set the signature for the current item with inline image.
+
+    var modIcon1Base64 = "iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpDRDMxMDg1MjBCNDZFMTExODE2MkM1RUI2M0M4MDYxRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTUxQjgyRjQ2MEQxMUUxODlFMkQwNTYzQ0YwMTUxMiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTUxQjgyRTQ2MEQxMUUxODlFMkQwNTYzQ0YwMTUxMiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkQxMzEwODUyMEI0NkUxMTE4MTYyQzVFQjYzQzgwNjFEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkNEMzEwODUyMEI0NkUxMTE4MTYyQzVFQjYzQzgwNjFEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+uC/WfAAAAehJREFUeNpilCzfwEAEkAbiECA2A2J1IOaHin8E4ptAfBaIVwLxU0IGMRKw0B6IW4DYhoE4cASIK6E0VsCEQ1wUiNcB8QESLGOAqj0MxBuhZhBloS4QnwHiQAbygR/UDF1CFupCXSjHQDmQg5qli8tCUBBsQUoQ1AD8UDNFsVk4n0o+w+bT+egWglKjNymmeGhLkqLcG2oHAwtUoIuQDj5OVgZPLUmwRe5aEmAxqYqNpFgKssOcCeplM0KqdST5GfpDDRm0JfkYrj3/SE7QguyQY4ImYYLgCtAS10kHGMw6dzNsv/qC7OwCClJXYlR++v6b4er3j5QmIFcmaNlIL6AOslCIjhYKMTHQGTBBqxh6gXcgC6/R0cKbIAv30dHCfaAKGJTxHxJSqS3Fz9DkowNmywpyMcgA8fF7b8D8VWcfM6w8+4gYC+VB+RCk8hSh0gaUD4/dewvlvUWRe/z+GzGWgex4BGtiOAHxXhoHpzMoSGHZAhSPW2lo2VZYWkHOh4nEtLrIAE+hZmNUwK+B2BOIv1PRsu9QM1/jatNcBtVZ0IREKXgENesyoVYbzNIdFFi2A5tl+NqlL6BB4QBNzsSCU1A9nlAzMAALAQMOQl0qB23qWwKxIlIrDBQ394H4OBCvISYqAAIMACVibHDqsO7zAAAAAElFTkSuQmCC";
+
+    Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+      modIcon1Base64,
+      "myImage.png",
+      { isInline: true },
+      function(result) {
+        if (result.status == Office.AsyncResultStatus.Succeeded) {
+          var signature = $("#signature").val() + "<img src='cid:myImage.png'>";
+          console.log(`Setting signature to "${signature}".`);
+          Office.context.mailbox.item.body.setSignatureAsync(
+            signature,
+            { coercionType: "html" },
+            function(asyncResult) {
+              console.log(`setSignatureAsync: ${asyncResult.status}`);
+            }
+          );
+        } else {
+          console.error(`addFileAttachmentFromBase64Async: ${result.error}`);
+        }
+      }
+    );
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Set the signature for the current item.
+
+    var signature = $("#signature").val();
+
+    console.log(`Setting signature to "${signature}".`);
+
+    Office.context.mailbox.item.body.setSignatureAsync(signature, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("setSignatureAsync succeeded");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSignatureAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: メールの本文で設定する署名を表す文字列。 この文字列は 30,000 文字に制限されます。
+      type: string
+    - id: options
+      description: '次のプロパティのうち 1 つ以上を含むオブジェクト リテラル。 `asyncContext`<!-- -->: 開発者は、コールバック メソッドでアクセスする任意のオブジェクトを提供できます。 `coercionType`<!-- -->: 署名を設定する必要がある形式。 Text の場合、メソッドは署名をプレーン テキストに設定し、存在する HTML タグを削除します。 Html の場合、メソッドは署名を HTML に設定します。'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSignatureAsync(data, callback)
+  uid: outlook!Office.Body#setSignatureAsync:member(2)
+  package: outlook!
+  fullName: setSignatureAsync(data, callback)
+  summary: >-
+    アイテム本文の署名を追加または置換します。
+
+
+    **重要**: このOutlook on the webメッセージ `setSignatureAsync` でのみ動作します。
+
+
+    **重要**: マニフェストで LaunchEvent を使用してアドインがイベント ベースのアクティブ化機能 [ \` を実装 \` している場合](https://docs.microsoft.com/office/dev/add-ins/outlook/autolaunch)<!-- -->、およびイベント `setSignatureAsync` ハンドラー内の呼び出しでは、次の動作が適用されます。
+
+
+    - ユーザーが新しいアイテム (返信または転送を含む) を作成すると、署名は設定されますが、フォームは変更ありません。 つまり、ユーザーが他の編集を行わずにフォームを閉じると、変更の保存を求めるメッセージは表示されません。
+  remarks: >-
+    \[[API セット: メールボックス 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]
+
+
+    **[最小アクセス許可レベル](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**:`ReadWriteItem`
+
+
+    **[適用可能なOutlookモード](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: Compose
+
+
+    **エラー**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: パラメーター `data` が 30,000 文字を超える。
+
+
+    - `InvalidFormatError`<!-- -->: パラメーター `options.coercionType` がに設定され `Office.CoercionType.Html` 、メッセージ本文がプレーン テキストで表示されます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSignatureAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: メールの本文で設定する署名を表す文字列。 この文字列は 30,000 文字に制限されます。
+      type: string
+    - id: callback
+      description: オプション。 メソッドが完了すると、パラメーターで渡される関数は、型の 1 つの `callback` パラメーターで呼び出されます。 `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 9b99a306947146c1a9eaa67d0e64c8964bc21778
+  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 11/02/2021
+  ms.locfileid: "60664008"
