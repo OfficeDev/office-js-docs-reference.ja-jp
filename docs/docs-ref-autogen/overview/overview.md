@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 06/30/2021
-ms.openlocfilehash: cefe01d6c73086044bb95d833f40f5ad02562cad
-ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+ms.date: 10/25/2021
+ms.openlocfilehash: a1df17ab79d1fee6380658a1e84bce15b32845ca
+ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/13/2021
-ms.locfileid: "60315830"
+ms.lasthandoff: 11/02/2021
+ms.locfileid: "60663039"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Office アドインの JavaScript API リファレンス
 
@@ -68,6 +68,7 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
             <h3>Outlook API</h3>
             <ul>
                 <li><a href="/javascript/api/outlook?view=outlook-js-preview">Mailbox プレビュー</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.11">Mailbox 1.11</a></li>
                 <li><a href="/javascript/api/outlook?view=outlook-js-1.10">Mailbox 1.10</a></li>
                 <li><a href="/javascript/api/outlook?view=outlook-js-1.9">Mailbox 1.9</a></li>
                 <li><a href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
