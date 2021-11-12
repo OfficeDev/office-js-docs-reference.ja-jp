@@ -158,7 +158,22 @@ methods:
   package: excel!
   fullName: calculate(calculationType)
   summary: Excel で現在開いているすべてのブックを再計算します。
-  remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/90-scenarios/performance-optimization.yaml
+
+    await Excel.run(async (context) => {
+      context.application.calculate(Excel.CalculationType.full);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -324,7 +339,48 @@ methods:
 
 
     *Note**: 繰り返し `suspendScreenUpdatingUntilNextSync` 呼び出さない (ループ内など)。 繰り返し呼び出しを行Excelウィンドウがちらつきます。
-  remarks: "\\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/90-scenarios/performance-optimization.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const rowCount = 500;\n    const columnCount = 20;\n\n    const startTime = Date.now();\n    console.log(\"Starting...\");\n\n    if (pauseScreenPainting) {\n        // Note: Don't call `suspendScreenUpdatingUntilNextSync` repeatedly (such as in a loop).\n        // Repeated calls will cause the Excel window to flicker. \n        context.application.suspendScreenUpdatingUntilNextSync();\n    }\n\n    for (let i = 0; i < rowCount; i++) {\n        for (let j = 0; j < columnCount; j++) {\n            let cell = sheet.getCell(i, j);\n            cell.values = [[i * j * Math.random()]];\n            if (untrack) {\n                cell.untrack();\n            }\n        }\n    }\n\n    await context.sync();\n\n    console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);\n});\n```"
+  remarks: >-
+    \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/90-scenarios/performance-optimization.yaml
+
+    await Excel.run(async (context) => {
+      // Recreate the data in the worksheet with random data.
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+      const startTime = Date.now();
+      console.log("Starting...");
+
+      // If other parts of the sample have toggled screen painting off, this will stop screen updating until context.sync is called.
+      if (pauseScreenPainting) {
+        context.application.suspendScreenUpdatingUntilNextSync();
+      }
+
+      for (let i = 1; i < ROW_COUNT; i++) {
+        for (let j = 1; j < COLUMN_COUNT; j++) {
+          let cell = sheet.getCell(i, j);
+          cell.values = [[i * j * Math.random()]];
+
+          // If other parts of the sample have toggled tracking off, we will avoid tracking this range and having to manage the proxy objects.
+          // For more information, see https://docs.microsoft.com/office/dev/add-ins/concepts/resource-limits-and-performance-optimization#untrack-unneeded-proxy-objects
+          if (untrack) {
+            cell.untrack();
+          }
+        }
+      }
+
+      await context.sync();
+
+      console.log(`Ending. Adding ${ROW_COUNT * COLUMN_COUNT} cells took ${Date.now() - startTime} milliseconds`);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -347,9 +403,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d1e7ab36b0e043cf09081cd42c08cd3897c4ec9f
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 5a2bb3e96b2034c347e06a24e7b6fd1f1b006c13
+  ms.sourcegitcommit: d8c112625a77e704fde37a106c2aa39e2468da0b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60329965"
+  ms.lasthandoff: 11/11/2021
+  ms.locfileid: "60916484"
