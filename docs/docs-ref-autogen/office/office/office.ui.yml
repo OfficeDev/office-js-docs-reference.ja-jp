@@ -26,7 +26,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: DialogParentMessageReceivedEventArgs) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: DialogParentMessageReceivedEventArgs) => void, options: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: 追加するイベントの種類を指定します。 これは、次の必要があります。 `Office.EventType.DialogParentMessageReceived`<!-- -->.
@@ -35,10 +35,37 @@ methods:
       description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.DialogParentMessageReceivedEventArgs:interface" />) =&gt; void'
     - id: options
-      description: 省略可能。 コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 省略可能。 ハンドラーの登録が返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: オプション。 ハンドラーの登録が返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: office!Office.UI#addHandlerAsync:member(2)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: 指定したイベントの種類を使用して、オブジェクトにイベント ハンドラーを追加します。
+  remarks: >-
+    **要件セット**: [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    各イベント ハンドラー関数の名前が一意である限り、指定したイベントの種類に対して複数のイベント ハンドラーを追加できます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: DialogParentMessageReceivedEventArgs) => void, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 追加するイベントの種類を指定します。 これは、次の必要があります。 `Office.EventType.DialogParentMessageReceived`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.DialogParentMessageReceivedEventArgs:interface" />) =&gt; void'
+    - id: callback
+      description: オプション。 ハンドラーの登録が返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -157,10 +184,10 @@ methods:
       description: ダイアログで開く最初の完全な HTTPS URL を受け入れる。 相対 URL は使用できません。
       type: string
     - id: options
-      description: 省略可能。 オブジェクトを受け[Office。DialogOptions オブジェクト](xref:office!Office.DialogOptions:interface)を使用してダイアログ表示を定義します。
+      description: オプション。 オブジェクトを受け[Office。DialogOptions オブジェクト](xref:office!Office.DialogOptions:interface)を使用してダイアログ表示を定義します。
       type: <xref uid="office!Office.DialogOptions:interface" />
     - id: callback
-      description: 省略可能。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
+      description: オプション。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Dialog:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -244,7 +271,7 @@ methods:
       description: ダイアログで開く最初の完全な HTTPS URL を受け入れる。 相対 URL は使用できません。
       type: string
     - id: callback
-      description: 省略可能。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
+      description: オプション。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Dialog:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -271,7 +298,7 @@ methods:
       description: ダイアログからメッセージを受け付け、アドインに配信します。 JSON や XML を含む文字列にシリアル化できる情報は、何でも送信できます。
       type: string
     - id: messageOptions
-      description: 省略可能。 メッセージを送信する方法のオプションを提供します。
+      description: オプション。 メッセージを送信する方法のオプションを提供します。
       type: <xref uid="office!Office.DialogMessageOptions:interface" />
     return:
       type: void
@@ -294,9 +321,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 6ce84ed0eadf9b2da16d3aeef71aaa26cf81cf21
-  ms.sourcegitcommit: 299ab01d75899a5547557dd4a40728b385dc16f1
+  ms.openlocfilehash: 6e5b9f60a115fd076f4d863af5217f6e86ccb609
+  ms.sourcegitcommit: 267ec6e5b963fda9cf16c6d3204d638429a9ad54
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 07/22/2021
-  ms.locfileid: "53532754"
+  ms.lasthandoff: 11/24/2021
+  ms.locfileid: "61153192"
