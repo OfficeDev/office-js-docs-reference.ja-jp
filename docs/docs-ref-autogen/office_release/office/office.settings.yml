@@ -1,0 +1,311 @@
+### YamlMime:TSType
+name: Office.Settings
+uid: office!Office.Settings:interface
+package: office!
+fullName: Office.Settings
+summary: ホスト ドキュメントに名前/値のペアとして格納される、作業ウィンドウ アドインまたはコンテンツ アドインのカスタム設定を表します。
+remarks: >-
+  **ホスト**: Excel、PowerPoint、Word
+
+
+  設定オブジェクトのメソッドを使用して作成された設定は、アドインごとに、およびドキュメントごとに保存されます。 つまり、これらの設定は、それを作成したアドインでのみ、かつ設定が保存されているドキュメントからのみ使用できます。
+
+
+  設定の名前は文字列ですが、値には文字列、数値、ブール値、null、オブジェクト、または配列を指定できます。
+
+
+  オブジェクト設定 Document オブジェクトの一部として自動的に読み込まれ、アドインがアクティブ化されると、そのオブジェクトの settings プロパティを呼び出して使用できます。
+
+
+  開発者は、設定を追加または削除した後に saveAsync メソッドを呼び出して、設定をドキュメントに保存します。
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addHandlerAsync(eventType, handler, options, callback)
+  uid: office!Office.Settings#addHandlerAsync:member(1)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, options, callback)
+  summary: >-
+    settingsChanged イベントのイベント ハンドラーを追加します。
+
+
+    **重要**: アドインのコードは、アドインが Excel クライアントで実行されている場合に settingsChanged イベントのハンドラーを登録できますが、Excel on the web で開かれているスプレッドシートがアドインに読み込まれ、複数のユーザーがスプレッドシートを編集している (共同編集) 場合にのみイベントが発生します。 したがって、実際には、settingsChanged イベントは、共同編集のシナリオExcel on the webでのみサポートされます。
+  remarks: >-
+    **要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+
+    各イベント ハンドラー関数の名前が一意である限り、指定した eventType に対して複数のイベント ハンドラーを追加できます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 追加するイベントの種類を指定します。必須です。
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。SettingsChangedEventArgs](xref:office!Office.SettingsChangedEventArgs:interface)<!-- -->. 必須です。
+      type: any
+    - id: options
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: >-
+        オプション。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+
+
+        <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>イベント ハンドラーを追加するとき、取得するデータまたはオブジェクトがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: office!Office.Settings#addHandlerAsync:member(2)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    settingsChanged イベントのイベント ハンドラーを追加します。
+
+
+    **重要**: アドインのコードは、アドインが Excel クライアントで実行されている場合に settingsChanged イベントのハンドラーを登録できますが、Excel on the web で開かれているスプレッドシートがアドインに読み込まれ、複数のユーザーがスプレッドシートを編集している (共同編集) 場合にのみイベントが発生します。 したがって、実際には、settingsChanged イベントは、共同編集のシナリオExcel on the webでのみサポートされます。
+  remarks: "**要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\n各イベント ハンドラー関数の名前が一意である限り、指定した eventType に対して複数のイベント ハンドラーを追加できます。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction addSelectionChangedEventHandler() {\n    Office.context.document.settings.addHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 追加するイベントの種類を指定します。必須です。
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。SettingsChangedEventArgs](xref:office!Office.SettingsChangedEventArgs:interface)<!-- -->. 必須です。
+      type: any
+    - id: callback
+      description: >-
+        省略可能。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+
+
+        <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>イベント ハンドラーを追加するとき、取得するデータまたはオブジェクトがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: get(name)
+  uid: office!Office.Settings#get:member(1)
+  package: office!
+  fullName: get(name)
+  summary: 指定された設定を取得します。
+  remarks: "**要件セット** [:](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)設定\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction displayMySetting() {\n    write('Current value for mySetting: ' + Office.context.document.settings.get('mySetting'));\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'get(name: string): any;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    return:
+      type: any
+      description: JSON シリアル化された値にマップされたプロパティ名を持つオブジェクト。
+- name: refreshAsync(callback)
+  uid: office!Office.Settings#refreshAsync:member(1)
+  package: office!
+  fullName: refreshAsync(callback)
+  summary: ドキュメントに保持されている設定をすべて読み取って、メモリ内に保持されているこれらの設定のコンテンツまたは作業ウィンドウ アドインのコピーを更新します。
+  remarks: "**要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\nこのメソッドは、同じアドインExcel複数のインスタンスが同じドキュメントに対して動作している場合PowerPoint、Word、および PowerPoint 共同編集のシナリオで役立ちます。 各アドインは、ユーザーが開いた時点でドキュメントから読み込まれた設定のメモリ内コピーに対して動作していますので、各ユーザーが使用する設定値は同期を取り戻す可能性があります。これは、アドインのインスタンスが 設定.saveAsync メソッドを呼び出して、そのユーザーのすべての設定をドキュメントに保持するたびに発生する可能性があります。 アドインの settingsChanged イベントのイベント ハンドラーから refreshAsync メソッドを呼び出すと、すべてのユーザーの設定値が更新されます。\n\nrefreshAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して次の情報を返すことができます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>更新された値を持つ Settings オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction refreshSettings() {\n    Office.context.document.settings.refreshAsync(function (asyncResult) {\n        write('Settings refreshed with status: ' + asyncResult.status);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'refreshAsync(callback?: (result: AsyncResult<Office.Settings>) => void): void;'
+    parameters:
+    - id: callback
+      description: オプション。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは、更新[されたOffice.設定](xref:office!Office.Settings:interface)オブジェクトです。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Settings:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: remove(name)
+  uid: office!Office.Settings#remove:member(1)
+  package: office!
+  fullName: remove(name)
+  summary: >-
+    指定された設定を削除します。
+
+
+    **重要**: 設定.remove メソッドは、settings プロパティ バッグのメモリ内コピーにのみ影響を与える点に注意してください。 To persist the removal of the specified setting in the document, at some point after calling the Settings.remove method and before the add-in is closed, you must call the Settings.saveAsync method.
+  remarks: >-
+    **要件セット** [:](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)設定
+
+
+    null は設定として有効な値です。したがって、 null を設定に割り当ててもその設定が設定プロパティ バッグから削除されるわけではありません。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function removeMySetting() {
+        Office.context.document.settings.remove('mySetting');
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(name: string): void;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, options, callback)
+  uid: office!Office.Settings#removeHandlerAsync:member(1)
+  package: office!
+  fullName: removeHandlerAsync(eventType, options, callback)
+  summary: settingsChanged イベントのイベント ハンドラーを削除します。
+  remarks: >-
+    **要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+
+    removeHandlerAsync メソッドを呼び出す際にオプションのハンドラー パラメーターを省略すると、指定した eventType のすべてのイベント ハンドラーが削除されます。
+
+
+    コールバック パラメーターに渡した関数が実行すると、コールバック関数の唯一のパラメーターからアクセスできる AsyncResult オブジェクトが受け取ります。
+
+
+    removeHandlerAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して、次の情報を返します。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 削除するイベントの型を指定します。必須です。
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: options
+      description: 削除するイベント ハンドラーまたはハンドラーを決定するオプションを提供します。
+      type: <xref uid="office!Office.RemoveHandlerOptions:interface" />
+    - id: callback
+      description: オプション。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: office!Office.Settings#removeHandlerAsync:member(2)
+  package: office!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: settingsChanged イベントのイベント ハンドラーを削除します。
+  remarks: "**要件セット**: [セットに含めない](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)\n\nremoveHandlerAsync メソッドを呼び出す際にオプションのハンドラー パラメーターを省略すると、指定した eventType のすべてのイベント ハンドラーが削除されます。\n\nコールバック パラメーターに渡した関数が実行すると、コールバック関数の唯一のパラメーターからアクセスできる AsyncResult オブジェクトが受け取ります。\n\nremoveHandlerAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して、次の情報を返します。\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction removeSettingsChangedEventHandler() {\n    Office.context.document.settings.removeHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 削除するイベントの型を指定します。必須です。
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: callback
+      description: オプション。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(options, callback)
+  uid: office!Office.Settings#saveAsync:member(1)
+  package: office!
+  fullName: saveAsync(options, callback)
+  summary: 設定プロパティ バッグのメモリ内コピーをドキュメントに保持します。
+  remarks: >-
+    **要件セット** [:](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)設定
+
+
+    アドイン によって過去に保存された設定は、アプリの初期化時に読み込まれます。したがって、セッションの実行中に set および get メソッドを使用し、設定プロパティ バッグのメモリ内コピーで作業できます。これらの設定を アドイン の次回使用時にも使用できるように保存するときは、saveAsync メソッドを使用します。
+
+
+    **注**: saveAsync メソッドは、メモリ内設定プロパティ バッグをドキュメント ファイルに保持します。 ただし、ドキュメント ファイル自体に対する変更は、ユーザー (または AutoRecover 設定) がドキュメントをファイル システムに保存した場合にのみ保存されます。 refreshAsync メソッドは、同じアドインの他のインスタンスが設定を変更し、これらの変更をすべてのインスタンスで使用できる必要がある場合にのみ、共同編集シナリオで役立ちます。
+
+
+    <table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(options?: SaveSettingsOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: options
+      description: 設定を保存するためのオプションを提供します。
+      type: <xref uid="office!Office.SaveSettingsOptions:interface" />
+    - id: callback
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback)
+  uid: office!Office.Settings#saveAsync:member(2)
+  package: office!
+  fullName: saveAsync(callback)
+  summary: 設定プロパティ バッグのメモリ内コピーをドキュメントに保持します。
+  remarks: "**要件セット** [:](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)設定\n\nアドイン によって過去に保存された設定は、アプリの初期化時に読み込まれます。したがって、セッションの実行中に set および get メソッドを使用し、設定プロパティ バッグのメモリ内コピーで作業できます。これらの設定を アドイン の次回使用時にも使用できるように保存するときは、saveAsync メソッドを使用します。\n\n**注**: saveAsync メソッドは、メモリ内設定プロパティ バッグをドキュメント ファイルに保持します。 ただし、ドキュメント ファイル自体に対する変更は、ユーザー (または AutoRecover 設定) がドキュメントをファイル システムに保存した場合にのみ保存されます。 refreshAsync メソッドは、同じアドインの他のインスタンスが設定を変更し、これらの変更をすべてのインスタンスで使用できる必要がある場合にのみ、共同編集シナリオで役立ちます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>取得するオブジェクトまたはデータがないため、常に undefined を返します。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nfunction persistSettings() {\n    Office.context.document.settings.saveAsync(function (asyncResult) {\n        write('Settings saved with status: ' + asyncResult.status);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: callback
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: set(name, value)
+  uid: office!Office.Settings#set:member(1)
+  package: office!
+  fullName: set(name, value)
+  summary: >-
+    指定された設定を行うかまたは作成します。
+
+
+    **重要**: 設定.set メソッドは、settings プロパティ バッグのメモリ内コピーにのみ影響を与える点に注意してください。 To make sure that additions or changes to settings will be available to your add-in the next time the document is opened, at some point after calling the Settings.set method and before the add-in is closed, you must call the Settings.saveAsync method to persist settings in the document.
+  remarks: >-
+    **要件セット** [:](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)設定
+
+
+    set メソッドは、指定された名前が存在しない場合は新しい設定を作成するか、settings プロパティ バッグのメモリ内コピーに指定した名前の既存の設定を設定します。 Settings.saveAsync メソッドを呼び出した後で、その値はそのデータ型のシリアル化された JSON 表現としてドキュメントに格納されます。
+
+
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    function setMySetting() {
+        Office.context.document.settings.set('mySetting', 'mySetting value');
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(name: string, value: any): void;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    - id: value
+      description: Specifies the value to be stored.
+      type: any
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 35a419da62de7186438e06ca16533d8045bfab01
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61280641"

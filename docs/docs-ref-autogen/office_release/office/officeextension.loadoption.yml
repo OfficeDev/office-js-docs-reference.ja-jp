@@ -1,0 +1,124 @@
+### YamlMime:TSType
+name: OfficeExtension.LoadOption
+uid: office!OfficeExtension.LoadOption:interface
+package: office!
+fullName: OfficeExtension.LoadOption
+summary: 読み込むオブジェクトのプロパティを指定します。 この読み込みは、sync() メソッドが実行されると発生します。 これにより、オブジェクトと対応する JavaScript プロキシ Office間の状態が同期されます。
+remarks: >-
+  Word の場合、プロパティとページング情報を指定する優先メソッドは、文字列リテラルを使用します。 最初の 2 つの例は、段落コレクションの段落のテキストおよびフォント サイズのプロパティを要求するための推奨される方法を示しています。
+
+
+  `context.load(paragraphs, 'text, font/size');`
+
+
+  `paragraphs.load('text, font/size');`
+
+
+  次に、オブジェクト表記 (ページングを含む) を使用する、類似の例を示します。
+
+
+  `context.load(paragraphs, {select: 'text, font/size', expand: 'font', top: 50, skip: 0});`
+
+
+  `paragraphs.load({select: 'text, font/size', expand: 'font', top: 50, skip: 0});`
+
+
+  select ステートメントのフォント オブジェクトで特定のプロパティを指定しない場合、すべてのフォント プロパティが読み込まれることを expand ステートメントが単独で示します。
+
+
+  #### <a name="examples"></a>例
+
+
+  ```javascript
+
+  // This example shows how to get the paragraphs in the Word document
+
+  // along with their text and font size properties.
+
+
+  // Run a batch operation against the Word object model.
+
+  Word.run(function (context) {
+      // Create a proxy object for the paragraphs collection.
+      var paragraphs = context.document.body.paragraphs;
+
+      // Queue a commmand to load the text and font properties.
+      // It is best practice to always specify the property set.
+      // Otherwise, all properties are returned on the object.
+      context.load(paragraphs, 'text, font/size');
+
+      // Synchronize the document state by executing the queued commands,
+      // and return a promise to indicate task completion.
+      return context.sync().then(function () {
+          // Insert code that works with the paragraphs loaded by context.load().
+      })
+  })
+
+  .catch(function (error) {
+      console.log('Error: ' + JSON.stringify(error));
+      if (error instanceof OfficeExtension.Error) {
+          console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+      }
+  });
+
+  ```
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: expand
+  uid: office!OfficeExtension.LoadOption#expand:member
+  package: office!
+  fullName: expand
+  summary: 読み込むナビゲーション プロパティを指定する、コンマで区切られた文字列、または文字列の配列。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'expand?: string | string[];'
+    return:
+      type: string | string[]
+- name: select
+  uid: office!OfficeExtension.LoadOption#select:member
+  package: office!
+  fullName: select
+  summary: 読み込むプロパティを指定する、コンマで区切られた文字列、または文字列の配列。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'select?: string | string[];'
+    return:
+      type: string | string[]
+- name: skip
+  uid: office!OfficeExtension.LoadOption#skip:member
+  package: office!
+  fullName: skip
+  summary: コレクションの種類でのみ使用できます。 結果に含まれていないスキップするコレクション内のアイテムの数を指定します。 top を指定すると、指定した数のアイテムをスキップした後、結果セットが開始されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'skip?: number;'
+    return:
+      type: number
+- name: top
+  uid: office!OfficeExtension.LoadOption#top:member
+  package: office!
+  fullName: top
+  summary: コレクションの種類でのみ使用できます。 結果に含めることができるコレクション項目の最大数を指定します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'top?: number;'
+    return:
+      type: number
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// This OneNote example shows how to get the page title and indentation level\n// of the top five pages in the current section.\nOneNote.run(function (context) {\n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n\n    // Queue a command to load the pages.           \n    pages.load({ \"select\":\"title,pageLevel\", \"top\":5, \"skip\":0 });\n    return context.sync()\n        .then(function() {\n            // Iterate through the collection of pages.    \n            $.each(pages.items, function(index, page) {\n                // Show some properties.\n                console.log(\"Page title: \" + page.title);\n                console.log(\"Indentation level: \" + page.pageLevel);\n            });\n        }).catch(function(error) {\n            console.log(\"Error: \" + error);\n            if (error instanceof OfficeExtension.Error) {\n                console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n            }\n        })\n    });\n```"
+metadata:
+  ms.openlocfilehash: e56a6f497ec6d1ed4b5d9efa8c60e8eef91bb6dd
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61280412"

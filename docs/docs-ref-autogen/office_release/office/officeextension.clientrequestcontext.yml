@@ -1,0 +1,151 @@
+### YamlMime:TSType
+name: OfficeExtension.ClientRequestContext
+uid: office!OfficeExtension.ClientRequestContext:class
+package: office!
+fullName: OfficeExtension.ClientRequestContext
+summary: アプリケーションのホストへの要求を容易にする抽象 RequestContext オブジェクトOfficeします。 and `Excel.run` メソッド `Word.run` は、要求コンテキストを提供します。
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+- name: (constructor)(url)
+  uid: office!OfficeExtension.ClientRequestContext:constructor(1)
+  package: office!
+  fullName: (constructor)(url)
+  summary: クラスの新しいインスタンスを作成 `ClientRequestContext` する
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'constructor(url?: string);'
+    parameters:
+    - id: url
+      description: ''
+      type: string
+properties:
+- name: debugInfo
+  uid: office!OfficeExtension.ClientRequestContext#debugInfo:member
+  package: office!
+  fullName: debugInfo
+  summary: デバッグ情報
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly debugInfo: RequestContextDebugInfo;'
+    return:
+      type: <xref uid="office!OfficeExtension.RequestContextDebugInfo:interface" />
+- name: requestHeaders
+  uid: office!OfficeExtension.ClientRequestContext#requestHeaders:member
+  package: office!
+  fullName: requestHeaders
+  summary: 要求ヘッダー
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'requestHeaders: { [name: string]: string };'
+    return:
+      type: '{ [name: string]: string }'
+- name: trackedObjects
+  uid: office!OfficeExtension.ClientRequestContext#trackedObjects:member
+  package: office!
+  fullName: trackedObjects
+  summary: ドキュメントの周囲の変更に基づいて自動調整のために追跡されるオブジェクトのコレクション。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'trackedObjects: TrackedObjects;'
+    return:
+      type: <xref uid="office!OfficeExtension.TrackedObjects:class" />
+methods:
+- name: load(object, option)
+  uid: office!OfficeExtension.ClientRequestContext#load:member(1)
+  package: office!
+  fullName: load(object, option)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(object: ClientObject, option?: string | string[] | LoadOption): void;'
+    parameters:
+    - id: object
+      description: プロパティが読み込まれるオブジェクト。
+      type: <xref uid="office!OfficeExtension.ClientObject:class" />
+    - id: option
+      description: 読み込むプロパティ、 [または OfficeExtension.LoadOption](xref:office!OfficeExtension.LoadOption:interface) オブジェクトを指定する、コンマで区切られた文字列、または文字列の配列。
+      type: string | string[] | <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: void
+      description: ''
+- name: loadRecursive(object, options, maxDepth)
+  uid: office!OfficeExtension.ClientRequestContext#loadRecursive:member(1)
+  package: office!
+  fullName: loadRecursive(object, options, maxDepth)
+  summary: >-
+    オブジェクトとそのナビゲーション プロパティの指定したプロパティを再帰的に読み込むコマンドをキューに入れられます。
+
+
+    プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'loadRecursive(object: ClientObject, options: { [typeName: string]: string | string[] | LoadOption }, maxDepth?: number): void;'
+    parameters:
+    - id: object
+      description: 読み込まれるオブジェクト。
+      type: <xref uid="office!OfficeExtension.ClientObject:class" />
+    - id: options
+      description: '種類の読み込みオプションのキーと値のペア `{ "Workbook": "worksheets,tables",  "Worksheet": "tables",  "Tables": "name" }`'
+      type: '{ [typeName: string]: string | string[] | <xref uid="office!OfficeExtension.LoadOption:interface" /> }'
+    - id: maxDepth
+      description: 再帰的な最大深度。
+      type: number
+    return:
+      type: void
+      description: ''
+- name: sync(passThroughValue)
+  uid: office!OfficeExtension.ClientRequestContext#sync:member(1)
+  package: office!
+  fullName: sync(passThroughValue)
+  summary: 要求コンテキストでキューに入った命令を実行し、コードで使用するために読み込まれた Office オブジェクトのプロパティを取得することにより、JavaScript プロキシ オブジェクトと Office ドキュメントの間で状態を同期します。 このメソッドは、同期が完了すると解決される promise を返します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'sync<T>(passThroughValue?: T): Promise<T>;'
+    parameters:
+    - id: passThroughValue
+      description: ''
+      type: T
+    return:
+      type: Promise&lt;T&gt;
+      description: ''
+- name: trace(message)
+  uid: office!OfficeExtension.ClientRequestContext#trace:member(1)
+  package: office!
+  fullName: trace(message)
+  summary: キューにトレース メッセージを追加します。 エラーによって返される約束が拒否された場合、実行されたトレース メッセージすべてが含まれる `context.sync()` OfficeExtension.Error オブジェクトに .traceMessages 配列が追加されます。 これらのメッセージは、プログラムの実行シーケンスを監視し、エラーの原因を検出するのに役立ちます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'trace(message: string): void;'
+    parameters:
+    - id: message
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: c0825a8a62900b93b93165e1614a8fbe6157ea77
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61281347"

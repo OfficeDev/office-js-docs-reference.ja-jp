@@ -1,0 +1,329 @@
+### YamlMime:TSType
+name: Office.UI
+uid: office!Office.UI:interface
+package: office!
+fullName: Office.UI
+summary: >-
+  ダイアログ ボックスなどの UI コンポーネントを作成および操作するために使用できるオブジェクトとメソッドを、Office提供します。
+
+
+  [アドイン[でダイアログ API をOfficeする] を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins)<!-- -->詳細については、「」を参照してください。
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addHandlerAsync(eventType, handler, options, callback)
+  uid: office!Office.UI#addHandlerAsync:member(1)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, options, callback)
+  summary: 指定したイベントの種類を使用して、オブジェクトにイベント ハンドラーを追加します。
+  remarks: >-
+    **要件セット**: [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    各イベント ハンドラー関数の名前が一意である限り、指定したイベントの種類に対して複数のイベント ハンドラーを追加できます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: DialogParentMessageReceivedEventArgs) => void, options: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 追加するイベントの種類を指定します。 これは、次の必要があります。 `Office.EventType.DialogParentMessageReceived`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.DialogParentMessageReceivedEventArgs:interface" />) =&gt; void'
+    - id: options
+      description: コールバックで使用するために、任意の種類のコンテキスト データを変更されずに保持するためのオプションを提供します。
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: 省略可能。 ハンドラーの登録が返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: office!Office.UI#addHandlerAsync:member(2)
+  package: office!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: 指定したイベントの種類を使用して、オブジェクトにイベント ハンドラーを追加します。
+  remarks: >-
+    **要件セット**: [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    各イベント ハンドラー関数の名前が一意である限り、指定したイベントの種類に対して複数のイベント ハンドラーを追加できます。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (result: DialogParentMessageReceivedEventArgs) => void, callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: 追加するイベントの種類を指定します。 これは、次の必要があります。 `Office.EventType.DialogParentMessageReceived`<!-- -->.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: 追加するイベント ハンドラー関数で、パラメーターの種類は[Office。DialogParentMessageReceivedEventArgs](xref:office!Office.DialogParentMessageReceivedEventArgs:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.DialogParentMessageReceivedEventArgs:interface" />) =&gt; void'
+    - id: callback
+      description: 省略可能。 ハンドラーの登録が返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: closeContainer()
+  uid: office!Office.UI#closeContainer:member(1)
+  package: office!
+  fullName: closeContainer()
+  summary: JavaScript が実行されている UI コンテナーを閉じます。
+  remarks: >-
+    **ホスト**: Excel、Outlook (最小要件セット: メールボックス 1.5)、PowerPoint、Word
+
+
+    **要件セット**:
+
+
+    - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.5](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    このメソッドの動作は、次の方法で指定されます。
+
+
+    - UI レス コマンド ボタンから呼び出されます。効果はありません。 displayDialogAsync によって開かれたダイアログは開いたままになります。
+
+
+    - 作業ウィンドウから呼び出される: 作業ウィンドウが閉じます。 displayDialogAsync で開いたダイアログも閉じます。 作業ウィンドウがピン留めをサポートし、ユーザーによってピン留めされた場合、ピン留めは解除されます。
+
+
+    - モジュール拡張機能から呼び出されます。効果はありません。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'closeContainer(): void;'
+    return:
+      type: void
+      description: ''
+- name: displayDialogAsync(startAddress, options, callback)
+  uid: office!Office.UI#displayDialogAsync:member(1)
+  package: office!
+  fullName: displayDialogAsync(startAddress, options, callback)
+  summary: ユーザーから情報を表示または収集したり、Web ナビゲーションを容易にするためのダイアログを表示します。
+  remarks: >-
+    **ホスト**: Excel、Outlook、PowerPoint、Word
+
+
+    **要件セット**:
+
+
+    - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    このメソッドは、Excel、PowerPoint、または Word アドインの DialogApi 要件セット、および Outlook のメールボックス要件セット 1.4 で使用できます。 マニフェストで要件セットを指定する方法の詳細については、「ホストと API の要件を指定[Office」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+
+
+    最初のページは、親ページ (startAddress パラメーター) と同じドメイン上に含める必要があります。 初期ページが読み込まれた後、他のドメインに移動できます。
+
+
+    すべてのページ呼び `Office.context.ui.messageParent` 出しは、親ページと同じドメイン上に含める必要があります。
+
+
+    **設計上の考慮事項**:
+
+
+    ダイアログ ボックスの設計には次のような考慮事項が適用されます。
+
+
+    - アドインOffice作業ウィンドウで開くことができるダイアログ ボックスは、いつでも 1 つのみです。 アドイン コマンド (カスタム リボン ボタンまたはメニュー項目) から、複数のダイアログを同時に開く場合があります。
+
+
+    - ユーザーは、すべてのダイアログ ボックスを移動およびサイズ変更できます。
+
+
+    - すべてのダイアログ ボックスは、画面の中央に開かれます。
+
+
+    - ダイアログ ボックスは、ホスト アプリケーションの前面に、作成された順序で表示されます。
+
+
+    ダイアログ ボックスは次のような場合に使用します。
+
+
+    - ユーザーの資格情報を収集する認証ページを表示します。
+
+
+    - ShowTaskpane または ExecuteAction コマンドからエラー/進行状況/入力画面を表示します。
+
+
+    - ユーザーがタスクの完了に利用できる表示領域を一時的に拡大します。
+
+
+    ドキュメントとの対話にはダイアログ ボックスを使用しないでください。代わりに作業ウィンドウを使用してください。
+
+
+    **displayDialogAsync エラー**:
+
+
+    <table> <tr> <th>コード番号</th> <th>意味</th> </tr> <tr> <td>12004</td> <td>displayDialogAsync に渡される URL のドメインは信頼できません。 ドメインは、ホスト ページと同じドメイン (プロトコルとポート番号を含む) にするか、またはアドイン マニフェストの `AppDomains` セクションで登録する必要があります。</td> </tr> <tr> <td>12005</td> <td>displayDialogAsync に渡される URL は、HTTP プロトコルを使用します。 HTTPS が必要です。 (Office の一部のバージョンでは、12004 で返されるのと同じエラー メッセージが、12005 でも返されます)。</td> </tr> <tr> <td>12007</td> <td>ダイアログ ボックスは、作業ウィンドウで既に開いています。作業ウィンドウ アドインで一度に開けるダイアログ ボックスは 1 つだけです。</td> </tr> <tr> <td>12009</td> <td>ダイアログ ボックスを無視するようにユーザーが選択しました。 このエラーは、ダイアログの表示をアドインに許可しないようにユーザーが選択すると、Office のオンライン バージョンで発生することがあります。</td> </tr> </table>
+
+
+    displayDialogAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して、次の情報を返します。
+
+
+    <table> <tr> <th>プロパティ</th> <th>使用する</th> </tr> <tr> <td>AsyncResult.value</td> <td>Dialog オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>ユーザー定義の object または値を asyncContext パラメーターとして渡した場合に、そのオブジェクトまたは値にアクセスします。</td> </tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult<Dialog>) => void): void;'
+    parameters:
+    - id: startAddress
+      description: ダイアログで開く最初の完全な HTTPS URL を受け入れる。 相対 URL は使用できません。
+      type: string
+    - id: options
+      description: 省略可能。 オブジェクトを受け[Office。DialogOptions オブジェクト](xref:office!Office.DialogOptions:interface)を使用してダイアログ表示を定義します。
+      type: <xref uid="office!Office.DialogOptions:interface" />
+    - id: callback
+      description: 省略可能。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Dialog:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayDialogAsync(startAddress, callback)
+  uid: office!Office.UI#displayDialogAsync:member(2)
+  package: office!
+  fullName: displayDialogAsync(startAddress, callback)
+  summary: ユーザーから情報を表示または収集したり、Web ナビゲーションを容易にするためのダイアログを表示します。
+  remarks: >-
+    **ホスト**: Excel、Outlook、PowerPoint、Word
+
+
+    **要件セット**:
+
+
+    - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.4](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    このメソッドは、Excel、PowerPoint、または Word アドインの DialogApi 要件セット、および Outlook のメールボックス要件セット 1.4 で使用できます。 マニフェストで要件セットを指定する方法の詳細については、「ホストと API の要件を指定[Office」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+
+
+    最初のページは、親ページ (startAddress パラメーター) と同じドメイン上に含める必要があります。 初期ページが読み込まれた後、他のドメインに移動できます。
+
+
+    すべてのページ呼び `Office.context.ui.messageParent` 出しは、親ページと同じドメイン上に含める必要があります。
+
+
+    **設計上の考慮事項**:
+
+
+    ダイアログ ボックスの設計には次のような考慮事項が適用されます。
+
+
+    - アドインOffice作業ウィンドウで開くことができるダイアログ ボックスは、いつでも 1 つのみです。 アドイン コマンド (カスタム リボン ボタンまたはメニュー項目) から、複数のダイアログを同時に開く場合があります。
+
+
+    - ユーザーは、すべてのダイアログ ボックスを移動およびサイズ変更できます。
+
+
+    - すべてのダイアログ ボックスは、画面の中央に開かれます。
+
+
+    - ダイアログ ボックスは、ホスト アプリケーションの前面に、作成された順序で表示されます。
+
+
+    ダイアログ ボックスは次のような場合に使用します。
+
+
+    - ユーザーの資格情報を収集する認証ページを表示します。
+
+
+    - ShowTaskpane または ExecuteAction コマンドからエラー/進行状況/入力画面を表示します。
+
+
+    - ユーザーがタスクの完了に利用できる表示領域を一時的に拡大します。
+
+
+    ドキュメントとの対話にはダイアログ ボックスを使用しないでください。代わりに作業ウィンドウを使用してください。
+
+
+    **displayDialogAsync エラー**:
+
+
+    <table> <tr> <th>コード番号</th> <th>意味</th> </tr> <tr> <td>12004</td> <td>displayDialogAsync に渡される URL のドメインは信頼できません。 ドメインは、ホスト ページと同じドメイン (プロトコルとポート番号を含む) にするか、またはアドイン マニフェストの `AppDomains` セクションで登録する必要があります。</td> </tr> <tr> <td>12005</td> <td>displayDialogAsync に渡される URL は、HTTP プロトコルを使用します。 HTTPS が必要です。 (Office の一部のバージョンでは、12004 で返されるのと同じエラー メッセージが、12005 でも返されます)。</td> </tr> <tr> <td>12007</td> <td>ダイアログ ボックスは、作業ウィンドウで既に開いています。作業ウィンドウ アドインで一度に開けるダイアログ ボックスは 1 つだけです。</td> </tr> <tr> <td>12009</td> <td>ダイアログ ボックスを無視するようにユーザーが選択しました。 このエラーは、ダイアログの表示をアドインに許可しないようにユーザーが選択すると、Office のオンライン バージョンで発生することがあります。</td> </tr> </table>
+
+
+    displayDialogAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して、次の情報を返します。
+
+
+    <table> <tr> <th>プロパティ</th> <th>使用する</th> </tr> <tr> <td>AsyncResult.value</td> <td>Dialog オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>ユーザー定義の object または値を asyncContext パラメーターとして渡した場合に、そのオブジェクトまたは値にアクセスします。</td> </tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayDialogAsync(startAddress: string, callback?: (result: AsyncResult<Dialog>) => void): void;'
+    parameters:
+    - id: startAddress
+      description: ダイアログで開く最初の完全な HTTPS URL を受け入れる。 相対 URL は使用できません。
+      type: string
+    - id: callback
+      description: オプション。 ダイアログ作成の試行を処理するコールバック メソッドを指定できます。 成功した場合、AsyncResult.value は Dialog オブジェクトです。
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Dialog:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: messageParent(message, messageOptions)
+  uid: office!Office.UI#messageParent:member(1)
+  package: office!
+  fullName: messageParent(message, messageOptions)
+  summary: メッセージをダイアログ ボックスからその親/オープナー ページに配信します。
+  remarks: >-
+    **要件セット**:
+
+
+    - [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - パラメーターを `messageOptions` 使用する場合は [、DialogOrigin 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets) も必要です。
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'messageParent(message: string, messageOptions?: DialogMessageOptions): void;'
+    parameters:
+    - id: message
+      description: ダイアログからメッセージを受け付け、アドインに配信します。 JSON や XML を含む文字列にシリアル化できる情報は、何でも送信できます。
+      type: string
+    - id: messageOptions
+      description: 省略可能。 メッセージを送信する方法のオプションを提供します。
+      type: <xref uid="office!Office.DialogMessageOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: openBrowserWindow(url)
+  uid: office!Office.UI#openBrowserWindow:member(1)
+  package: office!
+  fullName: openBrowserWindow(url)
+  summary: ブラウザー ウィンドウを開き、指定した URL を読み込む。
+  remarks: '**要件セット**: [OpenBrowserWindowAPI 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/open-browser-window-api-requirement-sets)'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'openBrowserWindow(url: string): void;'
+    parameters:
+    - id: url
+      description: 開く完全な URL (プロトコル (https など)、ポート番号 (指定されている場合) を含む。
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 6e5b9f60a115fd076f4d863af5217f6e86ccb609
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61281226"
