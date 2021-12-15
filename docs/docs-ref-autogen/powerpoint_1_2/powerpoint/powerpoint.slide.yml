@@ -3,12 +3,8 @@ name: PowerPoint.Slide
 uid: powerpoint!PowerPoint.Slide:class
 package: powerpoint!
 fullName: PowerPoint.Slide
-summary: >-
-  プレゼンテーションの 1 つのスライドを表します。
-
-
-  \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-remarks: ''
+summary: プレゼンテーションの 1 つのスライドを表します。
+remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,12 +25,8 @@ properties:
   uid: powerpoint!PowerPoint.Slide#id:member
   package: powerpoint!
   fullName: id
-  summary: >-
-    スライドの一意の ID を取得します。
-
-
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+  summary: スライドの一意の ID を取得します。
+  remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -46,19 +38,45 @@ methods:
   uid: powerpoint!PowerPoint.Slide#delete:member(1)
   package: powerpoint!
   fullName: delete()
-  summary: >-
-    プレゼンテーションからスライドを削除します。 スライドが存在しない場合は何もしません。
+  summary: プレゼンテーションからスライドを削除します。 スライドが存在しない場合は何もしません。
+  remarks: >-
+    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function(context) {
+      const slides = context.presentation.slides;
+      slides.load("tags/key, tags/value");
+
+      await context.sync();
+
+      for (let i = 0; i < slides.items.length; i++) {
+        let currentSlide = slides.items[i];
+        for (let j = 0; j < currentSlide.tags.items.length; j++) {
+          let currentTag = currentSlide.tags.items[j];
+          if (currentTag.key === "CUSTOMER_TYPE" && currentTag.value === "Premium") {
+            currentSlide.delete();
+          }
+        }
+      }
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'delete(): void;'
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml\nawait PowerPoint.run(async function(context) {\n  const slides = context.presentation.slides;\n  slides.load(\"tags/key, tags/value\");\n\n  await context.sync();\n\n  for (let i = 0; i < slides.items.length; i++) {\n    let currentSlide = slides.items[i];\n    for (let j = 0; j < currentSlide.tags.items.length; j++) {\n      let currentTag = currentSlide.tags.items[j];\n      if (currentTag.key === \"CUSTOMER_TYPE\" && currentTag.value === \"Premium\") {\n        currentSlide.delete();\n      }\n    }\n  }\n\n  await context.sync();\n});\n```"
+      description: ''
 - name: load(options)
   uid: powerpoint!PowerPoint.Slide#load:member(1)
   package: powerpoint!
@@ -122,7 +140,7 @@ methods:
   uid: powerpoint!PowerPoint.Slide#toJSON:member(1)
   package: powerpoint!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の PowerPoint.Slide オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `PowerPoint.Interfaces.SlideData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のPowerPoint。Slide オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`PowerPoint.Interfaces.SlideData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -133,9 +151,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a50c7e5b661531e8d6388625fd35844b78a35632
-  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
+  ms.openlocfilehash: aafc25b1550742ac3863f57bc494f63a5d1be3aa
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/21/2021
-  ms.locfileid: "51910808"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61518657"

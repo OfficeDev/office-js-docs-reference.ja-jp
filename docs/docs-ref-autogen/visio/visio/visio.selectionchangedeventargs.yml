@@ -7,48 +7,48 @@ summary: >-
   SelectionChanged イベントが発生した図形のコレクションに関する情報を提供します。
 
 
-  \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+  \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
 remarks: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar eventResult; // Global Variable to store the EventHandlerResult returned on attaching handler.\n\nfunction AttachHandler() {\n    Visio.run(session, function(ctx) {\n        var doc = ctx.document;\n        eventResult = doc.onSelectionChanged.add(\n            function (args) {\n                console.log(\"Selected Shape Name: \"+args.shapeNames[0]);\n            });\n        return ctx.sync().then(function(){\n            console.log(\"Handler attached\");\n        });\n    }).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n    });\n\n    function onSelectionChanged(args) {\n        console.log(Date.now() + \"Selection Changes Event\" + JSON.stringify(args));\n    }\n}\n\nfunction RemoveHandler() {\n    if (!eventResult || !eventResult.context) {\n        console.log(\"Handler has not been attached\");\n        return;\n    }\n\n    Visio.run(eventResult.context, function(ctx) {\n        eventResult.remove();\n        return ctx.sync().then(function (){\n            eventResult = null;\n            console.log(\"Handler removed\");\n        });\n    }).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n    });\n}\n```"
 isPreview: false
 isDeprecated: false
 type: interface
 properties:
-- name: pageName
-  uid: visio!Visio.SelectionChangedEventArgs#pageName:member
+- name: pageID
+  uid: visio!Visio.SelectionChangedEventArgs#pageID:member
   package: visio!
-  fullName: pageName
+  fullName: pageID
   summary: >-
-    SelectionChanged イベントが発生した ShapeCollection オブジェクトのあるページの名前を取得します。
+    SelectionChanged イベントを発生したページ ID を取得します。
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'pageName: string;'
+    content: 'pageID: number;'
     return:
-      type: string
-- name: shapeNames
-  uid: visio!Visio.SelectionChangedEventArgs#shapeNames:member
+      type: number
+- name: shapeIDs
+  uid: visio!Visio.SelectionChangedEventArgs#shapeIDs:member
   package: visio!
-  fullName: shapeNames
+  fullName: shapeIDs
   summary: >-
-    SelectionChanged イベントが発生した図形名の配列を取得します。
+    SelectionChanged イベントを発生した図形の配列を取得します。
 
 
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'shapeNames: string[];'
+    content: 'shapeIDs: number[];'
     return:
-      type: string[]
+      type: number[]
 metadata:
-  ms.openlocfilehash: e075e3c33adf5ed647ca7b5b5f28975fbc20a762
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 74bbfc093d9e0bd45e8d57e1a867f3f6d7c3a637
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51358026"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61517719"
