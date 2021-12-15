@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 10/25/2021
-ms.openlocfilehash: a1df17ab79d1fee6380658a1e84bce15b32845ca
-ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+ms.date: 12/14/2021
+ms.openlocfilehash: 1921d465002164e56ef200049f499d702fca1355
+ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "60663039"
+ms.lasthandoff: 12/15/2021
+ms.locfileid: "61518020"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Office アドインの JavaScript API リファレンス
 
@@ -110,6 +110,7 @@ JavaScript API for Office を使用すると、Office ホスト アプリケー�
             <h3>PowerPoint API</h3>
             <ul>
                 <li><a href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi プレビュー</a></li>
+                <li><a href="/javascript/api/powerpoint?view=powerpoint-js-1.3">PowerPointApi 1.3</a></li>
                 <li><a href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
                 <li><a href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
                 <li><a href="/javascript/api/office?view=powerpoint-js-preview">共通 API</a></li>

@@ -1,0 +1,136 @@
+### YamlMime:TSPackage
+uid: powerpoint!
+name: powerpoint
+type: package
+summary: ''
+interfaces:
+- powerpoint!PowerPoint.AddSlideOptions:interface
+- powerpoint!PowerPoint.InsertSlideOptions:interface
+- powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.PresentationData:interface
+- powerpoint!PowerPoint.Interfaces.PresentationLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeCollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.SlideCollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.SlideData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutCollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterCollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.TagCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.TagCollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.TagCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.TagData:interface
+- powerpoint!PowerPoint.Interfaces.TagLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.TagUpdateData:interface
+classes:
+- powerpoint!PowerPoint.Application:class
+- powerpoint!PowerPoint.Presentation:class
+- powerpoint!PowerPoint.RequestContext:class
+- powerpoint!PowerPoint.Shape:class
+- powerpoint!PowerPoint.ShapeCollection:class
+- powerpoint!PowerPoint.Slide:class
+- powerpoint!PowerPoint.SlideCollection:class
+- powerpoint!PowerPoint.SlideLayout:class
+- powerpoint!PowerPoint.SlideLayoutCollection:class
+- powerpoint!PowerPoint.SlideMaster:class
+- powerpoint!PowerPoint.SlideMasterCollection:class
+- powerpoint!PowerPoint.Tag:class
+- powerpoint!PowerPoint.TagCollection:class
+enums:
+- powerpoint!PowerPoint.ErrorCodes:enum
+- powerpoint!PowerPoint.InsertSlideFormatting:enum
+functions:
+- name: PowerPoint.createPresentation(base64File)
+  uid: powerpoint!PowerPoint.createPresentation:function(1)
+  package: powerpoint!
+  summary: >-
+    新しいプレゼンテーションを作成して開きます。 必要に応じて、プレゼンテーションに base64 でエンコードされたファイルを事前.pptxできます。
+
+
+    \[[API セット: PowerPointApi 1.1](/office/dev/add-ins/reference/javascript-api-for-office) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'export function createPresentation(base64File?: string): Promise<void>;'
+    parameters:
+    - id: base64File
+      description: 省略可能。 base64 でエンコードされた.pptxファイル。 既定値は null です。
+      type: string
+    return:
+      type: Promise&lt;void&gt;
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar myFile = document.getElementById(\"file\");\nvar reader = new FileReader();\n\nreader.onload = function (event) {\n    // strip off the metadata before the base64-encoded string\n    var startIndex = event.target.result.indexOf(\"base64,\");\n    var copyBase64 = event.target.result.substr(startIndex + 7);\n\n    PowerPoint.createPresentation(copyBase64);        \n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
+- name: PowerPoint.run(batch)
+  uid: powerpoint!PowerPoint.run:function(1)
+  package: powerpoint!
+  summary: 新しい RequestContext を使用して、オブジェクト モデルに対してアクションPowerPoint実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'export function run<T>(batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
+    parameters:
+    - id: batch
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求PowerPointします。 Office と PowerPoint アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから PowerPoint オブジェクト モデルにアクセスするには RequestContext が必要です。
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
+    return:
+      type: Promise&lt;T&gt;
+      description: ''
+- name: PowerPoint.run(object, batch)
+  uid: powerpoint!PowerPoint.run:function(2)
+  package: powerpoint!
+  summary: 以前に作成した API オブジェクトの RequestContext を使用して、PowerPoint オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。 promise が解決されると、実行中に自動的に割り当てられた追跡対象オブジェクトが解放されます。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'export function run<T>(object: OfficeExtension.ClientObject, batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
+    parameters:
+    - id: object
+      description: 以前に作成された API オブジェクト。 バッチは、渡されたオブジェクトと同じ RequestContext を使用します。つまり、オブジェクトに適用された変更は "context.sync()" によって取得されます。
+      type: <xref uid="office!OfficeExtension.ClientObject:class" />
+    - id: batch
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求PowerPointします。 Office と PowerPoint アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから PowerPoint オブジェクト モデルにアクセスするには RequestContext が必要です。
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
+    return:
+      type: Promise&lt;T&gt;
+      description: ''
+- name: PowerPoint.run(objects, batch)
+  uid: powerpoint!PowerPoint.run:function(3)
+  package: powerpoint!
+  summary: 以前に作成した API オブジェクトの RequestContext を使用して、PowerPoint オブジェクト モデルに対してアクションを実行するバッチ スクリプトを実行します。
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
+    parameters:
+    - id: objects
+      description: 以前に作成された API オブジェクトの配列。 配列が検証され、すべてのオブジェクトが同じコンテキストを共有します。 バッチは、この共有 RequestContext を使用します。つまり、これらのオブジェクトに適用された変更は "context.sync()" によって取得されます。
+      type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
+    - id: batch
+      description: RequestContext を取り込み、約束を返す関数 (通常、"context.sync()" の結果だけです)。 context パラメーターは、アプリケーションへの要求PowerPointします。 Office と PowerPoint アプリケーションは 2 つの異なるプロセスで実行されますので、アドインから PowerPoint オブジェクト モデルにアクセスするには RequestContext が必要です。
+      type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
+    return:
+      type: Promise&lt;T&gt;
+      description: ''
+metadata:
+  ms.openlocfilehash: d3d2e261a5b1bb365fa2b2d353bcb2577b9358bc
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.translationtype: MT
+  ms.contentlocale: ja-JP
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61519672"

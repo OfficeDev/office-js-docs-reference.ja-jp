@@ -17,11 +17,11 @@
 ||[getExtendedRange(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getExtendedRange_direction__activeCell_)|指定された方向に基づいて、現在の範囲と範囲の端までの範囲オブジェクトを返します。|
 ||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#getMergedAreasOrNullObject__)|この範囲内の結合領域を表す RangeAreas オブジェクトを返します。|
 ||[getRangeEdge(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getRangeEdge_direction__activeCell_)|指定された方向に対応するデータ領域のエッジ セルである範囲オブジェクトを返します。|
-|[表](/javascript/api/excel/excel.table)|[resize(newRange: Range \| string)](/javascript/api/excel/excel.table#resize_newRange_)|テーブルのサイズを新しい範囲に変更します。|
-|[ブック](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertWorksheetsFromBase64_base64File__options_)|指定したワークシートをソース ブックから現在のブックに挿入します。|
+|[Table](/javascript/api/excel/excel.table)|[resize(newRange: Range \| string)](/javascript/api/excel/excel.table#resize_newRange_)|テーブルのサイズを新しい範囲に変更します。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertWorksheetsFromBase64_base64File__options_)|指定したワークシートをソース ブックから現在のブックに挿入します。|
 ||[onActivated](/javascript/api/excel/excel.workbook#onActivated)|ブックがアクティブ化されると発生します。|
 |[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|イベントの種類を取得します。|
-|[ワークシート](/javascript/api/excel/excel.worksheet)|[onFormulaChanged](/javascript/api/excel/excel.worksheet#onFormulaChanged)|このワークシートで 1 つ以上の数式が変更された場合に発生します。|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[onFormulaChanged](/javascript/api/excel/excel.worksheet#onFormulaChanged)|このワークシートで 1 つ以上の数式が変更された場合に発生します。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onFormulaChanged)|このコレクションのワークシートで 1 つ以上の数式が変更された場合に発生します。|
 |[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formulaDetails)|変更された数式 `FormulaChangedEventDetail` の詳細を含むオブジェクトの配列を取得します。|
 ||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|イベントのソース。|

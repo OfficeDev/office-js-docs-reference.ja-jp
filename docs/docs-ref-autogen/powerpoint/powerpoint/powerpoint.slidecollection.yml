@@ -3,12 +3,8 @@ name: PowerPoint.SlideCollection
 uid: powerpoint!PowerPoint.SlideCollection:class
 package: powerpoint!
 fullName: PowerPoint.SlideCollection
-summary: >-
-  プレゼンテーション内のスライドのコレクションを表します。
-
-
-  \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-remarks: ''
+summary: プレゼンテーション内のスライドのコレクションを表します。
+remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -42,13 +38,33 @@ methods:
   uid: powerpoint!PowerPoint.SlideCollection#add:member(1)
   package: powerpoint!
   fullName: add(options)
-  summary: >-
-    コレクションの最後に新しいスライドを追加します。
+  summary: コレクションの最後に新しいスライドを追加します。
+  remarks: >-
+    \[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/add-slides.yaml
+
+    const chosenMaster = $("#master-id").val() as string;
+
+    const chosenLayout = $("#layout-id").val() as string;
+
+
+    await PowerPoint.run(async function(context) {
+      context.presentation.slides.add({
+        slideMasterId: chosenMaster,
+        layoutId: chosenLayout
+      });
+      await context.sync();
+    });
+
+    ```
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'add(options?: PowerPoint.AddSlideOptions): void;'
@@ -58,17 +74,13 @@ methods:
       type: <xref uid="powerpoint!PowerPoint.AddSlideOptions:interface" />
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/add-slides.yaml\nconst chosenMaster = $(\"#master-id\").val() as string;\nconst chosenLayout = $(\"#layout-id\").val() as string;\n\nawait PowerPoint.run(async function(context) {\n  context.presentation.slides.add({\n    slideMasterId: chosenMaster,\n    layoutId: chosenLayout\n  });\n  await context.sync();\n});\n```"
+      description: ''
 - name: getCount()
   uid: powerpoint!PowerPoint.SlideCollection#getCount:member(1)
   package: powerpoint!
   fullName: getCount()
-  summary: >-
-    コレクション内のスライドの数を取得します。
-
-
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内のスライドの数を取得します。
+  remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -80,12 +92,8 @@ methods:
   uid: powerpoint!PowerPoint.SlideCollection#getItem:member(1)
   package: powerpoint!
   fullName: getItem(key)
-  summary: >-
-    一意の ID を使用してスライドを取得します。
-
-
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+  summary: 一意の ID を使用してスライドを取得します。
+  remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -101,12 +109,38 @@ methods:
   uid: powerpoint!PowerPoint.SlideCollection#getItemAt:member(1)
   package: powerpoint!
   fullName: getItemAt(index)
-  summary: >-
-    コレクション内の 0 から始るインデックスを使用してスライドを取得します。 スライドは、プレゼンテーションに表示される順序と同じ順序で保存されます。
+  summary: コレクション内の 0 から始るインデックスを使用してスライドを取得します。 スライドは、プレゼンテーションに表示される順序と同じ順序で保存されます。
+  remarks: >-
+    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function(context) {
+      let selectedSlideIndex = await getSelectedSlideIndex();
+
+      // Decrement because the getSelectedSlideByIndex method is 1-based,
+      // but the getItemAt method is 0-based.
+      selectedSlideIndex = selectedSlideIndex - 1;
+      const slide = context.presentation.slides.getItemAt(selectedSlideIndex);
+      slide.tags.add("CUSTOMER_TYPE", "Premium");
+
+      await context.sync();
+
+      const audienceTag = slide.tags.getItem("CUSTOMER_TYPE");
+      audienceTag.load("key, value");
+
+      await context.sync();
+
+      console.log("Added key " + JSON.stringify(audienceTag.key) + " with value " + JSON.stringify(audienceTag.value));
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -117,47 +151,13 @@ methods:
       type: number
     return:
       type: <xref uid="powerpoint!PowerPoint.Slide:class" />
-      description: >-
-        指定したインデックスのスライド。 index が範囲を外している場合、エラーがスローされます。
-
-
-        #### <a name="examples"></a>例
-
-
-        ```typescript
-
-        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
-
-        await PowerPoint.run(async function(context) {
-          let selectedSlideIndex = await getSelectedSlideIndex();
-
-          // Decrement because the getSelectedSlideByIndex method is 1-based,
-          // but the getItemAt method is 0-based.
-          selectedSlideIndex = selectedSlideIndex - 1;
-          const slide = context.presentation.slides.getItemAt(selectedSlideIndex);
-          slide.tags.add("CUSTOMER_TYPE", "Premium");
-
-          await context.sync();
-
-          const audienceTag = slide.tags.getItem("CUSTOMER_TYPE");
-          audienceTag.load("key, value");
-
-          await context.sync();
-
-          console.log("Added key " + JSON.stringify(audienceTag.key) + " with value " + JSON.stringify(audienceTag.value));
-        });
-
-        ```
+      description: 指定したインデックスのスライド。 index が範囲を外している場合、エラーがスローされます。
 - name: getItemOrNullObject(id)
   uid: powerpoint!PowerPoint.SlideCollection#getItemOrNullObject:member(1)
   package: powerpoint!
   fullName: getItemOrNullObject(id)
-  summary: >-
-    一意の ID を使用してスライドを取得します。 このようなスライドが存在しない場合は、プロパティが true に設定 `isNullObject` されたオブジェクトが返されます。 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
+  summary: 一意の ID を使用してスライドを取得します。 このようなスライドが存在しない場合は、プロパティが true に設定 `isNullObject` されたオブジェクトが返されます。 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[API セット: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -235,9 +235,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: ee4fd73230c0127091ea76b2262127a4bf3ba9a2
-  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
+  ms.openlocfilehash: 38db05bef6ac687d246e8b529558c13e7f2d017b
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/21/2021
-  ms.locfileid: "51911172"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61517544"

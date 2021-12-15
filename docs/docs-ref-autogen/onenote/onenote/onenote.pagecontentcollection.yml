@@ -3,12 +3,8 @@ name: OneNote.PageContentCollection
 uid: onenote!OneNote.PageContentCollection:class
 package: onenote!
 fullName: OneNote.PageContentCollection
-summary: >-
-  PageContent オブジェクトのコレクションとして、ページのコンテンツを表します。
-
-
-  \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-remarks: ''
+summary: PageContent オブジェクトのコレクションとして、ページのコンテンツを表します。
+remarks: '\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,12 +25,8 @@ properties:
   uid: onenote!OneNote.PageContentCollection#count:member
   package: onenote!
   fullName: count
-  summary: >-
-    コレクション内のページ コンテンツの数を返します。 読み取り専用です。
-
-
-    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  remarks: ''
+  summary: コレクション内のページ コンテンツの数を返します。読み取り専用です。
+  remarks: '\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,12 +50,8 @@ methods:
   uid: onenote!OneNote.PageContentCollection#getItem:member(1)
   package: onenote!
   fullName: getItem(index)
-  summary: >-
-    ID やコレクション内のインデックスで、PageContent オブジェクトを取得します。 読み取り専用です。
-
-
-    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  remarks: ''
+  summary: ID やコレクション内のインデックスで、PageContent オブジェクトを取得します。読み取り専用です。
+  remarks: '\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -79,46 +67,63 @@ methods:
   uid: onenote!OneNote.PageContentCollection#getItemAt:member(1)
   package: onenote!
   fullName: getItemAt(index)
-  summary: >-
-    コレクション内での位置を基にページ コンテンツを取得します。
+  summary: コレクション内での位置を基にページ コンテンツを取得します。
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
 
 
-    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>例
+
+
+    ```javascript
+
+    OneNote.run(function (context) {
+
+        var page = context.application.getActivePage();
+        var pageContents = page.contents;
+        var firstPageContent = pageContents.getItemAt(0);
+        firstPageContent.load('type');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        return context.sync()
+            .then(function () {
+                console.log("The first page content item is of type: " + firstPageContent.type);
+                return context.sync();
+            });
+    })
+
+    .catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemAt(index: number): OneNote.PageContent;'
     parameters:
     - id: index
-      description: 取得するオブジェクトのインデックス値。 0 を起点とする番号になります。
+      description: 取得するオブジェクトのインデックス値。0 を起点とする番号になります。
       type: number
     return:
       type: <xref uid="onenote!OneNote.PageContent:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    var page = context.application.getActivePage();\n    var pageContents = page.contents;\n    var firstPageContent = pageContents.getItemAt(0);\n    firstPageContent.load('type');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"The first page content item is of type: \" + firstPageContent.type);\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: load(option)
+      description: ''
+- name: load(options)
   uid: onenote!OneNote.PageContentCollection#load:member(1)
   package: onenote!
-  fullName: load(option)
-  summary: オブジェクトの指定のプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取るには先に "context.sync()" を呼び出す必要があります。
-  remarks: >-
-    このシグネチャに加えて、このメソッドには次のシグネチャがあります。
-
-
-    `load(option?: string | string[]): OneNote.PageContentCollection` - where option は、コンマで区切られた文字列、または読み込むプロパティを指定する文字列の配列です。
-
-
-    `load(option?: { select?: string; expand?: string; }): OneNote.PageContentCollection` - option.select は読み込むプロパティを指定するコンマ区切りの文字列で、options.expand は読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageContentCollection` - コレクションの種類でのみ使用できます。 これは、前の署名に似ています。 Option.top 結果に含めるコレクション アイテムの最大数を指定します。 Option.skip は、結果に含まれていないスキップするアイテムの数を指定します。 この option.top 指定すると、指定した数のアイテムをスキップした後、結果セットが開始されます。
+  fullName: load(options)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'load(option?: OneNote.Interfaces.PageContentCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.PageContentCollection;'
+    content: 'load(options?: OneNote.Interfaces.PageContentCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.PageContentCollection;'
     parameters:
-    - id: option
-      description: ''
+    - id: options
+      description: 読み込むオブジェクトのプロパティのオプションを提供します。
       type: <xref uid="onenote!OneNote.Interfaces.PageContentCollectionLoadOptions:interface" /> & <xref uid="onenote!OneNote.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="onenote!OneNote.PageContentCollection:class" />
@@ -140,19 +145,19 @@ methods:
     return:
       type: <xref uid="onenote!OneNote.PageContentCollection:class" />
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Queue a command to load the type of each pageContent.\n    pageContents.load(\"type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            $.each(pageContents.items, function(index, pageContent) {\n                console.log(\"PageContent type: \" + pageContent.type);\n            });\n        });\n})                \n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n   var page = context.application.getActivePage();\n   var pageContents = page.contents;\n   pageContents.load('type');\n   var outlines = ;\n   return context.sync()\n       .then(function () {      \n              $.each(pageContents.items, function (index, pageContent) {\n                     console.log(pageContent.type);\n                     if (pageContent.type === 'Outline') {\n                           outlines.push(pageContent);\n                     }\n              });\n              $.each(outlines, function (index, outline) {\n                     outline.load(\"id,paragraphs,paragraphs/type\");\n              });\n              return context.sync();\n       })\n       .then(function () {\n              $.each(outlines, function (index, outline) {\n                     console.log(\"An outline was found with id : \" + outline.id);\n              });\n              return Promise.resolve(outlines);\n       });\n});\n```"
-- name: load(option)
+- name: load(propertyNamesAndPaths)
   uid: onenote!OneNote.PageContentCollection#load:member(3)
   package: onenote!
-  fullName: load(option)
-  summary: ''
+  fullName: load(propertyNamesAndPaths)
+  summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): OneNote.PageContentCollection;'
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): OneNote.PageContentCollection;'
     parameters:
-    - id: option
-      description: ''
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="onenote!OneNote.PageContentCollection:class" />
@@ -174,7 +179,7 @@ methods:
   uid: onenote!OneNote.PageContentCollection#track:member(1)
   package: onenote!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 これは context.trackedObjects.add(thisObject) 呼び出しの省略形です。 ".sync" 呼び出し間で、かつ ".run" バッチの連続実行の外でこのオブジェクトを使用しているとき、オブジェクトであるプロパティを設定したか、あるメソッドを呼び出したときに "InvalidObjectPath" エラーが表示される場合、オブジェクトを最初に作成したときに、追跡対象オブジェクトの集まりにそのオブジェクトを追加しておく必要がありました。
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -187,7 +192,7 @@ methods:
   uid: onenote!OneNote.PageContentCollection#untrack:member(1)
   package: onenote!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 これは context.trackedObjects.remove(thisObject) 呼び出しの省略形です。 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ リリースを有効にするには、"context.sync()" を先に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -198,9 +203,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 978c88e0bc73e105b59519ed777dc7274d81bbe2
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 90688c7d1020377e1d86e9c194dbec874abd5f9e
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51253434"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61516151"

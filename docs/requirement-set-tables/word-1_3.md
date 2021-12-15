@@ -111,7 +111,7 @@
 ||[insertTable(rowCount: number, columnCount: number, insertLocation: Word.InsertLocation, values?: string[][])](/javascript/api/word/word.paragraph#insertTable_rowCount__columnCount__insertLocation__values_)|指定した数の行と列を含むテーブルを挿入します。|
 ||[isLastParagraph](/javascript/api/word/word.paragraph#isLastParagraph)|段落がその親の本文内の最後の段落であることを示します。|
 ||[isListItem](/javascript/api/word/word.paragraph#isListItem)|段落がリスト アイテムであるかどうかを確認します。|
-||[list](/javascript/api/word/word.paragraph#list)|この段落が属するリストを取得します。|
+||[リスト](/javascript/api/word/word.paragraph#list)|この段落が属するリストを取得します。|
 ||[listItem](/javascript/api/word/word.paragraph#listItem)|段落の ListItem を取得します。|
 ||[listItemOrNullObject](/javascript/api/word/word.paragraph#listItemOrNullObject)|段落の ListItem を取得します。|
 ||[listOrNullObject](/javascript/api/word/word.paragraph#listOrNullObject)|この段落が属するリストを取得します。|
@@ -203,7 +203,7 @@
 ||[parentTableOrNullObject](/javascript/api/word/word.table#parentTableOrNullObject)|このテーブルを含むテーブルを取得します。|
 ||[rowCount](/javascript/api/word/word.table#rowCount)|表の行数を取得します。|
 ||[rows](/javascript/api/word/word.table#rows)|すべてのテーブルの行を取得します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.table#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|テーブル オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.table#search_searchText__searchOptions_)|テーブル オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.table#select_selectionMode_)|テーブル、あるいはテーブルの開始位置または終了位置を選択して、Word の UI に移動します。|
 ||[setCellPadding(cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number)](/javascript/api/word/word.table#setCellPadding_cellPaddingLocation__cellPadding_)|セル内のスペースをポイント単位で設定します。|
 ||[shadingColor](/javascript/api/word/word.table#shadingColor)|網かけの色を取得および設定します。|
@@ -269,7 +269,7 @@
 ||[parentTable](/javascript/api/word/word.tablerow#parentTable)|親テーブルを取得します。|
 ||[preferredHeight](/javascript/api/word/word.tablerow#preferredHeight)|適切な行の高さをポイント単位で取得および設定します。|
 ||[rowIndex](/javascript/api/word/word.tablerow#rowIndex)|親テーブル内の行のインデックスを取得します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.tablerow#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|行のスコープで指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.tablerow#search_searchText__searchOptions_)|行のスコープで指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.tablerow#select_selectionMode_)|行を選択し、その行に Word の UI を移動します。|
 ||[setCellPadding(cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number)](/javascript/api/word/word.tablerow#setCellPadding_cellPaddingLocation__cellPadding_)|セル内のスペースをポイント単位で設定します。|
 ||[shadingColor](/javascript/api/word/word.tablerow#shadingColor)|網かけの色を取得および設定します。|

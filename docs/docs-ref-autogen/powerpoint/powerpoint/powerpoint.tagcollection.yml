@@ -3,13 +3,9 @@ name: PowerPoint.TagCollection
 uid: powerpoint!PowerPoint.TagCollection:class
 package: powerpoint!
 fullName: PowerPoint.TagCollection
-summary: >-
-  タグのコレクションを表します。
-
-
-  \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-remarks: ''
-isPreview: true
+summary: タグのコレクションを表します。
+remarks: '\[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+isPreview: false
 isDeprecated: false
 type: class
 properties:
@@ -19,7 +15,7 @@ properties:
   fullName: context
   summary: オブジェクトに関連付けられた要求コンテキスト。 これにより、アドインのプロセスがホスト アプリケーションのプロセスOfficeに接続されます。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'context: RequestContext;'
@@ -31,7 +27,7 @@ properties:
   fullName: items
   summary: このコレクション内に読み込まれた子アイテムを取得します。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'readonly items: PowerPoint.Tag[];'
@@ -42,13 +38,37 @@ methods:
   uid: powerpoint!PowerPoint.TagCollection#add:member(1)
   package: powerpoint!
   fullName: add(key, value)
-  summary: >-
-    コレクションの末尾に新しいタグを追加します。 コレクションに既に存在する場合は、既存のタグの値が指定のタグに `key` 置き換えられる `value`<!-- -->.
+  summary: コレクションの末尾に新しいタグを追加します。 コレクションに既に存在する場合は、既存のタグの値が指定のタグに `key` 置き換えられる `value`<!-- -->.
+  remarks: >-
+    \[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function(context) {
+      const slide = context.presentation.slides.getItemAt(0);
+      slide.tags.add("OCEAN", "Indian");
+      slide.tags.add("PLANET", "Jupiter");
+      slide.tags.add("CONTINENT", "Antarctica");
+
+      await context.sync();
+
+      slide.tags.load("key, value");
+
+      await context.sync();
+
+      for (let i = 0; i < slide.tags.items.length; i++) {
+        console.log("Added key " + JSON.stringify(slide.tags.items[i].key) + " with value " +        JSON.stringify(slide.tags.items[i].value));
+      }
+    });
+
+    ```
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'add(key: string, value: string): void;'
@@ -61,18 +81,35 @@ methods:
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml\nawait PowerPoint.run(async function(context) {\n  const slide = context.presentation.slides.getItemAt(0);\n  slide.tags.add(\"OCEAN\", \"Indian\");\n  slide.tags.add(\"PLANET\", \"Jupiter\");\n  slide.tags.add(\"CONTINENT\", \"Antarctica\");\n\n  await context.sync();\n\n  slide.tags.load(\"key, value\");\n\n  await context.sync();\n\n  for (let i = 0; i < slide.tags.items.length; i++) {\n    console.log(\"Added key \" + JSON.stringify(slide.tags.items[i].key) + \" with value \" +        JSON.stringify(slide.tags.items[i].value));\n  }\n});\n```"
+      description: ''
 - name: delete(key)
   uid: powerpoint!PowerPoint.TagCollection#delete:member(1)
   package: powerpoint!
   fullName: delete(key)
-  summary: >-
-    このコレクション内の指定されたタグ `key` を削除します。 存在しない場合 `key` は何もしません。
+  summary: このコレクション内の指定されたタグ `key` を削除します。 存在しない場合 `key` は何もしません。
+  remarks: >-
+    \[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function (context) {
+      let presentationTags = context.presentation.tags;
+
+      presentationTags.delete("COLOR");
+
+      await context.sync();
+
+      console.log(JSON.stringify(presentationTags));
+    });
+
+    ```
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'delete(key: string): void;'
@@ -82,18 +119,14 @@ methods:
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml\nawait PowerPoint.run(async function (context) {\n  let presentationTags = context.presentation.tags;\n\n  presentationTags.delete(\"COLOR\");\n\n  await context.sync();\n\n  console.log(JSON.stringify(presentationTags));\n});\n```"
+      description: ''
 - name: getCount()
   uid: powerpoint!PowerPoint.TagCollection#getCount:member(1)
   package: powerpoint!
   fullName: getCount()
-  summary: >-
-    コレクション内のタグの数を取得します。
-
-
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+  summary: コレクション内のタグの数を取得します。
+  remarks: '\[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'getCount(): OfficeExtension.ClientResult<number>;'
@@ -104,13 +137,39 @@ methods:
   uid: powerpoint!PowerPoint.TagCollection#getItem:member(1)
   package: powerpoint!
   fullName: getItem(key)
-  summary: >-
-    一意の ID を使用してタグを取得します。 タグが存在しない場合、エラーがスローされます。
+  summary: 一意の ID を使用してタグを取得します。 タグが存在しない場合、エラーがスローされます。
+  remarks: >-
+    \[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
 
 
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function(context) {
+      let selectedSlideIndex = await getSelectedSlideIndex();
+
+      // Decrement because the getSelectedSlideByIndex method is 1-based,
+      // but the getItemAt method is 0-based.
+      selectedSlideIndex = selectedSlideIndex - 1;
+      const slide = context.presentation.slides.getItemAt(selectedSlideIndex);
+      slide.tags.add("CUSTOMER_TYPE", "Premium");
+
+      await context.sync();
+
+      const audienceTag = slide.tags.getItem("CUSTOMER_TYPE");
+      audienceTag.load("key, value");
+
+      await context.sync();
+
+      console.log("Added key " + JSON.stringify(audienceTag.key) + " with value " + JSON.stringify(audienceTag.value));
+    });
+
+    ```
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItem(key: string): PowerPoint.Tag;'
@@ -120,48 +179,14 @@ methods:
       type: string
     return:
       type: <xref uid="powerpoint!PowerPoint.Tag:class" />
-      description: >-
-        一意の ID を持つタグ。 このようなタグが存在しない場合は、エラーがスローされます。
-
-
-        #### <a name="examples"></a>例
-
-
-        ```typescript
-
-        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
-
-        await PowerPoint.run(async function(context) {
-          let selectedSlideIndex = await getSelectedSlideIndex();
-
-          // Decrement because the getSelectedSlideByIndex method is 1-based,
-          // but the getItemAt method is 0-based.
-          selectedSlideIndex = selectedSlideIndex - 1;
-          const slide = context.presentation.slides.getItemAt(selectedSlideIndex);
-          slide.tags.add("CUSTOMER_TYPE", "Premium");
-
-          await context.sync();
-
-          const audienceTag = slide.tags.getItem("CUSTOMER_TYPE");
-          audienceTag.load("key, value");
-
-          await context.sync();
-
-          console.log("Added key " + JSON.stringify(audienceTag.key) + " with value " + JSON.stringify(audienceTag.value));
-        });
-
-        ```
+      description: 一意の ID を持つタグ。 このようなタグが存在しない場合は、エラーがスローされます。
 - name: getItemAt(index)
   uid: powerpoint!PowerPoint.TagCollection#getItemAt:member(1)
   package: powerpoint!
   fullName: getItemAt(index)
-  summary: >-
-    コレクション内の 0 から始るインデックスを使用してタグを取得します。 インデックスが範囲を外している場合は、エラーがスローされます。
-
-
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+  summary: コレクション内の 0 から始るインデックスを使用してタグを取得します。 インデックスが範囲を外している場合は、エラーがスローされます。
+  remarks: '\[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemAt(index: number): PowerPoint.Tag;'
@@ -176,13 +201,9 @@ methods:
   uid: powerpoint!PowerPoint.TagCollection#getItemOrNullObject:member(1)
   package: powerpoint!
   fullName: getItemOrNullObject(key)
-  summary: >-
-    一意の ID を使用してタグを取得します。 そのようなタグが存在しない場合は、プロパティが true に設定 `isNullObject` されたオブジェクトが返されます。
-
-
-    \[[API セット: PowerPointApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
+  summary: 一意の ID を使用してタグを取得します。 そのようなタグが存在しない場合は、プロパティが true に設定 `isNullObject` されたオブジェクトが返されます。
+  remarks: '\[[API セット: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'getItemOrNullObject(key: string): PowerPoint.Tag;'
@@ -199,7 +220,7 @@ methods:
   fullName: load(options)
   summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'load(options?: PowerPoint.Interfaces.TagCollectionLoadOptions & PowerPoint.Interfaces.CollectionLoadOptions): PowerPoint.TagCollection;'
@@ -216,7 +237,7 @@ methods:
   fullName: load(propertyNames)
   summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'load(propertyNames?: string | string[]): PowerPoint.TagCollection;'
@@ -233,7 +254,7 @@ methods:
   fullName: load(propertyNamesAndPaths)
   summary: オブジェクトの指定されたプロパティを読み込むコマンドを待ち行列に入れます。 プロパティを読み取る前に、`context.sync()` を呼び出す必要があります。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): PowerPoint.TagCollection;'
@@ -250,7 +271,7 @@ methods:
   fullName: toJSON()
   summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元のオブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `PowerPoint.TagCollection` `toJSON` を返します。 `PowerPoint.Interfaces.TagCollectionData`<!-- -->) コレクションのアイテムから読み込まれたプロパティのコピーが浅い "items" 配列を含む。
   remarks: ''
-  isPreview: true
+  isPreview: false
   isDeprecated: false
   syntax:
     content: 'toJSON(): PowerPoint.Interfaces.TagCollectionData;'
@@ -259,9 +280,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 991cef83d406930e4a29713e9324aa3450489323
-  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
+  ms.openlocfilehash: 0a7342484dc55ef36331d259706e929a81a1176a
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/21/2021
-  ms.locfileid: "51911165"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61515318"

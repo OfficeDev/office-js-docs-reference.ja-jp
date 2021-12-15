@@ -22,7 +22,7 @@
 ||[matchWildcards](/javascript/api/word/word.body#matchWildcards)||
 ||[paragraphs](/javascript/api/word/word.body#paragraphs)|本文内の段落オブジェクトのコレクションを取得します。|
 ||[parentContentControl](/javascript/api/word/word.body#parentContentControl)|本文を含むコンテンツ コントロールを取得します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.body#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|body オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.body#search_searchText__searchOptions_)|body オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.body#select_selectionMode_)|本文を選択し、その本文に Word の UI を移動します。|
 ||[style](/javascript/api/word/word.body#style)|本文のスタイル名を取得または設定します。|
 ||[text](/javascript/api/word/word.body#text)|本文のテキストを取得します。|
@@ -55,7 +55,7 @@
 ||[parentContentControl](/javascript/api/word/word.contentcontrol#parentContentControl)|コンテンツ コントロールを含むコンテンツ コントロールを取得します。|
 ||[placeholderText](/javascript/api/word/word.contentcontrol#placeholderText)|コンテンツ コントロールのプレースホルダー テキストを取得または設定します。|
 ||[removeWhenEdited](/javascript/api/word/word.contentcontrol#removeWhenEdited)|コンテンツ コントロールを編集後に削除できるかどうかを示す値を取得または設定します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.contentcontrol#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|コンテンツ コントロール オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.contentcontrol#search_searchText__searchOptions_)|コンテンツ コントロール オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.contentcontrol#select_selectionMode_)|コンテンツ コントロールを選択します。|
 ||[style](/javascript/api/word/word.contentcontrol#style)|コンテンツ コントロールのスタイル名を取得または設定します。|
 ||[タグ](/javascript/api/word/word.contentcontrol#tag)|コンテンツ コントロールを識別するタグを取得または設定します。|
@@ -125,7 +125,7 @@
 ||[outlineLevel](/javascript/api/word/word.paragraph#outlineLevel)|段落のアウトライン レベルを取得または設定します。|
 ||[parentContentControl](/javascript/api/word/word.paragraph#parentContentControl)|段落を格納しているコンテンツ コントロールを取得します。|
 ||[rightIndent](/javascript/api/word/word.paragraph#rightIndent)|段落の右インデントの値をポイント数単位で取得または設定します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.paragraph#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Paragraph オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.paragraph#search_searchText__searchOptions_)|Paragraph オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.paragraph#select_selectionMode_)|段落を選択して、その段落に Word の UI を移動します。|
 ||[spaceAfter](/javascript/api/word/word.paragraph#spaceAfter)|段落後の間隔をポイント数単位で取得または設定します。|
 ||[spaceBefore](/javascript/api/word/word.paragraph#spaceBefore)|段落前の間隔をポイント数単位で取得または設定します。|
@@ -154,7 +154,7 @@
 ||[matchWildcards](/javascript/api/word/word.range#matchWildcards)||
 ||[paragraphs](/javascript/api/word/word.range#paragraphs)|範囲内の段落オブジェクトのコレクションを取得します。|
 ||[parentContentControl](/javascript/api/word/word.range#parentContentControl)|範囲を格納するコンテンツ コントロールを取得します。|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.range#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|range オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| { ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean matchWildcards?: boolean })](/javascript/api/word/word.range#search_searchText__searchOptions_)|range オブジェクトのスコープで、指定した SearchOptions を使用して検索を実行します。|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.range#select_selectionMode_)|範囲を選択して、その範囲に Word の UI を移動します。|
 ||[style](/javascript/api/word/word.range#style)|範囲のスタイル名を取得または設定します。|
 ||[text](/javascript/api/word/word.range#text)|範囲のテキストを取得します。|
