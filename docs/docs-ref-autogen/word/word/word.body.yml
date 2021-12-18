@@ -37,7 +37,7 @@ properties:
   uid: word!Word.Body#endnotes:member
   package: word!
   fullName: endnotes
-  summary: 本文の文末脚注のコレクションを取得します。 読み取り専用
+  summary: 本文の文末脚注のコレクションを取得します。 読み取り専用。
   remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -103,7 +103,7 @@ properties:
   uid: word!Word.Body#footnotes:member
   package: word!
   fullName: footnotes
-  summary: 本文の脚注のコレクションを取得します。 読み取り専用
+  summary: 本文の脚注のコレクションを取得します。 読み取り専用。
   remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -211,7 +211,7 @@ properties:
   uid: word!Word.Body#parentBody:member
   package: word!
   fullName: parentBody
-  summary: 本文の親の本文を取得します。 たとえば、テーブル セル本文の親本文にはヘッダーを指定できます。 親本文が含めなかった場合は、エラーをスローします。 読み取り専用です。
+  summary: 本文の親の本文を取得します。 たとえば、テーブル セル本文の親本文にはヘッダーを指定できます。 親本文が含めなかった場合は、エラーをスローします。 読み取り専用。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -235,7 +235,7 @@ properties:
   uid: word!Word.Body#parentContentControl:member
   package: word!
   fullName: parentContentControl
-  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用です。
+  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -259,7 +259,7 @@ properties:
   uid: word!Word.Body#parentSection:member
   package: word!
   fullName: parentSection
-  summary: 本文の親セクションを取得します。 親セクションが含めなかった場合は、エラーをスローします。 読み取り専用です。
+  summary: 本文の親セクションを取得します。 親セクションが含めなかった場合は、エラーをスローします。 読み取り専用。
   remarks: '\[[API セット: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -505,7 +505,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -522,10 +522,44 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
+      description: ''
+- name: getReviewedText(changeTrackingVersion)
+  uid: word!Word.Body#getReviewedText:member(1)
+  package: word!
+  fullName: getReviewedText(changeTrackingVersion)
+  summary: ChangeTrackingVersion の選択に基づいて確認されたテキストを取得します。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getReviewedText(changeTrackingVersion?: Word.ChangeTrackingVersion): OfficeExtension.ClientResult<string>;'
+    parameters:
+    - id: changeTrackingVersion
+      description: 省略可能。 changeTrackingVersion には、元の値、現在の値を指定できます。 既定値は Current です。
+      type: <xref uid="word!Word.ChangeTrackingVersion:enum" />
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
+      description: ''
+- name: getReviewedText(changeTrackingVersionString)
+  uid: word!Word.Body#getReviewedText:member(2)
+  package: word!
+  fullName: getReviewedText(changeTrackingVersionString)
+  summary: ChangeTrackingVersion の選択に基づいて確認されたテキストを取得します。
+  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getReviewedText(changeTrackingVersionString?: "Original" | "Current"): OfficeExtension.ClientResult<string>;'
+    parameters:
+    - id: changeTrackingVersionString
+      description: 省略可能。 changeTrackingVersion には、元の値、現在の値を指定できます。 既定値は Current です。
+      type: "\"Original\" | \"Current\""
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
       description: ''
 - name: insertBreak(breakType, insertLocation)
   uid: word!Word.Body#insertBreak:member(1)
@@ -1486,9 +1520,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c1b3afb083b3c88fc314087655bcca0d0b13dca0
-  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.openlocfilehash: 3e45fd4bd8f1766d36077727dbd5e84fd2139472
+  ms.sourcegitcommit: 080eae011bc786105caabe110849467131a7be05
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/02/2021
-  ms.locfileid: "60648780"
+  ms.lasthandoff: 12/17/2021
+  ms.locfileid: "61565603"
