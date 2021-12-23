@@ -14,7 +14,32 @@ properties:
   package: word!
   fullName: body
   summary: メモ アイテムの body オブジェクトを表します。 脚注または文末脚注内のテキストの部分です。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+
+    await Word.run(async (context) => {
+      const footnotes = context.document.body.footnotes;
+      footnotes.load("items/body");
+      await context.sync();
+
+      const referenceNumber = $("#input-reference").val();
+      let mark = (referenceNumber as number) - 1;
+      let footnoteBody = footnotes.items[mark].body.getRange();
+      footnoteBody.load("text");
+      await context.sync();
+
+      console.log(`Text of footnote ${referenceNumber}: ${footnoteBody.text}`);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -38,7 +63,33 @@ properties:
   package: word!
   fullName: reference
   summary: メイン ドキュメントの脚注または文末脚注参照を表します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+
+    await Word.run(async (context) => {
+      const footnotes = context.document.body.footnotes;
+      footnotes.load("items/reference");
+      await context.sync();
+
+      const referenceNumber = $("#input-reference").val();
+      let mark = (referenceNumber as number) - 1;
+      const item = footnotes.items[mark];
+      let reference = item.reference;
+      reference.select();
+      await context.sync();
+
+      console.log(`Reference ${referenceNumber} is selected.`);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -50,7 +101,29 @@ properties:
   package: word!
   fullName: type
   summary: メモ アイテムの種類である脚注または文末脚注を表します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+
+    await Word.run(async (context) => {
+      const footnotes = context.document.body.footnotes;
+      footnotes.load("items/type");
+      await context.sync();
+
+      const referenceNumber = $("#input-reference").val();
+      let mark = (referenceNumber as number) - 1;
+      const itemType = footnotes.items[mark].type;
+      console.log(`Note type of footnote ${referenceNumber}: ${itemType}`);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -63,7 +136,31 @@ methods:
   package: word!
   fullName: delete()
   summary: メモ アイテムを削除します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+
+    await Word.run(async (context) => {
+      const footnotes = context.document.body.footnotes;
+      footnotes.load("items");
+      await context.sync();
+
+      const referenceNumber = $("#input-reference").val();
+      let mark = (referenceNumber as number) - 1;
+      footnotes.items[mark].delete();
+      await context.sync();
+
+      console.log("Footnote deleted.");
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -76,7 +173,30 @@ methods:
   package: word!
   fullName: getNext()
   summary: 同じ種類の次のノート アイテムを取得します。 このメモアイテムが最後のノートアイテムである場合は、エラーをスローします。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+
+    await Word.run(async (context) => {
+      const footnotes = context.document.body.footnotes;
+      footnotes.load("items/reference");
+      await context.sync();
+
+      const referenceNumber = $("#input-reference").val();
+      let mark = (referenceNumber as number) - 1;
+      const reference = footnotes.items[mark].getNext().reference;
+      reference.select();
+      console.log("Selected is the next footnote: " + (mark + 2));
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -234,9 +354,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: b352dfe3ace077e649056d2fbfdc8be02169702f
-  ms.sourcegitcommit: 080eae011bc786105caabe110849467131a7be05
+  ms.openlocfilehash: e97404f42a81b8511877a70cb34d4af244ceef65
+  ms.sourcegitcommit: 14744f5eb3bb5023d61de44f5042e2e8d63e9a99
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/17/2021
-  ms.locfileid: "61565456"
+  ms.lasthandoff: 12/23/2021
+  ms.locfileid: "61598549"

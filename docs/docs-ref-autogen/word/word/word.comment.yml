@@ -38,7 +38,36 @@ properties:
   package: word!
   fullName: content
   summary: コメントのコンテンツをプレーン テキストとして取得または設定します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+
+    await Word.run(async (context) => {
+      let text = $("#edit-comment-text")
+        .val()
+        .toString();
+      let comment = context.document
+        .getSelection()
+        .getComments()
+        .getFirst();
+      comment.content = text;
+
+      // Load object for display in Script Lab console.
+      context.load(comment);
+      await context.sync();
+
+      console.log("Comment content changed:");
+      console.log(comment);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -98,7 +127,38 @@ properties:
   package: word!
   fullName: resolved
   summary: コメント スレッドの状態を取得または設定します。 true の値は、コメント スレッドが解決されるという意味です。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+
+    await Word.run(async (context) => {
+      let comment = context.document
+        .getSelection()
+        .getComments()
+        .getFirst();
+      comment.load("resolved");
+      await context.sync();
+
+      // Toggle resolved status.
+      // If the comment is active, set as resolved.
+      // If it's resolved, set resolved to false.
+      let toggleResolved: boolean = comment.resolved;
+      comment.resolved = !toggleResolved;
+      context.load(comment);
+      await context.sync();
+
+      console.log(`Comment Resolved status: ${comment.resolved}`);
+      console.log(comment);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -111,7 +171,29 @@ methods:
   package: word!
   fullName: delete()
   summary: コメントとその返信を削除します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+
+    await Word.run(async (context) => {
+      context.document
+        .getSelection()
+        .getComments()
+        .getFirst()
+        .delete();
+      await context.sync();
+
+      console.log("Comment deleted");
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -124,7 +206,30 @@ methods:
   package: word!
   fullName: getRange()
   summary: コメントがオンのメイン ドキュメント内の範囲を取得します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+
+    await Word.run(async (context) => {
+      let range = context.document
+        .getSelection()
+        .getComments()
+        .getFirst()
+        .getRange();
+      range.load("text");
+      await context.sync();
+
+      console.log(`Comment location: ${range.text}`);
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -196,7 +301,34 @@ methods:
   package: word!
   fullName: reply(replyText)
   summary: コメント スレッドの末尾に新しい返信を追加します。
-  remarks: '\[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[API セット: WordApiOnline BETA (PREVIEW のみ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+
+    await Word.run(async (context) => {
+      let text = $("#reply-text")
+        .val()
+        .toString();
+      let comments = context.document.getSelection().getComments();
+      comments.load("items");
+      await context.sync();
+      let firstActiveComment = comments.items.find((item) => item.resolved !== true);
+      if (firstActiveComment) {
+        let reply = firstActiveComment.reply(text);
+        console.log("Reply added");
+      } else {
+        console.log("No active comment was found in the selection so couldn't reply.");
+      }
+    });
+
+    ```
   isPreview: true
   isDeprecated: false
   syntax:
@@ -286,9 +418,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0ae195142925b2a5545f8320771ecaa0752b4fca
-  ms.sourcegitcommit: 76fc791ac5804a15c94eb5d93d21116dc6ffe753
+  ms.openlocfilehash: 755c6a48d47211f2f6e9612d4ce915527fe78dbd
+  ms.sourcegitcommit: 14744f5eb3bb5023d61de44f5042e2e8d63e9a99
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/15/2021
-  ms.locfileid: "60377244"
+  ms.lasthandoff: 12/23/2021
+  ms.locfileid: "61598521"
