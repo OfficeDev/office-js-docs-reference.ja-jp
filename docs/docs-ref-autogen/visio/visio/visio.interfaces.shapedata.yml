@@ -9,12 +9,12 @@ isPreview: false
 isDeprecated: false
 type: interface
 properties:
-- name: application
-  uid: visio!Visio.Interfaces.ShapeData#application:member
+- name: comments
+  uid: visio!Visio.Interfaces.ShapeData#comments:member
   package: visio!
-  fullName: application
+  fullName: comments
   summary: >-
-    オブジェクトに関連付けられた Microsoft Visio のインスタンスを返します。値の取得のみ可能です。
+    Comments コレクションを返します。読み取り専用です。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -22,15 +22,15 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'application?: Visio.Interfaces.ApplicationData;'
+    content: 'comments?: Visio.Interfaces.CommentData[];'
     return:
-      type: <xref uid="visio!Visio.Interfaces.ApplicationData:interface" />
-- name: document
-  uid: visio!Visio.Interfaces.ShapeData#document:member
+      type: <xref uid="visio!Visio.Interfaces.CommentData:interface" />[]
+- name: hyperlinks
+  uid: visio!Visio.Interfaces.ShapeData#hyperlinks:member
   package: visio!
-  fullName: document
+  fullName: hyperlinks
   summary: >-
-    図形に assocaited であるドキュメント オブジェクトを取得します。 読み取り専用。
+    図形オブジェクトのハイパーリンク コレクションを返します。読み取り専用です。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -38,15 +38,15 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'document?: Visio.Interfaces.DocumentData;'
+    content: 'hyperlinks?: Visio.Interfaces.HyperlinkData[];'
     return:
-      type: <xref uid="visio!Visio.Interfaces.DocumentData:interface" />
+      type: <xref uid="visio!Visio.Interfaces.HyperlinkData:interface" />[]
 - name: id
   uid: visio!Visio.Interfaces.ShapeData#id:member
   package: visio!
   fullName: id
   summary: >-
-    図形の識別子。
+    図形の識別子。 読み取り専用です。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -57,60 +57,12 @@ properties:
     content: 'id?: number;'
     return:
       type: number
-- name: isCallout
-  uid: visio!Visio.Interfaces.ShapeData#isCallout:member
-  package: visio!
-  fullName: isCallout
-  summary: >-
-    図形が引き出し線図形であるかどうかを示します。値の取得のみ可能です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'isCallout?: boolean;'
-    return:
-      type: boolean
-- name: isDataGraphicCallout
-  uid: visio!Visio.Interfaces.ShapeData#isDataGraphicCallout:member
-  package: visio!
-  fullName: isDataGraphicCallout
-  summary: >-
-    データ グラフィックの引き出し図形であるかを示します。値の取得のみ可能です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'isDataGraphicCallout?: boolean;'
-    return:
-      type: boolean
-- name: isOpenForTextEdit
-  uid: visio!Visio.Interfaces.ShapeData#isOpenForTextEdit:member
-  package: visio!
-  fullName: isOpenForTextEdit
-  summary: >-
-    現在、図形が対話的なテキスト編集を行うために開いているかどうかを示します。値の取得のみ可能です。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'isOpenForTextEdit?: boolean;'
-    return:
-      type: boolean
 - name: name
   uid: visio!Visio.Interfaces.ShapeData#name:member
   package: visio!
   fullName: name
   summary: >-
-    図形の名前。
+    図形の名前。読み取り専用です。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -121,12 +73,12 @@ properties:
     content: 'name?: string;'
     return:
       type: string
-- name: objType
-  uid: visio!Visio.Interfaces.ShapeData#objType:member
+- name: select
+  uid: visio!Visio.Interfaces.ShapeData#select:member
   package: visio!
-  fullName: objType
+  fullName: select
   summary: >-
-    オブジェクトの種類を返します。 読み取り専用。(Shape \_Type を指定すると、OACR 警告 :61721)
+    図形が選択されている場合は true を返します。ユーザーが true に設定すれば、明示的に図形を選択できます。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -134,15 +86,47 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'objType?: number;'
+    content: 'select?: boolean;'
     return:
-      type: number
+      type: boolean
+- name: shapeDataItems
+  uid: visio!Visio.Interfaces.ShapeData#shapeDataItems:member
+  package: visio!
+  fullName: shapeDataItems
+  summary: >-
+    図形のデータ セクションを返します。読み取り専用です。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'shapeDataItems?: Visio.Interfaces.ShapeDataItemData[];'
+    return:
+      type: <xref uid="visio!Visio.Interfaces.ShapeDataItemData:interface" />[]
+- name: subShapes
+  uid: visio!Visio.Interfaces.ShapeData#subShapes:member
+  package: visio!
+  fullName: subShapes
+  summary: >-
+    SubShape コレクションを取得します。読み取り専用です。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'subShapes?: Visio.Interfaces.ShapeData[];'
+    return:
+      type: <xref uid="visio!Visio.Interfaces.ShapeData:interface" />[]
 - name: text
   uid: visio!Visio.Interfaces.ShapeData#text:member
   package: visio!
   fullName: text
   summary: >-
-    図形のテキスト。
+    図形のテキスト。 読み取り専用です。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -153,10 +137,26 @@ properties:
     content: 'text?: string;'
     return:
       type: string
+- name: view
+  uid: visio!Visio.Interfaces.ShapeData#view:member
+  package: visio!
+  fullName: view
+  summary: >-
+    図形のビューを返します。読み取り専用です。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'view?: Visio.Interfaces.ShapeViewData;'
+    return:
+      type: <xref uid="visio!Visio.Interfaces.ShapeViewData:interface" />
 metadata:
-  ms.openlocfilehash: 9fdfb4387e2b067acf0107c2c757054563c87c95
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: 3ffa41a6807dee24f2933f5a42d5102aaf4becdb
+  ms.sourcegitcommit: fb28bc8fd0536b2e640f5039194fdbc31b30f5dc
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61517726"
+  ms.lasthandoff: 01/12/2022
+  ms.locfileid: "61764034"
