@@ -167,6 +167,18 @@
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getItemOrNullObject_key_)|ID によってリンクされたデータ型を取得します。|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|このコレクション内に読み込まれた子アイテムを取得します。|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestRefreshAll__)|コレクション内のすべてのリンクされたデータ型を更新する要求を行います。|
+|[LinkedEntityCellValue](/javascript/api/excel/excel.linkedentitycellvalue)|[basicType](/javascript/api/excel/excel.linkedentitycellvalue#basicType)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
+||[basicValue](/javascript/api/excel/excel.linkedentitycellvalue#basicValue)|この値を持つセルに対して返 `Range.values` される値を表します。|
+||[id](/javascript/api/excel/excel.linkedentitycellvalue#id)|この値の情報を提供したサービス ソースを表します。|
+||[properties: { [key: string]: CellValue & { propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#properties)|このエンティティのプロパティとそのメタデータを表します。|
+||[propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#propertyMetadata)||
+||[プロバイダー](/javascript/api/excel/excel.linkedentitycellvalue#provider)|イメージを提供したサービスを説明する情報を表します。|
+||[text](/javascript/api/excel/excel.linkedentitycellvalue#text)|この値を持つセルがレンダリングされる場合に表示されるテキストを表します。|
+||[type](/javascript/api/excel/excel.linkedentitycellvalue#type)|このセル値の種類を表します。|
+|[LinkedEntityId](/javascript/api/excel/excel.linkedentityid)|[カルチャ](/javascript/api/excel/excel.linkedentityid#culture)|これを作成するために使用された言語カルチャを表します `CellValue` 。|
+||[domainId](/javascript/api/excel/excel.linkedentityid#domainId)|を作成するために使用するサービスに固有のドメインを表します `CellValue` 。|
+||[entityId](/javascript/api/excel/excel.linkedentityid#entityId)|を作成するために使用するサービスに固有の識別子を表します `CellValue` 。|
+||[serviceId](/javascript/api/excel/excel.linkedentityid#serviceId)|を作成するために使用されたサービスを表します `CellValue` 。|
 |[NameErrorCellValue](/javascript/api/excel/excel.nameerrorcellvalue)|[basicType](/javascript/api/excel/excel.nameerrorcellvalue#basicType)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.nameerrorcellvalue#basicValue)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[errorType](/javascript/api/excel/excel.nameerrorcellvalue#errorType)|の種類を表します `ErrorCellValue` 。|
@@ -250,7 +262,8 @@
 ||[プロバイダー](/javascript/api/excel/excel.webimagecellvalue#provider)|画像を提供したエンティティまたは個人を表す情報を表します。|
 ||[relatedImagesAddress](/javascript/api/excel/excel.webimagecellvalue#relatedImagesAddress)|このページに関連すると見なされる画像を含む Web ページの URL を表します `WebImageCellValue` 。|
 ||[type](/javascript/api/excel/excel.webimagecellvalue#type)|このセル値の種類を表します。|
-|[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
+|[Workbook](/javascript/api/excel/excel.workbook)|[getLinkedEntityCellValue(linkedEntityCellValueId: LinkedEntityId)](/javascript/api/excel/excel.workbook#getLinkedEntityCellValue_linkedEntityCellValueId_)|指定した値に `LinkedEntityCellValue` 基づいて a を返します `LinkedEntityId` 。|
+||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showPivotFieldList)|ピボットテーブルのフィールド 一覧ウィンドウをブック レベルで表示するかどうかを指定します。|
 ||[タスク](/javascript/api/excel/excel.workbook#tasks)|ブックに存在するタスクのコレクションを返します。|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904DateSystem)|ブックの日付を 1904 年から計算する場合、true となります。|

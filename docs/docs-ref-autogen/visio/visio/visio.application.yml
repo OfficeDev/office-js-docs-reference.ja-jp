@@ -3,44 +3,16 @@ name: Visio.Application
 uid: visio!Visio.Application:class
 package: visio!
 fullName: Visio.Application
-summary: '\[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]'
+summary: >-
+  アプリケーションを表します。
+
+
+  \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: class
 properties:
-- name: activeDocument
-  uid: visio!Visio.Application#activeDocument:member
-  package: visio!
-  fullName: activeDocument
-  summary: >-
-    アクティブなドキュメントを返します。 読み取り専用。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly activeDocument: Visio.Document;'
-    return:
-      type: <xref uid="visio!Visio.Document:class" />
-- name: activePage
-  uid: visio!Visio.Application#activePage:member
-  package: visio!
-  fullName: activePage
-  summary: >-
-    アクティブなページを返します。 読み取り専用。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly activePage: Visio.Page;'
-    return:
-      type: <xref uid="visio!Visio.Page:class" />
 - name: context
   uid: visio!Visio.Application#context:member
   package: visio!
@@ -53,12 +25,12 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="visio!Visio.RequestContext:class" />
-- name: documents
-  uid: visio!Visio.Application#documents:member
+- name: showBorders
+  uid: visio!Visio.Application#showBorders:member
   package: visio!
-  fullName: documents
+  fullName: showBorders
   summary: >-
-    Microsoft インスタンスの documents コレクションをVisioします。 読み取り専用。
+    iFrame アプリケーションの境界線を表示または非表示にする。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -66,31 +38,16 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'readonly documents: Visio.DocumentCollection;'
-    return:
-      type: <xref uid="visio!Visio.DocumentCollection:class" />
-- name: isVisible
-  uid: visio!Visio.Application#isVisible:member
-  package: visio!
-  fullName: isVisible
-  summary: >-
-    アプリケーションが表示される場合は、取得または設定します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'isVisible: boolean;'
+    content: 'showBorders: boolean;'
     return:
       type: boolean
-- name: name
-  uid: visio!Visio.Application#name:member
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nVisio.run(session, function (ctx) {\n    var application = ctx.document.application;\n    application.showToolbars = false;\n    application.showBorders = false;\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: showToolbars
+  uid: visio!Visio.Application#showToolbars:member
   package: visio!
-  fullName: name
+  fullName: showToolbars
   summary: >-
-    アプリケーションの名前を指定します。 読み取り専用。
+    標準ツールバーの表示と非表示を切り替えます。
 
 
     \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
@@ -98,50 +55,10 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'readonly name: string;'
+    content: 'showToolbars: boolean;'
     return:
-      type: string
-- name: userName
-  uid: visio!Visio.Application#userName:member
-  package: visio!
-  fullName: userName
-  summary: >-
-    アプリケーションのユーザー名を取得または設定します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'userName: string;'
-    return:
-      type: string
+      type: boolean
 methods:
-- name: getStencilInfo(stencilName, includeHiddenMasters)
-  uid: visio!Visio.Application#getStencilInfo:member(1)
-  package: visio!
-  fullName: getStencilInfo(stencilName, includeHiddenMasters)
-  summary: >-
-    ステンシル情報を取得します。
-
-
-    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getStencilInfo(stencilName: string, includeHiddenMasters?: boolean): OfficeExtension.ClientResult<Visio.StencilInfo>;'
-    parameters:
-    - id: stencilName
-      description: ステンシル名は、ステンシルのファイル名を表します。
-      type: string
-    - id: includeHiddenMasters
-      description: '[図形] パネルなど、ユーザーの UI から非表示Visioマスターを含めるかどうかを指定します。既定値は false です。'
-      type: boolean
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="visio!Visio.StencilInfo:interface" />&gt;
-      description: ''
 - name: load(options)
   uid: visio!Visio.Application#load:member(1)
   package: visio!
@@ -206,7 +123,11 @@ methods:
   package: visio!
   fullName: set(properties, options)
   summary: オブジェクトの複数のプロパティを同時に設定します。 適切なプロパティを持つプレーン オブジェクト、または同じ種類の別の API オブジェクトを渡します。
-  remarks: ''
+  remarks: >-
+    このメソッドには、次の追加の署名があります。
+
+
+    `set(properties: Visio.Application): void`
   isPreview: false
   isDeprecated: false
   syntax:
@@ -238,6 +159,71 @@ methods:
     return:
       type: void
       description: ''
+- name: setMockData(data)
+  uid: visio!Visio.Application#setMockData:member(1)
+  package: visio!
+  fullName: setMockData(data)
+  summary: モック データの設定
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setMockData(data: Visio.Interfaces.ApplicationData): void;'
+    parameters:
+    - id: data
+      description: ''
+      type: <xref uid="visio!Visio.Interfaces.ApplicationData:interface" />
+    return:
+      type: void
+      description: ''
+- name: showToolbar(id, show)
+  uid: visio!Visio.Application#showToolbar:member(1)
+  package: visio!
+  fullName: showToolbar(id, show)
+  summary: >-
+    アプリケーション内の特定のツールバーの表示を設定します。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'showToolbar(id: Visio.ToolBarType, show: boolean): void;'
+    parameters:
+    - id: id
+      description: ツールバーの種類
+      type: <xref uid="visio!Visio.ToolBarType:enum" />
+    - id: show
+      description: ツールバーが目に見えて表示されるかどうか。
+      type: boolean
+    return:
+      type: void
+      description: ''
+- name: showToolbar(idString, show)
+  uid: visio!Visio.Application#showToolbar:member(2)
+  package: visio!
+  fullName: showToolbar(idString, show)
+  summary: >-
+    アプリケーション内の特定のツールバーの表示を設定します。
+
+
+    \[[API セット: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'showToolbar(idString: "CommandBar" | "PageNavigationBar" | "StatusBar", show: boolean): void;'
+    parameters:
+    - id: idString
+      description: ツールバーの種類
+      type: "\"CommandBar\" | \"PageNavigationBar\" | \"StatusBar\""
+    - id: show
+      description: ツールバーが目に見えて表示されるかどうか。
+      type: boolean
+    return:
+      type: void
+      description: ''
 - name: toJSON()
   uid: visio!Visio.Application#toJSON:member(1)
   package: visio!
@@ -253,9 +239,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 35ce3c0dbfc7541691858daa20fe5fc373eaa7f0
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: 34d742609762edb9316a0975576401ed70b70ba2
+  ms.sourcegitcommit: fb28bc8fd0536b2e640f5039194fdbc31b30f5dc
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61514975"
+  ms.lasthandoff: 01/12/2022
+  ms.locfileid: "61763421"
