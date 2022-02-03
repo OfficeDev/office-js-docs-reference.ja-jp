@@ -656,7 +656,7 @@ methods:
   uid: word!Word.Paragraph#getHtml:member(1)
   package: word!
   fullName: getHtml()
-  summary: 段落オブジェクトの HTML 表記を取得します。 Web ページまたは HTML ビューアーでレンダリングされる場合、書式設定は文書の書式設定と完全に一致しませんが、閉じます。 このメソッドは、異なるプラットフォーム上の同じドキュメント (Windows Mac、Word on the webなど) に対してまったく同じ HTML を返す必要があります。 正確な忠実度、またはプラットフォーム間の一貫性が必要な場合は、返される XML を `Paragraph.getOoxml()` HTML に使用して変換します。
+  summary: 段落オブジェクトの HTML 表記を取得します。 Web ページまたは HTML ビューアーでレンダリングされる場合、書式設定は文書の書式設定と完全に一致しませんが、閉じます。 このメソッドは、異なるプラットフォーム上の同じドキュメント (Windows Mac、Word on the webなど) に対してまったく同じ HTML を返す必要があります。 正確な忠実度、または `Paragraph.getOoxml()` プラットフォーム間の一貫性が必要な場合は、返される XML を HTML に使用して変換します。
   remarks: >-
     \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -871,7 +871,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -888,7 +888,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: 省略可能。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
+      description: オプション。 範囲の場所には、'Whole'、'Start'、'End'、'After'、または 'Content' を指定できます。
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -905,7 +905,7 @@ methods:
     content: 'getReviewedText(changeTrackingVersion?: Word.ChangeTrackingVersion): OfficeExtension.ClientResult<string>;'
     parameters:
     - id: changeTrackingVersion
-      description: 省略可能。 changeTrackingVersion は次の場合があります。 既定値は Current です。
+      description: オプション。 changeTrackingVersion は次の場合があります。 既定値は Current です。
       type: <xref uid="word!Word.ChangeTrackingVersion:enum" />
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
@@ -922,7 +922,7 @@ methods:
     content: 'getReviewedText(changeTrackingVersionString?: "Original" | "Current"): OfficeExtension.ClientResult<string>;'
     parameters:
     - id: changeTrackingVersionString
-      description: 省略可能。 changeTrackingVersion は次の場合があります。 既定値は Current です。
+      description: オプション。 changeTrackingVersion は次の場合があります。 既定値は Current です。
       type: "\"Original\" | \"Current\""
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
@@ -942,7 +942,7 @@ methods:
       description: 必須です。 句読点や他の終了記号を文字列の配列として指定します。
       type: string[]
     - id: trimSpacing
-      description: 省略可能。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1364,35 +1364,7 @@ methods:
   package: word!
   fullName: insertParagraph(paragraphText, insertLocation)
   summary: 指定した位置に、段落を挿入します。
-  remarks: >-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>例
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-formatted-text.yaml
-
-    await Word.run(async (context) => {
-      // Second sentence, let's insert it as a paragraph after the previously inserted one.
-      let secondSentence = context.document.body.insertParagraph(
-        "This is the first text with a custom style.",
-        "End"
-      );
-      secondSentence.font.set({
-        bold: false,
-        italic: true,
-        name: "Berlin Sans FB",
-        color: "blue",
-        size: 30
-      });
-
-      await context.sync();
-    });
-
-    ```
+  remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1589,7 +1561,7 @@ methods:
               }): Word.Paragraph;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -1782,10 +1754,10 @@ methods:
       description: 必須です。 文字列の配列としての区切り記号。
       type: string[]
     - id: trimDelimiters
-      description: 省略可能。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
+      description: オプション。 範囲コレクション内の範囲から区切り記号をトリミングするかどうかを示します。 既定値は false で、区切り記号が範囲コレクションに返される範囲に含まれるかどうかを示します。
       type: boolean
     - id: trimSpacing
-      description: 省略可能。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
+      description: オプション。 範囲コレクションで返される範囲の開始および終了から間隔文字 (スペース、タブ、列区切り、段落の終了マーク) をトリミングするかどうかを示します。 既定値は false で、範囲の開始と終了の間隔の文字が範囲コレクションに含まれるかどうかを示します。
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1841,7 +1813,7 @@ methods:
   uid: word!Word.Paragraph#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。元の Word.Paragraph オブジェクトが API オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。 `Word.Interfaces.ParagraphData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される `toJSON` オブジェクトのメソッドを呼び出します。元の Word.Paragraph オブジェクトが API `toJSON` オブジェクトであるのに対し、メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。 `Word.Interfaces.ParagraphData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1854,7 +1826,7 @@ methods:
   uid: word!Word.Paragraph#track:member(1)
   package: word!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. `.sync`このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1867,7 +1839,7 @@ methods:
   uid: word!Word.Paragraph#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効にされる前 `context.sync()` に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1878,9 +1850,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0ff3e86c728b8781d1592c267021978e84e8ae59
-  ms.sourcegitcommit: 080eae011bc786105caabe110849467131a7be05
+  ms.openlocfilehash: cbd3c30be28691da47043f776bb9d4125faebf31
+  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/17/2021
-  ms.locfileid: "61565470"
+  ms.lasthandoff: 02/02/2022
+  ms.locfileid: "62324164"
