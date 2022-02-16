@@ -38,49 +38,7 @@ properties:
   package: word!
   fullName: font
   summary: 本文のテキスト形式を取得します。これを使用して、フォント名、サイズ、色、およびその他のプロパティを取得および設定します。読み取り専用。
-  remarks: >-
-    \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>例
-
-
-    ```javascript
-
-    // Get the style and the font size, font name, and font color properties on the body object.
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to load font and style information for the document body.
-        context.load(body, 'font/size, font/name, font/color, style');
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            // Show the results of the load method. Here we show the
-            // property values on the body object.
-            var results = 'Font size: ' + body.font.size +
-                          '; Font name: ' + body.font.name +
-                          '; Font color: ' + body.font.color +
-                          '; Body style: ' + body.style;
-
-            console.log(results);
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
+  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Get the style and the font size, font name, and font color properties on the body object.\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to load font and style information for the document body.\n    context.load(body, 'font/size, font/name, font/color, style');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    await context.sync();\n    \n    // Show the results of the load method.\n    // Here we show the property values on the body object.\n    var results = 'Font size: ' + body.font.size +\n                    '; Font name: ' + body.font.name +\n                    '; Font color: ' + body.font.color +\n                    '; Body style: ' + body.style;\n\n    console.log(results);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -103,7 +61,7 @@ properties:
   uid: word!Word.Body#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: '本文内の段落オブジェクトのコレクションを取得します。 読み取り専用。 **重要**: 要件セット 1.1 および 1.2 では、表内の段落は返されません。 要件セット 1.3 から、テーブル内の段落も返されます。'
+  summary: '本文内の段落オブジェクトのコレクションを取得します。 読み取り専用です。 **重要**: 要件セット 1.1 および 1.2 では、表内の段落は返されません。 要件セット 1.3 から、テーブル内の段落も返されます。'
   remarks: >-
     \[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -171,7 +129,7 @@ properties:
   uid: word!Word.Body#parentContentControl:member
   package: word!
   fullName: parentContentControl
-  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用。
+  summary: 本文を含むコンテンツ コントロールを取得します。 親コンテンツ コントロールが含めなかった場合は、エラーをスローします。 読み取り専用です。
   remarks: '\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -203,13 +161,13 @@ properties:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Get the text property on the body object
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -219,16 +177,8 @@ properties:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body contents: " + body.text);
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log("Body contents: " + body.text);
     });
 
     ```
@@ -244,7 +194,7 @@ methods:
   package: word!
   fullName: clear()
   summary: 本文オブジェクトの内容を消去します。ユーザーは、消去された内容を元に戻す操作を実行できます。
-  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to clear the contents of the body.\n    body.clear();\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Cleared the body contents.');\n    });\n})\n.catch(function (error) {\n    console.log(\"Error: \" + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Silly stories add-in sample shows how the \n// clear method can be used to clear the contents of a document.\n// https://aka.ms/sillystorywordaddin\n```"
+  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to clear the contents of the body.\n    body.clear();\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    await context.sync();\n\n    console.log('Cleared the body contents.');\n});\n\n// The Silly stories add-in sample shows how the \n// clear method can be used to clear the contents of a document.\n// https://aka.ms/sillystorywordaddin\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -264,11 +214,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -278,16 +228,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body HTML contents: " + bodyHTML.value);
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log("Body HTML contents: " + bodyHTML.value);
     });
 
     ```
@@ -310,11 +252,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -324,16 +266,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body OOXML contents: " + bodyOOXML.value);
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log("Body OOXML contents: " + bodyOOXML.value);
     });
 
     ```
@@ -356,30 +290,22 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (ctx) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
-        var body = ctx.document.body;
+        var body = context.document.body;
 
         // Queue a command to insert a page break at the start of the document body.
         body.insertBreak(Word.BreakType.page, Word.InsertLocation.start);
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return ctx.sync().then(function () {
-            console.log('Added a page break at the start of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Added a page break at the start of the document body.');
     });
 
     ```
@@ -429,11 +355,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -443,16 +369,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Wrapped the body in a content control.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Wrapped the body in a content control.');
     });
 
     ```
@@ -475,11 +393,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -490,16 +408,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Added base64 encoded text to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Added base64 encoded text to the beginning of the document body.');
     });
 
     ```
@@ -549,11 +459,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -564,16 +474,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('HTML added to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('HTML added to the beginning of the document body.');
     });
 
     ```
@@ -623,11 +525,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -637,16 +539,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('OOXML added to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('OOXML added to the beginning of the document body.');
     });
 
 
@@ -746,11 +640,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -760,16 +654,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Paragraph added at the end of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Paragraph added at the end of the document body.');
     });
 
 
@@ -852,11 +738,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -866,16 +752,8 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Text added to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Text added to the beginning of the document body.');
     });
 
     ```
@@ -1121,31 +999,23 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
 
-        // Queue a command to select the document body. The Word UI will
-        // move to the selected document body.
+        // Queue a command to select the document body.
+        // The Word UI will move to the selected document body.
         body.select();
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Selected the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        await context.sync();
+        console.log('Selected the document body.');
     });
 
     ```
@@ -1255,9 +1125,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 061f461acb380a264df0232a59c2706f82ceec2b
-  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
+  ms.openlocfilehash: 6d892b536d5de30fb673275acd325d53f9653760
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 02/02/2022
-  ms.locfileid: "62324234"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62838951"
