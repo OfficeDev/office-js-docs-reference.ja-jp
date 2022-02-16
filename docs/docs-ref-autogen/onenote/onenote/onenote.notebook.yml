@@ -111,7 +111,7 @@ methods:
   package: onenote!
   fullName: addSection(name)
   summary: ノートブックの末尾に新しいセクションを追加します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n\n    // Queue a command to add a new section. \n    var section = notebook.addSection(\"Sample section\");\n    \n    // Queue a command to load the new section. This example reads the name property later.\n    section.load(\"name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            console.log(\"New section name is \" + section.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n\n    // Queue a command to add a new section.\n    var section = notebook.addSection(\"Sample section\");\n    \n    // Queue a command to load the new section. This example reads the name property later.\n    section.load(\"name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n    console.log(\"New section name is \" + section.name);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -128,7 +128,32 @@ methods:
   package: onenote!
   fullName: addSectionGroup(name)
   summary: ノートブックの末尾に新しいセクション グループを追加します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n\n    // Queue a command to add a new section group.\n    var sectionGroup = notebook.addSectionGroup(\"Sample section group\");\n\n    // Queue a command to load the new section group.\n    sectionGroup.load();\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            console.log(\"New section group name is \" + sectionGroup.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Gets the active notebook.
+        var notebook = context.application.getActiveNotebook();
+
+        // Queue a command to add a new section group.
+        var sectionGroup = notebook.addSectionGroup("Sample section group");
+
+        // Queue a command to load the new section group.
+        sectionGroup.load();
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+        console.log("New section group name is " + sectionGroup.name);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -145,7 +170,30 @@ methods:
   package: onenote!
   fullName: getRestApiId()
   summary: REST API ID を取得します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx){\n    // Get the current notebook.         \n    var notebook = ctx.application.getActiveNotebook();\n    var restApiId = notebook.getRestApiId();\n\n    return ctx.sync().\n        then(function(){\n            console.log(\"The REST API ID is \" + restApiId.value);\n            // Note that the REST API ID isn't all you need to interact with the OneNote REST API. \n            // This is only required for SharePoint notebooks. baseUrl will be null for OneDrive notebooks.\n            // For SharePoint notebooks, the notebook baseUrl should be used to talk to the OneNote REST API\n            // according to the OneNote Development Blog.\n            // https://blogs.msdn.microsoft.com/onenotedev/2015/06/11/and-sharepoint-makes-three/\n        });\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+        // Get the current notebook.
+        var notebook = context.application.getActiveNotebook();
+        var restApiId = notebook.getRestApiId();
+
+        await context.sync();
+        console.log("The REST API ID is " + restApiId.value);
+        // Note that the REST API ID isn't all you need to interact with the OneNote REST API.
+        // This is only required for SharePoint notebooks. baseUrl will be null for OneDrive notebooks.
+        // For SharePoint notebooks, the notebook baseUrl should be used to talk to the OneNote REST API
+        // according to the OneNote Development Blog.
+        // https://docs.microsoft.com/archive/blogs/onenotedev/and-sharepoint-makes-three
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -186,7 +234,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="onenote!OneNote.Notebook:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook. \n    // For best performance, request specific properties.           \n    notebook.load('baseUrl');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Base url: \" + notebook.baseUrl);\n            // This is only required for SharePoint notebooks, and will be null for OneDrive notebooks.\n            // This baseUrl should be used to talk to OneNote REST APIs according to the OneNote Development Blog.\n            // https://blogs.msdn.microsoft.com/onenotedev/2015/06/11/and-sharepoint-makes-three/\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook. \n    // For best performance, request specific properties.           \n    notebook.load('id');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Notebook ID: \" + notebook.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook. \n    // For best performance, request specific properties.           \n    notebook.load('name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Notebook name: \" + notebook.name);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups in the notebook. \n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the sectionGroups. \n    sectionGroups.load(\"name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            $.each(sectionGroups.items, function(index, sectionGroup) {\n                console.log(\"Section group name: \" + sectionGroup.name);\n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n    \n    // Queue a command to get immediate child sections of the notebook. \n    var childSections = notebook.sections;\n\n    // Queue a command to load the childSections. \n    context.load(childSections);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            $.each(childSections.items, function(index, childSection) {\n                console.log(\"Immediate child section name: \" + childSection.name);\n            });            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});   \n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n        \n    // Get the current notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook.\n    // For best performance, request specific properties.\n    notebook.load('baseUrl');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n    console.log(\"Base url: \" + notebook.baseUrl);\n    // This is only required for SharePoint notebooks, and will be null for OneDrive notebooks.\n    // This baseUrl should be used to talk to OneNote REST APIs according to the OneNote Development Blog.\n    // https://docs.microsoft.com/archive/blogs/onenotedev/and-sharepoint-makes-three\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: onenote!OneNote.Notebook#load:member(3)
   package: onenote!
@@ -203,7 +251,7 @@ methods:
               }): OneNote.Notebook;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -216,7 +264,7 @@ methods:
   uid: onenote!OneNote.Notebook#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のOneNote。ノートブック オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.NotebookData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のOneNote。ノートブック オブジェクトは API オブジェクトで、`toJSON`メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.NotebookData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -229,7 +277,7 @@ methods:
   uid: onenote!OneNote.Notebook#track:member(1)
   package: onenote!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. `.sync`このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -242,7 +290,7 @@ methods:
   uid: onenote!OneNote.Notebook#untrack:member(1)
   package: onenote!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効にされる前 `context.sync()` に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -253,9 +301,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: ab52f156f81956a6f0bf921108e442f22acbb2eb
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: af6516677133db47dbbdca32feaef0536b749d51
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61518692"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62839516"

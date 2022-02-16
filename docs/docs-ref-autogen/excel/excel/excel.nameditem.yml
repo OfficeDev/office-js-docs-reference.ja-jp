@@ -114,17 +114,9 @@ properties:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: >-
-      readonly valueAsJson: ArrayCellValue | BooleanCellValue | DoubleCellValue | EntityCellValue | EmptyCellValue | BlockedErrorCellValue | BusyErrorCellValue | CalcErrorCellValue | ConnectErrorCellValue | Div0ErrorCellValue | FieldErrorCellValue | GettingDataErrorCellValue | NotAvailableErrorCellValue | NameErrorCellValue | NullErrorCellValue | NumErrorCellValue | RefErrorCellValue | SpillErrorCellValue | ValueErrorCellValue | FormattedNumberCellValue | LinkedEntityCellValue | StringCellValue | ValueTypeNotAvailableCellValue | WebImageCellValue & {
-                  writable?: boolean;
-                  writableNote?: string;
-              };
+    content: 'readonly valueAsJson: CellValue;'
     return:
-      type: >-
-        <xref uid="excel!Excel.ArrayCellValue:interface" /> | <xref uid="excel!Excel.BooleanCellValue:interface" /> | <xref uid="excel!Excel.DoubleCellValue:interface" /> | <xref uid="excel!Excel.EntityCellValue:interface" /> | <xref uid="excel!Excel.EmptyCellValue:interface" /> | <xref uid="excel!Excel.BlockedErrorCellValue:interface" /> | <xref uid="excel!Excel.BusyErrorCellValue:interface" /> | <xref uid="excel!Excel.CalcErrorCellValue:interface" /> | <xref uid="excel!Excel.ConnectErrorCellValue:interface" /> | <xref uid="excel!Excel.Div0ErrorCellValue:interface" /> | <xref uid="excel!Excel.FieldErrorCellValue:interface" /> | <xref uid="excel!Excel.GettingDataErrorCellValue:interface" /> | <xref uid="excel!Excel.NotAvailableErrorCellValue:interface" /> | <xref uid="excel!Excel.NameErrorCellValue:interface" /> | <xref uid="excel!Excel.NullErrorCellValue:interface" /> | <xref uid="excel!Excel.NumErrorCellValue:interface" /> | <xref uid="excel!Excel.RefErrorCellValue:interface" /> | <xref uid="excel!Excel.SpillErrorCellValue:interface" /> | <xref uid="excel!Excel.ValueErrorCellValue:interface" /> | <xref uid="excel!Excel.FormattedNumberCellValue:interface" /> | <xref uid="excel!Excel.LinkedEntityCellValue:interface" /> | <xref uid="excel!Excel.StringCellValue:interface" /> | <xref uid="excel!Excel.ValueTypeNotAvailableCellValue:interface" /> | <xref uid="excel!Excel.WebImageCellValue:interface" /> & {
-                    writable?: boolean;
-                    writableNote?: string;
-                }
+      type: <xref uid="excel!Excel.CellValue:type" />
 - name: visible
   uid: excel!Excel.NamedItem#visible:member
   package: excel!
@@ -153,7 +145,7 @@ properties:
   uid: excel!Excel.NamedItem#worksheetOrNullObject:member
   package: excel!
   fullName: worksheetOrNullObject
-  summary: 名前付きアイテムのスコープを設定するワークシートを返します。 代わりに、アイテムのスコープがブックに設定されている場合、このメソッドはプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 名前付きアイテムのスコープを設定するワークシートを返します。 代わりに、アイテムのスコープがブックに `isNullObject` 設定されている場合、このメソッドはプロパティが次の値に設定されたオブジェクトを返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -209,7 +201,7 @@ methods:
   package: excel!
   fullName: getRange()
   summary: 名前に関連付けられている範囲オブジェクトを返します。名前付きアイテムの型が範囲でない場合、エラーをスローします。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Returns the Range object that is associated with the name.\n// Returns `null` if the name is not of type Range.\n// Note: This API currently supports only the Workbook scoped items.\nawait Excel.run(async (context) => { \n    var names = context.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    await context.sync();\n\n    console.log(range.address);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -221,7 +213,7 @@ methods:
   uid: excel!Excel.NamedItem#getRangeOrNullObject:member(1)
   package: excel!
   fullName: getRangeOrNullObject()
-  summary: 名前に関連付けられている範囲オブジェクトを返します。 名前付きアイテムの型が範囲ではない場合、このメソッドはプロパティが次の値に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 名前に関連付けられている範囲オブジェクトを返します。 名前付きアイテムの型が範囲ではない場合、このメソッドはプロパティが次の値に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: '\[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -263,7 +255,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var namedItem = names.getItem('MyRange');\n    namedItem.load('type');\n    return ctx.sync().then(function() {\n            console.log(namedItem.type);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var names = context.workbook.names;\n    var namedItem = names.getItem('MyRange');\n    namedItem.load('type');\n    await context.sync();\n    \n    console.log(namedItem.type);\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.NamedItem#load:member(3)
   package: excel!
@@ -280,7 +272,7 @@ methods:
               }): Excel.NamedItem;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -330,7 +322,7 @@ methods:
   uid: excel!Excel.NamedItem#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。NamedItem オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.NamedItemData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のExcel。NamedItem オブジェクトは API オブジェクトで`toJSON`、メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.NamedItemData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -341,9 +333,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: df133c8d3ea0bc34c4e2e82ceed314dd9d814847
-  ms.sourcegitcommit: 6e02b85fb05123b10f85db6c2ac009fa60f24a6f
+  ms.openlocfilehash: 57b33539da07ec3be85caed42e5fea40aac2e3e6
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/14/2022
-  ms.locfileid: "62040489"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62840651"

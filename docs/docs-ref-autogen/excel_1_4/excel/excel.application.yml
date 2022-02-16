@@ -78,16 +78,11 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
-    Excel.run(function (ctx) {
-        ctx.workbook.application.calculate('Full');
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+    await Excel.run(async (context) => {
+        context.workbook.application.calculate('Full');
+        await context.sync();
     });
 
     ```
@@ -135,7 +130,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Application:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    var application = context.workbook.application;\n    application.load('calculationMode');\n    await context.sync();\n\n    console.log(application.calculationMode);\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.Application#load:member(3)
   package: excel!
@@ -152,7 +147,7 @@ methods:
               }): Excel.Application;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -202,7 +197,7 @@ methods:
   uid: excel!Excel.Application#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。Application オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のExcel。Application オブジェクトは API オブジェクトで、`toJSON`メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -213,9 +208,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 3fcdffb4f8c8d0b6f6737518a4aaa56966a028fa
-  ms.sourcegitcommit: d8c112625a77e704fde37a106c2aa39e2468da0b
+  ms.openlocfilehash: 69aaf5f6e8ffda3ba767b5f743d537f81641a1db
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 11/11/2021
-  ms.locfileid: "60916330"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62841457"

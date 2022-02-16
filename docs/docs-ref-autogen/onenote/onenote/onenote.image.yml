@@ -74,7 +74,7 @@ properties:
   package: onenote!
   fullName: ocrData
   summary: OCR テキストや言語など、OCR (光学式文字認識) で取得されたこの画像のデータを取得します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar image = null;\n\nOneNote.run(function(ctx){\n    // Get the current outline.\n    var outline = ctx.application.getActiveOutline();\n\n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n            if (image != null)\n            {\n               image.load(\"ocrData\");\n            }\n            return ctx.sync();\n        })\n        .then(function(){\n            \n            // Log ocrText and ocrLanguageId\n            console.log(image.ocrData.ocrText);\n            console.log(image.ocrData.ocrLanguageId);\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nvar image = null;\n\nawait OneNote.run(async (context) => {\n    // Get the current outline.\n    var outline = context.application.getActiveOutline();\n\n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs\")\n    await context.sync();\n\n    for (var i=0; i < outline.paragraphs.items.length; i++) {\n        var paragraph = outline.paragraphs.items[i];\n        if (paragraph.type == \"Image\")\n        {\n            image = paragraph.image;\n        }\n    }\n    if (image != null) {\n        image.load(\"ocrData\");\n    }\n\n    await context.sync();\n            \n    // Log ocrText and ocrLanguageId.\n    console.log(image.ocrData.ocrText);\n    console.log(image.ocrData.ocrLanguageId);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -123,7 +123,7 @@ methods:
   package: onenote!
   fullName: getBase64Image()
   summary: 'Image の Base64 エンコードのバイナリ形式を取得します。 例: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIA...'
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n\nvar image = null;\nvar imageString;\n\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {\n                imageString = image.getBase64Image();\n                return ctx.sync();\n            }\n        })\n        .then(function(){\n            console.log(imageString);\n        });\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nvar image = null;\nvar imageString;\n\nawait OneNote.run(async (context) => {\n    // Get the current outline.\n    var outline = context.application.getActiveOutline();\n    \n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs/type\")\n    await context.sync();\n    for (var i=0; i < outline.paragraphs.items.length; i++) {\n        var paragraph = outline.paragraphs.items[i];\n        if (paragraph.type == \"Image\")\n        {\n            image = paragraph.image;\n        }\n    }\n\n    if (image != null) {\n        imageString = image.getBase64Image();\n        await context.sync();\n    }\n\n    console.log(imageString);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -164,7 +164,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="onenote!OneNote.Image:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    var image = null;\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {\n                // load every properties and relationships\n                ctx.load(image);\n                return ctx.sync();\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {                   \n                console.log(\"image \" + image.id + \" width is \" + image.width + \" height is \" + image.height);\n                console.log(\"description: \" + image.description);                   \n                console.log(\"hyperlink: \" + image.hyperlink);\n            }\n        });\n});\n```\n```javascript\nvar image = null;\n\nOneNote.run(function(ctx){\n    // Get the current outline.\n    var outline = ctx.application.getActiveOutline();\n\n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n            if (image != null)\n            {\n               image.load(\"ocrData\");\n            }\n            return ctx.sync();\n        })\n        .then(function(){\n            console.log(image.ocrData);\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    var searchedParagraph = null;\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function() {\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    searchedParagraph = paragraph;\n                    break;\n                }\n            }\n        })\n        .then(function() {\n            if (searchedParagraph != null)\n            {\n                // load every properties and relationships\n                searchedParagraph.image.load('paragraph');\n                return ctx.sync();\n            }\n        })\n        .then(function() {\n            if (searchedParagraph != null)\n            {                   \n                if (searchedParagraph.id != searchedParagraph.image.paragraph.id)\n                {\n                    console.log(\"id must match\");\n                }\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n    // Get the current outline.\n    var outline = context.application.getActiveOutline();\n    var image = null;\n    \n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs/type\")\n    await context.sync();\n\n    for (var i=0; i < outline.paragraphs.items.length; i++) {\n        var paragraph = outline.paragraphs.items[i];\n        if (paragraph.type == \"Image\")\n        {\n            image = paragraph.image;\n        }\n    }\n\n    if (image != null) {\n        // Load all properties and relationships.\n        image.load([\"id\", \"width\", \"height\", \"description\", \"hyperlink\"]);\n        await context.sync();\n    }\n\n    if (image != null) {                   \n        console.log(\"image \" + image.id + \" width is \" + image.width + \" height is \" + image.height);\n        console.log(\"description: \" + image.description);                   \n        console.log(\"hyperlink: \" + image.hyperlink);\n    }\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: onenote!OneNote.Image#load:member(3)
   package: onenote!
@@ -181,7 +181,7 @@ methods:
               }): OneNote.Image;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -231,7 +231,7 @@ methods:
   uid: onenote!OneNote.Image#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のOneNote。Image オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.ImageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のOneNote。Image オブジェクトは API オブジェクトで、`toJSON`メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.ImageData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -244,7 +244,7 @@ methods:
   uid: onenote!OneNote.Image#track:member(1)
   package: onenote!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. `.sync`このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -257,7 +257,7 @@ methods:
   uid: onenote!OneNote.Image#untrack:member(1)
   package: onenote!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効にされる前 `context.sync()` に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -268,9 +268,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 49961dd07cdfe452ed5f460011d7ee710a6c067b
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: a869c9f196699e992e8cafc1dabed3b5769fb3be
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61515689"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62841702"

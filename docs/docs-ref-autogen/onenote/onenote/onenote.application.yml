@@ -39,7 +39,7 @@ methods:
   package: onenote!
   fullName: getActiveNotebook()
   summary: 存在する場合はアクティブなノートブックを取得します。 アクティブなノートブックがない場合は、ItemNotFound をスローします。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the active notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook. \n    // For best performance, request specific properties.           \n    notebook.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n                    \n            // Show some properties.\n            console.log(\"Notebook name: \" + notebook.name);\n            console.log(\"Notebook ID: \" + notebook.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n        \n    // Get the active notebook.\n    var notebook = context.application.getActiveNotebook();\n            \n    // Queue a command to load the notebook.\n    // For best performance, request specific properties.\n    notebook.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n                    \n    // Show some properties.\n    console.log(\"Notebook name: \" + notebook.name);\n    console.log(\"Notebook ID: \" + notebook.id);\n            \n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -52,7 +52,35 @@ methods:
   package: onenote!
   fullName: getActiveNotebookOrNull()
   summary: 存在する場合はアクティブなノートブックを取得します。 アクティブなノートブックがない場合は、null を返します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the active notebook.\n    var notebook = context.application.getActiveNotebookOrNull();\n\n    // Queue a command to load the notebook. \n    // For best performance, request specific properties.           \n    notebook.load('id,name');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // check if active notebook is set.\n            if (!notebook.isNull) {\n                console.log(\"Notebook name: \" + notebook.name);\n                console.log(\"Notebook ID: \" + notebook.id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Get the active notebook.
+        var notebook = context.application.getActiveNotebookOrNull();
+
+        // Queue a command to load the notebook.
+        // For best performance, request specific properties.
+        notebook.load('id,name');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+
+        // Check if active notebook is set.
+        if (!notebook.isNullObject) {
+            console.log("Notebook name: " + notebook.name);
+            console.log("Notebook ID: " + notebook.id);
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -65,7 +93,31 @@ methods:
   package: onenote!
   fullName: getActiveOutline()
   summary: 存在する場合はアクティブなアウトラインを取得します。アクティブなアウトラインがない場合は、ItemNotFound をスローします。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // get active outline.\n    var outline = context.application.getActiveOutline();\n\n    // Queue a command to load the id of the outline.         \n    outline.load('id');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Show some properties.\n            console.log(\"outline id: \" + outline.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // get active outline.
+        var outline = context.application.getActiveOutline();
+
+        // Queue a command to load the id of the outline.
+        outline.load('id');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+
+        // Show some properties.
+        console.log("outline id: " + outline.id);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -78,7 +130,31 @@ methods:
   package: onenote!
   fullName: getActiveOutlineOrNull()
   summary: 存在する場合はアクティブなアウトラインを取得します。アクティブなアウトラインがない場合は、null を返します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // get active outline.\n    var outline = context.application.getActiveOutlineOrNull();\n\n    // Queue a command to load the id of the outline.         \n    outline.load('id');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            if (!outline.isNull) {\n                console.log(\"outline id: \" + outline.id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // get active outline.
+        var outline = context.application.getActiveOutlineOrNull();
+
+        // Queue a command to load the id of the outline.
+        outline.load('id');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+        if (!outline.isNullObject) {
+            console.log("outline id: " + outline.id);
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -91,7 +167,7 @@ methods:
   package: onenote!
   fullName: getActivePage()
   summary: 存在する場合はアクティブなページを取得します。 アクティブなページがない場合は、ItemNotFound をスローします。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the active page.\n    var page = context.application.getActivePage();\n            \n    // Queue a command to load the page. \n    // For best performance, request specific properties.           \n    page.load('id,title');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n                    \n            // Show some properties.\n            console.log(\"Page title: \" + page.title);\n            console.log(\"Page ID: \" + page.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n        \n    // Get the active page.\n    var page = context.application.getActivePage();\n            \n    // Queue a command to load the page.\n    // For best performance, request specific properties.\n    page.load('id,title');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n                    \n    // Show some properties.\n    console.log(\"Page title: \" + page.title);\n    console.log(\"Page ID: \" + page.id);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -104,7 +180,7 @@ methods:
   package: onenote!
   fullName: getActivePageOrNull()
   summary: 存在する場合はアクティブなページを取得します。 アクティブなページがない場合は、null を返します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the active page.\n    var page = context.application.getActivePageOrNull();\n\n    // Queue a command to load the page. \n    // For best performance, request specific properties.           \n    page.load('id,title');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            if (!page.isNull) {\n                // Show some properties.\n                console.log(\"Page title: \" + page.title);\n                console.log(\"Page ID: \" + page.id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n\n    // Get the active page.\n    var page = context.application.getActivePageOrNull();\n\n    // Queue a command to load the page.\n    // For best performance, request specific properties.\n    page.load('id,title');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n            \n    if (!page.isNullObject) {\n        // Show some properties.\n        console.log(\"Page title: \" + page.title);\n        console.log(\"Page ID: \" + page.id);\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -143,7 +219,7 @@ methods:
   package: onenote!
   fullName: getActiveSection()
   summary: 存在する場合はアクティブなセクションを取得します。 アクティブなセクションがない場合は、ItemNotFound をスローします。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the active section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n                    \n            // Show some properties.\n            console.log(\"Section name: \" + section.name);\n            console.log(\"Section ID: \" + section.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n        \n    // Get the active section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section.\n    // For best performance, request specific properties.\n    section.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync();\n                    \n    // Show some properties.\n    console.log(\"Section name: \" + section.name);\n    console.log(\"Section ID: \" + section.id);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -156,7 +232,34 @@ methods:
   package: onenote!
   fullName: getActiveSectionOrNull()
   summary: 存在する場合はアクティブなセクションを取得します。 アクティブなセクションがない場合は、null を返します。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the active section.\n    var section = context.application.getActiveSectionOrNull();\n\n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load('id,name');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if (!section.isNull) {\n                // Show some properties.\n                console.log(\"Section name: \" + section.name);\n                console.log(\"Section ID: \" + section.id);\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Get the active section.
+        var section = context.application.getActiveSectionOrNull();
+
+        // Queue a command to load the section.
+        // For best performance, request specific properties.
+        section.load('id,name');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+        if (!section.isNullObject) {
+            // Show some properties.
+            console.log("Section name: " + section.name);
+            console.log("Section ID: " + section.id);
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -270,7 +373,7 @@ methods:
               }): OneNote.Application;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -284,7 +387,7 @@ methods:
   package: onenote!
   fullName: navigateToPage(page)
   summary: アプリケーション インスタンスで指定されたページを開きます。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n            \n    // Queue a command to load the pages. \n    // For best performance, request specific properties.           \n    pages.load('id');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n                    \n            // This example loads the first page in the section.\n            var page = pages.items[0];\n                        \n            // Open the page in the application.                    \n            context.application.navigateToPage(page);\n                    \n            // Run the queued command.\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait OneNote.run(async (context) => {\n        \n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n            \n    // Queue a command to load the pages.\n    // For best performance, request specific properties.\n    pages.load('id');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    await context.sync()\n                    \n    // This example loads the first page in the section.\n    var page = pages.items[0];\n                \n    // Open the page in the application.\n    context.application.navigateToPage(page);\n            \n    // Run the queued command.\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -301,7 +404,38 @@ methods:
   package: onenote!
   fullName: navigateToPageWithClientUrl(url)
   summary: 指定されたページを取得し、アプリケーション インスタンスで開きます。 それでも、失敗しない場合はナビゲーションを実行できない場合があります。 必要に応じて、呼び出し元は返されたページを検証する必要があります。
-  remarks: "\\[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n\n    // Queue a command to load the pages. \n    // For best performance, request specific properties.           \n    pages.load('clientUrl');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // This example loads the first page in the section.\n            var page = pages.items[0];\n\n            // Open the page in the application.                    \n            context.application.navigateToPageWithClientUrl(page.clientUrl);\n\n            // Run the queued command.\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[API セット: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Get the pages in the current section.
+        var pages = context.application.getActiveSection().pages;
+
+        // Queue a command to load the pages.
+        // For best performance, request specific properties.
+        pages.load('clientUrl');
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync()
+
+        // This example loads the first page in the section.
+        var page = pages.items[0];
+
+        // Open the page in the application.
+        context.application.navigateToPageWithClientUrl(page.clientUrl);
+
+        // Run the queued command.
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -354,7 +488,7 @@ methods:
   uid: onenote!OneNote.Application#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のOneNote。Application オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のOneNote。Application オブジェクトは API オブジェクトで、`toJSON`メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.ApplicationData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -365,9 +499,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a633b1b87dc585c42dd9b8cc2102c59ef1e35d92
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: eef94bb476b4f86ed5cb5c92c2da1c0b6e537cf5
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61516242"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62841801"

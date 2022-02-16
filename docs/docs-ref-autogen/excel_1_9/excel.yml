@@ -867,7 +867,7 @@ functions:
       type: string
     return:
       type: Promise&lt;void&gt;
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nvar myFile = document.getElementById(\"file\");\nvar reader = new FileReader();\n\nreader.onload = function (event) {\n    // strip off the metadata before the base64-encoded string\n    var startIndex = event.target.result.indexOf(\"base64,\");\n    var copyBase64 = event.target.result.substr(startIndex + 7);\n\n    Excel.createWorkbook(copyBase64);        \n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n    // Remove the metadata before the base64-encoded string.\n    const startIndex = reader.result.toString().indexOf(\"base64,\");\n    const mybase64 = reader.result.toString().substr(startIndex + 7);\n\n    Excel.createWorkbook(mybase64);\n    return context.sync();\n    });\n};\n\n// Read in the file as a data URL so we can parse the base64-encoded string.\nreader.readAsDataURL(myFile.files[0]);\n```"
 - name: Excel.getDataCommonPostprocess(response, callArgs)
   uid: excel!Excel.getDataCommonPostprocess:function(1)
   package: excel!
@@ -996,9 +996,9 @@ functions:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 357402896daa2c8cb06b2b7be3613d7518da7001
-  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.openlocfilehash: 567c8a03e384dd06408561f7d6a3d49fd2955117
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 10/13/2021
-  ms.locfileid: "60315347"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62840003"

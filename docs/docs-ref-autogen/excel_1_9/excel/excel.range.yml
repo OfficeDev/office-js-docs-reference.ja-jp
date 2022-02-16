@@ -3,7 +3,7 @@ name: Excel.Range
 uid: excel!Excel.Range:class
 package: excel!
 fullName: Excel.Range
-summary: Range は、セル、行、列、またはセルのブロックなど、1 つ以上の連続するセルのセットを表します。 API 全体での範囲の使用方法の詳細については、JavaScript API の範囲から始Excel[してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
+summary: Range は、セル、行、列、またはセルのブロックなど、1 つ以上の連続するセルのセットを表します。 API 全体で範囲がどのように使用されるのかについて詳しくは、[JavaScript API の Excelを参照してください。](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
 remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
@@ -61,7 +61,7 @@ properties:
   uid: excel!Excel.Range#columnHidden:member
   package: excel!
   fullName: columnHidden
-  summary: 現在の範囲内のすべての列が非表示の場合を表します。 値は `true` 、範囲内のすべての列が非表示の場合です。 値は `false` 、範囲内の列が非表示の場合です。 値は、ある範囲の一部の列が非表示で、同じ範囲の他の列 `null` が非表示ではない場合です。
+  summary: 現在の範囲内のすべての列が非表示の場合を表します。 値は、 `true` 範囲内のすべての列が非表示の場合です。 値は、 `false` 範囲内の列が非表示の場合です。 値は、 `null` ある範囲の一部の列が非表示で、同じ範囲の他の列が非表示ではない場合です。
   remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -85,7 +85,7 @@ properties:
   uid: excel!Excel.Range#conditionalFormats:member
   package: excel!
   fullName: conditionalFormats
-  summary: 範囲と `ConditionalFormats` 交差するコレクション。
+  summary: 範囲と交差 `ConditionalFormats` するコレクション。
   remarks: '\[[API セット: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -169,7 +169,7 @@ properties:
   uid: excel!Excel.Range#hidden:member
   package: excel!
   fullName: hidden
-  summary: 現在の範囲内のすべてのセルが非表示の場合を表します。 値は `true` 、範囲内のすべてのセルが非表示の場合です。 値は `false` 、範囲内のセルが非表示の場合です。 値は `null` 、範囲内の一部のセルが非表示で、同じ範囲内の他のセルが非表示ではない場合です。
+  summary: 現在の範囲内のすべてのセルが非表示の場合を表します。 値は、 `true` 範囲内のすべてのセルが非表示の場合です。 値は、 `false` 範囲内のセルが非表示の場合です。 値は、 `null` 範囲内の一部のセルが非表示で、同じ範囲内の他のセルが非表示ではない場合です。
   remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -230,7 +230,7 @@ properties:
   package: excel!
   fullName: numberFormat
   summary: 指定したExcelの数値書式コードを表します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// The example below sets number-format, values and formulas on a grid that contains 2x3 grid.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:G7\";\n    var numberFormat = [[null, \"d-mmm\"], [null, \"d-mmm\"], [null, null]]\n    var values = [[\"Today\", 42147], [\"Tomorrow\", \"5/24\"], [\"Difference in days\", null]];\n    var formulas = [[null,null], [null,null], [null,\"=G6-G5\"]];\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.numberFormat = numberFormat;\n    range.values = values;\n    range.formulas= formulas;\n    range.load('text');\n    return ctx.sync().then(function() {\n        console.log(range.text);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Set the text of the chart title to \"My Chart\" and display it as an overlay on the chart.\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:G7\";\n    var numberFormat = [[null, \"d-mmm\"], [null, \"d-mmm\"], [null, null]]\n    var values = [[\"Today\", 42147], [\"Tomorrow\", \"5/24\"], [\"Difference in days\", null]];\n    var formulas = [[null,null], [null,null], [null,\"=G6-G5\"]];\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.numberFormat = numberFormat;\n    range.values = values;\n    range.formulas= formulas;\n    range.load('text');\n    await context.sync();\n    \n    console.log(range.text);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -241,7 +241,7 @@ properties:
   uid: excel!Excel.Range#numberFormatLocal:member
   package: excel!
   fullName: numberFormatLocal
-  summary: ユーザー Excelの言語設定に基づいて、指定した範囲の数値書式コードを表します。 Excelプロパティを取得または設定するときに、言語や形式の設定を実行 `numberFormatLocal` しない場合。 返されるテキストは、システム設定で指定された言語に基づいてローカル形式の文字列を使用します。
+  summary: ユーザー Excelの言語設定に基づいて、指定した範囲の数値書式コードを表します。 Excelプロパティを取得または設定するときに、言語や形式の設定を実行しない場合`numberFormatLocal`。 返されるテキストは、システム設定で指定された言語に基づいてローカル形式の文字列を使用します。
   remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -265,7 +265,7 @@ properties:
   uid: excel!Excel.Range#rowHidden:member
   package: excel!
   fullName: rowHidden
-  summary: 現在の範囲内のすべての行が非表示の場合を表します。 値は `true` 、範囲内のすべての行が非表示の場合です。 値は `false` 、範囲内の行が非表示の場合です。 値は `null` 、範囲内の一部の行が非表示で、同じ範囲内の他の行が非表示ではない場合です。
+  summary: 現在の範囲内のすべての行が非表示の場合を表します。 値は、 `true` 範囲内のすべての行が非表示の場合です。 値は、 `false` 範囲内の行が非表示の場合です。 値は、 `null` 範囲内の一部の行が非表示で、同じ範囲内の他の行が非表示ではない場合です。
   remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -337,7 +337,7 @@ properties:
   uid: excel!Excel.Range#style:member
   package: excel!
   fullName: style
-  summary: 現在の範囲のスタイルを表します。 セルのスタイルが矛盾している場合 `null` は、返されます。 カスタム スタイルの場合、スタイル名が返されます。 組み込みのスタイルの場合、列挙型の値を表す `BuiltInStyle` 文字列が返されます。
+  summary: 現在の範囲のスタイルを表します。 セルのスタイルが矛盾している場合は `null` 、返されます。 カスタム スタイルの場合、スタイル名が返されます。 組み込みのスタイルの場合、列挙型の値を表 `BuiltInStyle` す文字列が返されます。
   remarks: "\\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/style.yaml\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
@@ -349,7 +349,7 @@ properties:
   uid: excel!Excel.Range#text:member
   package: excel!
   fullName: text
-  summary: 指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 UI で発生する数値記号 ( ) Excelは、API によって返されるテキスト \# 値には影響しません。
+  summary: 指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 UI で発生する数値記号 (\#) Excelは、API によって返されるテキスト値には影響しません。
   remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -403,7 +403,7 @@ methods:
 
 
     詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
-  remarks: "\\[[API セット: ExcelApi 1.9、ExcelApi `destinationRange` <!-- --> Preview for null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-auto-fill.yaml\nawait Excel.run(async (context) => {\n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const sumCell = sheet.getRange(\"P4\");\n  \n  // Copy everything. The formulas will be contextually updated based on their new locations.\n  sumCell.autoFill(\"P4:P7\", Excel.AutoFillType.fillCopy);\n  sumCell.format.autofitColumns();\n  await context.sync();\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.9、ExcelApi Preview for null `destinationRange`<!-- -->](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-auto-fill.yaml\nawait Excel.run(async (context) => {\n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const sumCell = sheet.getRange(\"P4\");\n  \n  // Copy everything. The formulas will be contextually updated based on their new locations.\n  sumCell.autoFill(\"P4:P7\", Excel.AutoFillType.fillCopy);\n  sumCell.format.autofitColumns();\n  await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -427,7 +427,7 @@ methods:
 
 
     詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
-  remarks: '\[[API セット: ExcelApi 1.9、ExcelApi `destinationRange` <!-- --> Preview for null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  remarks: '\[[API セット: ExcelApi 1.9、ExcelApi Preview for null `destinationRange`<!-- -->](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -460,7 +460,7 @@ methods:
   package: excel!
   fullName: clear(applyTo)
   summary: 範囲の値、書式、塗りつぶし、罫線などをクリアします。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Below example clears format and contents of the range. \nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.clear();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Clear the format and contents of the range.\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.clear();\n    await context.sync(); \n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -526,7 +526,7 @@ methods:
   uid: excel!Excel.Range#copyFrom:member(1)
   package: excel!
   fullName: copyFrom(sourceRange, copyType, skipBlanks, transpose)
-  summary: セル データまたは書式をソース範囲または現在の `RangeAreas` 範囲にコピーします。 移動先の範囲は、ソース範囲と異なるサイズにするか、または `RangeAreas`<!-- -->. 移動先がソースより小さい場合は、自動的に展開されます。
+  summary: セル データまたは書式をソース範囲または現在の範囲 `RangeAreas` にコピーします。 移動先の範囲は、ソース範囲と異なるサイズにするか、または `RangeAreas`<!-- -->. 移動先がソースより小さい場合は、自動的に展開されます。
   remarks: >-
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -556,7 +556,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: ソース範囲または `RangeAreas` コピー元。 ソースに複数の範囲がある場合は、四角形の範囲から完全な行または列を削除してフォーム `RangeAreas` を作成できる必要があります。
+      description: ソース範囲またはコピー `RangeAreas` 元。 ソースに複数の `RangeAreas` 範囲がある場合は、四角形の範囲から完全な行または列を削除してフォームを作成できる必要があります。
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyType
       description: コピーするセル データまたは書式の種類。 既定値は "All" です。
@@ -574,7 +574,7 @@ methods:
   uid: excel!Excel.Range#copyFrom:member(2)
   package: excel!
   fullName: copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)
-  summary: セル データまたは書式をソース範囲または現在の `RangeAreas` 範囲にコピーします。 移動先の範囲は、ソース範囲と異なるサイズにするか、または `RangeAreas`<!-- -->. 移動先がソースより小さい場合は、自動的に展開されます。
+  summary: セル データまたは書式をソース範囲または現在の範囲 `RangeAreas` にコピーします。 移動先の範囲は、ソース範囲と異なるサイズにするか、または `RangeAreas`<!-- -->. 移動先がソースより小さい場合は、自動的に展開されます。
   remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -582,7 +582,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyTypeString?: "All" | "Formulas" | "Values" | "Formats", skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: ソース範囲または `RangeAreas` コピー元。 ソースに複数の範囲がある場合は、四角形の範囲から完全な行または列を削除してフォーム `RangeAreas` を作成できる必要があります。
+      description: ソース範囲またはコピー `RangeAreas` 元。 ソースに複数の `RangeAreas` 範囲がある場合は、四角形の範囲から完全な行または列を削除してフォームを作成できる必要があります。
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyTypeString
       description: コピーするセル データまたは書式の種類。 既定値は "All" です。
@@ -601,7 +601,7 @@ methods:
   package: excel!
   fullName: delete(shift)
   summary: 範囲に関連付けられているセルを削除します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.delete(\"Left\");\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.delete(\"Left\");\n    await context.sync(); \n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -654,7 +654,7 @@ methods:
   uid: excel!Excel.Range#findOrNullObject:member(1)
   package: excel!
   fullName: findOrNullObject(text, criteria)
-  summary: 指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が 1 つのセルより大きい場合、検索はその範囲に制限されます。それ以外の場合、検索はそのセルの後からシート全体をカバーします。 一致がない場合、このメソッドはプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 指定された条件に基づいて指定された文字列を見つけます。 現在の範囲が 1 つのセルより大きい場合、検索はその範囲に制限されます。それ以外の場合、検索はそのセルの後からシート全体をカバーします。 一致がない場合、このメソッドはプロパティが次に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: "\\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-find.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const table = sheet.tables.getItem(\"ExpensesTable\");\n    const searchRange = table.getRange();\n    const foundRange = searchRange.findOrNullObject($(\"#searchText\").text(), {\n        completeMatch: isCompleteMatchToggle,\n        matchCase: isMatchCaseToggle,\n        searchDirection: searchDirectionToggle\n    });\n    \n    foundRange.load(\"address\");\n    await context.sync();\n\n    if (foundRange.isNullObject) {\n        console.log(\"Text not found\");\n    } else {\n        console.log(foundRange.address);\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
@@ -687,7 +687,7 @@ methods:
   uid: excel!Excel.Range#getAbsoluteResizedRange:member(1)
   package: excel!
   fullName: getAbsoluteResizedRange(numRows, numColumns)
-  summary: 現在のオブジェクトと同じ左上のセルを持つオブジェクトを取得しますが、指定した行数と列 `Range` `Range` 数を持つオブジェクトを取得します。
+  summary: 現在の `Range` オブジェクトと同じ左上 `Range` のセルを持つオブジェクトを取得しますが、指定した行数と列数を持つオブジェクトを取得します。
   remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -707,8 +707,8 @@ methods:
   uid: excel!Excel.Range#getBoundingRect:member(1)
   package: excel!
   fullName: getBoundingRect(anotherRange)
-  summary: 指定した範囲を包含する、最小の Range オブジェクトを取得します。 たとえば `GetBoundingRect` 、"B2:C5" と "D10:E15" の値は "B2:E15" です。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D4:G6\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var range = range.getBoundingRect(\"G4:H8\");\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // Prints Sheet1!D4:H8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  summary: 指定した範囲を包含する、最小の Range オブジェクトを取得します。 たとえば、" `GetBoundingRect` B2:C5" と "D10:E15" の値は "B2:E15" です。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D4:G6\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var range = range.getBoundingRect(\"G4:H8\");\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // Prints Sheet1!D4:H8\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -725,7 +725,7 @@ methods:
   package: excel!
   fullName: getCell(row, column)
   summary: 行と列の番号に基づいて、1 つのセルを含んだ範囲オブジェクトを取得します。 セルは、ワークシート グリッド内にある限り、親範囲の境界外に配置できます。 返されるセルは、範囲の左上のセルを基準に配置されます。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var cell = range.getCell(0,0);\n    cell.load('address');\n    return ctx.sync().then(function() {\n        console.log(cell.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = context.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var cell = range.getCell(0,0);\n    cell.load('address');\n    await context.sync();\n    \n    console.log(cell.address);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -797,7 +797,7 @@ methods:
   package: excel!
   fullName: getColumn(column)
   summary: 範囲に含まれる列を 1 つ取得します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet19\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getColumn(1);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!B1:B8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet19\";\n    var rangeAddress = \"A1:F8\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getColumn(1);\n    range.load('address');\n    await context.sync();\n\n    console.log(range.address); // prints Sheet1!B1:B8\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -864,8 +864,8 @@ methods:
   uid: excel!Excel.Range#getEntireColumn:member(1)
   package: excel!
   fullName: getEntireColumn()
-  summary: 範囲の列全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4:E11" を表す場合、そのオブジェクトは列 `getEntireColumn` "B:E" を表す範囲です)。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Note: the grid properties of the Range (values, numberFormat, formulas) \n// contains null since the Range in question is unbounded.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var rangeEC = range.getEntireColumn();\n    rangeEC.load('address');\n    return ctx.sync().then(function() {\n        console.log(rangeEC.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  summary: 範囲の列全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4:E11" を表す場合、そのオブジェクトは列 "B:E" `getEntireColumn` を表す範囲です)。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Note: the grid properties of the Range (values, numberFormat, formulas) \n// contains null since the Range in question is unbounded.\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var rangeEC = range.getEntireColumn();\n    rangeEC.load('address');\n    await context.sync();\n    \n    console.log(rangeEC.address);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -877,8 +877,8 @@ methods:
   uid: excel!Excel.Range#getEntireRow:member(1)
   package: excel!
   fullName: getEntireRow()
-  summary: 範囲の行全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4:E11" を表す場合、そのオブジェクトは行 `GetEntireRow` "4:11" を表す範囲です)。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Gets an object that represents the entire row of the range \n// (for example, if the current range represents cells \"B4:E11\", \n// its GetEntireRow is a range that represents rows \"4:11\").\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var rangeER = range.getEntireRow();\n    rangeER.load('address');\n    return ctx.sync().then(function() {\n        console.log(rangeER.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  summary: 範囲の行全体を表すオブジェクトを取得します (たとえば、現在の範囲がセル "B4:E11" を表す場合、そのオブジェクトは行 "4:11" `GetEntireRow` を表す範囲です)。
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Gets an object that represents the entire row of the range \n// (for example, if the current range represents cells \"B4:E11\", \n// its GetEntireRow is a range that represents rows \"4:11\").\nawait Excel.run(async (context) => {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\"; \n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var rangeER = range.getEntireRow();\n    rangeER.load('address');\n    await context.sync();\n    \n    console.log(rangeER.address);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -890,7 +890,7 @@ methods:
   uid: excel!Excel.Range#getImage:member(1)
   package: excel!
   fullName: getImage()
-  summary: '範囲を base64 エンコードされた png イメージとしてレンダリングします。 *重要**: この API は現在、この API でサポートExcel for Mac。 現在 [の状態については、「OfficeDev/office-js Issue \# 235」](https://github.com/OfficeDev/office-js/issues/235) を参照してください。'
+  summary: '範囲を base64 エンコードされた png イメージとしてレンダリングします。 *重要**: この API は現在、この API でサポートExcel for Mac。 現在 [の状態については、「OfficeDev/office-js Issue \#235](https://github.com/OfficeDev/office-js/issues/235) 」を参照してください。'
   remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -904,7 +904,7 @@ methods:
   package: excel!
   fullName: getIntersection(anotherRange)
   summary: 指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = \n        ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getIntersection(\"D4:G6\");\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!D4:F6\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = \n        context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getIntersection(\"D4:G6\");\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!D4:F6\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -920,7 +920,7 @@ methods:
   uid: excel!Excel.Range#getIntersectionOrNullObject:member(1)
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
-  summary: 指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差が見つからない場合、このメソッドはプロパティが次に設定された `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 指定した範囲の長方形の交差を表す範囲オブジェクトを取得します。 交差が見つからない場合、このメソッドはプロパティが次に設定されたオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: >-
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -1004,7 +1004,7 @@ methods:
   package: excel!
   fullName: getLastCell()
   summary: 範囲内の最後のセルを取得します。たとえば、"B2:D5" の最後のセルは "D5" になります。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastCell();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!F8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastCell();\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!F8\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1017,7 +1017,7 @@ methods:
   package: excel!
   fullName: getLastColumn()
   summary: 範囲内の最後の列を取得します。たとえば、"B2:D5" の最後の列は "D2:D5" になります。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastColumn();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!F1:F8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastColumn();\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!F1:F8\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1030,7 +1030,7 @@ methods:
   package: excel!
   fullName: getLastRow()
   summary: 範囲内の最後の行を取得します。たとえば、"B2:D5" の最後の行は "B5:D5" になります。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastRow();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!A8:F8\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getLastRow();\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!A8:F8\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1043,7 +1043,7 @@ methods:
   package: excel!
   fullName: getOffsetRange(rowOffset, columnOffset)
   summary: 指定した範囲からのオフセットで範囲を表すオブジェクトを取得します。返される範囲のディメンションは、この範囲と一致します。結果の範囲がワークシートのグリッドの境界線の外にはみ出る場合は、エラーがスローされます。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D4:F6\";\n    var range = \n        ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!H3:J5\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D4:F6\";\n    var range = \n        context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!H3:J5\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1062,7 +1062,7 @@ methods:
   uid: excel!Excel.Range#getResizedRange:member(1)
   package: excel!
   fullName: getResizedRange(deltaRows, deltaColumns)
-  summary: 現在のオブジェクトに似たオブジェクトを取得しますが、右下隅がいくつかの行と列で展開 (または契約 `Range` `Range` ) されます。
+  summary: 現在の `Range` オブジェクトに似た `Range` オブジェクトを取得しますが、右下隅がいくつかの行と列で展開 (または契約) されます。
   remarks: '\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1083,7 +1083,7 @@ methods:
   package: excel!
   fullName: getRow(row)
   summary: 範囲に含まれている行を 1 つ取得します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getRow(1);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address); // prints Sheet1!A2:F2\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getRow(1);\n    range.load('address');\n    await context.sync();\n    \n    console.log(range.address); // prints Sheet1!A2:F2\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1099,7 +1099,7 @@ methods:
   uid: excel!Excel.Range#getRowProperties:member(1)
   package: excel!
   fullName: getRowProperties(rowPropertiesLoadOptions)
-  summary: 一次元配列を返します。各行のフォント、塗りつぶし、罫線、配置などのプロパティ データをカプセル化します。 特定の行内の各セル間で一貫性が保てないプロパティの場合 `null` は、返されます。
+  summary: 一次元配列を返します。各行のフォント、塗りつぶし、罫線、配置などのプロパティ データをカプセル化します。 特定の行内の各セル間で一貫性が保てないプロパティの場合は `null` 、返されます。
   remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1150,7 +1150,7 @@ methods:
   uid: excel!Excel.Range#getSpecialCells:member(1)
   package: excel!
   fullName: getSpecialCells(cellType, cellValueType)
-  summary: 指定した種類と値に一致するセルを表す、1 つ以上の四角形の範囲を含むオブジェクト `RangeAreas` を取得します。 特別なセルが見つからない場合は、 `ItemNotFound` エラーがスローされます。
+  summary: 指定した `RangeAreas` 種類と値に一致するセルを表す、1 つ以上の四角形の範囲を含むオブジェクトを取得します。 特別なセルが見つからない場合は、エラー `ItemNotFound` がスローされます。
   remarks: >-
     \[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -1184,7 +1184,7 @@ methods:
       description: 含めるセルの種類。
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: If `cellType` は、または `constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
+      description: If `cellType` は、または`constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1193,7 +1193,7 @@ methods:
   uid: excel!Excel.Range#getSpecialCells:member(2)
   package: excel!
   fullName: getSpecialCells(cellTypeString, cellValueType)
-  summary: 指定した種類と値に一致するセルを表す、1 つ以上の四角形の範囲を含むオブジェクト `RangeAreas` を取得します。 特別なセルが見つからない場合は、 `ItemNotFound` エラーがスローされます。
+  summary: 指定した `RangeAreas` 種類と値に一致するセルを表す、1 つ以上の四角形の範囲を含むオブジェクトを取得します。 特別なセルが見つからない場合は、エラー `ItemNotFound` がスローされます。
   remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1204,7 +1204,7 @@ methods:
       description: 含めるセルの種類。
       type: "\"ConditionalFormats\" | \"DataValidations\" | \"Blanks\" | \"Constants\" | \"Formulas\" | \"SameConditionalFormat\" | \"SameDataValidation\" | \"Visible\""
     - id: cellValueType
-      description: If `cellType` は、または `constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
+      description: If `cellType` は、または`constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
       type: "\"All\" | \"Errors\" | \"ErrorsLogical\" | \"ErrorsNumbers\" | \"ErrorsText\" | \"ErrorsLogicalNumber\" | \"ErrorsLogicalText\" | \"ErrorsNumberText\" | \"Logical\" | \"LogicalNumbers\" | \"LogicalText\" | \"LogicalNumbersText\" | \"Numbers\" | \"NumbersText\" | \"Text\""
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1213,7 +1213,7 @@ methods:
   uid: excel!Excel.Range#getSpecialCellsOrNullObject:member(1)
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellType, cellValueType)
-  summary: 指定した種類と値に一致するセルを表す 1 つ以上の範囲を含むオブジェクト `RangeAreas` を取得します。 特別なセルが見つからない場合、このメソッドはプロパティが設定されている `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 指定した `RangeAreas` 種類と値に一致するセルを表す 1 つ以上の範囲を含むオブジェクトを取得します。 特別なセルが見つからない場合、このメソッドはプロパティが設定されているオブジェクトを `isNullObject` 返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1224,7 +1224,7 @@ methods:
       description: 含めるセルの種類。
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: If `cellType` は、または `constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
+      description: If `cellType` は、または`constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1233,7 +1233,7 @@ methods:
   uid: excel!Excel.Range#getSpecialCellsOrNullObject:member(2)
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellTypeString, cellValueType)
-  summary: 指定した種類と値に一致するセルを表す 1 つ以上の範囲を含むオブジェクト `RangeAreas` を取得します。 特別なセルが見つからない場合、このメソッドはプロパティが設定されている `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 指定した `RangeAreas` 種類と値に一致するセルを表す 1 つ以上の範囲を含むオブジェクトを取得します。 特別なセルが見つからない場合、このメソッドはプロパティが設定されているオブジェクトを `isNullObject` 返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: '\[[API セット: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1244,7 +1244,7 @@ methods:
       description: 含めるセルの種類。
       type: "\"ConditionalFormats\" | \"DataValidations\" | \"Blanks\" | \"Constants\" | \"Formulas\" | \"SameConditionalFormat\" | \"SameDataValidation\" | \"Visible\""
     - id: cellValueType
-      description: If `cellType` は、または `constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
+      description: If `cellType` は、または`constants``formulas`<!-- -->、この引数は、結果に含めるセルの種類を決定するために使用されます。 これらの値を組み合わせて、複数の型を返します。 この引数を省略すると、すべての定数および数式が対象になります。
       type: "\"All\" | \"Errors\" | \"ErrorsLogical\" | \"ErrorsNumbers\" | \"ErrorsText\" | \"ErrorsLogicalNumber\" | \"ErrorsLogicalText\" | \"ErrorsNumberText\" | \"Logical\" | \"LogicalNumbers\" | \"LogicalText\" | \"LogicalNumbersText\" | \"Numbers\" | \"NumbersText\" | \"Text\""
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1366,7 +1366,7 @@ methods:
   uid: excel!Excel.Range#getUsedRangeOrNullObject:member(1)
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
-  summary: 指定した範囲オブジェクトのうち使用されている範囲を返します。 範囲内に使用されているセルがない場合、このメソッドはプロパティを次に設定した `isNullObject` オブジェクトを返します。 `true`<!-- -->. 詳細については [、「*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  summary: 指定した範囲オブジェクトのうち使用されている範囲を返します。 範囲内に使用されているセルがない場合、このメソッドはプロパティを次に設定したオブジェクト `isNullObject` を返します。 `true`<!-- -->. 詳細については、「 [*OrNullObject メソッドとプロパティ」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
   remarks: >-
     \[[API セット: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -1440,8 +1440,25 @@ methods:
   uid: excel!Excel.Range#insert:member(1)
   package: excel!
   fullName: insert(shift)
-  summary: この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域 `Range` に新しいオブジェクトを返します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.insert();\n    return ctx.sync(); \n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  summary: この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域に新 `Range` しいオブジェクトを返します。
+  remarks: >-
+    \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>例
+
+
+    ```typescript
+
+    await Excel.run(async (context) => {
+        var sheetName = "Sheet1";
+        var rangeAddress = "F5:F10";
+        var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
+        range.insert(Excel.InsertShiftDirection.down);
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1457,7 +1474,7 @@ methods:
   uid: excel!Excel.Range#insert:member(2)
   package: excel!
   fullName: insert(shiftString)
-  summary: この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域 `Range` に新しいオブジェクトを返します。
+  summary: この範囲を占めるセルまたはセルの範囲をワークシートに挿入し、領域を空けるために他のセルをシフトします。 空白の領域に新 `Range` しいオブジェクトを返します。
   remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -1503,7 +1520,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```javascript\n// Below example uses range address to get the range object.\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\"; \n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Use the range address to get the range object.\nawait Excel.run(async (context) => {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\"; \n    var worksheet = context.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    await context.sync();\n    \n    console.log(range.cellCount);\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.Range#load:member(3)
   package: excel!
@@ -1520,7 +1537,7 @@ methods:
               }): Excel.Range;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -1534,14 +1551,14 @@ methods:
   package: excel!
   fullName: merge(across)
   summary: 範囲内のセルをワークシートの 1 つの領域に結合します。
-  remarks: "\\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.merge(true);\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-merged-ranges.yaml\nawait Excel.run(async (context) => {\n  // Retrieve the worksheet and the table in that worksheet.\n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const tableRange = sheet.getRange(\"B2:E6\");\n\n  // Create a merged range in the first row of the table.\n  const chartTitle = tableRange.getRow(0);\n  chartTitle.merge(true);\n\n  // Format the merged range.\n  chartTitle.format.horizontalAlignment = \"Center\";\n\n  await context.sync();\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.merge(true);\n    await context.sync(); \n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-merged-ranges.yaml\nawait Excel.run(async (context) => {\n  // Retrieve the worksheet and the table in that worksheet.\n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const tableRange = sheet.getRange(\"B2:E6\");\n\n  // Create a merged range in the first row of the table.\n  const chartTitle = tableRange.getRow(0);\n  chartTitle.merge(true);\n\n  // Format the merged range.\n  chartTitle.format.horizontalAlignment = \"Center\";\n\n  await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'merge(across?: boolean): void;'
     parameters:
     - id: across
-      description: 省略可能。 指定 `true` した範囲の各行のセルを個別の結合セルとして結合します。 既定値は次の値です。 `false`<!-- -->.
+      description: 省略可能。 指定した `true` 範囲の各行のセルを個別の結合セルとして結合します。 既定値は次の値です。 `false`<!-- -->.
       type: boolean
     return:
       type: void
@@ -1594,7 +1611,7 @@ methods:
   package: excel!
   fullName: select()
   summary: Excel UI で指定した範囲を選択します。
-  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    await context.sync(); \n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1803,7 +1820,7 @@ methods:
   uid: excel!Excel.Range#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。Range オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.RangeData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のExcel。Range オブジェクトは API オブジェクトで、メソッド`toJSON`はプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.RangeData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1816,7 +1833,7 @@ methods:
   uid: excel!Excel.Range#track:member(1)
   package: excel!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. `.sync`このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1830,7 +1847,7 @@ methods:
   package: excel!
   fullName: unmerge()
   summary: 範囲内のセルを結合解除して別々のセルにします。
-  remarks: "\\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.unmerge();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API セット: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = context.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.unmerge();\n    await context.sync(); \n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1842,7 +1859,7 @@ methods:
   uid: excel!Excel.Range#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効にされる前 `context.sync()` に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1850,12 +1867,12 @@ methods:
     content: 'untrack(): Excel.Range;'
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // Call untrack() to release the range from memory.\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 55c0f6f6fd7154cf94463c65dbb2a5d47ca8eab1
-  ms.sourcegitcommit: fb28bc8fd0536b2e640f5039194fdbc31b30f5dc
+  ms.openlocfilehash: eaf4fe8804fbce1db9ee7b502f9b9212f4b124aa
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/12/2022
-  ms.locfileid: "61763818"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62839974"
