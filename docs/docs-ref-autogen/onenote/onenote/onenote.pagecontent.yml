@@ -130,9 +130,9 @@ methods:
     #### <a name="examples"></a>例
 
 
-    ```javascript
+    ```typescript
 
-    OneNote.run(function (context) {
+    await OneNote.run(async (context) => {
 
         var page = context.application.getActivePage();
         var pageContents = page.contents;
@@ -141,19 +141,10 @@ methods:
         firstPageContent.load('type');
 
         // Run the queued commands, and return a promise to indicate task completion.
-        return context.sync()
-            .then(function () {
-                if(firstPageContent.isNull === false) {
-                    firstPageContent.delete();
-                    return context.sync();
-                }
-            });
-    })
-
-    .catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        await context.sync();
+        if (firstPageContent.isNullObject === false) {
+            firstPageContent.delete();
+            await context.sync();
         }
     });
 
@@ -215,7 +206,7 @@ methods:
               }): OneNote.PageContent;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -265,7 +256,7 @@ methods:
   uid: onenote!OneNote.PageContent#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のOneNote。PageContent オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`OneNote.Interfaces.PageContentData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のOneNote。PageContent オブジェクトは API オブジェクトで`toJSON`、メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`OneNote.Interfaces.PageContentData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -278,7 +269,7 @@ methods:
   uid: onenote!OneNote.PageContent#track:member(1)
   package: onenote!
   fullName: track()
-  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。 `.sync`
+  summary: ドキュメントの環境変更に基づいて自動的に調整する目的でオブジェクトを追跡します。 この呼び出しは、 `context.trackedObjects.add(thisObject)`<!-- -->. `.sync`このオブジェクトを呼び出し間で使用し、.run バッチのシーケンシャル実行の外側で使用し、プロパティの設定またはオブジェクトのメソッドの呼び出し時に "InvalidObjectPath" エラーが発生する場合は、オブジェクトが最初に作成された時点で、追跡対象オブジェクト コレクションにオブジェクトを追加する必要がありました。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -291,7 +282,7 @@ methods:
   uid: onenote!OneNote.PageContent#untrack:member(1)
   package: onenote!
   fullName: untrack()
-  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効に `context.sync()` される前に呼び出す必要があります。
+  summary: 前に追跡されていた場合、このオブジェクトに関連付けられているメモリを解放します。 この呼び出しは、 `context.trackedObjects.remove(thisObject)`<!-- -->. 追跡対象オブジェクトが多いとホスト アプリケーションの動作が遅くなります。追加したオブジェクトが不要になったら、必ずそれを解放してください。 メモリ解放が有効にされる前 `context.sync()` に呼び出す必要があります。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -302,9 +293,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 8b40062e693c7861e8b330b1de5834d50873173b
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: a950dcb1d625fabd4decadf9142fdb019ac3a6c4
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61518685"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62843937"
