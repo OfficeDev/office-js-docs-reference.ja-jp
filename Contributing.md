@@ -1,42 +1,57 @@
 # <a name="contribute-to-this-documentation"></a>このドキュメントに投稿する
 
-このドキュメントをご感心をお寄せいただき、ありがとうございます。
+このドキュメントをご感心をお寄せいただき、ありがとうございます。 このドキュメントをより良くするための最良の方法は、次のとおりです。
 
-* [投稿する方法](#ways-to-contribute)
-* [GitHub を使用して投稿する](#contribute-using-github)
-* [Git を使用して投稿する](#contribute-using-git)
-* [Markdown を使用してトピックを書式設定する方法](#how-to-use-markdown-to-format-your-topic)
-* [FAQ](#faq)
-* [その他のリソース](#more-resources)
+* [問題を報告するか、追加のサンプルを要求します。](#report-issues)
+* [新しいサンプルを追加または編集します。](#add-or-edit-samples)
 
-## <a name="ways-to-contribute"></a>投稿する方法
+## <a name="report-issues"></a>問題の報告
 
-このドキュメントに投稿するいくつかの方法を下に示します。
+このレポのコンテンツの大部分は、型定義ファイル [から生成されます](https://github.com/DefinitelyTyped/DefinitelyTyped)。 そのため、ここでの修正は上書きされる可能性があります。 問題を報告するか、追加のドキュメントの要求を[問題] をGitHub[してください](https://github.com/OfficeDev/office-js-docs-reference/issues)。 これを行うには、影響を受ける記事の下部にある [フィードバック] セクションに移動し、[このページ] を選択して問題のGitHubします。 または、新しい問題を直接作成[GitHub。](https://github.com/OfficeDev/office-js-docs-reference/issues/new)
 
-* 記事に小さな変更を加える方法については、「[GitHub を使用して投稿する](#contribute-using-github)」を参照してください。
-* 大きな変更やコードが関係する変更を加える方法については、「[Git を使用して投稿する](#contribute-using-git)」を参照してください。
-* ドキュメントのバグを報告するには、影響を受ける記事の下部にある [フィードバック] セクションに移動し、[このページ] を選択して GitHub の問題を作成します。 使用できない場合は、GitHub で直接新しい問題 [を作成します](https://github.com/OfficeDev/office-js-docs-reference/issues)。
-* GitHub の問題を [使用して新しいドキュメントを要求します](https://github.com/OfficeDev/office-js-docs-reference/issues)。
+## <a name="add-or-edit-new-samples"></a>新しいサンプルを追加または編集する
 
-## <a name="contribute-using-github"></a>GitHub を使用して投稿する
+> **重要**: このリポジトリの参照コンテンツは自動生成されます。 このセクションに [記載されていないファイル](https://github.com/OfficeDev/office-js-docs-reference/blob/main/DocumentationToolingNotes.md) の編集を計画している場合は、ドキュメント ツールに関する注意事項をお読みください。
 
-> **重要**: このリポジトリの参照コンテンツは自動生成されます。 ファイルを編集する [前に、ドキュメント ツールの注意事項](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md) をお読みください。
+このレポのドキュメントにあるコード サンプルは、次の 2 つの場所から提供されます。
+
+* [**/docs/code-snippets**](https://github.com/OfficeDev/office-js-docs-reference/tree/main/docs/code-snippets)
+* [OfficeDev/office-js-snippets](https://github.com/OfficeDev/office-js-snippets) (サンプルのソースScript Lab)
+
+サンプル repo Script Labへの投稿は、そのレポの [readme で説明されています](https://github.com/OfficeDev/office-js-snippets#readme)。
+
+### <a name="how-to-add-or-edit-sample-code"></a>サンプル コードを追加または編集する方法
+
+[**このレポの /docs/code-snippets/\*-snippets.yaml**](https://github.com/OfficeDev/office-js-docs-reference/tree/main/docs/code-snippets) ファイルには、各アプリケーションと共通 API のサンプルが含まれています。 これらの YAML ファイルの 1 つの YAML キーは、ドキュメント内のフィールドの UID です。 キーは形式に従います `<Application>.<ClassName>#<fieldName>:member<overloadNumber(methods only)>`。 サンプル コード スニペットを、サンプルで使用しているフィールドのキーの下の値として追加します。 次の Git メカニズムを使用して、リポジトリに変更を送信します。
+
+* サンプルに小さな変更を加えるには、[サンプルを使用して投稿GitHub](#contribute-using-github)。
+* 大きな変更を行う場合は、 [Git を使用して投稿します](#contribute-using-git)。
+
+### <a name="tips-on-making-good-samples"></a>ヒントサンプルの作成に関する情報
+
+各 PR を確認して、Microsoft の標準を満たします。 サンプルがリファレンス ドキュメントに統合されるのを確実に支援するには、次のヒントを念頭に置いておきます。
+
+* スコープを制限します。 小さなシナリオまたは API の使用に焦点を当てたサンプル コードは、読者が API の使用方法を理解するのに役立ちます。 (大きいサンプルは、[Script Labまたは](https://github.com/OfficeDev/office-js-snippets) [Code サンプル repo に移動する](https://github.com/officedev/office-add-in-samples)必要があります)。
+* 意図した動作を説明する簡単なコメントを含める。
+* 予期される入力または状態を明確に示します。
+
+### <a name="contribute-using-github"></a>GitHub を使用して投稿する
 
 リポジトリをデスクトップに複製せずにこのドキュメントに投稿するには、GitHub を使用します。これは、このリポジトリでプル リクエストを作成する最も簡単な方法です。コードの変更に関係しない小さな変更を加えるには、この方法を使用します。
 
 このメソッドを使用すると、一度に 1 つの記事に投稿できます。
 
-### <a name="to-contribute-using-github"></a>GitHub を使用して投稿するには
+#### <a name="to-contribute-using-github"></a>アプリを使用してGitHub
 
 1. 投稿する記事を GitHub で検索します。
 2. GitHub で記事が表示されたら、GitHub にサインインします (無料アカウントを取得するには、「[Join GitHub](https://github.com/join)」 (GitHub に参加) にアクセスします)。
 3. **鉛筆アイコン** (このプロジェクトのフォークでファイルを編集します) を選択し、**[<>ファイルの編集]** ウィンドウで変更を加えます。
 4. 一番下までスクロールし、説明を入力します。
-5. [**ファイル変更の提案**] > [**プル リクエストの作成**] を選択します。
+5. [**ファイル変更の提案**]  >  [**プル リクエストの作成**] を選択します。
 
 これでプル リクエストを正常に提出できました。プル リクエストは、通常 10 営業日以内に審査されます。
 
-## <a name="contribute-using-git"></a>Git を使用して投稿する
+### <a name="contribute-using-git"></a>Git を使用して投稿する
 
 次のような実質的な変更を投稿するには、Git を使用します。
 
@@ -45,7 +60,7 @@
 * テキストの大規模な変更の投稿。
 * 新しいトピックの追加。
 
-### <a name="to-contribute-using-git"></a>Git を使用して投稿するには
+#### <a name="to-contribute-using-git"></a>Git を使用して投稿するには
 
 1. GitHub アカウントを持っていない場合は、[GitHub](https://github.com/join) でセットアップします。
 2. アカウントを取得したら、ご利用のコンピューターに Git をインストールします。 「[Set up Git]」 (Git の設定) チュートリアルの手順を実行します。
@@ -59,11 +74,9 @@
 
 CLA への署名により、メイン リポジトリにコミットする権限が付与されるわけではありませんが、Office Developer および Office Developer Content Publishing チームからお客様の投稿への確認と承認を受けることができるようになります。 送信内容には自身の名義が入ります。
 
-通常、プル要求は 10 営業日以内に審査されます。
-
 ## <a name="use-github-git-and-this-repository"></a>GitHub、Git、およびこのリポジトリを使用する
 
-**注:** このセクションの情報のほとんどは、「[GitHub ヘルプ]」の記事で見つけることができます。Git と GitHub のことをよく知っている場合は、「**コンテンツを投稿して編集する**」のセクションまでスキップして、このリポジトリのコード / コンテンツ フローの詳細を参照してください。
+**注:** このセクションの情報のほとんどは、「[GitHub ヘルプ]」の記事で見つけることができます。 Git と GitHub のことをよく知っている場合は、「**コンテンツを投稿して編集する**」のセクションまでスキップして、このリポジトリのコード / コンテンツ フローの詳細を参照してください。
 
 ### <a name="to-set-up-your-fork-of-the-repository"></a>リポジトリのフォークをセットアップするには
 
@@ -72,12 +85,12 @@ CLA への署名により、メイン リポジトリにコミットする権限
 3. このリポジトリの独自のフォークを作成します。これを行うには、ページの上部にある [**フォーク**] ボタンを選択します。
 4. フォークをコンピューターにコピーします。これを行うには、Git Bash を開きます。コマンド プロンプトで、次のように入力します。
 
-        git clone https://github.com/<your user name>/<repo name>.git
+        git clone https://github.com/<your user name>/office-js-docs-reference.git
 
     Next, create a reference to the root repository by entering these commands:
 
-        cd <repo name>
-        git remote add upstream https://github.com/OfficeDev/<repo name>.git
+        cd office-js-docs-reference
+        git remote add upstream https://github.com/OfficeDev/office-js-docs-reference.git
         git fetch upstream
 
 おめでとうございます。リポジトリをセットアップできました。今後、同じ手順をもう一度繰り返す必要はありません。
@@ -93,7 +106,7 @@ CLA への署名により、メイン リポジトリにコミットする権限
 3. メイン リポジトリにプル リクエストを提出します。
 4. 分岐を削除します。
 
-**重要** 作業フローを効率化してマージによる競合の可能性を減らすため、各分岐を単一の概念 / 記事に限定してください。新しい分岐に適した内容には、次のものが含まれます。
+**重要**: 各ブランチを 1 つの概念/記事に制限して、作業フローを合理化し、マージ競合の可能性を減らします。 新しい分岐に適した内容には、次のものが含まれます。
 
 * 新しい記事。
 * スペルと文法の編集。
@@ -102,17 +115,17 @@ CLA への署名により、メイン リポジトリにコミットする権限
 #### <a name="to-create-a-new-branch"></a>新しい分岐を作成するには
 
 1. Git Bash を開きます。
-2. At the Git Bash command prompt, type `git pull upstream master:<new branch name>`. This creates a new branch locally that is copied from the latest OfficeDev master branch.
+2. At the Git Bash command prompt, type `git pull upstream main:<new branch name>`. これにより、最新の OfficeDev メイン ブランチからコピーされる新しいブランチがローカルに作成されます。
 3. At the Git Bash command prompt, type `git push origin <new branch name>`. This alerts GitHub to the new branch. You should now see the new branch in your fork of the repository on GitHub.
 4. At the Git Bash command prompt, type `git checkout <new branch name>` to switch to your new branch.
 
 #### <a name="add-new-content-or-edit-existing-content"></a>新しい内容を追加するか既存の内容を編集する
 
-You navigate to the repository on your computer by using File Explorer. The repository files are in `C:\Users\<yourusername>\<repo name>`.
+You navigate to the repository on your computer by using File Explorer. The repository files are in `C:\Users\<yourusername>\office-js-docs-reference`.
 
 ファイルを編集するには、好みのエディターで開いて変更します。新しいファイルを作成するには、好みのエディターを使用して、リポジトリのローカル コピー内の適切な場所に新しいファイルを保存します。作業中は、頻繁に作業内容を保存してください。
 
-The files in `C:\Users\<yourusername>\<repo name>` are a working copy of the new branch that you created in your local repository. Changing anything in this folder doesn't affect the local repository until you commit a change. To commit a change to the local repository, type the following commands in GitBash:
+The files in `C:\Users\<yourusername>\office-js-docs-reference` are a working copy of the new branch that you created in your local repository. Changing anything in this folder doesn't affect the local repository until you commit a change. To commit a change to the local repository, type the following commands in GitBash:
 
     git add .
     git commit -v -a -m "<Describe the changes made in this commit>"
@@ -132,28 +145,28 @@ The files in `C:\Users\<yourusername>\<repo name>` are a working copy of the new
 1. In the Git Bash command prompt, type `git push origin <new branch name>`. In your local repository, `origin` refers to your GitHub repository that you cloned the local repository from. This command pushes the current state of your new branch, including all commits made in the previous steps, to your GitHub fork.
 2. GitHub サイト上のフォーク内で、新しい分岐まで移動します。
 3. ページの上部にある [**プル リクエスト**] ボタンを選択します。
-4. Verify the Base branch is `OfficeDev/<repo name>@master` and the Head branch is `<your username>/<repo name>@<branch name>`.
+4. Verify the Base branch is `OfficeDev/office-js-docs-reference@main` and the Head branch is `<your username>/office-js-docs-reference@<branch name>`.
 5. [**コミット範囲の更新**] ボタンを選択します。
 6. プル リクエストにタイトルを追加し、作成しているすべての変更についての説明を入力します。
 7. プル リクエストを提出します。
 
-One of the site administrators will process your pull request. Your pull request will surface on the OfficeDev/<repo name> site under Issues. When the pull request is accepted, the issue will be resolved.
+One of the site administrators will process your pull request. プル要求は、プル要求の [下の OfficeDev/office-js-docs-reference サイト](https://github.com/OfficeDev/office-js-docs-reference/pulls)**に表示されます**。 When the pull request is accepted, the issue will be resolved.
 
 #### <a name="create-a-new-branch-after-merge"></a>マージの後に新しい分岐を作成する
 
 分岐が正常にマージされた (つまり、プル リクエストが承諾された) 後は、ローカル分岐で作業を継続しないでください。別のプル リクエストを提出する場合にマージの競合が発生する可能性があります。別の更新を行うには、正常にマージされたアップストリーム分岐から新しいローカル分岐を作成した後、最初のローカル分岐を削除します。
 
-たとえば、ローカル分岐 X が正常に OfficeDev/microsoft-graph-docs マスター分岐にマージされた後、マージされた内容に追加の更新を行う場合を考えます。OfficeDev/microsoft-graph-docs マスター分岐から新しいローカル分岐 X2 を作成します。これを行うには、GitBash を開き、次のコマンドを実行します。
+たとえば、ローカル ブランチ X が OfficeDev/office-js-docs-reference メイン ブランチに正常にマージされた場合、マージされたコンテンツに追加の更新を加える必要があります。 OfficeDev/office-js-docs-reference メイン ブランチから新しいローカル ブランチ X2 を作成します。 これを行うには、GitBash を開き、次のコマンドを実行します。
 
-    cd microsoft-graph-docs
-    git pull upstream master:X2
+    cd office-js-docs-reference
+    git pull upstream main:X2
     git push origin X2
 
 これで、分岐 X で提出した作業のローカル コピーを (新しいローカル分岐内に) 作成できました。X2 ブランチには他のライターがマージしたすべての作業も含まれるため、自身の作業が他のライターの作業 (たとえば、共有画像) に依存している場合はその作業が新しい分岐で使用可能になります。以前の作業 (および他のライターの作業) が分岐にあることを確認するには、新しい分岐をチェックアウトして...
 
     git checkout X2
 
-...and verifying the content. (The `checkout` command updates the files in `C:\Users\<yourusername>\microsoft-graph-docs` to the current state of the X2 branch.) Once you check out the new branch, you can make updates to the content and commit them as usual. However, to avoid working in the merged branch (X) by mistake, it's best to delete it (see the following **Delete a branch** section).
+...and verifying the content. (The `checkout` command updates the files in `C:\Users\<yourusername>\office-js-docs-reference` to the current state of the X2 branch.) Once you check out the new branch, you can make updates to the content and commit them as usual. However, to avoid working in the merged branch (X) by mistake, it's best to delete it (see the following **Delete a branch** section).
 
 #### <a name="delete-a-branch"></a>分岐を削除する
 
@@ -161,17 +174,11 @@ One of the site administrators will process your pull request. Your pull request
 
 #### <a name="to-delete-a-branch"></a>分岐を削除するには
 
-1. Git Bash のコマンド プロンプトで、「`git checkout master`」と入力します。これにより、削除される分岐にいないことが保証されます (削除される分岐にいることは許可されません)。
+1. Git Bash のコマンド プロンプトで、「`git checkout main`」と入力します。これにより、削除される分岐にいないことが保証されます (削除される分岐にいることは許可されません)。
 2. Next, at the command prompt, type `git branch -d <branch name>`. This deletes the branch on your computer only if it has been successfully merged to the upstream repository. (You can override this behavior with the `–D` flag, but first be sure you want to do this.)
 3. Finally, type `git push origin :<branch name>` at the command prompt (a space before the colon and no space after it).  This will delete the branch on your github fork.  
 
 おめでとうございます。プロジェクトに正しく投稿できました。
-
-## <a name="how-to-use-markdown-to-format-your-topic"></a>Markdown を使用してトピックを書式設定する方法
-
-### <a name="markdown"></a>Markdown
-
-このリポジトリ内のすべての記事では、Markdown を使用しています。 完全な紹介 (および、すべての構文のリスト) は、「[Daring Fireball - Markdown]」にあります。
 
 ## <a name="faq"></a>FAQ
 
@@ -179,7 +186,7 @@ One of the site administrators will process your pull request. Your pull request
 
 無料の GitHub アカウントを開設するには、「[Join GitHub](https://github.com/join)」(GitHub に参加) にあるフォームに記入します。
 
-### <a name="where-do-i-get-a-contributors-license-agreement"></a>投稿者のライセンス同意書はどこで入手するのでしょうか。 
+### <a name="where-do-i-get-a-contributors-license-agreement"></a>投稿者のライセンス同意書はどこで入手するのでしょうか。
 
 プル リクエストで投稿者のライセンス同意書 (CLA) が必要な場合、CLA の署名が必要であることを述べる通知が自動的に送信されます。
 
@@ -199,11 +206,7 @@ One of the site administrators will process your pull request. Your pull request
 
 ## <a name="more-resources"></a>その他のリソース
 
-* Markdown に関する詳細については、Markdown 作成者のサイト「[Daring Fireball]」にアクセスしてください。
 * Git と GitHub の使用に関する詳細については、まず「[GitHub Help]」 (GitHub ヘルプ) を確認してください。
 
-[GitHub Home]: http://github.com
-[GitHub ヘルプ]: http://help.github.com/
-[Git の設定]: https://help.github.com/articles/set-up-git/
-[Daring Fireball - Markdown]: http://daringfireball.net/projects/markdown/
-[Daring Fireball]: http://daringfireball.net/
+[GitHub ヘルプ]: https://docs.github.com
+[Git の設定]: https://docs.github.com/get-started/quickstart/set-up-git
