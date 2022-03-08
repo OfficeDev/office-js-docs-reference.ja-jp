@@ -18,7 +18,7 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'appearance: Word.ContentControlAppearance | "BoundingBox" | "Tags" | "Hidden";'
+    content: '外観: Word.ContentControlAppearance |"BoundingBox" |"Tags" |"Hidden";'
     return:
       type: <xref uid="word!Word.ContentControlAppearance:enum" /> | "BoundingBox" | "Tags" | "Hidden"
 - name: cannotDelete
@@ -259,7 +259,7 @@ properties:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'readonly type: Word.ContentControlType | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText";'
+    content: 'readonly 型: Word.ContentControlType |"不明" |"RichTextInline" |"RichTextParagraphs" |"RichTextTableCell" |"RichTextTableRow" |"RichTextTable" |"PlainTextInline" |"PlainTextParagraph" |"Picture" |"BuildingBlockGallery" |"CheckBox" |"ComboBox" |"DropDownList" |"DatePicker" |"RepeatingSection" |"RichText" |"PlainText";'
     return:
       type: <xref uid="word!Word.ContentControlType:enum" /> | "Unknown" | "RichTextInline" | "RichTextParagraphs" | "RichTextTableCell" | "RichTextTableRow" | "RichTextTable" | "PlainTextInline" | "PlainTextParagraph" | "Picture" | "BuildingBlockGallery" | "CheckBox" | "ComboBox" | "DropDownList" | "DatePicker" | "RepeatingSection" | "RichText" | "PlainText"
 methods:
@@ -281,7 +281,7 @@ methods:
   package: word!
   fullName: delete(keepContent)
   summary: コンテンツ コントロールとそのコンテンツを削除します。keepContent が true の場合、コンテンツは削除されません。
-  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the content controls collection.\n    contentControls.load('text');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n        \n    if (contentControls.items.length === 0) {\n        console.log(\"There isn't a content control in this document.\");\n    } else {            \n        // Queue a command to delete the first content control. \n        // The contents will remain in the document.\n        contentControls.items[0].delete(true);\n\n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        await context.sync();\n        console.log('Content control cleared of contents.'); \n    }\n});\n```"
+  remarks: "\\[[API セット: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n    \n    // Create a proxy object for the content controls collection.\n    var contentControls = context.document.contentControls;\n    \n    // Queue a command to load the content controls collection.\n    contentControls.load('text');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n        \n    if (contentControls.items.length === 0) {\n        console.log(\"There isn't a content control in this document.\");\n    } else {            \n        // Queue a command to delete the first content control. \n        // The contents will remain in the document.\n        contentControls.items[0].delete(true);\n\n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        await context.sync();\n        console.log('Content control cleared of contents.'); \n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/content-control-ondeleted-event.yaml\nawait Word.run(async (context) => {\n  let contentControls = context.document.contentControls.getByTag(\"forTesting\");\n  contentControls.load(\"items\");\n  await context.sync();\n\n  if (contentControls.items.length === 0) {\n    console.log(\"There are no content controls in this document.\");\n  } else {\n    console.log(\"Control to be deleted:\");\n    console.log(contentControls.items[0]);\n    contentControls.items[0].delete(false);\n    await context.sync();\n  }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -348,7 +348,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
+    content: 'insertBreak(breakTypeString: "Page" |"Next" |"SectionNext" |"SectionContinuous" |"SectionEven" |"SectionOdd" |"Line", insertLocation: "Before" |"After" |"Start" |"End" |"Replace"): void;'
     parameters:
     - id: breakTypeString
       description: 必須です。 ブレークの種類。
@@ -388,7 +388,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+    content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.Range;'
     parameters:
     - id: base64File
       description: 必須。.docx ファイルの base64 でエンコードされたコンテンツ。
@@ -428,7 +428,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+    content: 'insertHtml(html: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.Range;'
     parameters:
     - id: html
       description: 必須。コンテンツ コントロールに挿入する HTML。
@@ -468,7 +468,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
+    content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
       description: 必須。コンテンツ コントロールに挿入される base64 でエンコードされた画像。
@@ -508,7 +508,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+    content: 'insertOoxml(ooxml: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.Range;'
     parameters:
     - id: ooxml
       description: 必須です。 コンテンツ コントロールに挿入する OOXML。
@@ -548,7 +548,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+    content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.Paragraph;'
     parameters:
     - id: paragraphText
       description: 必須。挿入する段落テキスト。
@@ -588,7 +588,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+    content: 'insertText(text: string, insertLocationString: "Before" |"After" |"Start" |"End" |"Replace"): Word.Range;'
     parameters:
     - id: text
       description: 必須。コンテンツ コントロールに挿入する テキスト。
@@ -642,11 +642,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: >-
-      load(propertyNamesAndPaths?: {
-                  select?: string;
-                  expand?: string;
-              }): Word.ContentControl;
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.ContentControl;'
     parameters:
     - id: propertyNamesAndPaths
       description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
@@ -667,16 +663,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: >-
-      search(searchText: string, searchOptions?: Word.SearchOptions | {
-                  ignorePunct?: boolean;
-                  ignoreSpace?: boolean;
-                  matchCase?: boolean;
-                  matchPrefix?: boolean;
-                  matchSuffix?: boolean;
-                  matchWholeWord?: boolean;
-                  matchWildcards?: boolean;
-              }): Word.RangeCollection;
+    content: 'search(searchText: string, searchOptions?: Word.SearchOptions |{ ignorePunct?: boolean; ignoreSpace?: boolean; matchCase?: boolean; matchPrefix?: boolean; matchSuffix?: boolean; matchWholeWord?: boolean; matchWildcards?: boolean; matchWildcards?: boolean; }): Word.RangeCollection;'
     parameters:
     - id: searchText
       description: 必須。検索テキスト。
@@ -722,7 +709,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
+    content: 'select(selectionModeString?: "Select" |"Start" |"End"): void;'
     parameters:
     - id: selectionModeString
       description: 省略可能。 選択モードは、'Select'、'Start'、'End' のいずれかになります。'Select' が既定値です。
@@ -808,9 +795,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9ae127bd85c33896c797eccd1028acb9965d6871
-  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
+  ms.openlocfilehash: 2f2c65540758a3226562c3c9e5aef73a6abef3f3
+  ms.sourcegitcommit: c059c785f406fa0095f2abc1463ec0e63401c66a
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 02/16/2022
-  ms.locfileid: "62838944"
+  ms.lasthandoff: 03/08/2022
+  ms.locfileid: "63341205"
