@@ -4,7 +4,35 @@ uid: excel!Excel.ChartType:enum
 package: excel!
 fullName: Excel.ChartType
 summary: ''
-remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+remarks: >-
+  \[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+  #### <a name="examples"></a>例
+
+
+  ```typescript
+
+  // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/10-chart/chart-create-several-charts.yaml
+
+  await Excel.run(async (context) => {
+    let sheet = context.workbook.worksheets.getItem("Sample");
+    let salesTable = sheet.tables.getItem("SalesTable");
+
+    let dataRange = sheet.getRange("A1:E7");
+    let chart = sheet.charts.add(Excel.ChartType.line, dataRange, "Auto");
+
+    chart.setPosition("A22", "F35");
+    chart.legend.position = "Right";
+    chart.legend.format.fill.setSolidColor("white");
+    chart.dataLabels.format.font.size = 15;
+    chart.dataLabels.format.font.color = "black";
+    chart.title.text = "Bicycle Parts Quarterly Sales";
+
+    await context.sync();
+  });
+
+  ```
 isPreview: false
 isDeprecated: false
 fields:
@@ -384,9 +412,9 @@ fields:
   summary: ''
   value: "\"XYScatterSmoothNoMarkers\""
 metadata:
-  ms.openlocfilehash: 6ccbd793d93e11daa2a7b8631193d53a206f46bc
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: 2c4626a20bb3eb0ba5abfeca9299c69dcd7e3136
+  ms.sourcegitcommit: a40356756d342cab5b760b0523d6993d2f4f2e70
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59675501"
+  ms.lasthandoff: 03/09/2022
+  ms.locfileid: "63389414"
