@@ -8,12 +8,12 @@ ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
 ms.date: 12/14/2021
-ms.openlocfilehash: 1921d465002164e56ef200049f499d702fca1355
-ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+ms.openlocfilehash: 9cdef753f04256c9e0d8df01218c180e924eb875
+ms.sourcegitcommit: fb20a733fe184115d0b9e0d6d52633a1295640e4
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "61518020"
+ms.lasthandoff: 03/23/2022
+ms.locfileid: "63742183"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Office アドインの JavaScript API リファレンス
 
