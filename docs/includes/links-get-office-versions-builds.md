@@ -1,0 +1,2 @@
+- [クライアントの更新チャネル リリースのバージョンとビルドMicrosoft 365します。](/officeupdates/update-history-office365-proplus-by-date)
+- [使用している Office のバージョンを確認する方法](https://support.microsoft.com/office/932788b8-a3ce-44bf-bb09-e334518b8b19)

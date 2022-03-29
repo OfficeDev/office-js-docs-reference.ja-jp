@@ -40,10 +40,10 @@ methods:
   fullName: closeAsync(callback)
   summary: ドキュメント ファイルを閉じます。
   remarks: >-
-    **要件セット**: [ファイル](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)
+    **要件セット**: [ファイル](https://docs.microsoft.com/javascript/api/requirement-sets/common/office-add-in-requirement-sets#file)
 
 
-    2 つ以上のドキュメントがメモリに存在する場合、Document.getFileAsync 操作は失敗します。 ファイルを使い終わったら、File.closeAsync メソッドを使用してファイルを閉じてください。
+    2 つ以上のドキュメントがメモリに存在する場合、Document.getFileAsync 操作は失敗します。ファイルを使い終わったら、 File.closeAsync メソッドを使用してファイルを閉じてください。
 
 
     closeAsync メソッドに渡されるコールバック関数で、AsyncResult オブジェクトのプロパティを使用して次の情報を返すことができます。
@@ -56,7 +56,7 @@ methods:
     content: 'closeAsync(callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: callback
-      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -66,7 +66,7 @@ methods:
   package: office!
   fullName: getSliceAsync(sliceIndex, callback)
   summary: 指定したスライスを返します。
-  remarks: "**要件セット**: [ファイル](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)\n\ngetSliceAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して次の情報を返すことができます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>Slice オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// This sample shows how to get all the slices of a file. \n// The asynchronous operation returns a Promise so it can be awaited.\nprivate getAllSlices(file: any): Promise<any> {\n    var self = this;\n    var isError = false;\n\n    return new Promise(async (resolve, reject) => {\n        var documentFileData = [];\n        for (var sliceIndex = 0; (sliceIndex < file.sliceCount) && !isError; sliceIndex++) {\n            var sliceReadPromise = new Promise((sliceResolve, sliceReject) => {\n                file.getSliceAsync(sliceIndex, (asyncResult) => {\n                    if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {\n                        documentFileData = documentFileData.concat(asyncResult.value.data);\n                        sliceResolve({\n                            IsSuccess: true,\n                            Data: documentFileData\n                        });\n                    } else {\n                        file.closeAsync();\n                        sliceReject({\n                            IsSuccess: false,\n                            ErrorMessage: `Error in reading the slice: ${sliceIndex} of the document`\n                        });\n                    }\n                });\n            });\n            await sliceReadPromise.catch((error) => {\n                isError = true;\n            });\n        }\n\n        if (isError || !documentFileData.length) {\n            reject('Error while reading document. Please try it again.');\n            return;\n        }\n\n        file.closeAsync();\n\n        resolve({\n            IsSuccess: true,\n            Data: documentFileData\n        });\n    });\n}\n```"
+  remarks: "**要件セット**: [ファイル](https://docs.microsoft.com/javascript/api/requirement-sets/common/office-add-in-requirement-sets#file)\n\ngetSliceAsync メソッドに渡されるコールバック関数では、AsyncResult オブジェクトのプロパティを使用して次の情報を返すことができます。\n\n<table> <tr> <th>プロパティ</th> <th>使用目的</th> </tr> <tr> <td>AsyncResult.value</td> <td>Slice オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.status</td> <td>操作の成功または失敗を判断します。</td> </tr> <tr> <td>AsyncResult.error</td> <td>操作が失敗した場合、エラーに関する情報を提供する Error オブジェクトにアクセスします。</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>変更されずに AsyncResult オブジェクトで返される任意の型のユーザー定義項目。</td> </tr> </table>\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// This sample shows how to get all the slices of a file. \n// The asynchronous operation returns a Promise so it can be awaited.\nprivate getAllSlices(file: any): Promise<any> {\n    var self = this;\n    var isError = false;\n\n    return new Promise(async (resolve, reject) => {\n        var documentFileData = [];\n        for (var sliceIndex = 0; (sliceIndex < file.sliceCount) && !isError; sliceIndex++) {\n            var sliceReadPromise = new Promise((sliceResolve, sliceReject) => {\n                file.getSliceAsync(sliceIndex, (asyncResult) => {\n                    if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {\n                        documentFileData = documentFileData.concat(asyncResult.value.data);\n                        sliceResolve({\n                            IsSuccess: true,\n                            Data: documentFileData\n                        });\n                    } else {\n                        file.closeAsync();\n                        sliceReject({\n                            IsSuccess: false,\n                            ErrorMessage: `Error in reading the slice: ${sliceIndex} of the document`\n                        });\n                    }\n                });\n            });\n            await sliceReadPromise.catch((error) => {\n                isError = true;\n            });\n        }\n\n        if (isError || !documentFileData.length) {\n            reject('Error while reading document. Please try it again.');\n            return;\n        }\n\n        file.closeAsync();\n\n        resolve({\n            IsSuccess: true,\n            Data: documentFileData\n        });\n    });\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -76,15 +76,15 @@ methods:
       description: Specifies the zero-based index of the slice to be retrieved. Required.
       type: number
     - id: callback
-      description: 省略可能。 コールバックが返された場合に呼び出される関数で、パラメーターは [Office.AsyncResult 型のみです。](xref:office!Office.AsyncResult:interface)<!-- -->. 結果 `value` のプロパティは [、Office.Slice](xref:office!Office.Slice:interface) オブジェクトです。
+      description: 省略可能。 コールバックが返された場合に呼び出される関数で、そのパラメーターはパラメーターの種類[Office。AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. 結果`value`のプロパティは、次のOffice[。Slice](xref:office!Office.Slice:interface) オブジェクト。
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Slice:interface" />&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 86beb27ff140734a445272a2236e141c12e34263
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 181e44fd669bead80d92297c4589b37c6ad27cc7
+  ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51307259"
+  ms.lasthandoff: 03/26/2022
+  ms.locfileid: "64482927"

@@ -4,7 +4,7 @@ uid: office!Office.Actions:interface
 package: office!
 fullName: Office.Actions
 summary: アクションとキーボード ショートカットを管理します。
-remarks: '**要件セット**: [SharedRuntime 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/shared-runtime-requirement-sets)'
+remarks: '**要件セット**: [SharedRuntime 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/shared-runtime-requirement-sets)'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -14,7 +14,7 @@ properties:
   package: office!
   fullName: associate
   summary: アクションの ID を関数に関連付ける。
-  remarks: '**要件セット**: [SharedRuntime 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/shared-runtime-requirement-sets)'
+  remarks: '**要件セット**: [SharedRuntime 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/shared-runtime-requirement-sets)'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -27,7 +27,7 @@ methods:
   package: office!
   fullName: areShortcutsInUse(shortcuts)
   summary: 別のアドインまたはホスト アプリケーションによって定義されているショートカットの組み合わせが現在ユーザーに使用Officeします。
-  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -44,7 +44,7 @@ methods:
   package: office!
   fullName: getShortcuts()
   summary: アドインの既存のショートカットを取得します。 このセットには、常に (1) アドインの拡張マニフェストでキーボード ショートカット用に定義されたショートカット、(2) 現在のユーザーのカスタム ショートカット (存在する場合) が含まれます。 ショートカットは、別`null`のアドインのショートカットと競合する場合や、別のアドインアプリケーションと競合する場合Officeがあります。 具体的には、使用 `null` するショートカットを選択するように求めるメッセージが表示されたら、ユーザーが現在のアドインのアクションを選択しなかった場合です。 ショートカットとの競合の詳細については、「他のアドインで使用されているキーの組み合わせを回避する [」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts#avoid-key-combinations-in-use-by-other-add-ins)<!-- -->.
-  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -57,22 +57,22 @@ methods:
   package: office!
   fullName: replaceShortcuts(shortcuts)
   summary: 既存のアドイン ショートカットをユーザーのカスタム ショートカットに置き換える。
-  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**要件セット**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
     content: 'replaceShortcuts(shortcuts: {[actionId: string]: string}): Promise<void>;'
     parameters:
     - id: shortcuts
-      description: 'キーがアクション (拡張マニフェストで定義されている) の ID であり、値がショートカットの組み合わせであるカスタム ショートカットのオブジェクト。 たとえば、`{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2"}` のように指定します。<!-- -->. 有効なアクション ID とキーの組み合わせを指定する方法については、「Add custom keyboard [shortcuts to your Office アドイン」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts)<!-- -->. (キーの組み合わせは次の場合があります。 `null`<!-- -->この場合、アクションは JSON ファイルで指定されたキーの組み合わせを保持します)。'
+      description: 'キーがアクション (拡張マニフェストで定義されている) の ID であり、値がショートカットの組み合わせであるカスタム ショートカットのオブジェクト。 たとえば、`{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2"}` のように指定します。<!-- -->. 有効なアクション ID とキーの組み合わせを指定する方法については、「Add custom keyboard shortcuts to your Office[アドイン」を参照してください。](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts)<!-- -->. (キーの組み合わせは次の場合があります。 `null`<!-- -->この場合、アクションは JSON ファイルで指定されたキーの組み合わせを保持します)。'
       type: '{[actionId: string]: string}'
     return:
       type: Promise&lt;void&gt;
       description: すべてのカスタム ショートカットの割り当てが登録されているときに `shortcuts` 解決する約束。 既存のショートカットと競合している場合でも、カスタマイズされたショートカットが登録されます。 それ以外の場合、promise はエラー コードとエラー メッセージで拒否されます。 "InvalidOperation" エラー コードは、アクション ID `shortcuts` が存在しない場合、またはショートカットの組み合わせが無効な場合に返されます。
 metadata:
-  ms.openlocfilehash: 1bc0231ade91b68d62b1cd0efee5d2aa333540d8
-  ms.sourcegitcommit: 4df843325f40111a29f85b605bc2b17bb2e050c7
+  ms.openlocfilehash: 2627b78116df47b9ccf5ef911b162d4380cd0020
+  ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 02/09/2022
-  ms.locfileid: "62466384"
+  ms.lasthandoff: 03/26/2022
+  ms.locfileid: "64482842"
