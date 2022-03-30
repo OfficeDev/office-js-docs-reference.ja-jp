@@ -4,12 +4,12 @@ description: ExcelApi 1.4 要件セットの詳細。
 ms.date: 11/09/2020
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: cbd3545aedbcb68af0ab487516e7c241bc814fd5
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 555e75fe4d7a210e22a74081b29869a2dc17b0cb
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486090"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503471"
 ---
 # <a name="whats-new-in-excel-javascript-api-14"></a>Excel JavaScript API 1.4 の新機能
 
@@ -40,7 +40,7 @@ API には、キー `getItem()` を介して設定エントリを取得 `add()` 
 * テーブル列をテーブルの末尾に追加します。
 * 一度に複数の行をテーブルに追加します。
 * `range.getColumnsAfter(count: number)` および `range.getColumnsBefore(count: number)` を使用して、現在の Range オブジェクトの左右にある特定の数の列を取得します。
-* [OrNullObject\* メソッドとプロパティ](/office/dev/add-ins/develop/application-specific-api-model.md#ornullobject-methods-and-properties): この機能を使用すると、キーを使用してオブジェクトを取得できます。 オブジェクトが存在しない場合、返されるオブジェクトのプロパティ `isNullObject` は true になります。 これにより、開発者は例外処理を介してオブジェクトを処理することなく、オブジェクトが存在するかどうかを確認できます。 メソッド `*OrNullObject` は、ほとんどのコレクション オブジェクトで使用できます。
+* [OrNullObject\* メソッドとプロパティ](/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties): この機能を使用すると、キーを使用してオブジェクトを取得できます。 オブジェクトが存在しない場合、返されるオブジェクトのプロパティ `isNullObject` は true になります。 これにより、開発者は例外処理を介してオブジェクトを処理することなく、オブジェクトが存在するかどうかを確認できます。 メソッド `*OrNullObject` は、ほとんどのコレクション オブジェクトで使用できます。
 
 ```js
 worksheet.getItemOrNullObject("itemName")

@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Supertip 要素
 description: Supertip 要素は、リッチ ヒント (タイトルと説明の両方) を定義します。
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 3d2a55eb01732e93b144bdda665c477448e4eb03
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: d4e59970af7c41f5303ec9cf94ef70e1373d1a59
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486138"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64501776"
 ---
 # <a name="supertip"></a>Supertip
 
@@ -27,8 +27,8 @@ ms.locfileid: "64486138"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="child-elements"></a>子要素
 

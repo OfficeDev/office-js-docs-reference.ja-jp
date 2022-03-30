@@ -3,12 +3,12 @@ title: Outlook API プレビュー要件セット
 description: 現在、アドインのプレビュー中の機能Outlook API。
 ms.date: 03/15/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 9b02b984b222bc7b7527470597c414d66fbabc13
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f9c947804b1ddcdbf61eb08c5510f236ef94f3e2
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487585"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503352"
 ---
 # <a name="outlook-add-in-api-preview-requirement-set"></a>Outlook API プレビュー要件セット
 
@@ -102,7 +102,7 @@ Office JavaScript API の Outlook アドイン API サブセットには、Outlo
 
 ### <a name="event-based-activation"></a>イベントベースのライセンス認証
 
-この機能は、要件セット [1.10 でリリースされました](../requirement-set-1.10/outlook-requirement-set-1.10.md)。 ただし、追加のイベントはプレビューで利用できます。 詳細については、「サポートされるイベント [」を参照してください](/office/dev/add-ins/outlook/autolaunch.md#supported-events)。
+この機能は、要件セット [1.10 でリリースされました](../requirement-set-1.10/outlook-requirement-set-1.10.md)。 ただし、追加のイベントはプレビューで利用できます。 詳細については、「サポートされるイベント [」を参照してください](/office/dev/add-ins/outlook/autolaunch#supported-events)。
 
 **使用可能な** 場所: Outlook (WindowsサブスクリプションにMicrosoft 365)
 

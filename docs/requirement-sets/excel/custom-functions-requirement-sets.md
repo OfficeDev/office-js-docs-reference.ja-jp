@@ -4,12 +4,12 @@ description: JavaScript API のカスタム関数要件セットExcel詳細で�
 ms.date: 02/15/2022
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: b07cc21e120115c4ccd2465e3b1dae956a2e998b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: ad17b6fa15fb56b406af3c07f16392f46f2810bc
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485807"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502085"
 ---
 # <a name="custom-functions-requirement-sets"></a>カスタム関数の要件セット
 
@@ -17,13 +17,13 @@ ms.locfileid: "64485807"
 
 |  要件セット  |  Office 2021 以降のWindows<br>(1 回限りの購入)  |  Windows での Office<br>(Microsoft 365 サブスクリプションに接続)  |  Office on iPad<br>(Microsoft 365 サブスクリプションに接続)  |  Office on Mac<br>(両方のサブスクリプション<br> Mac 2021 以降Office 1 回購入)  | Office on the web |
 |:-----|:-----|:-----|:-----|:-----|:-----|
-| CustomFunctionsRuntime 1.3 | 16.0.14326.20454 以降 | 16.0.13127.20296 以降 | 非サポート | 16.40.20081000 以降 | 2020 年 7 月 |
+| CustomFunctionsRuntime 1.3 | 16.0.14326.20454 以降 | 16.0.13127.20296 以降 | 非サポート | 16.40.20081000 以降 | 2020 年7 月 |
 | CustomFunctionsRuntime 1.2 | 16.0.14326.20454 以降 | 16.0.12527.20194 以降 | 非サポート | 16.34.20020900 以降 | 2020 年 1 月 |
 | CustomFunctionsRuntime 1.1 | 16.0.14326.20454 以降 | 16.0.12527.20092 以降 | 非サポート | 16.34 以降 | 2019 年 5 月 |
 
 ## <a name="customfunctionsruntime-11-12-and-13"></a>CustomFunctionsRuntime 1.1、1.2、および 1.3
 
-CustomFunctionsRuntime 1.1 は API の最初のバージョンです。 要件セット 1.2 は、エラー処理をサポート `CustomFunctions.Error` するオブジェクトを追加します。 要件セット 1.3 は [、XLL ストリーミング](/office/dev/add-ins/excel/make-custom-functions-compatible-with-xll-udf.md#custom-function-behavior-for-xll-compatible-functions) `ErrorCode` サポートと新しいオプションを [CustomFunctions.Error オブジェクトに追加](/javascript/api/custom-functions-runtime/customfunctions.error) します。
+CustomFunctionsRuntime 1.1 は API の最初のバージョンです。 要件セット 1.2 は、エラー処理をサポート `CustomFunctions.Error` するオブジェクトを追加します。 要件セット 1.3 は [、XLL ストリーミング](/office/dev/add-ins/excel/make-custom-functions-compatible-with-xll-udf#custom-function-behavior-for-xll-compatible-functions) `ErrorCode` サポートと新しいオプションを [CustomFunctions.Error オブジェクトに追加](/javascript/api/custom-functions-runtime/customfunctions.error) します。
 
 ## <a name="see-also"></a>関連項目
 

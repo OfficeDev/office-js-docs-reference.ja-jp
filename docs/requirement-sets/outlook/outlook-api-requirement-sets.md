@@ -4,16 +4,16 @@ description: Outlook JavaScript API の要件セットの詳細。
 ms.date: 02/15/2022
 ms.prod: outlook
 ms.localizationpriority: high
-ms.openlocfilehash: f85523dc686edbad9211e14ce5665a1da79f3423
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 79efccfd2378f6c301370a107c9b2ad2c19c2bd7
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486083"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503179"
 ---
 # <a name="outlook-javascript-api-requirement-sets"></a>Outlook JavaScript API の要件セット
 
-Outlook アドインは、[マニフェスト](/javascript/api/requirements)で[要件](/office/dev/add-ins/develop/add-in-manifests)要素を使用して、必要な API のバージョンを宣言します。Outlook アドインには、`Name` 属性が `Mailbox` に設定され、`MinVersion` 属性がアドインのシナリオをサポートする最小 API 要件セットに設定された[設定](/javascript/api/manifest/set)要素が常に含まれます。
+Outlook アドインは、[マニフェスト](/javascript/api/manifest/requirements)で[要件](/office/dev/add-ins/develop/add-in-manifests)要素を使用して、必要な API のバージョンを宣言します。Outlook アドインには、`Name` 属性が `Mailbox` に設定され、`MinVersion` 属性がアドインのシナリオをサポートする最小 API 要件セットに設定された[設定](/javascript/api/manifest/set)要素が常に含まれます。
 
 たとえば、次のマニフェストのスニペットは、最小要件セットの 1.1 を表します。
 
@@ -117,11 +117,11 @@ if (item.somePropertyOrFunction !== undefined) {
 >
 > <sup>3</sup> Outlook 2013 での 1.3 のサポートは、「[2015 年 12 月 8 日付、Outlook 2013 用更新プログラム (KB3114349)](https://support.microsoft.com/kb/3114349)」の一部として追加されました。 Outlook 2013 での 1.4 のサポートは、「[MS16-107: Outlook 2013 セキュリティ更新プログラムについて 2016 年 9 月 13 日](https://support.microsoft.com/help/3118280)」の一部として追加されました。 Outlook 2016 (1 回限りの購入) での 1.4 のサポートは、「[2018 年 7 月 3 日更新プログラム Office 2016 (KB4022223)](https://support.microsoft.com/help/4022223)」の一部として追加されました。
 >
-> <sup>4</sup> 新しい Mac 版 Outlook のプレビュー サポートは、バージョン 16.38.506 から利用できます。 詳細については、「[新しい Mac UI での Outlook のアドインのサポート](/office/dev/add-ins/outlook/compare-outlook-add-in-support-in-outlook-for-mac.md#add-in-support-in-outlook-on-new-mac-ui-preview)」セクションを参照してください。
+> <sup>4</sup> 新しい Mac 版 Outlook のプレビュー サポートは、バージョン 16.38.506 から利用できます。 詳細については、「[新しい Mac UI での Outlook のアドインのサポート](/office/dev/add-ins/outlook/compare-outlook-add-in-support-in-outlook-for-mac#add-in-support-in-outlook-on-new-mac-ui-preview)」セクションを参照してください。
 >
-> <sup>5</sup> 現在、モバイル クライアント用のアドインを設計および実装する際には、さらに考慮事項があります。 たとえば、サポートされるモードは、メールの読み取りのみです。 詳細については、[Outlook Mobile にアドイン コマンドのサポートを追加するときのコードの考慮事項](/office/dev/add-ins/outlook/add-mobile-support.md#code-considerations)を参照してください。
+> <sup>5</sup> 現在、モバイル クライアント用のアドインを設計および実装する際には、さらに考慮事項があります。 たとえば、サポートされるモードは、メールの読み取りのみです。 詳細については、[Outlook Mobile にアドイン コマンドのサポートを追加するときのコードの考慮事項](/office/dev/add-ins/outlook/add-mobile-support#code-considerations)を参照してください。
 >
-> <sup>6</sup> アドインは、iPhone および Android スマートフォンの最新の Outlook on the web では機能しません。 サポートされているブラウザーの詳細については、「[Office アドインを実行するための要件](/office/dev/add-ins/concepts/requirements-for-running-office-add-ins.md#client-requirements-non-windows-smartphone-and-tablet)」を参照してください。
+> <sup>6</sup> アドインは、iPhone および Android スマートフォンの最新の Outlook on the web では機能しません。 サポートされているブラウザーの詳細については、「[Office アドインを実行するための要件](/office/dev/add-ins/concepts/requirements-for-running-office-add-ins#client-requirements-non-windows-smartphone-and-tablet)」を参照してください。
 
 > [!TIP]
 > メールボックスのツールバーを確認することで、Web ブラウザーでの Outlook がモダンかクラシックかを区別できます。

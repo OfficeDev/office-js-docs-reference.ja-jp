@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Requirements 要素
 description: Requirements 要素は、Office アドインを Office または基本マニフェスト設定を上書きする必要がある最小要件セットとメソッドを指定します。
 ms.date: 01/26/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: a46d2e7b9573048be46ca2995148038fe957e7a2
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: c08197c4b1438bc0aef4e33efa9332fb735688e8
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487639"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503191"
 ---
 # <a name="requirements-element"></a>Requirements 要素
 
@@ -46,10 +46,10 @@ ms.locfileid: "64487639"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
-### <a name="remarks"></a>注釈
+### <a name="remarks"></a>解説
 
 **Requirements 要素** は、基本マニフェストの Requirements で指定されていない追加の要件を指定しない場合、**VersionOverrides** では目的を提供しません。 Officeプラットフォームが基本マニフェストの要件をサポートしない場合、アドインはアクティブ化されません。**VersionOverrides** 要素は解析されません。 このため、次の両方の条件が満たされている場合にのみ **、VersionOverrides で Requirements** 要素を使用する必要があります。
 

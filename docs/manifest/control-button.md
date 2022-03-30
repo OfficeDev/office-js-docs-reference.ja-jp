@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Button 型のコントロール要素
 description: アクションを実行するか、作業ウィンドウを起動するボタンを定義します。
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: afed892527a6678dd7f4025169e2c213e7bd177d
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 422295af60c08d35e50d329b420284597489bd0e
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485870"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502911"
 ---
 # <a name="control-element-of-type-button"></a>Button 型のコントロール要素
 
@@ -34,7 +34,7 @@ ms.locfileid: "64485870"
 |  [Enabled (有効)](enabled.md)    | いいえ |  アドインの起動時にコントロールを有効にするかどうかを指定します。  |
 |  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | いいえ |  カスタム コンテキスト タブをサポートするアプリケーションとプラットフォームの組み合わせにボタンを表示するかどうかを指定します。 使用する場合は、最初の子 *要素である* 必要があります。 |
 
-### <a name="label"></a>ラベル
+### <a name="label"></a>Label
 
 ボタンのテキストを、32 文字以内にできる唯一の属性を使用して指定し、Resources 要素の **ShortStrings** 子の **String** 要素の **id** 属性の値に設定する [必要](resources.md)があります。
 
@@ -51,8 +51,8 @@ ms.locfileid: "64485870"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="examples"></a>例
 

@@ -4,12 +4,12 @@ description: ExcelApi 1.8 要件セットの詳細。
 ms.date: 03/19/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: 0fcef590c8688d76f86ceae9c0c70585ec6d0b25
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 7461792da8d6a110c27a6ea0ad80ea433057f1a7
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485990"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502078"
 ---
 # <a name="whats-new-in-excel-javascript-api-18"></a>JavaScript API 1.8 Excel新機能
 
@@ -29,7 +29,7 @@ Excel JavaScript API 要件セット 1.8 の機能には、ピボットテーブ
 
 ## <a name="events"></a>イベント
 
-グラフの[イベント](/office/dev/add-ins/excel/excel-add-ins-events)がさらに追加されました。 グラフを操作するユーザーに対し、アドインで対応できます。 ブック全体にわたり、起動する[イベントの切り替え](/office/dev/add-ins/excel/performance.md#enable-and-disable-events)もできます。
+グラフの[イベント](/office/dev/add-ins/excel/excel-add-ins-events)がさらに追加されました。 グラフを操作するユーザーに対し、アドインで対応できます。 ブック全体にわたり、起動する[イベントの切り替え](/office/dev/add-ins/excel/performance#enable-and-disable-events)もできます。
 
 ## <a name="api-list"></a>API リスト
 

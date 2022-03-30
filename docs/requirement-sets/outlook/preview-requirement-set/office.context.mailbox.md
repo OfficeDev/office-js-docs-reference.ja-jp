@@ -3,12 +3,12 @@ title: Office.context.mailbox - プレビュー要件セット
 description: Outlook API プレビュー要件セットのバージョンのメールボックス オブジェクト モデル。
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: d35b854f447cd3937764e54e4c05e27d04ee700b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 8d4bcdc405d9f565a0ed520d2dfdf2695292b052
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486548"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502617"
 ---
 # <a name="mailbox-preview-requirement-set"></a>メールボックス (プレビュー要件セット)
 
@@ -22,7 +22,7 @@ Microsoft Outlook の Outlook アドイン オブジェクト モデルへのア
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
 |[最小限のアクセス許可レベル](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)| 制限あり|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ## <a name="properties"></a>プロパティ
 

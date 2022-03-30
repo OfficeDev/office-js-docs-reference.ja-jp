@@ -3,12 +3,12 @@ title: Outlook アドイン API 要件セット 1.8
 description: アドイン API の要件セット 1.8 Outlook 1.8。
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 12137c1e36186a48f0e0e770bdd8102a11beac40
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 299451f0c5159d602750b1646c2b43596b646b88
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486692"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502925"
 ---
 # <a name="outlook-add-in-api-requirement-set-18"></a>Outlook アドイン API 要件セット 1.8
 
@@ -37,7 +37,7 @@ Office JavaScript API の Outlook アドイン API サブセットには、Outlo
 - [LocationIdentifier](/javascript/api/outlook/office.locationidentifier?view=outlook-js-1.8&preserve-view=true) が追加されました: 場所の ID を表す新しいオブジェクトを追加します。
 - [MasterCategories](/javascript/api/outlook/office.mastercategories?view=outlook-js-1.8&preserve-view=true) が追加されました: メールボックスのカテゴリ マスター リストを表す新しいオブジェクトを追加します。
 - [SharedProperties](/javascript/api/outlook/office.sharedproperties?view=outlook-js-1.8&preserve-view=true) の追加: 共有フォルダー内の予定またはメッセージ アイテムのプロパティを表す新しいオブジェクトを追加します。
-- [SupportsSharedFolders マニフェスト要素](//javascript/api/manifest/supportssharedfolders) が追加されました: [DesktopFormFactor](/javascript/api/desktopformfactor) マニフェスト要素に子要素を追加します。 代理人のシナリオでアドインが使用できるかどうかを定義します。
+- [SupportsSharedFolders マニフェスト要素](/javascript/api/manifest/supportssharedfolders) が追加されました: [DesktopFormFactor](/javascript/api/manifest/desktopformfactor) マニフェスト要素に子要素を追加します。 代理人のシナリオでアドインが使用できるかどうかを定義します。
 - [Office.context.mailbox.masterCategories](office.context.mailbox.md#properties) が追加されました: メールボックスのカテゴリ マスター リストを表す新しいプロパティを追加します。
 - [Office.context.mailbox.item.categories](office.context.mailbox.item.md#properties) が追加されました: アイテムのカテゴリのセットを表す新しいプロパティを追加します。
 - [Office.context.mailbox.item.addFileAttachmentFromBase64Async](office.context.mailbox.item.md#methods) が追加されました: メッセージまたは予定に Base 64 エンコード文字列として表されるファイルを添付する新しい方法を追加します。

@@ -3,12 +3,12 @@ title: Office.context - プレビュー要件セット
 description: Office。メールボックス API プレビュー要件セットをOutlookアドインで使用できるコンテキスト オブジェクト メンバー。
 ms.date: 12/03/2020
 ms.localizationpriority: medium
-ms.openlocfilehash: 3a31488626bd675b6500e5153ece0b8c9da4e7a4
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: c572b9f1904baa22ce3e14456bfe74d66edc0d70
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485899"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502330"
 ---
 # <a name="context-mailbox-preview-requirement-set"></a>context (メールボックス プレビュー要件セット)
 
@@ -21,7 +21,7 @@ Office.context は、すべてのアプリでアドインで使用される共�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ## <a name="properties"></a>プロパティ
 
@@ -54,7 +54,7 @@ Office.context は、すべてのアプリでアドインで使用される共�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| プレビュー|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -89,7 +89,7 @@ Office.context.auth.getAccessTokenAsync(function(result) {
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -121,7 +121,7 @@ function write(message){
 
 アドインが実行されている環境に関する情報を取得します。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [ContextInformation](/javascript/api/office/office.contextinformation?view=outlook-js-preview&preserve-view=true)
 
@@ -130,7 +130,7 @@ function write(message){
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -161,7 +161,7 @@ console.log("Platform: " + contextInfo.platform);
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -196,7 +196,7 @@ function write(message){
 > [!NOTE]
 > または、[Office.context.diagnostics プロパティを使用して](#diagnostics-contextinformation)ホストを取得できます。
 
-##### <a name="type"></a>種類
+##### <a name="type"></a>型
 
 *   [HostType](/javascript/api/office/office.hosttype?view=outlook-js-preview&preserve-view=true)
 
@@ -205,7 +205,7 @@ function write(message){
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.5|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -227,7 +227,7 @@ Office テーマの色のプロパティにアクセスできるようにしま�
 
 Office テーマの色を使用すると、すべての Office クライアント アプリケーションに適用される File **> Office Account > Office テーマ UI** を使用して、ユーザーが選択した現在の Office テーマとアドインの配色を調整できます。 Using Office theme colors is appropriate for mail and task pane add-ins.
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [OfficeTheme](/javascript/api/office/office.officetheme?view=outlook-js-preview&preserve-view=true)
 
@@ -245,7 +245,7 @@ Office テーマの色を使用すると、すべての Office クライアン�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| プレビュー|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -274,7 +274,7 @@ function applyOfficeTheme(){
 > [!NOTE]
 > または、[Office.context.diagnostics](#diagnostics-contextinformation) プロパティを使用してプラットフォームを取得できます。
 
-##### <a name="type"></a>種類
+##### <a name="type"></a>型
 
 *   [PlatformType](/javascript/api/office/office.platformtype?view=outlook-js-preview&preserve-view=true)
 
@@ -283,7 +283,7 @@ function applyOfficeTheme(){
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.5|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -300,7 +300,7 @@ console.log(JSON.stringify(Office.context.platform));
 
 現在のアプリケーションとプラットフォームでサポートされている要件セットを決定するメソッドを提供します。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [RequirementSetSupport](/javascript/api/office/office.requirementsetsupport?view=outlook-js-preview&preserve-view=true)
 
@@ -309,7 +309,7 @@ console.log(JSON.stringify(Office.context.platform));
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -328,7 +328,7 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 
 `RoamingSettings`このオブジェクトを使用すると、ユーザーのメールボックスに格納されているメール アドインのデータを格納してアクセスできます。これにより、そのメールボックスへのアクセスに使用される Outlook クライアントから実行されている場合に、そのアドインで使用できます。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [RoamingSettings](/javascript/api/outlook/office.roamingsettings?view=outlook-js-preview&preserve-view=true)
 
@@ -338,7 +338,7 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
 |[最小限のアクセス許可レベル](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)| 制限あり|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 <br>
 
@@ -349,7 +349,7 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 
 ダイアログ ボックスなどの UI コンポーネントを作成および操作するために使用できるオブジェクトとメソッドを、Office提供します。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [UI](/javascript/api/office/office.ui?view=outlook-js-preview&preserve-view=true)
 
@@ -358,4 +358,4 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/../outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/../outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|

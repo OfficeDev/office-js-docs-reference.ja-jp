@@ -4,12 +4,12 @@ description: JavaScript API のExcel詳細。
 ms.date: 12/08/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: 3a7901d7d8dbd749843506060d347cdf94320e9b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: a995d4d39502a0461fe59d429d1b75ec4e726d27
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486365"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502337"
 ---
 # <a name="excel-javascript-preview-apis"></a>Excel JavaScript プレビュー API
 
@@ -22,7 +22,7 @@ ms.locfileid: "64486365"
 | 機能領域 | 説明 | 関連オブジェクト |
 |:--- |:--- |:--- |
 | [データ型](/office/dev/add-ins/excel/excel-data-types-overview) | 書式付き番号と web Excelのサポートを含む、既存のデータ型の拡張。 | [ArrayCellValue](/javascript/api/excel/excel.arraycellvalue)、 [BooleanCellValue](/javascript/api/excel/excel.booleancellvalue)、 [CellValueAttributionAttributes](/javascript/api/excel/excel.cellvalueattributionattributes)、 [CellValueProviderAttributes](/javascript/api/excel/excel.cellvalueproviderattributes)、 [DoubleCellValue](/javascript/api/excel/excel.doublecellvalue)、 [EmptyCellValue](/javascript/api/excel/excel.emptycellvalue)、 [EntityCellValue](/javascript/api/excel/excel.entitycellvalue)、 [FormattedNumberCellValue](/javascript/api/excel/excel.formattednumbercellvalue)、 [StringCellValue](/javascript/api/excel/excel.stringcellvalue)、 [ValueTypeNotAvailableCellValue](/javascript/api/excel/excel.valuetypenotavailablecellvalue)、 [WebImageCellValue](/javascript/api/excel/excel.webimagecellvalue) |
-| [データ型のエラー](/office/dev/add-ins/excel/excel-data-types-concepts.md#improved-error-support) | 拡張データ型をサポートするエラー オブジェクト。 | [BlockedErrorCellValue](/javascript/api/excel/excel.blockederrorcellvalue)、[BusyErrorCellValue](/javascript/api/excel/excel.busyerrorcellvalue)、[CalcErrorCellValue](/javascript/api/excel/excel.calcerrorcellvalue)、[ConnectErrorCellValue](/javascript/api/excel/excel.connecterrorcellvalue)、[Div0ErrorCellValue](/javascript/api/excel/excel.div0errorcellvalue)、[FieldErrorCellValue](/javascript/api/excel/excel.fielderrorcellvalue)、[GettingDataErrorCellValue](/javascript/api/excel/excel.gettingdataerrorcellvalue)、[NotAvailableErrorCellValue](/javascript/api/excel/excel.notavailableerrorcellvalue)、[NameErrorCellValue](/javascript/api/excel/excel.nameerrorcellvalue)、[NullErrorCellValue、NumErrorCellValue](/javascript/api/excel/excel.nullerrorcellvalue)、RefErrorCellValue、[](/javascript/api/excel/excel.numerrorcellvalue)[SpillErrorCellValue](/javascript/api/excel/excel.spillerrorcellvalue)、[ValueErrorCellValue](/javascript/api/excel/excel.valueerrorcellvalue) [](/javascript/api/excel/excel.referrorcellvalue)|
+| [データ型のエラー](/office/dev/add-ins/excel/excel-data-types-concepts#improved-error-support) | 拡張データ型をサポートするエラー オブジェクト。 | [BlockedErrorCellValue](/javascript/api/excel/excel.blockederrorcellvalue)、[BusyErrorCellValue](/javascript/api/excel/excel.busyerrorcellvalue)、[CalcErrorCellValue](/javascript/api/excel/excel.calcerrorcellvalue)、[ConnectErrorCellValue](/javascript/api/excel/excel.connecterrorcellvalue)、[Div0ErrorCellValue](/javascript/api/excel/excel.div0errorcellvalue)、[FieldErrorCellValue](/javascript/api/excel/excel.fielderrorcellvalue)、[GettingDataErrorCellValue](/javascript/api/excel/excel.gettingdataerrorcellvalue)、[NotAvailableErrorCellValue](/javascript/api/excel/excel.notavailableerrorcellvalue)、[NameErrorCellValue](/javascript/api/excel/excel.nameerrorcellvalue)、[NullErrorCellValue、NumErrorCellValue](/javascript/api/excel/excel.nullerrorcellvalue)、RefErrorCellValue、[](/javascript/api/excel/excel.numerrorcellvalue)[SpillErrorCellValue](/javascript/api/excel/excel.spillerrorcellvalue)、[ValueErrorCellValue](/javascript/api/excel/excel.valueerrorcellvalue) [](/javascript/api/excel/excel.referrorcellvalue)|
 | ドキュメント タスク | コメントをユーザーに割り当てられたタスクに変換します。 | [DocumentTask](/javascript/api/excel/excel.documenttask) |
 | ID | 表示名や電子メール アドレスなど、ユーザー ID を管理します。 | [IDENTITY](/javascript/api/excel/excel.identity)、[IdentityCollection、](/javascript/api/excel/excel.identitycollection)[IdentityEntity](/javascript/api/excel/excel.identityentity) |
 | リンクされたデータ型 | 外部ソースからデータに接続されたデータExcelサポートを追加します。 | [LinkedDataType](/javascript/api/excel/excel.linkeddatatype), [LinkedDataTypeAddedEventArgs](/javascript/api/excel/excel.linkeddatatypeaddedeventargs), [LinkedDataTypeCollection](/javascript/api/excel/excel.linkeddatatypecollection) |

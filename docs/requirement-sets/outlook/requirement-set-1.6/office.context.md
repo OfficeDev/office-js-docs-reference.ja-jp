@@ -3,12 +3,12 @@ title: Office.context - 要件セット 1.6
 description: Office。メールボックス API 要件セット 1.6 をOutlookアドインで使用できるコンテキスト オブジェクト メンバー。
 ms.date: 12/03/2020
 ms.localizationpriority: medium
-ms.openlocfilehash: 59207f446867720bb568195e8b38c4537d274ef4
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 53a4cef1059b6499a9f431202e40eb7444b40522
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485798"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503331"
 ---
 # <a name="context-mailbox-requirement-set-16"></a>context (メールボックス要件セット 1.6)
 
@@ -21,7 +21,7 @@ Office.context は、すべてのアプリでアドインで使用される共�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ## <a name="properties"></a>プロパティ
 
@@ -54,7 +54,7 @@ Office.context は、すべてのアプリでアドインで使用される共�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -86,7 +86,7 @@ function write(message){
 
 アドインが実行されている環境に関する情報を取得します。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [ContextInformation](/javascript/api/office/office.contextinformation?view=outlook-js-1.6&preserve-view=true)
 
@@ -95,7 +95,7 @@ function write(message){
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -126,7 +126,7 @@ console.log("Platform: " + contextInfo.platform);
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -170,7 +170,7 @@ function write(message){
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.5|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -190,7 +190,7 @@ console.log(JSON.stringify(Office.context.host));
 > [!NOTE]
 > または、[Office.context.diagnostics](#diagnostics-contextinformation) プロパティを使用してプラットフォームを取得できます。
 
-##### <a name="type"></a>種類
+##### <a name="type"></a>型
 
 *   [PlatformType](/javascript/api/office/office.platformtype?view=outlook-js-1.6&preserve-view=true)
 
@@ -199,7 +199,7 @@ console.log(JSON.stringify(Office.context.host));
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.5|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -216,7 +216,7 @@ console.log(JSON.stringify(Office.context.platform));
 
 現在のアプリケーションとプラットフォームでサポートされている要件セットを決定するメソッドを提供します。
 
-##### <a name="type"></a>Type
+##### <a name="type"></a>型
 
 *   [RequirementSetSupport](/javascript/api/office/office.requirementsetsupport?view=outlook-js-1.6&preserve-view=true)
 
@@ -225,7 +225,7 @@ console.log(JSON.stringify(Office.context.platform));
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ##### <a name="example"></a>例
 
@@ -254,7 +254,7 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
 |[最小限のアクセス許可レベル](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)| 制限あり|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 <br>
 
@@ -274,4 +274,4 @@ console.log(JSON.stringify(Office.context.requirements.isSetSupported("mailbox",
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|

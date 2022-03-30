@@ -3,12 +3,12 @@ title: マニフェスト ファイルの OfficeTab 要素
 description: OfficeTab 要素は、アドイン コマンドが表示されるリボン タブを定義します。
 ms.date: 02/02/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: fe15b29cc709b0b31db00e08e46853a97c8b7061
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 7d04078d69d66504c03108e68089eed8bfa908f6
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486401"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502512"
 ---
 # <a name="officetab-element"></a>OfficeTab 要素
 
@@ -27,8 +27,8 @@ ms.locfileid: "64486401"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="child-elements"></a>子要素
 

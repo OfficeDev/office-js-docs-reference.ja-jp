@@ -3,12 +3,12 @@ title: Office.context.mailbox - 要件セット 1.3
 description: Outlook API 要件セットメールボックス オブジェクト モデルの 1.3 バージョン。
 ms.date: 03/18/2020
 ms.localizationpriority: medium
-ms.openlocfilehash: 3142e760040177ae60deee42051cfed06f19a21e
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: e848057f3e013a839afbb666f5dbc086066c1a46
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486209"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503065"
 ---
 # <a name="mailbox-requirement-set-13"></a>メールボックス (要件セット 1.3)
 
@@ -22,7 +22,7 @@ Microsoft Outlook の Outlook アドイン オブジェクト モデルへのア
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
 |[最小限のアクセス許可レベル](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)| 制限あり|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ## <a name="properties"></a>プロパティ
 

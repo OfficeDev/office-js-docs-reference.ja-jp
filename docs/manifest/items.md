@@ -3,12 +3,12 @@ title: マニフェスト ファイル内の Items 要素
 description: メニューの項目を指定します。
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 08259a621f519da5c26e56611e3fe3dae855138f
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 15702e2cdbeb6d8df6d714d59206b6e03143b6a4
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487646"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503394"
 ---
 # <a name="items-element"></a>Items 要素
 
@@ -27,8 +27,8 @@ ms.locfileid: "64487646"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="syntax"></a>構文
 

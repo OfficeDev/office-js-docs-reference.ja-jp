@@ -3,12 +3,12 @@ title: マニフェスト ファイル内の MobileButton 型のコントロー�
 description: アクションを実行するか、作業ウィンドウを起動するモバイル デバイス上のボタンを定義します。
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: ee1c1057d99bea49f25d869347e58c6b1adb6a1b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 402a15465487811c0c4c6d8aa02c45b7840d711f
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485847"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502645"
 ---
 # <a name="control-element-of-type-mobilebutton"></a>MobileButton 型のコントロール要素
 
@@ -31,7 +31,7 @@ ms.locfileid: "64485847"
 
 **次の要件セットに関連付けられている**。
 
-- [Mailbox 1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 ## <a name="child-elements"></a>子要素
 
@@ -41,7 +41,7 @@ ms.locfileid: "64485847"
 |  [Icon](icon.md)      | はい |  ボタンの画像です。         |
 |  [Action](action.md)    | はい |  実行するアクションを指定します。 Control 要素の Action 子 **は** 1 つ **のみです** 。 |
 
-### <a name="label"></a>ラベル
+### <a name="label"></a>Label
 
 ボタンのテキストを、32 文字以内にできる唯一の属性を使用して指定し、Resources 要素の **ShortStrings** 子の **String** 要素の **id** 属性の値に設定する [必要](resources.md)があります。
 
@@ -55,7 +55,7 @@ ms.locfileid: "64485847"
 
 **次の要件セットに関連付けられている**。
 
-- [Mailbox 1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 ## <a name="examples"></a>例
 

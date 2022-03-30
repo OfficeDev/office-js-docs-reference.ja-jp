@@ -3,12 +3,12 @@ title: マニフェスト ファイルの種類 Menu のコントロール要素
 description: アイテムがアクションを実行したり、作業ウィンドウを起動したりできるメニューを定義します。
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 56a37268496c169d62feebf8a7ee518127737a1f
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 284b2881b958d44f9b583bb7eaaa21ea48079026
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485859"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503429"
 ---
 # <a name="control-element-of-type-menu"></a>Menu 型のコントロール要素
 
@@ -37,7 +37,7 @@ ms.locfileid: "64485859"
 |  **Items**     | はい |  メニュー内に表示するアイテムのコレクション。 各アイテムの **Item** 要素を格納します。 |
 |  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | いいえ |  カスタム コンテキスト タブをサポートするアプリケーションとプラットフォームの組み合わせにメニューを表示するかどうかを指定します。 使用する場合は、最初の子 *要素である* 必要があります。 |
 
-### <a name="label"></a>ラベル
+### <a name="label"></a>Label
 
 メニュー名のテキストを、32 文字以内で指定できる唯一の属性を使用して指定し、Resources 要素の **ShortStrings** 子の **String** 要素の **id** 属性の値に設定する [必要](resources.md)があります。
 
@@ -54,8 +54,8 @@ ms.locfileid: "64485859"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="examples"></a>例
 

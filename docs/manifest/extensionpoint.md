@@ -3,12 +3,12 @@ title: マニフェスト ファイルの ExtensionPoint 要素
 description: Office UI でアドインが機能を公開する場所を定義します。
 ms.date: 02/11/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 43507df9b1be11ffb8d3444d8ca6f0e0696395a2
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f3a409557fec2f48a4aaf93f5a93fd8c17648a7c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64485959"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503212"
 ---
 # <a name="extensionpoint-element"></a>ExtensionPoint 要素
 
@@ -112,9 +112,9 @@ JavaScript または TypeScript で作成されたカスタム関数で、Excel�
 
 |要素|説明|
 |:-----|:-----|
-|[Script](script.md)|必須です。 カスタム関数の定義と登録コードを含む JavaScript ファイルへのリンク。|
-|[Page](page.md)|必須です。 カスタム関数についての HTML ページにリンクします。|
-|[MetaData](metadata.md)|必須です。 Excel でカスタム関数によって使用されるメタデータの設定を定義します。|
+|[Script](script.md)|必須。 カスタム関数の定義と登録コードを含む JavaScript ファイルへのリンク。|
+|[Page](page.md)|必須。 カスタム関数についての HTML ページにリンクします。|
+|[MetaData](metadata.md)|必須。 Excel でカスタム関数によって使用されるメタデータの設定を定義します。|
 |[Namespace](namespace.md)|省略可能。 Excel でカスタム関数によって使用される名前空間を定義します。|
 
 #### <a name="example"></a>例
@@ -276,7 +276,7 @@ JavaScript または TypeScript で作成されたカスタム関数で、Excel�
 この拡張点は、モジュール拡張機能用のリボンにボタンを配置します。
 
 > [!IMPORTANT]
-> メールボックスイベント [とアイテム](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) イベント [の](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) 登録は、この拡張ポイントでは使用できません。
+> メールボックスイベント [とアイテム](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) イベント [の](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) 登録は、この拡張ポイントでは使用できません。
 
 #### <a name="child-elements"></a>子要素
 
@@ -319,7 +319,7 @@ JavaScript または TypeScript で作成されたカスタム関数で、Excel�
 > [!NOTE]
 > この拡張ポイントは、Android と iOS でのみサポートされ、サブスクリプションMicrosoft 365されます。
 >
-> メールボックスイベント [とアイテム](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) イベント [の](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) 登録は、この拡張ポイントでは使用できません。
+> メールボックスイベント [とアイテム](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) イベント [の](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) 登録は、この拡張ポイントでは使用できません。
 
 #### <a name="child-elements"></a>子要素
 
@@ -362,7 +362,7 @@ JavaScript または TypeScript で作成されたカスタム関数で、Excel�
 この拡張ポイントを使用すると、デスクトップ フォーム ファクターでサポートされているイベントに基づいてアドインをアクティブ化できます。 このシナリオの詳細と、サポートされているイベントの完全な一覧については、「イベント ベースのアクティブ化用に Outlookアドインを構成する」[を参照](/office/dev/add-ins/outlook/autolaunch)してください。
 
 > [!IMPORTANT]
-> メールボックスイベント [とアイテム](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) イベント [の](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) 登録は、この拡張ポイントでは使用できません。
+> メールボックスイベント [とアイテム](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) イベント [の](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) 登録は、この拡張ポイントでは使用できません。
 
 #### <a name="child-elements"></a>子要素
 
@@ -389,7 +389,7 @@ JavaScript または TypeScript で作成されたカスタム関数で、Excel�
 この拡張点は、指定したイベントのイベント ハンドラーを追加します。 この拡張ポイントの使用の詳細については、「[On-send feature for Outlookアドイン」を参照してください](/office/dev/add-ins/outlook/outlook-on-send-addins)。
 
 > [!IMPORTANT]
-> メールボックスイベント [とアイテム](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) イベント [の](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) 登録は、この拡張ポイントでは使用できません。
+> メールボックスイベント [とアイテム](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) イベント [の](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) 登録は、この拡張ポイントでは使用できません。
 
 | 要素 | 説明  |
 |:-----|:-----|

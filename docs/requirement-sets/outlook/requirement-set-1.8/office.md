@@ -3,12 +3,12 @@ title: Office名前空間 - 要件セット 1.8
 description: Office API 要件セット 1.8 をOutlookアドインで使用できる名前空間メンバーを指定します。
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 2c4828985e716ff5ba5e05e3529b7c8c953c095a
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 8493040f0d34c8544a7d70706c09b51fb16c5501
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486506"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503289"
 ---
 # <a name="office-mailbox-requirement-set-18"></a>Office (メールボックス要件セット 1.8)
 
@@ -19,7 +19,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 ## <a name="properties"></a>プロパティ
 
@@ -52,7 +52,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 
 ##### <a name="properties"></a>プロパティ
 
-|名前| 種類| 説明|
+|名前| 型| 説明|
 |---|---|---|
 |`Succeeded`| String|呼び出しが成功しました。|
 |`Failed`| String|呼び出しが失敗しました。|
@@ -62,7 +62,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 <br>
 
@@ -79,7 +79,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 
 ##### <a name="properties"></a>プロパティ
 
-|名前| 種類| 説明|
+|名前| 型| 説明|
 |---|---|---|
 |`Html`| String|HTML 形式で返されるデータを要求します。|
 |`Text`| String|テキスト形式で返されるデータを要求します。|
@@ -89,7 +89,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|
 
 <br>
 
@@ -106,7 +106,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 
 ##### <a name="properties"></a>プロパティ
 
-| 名前 | 種類 | 説明 | 最小要件セット |
+| 名前 | 型 | 説明 | 最小要件セット |
 |---|---|---|:---:|
 |`AppointmentTimeChanged`| String | 選択した予定または系列の日付または時刻が変更されました。 | 1.7 |
 |`AttachmentsChanged`| String | アイテムに添付ファイルが追加または削除されました。 | 1.8 |
@@ -120,7 +120,7 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.5 |
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧 |
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧 |
 
 <br>
 
@@ -147,4 +147,4 @@ Office 名前空間は、すべての Office アプリケーションのアド�
 |要件| 値|
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)| 1.1|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| 新規作成または閲覧|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| 新規作成または閲覧|

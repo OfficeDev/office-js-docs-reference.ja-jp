@@ -4,12 +4,12 @@ description: PowerPoint JavaScript API の要件セットの詳細情報。
 ms.date: 12/14/2021
 ms.prod: powerpoint
 ms.localizationpriority: high
-ms.openlocfilehash: 979157a0a3e540e6637499afb4f4c62d930a35f3
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 8b07389e2135a2fefbd0767507dfd0763b1cf6d6
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486185"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64501966"
 ---
 # <a name="powerpoint-javascript-api-requirement-sets"></a>PowerPoint JavaScript API の要件セット
 
@@ -31,7 +31,7 @@ Office のバージョンとビルド番号の詳細については、次を参�
 
 ## <a name="powerpoint-javascript-api-11"></a>PowerPoint JavaScript API 1.1
 
-PowerPoint JavaScript API 1.1 には、[新しいプレゼンテーションを作成するための 1 つの API](/javascript/api/powerpoint#PowerPoint_createPresentation_base64File_) が含まれます。 API の詳細については、「[プレゼンテーションを作成する](/office/dev/add-ins/powerpoint/powerpoint-add-ins.md#create-a-presentation)」を参照してください。
+PowerPoint JavaScript API 1.1 には、[新しいプレゼンテーションを作成するための 1 つの API](/javascript/api/powerpoint#PowerPoint_createPresentation_base64File_) が含まれます。 API の詳細については、「[プレゼンテーションを作成する](/office/dev/add-ins/powerpoint/powerpoint-add-ins#create-a-presentation)」を参照してください。
 
 ## <a name="powerpoint-javascript-api-12"></a>PowerPoint JavaScript API 1.2
 

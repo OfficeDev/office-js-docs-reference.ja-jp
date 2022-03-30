@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Set 要素
 description: Set 要素は、Office によってアクティブ化したり、基本マニフェスト設定を上書きしたりするために Office Office アドインに必要な javaScript API 要件セットを指定します。
 ms.date: 01/22/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 9f5e8273e07e1abf959def7eac262264bc922f45
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 1584a8ddff2cb03b507954d57565907eea81069c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486260"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502498"
 ---
 # <a name="set-element"></a>Set 要素
 
@@ -22,7 +22,7 @@ ms.locfileid: "64486260"
 
 ## <a name="as-a-great-grandchild-of-a-versionoverrides-element"></a>VersionOverrides 要素の孫として
 
-[versionOverrides](versionoverrides.md) を有効にするために、Office バージョンとプラットフォーム (Windows、Mac、Web、iOS、iPad など) でサポートする必要がある Office JavaScript API の要件セットを指定します。[](/office/dev/add-ins/develop/office-versions-and-requirement-sets.md#specify-office-applications-and-requirement-sets)
+[versionOverrides](versionoverrides.md) を有効にするために、Office バージョンとプラットフォーム (Windows、Mac、Web、iOS、iPad など) でサポートする必要がある Office JavaScript API の要件セットを指定します。[](/office/dev/add-ins/develop/office-versions-and-requirement-sets#specify-office-applications-and-requirement-sets)
 
 **アドインの種類:** 作業ウィンドウ, メール
 
@@ -46,7 +46,7 @@ ms.locfileid: "64486260"
 
 ## <a name="attributes"></a>属性
 
-|属性|種類|必須|説明|
+|属性|型|必須|説明|
 |:-----|:-----|:-----|:-----|
 |名前|string|必須|[要件セット](/office/dev/add-ins/develop/office-versions-and-requirement-sets)の名前。|
 |MinVersion|文字列|省略可能|アドインに必要な API セットの最小バージョンを指定します。 親 Sets 要素で **指定されている場合は、DefaultMinVersion** の値を [上書き](sets.md) します。|

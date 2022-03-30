@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Override 要素
 description: Override 要素を使用すると、指定した条件に応じて設定の値を指定できます。
 ms.date: 01/22/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 4cedc68a766b599e143b9e71f272d4d2aa600be3
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f6a13d981f249f2095136bed8e1adc5c02332d8f
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486398"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503492"
 ---
 # <a name="override-element"></a>Override 要素
 
@@ -60,7 +60,7 @@ ms.locfileid: "64486398"
 
 ### <a name="attributes"></a>属性
 
-|属性|Type|必須|説明|
+|属性|型|必須|説明|
 |:-----|:-----|:-----|:-----|
 |Locale|string|必須|`"en-US"` などの BCP 47 言語タグの書式で、この上書きのロケールのカルチャ名を指定します。|
 |Value|string|必須|指定のロケールに対して表される設定の値を指定します。|
@@ -149,7 +149,7 @@ ms.locfileid: "64486398"
 
 ### <a name="attributes"></a>属性
 
-|属性|Type|必須|説明|
+|属性|型|必須|説明|
 |:-----|:-----|:-----|:-----|
 |値|string|必須|条件が満たされた場合の祖父母トークンの値。|
 
@@ -198,7 +198,7 @@ ms.locfileid: "64486398"
 ## <a name="override-element-for-runtime"></a>Override 要素 `Runtime`
 
 > [!IMPORTANT]
-> この要素のサポートは、イベント ベースのアクティブ化機能を備えたメールボックス要件セット [1.10](/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/outlook-requirement-set-1.10) [で導入されました](/office/dev/add-ins/outlook/autolaunch)。 この要件セットをサポートする [クライアントおよびプラットフォーム](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets#requirement-sets-supported-by-exchange-servers-and-outlook-clients) を参照してください。
+> この要素のサポートは、イベント ベースのアクティブ化機能を備えたメールボックス要件セット [1.10](../requirement-sets/outlook/requirement-set-1.10/outlook-requirement-set-1.10.md) [で導入されました](/office/dev/add-ins/outlook/autolaunch)。 この要件セットをサポートする [クライアントおよびプラットフォーム](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets#requirement-sets-supported-by-exchange-servers-and-outlook-clients) を参照してください。
 
 **Override 要素** は条件付きを表し、"If .." として読み取り可能です。その後 ..."。ステートメント。 Override 要素 **が** **RuntimeOverride**`type` `resid` 型の場合、属性は条件であり、その結果属性になります。 たとえば、「型が 'javascript'の場合は、'JSRuntime.Url'`resid`です」と読み取ります。Outlookデスクトップでは、LaunchEvent 拡張ポイント ハンドラー[に対してこの要素が](/office/dev/add-ins/reference/manifest/extensionpoint#launchevent)必要です。
 
@@ -222,7 +222,7 @@ ms.locfileid: "64486398"
 
 ### <a name="attributes"></a>属性
 
-|属性|Type|必須|説明|
+|属性|型|必須|説明|
 |:-----|:-----|:-----|:-----|
 |**type**|string|はい|このオーバーライドの言語を指定します。 現時点では、 `"javascript"` サポートされている唯一のオプションです。|
 |**resid**|文字列|はい|親 [ランタイム](runtime.md) 要素で定義されている既定の HTML の URL の場所を上書きする JavaScript ファイルの URL の場所を指定します `resid`。 `resid` 32 `Url` `id` 文字以内で、要素内の要素の属性と一致する必要`Resources`があります。|

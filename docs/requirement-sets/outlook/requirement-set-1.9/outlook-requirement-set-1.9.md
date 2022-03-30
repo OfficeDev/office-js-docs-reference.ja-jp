@@ -3,12 +3,12 @@ title: Outlook API 要件セット 1.9
 description: アドイン API の要件セット 1.9 Outlook 1.9。
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: b6abba58e7f0ebcd3c7bfc80a9596bc9e024e3c0
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: d1268a2c12aed07d3c7bec6207d1eb6975ee6b68
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486332"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502813"
 ---
 # <a name="outlook-add-in-api-requirement-set-19"></a>Outlook API 要件セット 1.9
 
@@ -27,8 +27,8 @@ Office JavaScript API の Outlook アドイン API サブセットには、Outlo
 ### <a name="change-log"></a>変更ログ
 
 - [CustomProperties.getAll](/javascript/api/outlook/office.customproperties?view=outlook-js-1.9&preserve-view=true#outlook-office-customproperties-getall-member(1)) の追加: すべての`CustomProperties`カスタム プロパティを取得するオブジェクトに新しい関数を追加します。
-- [Dialog.messageChild](/office/dev/add-ins/develop/dialog-api-in-office-add-ins.md#pass-information-to-the-dialog-box) の追加: 作業ウィンドウや UI レス関数ファイルなど、ホスト ページからメッセージをページから開いたダイアログに配信する新しいメソッドを追加します。
-- [ExtendedPermissions マニフェスト要素の追加](/javascript/api/extendedpermissions): [VersionOverrides](/javascript/api/versionoverrides) マニフェスト要素に子要素を追加します。 アドインが追加送信[](/office/dev/add-ins/outlook/append-on-send)`AppendOnSend`機能をサポートするには、拡張アクセス許可を拡張アクセス許可のコレクションに含める必要があります。
+- [Dialog.messageChild](/office/dev/add-ins/develop/dialog-api-in-office-add-ins#pass-information-to-the-dialog-box) の追加: 作業ウィンドウや UI レス関数ファイルなど、ホスト ページからメッセージをページから開いたダイアログに配信する新しいメソッドを追加します。
+- [ExtendedPermissions マニフェスト要素の追加](/javascript/api/manifest/extendedpermissions): [VersionOverrides](/javascript/api/manifest/versionoverrides) マニフェスト要素に子要素を追加します。 アドインが追加送信[](/office/dev/add-ins/outlook/append-on-send)`AppendOnSend`機能をサポートするには、拡張アクセス許可を拡張アクセス許可のコレクションに含める必要があります。
 - [Office.context.mailbox.displayAppointmentFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displayappointmentformasync-member(1)): `Mailbox` 既存の予定を表示するオブジェクトに新しい関数を追加しました。 これは、メソッドの非同期バージョン `displayAppointmentForm` です。
 - [Office.context.mailbox.displayMessageFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displaymessageformasync-member(1)): `Mailbox` 既存のメッセージを表示するオブジェクトに新しい関数を追加しました。 これは、メソッドの非同期バージョン `displayMessageForm` です。
 - [Office.context.mailbox.displayNewAppointmentFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displaynewappointmentformasync-member(1)): `Mailbox` 新しい予定フォームを表示するオブジェクトに新しい関数を追加しました。 これは、メソッドの非同期バージョン `displayNewAppointmentForm` です。

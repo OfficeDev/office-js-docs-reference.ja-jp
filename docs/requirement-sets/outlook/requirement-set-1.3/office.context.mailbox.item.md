@@ -3,12 +3,12 @@ title: Office.context.mailbox.item - 要件セット 1.3
 description: Outlookメールボックス API 要件セット 1.3 バージョンの Item オブジェクト モデル。
 ms.date: 07/16/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 35a3fe2c42bd7ba19c1bfa4e365c69b34d0fb859
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 18a1217516bedc7b2ad31b1af8ffc91a808589c2
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486521"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503072"
 ---
 # <a name="item-mailbox-requirement-set-13"></a>item (メールボックス要件セット 1.3)
 
@@ -22,10 +22,10 @@ ms.locfileid: "64486521"
 |---|---|
 |[メールボックスの最小要件セットのバージョン](../outlook-api-requirement-sets.md)|1.1|
 |[最小限のアクセス許可レベル](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)|制限あり|
-|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)|予定の開催者、予定の出席者、<br>メッセージの作成、またはメッセージの読み取り|
+|[適用可能な Outlook のモード](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)|予定の開催者、予定の出席者、<br>メッセージの作成、またはメッセージの読み取り|
 
 > [!IMPORTANT]
-> Android と iOS: アドインがアクティブ化される時間と使用可能な API には制限があります。 詳細については、「[Outlook アドインにモバイル サポートを追加する](/office/dev/add-ins/outlook/add-mobile-support.md#compose-mode-and-appointments)」を参照してください。
+> Android と iOS: アドインがアクティブ化される時間と使用可能な API には制限があります。 詳細については、「[Outlook アドインにモバイル サポートを追加する](/office/dev/add-ins/outlook/add-mobile-support#compose-mode-and-appointments)」を参照してください。
 
 ## <a name="properties"></a>プロパティ
 
@@ -77,9 +77,9 @@ ms.locfileid: "64486521"
 | 開始 | ReadItem | [予定の開催者](/javascript/api/outlook/office.appointmentcompose?view=outlook-js-1.3&preserve-view=true#outlook-office-appointmentcompose-start-member) | [Time](/javascript/api/outlook/office.time?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [予定の出席者](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.3&preserve-view=true#outlook-office-appointmentread-start-member) | 日付 | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [既読メッセージ](/javascript/api/outlook/office.messageread?view=outlook-js-1.3&preserve-view=true#outlook-office-messageread-start-member)<br>(会議出席依頼) | 日付 | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| subject | ReadItem | [予定の開催者](/javascript/api/outlook/office.appointmentcompose?view=outlook-js-1.3&preserve-view=true#outlook-office-appointmentcompose-subject-member) | [件名](/javascript/api/outlook/office.subject?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
+| subject | ReadItem | [予定の開催者](/javascript/api/outlook/office.appointmentcompose?view=outlook-js-1.3&preserve-view=true#outlook-office-appointmentcompose-subject-member) | [[件名]](/javascript/api/outlook/office.subject?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [予定の出席者](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.3&preserve-view=true#outlook-office-appointmentread-subject-member) | String | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| | | [メッセージ作成](/javascript/api/outlook/office.messagecompose?view=outlook-js-1.3&preserve-view=true#outlook-office-messagecompose-subject-member) | [件名](/javascript/api/outlook/office.subject?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
+| | | [メッセージ作成](/javascript/api/outlook/office.messagecompose?view=outlook-js-1.3&preserve-view=true#outlook-office-messagecompose-subject-member) | [[件名]](/javascript/api/outlook/office.subject?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [既読メッセージ](/javascript/api/outlook/office.messageread?view=outlook-js-1.3&preserve-view=true#outlook-office-messageread-subject-member) | String | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | へ | ReadItem | [メッセージ作成](/javascript/api/outlook/office.messagecompose?view=outlook-js-1.3&preserve-view=true#outlook-office-messagecompose-to-member) | [受信者](/javascript/api/outlook/office.recipients?view=outlook-js-1.3&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [既読メッセージ](/javascript/api/outlook/office.messageread?view=outlook-js-1.3&preserve-view=true#outlook-office-messageread-to-member) | Array.<[EmailAddressDetails](/javascript/api/outlook/office.emailaddressdetails?view=outlook-js-1.3&preserve-view=true)> | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |

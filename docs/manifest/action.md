@@ -3,12 +3,12 @@ title: マニフェスト ファイルの Action 要素
 description: この要素は、ユーザーがボタンまたはメニュー コントロールを選択するときに実行するアクションを指定します。
 ms.date: 02/25/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 1f35fe9b1d9048424b0a96988eff529e7917dc0f
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 46bddb5c26bb22736bdf79bebb4a22d509f3b83c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486043"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503436"
 ---
 # <a name="action-element"></a>Action 要素
 
@@ -54,7 +54,7 @@ ms.locfileid: "64486043"
 ユーザーがアクションを開始 `ExecuteFunction` するボタンを選択すると、それまでに完了しない場合、アドインは 5 分後にタイム アウトします。
 
 > [!IMPORTANT]
-> Outlook: **xsi:type** `ExecuteFunction`が [](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) .[](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events)
+> Outlook: **xsi:type** `ExecuteFunction`が [](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) .[](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events)
 
 ## <a name="functionname"></a>FunctionName
 
@@ -186,10 +186,10 @@ ms.locfileid: "64486043"
 
 **次の要件セットに関連付けられている**。
 
-- [Mailbox 1.5](/office/dev/add-ins/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 > [!IMPORTANT]
-> **SupportPinning 要素** は要件セット [1.5](/office/dev/add-ins/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) で導入されましたが、現在サポートされているのは、以下を使用する Microsoft 365サブスクライバーのみです。
+> **SupportPinning 要素** は要件セット [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) で導入されましたが、現在サポートされているのは、以下を使用する Microsoft 365サブスクライバーのみです。
 >
 > - Outlook 2016以降 (ビルド 7628.1000 以降) Windows(ビルド 7628.1000 以降)
 > - Outlook 2016以降の Mac (ビルド 16.13.503 以降)

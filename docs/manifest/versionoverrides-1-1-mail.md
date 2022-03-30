@@ -3,12 +3,12 @@ title: メール アドインのマニフェスト ファイル内の VersionOve
 description: アドイン マニフェスト (XML) ファイルの VersionOverrides 1.1 要素 (メール) Officeドキュメントを参照してください。
 ms.date: 02/18/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: b5c2abe200bfd37849e379aa925327feb97e44a0
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: df96c4235e40b23dcf82acff6e8a4b995e1ecc90
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486130"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502365"
 ---
 # <a name="versionoverrides-11-element-in-the-manifest-file-for-a-mail-add-in"></a>メール アドインのマニフェスト ファイル内の VersionOverrides 1.1 要素
 
@@ -27,7 +27,7 @@ ms.locfileid: "64486130"
 
 **次の要件セットに関連付けられている**。
 
-- [Mailbox 1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 - 一部の子要素は、追加の要件セットに関連付けられる場合があります。
 
 ## <a name="child-elements"></a>子要素
@@ -65,8 +65,8 @@ ms.locfileid: "64486130"
 **次の要件セットに関連付けられている**。
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) 親 **VersionOverrides が** Taskpane 1.0 と入力されている場合。
-- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)。
-- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)。
+- 親 **VersionOverrides が Mail** 1.0 と入力されている場合のメールボックス [1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)。
+- 親 **VersionOverrides が Mail** 1.1 と入力されている場合のメールボックス [1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)。
 
 ## <a name="example"></a>例
 
