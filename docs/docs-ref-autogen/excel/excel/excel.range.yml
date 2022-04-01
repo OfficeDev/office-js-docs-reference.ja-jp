@@ -445,7 +445,7 @@ properties:
   uid: excel!Excel.Range#valuesAsJson:member
   package: excel!
   fullName: valuesAsJson
-  summary: この範囲内のセル内の値の JSON 表記。 異なり `Range.values`<!-- -->は `Range.valuesAsJson` 、セル内に含め得るすべてのデータ型をサポートします。
+  summary: この範囲内のセル内の値の JSON 表記。 異なり `Range.values`<!-- -->は `Range.valuesAsJson` 、セル内に含め得るすべてのデータ型をサポートします。 たとえば、標準のブール値、数値、文字列値に加えて、書式設定された数値と Web イメージが含まれます。 この API から返されるデータは、常に en-US ロケールに合わせて配置されます。 ユーザーの表示ロケールのデータを取得するには、 `Range.valuesAsJsonLocal`<!-- -->.
   remarks: >-
     \[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -483,6 +483,18 @@ properties:
   isDeprecated: false
   syntax:
     content: 'valuesAsJson: CellValue[][];'
+    return:
+      type: <xref uid="excel!Excel.CellValue:type" />[][]
+- name: valuesAsJsonLocal
+  uid: excel!Excel.Range#valuesAsJsonLocal:member
+  package: excel!
+  fullName: valuesAsJsonLocal
+  summary: この範囲内のセル内の値の JSON 表記。 異なり `Range.values`<!-- -->は `Range.valuesAsJsonLocal` 、セル内に含め得るすべてのデータ型をサポートします。 たとえば、標準のブール値、数値、文字列値に加えて、書式設定された数値と Web イメージが含まれます。 この API から返されるデータは、常にユーザーの表示ロケールに合わせて配置されます。 ロケールに依存しないデータを取得するには、 `Range.valuesAsJson`<!-- -->.
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'valuesAsJsonLocal: CellValue[][];'
     return:
       type: <xref uid="excel!Excel.CellValue:type" />[][]
 - name: valueTypes
@@ -2640,9 +2652,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // Call untrack() to release the range from memory.\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 36e694e897f0fbdd64d4d06716a3143594f22bd3
-  ms.sourcegitcommit: 55ac7dcbdaba83b3bdce1afc2d8fa22f352f10ff
+  ms.openlocfilehash: 4e6ce7805e5269a7d729673fb3b5afe855a579a7
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 03/22/2022
-  ms.locfileid: "63712098"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64603800"

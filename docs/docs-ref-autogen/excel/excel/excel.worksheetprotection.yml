@@ -13,7 +13,7 @@ properties:
   uid: excel!Excel.WorksheetProtection#allowEditRanges:member
   package: excel!
   fullName: allowEditRanges
-  summary: このワークシートにある `AllowEditRangeCollection` オブジェクトを指定します。 これは、ワークシート保護プロパティ `AllowEditRange` で動作するオブジェクトのコレクションです。 ワークシートの保護を有効にすると、オブジェクトを使用して特定の範囲の編集を許可し、ワークシートの残りの部分の保護 `AllowEditRange` を維持できます。
+  summary: このワークシートにある `AllowEditRangeCollection` オブジェクトを指定します。 これは、ワークシート保護プロパティ `AllowEditRange` で動作するオブジェクトのコレクションです。 ワークシートの保護を有効にすると `AllowEditRange` 、オブジェクトを使用して特定の範囲の編集を許可し、ワークシートの残りの部分の保護を維持できます。
   remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -93,6 +93,18 @@ properties:
     content: 'readonly protected: boolean;'
     return:
       type: boolean
+- name: savedOptions
+  uid: excel!Excel.WorksheetProtection#savedOptions:member
+  package: excel!
+  fullName: savedOptions
+  summary: ワークシートに保存されている保護オプションの設定を指定します。 これにより、ワークシートの保護状態 `WorksheetProtectionOptions` に関係なく、同じオブジェクトが返されます。
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly savedOptions: Excel.WorksheetProtectionOptions;'
+    return:
+      type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
 methods:
 - name: checkPassword(password)
   uid: excel!Excel.WorksheetProtection#checkPassword:member(1)
@@ -161,7 +173,7 @@ methods:
               }): Excel.WorksheetProtection;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -174,7 +186,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#pauseProtection:member(1)
   package: excel!
   fullName: pauseProtection(password)
-  summary: 特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。 パスワードが正しくない場合、このメソッドはエラーをスロー `UnsupportedOperation` し、保護の一時停止に失敗します。 ワークシートの保護が有効になっていないか、既に一時停止されている場合、このメソッドは保護状態を変更しません。
+  summary: 特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。 パスワードが正しくない場合、このメソッドはエラーを `UnsupportedOperation` スローし、保護の一時停止に失敗します。 ワークシートの保護が有効になっていないか、既に一時停止されている場合、このメソッドは保護状態を変更しません。
   remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -267,7 +279,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#setPassword:member(1)
   package: excel!
   fullName: setPassword(password)
-  summary: オブジェクトに関連付けられているパスワードを変更 `WorksheetProtection` します。 パスワードを空の文字列 ("") として設定するか、オブジェクトから `null` パスワード保護を削除 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を有効にし、一時停止する必要があります。 ワークシートの保護が無効になっている場合、このメソッドはエラーをスロー `InvalidOperation` し、パスワードの変更に失敗します。 ワークシート保護が有効で一時停止されていない場合、このメソッドはエラーをスロー `AccessDenied` し、パスワードの変更に失敗します。
+  summary: オブジェクトに関連付けられているパスワードを変更 `WorksheetProtection` します。 パスワードを空の文字列 ("") `null` として設定するか、オブジェクトからパスワード保護を削除 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を有効にし、一時停止する必要があります。 ワークシートの保護が無効になっている場合、このメソッドはエラーをスロー `InvalidOperation` し、パスワードの変更に失敗します。 ワークシート保護が有効で一時停止されていない場合、この `AccessDenied` メソッドはエラーをスローし、パスワードの変更に失敗します。
   remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -275,7 +287,7 @@ methods:
     content: 'setPassword(password?: string): void;'
     parameters:
     - id: password
-      description: オブジェクトに関連付けられている `WorksheetProtection` パスワード。
+      description: オブジェクトに関連付けられているパスワード `WorksheetProtection` 。
       type: string
     return:
       type: void
@@ -284,7 +296,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。WorksheetProtection オブジェクトは API オブジェクトで、メソッドはプレーンな JavaScript オブジェクト (次のように入力) `toJSON` を返します。`Excel.Interfaces.WorksheetProtectionData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のExcel。WorksheetProtection オブジェクトは API オブジェクトで`toJSON`、メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.WorksheetProtectionData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -345,7 +357,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#updateOptions:member(1)
   package: excel!
   fullName: updateOptions(options)
-  summary: オブジェクトに関連付けられているワークシート保護オプションを変更 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を無効または一時停止する必要があります。 ワークシートの保護が有効で一時停止されていない場合、このメソッドはエラーをスローし、ワークシートの保護オプション `AccessDenied` を変更できません。
+  summary: オブジェクトに関連付けられているワークシート保護オプションを変更 `WorksheetProtection` します。 このメソッドが正しく動作するには、ワークシート保護を無効または一時停止する必要があります。 ワークシートの保護が有効で一時停止されていない `AccessDenied` 場合、このメソッドはエラーをスローし、ワークシートの保護オプションを変更できません。
   remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -353,16 +365,16 @@ methods:
     content: 'updateOptions(options: Excel.WorksheetProtectionOptions): void;'
     parameters:
     - id: options
-      description: オブジェクトに関連付けられたオプション `WorksheetProtection` インターフェイス。
+      description: オブジェクトに関連付けられたオプション インターフェイス `WorksheetProtection` 。
       type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
     return:
       type: void
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 99da1f06d83baac4c7393e9e1ec3a8e1e88dfe9a
-  ms.sourcegitcommit: 6e02b85fb05123b10f85db6c2ac009fa60f24a6f
+  ms.openlocfilehash: 1d11afc5adb6e4639ab85e5a769d2ce25ec6a69c
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/14/2022
-  ms.locfileid: "62040538"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64604731"

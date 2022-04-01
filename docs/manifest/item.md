@@ -1,14 +1,14 @@
 ---
 title: マニフェスト ファイル内の Item 要素
 description: メニュー内のアイテムを指定します。
-ms.date: 02/04/2022
+ms.date: 03/29/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 6b717bcb3041a0164716b50116f387f0b581f2ea
-ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
+ms.openlocfilehash: a2ea0d1dd8d0b01f91340c61ebf2e21abf598b84
+ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/28/2022
-ms.locfileid: "64502631"
+ms.lasthandoff: 04/01/2022
+ms.locfileid: "64604248"
 ---
 # <a name="item-element"></a>Item 要素
 
@@ -34,12 +34,12 @@ ms.locfileid: "64502631"
 
 |  要素 |  必須  |  説明  |
 |:-----|:-----|:-----|
-|  [Label](#label)     | はい |  ボタンのテキストです。 |
-|  [Supertip](supertip.md)  | はい |  このボタンのヒントです。    |
-|  [Icon](icon.md)      | はい |  ボタンの画像です。         |
+|  [Label](#label)     | はい |  メニュー項目のテキスト。 |
+|  [Supertip](supertip.md)  | はい |  メニュー項目のスーパーヒント。    |
+|  [Icon](icon.md)      | 不要 |  メニュー項目のイメージ。         |
 |  [Action](action.md)    | はい |  実行するアクションを指定します。 Item 要素の Action 子 **は** 1 つ **のみです** 。  |
-|  [Enabled (有効)](enabled.md)    | いいえ |  アドインの起動時にコントロールを有効にするかどうかを指定します。  |
-|  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | いいえ |  カスタム コンテキスト タブをサポートするアプリケーションとプラットフォームの組み合わせにボタンを表示するかどうかを指定します。 使用する場合は、最初の子 *要素である* 必要があります。 |
+|  [Enabled (有効)](enabled.md)    | 不要 |  アドインの起動時にメニュー項目を有効にするかどうかを指定します。  |
+|  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | いいえ |  カスタム コンテキスト タブをサポートするアプリケーションとプラットフォームの組み合わせにメニュー項目を表示するかどうかを指定します。 使用する場合は、最初の子 *要素である* 必要があります。 |
 
 ### <a name="label"></a>Label
 

@@ -133,7 +133,7 @@ properties:
   uid: excel!Excel.RangeView#text:member
   package: excel!
   fullName: text
-  summary: 指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 UI \# で行う符号Excelは、API によって返されるテキスト値には影響しません。
+  summary: 指定した範囲のテキスト値。 テキスト値は、セルの幅には依存しません。 UI \# で発生する符号Excelは、API によって返されるテキスト値には影響しません。
   remarks: '\[[API セット: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -157,22 +157,26 @@ properties:
   uid: excel!Excel.RangeView#valuesAsJson:member
   package: excel!
   fullName: valuesAsJson
-  summary: この範囲内のセル内の値の JSON 表記。 異なり `RangeView.values`<!-- -->は `RangeView.valuesAsJson` 、セル内に含め得るすべてのデータ型をサポートします。
+  summary: この範囲内のセル内の値の JSON 表記。 異なり `RangeView.values`<!-- -->は `RangeView.valuesAsJson` 、セル内に含め得るすべてのデータ型をサポートします。 たとえば、標準のブール値、数値、文字列値に加えて、書式設定された数値と Web イメージが含まれます。 この API から返されるデータは、常に en-US ロケールに合わせて配置されます。 ユーザーの表示ロケールのデータを取得するには、 `RangeView.valuesAsJsonLocal`<!-- -->.
   remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
   syntax:
-    content: >-
-      valuesAsJson: ArrayCellValue | BooleanCellValue | DoubleCellValue | EntityCellValue | EmptyCellValue | BlockedErrorCellValue | BusyErrorCellValue | CalcErrorCellValue | ConnectErrorCellValue | Div0ErrorCellValue | FieldErrorCellValue | GettingDataErrorCellValue | NotAvailableErrorCellValue | NameErrorCellValue | NullErrorCellValue | NumErrorCellValue | RefErrorCellValue | SpillErrorCellValue | ValueErrorCellValue | FormattedNumberCellValue | LinkedEntityCellValue | StringCellValue | ValueTypeNotAvailableCellValue | WebImageCellValue & {
-                  writable?: boolean;
-                  writableNote?: string;
-              }[][];
+    content: 'valuesAsJson: CellValue[][];'
     return:
-      type: >-
-        <xref uid="excel!Excel.ArrayCellValue:interface" /> | <xref uid="excel!Excel.BooleanCellValue:interface" /> | <xref uid="excel!Excel.DoubleCellValue:interface" /> | <xref uid="excel!Excel.EntityCellValue:interface" /> | <xref uid="excel!Excel.EmptyCellValue:interface" /> | <xref uid="excel!Excel.BlockedErrorCellValue:interface" /> | <xref uid="excel!Excel.BusyErrorCellValue:interface" /> | <xref uid="excel!Excel.CalcErrorCellValue:interface" /> | <xref uid="excel!Excel.ConnectErrorCellValue:interface" /> | <xref uid="excel!Excel.Div0ErrorCellValue:interface" /> | <xref uid="excel!Excel.FieldErrorCellValue:interface" /> | <xref uid="excel!Excel.GettingDataErrorCellValue:interface" /> | <xref uid="excel!Excel.NotAvailableErrorCellValue:interface" /> | <xref uid="excel!Excel.NameErrorCellValue:interface" /> | <xref uid="excel!Excel.NullErrorCellValue:interface" /> | <xref uid="excel!Excel.NumErrorCellValue:interface" /> | <xref uid="excel!Excel.RefErrorCellValue:interface" /> | <xref uid="excel!Excel.SpillErrorCellValue:interface" /> | <xref uid="excel!Excel.ValueErrorCellValue:interface" /> | <xref uid="excel!Excel.FormattedNumberCellValue:interface" /> | <xref uid="excel!Excel.LinkedEntityCellValue:interface" /> | <xref uid="excel!Excel.StringCellValue:interface" /> | <xref uid="excel!Excel.ValueTypeNotAvailableCellValue:interface" /> | <xref uid="excel!Excel.WebImageCellValue:interface" /> & {
-                    writable?: boolean;
-                    writableNote?: string;
-                }[][]
+      type: <xref uid="excel!Excel.CellValue:type" />[][]
+- name: valuesAsJsonLocal
+  uid: excel!Excel.RangeView#valuesAsJsonLocal:member
+  package: excel!
+  fullName: valuesAsJsonLocal
+  summary: この範囲内のセル内の値の JSON 表記。 異なり `RangeView.values`<!-- -->は `RangeView.valuesAsJsonLocal` 、セル内に含め得るすべてのデータ型をサポートします。 たとえば、標準のブール値、数値、文字列値に加えて、書式設定された数値と Web イメージが含まれます。 この API から返されるデータは、常にユーザーの表示ロケールに合わせて配置されます。 ロケールに依存しないデータを取得するには、 `RangeView.valuesAsJson`<!-- -->.
+  remarks: '\[[API セット: ExcelApi BETA (プレビューのみ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'valuesAsJsonLocal: CellValue[][];'
+    return:
+      type: <xref uid="excel!Excel.CellValue:type" />[][]
 - name: valueTypes
   uid: excel!Excel.RangeView#valueTypes:member
   package: excel!
@@ -249,7 +253,7 @@ methods:
               }): Excel.RangeView;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` は、読み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切 `propertyNamesAndPaths.expand` りの文字列です。'
+      description: '`propertyNamesAndPaths.select` は、読 `propertyNamesAndPaths.expand` み込むプロパティを指定するコンマ区切りの文字列で、読み込むナビゲーション プロパティを指定するコンマ区切りの文字列です。'
       type: >-
         {
                     select?: string;
@@ -299,7 +303,7 @@ methods:
   uid: excel!Excel.RangeView#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: API オブジェクトを渡す際に、より有用な出力を提供するために `toJSON()` JavaScript メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡 `toJSON` されるオブジェクトのメソッドを呼び出します。一方、元のExcel。RangeView オブジェクトは API オブジェクトで、 `toJSON` メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.RangeViewData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
+  summary: API オブジェクトを渡す際に、より有用な出力を提供するために JavaScript `toJSON()` メソッドをオーバーライドします。 `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->、順番に、渡される`toJSON`オブジェクトのメソッドを呼び出します。一方、元のExcel。RangeView オブジェクトは API オブジェクトで`toJSON`、メソッドはプレーンな JavaScript オブジェクト (次のように入力) を返します。`Excel.Interfaces.RangeViewData`<!-- -->) は、元のオブジェクトから読み込まれた子プロパティの浅いコピーを含む。
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -310,9 +314,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: eae853200bbadc29c5b9411e3e7303141c14a596
-  ms.sourcegitcommit: 6e02b85fb05123b10f85db6c2ac009fa60f24a6f
+  ms.openlocfilehash: 2eed13cbc672f46bf7a324dc18cbe650c252c6cd
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 01/14/2022
-  ms.locfileid: "62040623"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64604738"

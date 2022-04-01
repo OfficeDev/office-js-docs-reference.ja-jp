@@ -265,7 +265,7 @@ properties:
   uid: excel!Excel.Range#numberFormatLocal:member
   package: excel!
   fullName: numberFormatLocal
-  summary: ユーザー Excelの言語設定に基づいて、指定した範囲の数値書式コードを表します。 Excelプロパティを取得または設定するときに、言語や形式の設定を実行しない場合`numberFormatLocal`。 返されるテキストは、システム設定で指定された言語に基づいてローカル形式の文字列を使用します。
+  summary: ユーザーのExcelに基づいて、指定した範囲の数値書式コードを表します。 Excelプロパティを取得または設定するときに、言語や形式の設定を実行しない場合`numberFormatLocal`。 返されるテキストは、システム設定で指定された言語に基づいてローカル形式の文字列を使用します。
   remarks: '\[[API セット: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -397,7 +397,7 @@ properties:
   uid: excel!Excel.Range#values:member
   package: excel!
   fullName: values
-  summary: 指定した範囲の Raw 値を表します。 返されるデータには、文字列、数値、またはブール値を指定できます。 エラーが含まれているセルは、エラー文字列を返します。 戻り値がプラス ("+")、マイナス ("-")、または等号 ("=") で始まる場合、Excelは、この値を数式として解釈します。
+  summary: 指定した範囲の Raw 値を表します。 返されるデータには、文字列、数値、またはブール値を指定できます。 エラーが含まれているセルは、エラー文字列を返します。 戻り値がプラス (+")、マイナス ("-")、または等号 ("=") で始まる場合、Excelは、この値を数式として解釈します。
   remarks: '\[[API セット: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -447,10 +447,10 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillType)
   summary: >-
-    指定した AutoFill ロジックを使用して、現在の範囲から移動先の範囲の範囲を塗りつぶしします。 移動先の範囲は次の場合があります。 `null`<!-- -->をクリックするか、ソースを水平方向または垂直方向に拡張できます。 不一視範囲はサポートされていません。
+    指定した AutoFill ロジックを使用して、現在の範囲から移動先の範囲の範囲を塗りつぶしします。 移動先の範囲は、 `null` ソース範囲を水平方向または垂直方向に拡張できます。 不一視範囲はサポートされていません。
 
 
-    詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+    詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.microsoft.com/office/2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
   remarks: "\\[[API セット: ExcelApi 1.9、ExcelApi Preview for null `destinationRange`<!-- -->](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>例\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-auto-fill.yaml\nawait Excel.run(async (context) => {\n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const sumCell = sheet.getRange(\"P4\");\n  \n  // Copy everything. The formulas will be contextually updated based on their new locations.\n  sumCell.autoFill(\"P4:P7\", Excel.AutoFillType.fillCopy);\n  sumCell.format.autofitColumns();\n  await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
@@ -471,10 +471,10 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillTypeString)
   summary: >-
-    指定した AutoFill ロジックを使用して、現在の範囲から移動先の範囲の範囲を塗りつぶしします。 移動先の範囲は次の場合があります。 `null`<!-- -->をクリックするか、ソースを水平方向または垂直方向に拡張できます。 不一視範囲はサポートされていません。
+    指定した AutoFill ロジックを使用して、現在の範囲から移動先の範囲の範囲を塗りつぶしします。 移動先の範囲は、 `null` ソース範囲を水平方向または垂直方向に拡張できます。 不一視範囲はサポートされていません。
 
 
-    詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+    詳細については、「Use [AutoFill and Flash Fill」を参照してください。](https://support.microsoft.com/office/2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
   remarks: '\[[API セット: ExcelApi 1.9、ExcelApi Preview for null `destinationRange`<!-- -->](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -2054,9 +2054,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>例\n\n```typescript\nawait Excel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // Call untrack() to release the range from memory.\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c75f9ef4b7a353d3aff3c297134f4a2f8effbed0
-  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
+  ms.openlocfilehash: 472641274dff619feaa9c3440dc73e06bd9caeb3
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 02/16/2022
-  ms.locfileid: "62836142"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64603247"
