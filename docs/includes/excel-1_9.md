@@ -11,7 +11,7 @@
 ||[getRange()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-getrange-member(1))|オートフィルターを `Range` 適用する範囲を表すオブジェクトを返します。|
 ||[getRangeOrNullObject()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-getrangeornullobject-member(1))|オートフィルターを `Range` 適用する範囲を表すオブジェクトを返します。|
 ||[isDataFiltered](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-isdatafiltered-member)|オートフィルターにフィルター条件がある場合に指定します。|
-||[reapply()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-reapply-member(1))|その範囲で現在指定されている Autofilter オブジェクトを適用します。|
+||[reapply()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-reapply-member(1))|指定した AutoFilter オブジェクトを現在範囲に適用します。|
 ||[remove()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-remove-member(1))|範囲の AutoFilter を削除します。|
 |[CellBorder](/javascript/api/excel/excel.cellborder)|[color](/javascript/api/excel/excel.cellborder#excel-excel-cellborder-color-member)|1 つの境界線の `color` プロパティを表します。|
 ||[style](/javascript/api/excel/excel.cellborder#excel-excel-cellborder-style-member)|1 つの境界線の `style` プロパティを表します。|

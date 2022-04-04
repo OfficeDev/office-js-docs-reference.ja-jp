@@ -15,7 +15,7 @@
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[refreshOnOpen](/javascript/api/excel/excel.pivottable#excel-excel-pivottable-refreshonopen-member)|ブックが開くとピボットテーブルが更新されるかどうかを指定します。|
 |[Range](/javascript/api/excel/excel.range)|[getDirectDependents()](/javascript/api/excel/excel.range#excel-excel-range-getdirectdependents-member(1))|同じワークシート `WorkbookRangeAreas` または複数のワークシート内のセルのすべての直接依存を含む範囲を表すオブジェクトを返します。|
 ||[getExtendedRange(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#excel-excel-range-getextendedrange-member(1))|指定された方向に基づいて、現在の範囲と範囲の端までの範囲オブジェクトを返します。|
-||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#excel-excel-range-getmergedareasornullobject-member(1))|この範囲内の結合領域を表す RangeAreas オブジェクトを返します。|
+||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#excel-excel-range-getmergedareasornullobject-member(1))|この範囲内の `RangeAreas` 結合領域を表すオブジェクトを返します。|
 ||[getRangeEdge(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#excel-excel-range-getrangeedge-member(1))|指定された方向に対応するデータ領域のエッジ セルである範囲オブジェクトを返します。|
 |[Table](/javascript/api/excel/excel.table)|[resize(newRange: Range \| string)](/javascript/api/excel/excel.table#excel-excel-table-resize-member(1))|テーブルのサイズを新しい範囲に変更します。|
 |[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#excel-excel-workbook-insertworksheetsfrombase64-member(1))|指定したワークシートをソース ブックから現在のブックに挿入します。|

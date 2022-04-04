@@ -17,6 +17,7 @@
 |[ArrayCellValue](/javascript/api/excel/excel.arraycellvalue)|[basicType](/javascript/api/excel/excel.arraycellvalue#excel-excel-arraycellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.arraycellvalue#excel-excel-arraycellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[要素](/javascript/api/excel/excel.arraycellvalue#excel-excel-arraycellvalue-elements-member)|配列の要素を表します。|
+||[referencedValues](/javascript/api/excel/excel.arraycellvalue#excel-excel-arraycellvalue-referencedvalues-member)|内で参照されるセル値を表します `ArrayCellValue.elements`。|
 ||[type](/javascript/api/excel/excel.arraycellvalue#excel-excel-arraycellvalue-type-member)|このセル値の種類を表します。|
 |[BlockedErrorCellValue](/javascript/api/excel/excel.blockederrorcellvalue)|[basicType](/javascript/api/excel/excel.blockederrorcellvalue#excel-excel-blockederrorcellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.blockederrorcellvalue#excel-excel-blockederrorcellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
@@ -51,6 +52,8 @@
 ||[licenseText](/javascript/api/excel/excel.cellvalueattributionattributes#excel-excel-cellvalueattributionattributes-licensetext-member)|このプロパティを管理するライセンスの名前を表します。|
 ||[sourceAddress](/javascript/api/excel/excel.cellvalueattributionattributes#excel-excel-cellvalueattributionattributes-sourceaddress-member)|ソースの URL を表します `CellValue`。|
 ||[sourceText](/javascript/api/excel/excel.cellvalueattributionattributes#excel-excel-cellvalueattributionattributes-sourcetext-member)|のソースの名前を表します `CellValue`。|
+|[CellValueExtraProperties](/javascript/api/excel/excel.cellvalueextraproperties)|[書き込み可能](/javascript/api/excel/excel.cellvalueextraproperties#excel-excel-cellvalueextraproperties-writable-member)|セルの上書きに `CellValue` 使用するかどうかを表します。|
+||[writableNote](/javascript/api/excel/excel.cellvalueextraproperties#excel-excel-cellvalueextraproperties-writablenote-member)|false として指定される理由に関 `CellValue.writable` する説明を表します。|
 |[CellValuePropertyMetadata](/javascript/api/excel/excel.cellvaluepropertymetadata)|[属性](/javascript/api/excel/excel.cellvaluepropertymetadata#excel-excel-cellvaluepropertymetadata-attribution-member)|このプロパティを使用するソース要件とライセンス要件を説明する属性情報を表します。|
 ||[excludeFrom](/javascript/api/excel/excel.cellvaluepropertymetadata#excel-excel-cellvaluepropertymetadata-excludefrom-member)|このプロパティが除外される機能を表します。|
 ||[サブラベル](/javascript/api/excel/excel.cellvaluepropertymetadata#excel-excel-cellvaluepropertymetadata-sublabel-member)|カード ビューに表示されるこのプロパティのサブラベルを表します。|
@@ -61,7 +64,10 @@
 |[CellValueProviderAttributes](/javascript/api/excel/excel.cellvalueproviderattributes)|[description](/javascript/api/excel/excel.cellvalueproviderattributes#excel-excel-cellvalueproviderattributes-description-member)|ロゴが指定されていない場合にカード ビューで使用されるプロバイダーの説明プロパティを表します。|
 ||[logoSourceAddress](/javascript/api/excel/excel.cellvalueproviderattributes#excel-excel-cellvalueproviderattributes-logosourceaddress-member)|カード ビューでロゴとして使用される画像をダウンロードするために使用される URL を表します。|
 ||[logoTargetAddress](/javascript/api/excel/excel.cellvalueproviderattributes#excel-excel-cellvalueproviderattributes-logotargetaddress-member)|ユーザーがカード ビューのロゴ要素をクリックした場合のナビゲーション ターゲットの URL を表します。|
-|[コメント](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#excel-excel-comment-assigntask-member(1))|コメントに添付されたタスクを、割り当て先として指定されたユーザーに割り当てる。|
+|[ChartFill](/javascript/api/excel/excel.chartfill)|[solidColor](/javascript/api/excel/excel.chartfill#excel-excel-chartfill-solidcolor-member)|グラフ要素の均一な塗りつぶし書式を設定および取得します。|
+|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionDataSourceString(dimension: Excel.ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#excel-excel-chartseries-getdimensiondatasourcestring-member(1))|グラフ系列のデータ ソースの文字列表現を取得します。文字列表現には、セル アドレスなどの情報を指定できます。|
+||[getDimensionDataSourceType(dimension: Excel.ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#excel-excel-chartseries-getdimensiondatasourcetype-member(1))|グラフ系列のデータ ソースの種類を取得します。|
+|[Comment](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#excel-excel-comment-assigntask-member(1))|コメントに添付されたタスクを、割り当て先として指定されたユーザーに割り当てる。|
 ||[getTask()](/javascript/api/excel/excel.comment#excel-excel-comment-gettask-member(1))|このコメントに関連付けられているタスクを取得します。|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.comment#excel-excel-comment-gettaskornullobject-member(1))|このコメントに関連付けられているタスクを取得します。|
 |[CommentReply](/javascript/api/excel/excel.commentreply)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.commentreply#excel-excel-commentreply-assigntask-member(1))|コメントに添付されたタスクを、特定のユーザーに唯一の割り当て先として割り当てる。|
@@ -120,10 +126,14 @@
 |[EntityCardLayout](/javascript/api/excel/excel.entitycardlayout)|[レイアウト](/javascript/api/excel/excel.entitycardlayout#excel-excel-entitycardlayout-layout-member)|このレイアウトの種類を表します。|
 |[EntityCellValue](/javascript/api/excel/excel.entitycellvalue)|[basicType](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
-||[cardLayout](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-cardlayout-member)|カード ビューでこのエンティティのレイアウトを表します。|
+||[レイアウト](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-layouts-member)|このエンティティのビューのレイアウト情報を表します。|
 ||[properties: { [key: string]](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-properties-member)|このエンティティのプロパティとそのメタデータを表します。|
+||[プロバイダー](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-provider-member)|この中のデータを提供したサービスを表す情報を表します `EntityCellValue`。|
+||[referencedValues](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-referencedvalues-member)|内で参照されるセル値を表します `EntityCellValue.properties`。|
 ||[text](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-text-member)|この値を持つセルがレンダリングされる場合に表示されるテキストを表します。|
 ||[type](/javascript/api/excel/excel.entitycellvalue#excel-excel-entitycellvalue-type-member)|このセル値の種類を表します。|
+|[EntityPropertyExtraProperties](/javascript/api/excel/excel.entitypropertyextraproperties)|[propertyMetadata](/javascript/api/excel/excel.entitypropertyextraproperties#excel-excel-entitypropertyextraproperties-propertymetadata-member)|プロパティに関するメタデータを表します。|
+|[EntityViewLayouts](/javascript/api/excel/excel.entityviewlayouts)|[カード](/javascript/api/excel/excel.entityviewlayouts#excel-excel-entityviewlayouts-card-member)|カード ビューでこのエンティティのレイアウトを表します。|
 |[FieldErrorCellValue](/javascript/api/excel/excel.fielderrorcellvalue)|[basicType](/javascript/api/excel/excel.fielderrorcellvalue#excel-excel-fielderrorcellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.fielderrorcellvalue#excel-excel-fielderrorcellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[errorSubType](/javascript/api/excel/excel.fielderrorcellvalue#excel-excel-fielderrorcellvalue-errorsubtype-member)|の種類を表します `FieldErrorCellValue`。|
@@ -169,10 +179,11 @@
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#excel-excel-linkeddatatypecollection-requestrefreshall-member(1))|コレクション内のすべてのリンクされたデータ型を更新する要求を行います。|
 |[LinkedEntityCellValue](/javascript/api/excel/excel.linkedentitycellvalue)|[basicType](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
+||[cardLayout](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-cardlayout-member)|カード ビューでこのリンクされたエンティティのレイアウトを表します。|
 ||[id](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-id-member)|この値の情報を提供したサービス ソースを表します。|
-||[properties: { [key: string]: CellValue & { propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-properties-member)|このエンティティのプロパティとそのメタデータを表します。|
+||[properties: { [key: string]: CellValue & { propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-properties-member)|このリンクされたエンティティのプロパティとそのメタデータを表します。|
 ||[propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-propertymetadata-member)||
-||[プロバイダー](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-provider-member)|イメージを提供したサービスを説明する情報を表します。|
+||[プロバイダー](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-provider-member)|この中でデータを提供したサービスを表す情報を表します `LinkedEntityCellValue`。|
 ||[text](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-text-member)|この値を持つセルがレンダリングされる場合に表示されるテキストを表します。|
 ||[type](/javascript/api/excel/excel.linkedentitycellvalue#excel-excel-linkedentitycellvalue-type-member)|このセル値の種類を表します。|
 |[LinkedEntityId](/javascript/api/excel/excel.linkedentityid)|[カルチャ](/javascript/api/excel/excel.linkedentityid#excel-excel-linkedentityid-culture-member)|これを作成するために使用された言語カルチャを表します `CellValue`。|
@@ -184,7 +195,9 @@
 ||[errorType](/javascript/api/excel/excel.nameerrorcellvalue#excel-excel-nameerrorcellvalue-errortype-member)|の種類を表します `ErrorCellValue`。|
 ||[type](/javascript/api/excel/excel.nameerrorcellvalue#excel-excel-nameerrorcellvalue-type-member)|このセル値の種類を表します。|
 |[NamedItem](/javascript/api/excel/excel.nameditem)|[valueAsJson](/javascript/api/excel/excel.nameditem#excel-excel-nameditem-valueasjson-member)|この名前付きアイテムの値の JSON 表記。|
-|[NamedItemArrayValues](/javascript/api/excel/excel.nameditemarrayvalues)|[valuesAsJson](/javascript/api/excel/excel.nameditemarrayvalues#excel-excel-nameditemarrayvalues-valuesasjson-member)|この範囲内のセル内の値の JSON 表記。|
+||[valueAsJsonLocal](/javascript/api/excel/excel.nameditem#excel-excel-nameditem-valueasjsonlocal-member)|この名前付きアイテムの値の JSON 表記。|
+|[NamedItemArrayValues](/javascript/api/excel/excel.nameditemarrayvalues)|[valuesAsJson](/javascript/api/excel/excel.nameditemarrayvalues#excel-excel-nameditemarrayvalues-valuesasjson-member)|この名前付きアイテム配列内の値の JSON 表記。|
+||[valuesAsJsonLocal](/javascript/api/excel/excel.nameditemarrayvalues#excel-excel-nameditemarrayvalues-valuesasjsonlocal-member)|この名前付きアイテム配列内の値の JSON 表記。|
 |[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#excel-excel-namedsheetviewcollection-getitemornullobject-member(1))|名前を使用してシート ビューを取得します。|
 |[NotAvailableErrorCellValue](/javascript/api/excel/excel.notavailableerrorcellvalue)|[basicType](/javascript/api/excel/excel.notavailableerrorcellvalue#excel-excel-notavailableerrorcellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.notavailableerrorcellvalue#excel-excel-notavailableerrorcellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
@@ -211,12 +224,18 @@
 ||[type](/javascript/api/excel/excel.placeholdererrorcellvalue#excel-excel-placeholdererrorcellvalue-type-member)|このセル値の種類を表します。|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#excel-excel-range-getdependents-member(1))|同じワークシート `WorkbookRangeAreas` または複数のワークシート内のセルのすべての従属セルを含む範囲を表すオブジェクトを返します。|
 ||[valuesAsJson](/javascript/api/excel/excel.range#excel-excel-range-valuesasjson-member)|この範囲内のセル内の値の JSON 表記。|
+||[valuesAsJsonLocal](/javascript/api/excel/excel.range#excel-excel-range-valuesasjsonlocal-member)|この範囲内のセル内の値の JSON 表記。|
 |[RangeView](/javascript/api/excel/excel.rangeview)|[valuesAsJson](/javascript/api/excel/excel.rangeview#excel-excel-rangeview-valuesasjson-member)|この範囲内のセル内の値の JSON 表記。|
+||[valuesAsJsonLocal](/javascript/api/excel/excel.rangeview#excel-excel-rangeview-valuesasjsonlocal-member)|この範囲内のセル内の値の JSON 表記。|
 |[RefErrorCellValue](/javascript/api/excel/excel.referrorcellvalue)|[basicType](/javascript/api/excel/excel.referrorcellvalue#excel-excel-referrorcellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.referrorcellvalue#excel-excel-referrorcellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[errorSubType](/javascript/api/excel/excel.referrorcellvalue#excel-excel-referrorcellvalue-errorsubtype-member)|の種類を表します `RefErrorCellValue`。|
 ||[errorType](/javascript/api/excel/excel.referrorcellvalue#excel-excel-referrorcellvalue-errortype-member)|の種類を表します `ErrorCellValue`。|
 ||[type](/javascript/api/excel/excel.referrorcellvalue#excel-excel-referrorcellvalue-type-member)|このセル値の種類を表します。|
+|[ReferenceCellValue](/javascript/api/excel/excel.referencecellvalue)|[basicType](/javascript/api/excel/excel.referencecellvalue#excel-excel-referencecellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
+||[basicValue](/javascript/api/excel/excel.referencecellvalue#excel-excel-referencecellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
+||[reference](/javascript/api/excel/excel.referencecellvalue#excel-excel-referencecellvalue-reference-member)|などのセル値のプロパティ `referencedValues` のインデックスを表 `EntityCellValue` します `ArrayCellValue`。|
+||[type](/javascript/api/excel/excel.referencecellvalue#excel-excel-referencecellvalue-type-member)|このセル値の種類を表します。|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#excel-excel-refreshmodechangedeventargs-refreshmode-member)|リンクされたデータ型の更新モード。|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#excel-excel-refreshmodechangedeventargs-serviceid-member)|更新モードが変更されたオブジェクトの一意の ID。|
 ||[source](/javascript/api/excel/excel.refreshmodechangedeventargs#excel-excel-refreshmodechangedeventargs-source-member)|イベントのソースを取得します。|
@@ -226,6 +245,9 @@
 ||[source](/javascript/api/excel/excel.refreshrequestcompletedeventargs#excel-excel-refreshrequestcompletedeventargs-source-member)|イベントのソースを取得します。|
 ||[type](/javascript/api/excel/excel.refreshrequestcompletedeventargs#excel-excel-refreshrequestcompletedeventargs-type-member)|イベントの種類を取得します。|
 ||[警告](/javascript/api/excel/excel.refreshrequestcompletedeventargs#excel-excel-refreshrequestcompletedeventargs-warnings-member)|更新要求から生成された警告を含む配列。|
+|[RootReferenceCellValue](/javascript/api/excel/excel.rootreferencecellvalue)|[basicType](/javascript/api/excel/excel.rootreferencecellvalue#excel-excel-rootreferencecellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
+||[basicValue](/javascript/api/excel/excel.rootreferencecellvalue#excel-excel-rootreferencecellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
+||[type](/javascript/api/excel/excel.rootreferencecellvalue#excel-excel-rootreferencecellvalue-type-member)|このセル値の種類を表します。|
 |[Shape](/javascript/api/excel/excel.shape)|[displayName](/javascript/api/excel/excel.shape#excel-excel-shape-displayname-member)|図形の表示名を取得します。|
 |[ShapeCollection](/javascript/api/excel/excel.shapecollection)|[addSvg(xml: string)](/javascript/api/excel/excel.shapecollection#excel-excel-shapecollection-addsvg-member(1))|XML 文字列からスケーラブルなベクター グラフィックス (SVG) を作成し、それをワークシートに追加します。|
 |[Slicer](/javascript/api/excel/excel.slicer)|[nameInFormula](/javascript/api/excel/excel.slicer#excel-excel-slicer-nameinformula-member)|数式で使用するスライサーの名前を表します。|
@@ -247,10 +269,12 @@
 ||[tableStyle](/javascript/api/excel/excel.table#excel-excel-table-tablestyle-member)|テーブルに適用されるスタイル。|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onFiltered](/javascript/api/excel/excel.tablecollection#excel-excel-tablecollection-onfiltered-member)|ブックまたはワークシート内の任意のテーブルにフィルターが適用されると発生します。|
 |[TableColumn](/javascript/api/excel/excel.tablecolumn)|[valuesAsJson](/javascript/api/excel/excel.tablecolumn#excel-excel-tablecolumn-valuesasjson-member)|このテーブル列のセル内の値の JSON 表記。|
+||[valuesAsJsonLocal](/javascript/api/excel/excel.tablecolumn#excel-excel-tablecolumn-valuesasjsonlocal-member)|このテーブル列のセル内の値の JSON 表記。|
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#excel-excel-tablefilteredeventargs-tableid-member)|フィルターが適用されるテーブルの ID を取得します。|
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#excel-excel-tablefilteredeventargs-type-member)|イベントの種類を取得します。|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#excel-excel-tablefilteredeventargs-worksheetid-member)|テーブルを含むワークシートの ID を取得します。|
 |[TableRow](/javascript/api/excel/excel.tablerow)|[valuesAsJson](/javascript/api/excel/excel.tablerow#excel-excel-tablerow-valuesasjson-member)|この表の行のセル内の値の JSON 表記。|
+||[valuesAsJsonLocal](/javascript/api/excel/excel.tablerow#excel-excel-tablerow-valuesasjsonlocal-member)|この表の行のセル内の値の JSON 表記。|
 |[ValueErrorCellValue](/javascript/api/excel/excel.valueerrorcellvalue)|[basicType](/javascript/api/excel/excel.valueerrorcellvalue#excel-excel-valueerrorcellvalue-basictype-member)|この値を持つセルに対して返 `Range.valueTypes` される値を表します。|
 ||[basicValue](/javascript/api/excel/excel.valueerrorcellvalue#excel-excel-valueerrorcellvalue-basicvalue-member)|この値を持つセルに対して返 `Range.values` される値を表します。|
 ||[errorSubType](/javascript/api/excel/excel.valueerrorcellvalue#excel-excel-valueerrorcellvalue-errorsubtype-member)|の種類を表します `ValueErrorCellValue`。|
@@ -270,10 +294,10 @@
 |[Workbook](/javascript/api/excel/excel.workbook)|[getLinkedEntityCellValue(linkedEntityCellValueId: LinkedEntityId)](/javascript/api/excel/excel.workbook#excel-excel-workbook-getlinkedentitycellvalue-member(1))|指定した値に `LinkedEntityCellValue` 基づいて a を返します `LinkedEntityId`。|
 ||[linkedDataTypes](/javascript/api/excel/excel.workbook#excel-excel-workbook-linkeddatatypes-member)|ブックの一部であるリンクされたデータ型のコレクションを返します。|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#excel-excel-workbook-showpivotfieldlist-member)|ピボットテーブルのフィールド 一覧ウィンドウをブック レベルで表示するかどうかを指定します。|
-||[tasks](/javascript/api/excel/excel.workbook#excel-excel-workbook-tasks-member)|ブックに存在するタスクのコレクションを返します。|
+||[タスク](/javascript/api/excel/excel.workbook#excel-excel-workbook-tasks-member)|ブックに存在するタスクのコレクションを返します。|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#excel-excel-workbook-use1904datesystem-member)|ブックの日付を 1904 年から計算する場合、true となります。|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#excel-excel-worksheet-onfiltered-member)|特定のワークシートにフィルターが適用されると発生します。|
-||[tasks](/javascript/api/excel/excel.worksheet#excel-excel-worksheet-tasks-member)|ワークシートに存在するタスクのコレクションを返します。|
+||[タスク](/javascript/api/excel/excel.worksheet#excel-excel-worksheet-tasks-member)|ワークシートに存在するタスクのコレクションを返します。|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#excel-excel-worksheetcollection-addfrombase64-member(1))|あるブックの指定されたワークシートを現在のブックに挿入します。|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#excel-excel-worksheetcollection-onfiltered-member)|ブック内でワークシートのフィルターが適用されたときに発生します。|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#excel-excel-worksheetfilteredeventargs-type-member)|イベントの種類を取得します。|
@@ -285,6 +309,7 @@
 ||[isPaused](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-ispaused-member)|ワークシートの保護を一時停止する場合に指定します。|
 ||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-pauseprotection-member(1))|特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を一時停止します。|
 ||[resumeProtection()](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-resumeprotection-member(1))|特定のセッションのユーザーに対する、指定されたワークシート オブジェクトのワークシート保護を再開します。|
+||[savedOptions](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-savedoptions-member)|ワークシートに保存されている保護オプションの設定を指定します。|
 ||[setPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-setpassword-member(1))|オブジェクトに関連付けられているパスワードを変更 `WorksheetProtection` します。|
 ||[updateOptions(options: Excel.WorksheetProtectionOptions)](/javascript/api/excel/excel.worksheetprotection#excel-excel-worksheetprotection-updateoptions-member(1))|オブジェクトに関連付けられているワークシート保護オプションを変更 `WorksheetProtection` します。|
 |[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[allowEditRangesChanged](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#excel-excel-worksheetprotectionchangedeventargs-alloweditrangeschanged-member)|オブジェクトが変更された場合に `AllowEditRange` 指定します。|
